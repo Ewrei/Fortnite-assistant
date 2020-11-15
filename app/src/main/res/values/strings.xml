@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Fortnite Assitant</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="retry">Try one more time</string>
+    <string name="repeat">Repeat</string>
+    <string name="unknown_error">Something went wrong</string>
+    <string name="network_error">Please check your internet connection and try again</string>
+    <string name="firebase_limit_error">The server has exceeded the request limit. We will try to fix it in the near future.</string>
+
+    <!--No subscription-->
+    <string name="no_subscription_content">Upgrade your account to access additional statistics</string>
+    <string name="no_subscription_content_2">Or watch the video ad to get 2 days access </string>
+    <string name="watch_video_ads">Watch video ads </string>
+
+    <string name="limited_content">This content is limited. To access full content, you can view ads or subscribe</string>
+    <string name="watch_advertisement">View ad</string>
+    <string name="subscribe">Subscribe</string>
+
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="retry">Попробовать еще раз</string>
+    <string name="unknown_error">Что-то пошло не так</string>
+    <string name="repeat">Повторить</string>
+    <string name="network_error">Пожалуйста, проверьте ваше интернет–соединение и попробуйте снова</string>
+    <string name="firebase_limit_error">На сервере превышен лимит запросов. Постараемся в ближайшее время это исправить.</string>
+
+    <!--No subscription-->
+    <string name="no_subscription_content">Улучшите аккаунт для доступа к дополнительной статистике</string>
+    <string name="no_subscription_content_2">Или посмотрите видеорекламу, чтоб получить доступ на 2 дня</string>
+    <string name="watch_video_ads">Смотреть видеорекламу</string>
+
+    <string name="limited_content">Данный контент ограничен. Вы можете просмотреть рекламу или оформить подписку и получите доступ к нему</string>
+    <string name="watch_advertisement">Посмотреть рекламу</string>
+    <string name="subscribe">Оформить подписку</string>
+
+</resources>

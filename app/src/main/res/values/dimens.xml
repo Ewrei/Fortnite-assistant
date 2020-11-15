@@ -1,0 +1,67 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="half_default_margin">4dp</dimen>
+    <dimen name="default_margin">8dp</dimen>
+    <dimen name="default_margin_double">16dp</dimen>
+    <dimen name="default_margin_x4">32dp</dimen>
+
+    <dimen name="half_default_padding">4dp</dimen>
+    <dimen name="default_padding">8dp</dimen>
+    <dimen name="default_padding_double">16dp</dimen>
+    <dimen name="default_padding_quoter">32dp</dimen>
+
+    <dimen name="default_divider_height">0.5dp</dimen>
+
+    <dimen name="icon_size">24dp</dimen>
+    <dimen name="icon_size_medium">36dp</dimen>
+    <dimen name="icon_size_large">48dp</dimen>
+
+    <dimen name="error_image_size">96dp</dimen>
+
+    <dimen name="avatar_size">100dp</dimen>
+    <dimen name="subscription_logo_size">150dp</dimen>
+
+    <dimen name="splash_animation_size">200dp</dimen>
+
+    <dimen name="corner_size">16dp</dimen>
+
+    <!--Filter-->
+    <dimen name="filter_count_text_size">7sp</dimen>
+    <dimen name="filter_count_size">12dp</dimen>
+
+    <dimen name="game_image_height">175dp</dimen>
+
+    <dimen name="map_short_height">150dp</dimen>
+
+    <dimen name="horizontal_bar_chart_height">100dp</dimen>
+
+    <dimen name="achievement_size">48dp</dimen>
+
+    <item name="circular_stroke_width" format="float" type="dimen">5.0</item>
+    <item name="circular_center_radius" format="float" type="dimen">30.0</item>
+
+    <dimen name="button_height">62dp</dimen>
+    <dimen name="card_stroke_width">1dp</dimen>
+    <dimen name="card_corner_radius">4dp</dimen>
+    <dimen name="default_elevation">8dp</dimen>
+
+    <!--Inventory details-->
+    <dimen name="banner_image_size">150dp</dimen>
+    <dimen name="size_toolbar_icon">30dp</dimen>
+    <dimen name="toolbar_end_margin">9dp</dimen>
+
+    <!--Setting screen-->
+    <dimen name="profile_image_size">125dp</dimen>
+
+    <!--Home screen-->
+    <dimen name="small_text_size">12sp</dimen>
+    <dimen name="arc_progress_size">150dp</dimen>
+
+    <dimen name="chart_height">200dp</dimen>
+
+    <dimen name="map_image_height">100dp</dimen>
+    <dimen name="geometric_progress_view_size">100dp</dimen>
+</resources>
