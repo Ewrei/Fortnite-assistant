@@ -15,4 +15,19 @@
     <string name="watch_advertisement">Посмотреть рекламу</string>
     <string name="subscribe">Оформить подписку</string>
 
+    <!--Dialog-->
+    <string name="app_estimate_ok">Оценить</string>
+    <string name="app_estimate_netral">Позже</string>
+    <string name="app_estimate_no">Не напоминать</string>
+    <string name="no">Нет</string>
+    <string name="yes">Да</string>
+
+    <!--Search-->
+    <string name="search_steam_no_found">Вы не можете найти себя в Steam? Попробуйте через Ссылка на профиль в Steam, SteamID64, или CustomURL</string>
+    <string name="search_hint">Ссылка на профиль в Steam, SteamID64, или CustomURL</string>
+    <string name="search">Поиск</string>]
+    <string name="search_player">Поиск игрока</string>
+    <string name="search_user_steam">Поиск игрока в Steam</string>
+    <string name="try_button">Попробовать</string>
+
 </resources>

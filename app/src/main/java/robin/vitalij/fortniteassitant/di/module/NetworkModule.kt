@@ -10,6 +10,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import robin.vitalij.fortniteassitant.api.FortniteRequestsApi
+import robin.vitalij.fortniteassitant.api.FortniteRequestsIOApi
 import java.security.cert.CertificateException
 import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
@@ -21,23 +22,40 @@ import javax.net.ssl.X509TrustManager
 
 
 const val TIMEOUT_SEC = 30L
-private const val ROOT_STEAM_URL = "https://fortnite-api.com"
+private const val ROOT_FORTNITE_COM_URL = "https://fortnite-api.com"
+private const val ROOT_FORTNITE_IO_URL = "https://fortniteapi.io"
+
+private const val AUTHORIZATION = "Authorization"
 
 @Module
 class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideSteamRequestsApi(): FortniteRequestsApi {
-        val okHttpClient = HttpClientFactory()
+    fun provideFortniteRequestsApi(): FortniteRequestsApi {
+        val okHttpClient = HttpClientFactory(false)
             .createHttpClient()
         val retrofit = Retrofit.Builder()
-            .baseUrl(ROOT_STEAM_URL)
+            .baseUrl(ROOT_FORTNITE_COM_URL)
             .client(okHttpClient)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         return retrofit.create(FortniteRequestsApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFortniteIORequestsApi(): FortniteRequestsIOApi {
+        val okHttpClient = HttpClientFactory(true)
+            .createHttpClient()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(ROOT_FORTNITE_IO_URL)
+            .client(okHttpClient)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        return retrofit.create(FortniteRequestsIOApi::class.java)
     }
 
     fun getUnsafeOkHttpClient(): OkHttpClient.Builder {
@@ -78,7 +96,7 @@ class NetworkModule {
         }
     }
 
-    inner class HttpClientFactory {
+    inner class HttpClientFactory(private val isFortniteIo: Boolean) {
         fun createHttpClient(): OkHttpClient {
             val builder = getUnsafeOkHttpClient()
                 .addInterceptor(HttpLoggingInterceptor().apply {
@@ -89,8 +107,14 @@ class NetworkModule {
                 .readTimeout(TIMEOUT_SEC, TimeUnit.SECONDS)
                 .writeTimeout(TIMEOUT_SEC, TimeUnit.SECONDS)
                 .addInterceptor { chain ->
-                    val request = chain.request().newBuilder().build()
-                    chain.proceed(request)
+                    val request = chain.request().newBuilder()
+                    if (isFortniteIo) {
+                        request.addHeader(
+                            AUTHORIZATION,
+                            "bc649d1b-d9500276-7071abc4-b47bde1d"
+                        )
+                    }
+                    chain.proceed(request.build())
                 }
             return builder.build()
         }

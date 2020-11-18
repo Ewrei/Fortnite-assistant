@@ -1,0 +1,31 @@
+ext.props = [:]
+
+def props = [:]
+
+def adalProdProperty = getConfigProperty("prod.properties")
+def stageProdProperty = getConfigProperty("stage.properties")
+
+props.fortnite_key = adalProdProperty['fortnite_key']
+
+props.admod_id = adalProdProperty['admod_id']
+props.billing_id = adalProdProperty['billing_id']
+
+props.banner_id = adalProdProperty['banner_id']
+props.interstitial_id = adalProdProperty['interstitial_id']
+props.native_id = adalProdProperty['native_id']
+props.video_ad_id = adalProdProperty['video_ad_id']
+
+props.admod_id_stage = stageProdProperty['admod_id']
+props.banner_id_stage = stageProdProperty['banner_id']
+props.interstitial_id_stage = stageProdProperty['interstitial_id']
+props.native_id_stage = stageProdProperty['native_id']
+props.video_ad_id_stage = stageProdProperty['video_ad_id']
+
+ext.props = props
+
+def getConfigProperty(fileName){
+    def propertiesFile = rootProject.file(fileName)
+    def properties = new Properties()
+    properties.load(new FileInputStream(propertiesFile))
+    return properties
+}
