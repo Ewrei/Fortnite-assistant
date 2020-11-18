@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fortnite Assitant</string>
+    <string name="app_name" translatable="false">Fortnite Assitant</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -18,5 +18,20 @@
     <string name="limited_content">This content is limited. To access full content, you can view ads or subscribe</string>
     <string name="watch_advertisement">View ad</string>
     <string name="subscribe">Subscribe</string>
+
+    <!--Dialog-->
+    <string name="app_estimate_ok">Rate now</string>
+    <string name="app_estimate_netral">Later</string>
+    <string name="app_estimate_no">Do not remind</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+
+    <!--Search-->
+    <string name="search_steam_no_found">"Can't find yourself on Steam? Try it via Steam Profile Link, SteamID64, or CustomURL"</string>
+    <string name="search_hint">"Profile link on Steam, SteamID64, or CustomURL"</string>
+    <string name="search">Search</string>
+    <string name="search_player">Search player</string>
+    <string name="search_user_steam">Search for a player on Steam</string>
+    <string name="try_button">Try</string>
 
 </resources>

@@ -11,18 +11,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_home.*
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.ui.search.SearchActivity
 
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         homeViewModel =
-                ViewModelProvider(this).get(HomeViewModel::class.java)
+            ViewModelProvider(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         val textView: TextView = root.findViewById(R.id.text_home)
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
@@ -37,6 +38,10 @@ class HomeFragment : Fragment() {
         news.setOnClickListener {
             val navController = findNavController()
             navController.navigate(R.id.navigation_news)
+        }
+
+        search.setOnClickListener {
+            startActivity(SearchActivity.newInstance(requireContext()))
         }
     }
 }
