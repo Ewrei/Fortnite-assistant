@@ -1,0 +1,29 @@
+<changelist name="Added_Search_User_Part_12" date="1605776148830" recycled="false">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Added_Search_User_Part_12/shelved.patch" />
+  <option name="DESCRIPTION" value="Added Search User Part 1" />
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value=".idea/shelf/Added_Search_User_Part_11/buildOutputCleanup.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Added_Search_User_Part_12/buildOutputCleanup.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value=".idea/shelf/Added_Search_User_Part_11/executionHistory.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Added_Search_User_Part_12/executionHistory.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value=".idea/shelf/Added_Search_User_Part_11/fileHashes.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Added_Search_User_Part_12/fileHashes.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value=".idea/shelf/Added_Search_User_Part_11/fileHashes.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Added_Search_User_Part_12/fileHashes.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value=".idea/shelf/Added_Search_User_Part_11/gradle-wrapper.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Added_Search_User_Part_12/gradle-wrapper.jar" />
+  </binary>
+</changelist>

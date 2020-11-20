@@ -170,4 +170,16 @@
         <item name="chipBackgroundColor">@color/color_orange</item>
     </style>
 
+    <style name="IconOnlyButton" parent="ToggleDefaultOutlinedButton">
+        <item name="iconPadding">0dp</item>
+        <item name="iconGravity">textStart</item>
+    </style>
+
+    <style name="ToggleDefaultOutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="cornerRadius">10dp</item>
+        <item name="strokeColor">@color/outlined_button_selector</item>
+        <item name="android:textColor">@color/outlined_button_text_color</item>
+        <item name="iconTint">@color/outlined_button_text_color</item>
+    </style>
+
 </resources>

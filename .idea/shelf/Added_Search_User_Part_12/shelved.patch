@@ -1,0 +1,1126 @@
+Index: .idea/shelf/Added_Search_User_Part_11/shelved.patch
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/shelf/Added_Search_User_Part_11/shelved.patch	(date 1605776130000)
++++ .idea/shelf/Added_Search_User_Part_11/shelved.patch	(date 1605776130000)
+@@ -0,0 +1,1080 @@
++Index: .idea/shelf/Added_Search_User_Part_1.xml
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++--- .idea/shelf/Added_Search_User_Part_1.xml	(date 1605776112000)
+++++ .idea/shelf/Added_Search_User_Part_1.xml	(date 1605776112000)
++@@ -0,0 +1,24 @@
+++<changelist name="Added_Search_User_Part_1" date="1605776111635" recycled="false">
+++  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Added_Search_User_Part_1/shelved.patch" />
+++  <option name="DESCRIPTION" value="Added Search User Part 1" />
+++  <binary>
+++    <option name="BEFORE_PATH" value=".gradle/6.5/executionHistory/executionHistory.lock" />
+++    <option name="AFTER_PATH" value=".gradle/6.5/executionHistory/executionHistory.lock" />
+++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Added_Search_User_Part_1/executionHistory.lock" />
+++  </binary>
+++  <binary>
+++    <option name="BEFORE_PATH" value=".gradle/6.5/fileHashes/fileHashes.bin" />
+++    <option name="AFTER_PATH" value=".gradle/6.5/fileHashes/fileHashes.bin" />
+++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Added_Search_User_Part_1/fileHashes.bin" />
+++  </binary>
+++  <binary>
+++    <option name="BEFORE_PATH" value=".gradle/6.5/fileHashes/fileHashes.lock" />
+++    <option name="AFTER_PATH" value=".gradle/6.5/fileHashes/fileHashes.lock" />
+++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Added_Search_User_Part_1/fileHashes.lock" />
+++  </binary>
+++  <binary>
+++    <option name="BEFORE_PATH" value=".gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+++    <option name="AFTER_PATH" value=".gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Added_Search_User_Part_1/buildOutputCleanup.lock" />
+++  </binary>
+++</changelist>
++\ No newline at end of file
++Index: .idea/compiler.xml
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++--- .idea/compiler.xml	(date 1605385416000)
+++++ .idea/compiler.xml	(date 1605385416000)
++@@ -0,0 +1,6 @@
+++<?xml version="1.0" encoding="UTF-8"?>
+++<project version="4">
+++  <component name="CompilerConfiguration">
+++    <bytecodeTargetLevel target="1.8" />
+++  </component>
+++</project>
++\ No newline at end of file
++Index: .idea/jarRepositories.xml
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++--- .idea/jarRepositories.xml	(date 1605386295000)
+++++ .idea/jarRepositories.xml	(date 1605386295000)
++@@ -0,0 +1,30 @@
+++<?xml version="1.0" encoding="UTF-8"?>
+++<project version="4">
+++  <component name="RemoteRepositoriesConfiguration">
+++    <remote-repository>
+++      <option name="id" value="central" />
+++      <option name="name" value="Maven Central repository" />
+++      <option name="url" value="https://repo1.maven.org/maven2" />
+++    </remote-repository>
+++    <remote-repository>
+++      <option name="id" value="jboss.community" />
+++      <option name="name" value="JBoss Community repository" />
+++      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+++    </remote-repository>
+++    <remote-repository>
+++      <option name="id" value="BintrayJCenter" />
+++      <option name="name" value="BintrayJCenter" />
+++      <option name="url" value="https://jcenter.bintray.com/" />
+++    </remote-repository>
+++    <remote-repository>
+++      <option name="id" value="Google" />
+++      <option name="name" value="Google" />
+++      <option name="url" value="https://dl.google.com/dl/android/maven2/" />
+++    </remote-repository>
+++    <remote-repository>
+++      <option name="id" value="maven" />
+++      <option name="name" value="maven" />
+++      <option name="url" value="https://jitpack.io" />
+++    </remote-repository>
+++  </component>
+++</project>
++\ No newline at end of file
++Index: .idea/shelf/Added_Search_User_Part_1/shelved.patch
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++--- .idea/shelf/Added_Search_User_Part_1/shelved.patch	(date 1605776111000)
+++++ .idea/shelf/Added_Search_User_Part_1/shelved.patch	(date 1605776111000)
++@@ -0,0 +1,975 @@
+++Index: app/src/main/res/layout/bottom_sheet_profile.xml
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/res/layout/bottom_sheet_profile.xml	(date 1601299299000)
++++++ app/src/main/res/layout/bottom_sheet_profile.xml	(date 1601299299000)
+++@@ -0,0 +1,87 @@
++++<?xml version="1.0" encoding="utf-8"?>
++++<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
++++    xmlns:app="http://schemas.android.com/apk/res-auto"
++++    android:id="@+id/content_view"
++++    android:layout_width="match_parent"
++++    android:layout_height="match_parent"
++++    android:orientation="vertical">
++++
++++    <LinearLayout
++++        android:layout_width="match_parent"
++++        android:layout_height="wrap_content"
++++        android:orientation="vertical">
++++
++++        <LinearLayout
++++            android:id="@+id/tabMenu"
++++            android:layout_width="match_parent"
++++            android:layout_height="wrap_content"
++++            android:visibility="gone"
++++            android:orientation="vertical">
++++
++++            <TableRow
++++                android:id="@+id/fullTable"
++++                android:layout_width="match_parent"
++++                android:layout_height="wrap_content">
++++
++++                <com.google.android.material.button.MaterialButton
++++                    android:id="@+id/compareWithYourself"
++++                    style="@style/DefaultTextButton"
++++                    android:layout_width="wrap_content"
++++                    android:layout_height="wrap_content"
++++                    android:layout_marginStart="@dimen/default_margin"
++++                    android:text="@string/compare_with_yourself"
++++                    app:layout_constraintStart_toStartOf="parent"
++++                    app:layout_constraintTop_toTopOf="parent" />
++++
++++                <TextView
++++                    android:layout_width="0dp"
++++                    android:layout_height="wrap_content"
++++                    android:layout_weight="1"
++++                    android:text="" />
++++
++++                <com.google.android.material.button.MaterialButton
++++                    android:id="@+id/addedProfile"
++++                    style="@style/DefaultTextButton"
++++                    android:layout_width="wrap_content"
++++                    android:layout_height="wrap_content"
++++                    android:layout_gravity="end"
++++                    android:layout_marginEnd="@dimen/default_margin"
++++                    android:text="@string/add"
++++                    app:layout_constraintEnd_toEndOf="parent"
++++                    app:layout_constraintTop_toTopOf="parent" />
++++
++++            </TableRow>
++++
++++            <com.google.android.material.button.MaterialButton
++++                android:id="@+id/addedToComparison"
++++                style="@style/DefaultTextButton"
++++                android:layout_width="wrap_content"
++++                android:layout_height="wrap_content"
++++                android:layout_marginStart="@dimen/default_margin"
++++                android:text="@string/add_to_comparison"
++++                app:layout_constraintEnd_toEndOf="parent"
++++                app:layout_constraintTop_toTopOf="parent" />
++++
++++        </LinearLayout>
++++
++++        <include
++++            layout="@layout/recycler_view"
++++            android:layout_width="match_parent"
++++            android:layout_height="match_parent" />
++++
++++    </LinearLayout>
++++
++++    <include
++++        layout="@layout/progress_view"
++++        android:layout_width="match_parent"
++++        android:layout_height="match_parent"
++++        android:layout_gravity="center" />
++++
++++    <include
++++        layout="@layout/view_error"
++++        android:layout_width="match_parent"
++++        android:layout_height="match_parent"
++++        android:layout_gravity="center"
++++        android:visibility="gone" />
++++
++++</FrameLayout>
+++\ No newline at end of file
+++Index: app/src/main/java/robin/vitalij/fortniteassitant/repository/comparison/ComparisonListUserRepository.kt
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/java/robin/vitalij/fortniteassitant/repository/comparison/ComparisonListUserRepository.kt	(date 1605706293000)
++++++ app/src/main/java/robin/vitalij/fortniteassitant/repository/comparison/ComparisonListUserRepository.kt	(date 1605706293000)
+++@@ -0,0 +1,9 @@
++++package robin.vitalij.fortniteassitant.repository.comparison
++++
++++import javax.inject.Inject
++++import javax.inject.Singleton
++++
++++@Singleton
++++class ComparisonListUserRepository @Inject constructor() {
++++
++++}
+++\ No newline at end of file
+++Index: app/src/main/java/robin/vitalij/fortniteassitant/interfaces/RegistrationProfileCallback.kt
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+++<+>package robin.vitalij.fortniteassitant.interfaces\n\ninterface RegistrationProfileCallback {\n\n    //fun addedProfile(csGoFullProfileResponse: CsGoFullProfileResponse)\n\n}
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/java/robin/vitalij/fortniteassitant/interfaces/RegistrationProfileCallback.kt	(revision db7ff576b2e5dd5ea61131540e0ac22eccea6f04)
++++++ app/src/main/java/robin/vitalij/fortniteassitant/interfaces/RegistrationProfileCallback.kt	(date 1605770631000)
+++@@ -1,7 +1,9 @@
+++ package robin.vitalij.fortniteassitant.interfaces
+++ 
++++import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
++++
+++ interface RegistrationProfileCallback {
+++ 
+++-    //fun addedProfile(csGoFullProfileResponse: CsGoFullProfileResponse)
++++    fun addedProfile(fortniteProfileResponse: FortniteProfileResponse)
+++ 
+++ }
+++\ No newline at end of file
+++Index: app/src/main/java/robin/vitalij/fortniteassitant/repository/comparison/ComparisonRepository.kt
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/java/robin/vitalij/fortniteassitant/repository/comparison/ComparisonRepository.kt	(date 1605703073000)
++++++ app/src/main/java/robin/vitalij/fortniteassitant/repository/comparison/ComparisonRepository.kt	(date 1605703073000)
+++@@ -0,0 +1,7 @@
++++package robin.vitalij.fortniteassitant.repository.comparison
++++
++++import javax.inject.Inject
++++import javax.inject.Singleton
++++
++++@Singleton
++++class ComparisonRepository @Inject constructor()
+++\ No newline at end of file
+++Index: app/src/main/java/robin/vitalij/fortniteassitant/api/FortniteRequestsApi.kt
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+++<+>package robin.vitalij.fortniteassitant.api\n\nimport io.reactivex.Observable\nimport retrofit2.http.GET\nimport retrofit2.http.Query\nimport robin.vitalij.fortniteassitant.model.network.NewsResponse\n\ninterface FortniteRequestsApi {\n\n    @GET(\"/v2/news\")\n    fun getNews(): Observable<NewsResponse>\n\n}
+++===================================================================
+++--- app/src/main/java/robin/vitalij/fortniteassitant/api/FortniteRequestsApi.kt	(revision db7ff576b2e5dd5ea61131540e0ac22eccea6f04)
++++++ app/src/main/java/robin/vitalij/fortniteassitant/api/FortniteRequestsComApi.kt	(date 1605776001000)
+++@@ -1,13 +1,23 @@
+++ package robin.vitalij.fortniteassitant.api
+++ 
+++ import io.reactivex.Observable
++++import io.reactivex.Single
+++ import retrofit2.http.GET
++++import retrofit2.http.Path
+++ import retrofit2.http.Query
+++ import robin.vitalij.fortniteassitant.model.network.NewsResponse
++++import robin.vitalij.fortniteassitant.model.network.stats.PlayerStatsResponse
+++ 
+++-interface FortniteRequestsApi {
++++interface FortniteRequestsComApi {
+++ 
+++     @GET("/v2/news")
+++     fun getNews(): Observable<NewsResponse>
+++ 
++++    @GET("v1/stats/br/v2/{accountId}")
++++    fun getStats(
++++        @Path("accountId") accountId: String,
++++        @Query("timeWindow") timeWindow: String,
++++        @Query("image") image: String
++++    ): Single<PlayerStatsResponse>
++++
+++ }
+++\ No newline at end of file
+++Index: app/src/main/java/robin/vitalij/fortniteassitant/ui/bottomsheet/profile/ProfileResultViewModelFactory.kt
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/java/robin/vitalij/fortniteassitant/ui/bottomsheet/profile/ProfileResultViewModelFactory.kt	(date 1605703188000)
++++++ app/src/main/java/robin/vitalij/fortniteassitant/ui/bottomsheet/profile/ProfileResultViewModelFactory.kt	(date 1605703188000)
+++@@ -0,0 +1,31 @@
++++package robin.vitalij.fortniteassitant.ui.bottomsheet.profile
++++
++++import robin.vitalij.fortniteassitant.repository.comparison.ComparisonListUserRepository
++++import robin.vitalij.fortniteassitant.repository.comparison.ComparisonRepository
++++import robin.vitalij.fortniteassitant.repository.network.GetUserRepository
++++import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
++++import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
++++import javax.inject.Inject
++++
++++class ProfileResultViewModelFactory @Inject constructor(
++++    private val getUserRepository: GetUserRepository,
++++    private val comparisonListUserRepository: ComparisonListUserRepository,
++++    private val comparisonRepository: ComparisonRepository,
++++    private val resourceProvider: ResourceProvider
++++) : BaseViewModelFactory<ProfileResultViewModel>(ProfileResultViewModel::class.java) {
++++
++++    private var viewModel: ProfileResultViewModel? = null
++++
++++    override fun createViewModel(): ProfileResultViewModel {
++++        return viewModel ?: run {
++++            val model = ProfileResultViewModel(
++++                getUserRepository,
++++                comparisonListUserRepository,
++++                comparisonRepository,
++++                resourceProvider
++++            )
++++            viewModel = model
++++            return model
++++        }
++++    }
++++}
+++\ No newline at end of file
+++Index: app/src/main/res/drawable/bottomsheet_container_background.xml
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/res/drawable/bottomsheet_container_background.xml	(date 1601299299000)
++++++ app/src/main/res/drawable/bottomsheet_container_background.xml	(date 1601299299000)
+++@@ -0,0 +1,9 @@
++++<?xml version="1.0" encoding="utf-8"?>
++++<shape xmlns:android="http://schemas.android.com/apk/res/android"
++++    android:shape="rectangle"
++++    >
++++    <corners android:topRightRadius="16dp"
++++        android:topLeftRadius="16dp"
++++        />
++++    <solid android:color="@color/background_app"/>
++++</shape>
+++\ No newline at end of file
+++Index: app/src/main/java/robin/vitalij/fortniteassitant/ui/bottomsheet/profile/adapter/viewholder/Profile.kt
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/java/robin/vitalij/fortniteassitant/ui/bottomsheet/profile/adapter/viewholder/Profile.kt	(date 1605704104000)
++++++ app/src/main/java/robin/vitalij/fortniteassitant/ui/bottomsheet/profile/adapter/viewholder/Profile.kt	(date 1605704104000)
+++@@ -0,0 +1,4 @@
++++package robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewholder
++++
++++class Profile {
++++}
+++\ No newline at end of file
+++Index: app/src/main/res/values-ru/strings.xml
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+++<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<resources>\n    <string name=\"retry\">Попробовать еще раз</string>\n    <string name=\"unknown_error\">Что-то пошло не так</string>\n    <string name=\"repeat\">Повторить</string>\n    <string name=\"network_error\">Пожалуйста, проверьте ваше интернет–соединение и попробуйте снова</string>\n    <string name=\"firebase_limit_error\">На сервере превышен лимит запросов. Постараемся в ближайшее время это исправить.</string>\n\n    <!--No subscription-->\n    <string name=\"no_subscription_content\">Улучшите аккаунт для доступа к дополнительной статистике</string>\n    <string name=\"no_subscription_content_2\">Или посмотрите видеорекламу, чтоб получить доступ на 2 дня</string>\n    <string name=\"watch_video_ads\">Смотреть видеорекламу</string>\n\n    <string name=\"limited_content\">Данный контент ограничен. Вы можете просмотреть рекламу или оформить подписку и получите доступ к нему</string>\n    <string name=\"watch_advertisement\">Посмотреть рекламу</string>\n    <string name=\"subscribe\">Оформить подписку</string>\n\n    <!--Dialog-->\n    <string name=\"app_estimate_ok\">Оценить</string>\n    <string name=\"app_estimate_netral\">Позже</string>\n    <string name=\"app_estimate_no\">Не напоминать</string>\n    <string name=\"no\">Нет</string>\n    <string name=\"yes\">Да</string>\n\n    <!--Search-->\n    <string name=\"search_steam_no_found\">Вы не можете найти себя в Steam? Попробуйте через Ссылка на профиль в Steam, SteamID64, или CustomURL</string>\n    <string name=\"search_hint\">Ссылка на профиль в Steam, SteamID64, или CustomURL</string>\n    <string name=\"search\">Поиск</string>]\n    <string name=\"search_player\">Поиск игрока</string>\n    <string name=\"search_user_steam\">Поиск игрока в Steam</string>\n    <string name=\"try_button\">Попробовать</string>\n\n</resources>
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/res/values-ru/strings.xml	(revision db7ff576b2e5dd5ea61131540e0ac22eccea6f04)
++++++ app/src/main/res/values-ru/strings.xml	(date 1605706251000)
+++@@ -30,4 +30,13 @@
+++     <string name="search_user_steam">Поиск игрока в Steam</string>
+++     <string name="try_button">Попробовать</string>
+++ 
++++    <!--Users-->
++++    <string name="account_action">Действие с аккаунтом</string>
++++    <string name="refresh">Обновить</string>
++++    <string name="to_switch">Переключиться</string>
++++    <string name="compare_with_yourself">Сравнить с собой</string>
++++    <string name="user_update">Обновление данных пользователя</string>
++++    <string name="add">Добавить</string>
++++    <string name="add_to_comparison">Добавить в сравнение</string>
++++
+++ </resources>
+++\ No newline at end of file
+++Index: app/src/main/java/robin/vitalij/fortniteassitant/utils/mapper/ProfileResultMapper.kt
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/java/robin/vitalij/fortniteassitant/utils/mapper/ProfileResultMapper.kt	(date 1605770631000)
++++++ app/src/main/java/robin/vitalij/fortniteassitant/utils/mapper/ProfileResultMapper.kt	(date 1605770631000)
+++@@ -0,0 +1,15 @@
++++package robin.vitalij.fortniteassitant.utils.mapper
++++
++++import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
++++import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewholder.Profile
++++import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
++++import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
++++
++++class ProfileResultMapper(private val resourceProvider: ResourceProvider) :
++++    Mapper<FortniteProfileResponse, List<Profile>> {
++++
++++    override fun transform(obj: FortniteProfileResponse): List<Profile> {
++++        val list = arrayListOf<Profile>()
++++        return list
++++    }
++++}
+++\ No newline at end of file
+++Index: app/src/main/java/robin/vitalij/fortniteassitant/api/FortniteRequestsIOApi.kt
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+++<+>package robin.vitalij.fortniteassitant.api\n\nimport io.reactivex.Single\nimport retrofit2.http.GET\nimport retrofit2.http.Query\nimport robin.vitalij.fortniteassitant.model.network.search.SearchResponse\n\ninterface FortniteRequestsIOApi {\n\n    @GET(\"/lookup\")\n    fun getSearch(\n        @Query(\"username\") username: String,\n        @Query(\"strict\") strict: Boolean\n    ): Single<SearchResponse>\n\n}
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/java/robin/vitalij/fortniteassitant/api/FortniteRequestsIOApi.kt	(revision db7ff576b2e5dd5ea61131540e0ac22eccea6f04)
++++++ app/src/main/java/robin/vitalij/fortniteassitant/api/FortniteRequestsIOApi.kt	(date 1605706168000)
+++@@ -1,9 +1,11 @@
+++ package robin.vitalij.fortniteassitant.api
+++ 
+++ import io.reactivex.Single
++++import okhttp3.Response
+++ import retrofit2.http.GET
+++ import retrofit2.http.Query
+++ import robin.vitalij.fortniteassitant.model.network.search.SearchResponse
++++import robin.vitalij.fortniteassitant.model.network.stats.PlayerMatchesResponse
+++ 
+++ interface FortniteRequestsIOApi {
+++ 
+++@@ -13,4 +15,7 @@
+++         @Query("strict") strict: Boolean
+++     ): Single<SearchResponse>
+++ 
++++
++++    @GET("v1/matches?")
++++    fun getMatches(@Query("account") account: String): Single<PlayerMatchesResponse>
+++ }
+++\ No newline at end of file
+++Index: app/src/main/java/robin/vitalij/fortniteassitant/di/component/AppComponent.kt
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+++<+>package robin.vitalij.fortniteassitant.di.component\n\nimport dagger.Component\nimport robin.vitalij.fortniteassitant.ui.main.MainActivity\nimport robin.vitalij.fortniteassitant.di.module.DatabaseModule\nimport robin.vitalij.fortniteassitant.di.module.FortniteAppModule\nimport robin.vitalij.fortniteassitant.di.module.NetworkModule\nimport robin.vitalij.fortniteassitant.di.module.RepositoryModule\nimport robin.vitalij.fortniteassitant.ui.news.NewsFragment\nimport robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment\nimport javax.inject.Singleton\n\n@Singleton\n@Component(modules = [FortniteAppModule::class, DatabaseModule::class, RepositoryModule::class, NetworkModule::class])\ninterface AppComponent {\n\n    fun inject(activity: MainActivity)\n\n    fun inject(fragment: NewsFragment)\n    fun inject(fragment: SearchUserFragment)\n}
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/java/robin/vitalij/fortniteassitant/di/component/AppComponent.kt	(revision db7ff576b2e5dd5ea61131540e0ac22eccea6f04)
++++++ app/src/main/java/robin/vitalij/fortniteassitant/di/component/AppComponent.kt	(date 1605702463000)
+++@@ -6,6 +6,7 @@
+++ import robin.vitalij.fortniteassitant.di.module.FortniteAppModule
+++ import robin.vitalij.fortniteassitant.di.module.NetworkModule
+++ import robin.vitalij.fortniteassitant.di.module.RepositoryModule
++++import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
+++ import robin.vitalij.fortniteassitant.ui.news.NewsFragment
+++ import robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment
+++ import javax.inject.Singleton
+++@@ -18,4 +19,6 @@
+++ 
+++     fun inject(fragment: NewsFragment)
+++     fun inject(fragment: SearchUserFragment)
++++
++++    fun inject(fragment: ProfileResultFragment)
+++ }
+++\ No newline at end of file
+++Index: app/src/main/java/robin/vitalij/fortniteassitant/repository/network/GetSearchUserRepository.kt
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+++<+>package robin.vitalij.fortniteassitant.repository.network\n\nimport io.reactivex.Single\nimport io.reactivex.schedulers.Schedulers\nimport robin.vitalij.fortniteassitant.api.FortniteRequestsApi\nimport robin.vitalij.fortniteassitant.api.FortniteRequestsIOApi\nimport robin.vitalij.fortniteassitant.utils.mapper.SearchUserMapper\nimport javax.inject.Inject\n\nclass GetSearchUserRepository @Inject constructor(\n    private val fortniteRequestsIOApi: FortniteRequestsIOApi,\n    private val fortniteRequestsApi: FortniteRequestsApi\n) {\n\n    fun getSearch(username: String) =\n        fortniteRequestsIOApi.getSearch(username, false).subscribeOn(Schedulers.io()).flatMap {\n            return@flatMap Single.just(SearchUserMapper().transform(it))\n        }\n\n}
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/java/robin/vitalij/fortniteassitant/repository/network/GetSearchUserRepository.kt	(revision db7ff576b2e5dd5ea61131540e0ac22eccea6f04)
++++++ app/src/main/java/robin/vitalij/fortniteassitant/repository/network/GetSearchUserRepository.kt	(date 1605704978000)
+++@@ -2,14 +2,14 @@
+++ 
+++ import io.reactivex.Single
+++ import io.reactivex.schedulers.Schedulers
+++-import robin.vitalij.fortniteassitant.api.FortniteRequestsApi
++++import robin.vitalij.fortniteassitant.api.FortniteRequestsComApi
+++ import robin.vitalij.fortniteassitant.api.FortniteRequestsIOApi
+++ import robin.vitalij.fortniteassitant.utils.mapper.SearchUserMapper
+++ import javax.inject.Inject
+++ 
+++ class GetSearchUserRepository @Inject constructor(
+++     private val fortniteRequestsIOApi: FortniteRequestsIOApi,
+++-    private val fortniteRequestsApi: FortniteRequestsApi
++++    private val fortniteRequestsComApi: FortniteRequestsComApi
+++ ) {
+++ 
+++     fun getSearch(username: String) =
+++Index: app/src/main/java/robin/vitalij/fortniteassitant/repository/network/GetUserRepository.kt
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/java/robin/vitalij/fortniteassitant/repository/network/GetUserRepository.kt	(date 1605771779000)
++++++ app/src/main/java/robin/vitalij/fortniteassitant/repository/network/GetUserRepository.kt	(date 1605771779000)
+++@@ -0,0 +1,41 @@
++++package robin.vitalij.fortniteassitant.repository.network
++++
++++import io.reactivex.Single
++++import io.reactivex.functions.BiFunction
++++import io.reactivex.schedulers.Schedulers
++++import robin.vitalij.fortniteassitant.api.FortniteRequestsComApi
++++import robin.vitalij.fortniteassitant.api.FortniteRequestsIOApi
++++import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
++++import robin.vitalij.fortniteassitant.model.network.stats.PlayerMatchesResponse
++++import robin.vitalij.fortniteassitant.model.network.stats.PlayerStatsResponse
++++import javax.inject.Inject
++++
++++class GetUserRepository @Inject constructor(
++++    private val fortniteRequestsIOApi: FortniteRequestsIOApi,
++++    private val fortniteRequestsComApi: FortniteRequestsComApi
++++) {
++++
++++    fun getUser(playerId: String): Single<FortniteProfileResponse> {
++++        val playerStats = fortniteRequestsComApi.getStats(playerId, "lifetime", "all")
++++        val matchesPlayerStats = fortniteRequestsIOApi.getMatches(playerId)
++++
++++        return Single.zip(
++++            playerStats,
++++            matchesPlayerStats,
++++            handleResult()
++++        ).subscribeOn(Schedulers.io()).flatMap { fortniteProfileResponse ->
++++            return@flatMap fortniteRequestsComApi.getStats(playerId, "season", "all").flatMap {
++++                return@flatMap Single.just(fortniteProfileResponse.apply { sessionStats = it })
++++            }
++++        }
++++    }
++++
++++    private fun handleResult(): BiFunction<PlayerStatsResponse, PlayerMatchesResponse, FortniteProfileResponse> =
++++        BiFunction { stats, matches ->
++++            FortniteProfileResponse(
++++                stats = stats,
++++                sessionStats = stats,
++++                matches = matches
++++            )
++++        }
++++}
+++\ No newline at end of file
+++Index: app/src/main/java/robin/vitalij/fortniteassitant/model/network/stats/PlayerMatchesResponse.kt
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/java/robin/vitalij/fortniteassitant/model/network/stats/PlayerMatchesResponse.kt	(date 1605775841000)
++++++ app/src/main/java/robin/vitalij/fortniteassitant/model/network/stats/PlayerMatchesResponse.kt	(date 1605775841000)
+++@@ -0,0 +1,30 @@
++++package robin.vitalij.fortniteassitant.model.network.stats
++++
++++import com.google.gson.annotations.SerializedName
++++
++++class PlayerMatchesResponse(
++++    @SerializedName("result") val result: Boolean,
++++    @SerializedName("account") val account: String,
++++    @SerializedName("name") val name: String,
++++    @SerializedName("max_results") val maxResults: Int,
++++    @SerializedName("matches") val matches: List<MatchesPlayer>
++++)
++++
++++class MatchesPlayer(
++++    @SerializedName("platform") val platform: String,
++++    @SerializedName("date") val date: String,
++++    @SerializedName("mode") val mode: String,
++++    @SerializedName("readable_name") val readableName: String,
++++    @SerializedName("kills") val kills: Int,
++++    @SerializedName("matchesplayed") val matchesplayed: Int,
++++    @SerializedName("minutesplayed") val minutesplayed: Int,
++++    @SerializedName("playersoutlived") val playersoutlived: Int,
++++    @SerializedName("score") val score: Int,
++++    @SerializedName("placetop1") val placetop1: Int,
++++    @SerializedName("placetop3") val placetop3: Int,
++++    @SerializedName("placetop5") val placetop5: Int,
++++    @SerializedName("placetop6") val placetop6: Int,
++++    @SerializedName("placetop10") val placetop10: Int,
++++    @SerializedName("placetop12") val placetop12: Int,
++++    @SerializedName("placetop25") val placetop25: Int
++++)
+++\ No newline at end of file
+++Index: app/src/main/java/robin/vitalij/fortniteassitant/model/network/stats/PlayerStatsResponse.kt
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/java/robin/vitalij/fortniteassitant/model/network/stats/PlayerStatsResponse.kt	(date 1605775385000)
++++++ app/src/main/java/robin/vitalij/fortniteassitant/model/network/stats/PlayerStatsResponse.kt	(date 1605775385000)
+++@@ -0,0 +1,100 @@
++++package robin.vitalij.fortniteassitant.model.network.stats
++++
++++import com.google.gson.annotations.SerializedName
++++
++++class PlayerStatsResponse(
++++    @SerializedName("status") val status: Int,
++++    @SerializedName("data") val playerStatsData: PlayerStatsData,
++++)
++++
++++class PlayerStatsData(
++++    @SerializedName("image") val image: String?,
++++    @SerializedName("account") val account: Account,
++++    @SerializedName("battlePass") val battlePass: BattlePass,
++++    @SerializedName("stats") val stats: Stats,
++++)
++++
++++class Account(
++++    @SerializedName("id") val id: String,
++++    @SerializedName("name") val name: String
++++)
++++
++++class BattlePass(
++++    @SerializedName("level") val level: Int,
++++    @SerializedName("progress") val progress: Int
++++)
++++
++++class Stats(
++++    @SerializedName("all") val all: StatsTypeDevice,
++++    @SerializedName("keyboardMouse") val keyboardMouse: StatsTypeDevice,
++++    @SerializedName("gamepad") val gamepad: StatsTypeDevice,
++++    @SerializedName("touch") val touch: StatsTypeDevice
++++)
++++
++++class StatsTypeDevice(
++++    @SerializedName("overall") val overall: Overall,
++++    @SerializedName("solo") val solo: Math,
++++    @SerializedName("duo") val duo: Math,
++++    @SerializedName("trio") val trio: Math,
++++    @SerializedName("squad") val squad: Math,
++++    @SerializedName("ltm") val ltm: Ltm
++++)
++++
++++class Overall(
++++    @SerializedName("score") val score: Long,
++++    @SerializedName("scorePerMin") val scorePerMin: Double,
++++    @SerializedName("scorePerMatch") val scorePerMatch: Double,
++++    @SerializedName("wins") val wins: Int,
++++    @SerializedName("top3") val top3: Int,
++++    @SerializedName("top5") val top5: Int,
++++    @SerializedName("top6") val top6: Int,
++++    @SerializedName("top10") val top10: Int,
++++    @SerializedName("top12") val top12: Int,
++++    @SerializedName("top25") val top25: Int,
++++    @SerializedName("kills") val kills: Int,
++++    @SerializedName("killsPerMin") val killsPerMin: Double,
++++    @SerializedName("killsPerMatch") val killsPerMatch: Double,
++++    @SerializedName("deaths") val deaths: Int,
++++    @SerializedName("kd") val kd: Double,
++++    @SerializedName("matches") val matches: Int,
++++    @SerializedName("winRate") val winRate: Double,
++++    @SerializedName("minutesPlayed") val minutesPlayed: Int,
++++    @SerializedName("playersOutlived") val playersOutlived: Long,
++++    @SerializedName("lastModified") val lastModified: String
++++)
++++
++++class Matches(
++++    @SerializedName("score") val score: Long,
++++    @SerializedName("scorePerMin") val scorePerMin: Double,
++++    @SerializedName("scorePerMatch") val scorePerMatch: Double,
++++    @SerializedName("wins") val wins: Int,
++++    @SerializedName("top10") val top10: Int,
++++    @SerializedName("top25") val top25: Int,
++++    @SerializedName("kills") val kills: Int,
++++    @SerializedName("killsPerMin") val killsPerMin: Double,
++++    @SerializedName("killsPerMatch") val killsPerMatch: Double,
++++    @SerializedName("deaths") val deaths: Int,
++++    @SerializedName("kd") val kd: Double,
++++    @SerializedName("matches") val matches: Int,
++++    @SerializedName("winRate") val winRate: Double,
++++    @SerializedName("minutesPlayed") val minutesPlayed: Int,
++++    @SerializedName("playersOutlived") val playersOutlived: Long,
++++    @SerializedName("lastModified") val lastModified: String
++++)
++++
++++class Ltm(
++++    @SerializedName("score") val score: Long,
++++    @SerializedName("scorePerMin") val scorePerMin: Double,
++++    @SerializedName("scorePerMatch") val scorePerMatch: Double,
++++    @SerializedName("wins") val wins: Int,
++++    @SerializedName("kills") val kills: Int,
++++    @SerializedName("killsPerMin") val killsPerMin: Double,
++++    @SerializedName("killsPerMatch") val killsPerMatch: Double,
++++    @SerializedName("deaths") val deaths: Int,
++++    @SerializedName("kd") val kd: Double,
++++    @SerializedName("matches") val matches: Int,
++++    @SerializedName("winRate") val winRate: Double,
++++    @SerializedName("minutesPlayed") val minutesPlayed: Int,
++++    @SerializedName("playersOutlived") val playersOutlived: Long,
++++    @SerializedName("lastModified") val lastModified: String
++++)
+++\ No newline at end of file
+++Index: app/src/main/java/robin/vitalij/fortniteassitant/ui/search/fortnite/SearchUserFragment.kt
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+++<+>package robin.vitalij.fortniteassitant.ui.search.fortnite\n\nimport android.annotation.SuppressLint\nimport android.content.Intent\nimport android.os.Bundle\nimport android.view.LayoutInflater\nimport android.view.View\nimport android.view.ViewGroup\nimport androidx.appcompat.app.AppCompatActivity\nimport androidx.lifecycle.ViewModelProvider\nimport androidx.navigation.fragment.findNavController\nimport androidx.navigation.ui.AppBarConfiguration\nimport androidx.navigation.ui.setupWithNavController\nimport androidx.recyclerview.widget.LinearLayoutManager\nimport com.google.android.gms.ads.AdListener\nimport com.google.android.gms.ads.AdRequest\nimport kotlinx.android.synthetic.main.fragment_search_steam.*\nimport kotlinx.android.synthetic.main.recycler_view.*\nimport kotlinx.android.synthetic.main.toolbar_center_title.*\nimport robin.vitalij.fortniteassitant.FortniteApplication\nimport robin.vitalij.fortniteassitant.R\nimport robin.vitalij.fortniteassitant.common.extensions.*\nimport robin.vitalij.fortniteassitant.model.enums.ProfileResultType\nimport robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser\nimport robin.vitalij.fortniteassitant.ui.common.BaseFragment\nimport robin.vitalij.fortniteassitant.ui.main.MainActivity\nimport robin.vitalij.fortniteassitant.ui.search.adapter.SearchAdapter\nimport java.util.*\nimport javax.inject.Inject\n\nclass SearchUserFragment : BaseFragment() {\n\n    @Inject\n    lateinit var viewModelFactory: SearchUserViewModelFactory\n\n    private lateinit var viewModel: SearchUserViewModel\n\n    lateinit var adRequest: AdRequest\n\n    override fun onCreateView(\n        inflater: LayoutInflater, container: ViewGroup?,\n        savedInstanceState: Bundle?\n    ) = inflater.inflate(R.layout.fragment_search_steam, container, false)\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        FortniteApplication.appComponent.inject(this)\n        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)\n            .get(SearchUserViewModel::class.java).apply {\n                observeToProgressBar(this@SearchUserFragment)\n                observeToError(this@SearchUserFragment)\n                observeToProgressBar(\n                    this@SearchUserFragment,\n                    activity = activity as AppCompatActivity\n                )\n\n                openMainScreen = {\n                    activity?.finish()\n                    val intent = Intent(requireContext(), MainActivity::class.java)\n                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)\n                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)\n                    startActivity(intent)\n                }\n            }\n    }\n\n    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {\n        super.onViewCreated(view, savedInstanceState)\n        viewModel.mutableLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {\n            usersEmpty.setVisibility(it.isEmpty())\n            it?.let(::initAdapter)\n        })\n\n        arguments?.let {\n            if (it.getSerializable(IS_COMPARISON_VISIBLE) as ProfileResultType == ProfileResultType.FULL) {\n                setNavigation()\n            } else {\n                toolbar.title = getString(R.string.search_player)\n            }\n        }\n\n        initBanner()\n        setListeners()\n    }\n\n    private fun initBanner() {\n        if (viewModel.preferenceManager.getIsSubscription() || viewModel.preferenceManager.getDisableAdvertising() >= Date().time) {\n            adView.setVisibility(false)\n        } else {\n            adRequest = AdRequest.Builder().build()\n            adView.loadAd(adRequest)\n        }\n    }\n\n    private fun setNavigation() {\n        val navController = findNavController()\n        val appBarConfiguration = AppBarConfiguration(navController.graph)\n        toolbar.setupWithNavController(navController, appBarConfiguration)\n    }\n\n    @SuppressLint(\"ClickableViewAccessibility\")\n    private fun setListeners() {\n        recyclerView.setOnTouchListener { v, event ->\n            context.closeKeyboard(view)\n            false\n        }\n\n        adView?.adListener = object : AdListener() {\n            override fun onAdLoaded() {\n                adView?.setVisibility(true)\n            }\n\n            override fun onAdFailedToLoad(errorCode: Int) {\n                adView?.setVisibility(false)\n                adView?.loadAd(adRequest)\n            }\n\n            override fun onAdOpened() {}\n\n            override fun onAdLeftApplication() {\n            }\n\n            override fun onAdClosed() {\n            }\n        }\n\n//        searchById.setOnClickListener {\n//            arguments?.let {\n//                if (it.getSerializable(IS_COMPARISON_VISIBLE) as ProfileResultType == ProfileResultType.FULL) {\n////                    findNavController().navigate(R.id.navigation_search_id, Bundle().apply {\n////                        putSerializable(IS_COMPARISON_VISIBLE, ProfileResultType.FULL)\n////                    })\n//                } else {\n////                    (activity as? BaseActivity)?.replaceStackFragment(\n////                        SearchIdFragment.newInstance(\n////                            it.getSerializable(\n////                                IS_COMPARISON_VISIBLE\n////                            ) as ProfileResultType\n////                        )\n////                    )\n//                }\n//            }\n//        }\n\n        searchButton.setSafeOnClickListener {\n            context?.closeKeyboard(view)\n            if (searchInputEditText.text.toString().isEmpty()) {\n                viewModel.mutableLiveData.value = arrayListOf()\n            }\n            if (searchInputEditText.text.toString().length >= resources.getInteger(R.integer.min_length)) {\n                viewModel.searchPlayer(searchInputEditText.text.toString())\n            }\n        }\n    }\n\n    private fun initAdapter(list: List<SearchSteamUser>) {\n        recyclerView.run {\n            arguments?.let { bundle ->\n                adapter = SearchAdapter { it ->\n                    context.closeKeyboard(view)\n//                    ProfileResultFragment.show(\n//                        childFragmentManager,\n//                        it.profile,\n//                        bundle.getSerializable(IS_COMPARISON_VISIBLE) as ProfileResultType,\n//                        true,\n//                        object : RegistrationProfileCallback {\n//                            override fun addedProfile(csGoFullProfileResponse: CsGoFullProfileResponse) {\n//                                viewModel.textActivityVisibility.set(getString(R.string.save_the_user))\n//                                viewModel.saveUser(csGoFullProfileResponse)\n//                            }\n//\n//                        })\n                }\n            }\n            layoutManager = LinearLayoutManager(context)\n            (adapter as SearchAdapter).setData(list)\n        }\n    }\n\n    companion object {\n        const val IS_COMPARISON_VISIBLE = \"is_comparison_visible\"\n\n        fun newInstance(profileResultType: ProfileResultType) = SearchUserFragment().apply {\n            arguments = Bundle().apply {\n                putSerializable(IS_COMPARISON_VISIBLE, profileResultType)\n            }\n        }\n    }\n}
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/java/robin/vitalij/fortniteassitant/ui/search/fortnite/SearchUserFragment.kt	(revision db7ff576b2e5dd5ea61131540e0ac22eccea6f04)
++++++ app/src/main/java/robin/vitalij/fortniteassitant/ui/search/fortnite/SearchUserFragment.kt	(date 1605770631000)
+++@@ -20,8 +20,11 @@
+++ import robin.vitalij.fortniteassitant.FortniteApplication
+++ import robin.vitalij.fortniteassitant.R
+++ import robin.vitalij.fortniteassitant.common.extensions.*
++++import robin.vitalij.fortniteassitant.interfaces.RegistrationProfileCallback
+++ import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
+++ import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
++++import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
++++import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
+++ import robin.vitalij.fortniteassitant.ui.common.BaseFragment
+++ import robin.vitalij.fortniteassitant.ui.main.MainActivity
+++ import robin.vitalij.fortniteassitant.ui.search.adapter.SearchAdapter
+++@@ -158,18 +161,16 @@
+++             arguments?.let { bundle ->
+++                 adapter = SearchAdapter { it ->
+++                     context.closeKeyboard(view)
+++-//                    ProfileResultFragment.show(
+++-//                        childFragmentManager,
+++-//                        it.profile,
+++-//                        bundle.getSerializable(IS_COMPARISON_VISIBLE) as ProfileResultType,
+++-//                        true,
+++-//                        object : RegistrationProfileCallback {
+++-//                            override fun addedProfile(csGoFullProfileResponse: CsGoFullProfileResponse) {
++++                    ProfileResultFragment.show(
++++                        childFragmentManager,
++++                        it.accountId,
++++                        bundle.getSerializable(IS_COMPARISON_VISIBLE) as ProfileResultType,
++++                        object : RegistrationProfileCallback {
++++                            override fun addedProfile(fortniteProfileResponse: FortniteProfileResponse) {
+++ //                                viewModel.textActivityVisibility.set(getString(R.string.save_the_user))
+++-//                                viewModel.saveUser(csGoFullProfileResponse)
+++-//                            }
+++-//
+++-//                        })
++++//                                viewModel.saveUser(fortniteProfileResponse)
++++                            }
++++                        })
+++                 }
+++             }
+++             layoutManager = LinearLayoutManager(context)
+++Index: app/src/main/java/robin/vitalij/fortniteassitant/model/network/stats/FortniteProfileResponse.kt
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/java/robin/vitalij/fortniteassitant/model/network/stats/FortniteProfileResponse.kt	(date 1605771704000)
++++++ app/src/main/java/robin/vitalij/fortniteassitant/model/network/stats/FortniteProfileResponse.kt	(date 1605771704000)
+++@@ -0,0 +1,7 @@
++++package robin.vitalij.fortniteassitant.model.network.stats
++++
++++class FortniteProfileResponse(
++++    val stats: PlayerStatsResponse,
++++    var sessionStats: PlayerStatsResponse,
++++    val matches: PlayerMatchesResponse
++++)
+++\ No newline at end of file
+++Index: app/src/main/java/robin/vitalij/fortniteassitant/ui/bottomsheet/profile/ProfileResultViewModel.kt
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/java/robin/vitalij/fortniteassitant/ui/bottomsheet/profile/ProfileResultViewModel.kt	(date 1605770631000)
++++++ app/src/main/java/robin/vitalij/fortniteassitant/ui/bottomsheet/profile/ProfileResultViewModel.kt	(date 1605770631000)
+++@@ -0,0 +1,61 @@
++++package robin.vitalij.fortniteassitant.ui.bottomsheet.profile
++++
++++import androidx.databinding.ObservableField
++++import androidx.lifecycle.MutableLiveData
++++import io.reactivex.android.schedulers.AndroidSchedulers
++++import robin.vitalij.fortniteassitant.common.extensions.getErrorModel
++++import robin.vitalij.fortniteassitant.repository.comparison.ComparisonListUserRepository
++++import robin.vitalij.fortniteassitant.repository.comparison.ComparisonRepository
++++import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
++++import robin.vitalij.fortniteassitant.repository.network.GetUserRepository
++++import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewholder.Profile
++++import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
++++import robin.vitalij.fortniteassitant.utils.mapper.ProfileResultMapper
++++import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
++++
++++
++++class ProfileResultViewModel(
++++    private val getUserRepository: GetUserRepository,
++++    private val comparisonListUserRepository: ComparisonListUserRepository,
++++    private val comparisonRepository: ComparisonRepository,
++++    private val resourceProvider: ResourceProvider
++++) : BaseViewModel() {
++++
++++    val mutableLiveData = MutableLiveData<List<Profile>>()
++++
++++    var playerModel: ObservableField<FortniteProfileResponse> = ObservableField()
++++
++++    lateinit var openCompare: () -> Unit
++++
++++    fun loadData(accountId: String) {
++++        getUserRepository.getUser(accountId)
++++            .observeOn(AndroidSchedulers.mainThread())
++++            .let(::setupProgressShow)
++++            .subscribe({
++++                playerModel.set(it)
++++                mutableLiveData.value =
++++                    ProfileResultMapper(resourceProvider).transform(playerModel.get()!!)
++++            }, {
++++                errorModelUnit(it.getErrorModel(true))
++++            })
++++            .let(disposables::add)
++++    }
++++
++++    fun addedUserMode() {
++++//        playerModel.get()?.let {
++++//            comparisonListUserRepository.addUserModel(PlayerUserMapper().transform(it))
++++//        }
++++    }
++++
++++    fun compareWithYourself() {
++++//        playerModel.get()?.let {
++++//            comparisonRepository.loadOneLocalData(PlayerUserMapper().transform(it))
++++//                .subscribeOn(Schedulers.io())
++++//                .observeOn(AndroidSchedulers.mainThread())
++++//                .subscribe(
++++//                    { openCompare() }, {
++++//                        // do nothing
++++//                    })
++++//        }
++++    }
++++}
+++\ No newline at end of file
+++Index: app/src/main/java/robin/vitalij/fortniteassitant/ui/bottomsheet/profile/ProfileResultFragment.kt
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/java/robin/vitalij/fortniteassitant/ui/bottomsheet/profile/ProfileResultFragment.kt	(date 1605770001000)
++++++ app/src/main/java/robin/vitalij/fortniteassitant/ui/bottomsheet/profile/ProfileResultFragment.kt	(date 1605770001000)
+++@@ -0,0 +1,178 @@
++++package robin.vitalij.fortniteassitant.ui.bottomsheet.profile
++++
++++import android.os.Bundle
++++import android.util.DisplayMetrics
++++import android.view.LayoutInflater
++++import android.view.View
++++import android.view.ViewGroup
++++import androidx.fragment.app.FragmentManager
++++import androidx.lifecycle.Observer
++++import androidx.lifecycle.ViewModelProvider
++++import androidx.recyclerview.widget.LinearLayoutManager
++++import com.google.android.material.bottomsheet.BottomSheetBehavior
++++import com.google.android.material.bottomsheet.BottomSheetDialog
++++import kotlinx.android.synthetic.main.bottom_sheet_profile.*
++++import kotlinx.android.synthetic.main.recycler_view.*
++++import robin.vitalij.fortniteassitant.FortniteApplication
++++import robin.vitalij.fortniteassitant.R
++++import robin.vitalij.fortniteassitant.common.extensions.observeToError
++++import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
++++import robin.vitalij.fortniteassitant.common.extensions.setVisibility
++++import robin.vitalij.fortniteassitant.common.extensions.showDialog
++++import robin.vitalij.fortniteassitant.interfaces.RegistrationProfileCallback
++++import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
++++import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewholder.Profile
++++import robin.vitalij.fortniteassitant.ui.common.BaseBottomSheetDialogFragment
++++import robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment.Companion.IS_COMPARISON_VISIBLE
++++import javax.inject.Inject
++++
++++const val ACCOUNT_ID = "account_id"
++++const val BOTTOM_SHEET_MARGIN_TOP = 200
++++
++++class ProfileResultFragment : BaseBottomSheetDialogFragment() {
++++
++++    @Inject
++++    lateinit var viewModelFactory: ProfileResultViewModelFactory
++++
++++    private lateinit var viewModel: ProfileResultViewModel
++++
++++    private var registrationProfileCallback: RegistrationProfileCallback? = null
++++
++++    override fun onCreateView(
++++        inflater: LayoutInflater, container: ViewGroup?,
++++        savedInstanceState: Bundle?
++++    ): View? {
++++        dialog?.setOnShowListener { dialog ->
++++            val d = dialog as BottomSheetDialog
++++            val bottomSheetInternal =
++++                d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
++++            bottomSheetInternal?.setBackgroundResource(R.drawable.bottomsheet_container_background)
++++            bottomSheetInternal?.let {
++++                BottomSheetBehavior.from(it).state = BottomSheetBehavior.STATE_EXPANDED
++++                BottomSheetBehavior.from(it).skipCollapsed = true
++++            }
++++        }
++++        return inflater.inflate(R.layout.bottom_sheet_profile, container, false)
++++    }
++++
++++    override fun onCreate(savedInstanceState: Bundle?) {
++++        super.onCreate(savedInstanceState)
++++        FortniteApplication.appComponent.inject(this)
++++        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
++++            .get(ProfileResultViewModel::class.java).apply {
++++                observeToProgressBar(this@ProfileResultFragment)
++++                observeToError(this@ProfileResultFragment)
++++
++++                openCompare = {
++++                    dismiss()
++++//                    startActivity(
++++//                        ComparisonActivity.getComparisonActivityIntent(
++++//                            requireContext(),
++++//                            ComparisonDataType.COMPARE_WITH_YOURSELF
++++//                        )
++++//                    )
++++                }
++++            }
++++    }
++++
++++    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
++++        super.onViewCreated(view, savedInstanceState)
++++        compareWithYourself.setVisibility(arguments?.getBoolean(IS_COMPARISON_VISIBLE))
++++        setListeners()
++++
++++        viewModel.mutableLiveData.observe(viewLifecycleOwner, Observer {
++++            tabMenu.setVisibility(true)
++++            it.let(::initAdapter)
++++        })
++++
++++        arguments?.let {
++++            val profileResultType = it.getSerializable(PROFILE_RESULT_TYPE) as ProfileResultType
++++            compareWithYourself.setVisibility(profileResultType != ProfileResultType.NEW)
++++            addedToComparison.setVisibility(profileResultType != ProfileResultType.NEW)
++++        }
++++
++++        loadData()
++++    }
++++
++++    override fun onStart() {
++++        super.onStart()
++++        val displayMetrics = DisplayMetrics()
++++        activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
++++        val sheetContainer = requireView().parent as? ViewGroup ?: return
++++        sheetContainer.layoutParams.height = (displayMetrics.heightPixels - BOTTOM_SHEET_MARGIN_TOP)
++++    }
++++
++++    private fun setListeners() {
++++        addedProfile.setOnClickListener {
++++            viewModel.playerModel.get()?.let {
++++//                if (viewModel.playerModel.get()?.csGoProfileModel?.data?.segments?.first()?.stats?.matchesPlayed?.value == 0.0) {
++++//                    context?.showDialog(R.string.steam_private)
++++//                } else {
++++//                    registrationProfileCallback?.addedProfile(it)
++++//                    dismiss()
++++//                }
++++            }
++++        }
++++
++++        compareWithYourself.setOnClickListener {
++++//            if (viewModel.playerModel.get()?.csGoProfileModel?.data?.segments?.first()?.stats?.matchesPlayed?.value == 0.0) {
++++//                context?.showDialog(R.string.steam_private)
++++//            } else {
++++//                viewModel.compareWithYourself()
++++//            }
++++        }
++++
++++        addedToComparison.setOnClickListener {
++++            dismiss()
++++            viewModel.addedUserMode()
++++        }
++++
++++        setErrorResolveButtonClick {
++++            loadData()
++++        }
++++    }
++++
++++    private fun loadData() {
++++        arguments?.let {
++++            viewModel.loadData(
++++                it.getString(ACCOUNT_ID, "")
++++            )
++++        }
++++    }
++++
++++    private fun initAdapter(list: List<Profile>) {
++++        recyclerView.run {
++++//            adapter = HomeAdapter(
++++//            )
++++//            (adapter as HomeAdapter).setData(list)
++++//            layoutManager = LinearLayoutManager(context)
++++        }
++++    }
++++
++++    companion object {
++++
++++        private const val TAG = "ProfileResultFragment"
++++        private const val PROFILE_RESULT_TYPE = "profile_result_type"
++++
++++        fun show(
++++            fragmentManager: FragmentManager?,
++++            accountId: String,
++++            profileResultType: ProfileResultType,
++++            registrationProfileCallback: RegistrationProfileCallback
++++        ) {
++++            val profileResultFragment = ProfileResultFragment().apply {
++++                this.registrationProfileCallback = registrationProfileCallback
++++                arguments = Bundle().apply {
++++                    putString(ACCOUNT_ID, accountId)
++++                    putSerializable(PROFILE_RESULT_TYPE, profileResultType)
++++                }
++++            }
++++            fragmentManager?.let {
++++                profileResultFragment.show(
++++                    it,
++++                    TAG
++++                )
++++            }
++++        }
++++    }
++++}
+++Index: app/src/main/res/values/strings.xml
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+++<+><resources>\n    <string name=\"app_name\" translatable=\"false\">Fortnite Assitant</string>\n    <string name=\"title_home\">Home</string>\n    <string name=\"title_dashboard\">Dashboard</string>\n    <string name=\"title_notifications\">Notifications</string>\n\n    <string name=\"retry\">Try one more time</string>\n    <string name=\"repeat\">Repeat</string>\n    <string name=\"unknown_error\">Something went wrong</string>\n    <string name=\"network_error\">Please check your internet connection and try again</string>\n    <string name=\"firebase_limit_error\">The server has exceeded the request limit. We will try to fix it in the near future.</string>\n\n    <!--No subscription-->\n    <string name=\"no_subscription_content\">Upgrade your account to access additional statistics</string>\n    <string name=\"no_subscription_content_2\">Or watch the video ad to get 2 days access </string>\n    <string name=\"watch_video_ads\">Watch video ads </string>\n\n    <string name=\"limited_content\">This content is limited. To access full content, you can view ads or subscribe</string>\n    <string name=\"watch_advertisement\">View ad</string>\n    <string name=\"subscribe\">Subscribe</string>\n\n    <!--Dialog-->\n    <string name=\"app_estimate_ok\">Rate now</string>\n    <string name=\"app_estimate_netral\">Later</string>\n    <string name=\"app_estimate_no\">Do not remind</string>\n    <string name=\"no\">No</string>\n    <string name=\"yes\">Yes</string>\n\n    <!--Search-->\n    <string name=\"search_steam_no_found\">\"Can't find yourself on Steam? Try it via Steam Profile Link, SteamID64, or CustomURL\"</string>\n    <string name=\"search_hint\">\"Profile link on Steam, SteamID64, or CustomURL\"</string>\n    <string name=\"search\">Search</string>\n    <string name=\"search_player\">Search player</string>\n    <string name=\"search_user_steam\">Search for a player on Steam</string>\n    <string name=\"try_button\">Try</string>\n\n</resources>
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/res/values/strings.xml	(revision db7ff576b2e5dd5ea61131540e0ac22eccea6f04)
++++++ app/src/main/res/values/strings.xml	(date 1605706251000)
+++@@ -34,4 +34,13 @@
+++     <string name="search_user_steam">Search for a player on Steam</string>
+++     <string name="try_button">Try</string>
+++ 
++++    <!--Users-->
++++    <string name="account_action">Account action</string>
++++    <string name="refresh">Refresh</string>
++++    <string name="to_switch">Switch</string>
++++    <string name="compare_with_yourself">Compare with yourself </string>
++++    <string name="user_update">Updating user data</string>
++++    <string name="add">Add</string>
++++    <string name="add_to_comparison">Add to comparison</string>
++++
+++ </resources>
+++\ No newline at end of file
+++Index: app/src/main/java/robin/vitalij/fortniteassitant/di/module/NetworkModule.kt
+++IDEA additional info:
+++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+++<+>package robin.vitalij.fortniteassitant.di.module\n\nimport android.annotation.SuppressLint\nimport dagger.Module\nimport dagger.Provides\nimport okhttp3.OkHttpClient\nimport okhttp3.Protocol\nimport okhttp3.logging.HttpLoggingInterceptor\nimport retrofit2.Retrofit\nimport retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory\nimport retrofit2.converter.gson.GsonConverterFactory\nimport robin.vitalij.fortniteassitant.api.FortniteRequestsApi\nimport robin.vitalij.fortniteassitant.api.FortniteRequestsIOApi\nimport java.security.cert.CertificateException\nimport java.security.cert.X509Certificate\nimport java.util.concurrent.TimeUnit\nimport javax.inject.Singleton\nimport javax.net.ssl.HostnameVerifier\nimport javax.net.ssl.SSLContext\nimport javax.net.ssl.TrustManager\nimport javax.net.ssl.X509TrustManager\n\n\nconst val TIMEOUT_SEC = 30L\nprivate const val ROOT_FORTNITE_COM_URL = \"https://fortnite-api.com\"\nprivate const val ROOT_FORTNITE_IO_URL = \"https://fortniteapi.io\"\n\nprivate const val AUTHORIZATION = \"Authorization\"\n\n@Module\nclass NetworkModule {\n\n    @Provides\n    @Singleton\n    fun provideFortniteRequestsApi(): FortniteRequestsApi {\n        val okHttpClient = HttpClientFactory(false)\n            .createHttpClient()\n        val retrofit = Retrofit.Builder()\n            .baseUrl(ROOT_FORTNITE_COM_URL)\n            .client(okHttpClient)\n            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())\n            .addConverterFactory(GsonConverterFactory.create())\n            .build()\n        return retrofit.create(FortniteRequestsApi::class.java)\n    }\n\n    @Provides\n    @Singleton\n    fun provideFortniteIORequestsApi(): FortniteRequestsIOApi {\n        val okHttpClient = HttpClientFactory(true)\n            .createHttpClient()\n        val retrofit = Retrofit.Builder()\n            .baseUrl(ROOT_FORTNITE_IO_URL)\n            .client(okHttpClient)\n            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())\n            .addConverterFactory(GsonConverterFactory.create())\n            .build()\n        return retrofit.create(FortniteRequestsIOApi::class.java)\n    }\n\n    fun getUnsafeOkHttpClient(): OkHttpClient.Builder {\n        try {\n            val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {\n\n                override fun getAcceptedIssuers(): Array<X509Certificate> {\n                    return arrayOf()\n                }\n\n                @SuppressLint(\"TrustAllX509TrustManager\")\n                @Throws(CertificateException::class)\n                override fun checkClientTrusted(\n                    chain: Array<X509Certificate>,\n                    authType: String\n                ) {\n                    //do nothing\n                }\n\n                @SuppressLint(\"TrustAllX509TrustManager\")\n                @Throws(CertificateException::class)\n                override fun checkServerTrusted(\n                    chain: Array<X509Certificate>,\n                    authType: String\n                ) {\n                    //do nothing\n                }\n            })\n            val sslContext = SSLContext.getInstance(\"SSL\")\n            sslContext.init(null, trustAllCerts, java.security.SecureRandom())\n            val sslSocketFactory = sslContext.socketFactory\n            val builder = OkHttpClient.Builder()\n            builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)\n            builder.hostnameVerifier(HostnameVerifier { var1, var2 -> true })\n            return builder\n        } catch (e: Exception) {\n            throw RuntimeException(e)\n        }\n    }\n\n    inner class HttpClientFactory(private val isFortniteIo: Boolean) {\n        fun createHttpClient(): OkHttpClient {\n            val builder = getUnsafeOkHttpClient()\n                .addInterceptor(HttpLoggingInterceptor().apply {\n                    level = HttpLoggingInterceptor.Level.BODY\n                })\n                .protocols(listOf(Protocol.HTTP_2, Protocol.HTTP_1_1))\n                .connectTimeout(TIMEOUT_SEC, TimeUnit.SECONDS)\n                .readTimeout(TIMEOUT_SEC, TimeUnit.SECONDS)\n                .writeTimeout(TIMEOUT_SEC, TimeUnit.SECONDS)\n                .addInterceptor { chain ->\n                    val request = chain.request().newBuilder()\n                    if (isFortniteIo) {\n                        request.addHeader(\n                            AUTHORIZATION,\n                            \"bc649d1b-d9500276-7071abc4-b47bde1d\"\n                        )\n                    }\n                    chain.proceed(request.build())\n                }\n            return builder.build()\n        }\n    }\n}
+++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+++<+>UTF-8
+++===================================================================
+++--- app/src/main/java/robin/vitalij/fortniteassitant/di/module/NetworkModule.kt	(revision db7ff576b2e5dd5ea61131540e0ac22eccea6f04)
++++++ app/src/main/java/robin/vitalij/fortniteassitant/di/module/NetworkModule.kt	(date 1605771157000)
+++@@ -9,7 +9,7 @@
+++ import retrofit2.Retrofit
+++ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+++ import retrofit2.converter.gson.GsonConverterFactory
+++-import robin.vitalij.fortniteassitant.api.FortniteRequestsApi
++++import robin.vitalij.fortniteassitant.api.FortniteRequestsComApi
+++ import robin.vitalij.fortniteassitant.api.FortniteRequestsIOApi
+++ import java.security.cert.CertificateException
+++ import java.security.cert.X509Certificate
+++@@ -32,7 +32,7 @@
+++ 
+++     @Provides
+++     @Singleton
+++-    fun provideFortniteRequestsApi(): FortniteRequestsApi {
++++    fun provideFortniteRequestsApi(): FortniteRequestsComApi {
+++         val okHttpClient = HttpClientFactory(false)
+++             .createHttpClient()
+++         val retrofit = Retrofit.Builder()
+++@@ -41,7 +41,7 @@
+++             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+++             .addConverterFactory(GsonConverterFactory.create())
+++             .build()
+++-        return retrofit.create(FortniteRequestsApi::class.java)
++++        return retrofit.create(FortniteRequestsComApi::class.java)
+++     }
+++ 
+++     @Provides
+++@@ -113,6 +113,11 @@
+++                             AUTHORIZATION,
+++                             "bc649d1b-d9500276-7071abc4-b47bde1d"
+++                         )
++++                    } else {
++++                        request.addHeader(
++++                            "API-Key",
++++                            "01b315a55d2237b1b8a9e9a9e7abe882eb094638"
++++                        )
+++                     }
+++                     chain.proceed(request.build())
+++                 }
++Index: .idea/.name
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++--- .idea/.name	(date 1605385416000)
+++++ .idea/.name	(date 1605385416000)
++@@ -0,0 +1,1 @@
+++Fortnite Assitant
++\ No newline at end of file
+Index: .idea/shelf/Added_Search_User_Part_11.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/shelf/Added_Search_User_Part_11.xml	(date 1605776138000)
++++ .idea/shelf/Added_Search_User_Part_11.xml	(date 1605776138000)
+@@ -0,0 +1,29 @@
++<changelist name="Added_Search_User_Part_11" date="1605776130799" recycled="false">
++  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Added_Search_User_Part_11/shelved.patch" />
++  <option name="DESCRIPTION" value="Added Search User Part 1" />
++  <binary>
++    <option name="BEFORE_PATH" />
++    <option name="AFTER_PATH" value=".idea/shelf/Added_Search_User_Part_1/buildOutputCleanup.lock" />
++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Added_Search_User_Part_11/buildOutputCleanup.lock" />
++  </binary>
++  <binary>
++    <option name="BEFORE_PATH" />
++    <option name="AFTER_PATH" value=".idea/shelf/Added_Search_User_Part_1/executionHistory.lock" />
++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Added_Search_User_Part_11/executionHistory.lock" />
++  </binary>
++  <binary>
++    <option name="BEFORE_PATH" />
++    <option name="AFTER_PATH" value=".idea/shelf/Added_Search_User_Part_1/fileHashes.bin" />
++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Added_Search_User_Part_11/fileHashes.bin" />
++  </binary>
++  <binary>
++    <option name="BEFORE_PATH" />
++    <option name="AFTER_PATH" value=".idea/shelf/Added_Search_User_Part_1/fileHashes.lock" />
++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Added_Search_User_Part_11/fileHashes.lock" />
++  </binary>
++  <binary>
++    <option name="BEFORE_PATH" />
++    <option name="AFTER_PATH" value="gradle/wrapper/gradle-wrapper.jar" />
++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Added_Search_User_Part_11/gradle-wrapper.jar" />
++  </binary>
++</changelist>
+\ No newline at end of file

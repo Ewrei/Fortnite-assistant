@@ -9,7 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import robin.vitalij.fortniteassitant.api.FortniteRequestsApi
+import robin.vitalij.fortniteassitant.api.FortniteRequestsComApi
 import robin.vitalij.fortniteassitant.api.FortniteRequestsIOApi
 import java.security.cert.CertificateException
 import java.security.cert.X509Certificate
@@ -32,7 +32,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideFortniteRequestsApi(): FortniteRequestsApi {
+    fun provideFortniteRequestsApi(): FortniteRequestsComApi {
         val okHttpClient = HttpClientFactory(false)
             .createHttpClient()
         val retrofit = Retrofit.Builder()
@@ -41,7 +41,7 @@ class NetworkModule {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        return retrofit.create(FortniteRequestsApi::class.java)
+        return retrofit.create(FortniteRequestsComApi::class.java)
     }
 
     @Provides
@@ -112,6 +112,11 @@ class NetworkModule {
                         request.addHeader(
                             AUTHORIZATION,
                             "bc649d1b-d9500276-7071abc4-b47bde1d"
+                        )
+                    } else {
+                        request.addHeader(
+                            "API-Key",
+                            "01b315a55d2237b1b8a9e9a9e7abe882eb094638"
                         )
                     }
                     chain.proceed(request.build())

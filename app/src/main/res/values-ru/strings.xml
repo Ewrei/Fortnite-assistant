@@ -30,4 +30,22 @@
     <string name="search_user_steam">Поиск игрока в Steam</string>
     <string name="try_button">Попробовать</string>
 
+    <!--Users-->
+    <string name="account_action">Действие с аккаунтом</string>
+    <string name="refresh">Обновить</string>
+    <string name="to_switch">Переключиться</string>
+    <string name="compare_with_yourself">Сравнить с собой</string>
+    <string name="user_update">Обновление данных пользователя</string>
+    <string name="add">Добавить</string>
+    <string name="add_to_comparison">Добавить в сравнение</string>
+    <string name="matches">Матчи</string>
+    <string name="matches_format">%s матчей</string>
+    <string name="wins_percent">Победы %</string>
+    <string name="kd">KD</string>
+    <string name="play_time">%s ч. всего</string>
+    <string name="level_format">Уровень %d</string> 
+    <string name="all">Вся</string>
+    <string name="no_results_for_this_platform">Нет результатов для этой платформы</string>
+    <string name="kills">Убийства</string>
+
 </resources>
