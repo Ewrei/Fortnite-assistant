@@ -69,5 +69,5 @@
     <string name="top_five">Top 5</string>
     <string name="minutes_played">Minutes Played</string>
     <string name="user_empty_stats">Could not find stats for the requested profile</string>
-
+    <string name="save_the_user">Save the user</string>
 </resources>

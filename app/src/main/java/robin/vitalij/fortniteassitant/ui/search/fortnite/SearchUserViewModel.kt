@@ -1,9 +1,10 @@
 package robin.vitalij.fortniteassitant.ui.search.fortnite
 
-import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
+import robin.vitalij.fortniteassitant.interfaces.SaveUserCallback
 import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
+import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
 import robin.vitalij.fortniteassitant.repository.network.GetSearchUserRepository
 import robin.vitalij.fortniteassitant.repository.network.SaveUserRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
@@ -31,27 +32,27 @@ class SearchUserViewModel(
             .let(disposables::add)
     }
 
-//    fun saveUser(csGoFullProfileResponse: CsGoFullProfileResponse) {
-//        activityProgressBarVisibility.value = true
-//        saveUserRepository.saveUser(csGoFullProfileResponse, object :
-//            SaveUserCallback {
-//            override fun showOrHideProgressBar(isVisible: Boolean) {
-//                //do nothing
-//            }
-//
-//            override fun showError(throwable: Throwable) {
-//                //do nothing
-//            }
-//
-//            override fun showMessage(title: String) {
-//                //do nothing
-//            }
-//
-//            override fun done() {
-//                openMainScreen()
-//            }
-//        })
-//    }
+    fun saveUser(csGoFullProfileResponse: FortniteProfileResponse) {
+        activityProgressBarVisibility.value = true
+        saveUserRepository.saveUser(csGoFullProfileResponse, object :
+            SaveUserCallback {
+            override fun showOrHideProgressBar(isVisible: Boolean) {
+                //do nothing
+            }
+
+            override fun showError(throwable: Throwable) {
+                //do nothing
+            }
+
+            override fun showMessage(title: String) {
+                //do nothing
+            }
+
+            override fun done() {
+                openMainScreen()
+            }
+        })
+    }
 
     fun clearSearch() {
         mutableLiveData.value = arrayListOf()
