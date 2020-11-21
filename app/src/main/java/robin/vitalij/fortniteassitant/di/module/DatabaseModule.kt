@@ -22,5 +22,16 @@ class DatabaseModule(context: Context) {
     @Singleton
     fun provideDatabase() = appDatabase
 
+    @Provides
+    @Singleton
+    fun provideUserDao() = appDatabase.userDao()
+
+    @Provides
+    @Singleton
+    fun provideSaveDao() = appDatabase.saveDao()
+
+    @Provides
+    @Singleton
+    fun provideMatchDao() = appDatabase.matchDao()
 
 }

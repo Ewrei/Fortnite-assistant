@@ -18,6 +18,7 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.common.extensions.setVisibility
+import robin.vitalij.fortniteassitant.common.extensions.showDialog
 import robin.vitalij.fortniteassitant.interfaces.RegistrationProfileCallback
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.ProfileAdapter
@@ -105,12 +106,12 @@ class ProfileResultFragment : BaseBottomSheetDialogFragment() {
     private fun setListeners() {
         addedProfile.setOnClickListener {
             viewModel.playerModel.get()?.let {
-//                if (viewModel.playerModel.get()?.csGoProfileModel?.data?.segments?.first()?.stats?.matchesPlayed?.value == 0.0) {
-//                    context?.showDialog(R.string.steam_private)
-//                } else {
-//                    registrationProfileCallback?.addedProfile(it)
-//                    dismiss()
-//                }
+                if (viewModel.playerModel.get()?.stats?.playerStatsData?.stats?.all?.overall?.matches == 0) {
+                    context?.showDialog(R.string.user_empty_stats)
+                } else {
+                    registrationProfileCallback?.addedProfile(it)
+                    dismiss()
+                }
             }
         }
 

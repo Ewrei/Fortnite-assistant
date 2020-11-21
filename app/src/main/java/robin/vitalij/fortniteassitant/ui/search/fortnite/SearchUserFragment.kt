@@ -167,8 +167,8 @@ class SearchUserFragment : BaseFragment() {
                         bundle.getSerializable(IS_COMPARISON_VISIBLE) as ProfileResultType,
                         object : RegistrationProfileCallback {
                             override fun addedProfile(fortniteProfileResponse: FortniteProfileResponse) {
-//                                viewModel.textActivityVisibility.set(getString(R.string.save_the_user))
-//                                viewModel.saveUser(fortniteProfileResponse)
+                                viewModel.textActivityVisibility.set(getString(R.string.save_the_user))
+                                viewModel.saveUser(fortniteProfileResponse)
                             }
                         })
                 }

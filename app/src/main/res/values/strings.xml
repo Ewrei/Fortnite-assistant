@@ -2,6 +2,7 @@
     <string name="app_name" translatable="false">Fortnite Assitant</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
+    <string name="tab_title_history_match">History</string>
     <string name="title_notifications">Notifications</string>
 
     <string name="retry">Try one more time</string>
@@ -69,5 +70,11 @@
     <string name="top_five">Top 5</string>
     <string name="minutes_played">Minutes Played</string>
     <string name="user_empty_stats">Could not find stats for the requested profile</string>
+    <string name="save_the_user">Save the user</string>
 
+    <!--History match-->
+    <string name="title_history_match">History matches</string>
+    <string name="player_soutlived">Player Soutlived</string>
+    <string name="top_history">Top</string>
+    <string name="score">Score</string>
 </resources>

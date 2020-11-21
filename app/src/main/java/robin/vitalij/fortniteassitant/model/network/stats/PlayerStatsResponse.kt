@@ -1,5 +1,6 @@
 package robin.vitalij.fortniteassitant.model.network.stats
 
+import androidx.room.Embedded
 import com.google.gson.annotations.SerializedName
 
 class PlayerStatsResponse(
@@ -32,12 +33,12 @@ class Stats(
 )
 
 class StatsTypeDevice(
-    @SerializedName("overall") val overall: Overall?,
-    @SerializedName("solo") val solo: Matches?,
-    @SerializedName("duo") val duo: Matches?,
-    @SerializedName("trio") val trio: Matches?,
-    @SerializedName("squad") val squad: Matches?,
-    @SerializedName("ltm") val ltm: Ltm?
+    @Embedded(prefix = "overall") @SerializedName("overall") val overall: Overall?,
+    @Embedded(prefix = "solo") @SerializedName("solo") val solo: Matches?,
+    @Embedded(prefix = "duo") @SerializedName("duo") val duo: Matches?,
+    @Embedded(prefix = "trio") @SerializedName("trio") val trio: Matches?,
+    @Embedded(prefix = "squad") @SerializedName("squad") val squad: Matches?,
+    @Embedded(prefix = "ltm") @SerializedName("ltm") val ltm: Ltm?
 )
 
 class Overall(
