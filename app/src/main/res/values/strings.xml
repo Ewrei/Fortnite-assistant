@@ -34,4 +34,40 @@
     <string name="search_user_steam">Search for a player on Steam</string>
     <string name="try_button">Try</string>
 
+    <!--Users-->
+    <string name="account_action">Account action</string>
+    <string name="refresh">Refresh</string>
+    <string name="to_switch">Switch</string>
+    <string name="compare_with_yourself">Compare with yourself </string>
+    <string name="user_update">Updating user data</string>
+    <string name="add">Add</string>
+    <string name="add_to_comparison">Add to comparison</string>
+    <string name="matches">Matches</string>
+    <string name="matches_format">%s matches</string>
+    <string name="wins_percent">Wins %</string>
+    <string name="kd">KD</string>
+    <string name="play_time">%s h. all</string>
+    <string name="level_format">Level %d</string>
+    <string name="all">All</string>
+    <string name="no_results_for_this_platform">No results for this platform</string>
+    <string name="overall_battles" translatable="false">Overall</string>
+    <string name="solo_battles" translatable="false">Solo</string>
+    <string name="duo_battles" translatable="false">Duo</string>
+    <string name="trio_battles" translatable="false">Trio</string>
+    <string name="squad_battles" translatable="false">Squad</string>
+    <string name="ltm_battles" translatable="false">Ltm</string>
+    <string name="kills">Kills</string>
+    <string name="killsPerMin">Kills per. min</string>
+    <string name="killsPerMatch">Kills per. match</string>
+    <string name="deaths">Deaths</string>
+    <string name="top_one">Top 1</string>
+    <string name="top_ten">Top 10</string>
+    <string name="top_three">Top 3</string>
+    <string name="top_six">Top 6</string>
+    <string name="top_twenty_five">Top 25</string>
+    <string name="top_twelve">Top 12</string>
+    <string name="top_five">Top 5</string>
+    <string name="minutes_played">Minutes Played</string>
+    <string name="user_empty_stats">Could not find stats for the requested profile</string>
+
 </resources>

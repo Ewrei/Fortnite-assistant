@@ -20,16 +20,17 @@ fun Throwable?.getErrorModel(isUser: Boolean = false): ErrorModel {
             )
         }
         is HttpException -> {
-            errorModel = ErrorModel(
-                    R.string.unknown_error,
-                    R.drawable.ic_unknown_error,
-                    null,
-                    true,
-                    ParserJsonObject.getErrors(this.response()?.errorBody()?.string())
-                )
+            errorModel = if (isUser) getUserError(this)
+            else ErrorModel(
+                R.string.unknown_error,
+                R.drawable.ic_unknown_error,
+                null,
+                true,
+                ParserJsonObject.getErrors(this.response()?.errorBody()?.string())
+            )
         }
         is FirebaseFirestoreException -> {
-            if(this.code == FirebaseFirestoreException.Code.RESOURCE_EXHAUSTED) {
+            if (this.code == FirebaseFirestoreException.Code.RESOURCE_EXHAUSTED) {
                 errorModel = ErrorModel(
                     R.string.firebase_limit_error,
                     R.drawable.ic_unknown_error,
@@ -63,4 +64,23 @@ fun Throwable?.getErrorModel(isUser: Boolean = false): ErrorModel {
         }
     }
     return errorModel
+}
+
+private fun getUserError(error: HttpException): ErrorModel {
+    return if (error.code() == ApiError.NOT_FOUND.code) {
+        ErrorModel(
+            R.string.user_empty_stats,
+            R.drawable.ic_empty_user,
+            null,
+            false
+        )
+    } else {
+        ErrorModel(
+            R.string.unknown_error,
+            R.drawable.ic_unknown_error,
+            null,
+            true,
+            ParserJsonObject.getErrors(error.response()?.errorBody()?.string())
+        )
+    }
 }
