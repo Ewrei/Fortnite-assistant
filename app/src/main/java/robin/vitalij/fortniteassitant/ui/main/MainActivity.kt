@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         val navGraphIds =
             listOf(
                 R.navigation.navigation_home,
+                R.navigation.navigation_history_match,
                 R.navigation.navigation_dashboard,
                 R.navigation.navigation_notifications
             )

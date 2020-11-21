@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import io.reactivex.Flowable
 import io.reactivex.Maybe
+import robin.vitalij.fortniteassitant.db.entity.MatchEntity
 import robin.vitalij.fortniteassitant.db.entity.UserEntity
 import robin.vitalij.fortniteassitant.db.projection.User
 
@@ -15,5 +16,8 @@ interface UserDao {
 
     @Query("SELECT * FROM User WHERE player_id = :playerId order by playerSessionId desc limit 1")
     fun getFlowableUserEntity(playerId: String): Flowable<UserEntity>
+
+    @Query("SELECT * FROM Match WHERE playerId = :playerId")
+    fun getHistoryMatch(playerId: String): Flowable<List<MatchEntity>>
 
 }

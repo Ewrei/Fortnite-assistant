@@ -45,7 +45,7 @@ class SaveUserMapper : Mapper<FortniteProfileResponse, SaveUserModel> {
         playerId: String
     ): List<MatchEntity> {
         val list = arrayListOf<MatchEntity>()
-        playerMatchesResponse.matches.forEach {
+        playerMatchesResponse.matches.filter { !it.mode.isBlank() }.forEach {
             list.add(
                 MatchEntity(
                     platform = it.platform,
