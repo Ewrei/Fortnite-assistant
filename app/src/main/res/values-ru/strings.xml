@@ -47,5 +47,6 @@
     <string name="all">Вся</string>
     <string name="no_results_for_this_platform">Нет результатов для этой платформы</string>
     <string name="kills">Убийства</string>
+    <string name="user_empty_stats">Не удалось найти статистику по запрошенному профилю</string>
 
 </resources>
