@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
             listOf(
                 R.navigation.navigation_home,
                 R.navigation.navigation_history_match,
+                R.navigation.navigation_top,
                 R.navigation.navigation_dashboard,
                 R.navigation.navigation_notifications
             )

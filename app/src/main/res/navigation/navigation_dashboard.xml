@@ -10,6 +10,14 @@
         android:id="@+id/homeScreen"
         android:name="robin.vitalij.fortniteassitant.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_homeScreen_to_newsFragment2"
+            app:destination="@id/navigation_news" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_news"
+        android:name="robin.vitalij.fortniteassitant.ui.news.NewsFragment"
+        android:label="NewsFragment" />
 
 </navigation>

@@ -18,6 +18,7 @@
     <color name="color_red_elo">#fc0000</color>
 
     <color name="background_segment_dark">#AE000000</color>
+    <color name="profile_tint">#BF000000</color>
 
     <color name="color_primary_dark_face_it">#852A00</color>
 

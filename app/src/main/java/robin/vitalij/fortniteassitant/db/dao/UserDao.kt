@@ -17,7 +17,7 @@ interface UserDao {
     @Query("SELECT * FROM User WHERE player_id = :playerId order by playerSessionId desc limit 1")
     fun getFlowableUserEntity(playerId: String): Flowable<UserEntity>
 
-    @Query("SELECT * FROM Match WHERE playerId = :playerId")
-    fun getHistoryMatch(playerId: String): Flowable<List<MatchEntity>>
+    @Query("SELECT * FROM User WHERE player_id = :playerId order by playerSessionId desc limit 2")
+    fun getLastTwoUserEntities(playerId: String): Flowable<List<UserEntity>>
 
 }

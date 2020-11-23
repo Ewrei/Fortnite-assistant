@@ -3,6 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="tab_title_history_match">History</string>
+    <string name="tab_title_top">Top</string>
     <string name="title_notifications">Notifications</string>
 
     <string name="retry">Try one more time</string>
@@ -77,4 +78,8 @@
     <string name="player_soutlived">Player Soutlived</string>
     <string name="top_history">Top</string>
     <string name="score">Score</string>
+
+    <!--Home-->
+    <string name="hours">Hours</string>
+    <string name="no_information">No information</string>
 </resources>

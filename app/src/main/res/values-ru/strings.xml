@@ -49,4 +49,9 @@
     <string name="kills">Убийства</string>
     <string name="user_empty_stats">Не удалось найти статистику по запрошенному профилю</string>
     <string name="save_the_user">Сохраняем пользователя</string>
+
+    <!--Home-->
+    <string name="hours">Часы</string>
+    <string name="no_information">Нет информации</string>
+
 </resources>
