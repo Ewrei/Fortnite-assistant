@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
@@ -14,11 +15,10 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToEmpty
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
-import robin.vitalij.fortniteassitant.common.extensions.pxFromDp
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
+import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment.Companion.DETAIL_STATISTICS
 import robin.vitalij.fortniteassitant.ui.home.adapter.HomeAdapter
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.Home
-import robin.vitalij.fortniteassitant.utils.Space
 import javax.inject.Inject
 
 class HomeFragment : BaseFragment() {
@@ -58,7 +58,13 @@ class HomeFragment : BaseFragment() {
 
     private fun initAdapter(list: List<Home>) {
         recyclerView.run {
-            adapter = HomeAdapter()
+            adapter = HomeAdapter(openDetailsStatistics = {
+                findNavController().navigate(
+                    R.id.navigation_adapter_details_statistics,
+                    Bundle().apply {
+                        putParcelableArrayList(DETAIL_STATISTICS, viewModel.detailsStatistics)
+                    })
+            })
             (adapter as HomeAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)
         }

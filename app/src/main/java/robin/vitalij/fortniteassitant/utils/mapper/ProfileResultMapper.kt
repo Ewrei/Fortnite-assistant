@@ -71,7 +71,20 @@ class ProfileResultMapper(private val resourceProvider: ResourceProvider) :
                 list.add(
                     BodyStatsStats(
                         resourceProvider.getString(R.string.solo_battles),
-                        it
+                        score = it.score,
+                        wins = it.wins,
+                        kills = it.kills,
+                        killsPerMin = it.killsPerMin,
+                        killsPerMatch = it.killsPerMatch,
+                        deaths = it.deaths,
+                        kd = it.kd,
+                        matches = it.matches,
+                        winRate = it.winRate,
+                        minutesPlayed = it.minutesPlayed,
+                        titleOne = resourceProvider.getString(R.string.top_ten),
+                        valueOne = it.top10.getStringFormat(),
+                        titleTwo = resourceProvider.getString(R.string.top_twenty_five),
+                        valueTwo = it.top25.getStringFormat()
                     )
                 )
             }
@@ -80,7 +93,20 @@ class ProfileResultMapper(private val resourceProvider: ResourceProvider) :
                 list.add(
                     BodyStatsStats(
                         resourceProvider.getString(R.string.duo_battles),
-                        it
+                        score = it.score,
+                        wins = it.wins,
+                        kills = it.kills,
+                        killsPerMin = it.killsPerMin,
+                        killsPerMatch = it.killsPerMatch,
+                        deaths = it.deaths,
+                        kd = it.kd,
+                        matches = it.matches,
+                        winRate = it.winRate,
+                        minutesPlayed = it.minutesPlayed,
+                        titleOne = resourceProvider.getString(R.string.top_five),
+                        valueOne = it.top5.getStringFormat(),
+                        titleTwo = resourceProvider.getString(R.string.top_twelve),
+                        valueTwo = it.top12.getStringFormat()
                     )
                 )
             }
@@ -89,7 +115,20 @@ class ProfileResultMapper(private val resourceProvider: ResourceProvider) :
                 list.add(
                     BodyStatsStats(
                         resourceProvider.getString(R.string.trio_battles),
-                        it
+                        score = it.score,
+                        wins = it.wins,
+                        kills = it.kills,
+                        killsPerMin = it.killsPerMin,
+                        killsPerMatch = it.killsPerMatch,
+                        deaths = it.deaths,
+                        kd = it.kd,
+                        matches = it.matches,
+                        winRate = it.winRate,
+                        minutesPlayed = it.minutesPlayed,
+                        titleOne = resourceProvider.getString(R.string.top_three),
+                        valueOne = it.top3.getStringFormat(),
+                        titleTwo = resourceProvider.getString(R.string.top_six),
+                        valueTwo = it.top6.getStringFormat()
                     )
                 )
             }
@@ -98,7 +137,20 @@ class ProfileResultMapper(private val resourceProvider: ResourceProvider) :
                 list.add(
                     BodyStatsStats(
                         resourceProvider.getString(R.string.squad_battles),
-                        it
+                        score = it.score,
+                        wins = it.wins,
+                        kills = it.kills,
+                        killsPerMin = it.killsPerMin,
+                        killsPerMatch = it.killsPerMatch,
+                        deaths = it.deaths,
+                        kd = it.kd,
+                        matches = it.matches,
+                        winRate = it.winRate,
+                        minutesPlayed = it.minutesPlayed,
+                        titleOne = resourceProvider.getString(R.string.top_three),
+                        valueOne = it.top3.getStringFormat(),
+                        titleTwo = resourceProvider.getString(R.string.top_six),
+                        valueTwo = it.top6.getStringFormat()
                     )
                 )
             }

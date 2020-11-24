@@ -16,7 +16,6 @@
         android:layout_marginStart="@dimen/default_margin"
         android:layout_marginTop="@dimen/default_margin_double"
         android:layout_marginEnd="@dimen/default_margin"
-        android:gravity="center"
         android:text="@{item.title}"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textStyle="bold"

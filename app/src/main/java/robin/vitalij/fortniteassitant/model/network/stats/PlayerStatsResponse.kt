@@ -34,10 +34,10 @@ class Stats(
 
 class StatsTypeDevice(
     @Embedded(prefix = "overall") @SerializedName("overall") val overall: Overall?,
-    @Embedded(prefix = "solo") @SerializedName("solo") val solo: Matches?,
-    @Embedded(prefix = "duo") @SerializedName("duo") val duo: Matches?,
-    @Embedded(prefix = "trio") @SerializedName("trio") val trio: Matches?,
-    @Embedded(prefix = "squad") @SerializedName("squad") val squad: Matches?,
+    @Embedded(prefix = "solo") @SerializedName("solo") val solo: SoloMatches?,
+    @Embedded(prefix = "duo") @SerializedName("duo") val duo: DuoMatches?,
+    @Embedded(prefix = "trio") @SerializedName("trio") val trio: TrioMatches?,
+    @Embedded(prefix = "squad") @SerializedName("squad") val squad: TrioMatches?,
     @Embedded(prefix = "ltm") @SerializedName("ltm") val ltm: Ltm?
 )
 
@@ -64,13 +64,51 @@ class Overall(
     @SerializedName("lastModified") val lastModified: String
 )
 
-class Matches(
+class SoloMatches(
     @SerializedName("score") val score: Long,
     @SerializedName("scorePerMin") val scorePerMin: Double,
     @SerializedName("scorePerMatch") val scorePerMatch: Double,
     @SerializedName("wins") val wins: Int,
     @SerializedName("top10") val top10: Int,
     @SerializedName("top25") val top25: Int,
+    @SerializedName("kills") val kills: Int,
+    @SerializedName("killsPerMin") val killsPerMin: Double,
+    @SerializedName("killsPerMatch") val killsPerMatch: Double,
+    @SerializedName("deaths") val deaths: Int,
+    @SerializedName("kd") val kd: Double,
+    @SerializedName("matches") val matches: Int,
+    @SerializedName("winRate") val winRate: Double,
+    @SerializedName("minutesPlayed") val minutesPlayed: Int,
+    @SerializedName("playersOutlived") val playersOutlived: Long,
+    @SerializedName("lastModified") val lastModified: String
+)
+
+class DuoMatches(
+    @SerializedName("score") val score: Long,
+    @SerializedName("scorePerMin") val scorePerMin: Double,
+    @SerializedName("scorePerMatch") val scorePerMatch: Double,
+    @SerializedName("wins") val wins: Int,
+    @SerializedName("top5") val top5: Int,
+    @SerializedName("top12") val top12: Int,
+    @SerializedName("kills") val kills: Int,
+    @SerializedName("killsPerMin") val killsPerMin: Double,
+    @SerializedName("killsPerMatch") val killsPerMatch: Double,
+    @SerializedName("deaths") val deaths: Int,
+    @SerializedName("kd") val kd: Double,
+    @SerializedName("matches") val matches: Int,
+    @SerializedName("winRate") val winRate: Double,
+    @SerializedName("minutesPlayed") val minutesPlayed: Int,
+    @SerializedName("playersOutlived") val playersOutlived: Long,
+    @SerializedName("lastModified") val lastModified: String
+)
+
+class TrioMatches(
+    @SerializedName("score") val score: Long,
+    @SerializedName("scorePerMin") val scorePerMin: Double,
+    @SerializedName("scorePerMatch") val scorePerMatch: Double,
+    @SerializedName("wins") val wins: Int,
+    @SerializedName("top3") val top3: Int,
+    @SerializedName("top6") val top6: Int,
     @SerializedName("kills") val kills: Int,
     @SerializedName("killsPerMin") val killsPerMin: Double,
     @SerializedName("killsPerMatch") val killsPerMatch: Double,

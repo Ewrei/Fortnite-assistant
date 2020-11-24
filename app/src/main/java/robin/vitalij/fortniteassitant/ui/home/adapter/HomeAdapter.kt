@@ -12,6 +12,7 @@ import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.Home
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.HomeType
 
 class HomeAdapter(
+    private val openDetailsStatistics:() -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder<Home>>() {
 
     private val items = arrayListOf<Home>()
@@ -49,7 +50,8 @@ class HomeAdapter(
                         R.layout.item_home_statistics,
                         parent,
                         false
-                    )
+                    ),
+                    openDetailsStatistics
                 )
             }
             else -> {

@@ -14,10 +14,18 @@
         <action
             android:id="@+id/action_homeScreen_to_newsFragment"
             app:destination="@id/navigation_news" />
+        <action
+            android:id="@+id/action_homeScreen_to_adapterDetailsStatisticsFragment"
+            app:destination="@id/navigation_adapter_details_statistics" />
     </fragment>
     <fragment
         android:id="@+id/navigation_news"
         android:name="robin.vitalij.fortniteassitant.ui.news.NewsFragment"
         android:label="NewsFragment" />
+    <fragment
+        android:id="@+id/navigation_adapter_details_statistics"
+        tools:layout="@layout/fragment_adapter_details_statistics"
+        android:name="robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment"
+        android:label="@string/details_statistics" />
 
 </navigation>

@@ -51,7 +51,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/guideline2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:value="@{item.matches.matches}"
+                    app:value="@{item.matches}"
                     tools:text="matches" />
 
                 <TextView
@@ -81,7 +81,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:percent="@{item.matches.winRate}"
+                    app:percent="@{item.winRate}"
                     tools:text="winRate" />
 
                 <TextView
@@ -111,7 +111,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/guideline2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view1"
-                    app:value="@{item.matches.kills}"
+                    app:value="@{item.kills}"
                     tools:text="kills" />
 
                 <TextView
@@ -141,7 +141,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
                     app:layout_constraintTop_toBottomOf="@+id/view2"
-                    app:value="@{item.matches.deaths}"
+                    app:value="@{item.deaths}"
                     tools:text="deaths" />
 
                 <TextView
@@ -171,7 +171,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/guideline2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view3"
-                    app:value="@{item.matches.killsPerMin}"
+                    app:value="@{item.killsPerMin}"
                     tools:text="killsPerMin" />
 
                 <TextView
@@ -201,7 +201,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
                     app:layout_constraintTop_toBottomOf="@+id/view4"
-                    app:value="@{item.matches.killsPerMatch}"
+                    app:value="@{item.killsPerMatch}"
                     tools:text="killsPerMatch" />
 
                 <TextView
@@ -326,7 +326,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/guideline2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view5"
-                    app:value="@{item.matches.kd}"
+                    app:value="@{item.kd}"
                     tools:text="kd" />
 
                 <TextView
@@ -356,7 +356,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
                     app:layout_constraintTop_toBottomOf="@+id/view6"
-                    app:value="@{item.matches.wins}"
+                    app:value="@{item.wins}"
                     tools:text="topOne" />
 
                 <TextView
@@ -386,7 +386,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/guideline2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view7"
-                    app:value="@{item.matches.top10}"
+                    android:text="@{item.valueOne}"
                     tools:text="top 10" />
 
                 <TextView
@@ -397,7 +397,7 @@
                     android:layout_marginEnd="@dimen/default_margin"
                     android:layout_marginBottom="@dimen/default_margin_double"
                     android:gravity="center"
-                    android:text="@string/top_ten"
+                    android:text="@{item.titleOne}"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="@android:color/darker_gray"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -418,7 +418,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
                     app:layout_constraintTop_toBottomOf="@+id/view8"
-                    app:value="@{item.matches.top25}"
+                    android:text="@{item.valueTwo}"
                     tools:text="top 25" />
 
                 <TextView
@@ -428,7 +428,7 @@
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginEnd="@dimen/default_margin"
                     android:gravity="center"
-                    android:text="@string/top_twenty_five"
+                    android:text="@{item.titleTwo}"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="@android:color/darker_gray"
                     app:layout_constraintEnd_toEndOf="parent"

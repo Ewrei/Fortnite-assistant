@@ -6,13 +6,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.ui.common.BaseViewHolder
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewholder.HomeBodyHeaderViewHolder
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewholder.HomeBodyStatsShortViewHolder
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewholder.HomeBodyStatsViewHolder
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewholder.*
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.HomeBodyStats
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.HomeBodyStatsType
 
-class HomeBodyStatsAdapter() : RecyclerView.Adapter<BaseViewHolder<HomeBodyStats>>() {
+class HomeBodyStatsAdapter(
+    private val openDetailsStatistics: () -> Unit
+) : RecyclerView.Adapter<BaseViewHolder<HomeBodyStats>>() {
 
     private val items = arrayListOf<HomeBodyStats>()
 
@@ -50,6 +50,27 @@ class HomeBodyStatsAdapter() : RecyclerView.Adapter<BaseViewHolder<HomeBodyStats
                     DataBindingUtil.inflate(
                         inflater,
                         R.layout.item_home_body_statistics_short,
+                        parent,
+                        false
+                    )
+                )
+            }
+            HomeBodyStatsType.DETAIL_STATISTICS.id -> {
+                return HomeBodyDetailStatisticsViewHolder(
+                    DataBindingUtil.inflate(
+                        inflater,
+                        R.layout.item_home_body_detail_statistics,
+                        parent,
+                        false
+                    ),
+                    openDetailsStatistics
+                )
+            }
+            HomeBodyStatsType.EMPTY.id -> {
+                return HomeBodyEmptyViewHolder(
+                    DataBindingUtil.inflate(
+                        inflater,
+                        R.layout.item_body_stats_empty,
                         parent,
                         false
                     )

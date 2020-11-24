@@ -2,7 +2,7 @@ package robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.ada
 
 enum class HomeBodyStatsType {
 
-    STATISTICS, STATISTICS_SHORT, HEADER, EMPTY;
+    STATISTICS, STATISTICS_SHORT, HEADER, EMPTY, DETAIL_STATISTICS;
 
     val id = ordinal
 
