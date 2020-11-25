@@ -6,6 +6,7 @@
     <string name="tab_title_history_match">History</string>
     <string name="tab_title_top">Top</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_setting">Settings</string>
 
     <string name="retry">Try one more time</string>
     <string name="repeat">Repeat</string>
@@ -134,4 +135,39 @@
     <string name="contact_vk">Write to Vkontakte</string>
     <string name="contact_gmail">Email me</string>
     <string name="message_no_set_telegram">"You don't have Telegram installed"</string>
+
+    <!--Application info-->
+    <string name="develop">Developer: Vitaliy Robinovsky\nvitalij.robin@gmail.com</string>
+    <string name="version_format">Version: %s</string>
+    <string name="application_info">The Cs Go Statistics application is designed to analyze and track your statistics, without authorization on Steam.</string>
+    <string name="developer_title">Developer Link</string>
+    <string name="developer_body">Have you found a bug, or do you have ideas on how to make the application better? Email</string>
+    <string name="gmail" translatable="false">v.robin.projects@gmail.com</string>
+    <string name="vk_url" translatable="false">https://vk.com/cs_go_assistant</string>
+    <string name="telegram_url" translatable="false">https://t.me/cs_go_assistant</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="privacy_policy_url" translatable="false">https://robinlabs.ru/privat.html#csgoassistant</string>
+
+    <string name="purchases_message"> Your purchases have been restored </string>
+    <string name="purchases_message_no"> You did not make purchases </string>
+    <string name="purchases_user_canceled">You have canceled your subscription </string>
+
+    <string name="check_shopping">Shopping Recovery</string>
+    <string name="check_shopping_body">Checks your shopping cart. If the purchase was made, advertising will be disabled</string>
+
+    <!--Settings-->
+    <string name="info_application">About the application</string>
+    <string name="share_title">Share the app</string>
+    <string name="share_body">Do your friends play cs go? Share this app with them.</string>
+    <string name="compare_players">Player comparison</string>
+    <string name="users">Accounts</string>
+    <string name="news_game">News game</string>
+    <string name="users_body">List of saved accounts</string>
+    <string name="steam_profile">Steam profile</string>
+    <string name="faceit_profile">Faceit profile</string>
+    <string name="copy_stats_link">Copy stats link</string>
+    <string name="feedback">Feedback</string>
+    <string name="add_functional">Add. functional</string>
+    <string name="steam_functional">Steam functional</string>
+    <string name="steam_onlie">Online in CS:GO</string>
 </resources>

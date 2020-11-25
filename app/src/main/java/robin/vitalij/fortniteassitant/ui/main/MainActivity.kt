@@ -1,6 +1,5 @@
 package robin.vitalij.fortniteassitant.ui.main
 
-import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.content.res.Resources
@@ -111,7 +110,7 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
                 R.navigation.navigation_history_match,
                 R.navigation.navigation_top,
                 R.navigation.navigation_dashboard,
-                R.navigation.navigation_notifications
+                R.navigation.navigation_setting
             )
 
         val controller = bottom_nav.setupWithNavController(

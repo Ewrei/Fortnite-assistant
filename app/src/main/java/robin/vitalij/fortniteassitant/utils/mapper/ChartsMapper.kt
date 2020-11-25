@@ -40,5 +40,10 @@ class ChartsMapper(private val chartsType: ChartsType) :
     private fun getValue(userEntity: UserEntity) = when (chartsType) {
         ChartsType.KD -> userEntity.all?.overall?.kd ?: 0.0
         ChartsType.WIN_RATE -> userEntity.all?.overall?.winRate ?: 0.0
+        ChartsType.AVG_SCORE -> userEntity.all?.overall?.getAvgScore() ?: 0.0
+        ChartsType.SCORE_PER_MATCH -> userEntity.all?.overall?.scorePerMatch ?: 0.0
+        ChartsType.SCORE_PER_MIN -> userEntity.all?.overall?.scorePerMin ?: 0.0
+        ChartsType.KILLS_PER_MIN -> userEntity.all?.overall?.killsPerMin ?: 0.0
+        ChartsType.KILLS_PER_MATCH -> userEntity.all?.overall?.killsPerMatch ?: 0.0
     }
 }

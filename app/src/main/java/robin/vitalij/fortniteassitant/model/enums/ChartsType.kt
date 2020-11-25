@@ -12,6 +12,31 @@ enum class ChartsType {
         override fun getTitleRes() = R.string.win_rate
         override fun getTitleShortRes() = R.string.win_rate
         override fun getProgressMax() = 100
+    },
+    AVG_SCORE {
+        override fun getTitleRes() = R.string.avg_score
+        override fun getTitleShortRes() = R.string.avg_score
+        override fun getProgressMax() = 1000
+    },
+    SCORE_PER_MATCH {
+        override fun getTitleRes() = R.string.score_per_match
+        override fun getTitleShortRes() = R.string.score_per_match
+        override fun getProgressMax() = 1000
+    },
+    SCORE_PER_MIN {
+        override fun getTitleRes() = R.string.score_per_min
+        override fun getTitleShortRes() = R.string.score_per_min
+        override fun getProgressMax() = 1000
+    },
+    KILLS_PER_MIN {
+        override fun getTitleRes() = R.string.killsPerMin
+        override fun getTitleShortRes() = R.string.killsPerMin
+        override fun getProgressMax() = 1
+    },
+    KILLS_PER_MATCH {
+        override fun getTitleRes() = R.string.killsPerMatch
+        override fun getTitleShortRes() = R.string.killsPerMatch
+        override fun getProgressMax() = 1
     };
 
     abstract fun getTitleRes(): Int

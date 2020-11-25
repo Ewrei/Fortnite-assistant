@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="title_setting">Настройки</string>
+
     <string name="retry">Попробовать еще раз</string>
     <string name="unknown_error">Что-то пошло не так</string>
     <string name="repeat">Повторить</string>
@@ -89,5 +91,36 @@
     <string name="contact_vk">Написать в Вконтакте</string>
     <string name="contact_gmail">Написать на почту</string>
     <string name="message_no_set_telegram">У вас не установлен Telegram</string>
+
+    <!--Application info-->
+    <string name="develop">Разработчик: Виталий Робиновский\nvitalij.robin@gmail.com</string>
+    <string name="version_format">Version: %s</string>
+    <string name="application_info">Приложение Cs Go Statistics предназначено для анализа и отслеживание вашей статистики, без авторизации в Steam</string>
+    <string name="developer_title">Связь с разработичком</string>
+    <string name="developer_body">Вы нашли ошибку, или у вас есть идеи как сделать приложение лучше? Пишите</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
+
+    <string name="purchases_message">Ваши покупки былы восстановлены</string>
+    <string name="purchases_message_no">Вы не совершали покупок</string>
+    <string name="purchases_user_canceled">Вы отменили подписку</string>
+
+    <string name="check_shopping">Восстановление покупок</string>
+    <string name="check_shopping_body">Проверяет вашу корзину покупок. Если покупка была совершена, реклама будет отключена</string>
+
+    <!--Settings-->
+    <string name="info_application">О приложение</string>
+    <string name="share_title">Поделиться приложением</string>
+    <string name="share_body">Ваши друзья играют в cs go? Поделитесь этим приложением с ними.</string>
+    <string name="compare_players">Сравнение игроков</string>
+    <string name="users">Аккаунты</string>
+    <string name="users_body">Список сохраненных аккаунтов</string>
+    <string name="steam_profile">Steam профиль</string>
+    <string name="faceit_profile">Faceit профиль</string>
+    <string name="copy_stats_link">Cкопировать ссылку</string>
+    <string name="news_game">Новости</string>
+    <string name="feedback">Обратная связь</string>
+    <string name="add_functional">Доп. функционал</string>
+    <string name="steam_functional">Steam функции</string>
+    <string name="steam_onlie">Онлайн в CS:GO</string>
 
 </resources>

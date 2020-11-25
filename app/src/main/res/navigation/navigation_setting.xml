@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_setting"
+    app:startDestination="@+id/navigation_setting">
+
+    <fragment
+        android:id="@+id/navigation_setting"
+        android:name="robin.vitalij.fortniteassitant.ui.setting.SettingFragment"
+        android:label="@string/title_setting"
+        tools:layout="@layout/fragment_setting">
+        <action
+            android:id="@+id/action_navigation_setting_to_searchUserFragment"
+            app:destination="@id/navigation_search" />
+        <action
+            android:id="@+id/action_navigation_setting_to_applicationInfoFragment"
+            app:destination="@id/navigation_application_info" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment"
+        android:label="@string/search"
+        tools:layout="@layout/fragment_search_steam" />
+    <fragment
+        android:id="@+id/navigation_application_info"
+        android:name="robin.vitalij.fortniteassitant.ui.setting.applicationinfo.ApplicationInfoFragment"
+        android:label="@string/application_info"
+        tools:layout="@layout/fragment_application_info" />
+
+</navigation>

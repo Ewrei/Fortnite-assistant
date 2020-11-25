@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_navigation_adapter_details_statistics_to_chartsFragment"
             app:destination="@id/navigation_charts" />
+        <action
+            android:id="@+id/action_navigation_adapter_details_statistics_to_navigation_charts_type"
+            app:destination="@id/navigation_charts_type" />
     </fragment>
     <fragment
         android:id="@+id/navigation_charts_type"
