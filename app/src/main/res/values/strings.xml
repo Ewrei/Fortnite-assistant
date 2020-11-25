@@ -85,4 +85,12 @@
 
     <!--Details statistics-->
     <string name="details_statistics">Детальная статистика</string>
+    <string name="avg_score">Avg. score</string>
+    <string name="score_per_min">Score per min</string>
+    <string name="score_per_match">Score per match</string>
+    <string name="last_modified">Last modified</string>
+    <string name="other">Other</string>
+    <string name="kills_per_min">Kills per min</string>
+    <string name="kills_per_match">Kills per match</string>
+    <string name="players_outlived">Players Outlived</string>
 </resources>

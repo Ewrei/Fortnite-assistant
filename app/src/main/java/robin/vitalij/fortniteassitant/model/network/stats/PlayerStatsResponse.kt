@@ -2,6 +2,7 @@ package robin.vitalij.fortniteassitant.model.network.stats
 
 import androidx.room.Embedded
 import com.google.gson.annotations.SerializedName
+import robin.vitalij.fortniteassitant.utils.TextUtils
 
 class PlayerStatsResponse(
     @SerializedName("status") val status: Int,
@@ -62,7 +63,9 @@ class Overall(
     @SerializedName("minutesPlayed") val minutesPlayed: Int,
     @SerializedName("playersOutlived") val playersOutlived: Long,
     @SerializedName("lastModified") val lastModified: String
-)
+) {
+    fun getAvgScore(): Double = TextUtils.getAverage(score.toDouble(), matches.toDouble())
+}
 
 class SoloMatches(
     @SerializedName("score") val score: Long,
@@ -81,7 +84,9 @@ class SoloMatches(
     @SerializedName("minutesPlayed") val minutesPlayed: Int,
     @SerializedName("playersOutlived") val playersOutlived: Long,
     @SerializedName("lastModified") val lastModified: String
-)
+) {
+    fun getAvgScore(): Double = TextUtils.getAverage(score.toDouble(), matches.toDouble())
+}
 
 class DuoMatches(
     @SerializedName("score") val score: Long,
@@ -100,7 +105,9 @@ class DuoMatches(
     @SerializedName("minutesPlayed") val minutesPlayed: Int,
     @SerializedName("playersOutlived") val playersOutlived: Long,
     @SerializedName("lastModified") val lastModified: String
-)
+) {
+    fun getAvgScore(): Double = TextUtils.getAverage(score.toDouble(), matches.toDouble())
+}
 
 class TrioMatches(
     @SerializedName("score") val score: Long,
@@ -119,7 +126,9 @@ class TrioMatches(
     @SerializedName("minutesPlayed") val minutesPlayed: Int,
     @SerializedName("playersOutlived") val playersOutlived: Long,
     @SerializedName("lastModified") val lastModified: String
-)
+) {
+    fun getAvgScore(): Double = TextUtils.getAverage(score.toDouble(), matches.toDouble())
+}
 
 class Ltm(
     @SerializedName("score") val score: Long,
@@ -136,4 +145,6 @@ class Ltm(
     @SerializedName("minutesPlayed") val minutesPlayed: Int,
     @SerializedName("playersOutlived") val playersOutlived: Long,
     @SerializedName("lastModified") val lastModified: String
-)
+) {
+    fun getAvgScore(): Double = TextUtils.getAverage(score.toDouble(), matches.toDouble())
+}

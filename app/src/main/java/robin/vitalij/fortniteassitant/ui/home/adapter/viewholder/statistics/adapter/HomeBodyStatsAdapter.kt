@@ -55,6 +55,16 @@ class HomeBodyStatsAdapter(
                     )
                 )
             }
+            HomeBodyStatsType.STATISTICS_SMALL.id -> {
+                return HomeBodyStatsSmallViewHolder(
+                    DataBindingUtil.inflate(
+                        inflater,
+                        R.layout.item_home_body_stats_small,
+                        parent,
+                        false
+                    )
+                )
+            }
             HomeBodyStatsType.DETAIL_STATISTICS.id -> {
                 return HomeBodyDetailStatisticsViewHolder(
                     DataBindingUtil.inflate(
