@@ -7,6 +7,7 @@ import io.reactivex.Maybe
 import robin.vitalij.fortniteassitant.db.entity.MatchEntity
 import robin.vitalij.fortniteassitant.db.entity.UserEntity
 import robin.vitalij.fortniteassitant.db.projection.User
+import robin.vitalij.fortniteassitant.db.projection.UserHistory
 
 @Dao
 interface UserDao {
@@ -19,5 +20,8 @@ interface UserDao {
 
     @Query("SELECT * FROM User WHERE player_id = :playerId order by playerSessionId desc limit 2")
     fun getLastTwoUserEntities(playerId: String): Flowable<List<UserEntity>>
+
+    @Query("SELECT * FROM PlayerSession WHERE accountId = :playerId ORDER BY playerSessionId DESC")
+    fun getUserHistory(playerId: String): Flowable<List<UserHistory>>
 
 }

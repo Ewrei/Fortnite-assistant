@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
+import robin.vitalij.fortniteassitant.model.enums.ChartsType
 
 object TextViewBinding {
 
@@ -32,5 +33,11 @@ object TextViewBinding {
     fun TextView.setHoursGame(hoursGame: Double) {
         text =
             if (hoursGame != 0.0) hoursGame.getStringFormat() else context.getString(R.string.no_information)
+    }
+
+    @JvmStatic
+    @BindingAdapter("chartsType")
+    fun TextView.setChartsType(chartsType: ChartsType) {
+        setText(chartsType.getTitleRes())
     }
 }

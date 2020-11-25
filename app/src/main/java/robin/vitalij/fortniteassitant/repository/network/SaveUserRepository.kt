@@ -22,10 +22,10 @@ class SaveUserRepository @Inject constructor(
 
     @SuppressLint("CheckResult")
     fun saveUser(
-        csGoFullProfileResponse: FortniteProfileResponse,
+        fortniteProfileResponse: FortniteProfileResponse,
         saveUserCallback: SaveUserCallback
     ) {
-        val user = SaveUserMapper().transform(csGoFullProfileResponse)
+        val user = SaveUserMapper().transform(fortniteProfileResponse)
 
         if (user.userEntity.all?.overall?.matches == 0 || user.userEntity.playerId == "") {
             saveUserCallback.showError(Throwable())

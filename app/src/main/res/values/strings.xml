@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">Fortnite Assitant</string>
+    <string name="application_url" translatable="false">https://play.google.com/store/apps/details?id=robin.vitalij.cs_go_assistant</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="tab_title_history_match">History</string>
@@ -93,4 +94,44 @@
     <string name="kills_per_min">Kills per min</string>
     <string name="kills_per_match">Kills per match</string>
     <string name="players_outlived">Players Outlived</string>
+
+    <!--Charts-->
+    <string name="kd_full">Kill/Death Ratio</string>
+    <string name="win_rate">Win rate</string>
+
+    <!--Subscription-->
+    <string name="cancel_at_any_time">Cancel at any time on Google Play</string>
+    <string name="subscription_features">Disabling ads; \n Access to all functions in the application</string>
+    <string name="plus_subcription_title">Subscription Benefits:</string>
+    <string name="additional_features">Access to all application features</string>
+    <string name="food_developer">Food Developer</string>
+    <string name="remove_ads_body">In order to remove ads from the application for 96 hours, watch video ads</string>
+    <string name="reclam_info">Advertising has been disabled until </string>
+    <string name="reclam_info2">Ads have not loaded yet </string>
+    <string name="reclam_body">Advertising helps the application develop. The next time the show will be in one hour</string>
+    <string name="subscription">Subscription</string>
+    <string name="watch">Watch</string>
+    <string name="per_month">per month</string>
+    <string name="or">Or</string>
+    <string name="disabling_ads">Disabling ads</string>
+
+    <!--Main-->
+    <string name="play_market_header">Rate me on the Play Market</string>
+    <string name="play_market_body">Do you like to use this app? Please help us become a 5 star app!</string>
+
+    <!--Update-->
+    <string name="downloaded_update_snackbar">An update has just been downloaded. \ nRestart to update</string>
+    <string name="install">Install</string>
+    <string name="app_download_starts">App download starts…</string>
+    <string name="app_download_canceled">Application download canceled.</string>
+    <string name="app_download_failed">Failed to download the app</string>
+    <string name="update_body">Receiving data from the server</string>
+
+    <!--To contact us-->
+    <string name="to_contact_us">To contact us</string>
+    <string name="to_contact_us_body">Did you find an error? Or do you have an idea? Email us</string>
+    <string name="contact_telegram">Write to Telegram</string>
+    <string name="contact_vk">Write to Vkontakte</string>
+    <string name="contact_gmail">Email me</string>
+    <string name="message_no_set_telegram">"You don't have Telegram installed"</string>
 </resources>

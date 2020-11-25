@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        style="@style/DefaultDivider"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/half_default_margin"
+        android:layout_marginEnd="@dimen/half_default_margin"
+        android:layout_toStartOf="@+id/battlesTitle"
+        android:background="@color/color_orange" />
+
+    <TextView
+        android:id="@+id/battlesTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/or"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textColor="@color/color_orange" />
+
+    <View
+        style="@style/DefaultDivider"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/half_default_margin"
+        android:layout_marginEnd="@dimen/half_default_margin"
+        android:layout_toEndOf="@+id/battlesTitle"
+        android:background="@color/color_orange" />
+
+</RelativeLayout>

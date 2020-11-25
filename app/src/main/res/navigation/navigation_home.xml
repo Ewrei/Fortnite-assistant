@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_home"
@@ -12,20 +11,37 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_homeScreen_to_newsFragment"
-            app:destination="@id/navigation_news" />
-        <action
             android:id="@+id/action_homeScreen_to_adapterDetailsStatisticsFragment"
             app:destination="@id/navigation_adapter_details_statistics" />
+        <action
+            android:id="@+id/action_homeScreen_to_chartsTypeFragment"
+            app:destination="@id/navigation_charts_type" />
+        <action
+            android:id="@+id/action_homeScreen_to_chartsFragment"
+            app:destination="@id/navigation_charts" />
     </fragment>
     <fragment
-        android:id="@+id/navigation_news"
-        android:name="robin.vitalij.fortniteassitant.ui.news.NewsFragment"
-        android:label="NewsFragment" />
-    <fragment
         android:id="@+id/navigation_adapter_details_statistics"
-        tools:layout="@layout/fragment_adapter_details_statistics"
         android:name="robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment"
-        android:label="@string/details_statistics" />
+        android:label="@string/details_statistics"
+        tools:layout="@layout/fragment_adapter_details_statistics">
+        <action
+            android:id="@+id/action_navigation_adapter_details_statistics_to_chartsFragment"
+            app:destination="@id/navigation_charts" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_charts_type"
+        android:name="robin.vitalij.fortniteassitant.ui.chartlist.ChartsTypeFragment"
+        android:label="ChartsTypeFragment"
+        tools:layout="@layout/fragment_map">
+        <action
+            android:id="@+id/action_chartsTypeFragment_to_chartsFragment"
+            app:destination="@id/navigation_charts" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_charts"
+        android:name="robin.vitalij.fortniteassitant.ui.charts.ChartsFragment"
+        android:label="ChartsFragment"
+        tools:layout="@layout/fragment_charts" />
 
 </navigation>

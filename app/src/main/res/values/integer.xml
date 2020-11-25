@@ -2,4 +2,5 @@
 <resources>
     <integer name="min_length">3</integer>
     <integer name="search_max_size">30</integer>
+    <integer name="infografika_size">10</integer>
 </resources>
