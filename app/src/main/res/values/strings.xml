@@ -170,4 +170,28 @@
     <string name="add_functional">Add. functional</string>
     <string name="steam_functional">Steam functional</string>
     <string name="steam_onlie">Online in CS:GO</string>
+
+    <string name="delete_account">Delete user</string>
+    <string name="delete_account_message">Profile has been deleted.</string>
+    <string name="delete_account_title">Are you sure you want to delete %s?</string>
+
+    <string name="wins">Wins</string>
+
+    <!--Users-->
+    <string name="last_date_update">Last update %s</string>
+
+    <string name="vs" translatable="false">VS</string>
+
+    <!--Comparison-->
+    <string name="comparison_player_format"> Compare %s players</string>
+    <string name="comparison_no_players_selected_dialog_body">To compare players you need to select at least two players</string>
+    <string name="content_restriction_dialog">This function has limitations. To access it, subscribe or watch a short advertisement</string>
+    <string name="added_comparison">Add to comparison</string>
+    <string name="selected_user">Selected users</string>
+    <string name="player_omparison"> Player comparison </string>
+    <string name="statistics_title">Statistics</string>
+    <string name="important">Important</string>
+
+    <string name="delete">Delete</string>
+
 </resources>

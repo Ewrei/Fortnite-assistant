@@ -8,6 +8,7 @@ import robin.vitalij.fortniteassitant.db.dao.SaveDao
 import robin.vitalij.fortniteassitant.db.dao.UserDao
 import robin.vitalij.fortniteassitant.db.projection.User
 import robin.vitalij.fortniteassitant.model.SaveUserModel
+import robin.vitalij.fortniteassitant.model.comparison.PlayerModel
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -28,4 +29,17 @@ class UserRepository @Inject constructor(
     fun getFullUser(playerId: String): Maybe<User> =
         userDao.getUserFull(playerId).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+
+    fun deleteProfile(playerId: String): Completable {
+        return Completable.fromAction { userDao.deleteProfile(playerId) }
+            .subscribeOn(Schedulers.io()).observeOn(
+                AndroidSchedulers.mainThread()
+            )
+    }
+
+    fun loadData(playerId: String): Maybe<PlayerModel> {
+        return userDao.getUserFull(playerId).flatMap {
+            return@flatMap Maybe.just(PlayerModel(it.userEntity))
+        }
+    }
 }

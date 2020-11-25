@@ -96,6 +96,36 @@ fun Context.showDialog(
         .create().show()
 }
 
+fun Context.showDialog(
+title: String?,
+message: String?,
+positiveClick: () -> Unit,
+neutralClick: () -> Unit
+) {
+    MaterialAlertDialogBuilder(this)
+        .setTitle(title)
+        .setMessage(message)
+        .setCancelable(true)
+        .setPositiveButton(android.R.string.ok) { dialog, _ ->
+            run {
+                dialog.dismiss()
+                positiveClick()
+            }
+        }
+        .setNegativeButton(android.R.string.no) { dialog, _ ->
+            run {
+                dialog.dismiss()
+            }
+        }
+        .setNeutralButton(R.string.subscription) { dialog, _ ->
+            run {
+                dialog.dismiss()
+                neutralClick()
+            }
+        }
+        .show()
+}
+
 
 @SuppressLint("PrivateResource")
 fun Context.showApplicationDialog(

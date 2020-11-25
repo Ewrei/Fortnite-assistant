@@ -37,7 +37,8 @@ class SaveUserMapper : Mapper<FortniteProfileResponse, SaveUserModel> {
         all = playerStatsResponse.playerStatsData.stats.all,
         keyboardMouse = playerStatsResponse.playerStatsData.stats.keyboardMouse,
         gamepad = playerStatsResponse.playerStatsData.stats.gamepad,
-        touch = playerStatsResponse.playerStatsData.stats.touch
+        touch = playerStatsResponse.playerStatsData.stats.touch,
+        timeUpdate = Date().time
     )
 
     private fun getMatches(

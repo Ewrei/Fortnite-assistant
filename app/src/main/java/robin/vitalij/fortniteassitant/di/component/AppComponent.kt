@@ -8,8 +8,15 @@ import robin.vitalij.fortniteassitant.di.module.NetworkModule
 import robin.vitalij.fortniteassitant.di.module.RepositoryModule
 import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
+import robin.vitalij.fortniteassitant.ui.bottomsheet.user.UserResultFragment
 import robin.vitalij.fortniteassitant.ui.chartlist.ChartsTypeFragment
 import robin.vitalij.fortniteassitant.ui.charts.ChartsFragment
+import robin.vitalij.fortniteassitant.ui.comparison.selected.ComparisonSelectedFragment
+import robin.vitalij.fortniteassitant.ui.comparison.selected.listuser.SelectedListUserFragment
+import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.statistics.ComparisonManyPlayersStatisticsFragment
+import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.viewpager.AdapterManyAccountFragment
+import robin.vitalij.fortniteassitant.ui.comparison.statistics.ComparisonStatisticsFragment
+import robin.vitalij.fortniteassitant.ui.comparison.viewpager.AdapterComparisonFragment
 import robin.vitalij.fortniteassitant.ui.details.statistics.DetailsStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.history.HistoryMatchFragment
@@ -19,6 +26,7 @@ import robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment
 import robin.vitalij.fortniteassitant.ui.setting.SettingFragment
 import robin.vitalij.fortniteassitant.ui.setting.applicationinfo.ApplicationInfoFragment
 import robin.vitalij.fortniteassitant.ui.subscription.SubscriptionsFragment
+import robin.vitalij.fortniteassitant.ui.users.UsersFragment
 import javax.inject.Singleton
 
 @Singleton
@@ -38,7 +46,15 @@ interface AppComponent {
     fun inject(fragment: ChartsTypeFragment)
     fun inject(fragment: ApplicationInfoFragment)
     fun inject(fragment: SettingFragment)
-    fun inject(fragment: ContactUsResultFragment)
+    fun inject(fragment: UsersFragment)
+    fun inject(fragment: AdapterComparisonFragment)
+    fun inject(fragment: ComparisonStatisticsFragment)
+    fun inject(fragment: SelectedListUserFragment)
+    fun inject(fragment: ComparisonManyPlayersStatisticsFragment)
+    fun inject(fragment: ComparisonSelectedFragment)
+    fun inject(fragment: AdapterManyAccountFragment)
 
     fun inject(fragment: ProfileResultFragment)
+    fun inject(fragment: ContactUsResultFragment)
+    fun inject(fragment: UserResultFragment)
 }

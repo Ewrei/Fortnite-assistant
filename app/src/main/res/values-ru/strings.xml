@@ -123,4 +123,25 @@
     <string name="steam_functional">Steam функции</string>
     <string name="steam_onlie">Онлайн в CS:GO</string>
 
+    <string name="delete_account">Удалить пользователя</string>
+    <string name="delete_account_message">Профиль был удален</string>
+    <string name="delete_account_title">Вы точно хотите %s удалить?</string>
+
+    <string name="wins">Победы</string>
+
+    <!--Users-->
+    <string name="last_date_update">Последнее обновление %s</string>
+
+    <!--Comparison-->
+    <string name="comparison_player_format">Сравнить %s игроков</string>
+    <string name="comparison_no_players_selected_dialog_body">Для сравнение игроков нужно выбрать минимум двух игроков</string>
+    <string name="content_restriction_dialog">Эта функция имеет ограничения. Для доступа к ней, оформите подписку или посмотрите короткую рекламу</string>
+    <string name="added_comparison">Добавление в сравнение</string>
+    <string name="selected_user">Выбранные пользователи</string>
+    <string name="player_omparison">Сравнение игроков</string>
+    <string name="statistics_title">Статистика</string>
+    <string name="important">Важное</string>
+
+    <string name="delete">Удалить</string>
+
 </resources>

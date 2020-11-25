@@ -2,6 +2,7 @@ package robin.vitalij.fortniteassitant.model.network.stats
 
 import androidx.room.Embedded
 import com.google.gson.annotations.SerializedName
+import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
 import robin.vitalij.fortniteassitant.utils.TextUtils
 
 class PlayerStatsResponse(
@@ -65,6 +66,8 @@ class Overall(
     @SerializedName("lastModified") val lastModified: String
 ) {
     fun getAvgScore(): Double = TextUtils.getAverage(score.toDouble(), matches.toDouble())
+
+    fun getMatchesString() = matches.getStringFormat()
 }
 
 class SoloMatches(

@@ -20,6 +20,7 @@ import robin.vitalij.fortniteassitant.databinding.FragmentSettingBinding
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
+import robin.vitalij.fortniteassitant.ui.comparison.selected.ComparisonSelectedActivity
 import robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment.Companion.IS_COMPARISON_VISIBLE
 import robin.vitalij.fortniteassitant.ui.subscription.SubscriptionActivity
 import javax.inject.Inject
@@ -74,7 +75,7 @@ class SettingFragment : BaseFragment() {
         val navController = findNavController()
 
         accountsLayout.setOnClickListener {
-            //navController.navigate(R.id.navigation_users)
+            navController.navigate(R.id.navigation_users)
         }
 
         searchLayout.setOnClickListener {
@@ -85,8 +86,8 @@ class SettingFragment : BaseFragment() {
         }
 
         comparisonLayout.setOnClickListener {
-//            val intent = Intent(context, ComparisonSelectedActivity::class.java)
-//            context?.startActivity(intent)
+            val intent = Intent(context, ComparisonSelectedActivity::class.java)
+            context?.startActivity(intent)
         }
 
         applicationInfo.setOnClickListener {

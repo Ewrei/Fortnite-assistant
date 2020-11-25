@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="robin.vitalij.fortniteassitant.ui.bottomsheet.user.UserResultViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/content_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/background_app"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center"
+            android:text="@string/account_action"
+            android:textStyle="bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="@android:color/darker_gray" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/updateButton"
+            android:backgroundTint="@color/color_orange"
+            android:layout_marginStart="@dimen/default_margin_double"
+            android:layout_marginEnd="@dimen/default_margin_double"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/refresh" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/switchButton"
+            android:backgroundTint="@color/color_orange"
+            android:layout_marginStart="@dimen/default_margin_double"
+            android:layout_marginEnd="@dimen/default_margin_double"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/to_switch"
+            android:visibility="@{viewModel.isDifferentUser ? View.VISIBLE : View.GONE}" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/compareWithYourself"
+            android:backgroundTint="@color/color_orange"
+            android:layout_marginStart="@dimen/default_margin_double"
+            android:layout_marginEnd="@dimen/default_margin_double"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/compare_with_yourself"
+            android:visibility="@{viewModel.isDifferentUser ? View.VISIBLE : View.GONE}" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/removeAccount"
+            android:backgroundTint="@color/color_orange"
+            android:layout_marginStart="@dimen/default_margin_double"
+            android:layout_marginEnd="@dimen/default_margin_double"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_account"
+            android:visibility="@{viewModel.isDifferentUser ? View.VISIBLE : View.GONE}" />
+
+    </LinearLayout>
+
+</layout>

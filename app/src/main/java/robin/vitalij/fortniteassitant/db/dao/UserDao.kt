@@ -24,4 +24,10 @@ interface UserDao {
     @Query("SELECT * FROM PlayerSession WHERE accountId = :playerId ORDER BY playerSessionId DESC")
     fun getUserHistory(playerId: String): Flowable<List<UserHistory>>
 
+    @Query("SELECT *, MAX(alloverallmatches) FROM User GROUP BY player_id")
+    fun getUsers(): Flowable<List<UserEntity>>
+
+    @Query("DELETE FROM User WHERE player_id = :playerId")
+    fun deleteProfile(playerId: String)
+
 }
