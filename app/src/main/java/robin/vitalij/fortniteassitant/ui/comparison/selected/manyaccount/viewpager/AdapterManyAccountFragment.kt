@@ -7,11 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.fragment_adapter_comparion.*
 import kotlinx.android.synthetic.main.fragment_adapter_comparison_many_account.*
+import kotlinx.android.synthetic.main.fragment_adapter_comparison_many_account.allStats
+import kotlinx.android.synthetic.main.fragment_adapter_comparison_many_account.gamepad
+import kotlinx.android.synthetic.main.fragment_adapter_comparison_many_account.keyboardMouse
+import kotlinx.android.synthetic.main.fragment_adapter_comparison_many_account.tabLayout
+import kotlinx.android.synthetic.main.fragment_adapter_comparison_many_account.touch
+import kotlinx.android.synthetic.main.fragment_adapter_comparison_many_account.viewPager
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.model.enums.BattlesType
+import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.ui.common.BaseViewPagerAdapter
 import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.statistics.ComparisonManyPlayersStatisticsFragment
+import robin.vitalij.fortniteassitant.ui.comparison.statistics.ComparisonStatisticsFragment
 import javax.inject.Inject
 
 
@@ -45,10 +55,12 @@ class AdapterManyAccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewPager.offscreenPageLimit = 3
+        viewPager.offscreenPageLimit = 6
 
         addTabs()
         tabLayout.setupWithViewPager(viewPager)
+
+        setListeners()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -76,21 +88,86 @@ class AdapterManyAccountFragment : Fragment() {
         }
     }
 
+    private fun setListeners() {
+        allStats.setOnClickListener {
+            ((viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
+                (it as? ComparisonManyPlayersStatisticsFragment)?.loadGameType(
+                    GameType.ALL
+                )
+            })
+        }
+
+        keyboardMouse.setOnClickListener {
+            ((viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
+                (it as? ComparisonManyPlayersStatisticsFragment)?.loadGameType(
+                    GameType.KEYBOARD_MOUSE
+                )
+            })
+        }
+
+        gamepad.setOnClickListener {
+            ((viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
+                (it as? ComparisonManyPlayersStatisticsFragment)?.loadGameType(
+                    GameType.GAMEPAD
+                )
+            })
+        }
+
+        touch.setOnClickListener {
+            ((viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
+                (it as? ComparisonManyPlayersStatisticsFragment)?.loadGameType(GameType.TOUCH)
+            })
+        }
+    }
+
     private fun addTabs() {
         val pagerAdapter = BaseViewPagerAdapter(childFragmentManager)
         pagerAdapter.run {
             addFragment(
-                ComparisonManyPlayersStatisticsFragment.newInstance(false),
-                getString(R.string.statistics_title)
+                ComparisonManyPlayersStatisticsFragment.newInstance(
+                    BattlesType.OVERALL,
+                    GameType.ALL
+                ),
+                getString(R.string.overall_battles)
             )
             addFragment(
-                ComparisonManyPlayersStatisticsFragment.newInstance(true),
-                getString(R.string.other)
+                ComparisonManyPlayersStatisticsFragment.newInstance(
+                    BattlesType.SOLO,
+                    GameType.ALL
+                ),
+                getString(R.string.solo_battles)
+            )
+            addFragment(
+                ComparisonManyPlayersStatisticsFragment.newInstance(
+                    BattlesType.DUO,
+                    GameType.ALL
+                ),
+                getString(R.string.duo_battles)
+            )
+            addFragment(
+                ComparisonManyPlayersStatisticsFragment.newInstance(
+                    BattlesType.TRIO,
+                    GameType.ALL
+                ),
+                getString(R.string.trio_battles)
+            )
+            addFragment(
+                ComparisonManyPlayersStatisticsFragment.newInstance(
+                    BattlesType.SQUAD,
+                    GameType.ALL
+                ),
+                getString(R.string.squad_battles)
+            )
+            addFragment(
+                ComparisonManyPlayersStatisticsFragment.newInstance(
+                    BattlesType.LTM,
+                    GameType.ALL
+                ),
+                getString(R.string.ltm_battles)
             )
         }
 
         viewPager.adapter = pagerAdapter
-
     }
 
     companion object {

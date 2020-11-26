@@ -107,48 +107,55 @@ class ComparisonPlayersMapper(
     ): List<ComparisonPlayer> {
         val list = arrayListOf<ComparisonPlayer>()
 
-        if (battlesType == BattlesType.OVERALL) {
-            list.addAll(
-                getOverallStatistics(
-                    statsTypeDeviceOne?.overall,
-                    statsTypeDeviceTwo?.overall
+        when (battlesType) {
+            BattlesType.OVERALL -> {
+                list.addAll(
+                    getOverallStatistics(
+                        statsTypeDeviceOne?.overall,
+                        statsTypeDeviceTwo?.overall
+                    )
                 )
-            )
-        } else if (battlesType == BattlesType.SOLO) {
-            list.addAll(
-                getOverallStatistics(
-                    statsTypeDeviceOne?.solo,
-                    statsTypeDeviceTwo?.solo
+            }
+            BattlesType.SOLO -> {
+                list.addAll(
+                    getOverallStatistics(
+                        statsTypeDeviceOne?.solo,
+                        statsTypeDeviceTwo?.solo
+                    )
                 )
-            )
-        } else if (battlesType == BattlesType.DUO) {
-            list.addAll(
-                getOverallStatistics(
-                    statsTypeDeviceOne?.duo,
-                    statsTypeDeviceTwo?.duo
+            }
+            BattlesType.DUO -> {
+                list.addAll(
+                    getOverallStatistics(
+                        statsTypeDeviceOne?.duo,
+                        statsTypeDeviceTwo?.duo
+                    )
                 )
-            )
-        } else if (battlesType == BattlesType.TRIO) {
-            list.addAll(
-                getOverallStatistics(
-                    statsTypeDeviceOne?.trio,
-                    statsTypeDeviceTwo?.trio
+            }
+            BattlesType.TRIO -> {
+                list.addAll(
+                    getOverallStatistics(
+                        statsTypeDeviceOne?.trio,
+                        statsTypeDeviceTwo?.trio
+                    )
                 )
-            )
-        } else if (battlesType == BattlesType.SQUAD) {
-            list.addAll(
-                getOverallStatistics(
-                    statsTypeDeviceOne?.squad,
-                    statsTypeDeviceTwo?.squad
+            }
+            BattlesType.SQUAD -> {
+                list.addAll(
+                    getOverallStatistics(
+                        statsTypeDeviceOne?.squad,
+                        statsTypeDeviceTwo?.squad
+                    )
                 )
-            )
-        } else if (battlesType == BattlesType.LTM) {
-            list.addAll(
-                getOverallStatistics(
-                    statsTypeDeviceOne?.ltm,
-                    statsTypeDeviceTwo?.ltm
+            }
+            BattlesType.LTM -> {
+                list.addAll(
+                    getOverallStatistics(
+                        statsTypeDeviceOne?.ltm,
+                        statsTypeDeviceTwo?.ltm
+                    )
                 )
-            )
+            }
         }
 
         return list

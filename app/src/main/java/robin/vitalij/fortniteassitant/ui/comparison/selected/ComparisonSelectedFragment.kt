@@ -70,11 +70,25 @@ class ComparisonSelectedFragment : BaseFragment() {
                 }
             }
         viewModel.initOwner(this)
+
+        setHasOptionsMenu(true)
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         FortniteApplication.appComponent.inject(this)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_friends, menu)
+        val filterItem = menu.findItem(R.id.action_list_user)
+        filterItem?.let { item ->
+            selectedComparisonImageView = item.actionView as SelectedComparisonImageView
+            selectedComparisonImageView?.setOnClickListener {
+                startActivity(SelectedListUserActivity.getSelectedListUser(requireContext()))
+            }
+            viewModel.loadPlayerComparisonSize()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

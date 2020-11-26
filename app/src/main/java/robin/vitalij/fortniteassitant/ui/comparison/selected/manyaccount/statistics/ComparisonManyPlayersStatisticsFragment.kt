@@ -13,8 +13,12 @@ import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.model.enums.BattlesType
+import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
+import robin.vitalij.fortniteassitant.ui.comparison.BATTLES_TYPE
+import robin.vitalij.fortniteassitant.ui.comparison.GAME_TYPE
 import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.statistics.adapter.ComparisonManyPlayerAdapter
 import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.statistics.adapter.viewmodel.ComparisonManyPlayers
 import javax.inject.Inject
@@ -54,7 +58,9 @@ class ComparisonManyPlayersStatisticsFragment :
         })
 
         arguments?.let {
-            viewModel.loadData(it.getBoolean(IS_OTHER, false))
+            viewModel.battlesType = it.get(BATTLES_TYPE) as BattlesType
+            viewModel.gameType = it.get(GAME_TYPE) as GameType
+            viewModel.loadData()
         }
     }
 
@@ -71,11 +77,18 @@ class ComparisonManyPlayersStatisticsFragment :
         }
     }
 
+    fun loadGameType(gameType: GameType) {
+        viewModel.gameType = gameType
+        viewModel.loadData()
+    }
+
     companion object {
-        fun newInstance(isOther: Boolean) = ComparisonManyPlayersStatisticsFragment().apply {
-            arguments = Bundle().apply {
-                putBoolean(IS_OTHER, isOther)
+        fun newInstance(battlesType: BattlesType, gameType: GameType) =
+            ComparisonManyPlayersStatisticsFragment().apply {
+                arguments = Bundle().apply {
+                    putSerializable(BATTLES_TYPE, battlesType)
+                    putSerializable(GAME_TYPE, gameType)
+                }
             }
-        }
     }
 }
