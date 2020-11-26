@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import robin.vitalij.fortniteassitant.model.comparison.ComparisonProfileResponse
+import robin.vitalij.fortniteassitant.model.enums.BattlesType
+import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.repository.comparison.ComparisonProfileRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel.ComparisonPlayer
@@ -16,6 +18,11 @@ class ComparisonStatisticsViewModel(
 ) : BaseViewModel() {
 
     var isSchedule: Boolean = false
+
+    lateinit var playerOneId: String
+    lateinit var playerTwoId: String
+    lateinit var battlesType: BattlesType
+    lateinit var gameType: GameType
 
     private var profileResponse: ComparisonProfileResponse? = null
 
@@ -35,9 +42,8 @@ class ComparisonStatisticsViewModel(
 
     fun loadSchedule(isSchedule: Boolean) {
         this.isSchedule = isSchedule
-
         profileResponse?.let {
-            data.value = ComparisonPlayersMapper(resourceProvider, isSchedule).transform(it)
+            data.value = ComparisonPlayersMapper(resourceProvider, isSchedule, battlesType, gameType).transform(it)
         }
     }
 }

@@ -20,10 +20,12 @@ import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.common.extensions.setVisibility
 import robin.vitalij.fortniteassitant.common.extensions.showDialog
 import robin.vitalij.fortniteassitant.interfaces.RegistrationProfileCallback
+import robin.vitalij.fortniteassitant.model.enums.ComparisonDataType
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.ProfileAdapter
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewmodel.Profile
 import robin.vitalij.fortniteassitant.ui.common.BaseBottomSheetDialogFragment
+import robin.vitalij.fortniteassitant.ui.comparison.ComparisonActivity
 import robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment.Companion.IS_COMPARISON_VISIBLE
 import javax.inject.Inject
 
@@ -66,12 +68,12 @@ class ProfileResultFragment : BaseBottomSheetDialogFragment() {
 
                 openCompare = {
                     dismiss()
-//                    startActivity(
-//                        ComparisonActivity.getComparisonActivityIntent(
-//                            requireContext(),
-//                            ComparisonDataType.COMPARE_WITH_YOURSELF
-//                        )
-//                    )
+                    startActivity(
+                        ComparisonActivity.getComparisonActivityIntent(
+                            requireContext(),
+                            ComparisonDataType.COMPARE_WITH_YOURSELF
+                        )
+                    )
                 }
             }
     }
@@ -116,11 +118,11 @@ class ProfileResultFragment : BaseBottomSheetDialogFragment() {
         }
 
         compareWithYourself.setOnClickListener {
-//            if (viewModel.playerModel.get()?.csGoProfileModel?.data?.segments?.first()?.stats?.matchesPlayed?.value == 0.0) {
-//                context?.showDialog(R.string.steam_private)
-//            } else {
-//                viewModel.compareWithYourself()
-//            }
+            if (viewModel.playerModel.get()?.stats?.playerStatsData?.stats?.all?.overall?.matches == 0) {
+              //  context?.showDialog(R.string.steam_private) TODO
+            } else {
+                viewModel.compareWithYourself()
+            }
         }
 
         addedToComparison.setOnClickListener {

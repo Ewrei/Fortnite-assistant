@@ -144,4 +144,6 @@
 
     <string name="delete">Удалить</string>
 
+    <string name="players_did_not_participate_in_battles">Игроки не участвовали в боях</string>
+
 </resources>

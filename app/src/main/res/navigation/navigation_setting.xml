@@ -33,7 +33,7 @@
 
     <fragment
         android:id="@+id/navigation_users"
-        android:name="robin.vitalij.cs_go_assistant.ui.users.UsersFragment"
+        android:name="robin.vitalij.fortniteassitant.ui.users.UsersFragment"
         android:label="@string/users"
         tools:layout="@layout/fragment_with_recyclerview_and_lce" />
 

@@ -5,16 +5,16 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.fragment_search_steam.*
 import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.closeKeyboard
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.common.extensions.setSafeOnClickListener
 import robin.vitalij.fortniteassitant.interfaces.RegistrationProfileCallback
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
@@ -36,12 +36,10 @@ class ComparisonSelectedFragment : BaseFragment() {
 
     private var selectedComparisonImageView: SelectedComparisonImageView? = null
 
-    private var searchView: SearchView? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_comparison_selected, container, false)
+    ) = inflater.inflate(R.layout.fragment_comparion, container, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,8 +70,6 @@ class ComparisonSelectedFragment : BaseFragment() {
                 }
             }
         viewModel.initOwner(this)
-
-        setHasOptionsMenu(true)
     }
 
     override fun onAttach(context: Context) {
@@ -81,67 +77,37 @@ class ComparisonSelectedFragment : BaseFragment() {
         FortniteApplication.appComponent.inject(this)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_friends, menu)
-        val filterItem = menu.findItem(R.id.action_list_user)
-        filterItem?.let { item ->
-            selectedComparisonImageView = item.actionView as SelectedComparisonImageView
-            selectedComparisonImageView?.setOnClickListener {
-                startActivity(SelectedListUserActivity.getSelectedListUser(requireContext()))
-            }
-            viewModel.loadPlayerComparisonSize()
-        }
-
-        val searchItem = menu.findItem(R.id.action_search)
-        searchView = searchItem.actionView as SearchView
-        searchItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW or MenuItem.SHOW_AS_ACTION_IF_ROOM)
-        searchItem.actionView = searchView
-        initSearch()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, Observer{
+        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
             it?.let(::initAdapter)
         })
 
 
-        viewModel.mutableSizeLiveData.observe(viewLifecycleOwner, Observer{
+        viewModel.mutableSizeLiveData.observe(viewLifecycleOwner, {
             selectedComparisonImageView?.setFilterSize(it)
         })
 
-        setListener()
+        setListeners()
 
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun setListener() {
+    private fun setListeners() {
         recyclerView.setOnTouchListener { v, event ->
             context.closeKeyboard(view)
             false
         }
-    }
 
-    private fun initSearch() {
-        searchView?.setOnCloseListener {
-            viewModel.mutableLiveData.value = arrayListOf()
-            false
+        searchButton.setSafeOnClickListener {
+            context?.closeKeyboard(view)
+            if (searchInputEditText.text.toString().isEmpty()) {
+                viewModel.mutableLiveData.value = arrayListOf()
+            }
+            if (searchInputEditText.text.toString().length >= resources.getInteger(R.integer.min_length)) {
+                viewModel.searchPlayer(searchInputEditText.text.toString())
+            }
         }
-
-  //      searchView?.setOnQueryTextListener(
-//            DebouncingQueryTextListener(
-//                this@ComparisonSelectedFragment.lifecycle
-//            ) { text ->
-//                text?.let {
-//                    if (it.isEmpty()) {
-//                        viewModel.mutableLiveData.value = arrayListOf()
-//                    }
-//                    if (it.length >= resources.getInteger(R.integer.min_length)) {
-//                        viewModel.searchPlayer(it)
-//                    }
-//                }
-//            }
-  //      )
     }
 
     private fun initAdapter(list: List<SearchSteamUser>) {

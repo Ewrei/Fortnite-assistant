@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import robin.vitalij.fortniteassitant.common.extensions.getErrorModel
 import robin.vitalij.fortniteassitant.repository.comparison.ComparisonListUserRepository
 import robin.vitalij.fortniteassitant.repository.comparison.ComparisonRepository
@@ -11,6 +12,7 @@ import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileRespons
 import robin.vitalij.fortniteassitant.repository.network.GetUserRepository
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewmodel.Profile
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
+import robin.vitalij.fortniteassitant.utils.mapper.PlayerUserMapper
 import robin.vitalij.fortniteassitant.utils.mapper.ProfileResultMapper
 import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
 
@@ -43,20 +45,20 @@ class ProfileResultViewModel(
     }
 
     fun addedUserMode() {
-//        playerModel.get()?.let {
-//            comparisonListUserRepository.addUserModel(PlayerUserMapper().transform(it))
-//        }
+        playerModel.get()?.let {
+            comparisonListUserRepository.addUserModel(PlayerUserMapper().transform(it))
+        }
     }
 
     fun compareWithYourself() {
-//        playerModel.get()?.let {
-//            comparisonRepository.loadOneLocalData(PlayerUserMapper().transform(it))
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(
-//                    { openCompare() }, {
-//                        // do nothing
-//                    })
-//        }
+        playerModel.get()?.let {
+            comparisonRepository.loadOneLocalData(PlayerUserMapper().transform(it))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { openCompare() }, {
+                        // do nothing
+                    })
+        }
     }
 }

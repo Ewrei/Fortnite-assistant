@@ -12,7 +12,11 @@ import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.model.enums.BattlesType
+import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
+import robin.vitalij.fortniteassitant.ui.comparison.BATTLES_TYPE
+import robin.vitalij.fortniteassitant.ui.comparison.GAME_TYPE
 import robin.vitalij.fortniteassitant.ui.comparison.PLAYER_ONE
 import robin.vitalij.fortniteassitant.ui.comparison.PLAYER_TWO
 import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.ComparisonStatisticsAdapter
@@ -27,9 +31,6 @@ class ComparisonStatisticsFragment : BaseFragment() {
     private lateinit var viewModel: ComparisonStatisticsViewModel
 
     private var isSchedule: Boolean = false
-
-    private lateinit var playerOneId: String
-    private lateinit var playerTwoId: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,8 +47,10 @@ class ComparisonStatisticsFragment : BaseFragment() {
             }
 
         arguments?.let {
-            playerOneId = it.getString(PLAYER_ONE, "")
-            playerTwoId = it.getString(PLAYER_TWO, "")
+            viewModel.playerOneId = it.getString(PLAYER_ONE, "")
+            viewModel.playerTwoId = it.getString(PLAYER_TWO, "")
+            viewModel.battlesType = it.get(BATTLES_TYPE) as BattlesType
+            viewModel.gameType = it.get(GAME_TYPE) as GameType
         }
     }
 
@@ -65,6 +68,11 @@ class ComparisonStatisticsFragment : BaseFragment() {
         this.isSchedule = isSchedule
         viewModel.loadSchedule(isSchedule)
     }
+    
+    fun loadGameType(gameType: GameType) {
+        viewModel.gameType = gameType
+        viewModel.loadSchedule(isSchedule)
+    }
 
     private fun initAdapter(list: List<ComparisonPlayer>) {
         recyclerView.run {
@@ -77,11 +85,15 @@ class ComparisonStatisticsFragment : BaseFragment() {
     companion object {
         fun newInstance(
             playerOneId: String,
-            playerTwoId: String
+            playerTwoId: String,
+            battlesType: BattlesType,
+            gameType: GameType
         ) = ComparisonStatisticsFragment().apply {
             arguments = Bundle().apply {
                 putString(PLAYER_ONE, playerOneId)
                 putString(PLAYER_TWO, playerTwoId)
+                putSerializable(BATTLES_TYPE, battlesType)
+                putSerializable(GAME_TYPE, gameType)
             }
         }
     }

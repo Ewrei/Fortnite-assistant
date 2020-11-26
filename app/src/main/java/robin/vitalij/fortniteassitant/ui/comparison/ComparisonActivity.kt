@@ -13,6 +13,8 @@ import robin.vitalij.fortniteassitant.ui.comparison.viewpager.AdapterComparisonF
 
 const val PLAYER_ONE = "player_one"
 const val PLAYER_TWO = "player_two"
+const val BATTLES_TYPE = "battles_type"
+const val GAME_TYPE = "game_type"
 const val COMPARISON_DATA_TYPE = "comparison_data_type"
 
 class ComparisonActivity : BaseActivity() {

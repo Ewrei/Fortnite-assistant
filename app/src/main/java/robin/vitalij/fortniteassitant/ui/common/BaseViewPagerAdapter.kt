@@ -28,4 +28,6 @@ class BaseViewPagerAdapter(manager: FragmentManager) : FragmentStatePagerAdapter
         fragmentTitleList.add(title)
         notifyDataSetChanged()
     }
+
+    fun getItems(): List<Fragment> = fragmentList
 }

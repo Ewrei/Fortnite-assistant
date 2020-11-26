@@ -194,4 +194,7 @@
 
     <string name="delete">Delete</string>
 
+    <string name="players_did_not_participate_in_battles">Players did not participate in battles</string>
+    <string name="tops">Tops</string>
+
 </resources>
