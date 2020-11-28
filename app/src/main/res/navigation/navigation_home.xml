@@ -19,6 +19,12 @@
         <action
             android:id="@+id/action_homeScreen_to_chartsFragment"
             app:destination="@id/navigation_charts" />
+        <action
+            android:id="@+id/action_homeScreen_to_historyFragment"
+            app:destination="@id/navigation_history" />
+        <action
+            android:id="@+id/action_homeScreen_to_adapterSessionFragment2"
+            app:destination="@id/adapterSessionFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_adapter_details_statistics"
@@ -46,5 +52,18 @@
         android:name="robin.vitalij.fortniteassitant.ui.charts.ChartsFragment"
         android:label="ChartsFragment"
         tools:layout="@layout/fragment_charts" />
+    <fragment
+        android:id="@+id/navigation_history"
+        android:name="robin.vitalij.fortniteassitant.ui.history.HistoryFragment"
+        tools:layout="@layout/fragment_history"
+        android:label="@string/game_sessions" >
+        <action
+            android:id="@+id/action_navigation_history_to_adapterSessionFragment2"
+            app:destination="@id/adapterSessionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adapterSessionFragment"
+        android:name="robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment"
+        android:label="AdapterSessionFragment" />
 
 </navigation>

@@ -1,7 +1,7 @@
 package robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel
 
 enum class HomeType {
-    HEADER, STATISTICS;
+    HEADER, STATISTICS, SESSION, TITLE;
 
     val id = ordinal
 }

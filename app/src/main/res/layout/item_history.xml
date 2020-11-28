@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="robin.vitalij.fortniteassitant.model.HistoryUserModel" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        style="@style/DefaultCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/half_default_margin"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                app:endTimeUpdate="@{item.endTimeUpdate}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textStyle="bold"
+                app:startTimeUpdate="@{item.startTimeUpdate}"
+                tools:text="Session date" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp">
+
+                <View
+                    android:id="@+id/view2"
+                    style="@style/DefaultDivider"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:layout_marginEnd="@dimen/default_margin"
+                    app:layout_constraintBottom_toBottomOf="@+id/arcProgress"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/arcProgress"
+                    app:layout_constraintTop_toTopOf="@+id/arcProgress" />
+
+                <View
+                    android:id="@+id/view3"
+                    style="@style/DefaultDivider"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:layout_marginEnd="@dimen/default_margin"
+                    app:layout_constraintBottom_toBottomOf="@+id/arcProgress"
+                    app:layout_constraintEnd_toStartOf="@+id/arcProgress"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/arcProgress" />
+
+                <View
+                    android:id="@+id/view4"
+                    style="@style/DefaultDivider"
+                    android:layout_width="@dimen/default_divider_height"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    app:layout_constraintBottom_toTopOf="@+id/arcProgress"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/view5"
+                    style="@style/DefaultDivider"
+                    android:layout_width="@dimen/default_divider_height"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/arcProgress" />
+
+                <TextView
+                    android:id="@+id/leftTopTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/matches"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="@android:color/darker_gray"
+                    app:layout_constraintBottom_toTopOf="@+id/view3"
+                    app:layout_constraintEnd_toEndOf="@+id/leftTop"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/leftTop"
+                    app:layout_constraintTop_toBottomOf="@+id/leftTop" />
+
+                <TextView
+                    android:id="@+id/leftTop"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/default_margin_double"
+                    android:layout_marginEnd="@dimen/default_margin_double"
+                    android:gravity="center"
+                    app:value="@{item.userEntity.all.overall.matches}"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/leftTopTitle"
+                    app:layout_constraintEnd_toStartOf="@+id/arcProgress"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:text="matches" />
+
+                <TextView
+                    android:id="@+id/rightTopTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/kills"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="@android:color/darker_gray"
+                    app:layout_constraintBottom_toBottomOf="@+id/view2"
+                    app:layout_constraintEnd_toEndOf="@+id/rightTop"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/rightTop"
+                    app:layout_constraintTop_toBottomOf="@+id/rightTop" />
+
+                <TextView
+                    android:id="@+id/rightTop"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/default_margin_double"
+                    android:layout_marginEnd="@dimen/default_margin_double"
+                    android:gravity="center"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/rightTopTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/arcProgress"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    app:value="@{item.userEntity.all.overall.kills}"
+                    tools:text="kills" />
+
+                <robin.vitalij.fortniteassitant.utils.view.ArcProgress
+                    android:id="@+id/arcProgress"
+                    android:layout_width="@dimen/arc_progress_size"
+                    android:layout_height="@dimen/arc_progress_size"
+                    app:arc_bottom_text_size="@dimen/small_text_size"
+                    app:arc_finished_color="@color/color_orange"
+                    app:arc_max="100"
+                    app:arc_stroke_width="8dp"
+                    app:arc_text_color="@color/text_color"
+                    app:arc_unfinished_color="@color/color_orange_full"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:arc_bottom_text="@string/win_rate"
+                    tools:arc_progress="55" />
+
+                <TextView
+                    android:id="@+id/leftBottom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/default_margin_double"
+                    android:layout_marginEnd="@dimen/default_margin_double"
+                    android:gravity="center"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/leftBottomTitle"
+                    app:layout_constraintEnd_toEndOf="@+id/view3"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view3"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    app:value="@{item.userEntity.all.overall.kd}"
+                    tools:text="kd" />
+
+                <TextView
+                    android:id="@+id/leftBottomTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/kd_full"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="@android:color/darker_gray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/leftBottom"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/leftBottom"
+                    app:layout_constraintTop_toBottomOf="@+id/leftBottom" />
+
+                <TextView
+                    android:id="@+id/rightBottom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/default_margin_double"
+                    android:layout_marginEnd="@dimen/default_margin_double"
+                    android:gravity="center"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/rightBottomTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/arcProgress"
+                    app:layout_constraintTop_toBottomOf="@+id/view2"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    app:value="@{item.userEntity.all.overall.minutesPlayed}"
+                    tools:text="minute" />
+
+                <TextView
+                    android:id="@+id/rightBottomTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/minutes_played"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="@android:color/darker_gray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/rightBottom"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/rightBottom"
+                    app:layout_constraintTop_toBottomOf="@+id/rightBottom" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

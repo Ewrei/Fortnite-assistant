@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.history
+package robin.vitalij.fortniteassitant.ui.historymatch
 
 import robin.vitalij.fortniteassitant.repository.db.HistoryMatchRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager

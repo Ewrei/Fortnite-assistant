@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.history.adapter.viewmodel
+package robin.vitalij.fortniteassitant.ui.historymatch.adapter.viewmodel
 
 enum class HistoryMatchType {
 

@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="robin.vitalij.fortniteassitant.ui.history.adapter.viewmodel.HistoryMatchViewModel" />
+            type="robin.vitalij.fortniteassitant.ui.historymatch.adapter.viewmodel.HistoryMatchViewModel" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

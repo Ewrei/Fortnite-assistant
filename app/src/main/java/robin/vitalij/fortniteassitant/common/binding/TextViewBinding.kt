@@ -5,6 +5,8 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.DATE_PATTERN_SHORT_TIME
+import robin.vitalij.fortniteassitant.common.extensions.getDateStringFormat
 import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
 import robin.vitalij.fortniteassitant.common.extensions.setVisibility
 import robin.vitalij.fortniteassitant.model.enums.ChartsType
@@ -35,6 +37,15 @@ object TextViewBinding {
     fun TextView.setHoursGame(hoursGame: Double) {
         text =
             if (hoursGame != 0.0) hoursGame.getStringFormat() else context.getString(R.string.no_information)
+    }
+
+    @SuppressLint("SetTextI18n")
+    @JvmStatic
+    @BindingAdapter("startTimeUpdate", "endTimeUpdate")
+    fun TextView.setSessionData(startTimeUpdate: Long, endTimeUpdate: Long) {
+        text = "${startTimeUpdate.getDateStringFormat(DATE_PATTERN_SHORT_TIME)} - ${
+            endTimeUpdate.getDateStringFormat(DATE_PATTERN_SHORT_TIME)
+        }"
     }
 
     @JvmStatic

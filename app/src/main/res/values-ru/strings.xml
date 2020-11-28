@@ -55,6 +55,8 @@
     <!--Home-->
     <string name="hours">Часы</string>
     <string name="no_information">Нет информации</string>
+    <string name="game_sessions">Игровые сессии</string>
+    <string name="other_session">Другие сессии</string>
 
     <!--Subscription-->
     <string name="disabling_ads">Отключение рекламы</string>

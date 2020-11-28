@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.history
+package robin.vitalij.fortniteassitant.ui.historymatch
 
 import android.content.Context
 import android.os.Bundle
@@ -20,8 +20,8 @@ import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.common.extensions.pxFromDp
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
-import robin.vitalij.fortniteassitant.ui.history.adapter.HistoryMatchAdapter
-import robin.vitalij.fortniteassitant.ui.history.adapter.viewmodel.HistoryMatch
+import robin.vitalij.fortniteassitant.ui.historymatch.adapter.HistoryMatchAdapter
+import robin.vitalij.fortniteassitant.ui.historymatch.adapter.viewmodel.HistoryMatch
 import robin.vitalij.fortniteassitant.utils.Space
 import javax.inject.Inject
 

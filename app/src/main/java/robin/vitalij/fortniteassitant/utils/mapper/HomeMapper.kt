@@ -3,6 +3,7 @@ package robin.vitalij.fortniteassitant.utils.mapper
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
 import robin.vitalij.fortniteassitant.db.entity.UserEntity
+import robin.vitalij.fortniteassitant.db.projection.UserHistory
 import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 import robin.vitalij.fortniteassitant.model.FullHomeModel
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
@@ -11,10 +12,11 @@ import robin.vitalij.fortniteassitant.model.network.stats.DuoMatches
 import robin.vitalij.fortniteassitant.model.network.stats.SoloMatches
 import robin.vitalij.fortniteassitant.model.network.stats.StatsTypeDevice
 import robin.vitalij.fortniteassitant.model.network.stats.TrioMatches
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.viewmodel.HomeSession
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.viewmodel.HomeSessionOtherViewModel
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.viewmodel.HomeSessionSessionViewModel
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.*
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.Home
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.HomeHeaderViewModel
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.HomeStatisticsViewModel
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.*
 import robin.vitalij.fortniteassitant.utils.TextUtils
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
 import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
@@ -22,7 +24,8 @@ import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
 private const val TWO_SESSION = 2
 
 class HomeMapper(
-    private val resourceProvider: ResourceProvider
+    private val resourceProvider: ResourceProvider,
+    private val histories: List<UserHistory>
 ) : Mapper<List<UserEntity>, FullHomeModel> {
 
     override fun transform(obj: List<UserEntity>): FullHomeModel {
@@ -43,6 +46,34 @@ class HomeMapper(
                 ),
             )
         )
+
+        val history = HistoryMapper().transform(histories)
+        if (history.isNotEmpty()) {
+            list.add(HomeTitleViewModel(resourceProvider.getString(R.string.game_sessions)))
+
+            if (history.size <= TWO_SESSION) {
+                val sessions = arrayListOf<HomeSession>()
+                history.forEach {
+                    sessions.add(HomeSessionSessionViewModel(it))
+                }
+                list.add(
+                    HomeSessionViewModel(
+                        sessions
+                    )
+                )
+            } else {
+                val sessions = arrayListOf<HomeSession>()
+                history.take(TWO_SESSION).forEach {
+                    sessions.add(HomeSessionSessionViewModel(it))
+                }
+                sessions.add(HomeSessionOtherViewModel())
+                list.add(
+                    HomeSessionViewModel(
+                        sessions
+                    )
+                )
+            }
+        }
 
         list.add(
             HomeStatisticsViewModel(

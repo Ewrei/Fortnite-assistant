@@ -84,6 +84,8 @@
     <!--Home-->
     <string name="hours">Hours</string>
     <string name="no_information">No information</string>
+    <string name="game_sessions">Game sessions</string>
+    <string name="other_session">Other sessions</string>
 
     <!--Details statistics-->
     <string name="details_statistics">Детальная статистика</string>

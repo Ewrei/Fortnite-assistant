@@ -19,10 +19,13 @@ import robin.vitalij.fortniteassitant.ui.comparison.statistics.ComparisonStatist
 import robin.vitalij.fortniteassitant.ui.comparison.viewpager.AdapterComparisonFragment
 import robin.vitalij.fortniteassitant.ui.details.statistics.DetailsStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment
-import robin.vitalij.fortniteassitant.ui.history.HistoryMatchFragment
+import robin.vitalij.fortniteassitant.ui.history.HistoryFragment
+import robin.vitalij.fortniteassitant.ui.historymatch.HistoryMatchFragment
 import robin.vitalij.fortniteassitant.ui.home.HomeFragment
 import robin.vitalij.fortniteassitant.ui.news.NewsFragment
 import robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment
+import robin.vitalij.fortniteassitant.ui.session.statistics.DetailsSessionStatisticsFragment
+import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment
 import robin.vitalij.fortniteassitant.ui.setting.SettingFragment
 import robin.vitalij.fortniteassitant.ui.setting.applicationinfo.ApplicationInfoFragment
 import robin.vitalij.fortniteassitant.ui.splash.SplashActivity
@@ -55,6 +58,9 @@ interface AppComponent {
     fun inject(fragment: ComparisonManyPlayersStatisticsFragment)
     fun inject(fragment: ComparisonSelectedFragment)
     fun inject(fragment: AdapterManyAccountFragment)
+    fun inject(fragment: HistoryFragment)
+    fun inject(fragment: DetailsSessionStatisticsFragment)
+    fun inject(fragment: AdapterSessionFragment)
 
     fun inject(fragment: ProfileResultFragment)
     fun inject(fragment: ContactUsResultFragment)

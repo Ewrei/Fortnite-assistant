@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +18,7 @@ import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment.Companion.DETAIL_STATISTICS
 import robin.vitalij.fortniteassitant.ui.home.adapter.HomeAdapter
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.Home
+import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment
 import javax.inject.Inject
 
 class HomeFragment : BaseFragment() {
@@ -51,7 +51,7 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
             it.let(::initAdapter)
         })
     }
@@ -64,7 +64,19 @@ class HomeFragment : BaseFragment() {
                     Bundle().apply {
                         putParcelableArrayList(DETAIL_STATISTICS, viewModel.detailsStatistics)
                     })
-            })
+            },
+                openSession = { sessionId: Long, sessionLast: Long, sessionDate: String ->
+                    val bundle = Bundle().apply {
+                        putLong(AdapterSessionFragment.SESSION_ID, sessionId)
+                        putLong(AdapterSessionFragment.SESSION_LAST_ID, sessionLast)
+                        putString(AdapterSessionFragment.DATE, sessionDate)
+                    }
+
+                    findNavController().navigate(R.id.adapterSessionFragment, bundle)
+                },
+                openSessions = {
+                    findNavController().navigate(R.id.navigation_history)
+                })
             (adapter as HomeAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)
         }

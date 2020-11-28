@@ -7,6 +7,7 @@ import java.util.*
 
 const val DATE_PATTERN_YEAR_TIME = "dd MMMM yyyy HH:mm"
 const val DATE_PATTERN = "dd.MM"
+const val DATE_PATTERN_SHORT_TIME = "dd MMM HH:mm"
 
 fun Int?.getStringFormat(): String =
     this?.let {

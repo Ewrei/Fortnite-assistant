@@ -1,9 +1,9 @@
-package robin.vitalij.fortniteassitant.ui.history.adapter.viewholder
+package robin.vitalij.fortniteassitant.ui.historymatch.adapter.viewholder
 
 import robin.vitalij.fortniteassitant.databinding.ItemHistoryMatchDateBinding
 import robin.vitalij.fortniteassitant.ui.common.BaseViewHolder
-import robin.vitalij.fortniteassitant.ui.history.adapter.viewmodel.HistoryMatch
-import robin.vitalij.fortniteassitant.ui.history.adapter.viewmodel.HistoryMatchDateViewModel
+import robin.vitalij.fortniteassitant.ui.historymatch.adapter.viewmodel.HistoryMatch
+import robin.vitalij.fortniteassitant.ui.historymatch.adapter.viewmodel.HistoryMatchDateViewModel
 
 class HistoryMatchDateViewHolder(
     override val binding: ItemHistoryMatchDateBinding

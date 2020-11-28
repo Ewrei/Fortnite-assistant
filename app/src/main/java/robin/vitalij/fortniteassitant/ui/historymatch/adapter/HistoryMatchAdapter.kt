@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.history.adapter
+package robin.vitalij.fortniteassitant.ui.historymatch.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,10 +6,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.ui.common.BaseViewHolder
-import robin.vitalij.fortniteassitant.ui.history.adapter.viewholder.HistoryMatchDateViewHolder
-import robin.vitalij.fortniteassitant.ui.history.adapter.viewholder.HistoryMatchViewHolder
-import robin.vitalij.fortniteassitant.ui.history.adapter.viewmodel.HistoryMatch
-import robin.vitalij.fortniteassitant.ui.history.adapter.viewmodel.HistoryMatchType
+import robin.vitalij.fortniteassitant.ui.historymatch.adapter.viewholder.HistoryMatchDateViewHolder
+import robin.vitalij.fortniteassitant.ui.historymatch.adapter.viewholder.HistoryMatchViewHolder
+import robin.vitalij.fortniteassitant.ui.historymatch.adapter.viewmodel.HistoryMatch
+import robin.vitalij.fortniteassitant.ui.historymatch.adapter.viewmodel.HistoryMatchType
 
 class HistoryMatchAdapter(
 ) : RecyclerView.Adapter<BaseViewHolder<HistoryMatch>>() {
