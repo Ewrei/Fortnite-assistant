@@ -1,13 +1,11 @@
 package robin.vitalij.fortniteassitant.utils.mapper
 
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.getDetailStatisticsModelList
 import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
 import robin.vitalij.fortniteassitant.db.entity.UserEntity
 import robin.vitalij.fortniteassitant.db.projection.UserHistory
-import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 import robin.vitalij.fortniteassitant.model.FullHomeModel
-import robin.vitalij.fortniteassitant.model.enums.BattlesType
-import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.model.network.stats.DuoMatches
 import robin.vitalij.fortniteassitant.model.network.stats.SoloMatches
 import robin.vitalij.fortniteassitant.model.network.stats.StatsTypeDevice
@@ -84,7 +82,7 @@ class HomeMapper(
             )
         )
 
-        return FullHomeModel(homes = list, generateDetails(userLastEntity))
+        return FullHomeModel(homes = list, userLastEntity.getDetailStatisticsModelList())
     }
 
     private fun getAllBodyStats(statsTypeDevice: StatsTypeDevice?): List<HomeBodyStats> {
@@ -280,54 +278,5 @@ class HomeMapper(
         )
 
         return list
-    }
-
-    private fun generateDetails(userEntity: UserEntity): ArrayList<DetailStatisticsModel> {
-        val list = arrayListOf<DetailStatisticsModel>()
-
-        userEntity.all?.let {
-            list.add(getDetailStatisticsModel(GameType.ALL, it))
-        }
-
-        userEntity.keyboardMouse?.let {
-            list.add(getDetailStatisticsModel(GameType.KEYBOARD_MOUSE, it))
-        }
-
-        userEntity.gamepad?.let {
-            list.add(getDetailStatisticsModel(GameType.GAMEPAD, it))
-        }
-
-        userEntity.touch?.let {
-            list.add(getDetailStatisticsModel(GameType.TOUCH, it))
-        }
-
-        return list
-    }
-
-    private fun getDetailStatisticsModel(
-        gameType: GameType,
-        statsTypeDevice: StatsTypeDevice
-    ): DetailStatisticsModel {
-        val battlesTypes: ArrayList<BattlesType> = arrayListOf()
-        statsTypeDevice.overall?.let {
-            battlesTypes.add(BattlesType.OVERALL)
-        }
-        statsTypeDevice.solo?.let {
-            battlesTypes.add(BattlesType.SOLO)
-        }
-        statsTypeDevice.duo?.let {
-            battlesTypes.add(BattlesType.DUO)
-        }
-        statsTypeDevice.trio?.let {
-            battlesTypes.add(BattlesType.TRIO)
-        }
-        statsTypeDevice.squad?.let {
-            battlesTypes.add(BattlesType.SQUAD)
-        }
-        statsTypeDevice.ltm?.let {
-            battlesTypes.add(BattlesType.LTM)
-        }
-
-        return DetailStatisticsModel(gameType, battlesTypes)
     }
 }

@@ -75,7 +75,7 @@ class HistoryFragment : BaseFragment() {
                     putString(DATE, sessionDate)
                 }
 
-                findNavController().navigate(R.id.adapterSessionFragment, bundle)
+                findNavController().navigate(R.id.navigation_adapter_session, bundle)
             }
             (adapter as HistoryAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)

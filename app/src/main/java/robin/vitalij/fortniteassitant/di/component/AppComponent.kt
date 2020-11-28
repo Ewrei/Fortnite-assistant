@@ -24,6 +24,8 @@ import robin.vitalij.fortniteassitant.ui.historymatch.HistoryMatchFragment
 import robin.vitalij.fortniteassitant.ui.home.HomeFragment
 import robin.vitalij.fortniteassitant.ui.news.NewsFragment
 import robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment
+import robin.vitalij.fortniteassitant.ui.season.statistics.DetailsSeasonStatisticsFragment
+import robin.vitalij.fortniteassitant.ui.season.viewpager.AdapterDetailsSeasonStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.session.statistics.DetailsSessionStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment
 import robin.vitalij.fortniteassitant.ui.setting.SettingFragment
@@ -61,6 +63,8 @@ interface AppComponent {
     fun inject(fragment: HistoryFragment)
     fun inject(fragment: DetailsSessionStatisticsFragment)
     fun inject(fragment: AdapterSessionFragment)
+    fun inject(fragment: DetailsSeasonStatisticsFragment)
+    fun inject(fragment: AdapterDetailsSeasonStatisticsFragment)
 
     fun inject(fragment: ProfileResultFragment)
     fun inject(fragment: ContactUsResultFragment)

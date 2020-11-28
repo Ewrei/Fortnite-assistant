@@ -86,6 +86,7 @@
     <string name="no_information">No information</string>
     <string name="game_sessions">Game sessions</string>
     <string name="other_session">Other sessions</string>
+    <string name="current_season_statistics">Current season</string>
 
     <!--Details statistics-->
     <string name="details_statistics">Детальная статистика</string>

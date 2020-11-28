@@ -24,7 +24,10 @@
             app:destination="@id/navigation_history" />
         <action
             android:id="@+id/action_homeScreen_to_adapterSessionFragment2"
-            app:destination="@id/adapterSessionFragment" />
+            app:destination="@id/navigation_adapter_session" />
+        <action
+            android:id="@+id/action_homeScreen_to_adapterDetailsSeasonStatisticsFragment"
+            app:destination="@id/navigation_adapter_details_season_statistics" />
     </fragment>
     <fragment
         android:id="@+id/navigation_adapter_details_statistics"
@@ -59,11 +62,16 @@
         android:label="@string/game_sessions" >
         <action
             android:id="@+id/action_navigation_history_to_adapterSessionFragment2"
-            app:destination="@id/adapterSessionFragment" />
+            app:destination="@id/navigation_adapter_session" />
     </fragment>
     <fragment
-        android:id="@+id/adapterSessionFragment"
+        android:id="@+id/navigation_adapter_session"
         android:name="robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment"
         android:label="AdapterSessionFragment" />
+    <fragment
+        android:id="@+id/navigation_adapter_details_season_statistics"
+        tools:layout="@layout/fragment_adapter_details_season"
+        android:name="robin.vitalij.fortniteassitant.ui.season.viewpager.AdapterDetailsSeasonStatisticsFragment"
+        android:label="@string/current_season_statistics" />
 
 </navigation>

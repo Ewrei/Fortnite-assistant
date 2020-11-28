@@ -121,6 +121,31 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#0a0a0a">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/currentSeason"
+                style="@style/DefaultTextButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/current_season_statistics"
+                android:textColor="@color/color_orange" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/detailsStatistics"
+                style="@style/DefaultTextButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/details_statistics"
+                android:textColor="@color/color_orange" />
+
+        </TableRow>
+
     </LinearLayout>
 
 </layout>

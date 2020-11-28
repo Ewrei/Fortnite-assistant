@@ -72,10 +72,13 @@ class HomeFragment : BaseFragment() {
                         putString(AdapterSessionFragment.DATE, sessionDate)
                     }
 
-                    findNavController().navigate(R.id.adapterSessionFragment, bundle)
+                    findNavController().navigate(R.id.navigation_adapter_session, bundle)
                 },
                 openSessions = {
                     findNavController().navigate(R.id.navigation_history)
+                },
+                openSeason = {
+                    findNavController().navigate(R.id.navigation_adapter_details_season_statistics)
                 })
             (adapter as HomeAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)

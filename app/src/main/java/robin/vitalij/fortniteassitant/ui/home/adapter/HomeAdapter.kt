@@ -18,7 +18,8 @@ import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.HomeType
 class HomeAdapter(
     private val openDetailsStatistics: () -> Unit,
     private val openSessions: () -> Unit,
-    private val openSession: (sessionId: Long, sessionLast: Long, sessionDate: String) -> Unit
+    private val openSession: (sessionId: Long, sessionLast: Long, sessionDate: String) -> Unit,
+    private val openSeason: () -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder<Home>>() {
 
     private val items = arrayListOf<Home>()
@@ -46,7 +47,7 @@ class HomeAdapter(
                         R.layout.item_home_header,
                         parent,
                         false
-                    )
+                    ), openDetailsStatistics, openSeason
                 )
             }
             HomeType.STATISTICS.id -> {
@@ -85,7 +86,7 @@ class HomeAdapter(
                         R.layout.item_home_header,
                         parent,
                         false
-                    )
+                    ), openDetailsStatistics, openSeason
                 )
             }
         }

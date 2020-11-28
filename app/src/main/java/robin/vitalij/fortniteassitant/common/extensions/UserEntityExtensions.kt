@@ -1,6 +1,9 @@
 package robin.vitalij.fortniteassitant.common.extensions
 
 import robin.vitalij.fortniteassitant.db.entity.UserEntity
+import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
+import robin.vitalij.fortniteassitant.model.enums.BattlesType
+import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.model.network.stats.*
 import robin.vitalij.fortniteassitant.utils.TextUtils
 
@@ -21,6 +24,56 @@ fun UserEntity.differenceUser(userEntityLast: UserEntity): UserEntity {
         touch = getStatsTypeDevice(this.touch, userEntityLast.touch)
     )
 }
+
+fun UserEntity.getDetailStatisticsModelList(): ArrayList<DetailStatisticsModel> {
+    val list = arrayListOf<DetailStatisticsModel>()
+
+    all?.let {
+        list.add(getDetailStatisticsModel(GameType.ALL, it))
+    }
+
+    keyboardMouse?.let {
+        list.add(getDetailStatisticsModel(GameType.KEYBOARD_MOUSE, it))
+    }
+
+    gamepad?.let {
+        list.add(getDetailStatisticsModel(GameType.GAMEPAD, it))
+    }
+
+    touch?.let {
+        list.add(getDetailStatisticsModel(GameType.TOUCH, it))
+    }
+
+    return list
+}
+
+private fun getDetailStatisticsModel(
+    gameType: GameType,
+    statsTypeDevice: StatsTypeDevice
+): DetailStatisticsModel {
+    val battlesTypes: ArrayList<BattlesType> = arrayListOf()
+    statsTypeDevice.overall?.let {
+        battlesTypes.add(BattlesType.OVERALL)
+    }
+    statsTypeDevice.solo?.let {
+        battlesTypes.add(BattlesType.SOLO)
+    }
+    statsTypeDevice.duo?.let {
+        battlesTypes.add(BattlesType.DUO)
+    }
+    statsTypeDevice.trio?.let {
+        battlesTypes.add(BattlesType.TRIO)
+    }
+    statsTypeDevice.squad?.let {
+        battlesTypes.add(BattlesType.SQUAD)
+    }
+    statsTypeDevice.ltm?.let {
+        battlesTypes.add(BattlesType.LTM)
+    }
+
+    return DetailStatisticsModel(gameType, battlesTypes)
+}
+
 
 private fun getStatsTypeDevice(
     oneStatsTypeDevice: StatsTypeDevice?,
