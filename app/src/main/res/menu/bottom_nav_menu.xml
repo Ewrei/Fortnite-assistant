@@ -17,9 +17,9 @@
         android:title="@string/tab_title_top" />
 
     <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:id="@+id/navigation_shop"
+        android:icon="@drawable/ic_shopping_cart"
+        android:title="@string/title_item_shop" />
 
     <item
         android:id="@+id/navigation_setting"

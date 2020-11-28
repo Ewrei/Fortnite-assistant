@@ -4,8 +4,9 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="tab_title_history_match">History</string>
-    <string name="tab_title_top">Top</string>
+    <string name="tab_title_top">Leaderboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_item_shop">Item shop</string>
     <string name="title_setting">Settings</string>
 
     <string name="retry">Try one more time</string>
@@ -199,5 +200,8 @@
 
     <string name="players_did_not_participate_in_battles">Players did not participate in battles</string>
     <string name="tops">Tops</string>
+
+    <!--Top-->
+    <string name="parametr">Parameter</string>
 
 </resources>

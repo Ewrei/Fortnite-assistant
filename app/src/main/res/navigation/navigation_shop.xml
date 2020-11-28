@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation_dashboard"
+    android:id="@+id/navigation_shop"
     app:startDestination="@+id/homeScreen">
 
     <fragment
         android:id="@+id/homeScreen"
-        android:name="robin.vitalij.fortniteassitant.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:name="robin.vitalij.fortniteassitant.ui.shop.viewpager.AdapterShoppingFragment"
+        android:label="@string/title_item_shop"
         tools:layout="@layout/fragment_dashboard">
         <action
             android:id="@+id/action_homeScreen_to_newsFragment2"

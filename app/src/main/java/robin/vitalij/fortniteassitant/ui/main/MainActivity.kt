@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
                 R.navigation.navigation_home,
                 R.navigation.navigation_history_match,
                 R.navigation.navigation_top,
-                R.navigation.navigation_dashboard,
+                R.navigation.navigation_shop,
                 R.navigation.navigation_setting
             )
 

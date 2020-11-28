@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_setting">Настройки</string>
+    <string name="title_item_shop">Магазин</string>
 
     <string name="retry">Попробовать еще раз</string>
     <string name="unknown_error">Что-то пошло не так</string>

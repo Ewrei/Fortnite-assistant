@@ -8,6 +8,7 @@ import robin.vitalij.fortniteassitant.di.module.NetworkModule
 import robin.vitalij.fortniteassitant.di.module.RepositoryModule
 import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
+import robin.vitalij.fortniteassitant.ui.bottomsheet.top.TopResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.user.UserResultFragment
 import robin.vitalij.fortniteassitant.ui.chartlist.ChartsTypeFragment
 import robin.vitalij.fortniteassitant.ui.charts.ChartsFragment
@@ -30,8 +31,10 @@ import robin.vitalij.fortniteassitant.ui.session.statistics.DetailsSessionStatis
 import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment
 import robin.vitalij.fortniteassitant.ui.setting.SettingFragment
 import robin.vitalij.fortniteassitant.ui.setting.applicationinfo.ApplicationInfoFragment
+import robin.vitalij.fortniteassitant.ui.shop.viewpager.AdapterShoppingFragment
 import robin.vitalij.fortniteassitant.ui.splash.SplashActivity
 import robin.vitalij.fortniteassitant.ui.subscription.SubscriptionsFragment
+import robin.vitalij.fortniteassitant.ui.top.TopFragment
 import robin.vitalij.fortniteassitant.ui.users.UsersFragment
 import javax.inject.Singleton
 
@@ -65,8 +68,11 @@ interface AppComponent {
     fun inject(fragment: AdapterSessionFragment)
     fun inject(fragment: DetailsSeasonStatisticsFragment)
     fun inject(fragment: AdapterDetailsSeasonStatisticsFragment)
+    fun inject(fragment: AdapterShoppingFragment)
+    fun inject(fragment: TopFragment)
 
     fun inject(fragment: ProfileResultFragment)
     fun inject(fragment: ContactUsResultFragment)
     fun inject(fragment: UserResultFragment)
+    fun inject(fragment: TopResultFragment)
 }
