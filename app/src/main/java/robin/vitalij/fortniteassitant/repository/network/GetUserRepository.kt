@@ -26,14 +26,7 @@ class GetUserRepository @Inject constructor(
             playerStats,
             matchesPlayerStats,
             handleResult()
-        )
-            .subscribeOn(Schedulers.io())
-
-//            .flatMap { fortniteProfileResponse ->
-//            return@flatMap fortniteRequestsComApi.getStats(playerId, "season", "all").flatMap {
-//                return@flatMap Single.just(fortniteProfileResponse.apply { sessionStats = it })
-//            }
-//        }
+        ).subscribeOn(Schedulers.io())
     }
 
     private fun handleResult(): BiFunction<PlayerStatsResponse, PlayerMatchesResponse, FortniteProfileResponse> =

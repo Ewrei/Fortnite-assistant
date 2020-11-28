@@ -25,6 +25,7 @@ import robin.vitalij.fortniteassitant.ui.news.NewsFragment
 import robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment
 import robin.vitalij.fortniteassitant.ui.setting.SettingFragment
 import robin.vitalij.fortniteassitant.ui.setting.applicationinfo.ApplicationInfoFragment
+import robin.vitalij.fortniteassitant.ui.splash.SplashActivity
 import robin.vitalij.fortniteassitant.ui.subscription.SubscriptionsFragment
 import robin.vitalij.fortniteassitant.ui.users.UsersFragment
 import javax.inject.Singleton
@@ -34,6 +35,7 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun inject(activity: MainActivity)
+    fun inject(activity: SplashActivity)
 
     fun inject(fragment: NewsFragment)
     fun inject(fragment: SearchUserFragment)

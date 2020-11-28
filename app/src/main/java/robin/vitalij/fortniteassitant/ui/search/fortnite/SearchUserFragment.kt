@@ -84,8 +84,6 @@ class SearchUserFragment : BaseFragment() {
 
         initBanner()
         setListeners()
-
-        toolbar.title = getString(R.string.compare_players)
     }
 
     private fun initBanner() {
