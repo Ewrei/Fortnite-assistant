@@ -2,6 +2,7 @@ package robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session
 
 import kotlinx.android.synthetic.main.item_home_session.view.*
 import robin.vitalij.fortniteassitant.databinding.ItemHomeSessionBinding
+import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 import robin.vitalij.fortniteassitant.ui.common.BaseViewHolder
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.HomeSessionAdapter
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.viewmodel.HomeSession
@@ -11,7 +12,7 @@ import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.HomeSessionViewM
 class HomeStatisticsSessionViewHolder(
     override val binding: ItemHomeSessionBinding,
     private val openSessions: () -> Unit,
-    private val openSession: (sessionId: Long, sessionLast: Long, sessionDate: String) -> Unit
+    private val openSession: (sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel>) -> Unit
 ) : BaseViewHolder<Home>(binding) {
 
     override fun bind(item: Home) {

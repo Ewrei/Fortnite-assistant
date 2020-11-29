@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 import robin.vitalij.fortniteassitant.ui.common.BaseViewHolder
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.viewholder.HomeOtherViewHolder
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.viewholder.HomeSessionViewHolder
@@ -13,7 +14,7 @@ import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter
 
 class HomeSessionAdapter(
     private val openSessions: () -> Unit,
-    private val openSession: (sessionId: Long, sessionLast: Long, sessionDate: String) -> Unit
+    private val openSession: (sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel>) -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder<HomeSession>>() {
 
     private val items = arrayListOf<HomeSession>()

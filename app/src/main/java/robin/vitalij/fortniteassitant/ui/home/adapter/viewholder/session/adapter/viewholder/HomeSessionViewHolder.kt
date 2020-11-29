@@ -3,14 +3,16 @@ package robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapte
 import kotlinx.android.synthetic.main.item_home_session_card.view.*
 import robin.vitalij.fortniteassitant.common.extensions.DATE_PATTERN_SHORT_TIME
 import robin.vitalij.fortniteassitant.common.extensions.getDateStringFormat
+import robin.vitalij.fortniteassitant.common.extensions.getDetailStatisticsModelList
 import robin.vitalij.fortniteassitant.databinding.ItemHomeSessionCardBinding
+import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 import robin.vitalij.fortniteassitant.ui.common.BaseViewHolder
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.viewmodel.HomeSession
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.viewmodel.HomeSessionSessionViewModel
 
 class HomeSessionViewHolder(
     override val binding: ItemHomeSessionCardBinding,
-    private val openSession: (sessionId: Long, sessionLast: Long, sessionDate: String) -> Unit
+    private val openSession: (sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel>) -> Unit
 ) : BaseViewHolder<HomeSession>(binding) {
 
     override fun bind(item: HomeSession) {
@@ -24,11 +26,12 @@ class HomeSessionViewHolder(
                     item.historyUserModel.startTimeUpdate.getDateStringFormat(
                         DATE_PATTERN_SHORT_TIME
                     )
-                    } - ${
+                    } - \n${
                     item.historyUserModel.endTimeUpdate.getDateStringFormat(
                         DATE_PATTERN_SHORT_TIME
                     )
-                    }"
+                    }",
+                    item.historyUserModel.userEntity.getDetailStatisticsModelList()
                 )
             }
         }

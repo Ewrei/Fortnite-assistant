@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.databinding.ItemHomeSessionBinding
 import robin.vitalij.fortniteassitant.databinding.ItemHomeTitleBinding
+import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 import robin.vitalij.fortniteassitant.ui.common.BaseViewHolder
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.HomeHeaderViewHolder
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.HomeTitleViewHolder
@@ -18,7 +19,7 @@ import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.HomeType
 class HomeAdapter(
     private val openDetailsStatistics: () -> Unit,
     private val openSessions: () -> Unit,
-    private val openSession: (sessionId: Long, sessionLast: Long, sessionDate: String) -> Unit,
+    private val openSession: (sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel>) -> Unit,
     private val openSeason: () -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder<Home>>() {
 

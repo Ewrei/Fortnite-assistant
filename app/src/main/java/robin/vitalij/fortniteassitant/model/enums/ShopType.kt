@@ -12,7 +12,17 @@ enum class ShopType(val id: String) {
     },
     OUTFIT("outfit") {
         override fun getTitleRes() = R.string.outfit
+    },
+    PICKAXE("pickaxe") {
+        override fun getTitleRes() = R.string.pickaxe
+    },
+    GLIDER("glider") {
+        override fun getTitleRes() = R.string.glider
+    },
+    BUNDLE("bundle") {
+        override fun getTitleRes() = R.string.bundle
     };
+
 
     abstract fun getTitleRes(): Int
 

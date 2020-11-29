@@ -16,12 +16,15 @@ import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 import robin.vitalij.fortniteassitant.model.HistoryUserModel
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
+import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.history.adapter.HistoryAdapter
 import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.DATE
 import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.SESSION_ID
 import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.SESSION_LAST_ID
+import java.util.ArrayList
 import javax.inject.Inject
 
 
@@ -68,11 +71,15 @@ class HistoryFragment : BaseFragment() {
 
     private fun initAdapter(list: List<HistoryUserModel>) {
         recyclerView.run {
-            adapter = HistoryAdapter { sessionId: Long, sessionLast: Long, sessionDate: String ->
+            adapter = HistoryAdapter { sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel> ->
                 val bundle = Bundle().apply {
                     putLong(SESSION_ID, sessionId)
                     putLong(SESSION_LAST_ID, sessionLast)
                     putString(DATE, sessionDate)
+                    putParcelableArrayList(
+                        AdapterDetailsStatisticsFragment.DETAIL_STATISTICS,
+                        detailsStats as ArrayList<DetailStatisticsModel>
+                    )
                 }
 
                 findNavController().navigate(R.id.navigation_adapter_session, bundle)

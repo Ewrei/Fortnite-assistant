@@ -2,6 +2,7 @@ package robin.vitalij.fortniteassitant.ui.home
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +15,14 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToEmpty
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
+import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment.Companion.DETAIL_STATISTICS
 import robin.vitalij.fortniteassitant.ui.home.adapter.HomeAdapter
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.Home
 import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment
+import java.util.ArrayList
 import javax.inject.Inject
 
 class HomeFragment : BaseFragment() {
@@ -65,11 +69,15 @@ class HomeFragment : BaseFragment() {
                         putParcelableArrayList(DETAIL_STATISTICS, viewModel.detailsStatistics)
                     })
             },
-                openSession = { sessionId: Long, sessionLast: Long, sessionDate: String ->
+                openSession = { sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel> ->
                     val bundle = Bundle().apply {
                         putLong(AdapterSessionFragment.SESSION_ID, sessionId)
                         putLong(AdapterSessionFragment.SESSION_LAST_ID, sessionLast)
                         putString(AdapterSessionFragment.DATE, sessionDate)
+                        putParcelableArrayList(
+                            DETAIL_STATISTICS,
+                            detailsStats as ArrayList<DetailStatisticsModel>
+                        )
                     }
 
                     findNavController().navigate(R.id.navigation_adapter_session, bundle)

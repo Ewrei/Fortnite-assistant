@@ -10,11 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_adapter_details_statistics.*
-import kotlinx.android.synthetic.main.fragment_adapter_history_session.tabLayout
-import kotlinx.android.synthetic.main.fragment_adapter_history_session.viewPager
-import kotlinx.android.synthetic.main.toolbar_center_title.toolbar
+import kotlinx.android.synthetic.main.fragment_adapter_details_statistics.toolbar
+import kotlinx.android.synthetic.main.toolbar_center_title.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToEmpty
@@ -72,7 +70,6 @@ class AdapterSessionFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         tabLayout.setupWithViewPager(viewPager)
-        tabLayout.tabMode = TabLayout.MODE_FIXED
         initToolbar()
         setListeners()
     }

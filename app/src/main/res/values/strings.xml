@@ -211,6 +211,10 @@
     <string name="emote">Emote</string>
     <string name="unknown">Unknown</string>
     <string name="outfit">Outfit</string>
+    <string name="pickaxe">Pickaxe</string>
+    <string name="glider">Glider</string>
+    <string name="bundle">Items included</string>
+
     <string name="daily">Daily</string>
     <string name="special_daily">Special Daily</string>
     <string name="special_featured">Special Featured</string>

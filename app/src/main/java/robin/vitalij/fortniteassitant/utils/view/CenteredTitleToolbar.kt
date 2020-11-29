@@ -37,7 +37,7 @@ class CenteredTitleToolbar : Toolbar {
         screenWidth = screenSize.x
         titleTextView = TextView(context)
         titleTextView.setTextAppearance(context, R.style.ToolbarTitleText)
-        titleTextView.maxLines = 1
+        titleTextView.maxLines = 2
         titleTextView.ellipsize = TextUtils.TruncateAt.END
         addView(titleTextView)
     }

@@ -21,7 +21,7 @@ import robin.vitalij.fortniteassitant.ui.shop.current.adapter.viewmodel.CurrentS
 import robin.vitalij.fortniteassitant.ui.shop.current.adapter.viewmodel.CurrentShopType
 import javax.inject.Inject
 
-private const val MAX_SPAN_COUNT = 3
+private const val MAX_SPAN_COUNT = 2
 
 class CurrentShopFragment : BaseFragment() {
 

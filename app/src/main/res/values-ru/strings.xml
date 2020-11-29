@@ -159,6 +159,9 @@
     <string name="featured">Рекомендуемые</string>
     <string name="emote">Эмоция</string>
     <string name="outfit">Экипировка</string>
+    <string name="pickaxe">Инструмент</string>
+    <string name="glider">Дельтаплан</string>
+    <string name="bundle">Предметы в комплекте</string>
 
     <string name="daily">Ежедневно</string>
     <string name="special_daily">Особое</string>
