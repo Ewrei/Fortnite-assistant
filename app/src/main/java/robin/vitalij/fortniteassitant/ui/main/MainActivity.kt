@@ -52,6 +52,8 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
 
     var binding: ActivityMainBinding? = null
 
+    private lateinit var adRequest: AdRequest
+
     private var currentNavController: LiveData<NavController>? = null
 
     private var appUpdateManager: AppUpdateManager? = null
@@ -96,6 +98,7 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
         initAppUpdateManager()
         openSubscriptionDialog()
         initRewardedAdd()
+        initBanner()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -148,6 +151,15 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
 
     fun saveUser(fortniteProfileResponse: FortniteProfileResponse) {
         viewModel.saveUser(fortniteProfileResponse)
+    }
+
+    private fun initBanner() {
+        if (viewModel.preferenceManager.getIsSubscription() || viewModel.preferenceManager.getDisableAdvertising() >= Date().time) {
+            adView.setVisibility(false)
+        } else {
+            adRequest = AdRequest.Builder().build()
+            adView.loadAd(adRequest)
+        }
     }
 
     private fun initInterstitialAd() {

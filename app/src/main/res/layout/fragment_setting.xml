@@ -71,6 +71,21 @@
                             app:layout_constraintTop_toTopOf="parent"
                             tools:text="userName" />
 
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/refresh"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/default_margin_double"
+                            android:layout_marginEnd="@dimen/default_margin_double"
+                            android:backgroundTint="@color/color_orange"
+                            android:text="@string/refresh"
+                            app:icon="@drawable/ic_refresh"
+                            app:layout_constraintBottom_toTopOf="@+id/lastUpdate"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/profileImage"
+                            app:layout_constraintTop_toBottomOf="@+id/copyStatsLink" />
+
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/copyStatsLink"
@@ -81,11 +96,26 @@
                             android:backgroundTint="@color/color_orange"
                             android:text="@string/copy_stats_link"
                             app:icon="@drawable/ic_link"
-                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintBottom_toTopOf="@+id/refresh"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/profileImage"
                             app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/lastUpdate"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/default_margin_double"
+                            android:layout_marginEnd="@dimen/default_margin_double"
+                            android:text="@{@string/last_date_update(viewModel.user.getLastUpdate())}"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/profileImage"
+                            app:layout_constraintTop_toBottomOf="@+id/refresh"
+                            tools:text="last update" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

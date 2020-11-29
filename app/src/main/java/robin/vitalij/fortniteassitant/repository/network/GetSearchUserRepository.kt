@@ -8,8 +8,7 @@ import robin.vitalij.fortniteassitant.utils.mapper.SearchUserMapper
 import javax.inject.Inject
 
 class GetSearchUserRepository @Inject constructor(
-    private val fortniteRequestsIOApi: FortniteRequestsIOApi,
-    private val fortniteRequestsComApi: FortniteRequestsComApi
+    private val fortniteRequestsIOApi: FortniteRequestsIOApi
 ) {
 
     fun getSearch(username: String) =

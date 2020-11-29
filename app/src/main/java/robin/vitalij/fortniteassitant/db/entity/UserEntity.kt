@@ -1,6 +1,8 @@
 package robin.vitalij.fortniteassitant.db.entity
 
 import androidx.room.*
+import robin.vitalij.fortniteassitant.common.extensions.DATE_PATTERN_YEAR_TIME
+import robin.vitalij.fortniteassitant.common.extensions.getDateStringFormat
 import robin.vitalij.fortniteassitant.model.network.stats.StatsTypeDevice
 
 @Entity(tableName = "User")
@@ -25,4 +27,6 @@ class UserEntity(
         onDelete = ForeignKey.CASCADE
     )
     var playerSessionId: Long = 0
+
+    fun getLastUpdate(): String = timeUpdate.getDateStringFormat(DATE_PATTERN_YEAR_TIME)
 }

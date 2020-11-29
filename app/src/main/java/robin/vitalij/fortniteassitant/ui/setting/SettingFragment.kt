@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -52,6 +53,7 @@ class SettingFragment : BaseFragment() {
         viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
             .get(SettingViewModel::class.java).apply {
                 observeToProgressBar(this@SettingFragment)
+                observeToProgressBar(this@SettingFragment, activity = activity as AppCompatActivity)
                 observeToError(this@SettingFragment)
             }
     }
@@ -123,6 +125,10 @@ class SettingFragment : BaseFragment() {
 
         copyStatsLink.setOnClickListener {
             // context?.showDialog(R.string.no_function)
+        }
+
+        refresh.setOnClickListener {
+            viewModel.update()
         }
     }
 
