@@ -1,7 +1,7 @@
 package robin.vitalij.fortniteassitant.utils.mapper
 
 import robin.vitalij.fortniteassitant.model.enums.TopType
-import robin.vitalij.fortniteassitant.repository.network.TopUser
+import robin.vitalij.fortniteassitant.model.network.TopUser
 import robin.vitalij.fortniteassitant.ui.top.adapter.TopUserModel
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
 

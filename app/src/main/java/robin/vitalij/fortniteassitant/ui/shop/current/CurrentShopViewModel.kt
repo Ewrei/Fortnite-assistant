@@ -1,33 +1,26 @@
-package robin.vitalij.fortniteassitant.ui.top
+package robin.vitalij.fortniteassitant.ui.shop.current
 
-import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import robin.vitalij.fortniteassitant.model.enums.TopType
-import robin.vitalij.fortniteassitant.repository.network.TopRepository
+import robin.vitalij.fortniteassitant.repository.network.GetCurrentShopRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
+import robin.vitalij.fortniteassitant.ui.shop.current.adapter.viewmodel.CurrentShopImpl
 import robin.vitalij.fortniteassitant.ui.top.adapter.TopUserModel
 
-class TopViewModel(
-    private val topRepository: TopRepository
+class CurrentShopViewModel(
+    private val getCurrentShopRepository: GetCurrentShopRepository
 ) : BaseViewModel() {
 
-    var topType = ObservableField(TopType.KD)
-
-    val mutableLiveData = MutableLiveData<List<TopUserModel>>()
-
-    init {
-        loadData()
-    }
+    val mutableLiveData = MutableLiveData<List<CurrentShopImpl>>()
 
     fun loadData() {
-        topRepository.getTopUsers(topType.get() ?: TopType.KD)
+        getCurrentShopRepository.getCurrentShop()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .let(::setupProgressShow)
             .subscribe({
-                mutableLiveData.value = it
+                   mutableLiveData.value = it
             }, error)
             .let(disposables::add)
     }

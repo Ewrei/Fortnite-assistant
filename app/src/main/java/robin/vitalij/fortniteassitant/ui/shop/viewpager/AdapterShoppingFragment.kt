@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -16,11 +15,10 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToEmpty
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
-import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseViewPagerAdapter
-import robin.vitalij.fortniteassitant.ui.details.statistics.DetailsStatisticsFragment
-import robin.vitalij.fortniteassitant.utils.view.GameBattlesAdapter
+import robin.vitalij.fortniteassitant.ui.shop.current.CurrentShopFragment
+import robin.vitalij.fortniteassitant.ui.shop.upcoming.UpcomingShopFragment
 import javax.inject.Inject
 
 private const val DEFAULT_LAST_TAB_VALUE = Integer.MAX_VALUE
@@ -58,6 +56,7 @@ class AdapterShoppingFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         tabLayout.setupWithViewPager(viewPager)
         setNavigation()
+        addTabs()
     }
 
     override fun onResume() {
@@ -80,14 +79,18 @@ class AdapterShoppingFragment : BaseFragment() {
         }
     }
 
-    private fun addTabs(detailStatisticsModel: DetailStatisticsModel) {
+    private fun addTabs() {
         val pagerAdapter = BaseViewPagerAdapter(childFragmentManager)
-        detailStatisticsModel.battlesTypes.forEach {
-            pagerAdapter.addFragment(
-                DetailsStatisticsFragment.newInstance(it, detailStatisticsModel.gameType),
-                getString(it.getTitleRes())
-            )
-        }
+        pagerAdapter.addFragment(
+            CurrentShopFragment(),
+            getString(R.string.current_shop)
+        )
+
+        pagerAdapter.addFragment(
+            UpcomingShopFragment(),
+            getString(R.string.upcoming_shop)
+        )
+
         viewPager.adapter = pagerAdapter
     }
 
@@ -95,9 +98,5 @@ class AdapterShoppingFragment : BaseFragment() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         toolbar.setupWithNavController(navController, appBarConfiguration)
-    }
-
-    companion object {
-        const val DETAIL_STATISTICS = "detail_statistics"
     }
 }

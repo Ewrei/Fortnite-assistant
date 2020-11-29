@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.repository
+package robin.vitalij.fortniteassitant.repository.network
 
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

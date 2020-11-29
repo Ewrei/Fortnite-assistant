@@ -7,8 +7,10 @@ import robin.vitalij.fortniteassitant.di.module.FortniteAppModule
 import robin.vitalij.fortniteassitant.di.module.NetworkModule
 import robin.vitalij.fortniteassitant.di.module.RepositoryModule
 import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFragment
+import robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.CurrentShopResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.top.TopResultFragment
+import robin.vitalij.fortniteassitant.ui.bottomsheet.upcomingshop.UpcomingShopResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.user.UserResultFragment
 import robin.vitalij.fortniteassitant.ui.chartlist.ChartsTypeFragment
 import robin.vitalij.fortniteassitant.ui.charts.ChartsFragment
@@ -31,6 +33,8 @@ import robin.vitalij.fortniteassitant.ui.session.statistics.DetailsSessionStatis
 import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment
 import robin.vitalij.fortniteassitant.ui.setting.SettingFragment
 import robin.vitalij.fortniteassitant.ui.setting.applicationinfo.ApplicationInfoFragment
+import robin.vitalij.fortniteassitant.ui.shop.current.CurrentShopFragment
+import robin.vitalij.fortniteassitant.ui.shop.upcoming.UpcomingShopFragment
 import robin.vitalij.fortniteassitant.ui.shop.viewpager.AdapterShoppingFragment
 import robin.vitalij.fortniteassitant.ui.splash.SplashActivity
 import robin.vitalij.fortniteassitant.ui.subscription.SubscriptionsFragment
@@ -70,9 +74,13 @@ interface AppComponent {
     fun inject(fragment: AdapterDetailsSeasonStatisticsFragment)
     fun inject(fragment: AdapterShoppingFragment)
     fun inject(fragment: TopFragment)
+    fun inject(fragment: CurrentShopFragment)
+    fun inject(fragment: UpcomingShopFragment)
 
     fun inject(fragment: ProfileResultFragment)
     fun inject(fragment: ContactUsResultFragment)
     fun inject(fragment: UserResultFragment)
     fun inject(fragment: TopResultFragment)
+    fun inject(fragment: UpcomingShopResultFragment)
+    fun inject(fragment: CurrentShopResultFragment)
 }

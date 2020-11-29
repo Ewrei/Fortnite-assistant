@@ -4,7 +4,7 @@ import io.reactivex.Observable
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
-import robin.vitalij.fortniteassitant.repository.network.TopUser
+import robin.vitalij.fortniteassitant.model.network.TopUser
 
 private const val PATCH_CS_GO = "csgo"
 private const val PATCH_SAVE_USER_STAT = "save-user-stat"

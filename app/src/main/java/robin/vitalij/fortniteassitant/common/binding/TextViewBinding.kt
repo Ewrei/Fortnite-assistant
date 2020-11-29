@@ -10,8 +10,16 @@ import robin.vitalij.fortniteassitant.common.extensions.getDateStringFormat
 import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
 import robin.vitalij.fortniteassitant.common.extensions.setVisibility
 import robin.vitalij.fortniteassitant.model.enums.ChartsType
+import robin.vitalij.fortniteassitant.model.enums.ShopType
+import robin.vitalij.fortniteassitant.model.enums.TopType
 
 object TextViewBinding {
+
+    @JvmStatic
+    @BindingAdapter("topType")
+    fun TextView.setTopType(topType: TopType) {
+        setText(topType.getStringRes())
+    }
 
     @SuppressLint("SetTextI18n")
     @JvmStatic
@@ -30,6 +38,12 @@ object TextViewBinding {
     @BindingAdapter("value")
     fun TextView.setValueText(value: Int) {
         text = value.getStringFormat()
+    }
+
+    @JvmStatic
+    @BindingAdapter("typeShop")
+    fun TextView.setTypeShop(typeShop: String) {
+        setText(ShopType.getShopType(typeShop).getTitleRes())
     }
 
     @JvmStatic

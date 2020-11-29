@@ -150,4 +150,20 @@
 
     <string name="players_did_not_participate_in_battles">Игроки не участвовали в боях</string>
 
+    <!--Top-->
+    <string name="parametr">Parameter</string>
+
+    <!--Shop-->
+    <string name="upcoming_shop">Предстоящие</string>
+    <string name="current_shop">Текущий</string>
+    <string name="featured">Рекомендуемые</string>
+    <string name="emote">Эмоция</string>
+    <string name="outfit">Экипировка</string>
+
+    <string name="daily">Ежедневно</string>
+    <string name="special_daily">Особое</string>
+    <string name="special_featured">Специальные предложения</string>
+
+    <string name="the_kit_includes">В комплект входит</string>
+
 </resources>

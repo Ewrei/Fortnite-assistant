@@ -1,6 +1,6 @@
 package robin.vitalij.fortniteassitant.ui.top
 
-import robin.vitalij.fortniteassitant.repository.TopRepository
+import robin.vitalij.fortniteassitant.repository.network.TopRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
 import javax.inject.Inject
 

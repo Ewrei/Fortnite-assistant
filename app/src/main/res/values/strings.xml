@@ -204,4 +204,17 @@
     <!--Top-->
     <string name="parametr">Parameter</string>
 
+    <!--Shop-->
+    <string name="upcoming_shop">Upcoming</string>
+    <string name="current_shop">Current</string>
+    <string name="featured">Featured</string>
+    <string name="emote">Emote</string>
+    <string name="unknown">Unknown</string>
+    <string name="outfit">Outfit</string>
+    <string name="daily">Daily</string>
+    <string name="special_daily">Special Daily</string>
+    <string name="special_featured">Special Featured</string>
+
+    <string name="the_kit_includes">The kit includes</string>
+
 </resources>

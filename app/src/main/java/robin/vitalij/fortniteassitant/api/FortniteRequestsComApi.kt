@@ -1,5 +1,6 @@
 package robin.vitalij.fortniteassitant.api
 
+import com.squareup.okhttp.ResponseBody
 import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.http.GET
@@ -19,5 +20,8 @@ interface FortniteRequestsComApi {
         @Query("timeWindow") timeWindow: String,
         @Query("image") image: String
     ): Single<PlayerStatsResponse>
+
+    @GET("/v2/shop/br/combined")
+    fun getShop( @Query("language") language: String): Single<ResponseBody>
 
 }
