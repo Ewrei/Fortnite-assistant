@@ -29,11 +29,11 @@
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginBottom="@dimen/default_margin"
-                android:background="@drawable/black_border"
-                app:srcCompat="@drawable/ic_cop"
+                app:imageUrl="@{item.avatarImage}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_cop"
                 tools:src="@drawable/ic_cop" />
 
             <TextView

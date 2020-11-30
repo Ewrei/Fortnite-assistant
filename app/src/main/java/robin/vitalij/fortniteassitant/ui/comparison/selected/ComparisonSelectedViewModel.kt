@@ -30,8 +30,6 @@ class ComparisonSelectedViewModel(
 
     val visibility = ObservableField<Boolean>(true)
 
-    lateinit var openProfile: (accountId: String) -> Unit
-
     var mutableLiveData = MutableLiveData<List<SearchSteamUser>>()
 
     private lateinit var owner: LifecycleOwner

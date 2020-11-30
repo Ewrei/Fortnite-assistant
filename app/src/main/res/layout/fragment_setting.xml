@@ -48,7 +48,7 @@
                             android:layout_marginTop="@dimen/default_margin"
                             android:layout_marginBottom="@dimen/default_margin_double"
                             android:background="@drawable/black_border"
-                            app:imageUrl="@{viewModel.user.name}"
+                            app:imageUrl="@{viewModel.user.avatar}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/userName"

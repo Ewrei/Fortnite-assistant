@@ -48,19 +48,6 @@ class ComparisonSelectedFragment : BaseFragment() {
                 observeToProgressBar(this@ComparisonSelectedFragment)
                 observeToError(this@ComparisonSelectedFragment)
 
-                openProfile = {
-                    ProfileResultFragment.show(
-                        childFragmentManager,
-                        it,
-                        ProfileResultType.FULL,
-                        object : RegistrationProfileCallback {
-                            override fun addedProfile(fortniteProfileResponse: FortniteProfileResponse) {
-                                viewModel.saveUser(fortniteProfileResponse)
-                            }
-
-                        })
-                }
-
                 openMainScreen = {
                     activity?.finish()
                     val intent = Intent(requireContext(), MainActivity::class.java)
@@ -130,6 +117,7 @@ class ComparisonSelectedFragment : BaseFragment() {
                 ProfileResultFragment.show(
                     childFragmentManager,
                     it.accountId,
+                    it.avatarImage,
                     ProfileResultType.FULL,
                     object : RegistrationProfileCallback {
                         override fun addedProfile(fortniteProfileResponse: FortniteProfileResponse) {

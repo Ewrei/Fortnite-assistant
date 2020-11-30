@@ -12,14 +12,16 @@ import robin.vitalij.fortniteassitant.utils.TextUtils
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
 import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
 
-class ProfileResultMapper(private val resourceProvider: ResourceProvider) :
+class ProfileResultMapper(
+    private val resourceProvider: ResourceProvider
+) :
     Mapper<FortniteProfileResponse, List<Profile>> {
 
     override fun transform(obj: FortniteProfileResponse): List<Profile> {
         val list = arrayListOf<Profile>()
         list.add(
             ProfileHeaderViewModel(
-                avatarUrl = "",
+                avatarUrl = obj.avatar,
                 userName = obj.stats.playerStatsData.account.name,
                 playerId = obj.stats.playerStatsData.account.id,
                 level = obj.stats.playerStatsData.battlePass.level,

@@ -30,12 +30,13 @@ class ProfileResultViewModel(
 
     lateinit var openCompare: () -> Unit
 
-    fun loadData(accountId: String) {
+    fun loadData(accountId: String, avatarImage: String) {
         getUserRepository.getUser(accountId)
             .observeOn(AndroidSchedulers.mainThread())
             .let(::setupProgressShow)
             .subscribe({
                 playerModel.set(it)
+                it.avatar = avatarImage
                 mutableLiveData.value =
                     ProfileResultMapper(resourceProvider).transform(playerModel.get()!!)
             }, {

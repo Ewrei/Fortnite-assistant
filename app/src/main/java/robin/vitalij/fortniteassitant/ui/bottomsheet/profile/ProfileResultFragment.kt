@@ -138,7 +138,8 @@ class ProfileResultFragment : BaseBottomSheetDialogFragment() {
     private fun loadData() {
         arguments?.let {
             viewModel.loadData(
-                it.getString(ACCOUNT_ID, "")
+                it.getString(ACCOUNT_ID, ""),
+                it.getString(IMAGE_URL, "")
             )
         }
     }
@@ -155,10 +156,12 @@ class ProfileResultFragment : BaseBottomSheetDialogFragment() {
 
         private const val TAG = "ProfileResultFragment"
         private const val PROFILE_RESULT_TYPE = "profile_result_type"
+        private const val IMAGE_URL = "img_url"
 
         fun show(
             fragmentManager: FragmentManager?,
             accountId: String,
+            imageUrl: String,
             profileResultType: ProfileResultType,
             registrationProfileCallback: RegistrationProfileCallback
         ) {
@@ -166,6 +169,7 @@ class ProfileResultFragment : BaseBottomSheetDialogFragment() {
                 this.registrationProfileCallback = registrationProfileCallback
                 arguments = Bundle().apply {
                     putString(ACCOUNT_ID, accountId)
+                    putString(IMAGE_URL, imageUrl)
                     putSerializable(PROFILE_RESULT_TYPE, profileResultType)
                 }
             }

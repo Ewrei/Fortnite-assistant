@@ -23,6 +23,7 @@ import robin.vitalij.fortniteassitant.common.extensions.saveUser
 import robin.vitalij.fortniteassitant.databinding.FragmentTopBinding
 import robin.vitalij.fortniteassitant.interfaces.RegistrationProfileCallback
 import robin.vitalij.fortniteassitant.interfaces.TopResultCallback
+import robin.vitalij.fortniteassitant.model.enums.AvatarType
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.model.enums.TopType
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
@@ -103,6 +104,7 @@ class TopFragment : BaseFragment() {
                 ProfileResultFragment.show(
                     childFragmentManager,
                     it,
+                    AvatarType.values().random().getImageUrl(),
                     ProfileResultType.FULL,
                     object : RegistrationProfileCallback {
                         override fun addedProfile(fortniteProfileResponse: FortniteProfileResponse) {

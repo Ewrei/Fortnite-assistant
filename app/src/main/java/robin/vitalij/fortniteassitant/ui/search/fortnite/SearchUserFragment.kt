@@ -127,24 +127,6 @@ class SearchUserFragment : BaseFragment() {
             }
         }
 
-//        searchById.setOnClickListener {
-//            arguments?.let {
-//                if (it.getSerializable(IS_COMPARISON_VISIBLE) as ProfileResultType == ProfileResultType.FULL) {
-////                    findNavController().navigate(R.id.navigation_search_id, Bundle().apply {
-////                        putSerializable(IS_COMPARISON_VISIBLE, ProfileResultType.FULL)
-////                    })
-//                } else {
-////                    (activity as? BaseActivity)?.replaceStackFragment(
-////                        SearchIdFragment.newInstance(
-////                            it.getSerializable(
-////                                IS_COMPARISON_VISIBLE
-////                            ) as ProfileResultType
-////                        )
-////                    )
-//                }
-//            }
-//        }
-
         searchButton.setSafeOnClickListener {
             context?.closeKeyboard(view)
             if (searchInputEditText.text.toString().isEmpty()) {
@@ -164,6 +146,7 @@ class SearchUserFragment : BaseFragment() {
                     ProfileResultFragment.show(
                         childFragmentManager,
                         it.accountId,
+                        it.avatarImage,
                         bundle.getSerializable(IS_COMPARISON_VISIBLE) as ProfileResultType,
                         object : RegistrationProfileCallback {
                             override fun addedProfile(fortniteProfileResponse: FortniteProfileResponse) {

@@ -33,7 +33,6 @@ class GetUserRepository @Inject constructor(
         BiFunction { stats, matches ->
             FortniteProfileResponse(
                 stats = stats,
-                sessionStats = stats,
                 matches = matches
             )
         }

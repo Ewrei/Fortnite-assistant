@@ -8,7 +8,7 @@ import robin.vitalij.fortniteassitant.model.network.stats.*
 import robin.vitalij.fortniteassitant.utils.TextUtils
 
 fun UserEntity.differenceUser(userEntityLast: UserEntity): UserEntity {
-     return UserEntity(
+    return UserEntity(
         playerId = userEntityLast.playerId,
         name = userEntityLast.name,
         progress = userEntityLast.progress,
@@ -81,9 +81,11 @@ private fun getStatsTypeDevice(
 ): StatsTypeDevice? {
     return if (oneStatsTypeDevice == null && lastStatsTypeDevice == null) {
         null
-    } else if (oneStatsTypeDevice == null && lastStatsTypeDevice != null) {
+    } else if (oneStatsTypeDevice == null && lastStatsTypeDevice != null && lastStatsTypeDevice.overall?.matches ?: 0 >= 1) {
         lastStatsTypeDevice
-    } else {
+    } else if (oneStatsTypeDevice?.overall?.matches ?: 0 == lastStatsTypeDevice?.overall?.matches ?: 0) {
+        null
+    } else if (lastStatsTypeDevice?.overall?.matches ?: 0 >= 1) {
         StatsTypeDevice(
             overall = getOverall(oneStatsTypeDevice?.overall, lastStatsTypeDevice?.overall),
             solo = getSolo(oneStatsTypeDevice?.solo, lastStatsTypeDevice?.solo),
@@ -92,15 +94,19 @@ private fun getStatsTypeDevice(
             squad = getTrio(oneStatsTypeDevice?.squad, lastStatsTypeDevice?.squad),
             ltm = getLtm(oneStatsTypeDevice?.ltm, lastStatsTypeDevice?.ltm)
         )
+    } else {
+        null
     }
 }
 
 private fun getOverall(overall: Overall?, overallLast: Overall?): Overall? {
     return if (overall == null && overallLast == null) {
         null
-    } else if (overall == null && overallLast != null) {
+    } else if (overall == null && overallLast != null && overallLast.matches >= 1) {
         overallLast
-    } else if (overall != null && overallLast != null) {
+    } else if (overall?.matches ?: 0 == overallLast?.matches ?: 0) {
+        null
+    } else if (overall != null && overallLast != null && overallLast.matches >= 1) {
         Overall(
             score = overallLast.score - overall.score,
             scorePerMin = overallLast.scorePerMin,
@@ -134,9 +140,11 @@ private fun getOverall(overall: Overall?, overallLast: Overall?): Overall? {
 private fun getSolo(overall: SoloMatches?, overallLast: SoloMatches?): SoloMatches? {
     return if (overall == null && overallLast == null) {
         null
-    } else if (overall == null && overallLast != null) {
+    } else if (overall == null && overallLast != null && overallLast.matches >= 1) {
         overallLast
-    } else if (overall != null && overallLast != null) {
+    } else if (overall?.matches ?: 0 == overallLast?.matches ?: 0) {
+        null
+    } else if (overall != null && overallLast != null && overallLast.matches >= 1) {
         SoloMatches(
             score = overallLast.score - overall.score,
             scorePerMin = overallLast.scorePerMin,
@@ -166,9 +174,11 @@ private fun getSolo(overall: SoloMatches?, overallLast: SoloMatches?): SoloMatch
 private fun getDuo(overall: DuoMatches?, overallLast: DuoMatches?): DuoMatches? {
     return if (overall == null && overallLast == null) {
         null
-    } else if (overall == null && overallLast != null) {
+    } else if (overall == null && overallLast != null && overallLast.matches >= 1) {
         overallLast
-    } else if (overall != null && overallLast != null) {
+    } else if (overall?.matches ?: 0 == overallLast?.matches ?: 0) {
+        null
+    } else if (overall != null && overallLast != null && overallLast.matches >= 1) {
         DuoMatches(
             score = overallLast.score - overall.score,
             scorePerMin = overallLast.scorePerMin,
@@ -198,9 +208,11 @@ private fun getDuo(overall: DuoMatches?, overallLast: DuoMatches?): DuoMatches? 
 private fun getTrio(overall: TrioMatches?, overallLast: TrioMatches?): TrioMatches? {
     return if (overall == null && overallLast == null) {
         null
-    } else if (overall == null && overallLast != null) {
+    } else if (overall == null && overallLast != null && overallLast.matches >= 1) {
         overallLast
-    } else if (overall != null && overallLast != null) {
+    } else if (overall?.matches ?: 0 == overallLast?.matches ?: 0) {
+        null
+    } else if (overall != null && overallLast != null && overallLast.matches >= 1) {
         TrioMatches(
             score = overallLast.score - overall.score,
             scorePerMin = overallLast.scorePerMin,
@@ -230,9 +242,11 @@ private fun getTrio(overall: TrioMatches?, overallLast: TrioMatches?): TrioMatch
 private fun getLtm(overall: Ltm?, overallLast: Ltm?): Ltm? {
     return if (overall == null && overallLast == null) {
         null
-    } else if (overall == null && overallLast != null) {
+    } else if (overall == null && overallLast != null && overallLast.matches >= 1) {
         overallLast
-    } else if (overall != null && overallLast != null) {
+    } else if (overall?.matches ?: 0 == overallLast?.matches ?: 0) {
+        null
+    } else if (overall != null && overallLast != null && overallLast.matches >= 1) {
         Ltm(
             score = overallLast.score - overall.score,
             scorePerMin = overallLast.scorePerMin,

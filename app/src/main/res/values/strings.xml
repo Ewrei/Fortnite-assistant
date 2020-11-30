@@ -64,14 +64,14 @@
     <string name="kills">Kills</string>
     <string name="killsPerMin">Kills per. min</string>
     <string name="killsPerMatch">Kills per. match</string>
-    <string name="deaths">Deaths</string>
-    <string name="top_one">Top 1</string>
-    <string name="top_ten">Top 10</string>
-    <string name="top_three">Top 3</string>
-    <string name="top_six">Top 6</string>
-    <string name="top_twenty_five">Top 25</string>
-    <string name="top_twelve">Top 12</string>
-    <string name="top_five">Top 5</string>
+    <string name="deaths" translatable="false">Deaths</string>
+    <string name="top_one" translatable="false">Top 1</string>
+    <string name="top_ten" translatable="false">Top 10</string>
+    <string name="top_three" translatable="false">Top 3</string>
+    <string name="top_six" translatable="false">Top 6</string>
+    <string name="top_twenty_five" translatable="false">Top 25</string>
+    <string name="top_twelve" translatable="false">Top 12</string>
+    <string name="top_five" translatable="false">Top 5</string>
     <string name="minutes_played">Minutes Played</string>
     <string name="user_empty_stats">Could not find stats for the requested profile</string>
     <string name="save_the_user">Save the user</string>
@@ -90,7 +90,7 @@
     <string name="current_season_statistics">Current season</string>
 
     <!--Details statistics-->
-    <string name="details_statistics">Детальная статистика</string>
+    <string name="details_statistics">Detailed statistics</string>
     <string name="avg_score">Avg. score</string>
     <string name="score_per_min">Score per min</string>
     <string name="score_per_match">Score per match</string>
@@ -199,7 +199,9 @@
     <string name="delete">Delete</string>
 
     <string name="players_did_not_participate_in_battles">Players did not participate in battles</string>
-    <string name="tops">Tops</string>
+    <string name="tops">Leaderboard</string>
+
+    <string name="no_function">This function will be available in the next version of the application.</string>
 
     <!--Top-->
     <string name="parametr">Parameter</string>

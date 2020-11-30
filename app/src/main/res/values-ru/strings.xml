@@ -52,6 +52,30 @@
     <string name="kills">Убийства</string>
     <string name="user_empty_stats">Не удалось найти статистику по запрошенному профилю</string>
     <string name="save_the_user">Сохраняем пользователя</string>
+    <string name="killsPerMin">Убийств за. мин</string>
+    <string name="killsPerMatch">Убийств за матч</string>
+    <string name="minutes_played">Минуты в игре</string>
+
+    <!--History match-->
+    <string name="title_history_match">История матчей</string>
+    <string name="player_soutlived">Player Soutlived</string>
+    <string name="top_history">Top</string>
+    <string name="score">Очки</string>
+
+    <!--Details statistics-->
+    <string name="details_statistics">Детальная статистика</string>
+    <string name="avg_score">Avg. score</string>
+    <string name="score_per_min">Score per min</string>
+    <string name="score_per_match">Score per match</string>
+    <string name="last_modified">Last modified</string>
+    <string name="other">Other</string>
+    <string name="kills_per_min">Kills per min</string>
+    <string name="kills_per_match">Kills per match</string>
+    <string name="players_outlived">Players Outlived</string>
+
+    <!--Charts-->
+    <string name="kd_full">Kill/Death Ratio</string>
+    <string name="win_rate">Win rate</string>
 
     <!--Home-->
     <string name="hours">Часы</string>
@@ -133,6 +157,8 @@
 
     <string name="wins">Победы</string>
 
+    <string name="tops">Leaderboard</string>
+
     <!--Users-->
     <string name="last_date_update">Последнее обновление %s</string>
 
@@ -150,6 +176,8 @@
 
     <string name="players_did_not_participate_in_battles">Игроки не участвовали в боях</string>
 
+    <string name="no_function">Данная функция будет доступна в следущей версии приложения</string>
+
     <!--Top-->
     <string name="parametr">Parameter</string>
 
@@ -157,6 +185,7 @@
     <string name="upcoming_shop">Предстоящие</string>
     <string name="current_shop">Текущий</string>
     <string name="featured">Рекомендуемые</string>
+    <string name="unknown">Неизвестно</string>
     <string name="emote">Эмоция</string>
     <string name="outfit">Экипировка</string>
     <string name="pickaxe">Инструмент</string>
@@ -168,5 +197,6 @@
     <string name="special_featured">Специальные предложения</string>
 
     <string name="the_kit_includes">В комплект входит</string>
+
 
 </resources>

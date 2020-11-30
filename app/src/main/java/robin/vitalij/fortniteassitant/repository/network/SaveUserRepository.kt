@@ -34,6 +34,7 @@ class SaveUserRepository @Inject constructor(
                 .subscribe(object : DisposableMaybeObserver<User>() {
                     override fun onSuccess(t: User) {
                         if ((t.userEntity.all?.overall?.matches != user.userEntity.all?.overall?.matches) && t.userEntity.all?.overall?.matches != 0) {
+                            user.userEntity.avatar = t.userEntity.avatar
                             saveData(user, saveUserCallback)
                         } else {
                             saveUserCallback.showOrHideProgressBar(false)

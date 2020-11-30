@@ -17,6 +17,7 @@ import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.common.extensions.showDialog
 import robin.vitalij.fortniteassitant.databinding.FragmentSettingBinding
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFragment
@@ -124,7 +125,7 @@ class SettingFragment : BaseFragment() {
         }
 
         copyStatsLink.setOnClickListener {
-            // context?.showDialog(R.string.no_function)
+            context?.showDialog(R.string.no_function)
         }
 
         refresh.setOnClickListener {

@@ -53,8 +53,4 @@ class SearchUserViewModel(
             }
         })
     }
-
-    fun clearSearch() {
-        mutableLiveData.value = arrayListOf()
-    }
 }

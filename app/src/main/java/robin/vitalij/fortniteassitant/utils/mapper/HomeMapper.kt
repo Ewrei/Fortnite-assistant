@@ -34,7 +34,7 @@ class HomeMapper(
 
         list.add(
             HomeHeaderViewModel(
-                avatarUrl = "",
+                avatarUrl = userLastEntity.avatar ?: "",
                 userName = userLastEntity.name,
                 playerId = userLastEntity.playerId,
                 matchesPlayed = userLastEntity.all?.overall?.matches ?: 0,

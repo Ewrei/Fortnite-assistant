@@ -12,6 +12,7 @@ class UserEntity(
     @ColumnInfo(name = "level") var level: Int = 0,
     @ColumnInfo(name = "progress") var progress: Int = 0,
     @ColumnInfo(name = "image") var image: String? = "",
+    @ColumnInfo(name = "avatar") var avatar: String? = "",
     @Embedded(prefix = "all") val all: StatsTypeDevice? = null,
     @Embedded(prefix = "keyboard_mouse") val keyboardMouse: StatsTypeDevice? = null,
     @Embedded(prefix = "gamepad") val gamepad: StatsTypeDevice? = null,

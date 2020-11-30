@@ -41,7 +41,7 @@
                     android:layout_marginTop="@dimen/default_margin"
                     android:layout_marginBottom="@dimen/default_margin"
                     android:background="@drawable/black_border"
-                    app:imageUrl="@{item.userEntity.image}"
+                    app:imageUrl="@{item.userEntity.avatar}"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView

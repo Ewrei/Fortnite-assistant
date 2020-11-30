@@ -20,7 +20,9 @@ class SaveUserMapper : Mapper<FortniteProfileResponse, SaveUserModel> {
                 Date().time
             ),
             matches = getMatches(obj.matches, obj.stats.playerStatsData.account.id)
-        )
+        ).apply {
+            userEntity.avatar = obj.avatar
+        }
     }
 
     private fun getMatches(
