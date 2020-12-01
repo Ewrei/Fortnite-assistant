@@ -16,12 +16,12 @@
 
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/typeStatGroup"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_margin_double"
             android:layout_marginTop="@dimen/default_margin_double"
             android:layout_marginEnd="@dimen/default_margin_double"
-            android:gravity="center"
+            android:layout_gravity="center"
             app:checkedButton="@id/allStats"
             app:selectionRequired="true"
             app:singleSelection="true">
@@ -30,34 +30,34 @@
                 android:id="@+id/allStats"
                 style="@style/IconOnlyButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/all" />
+                app:icon="@drawable/ic_all" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/keyboardMouse"
                 style="@style/IconOnlyButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                app:icon="@drawable/ic_desktop" />
+                app:icon="@drawable/ic_keyboard" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/gamepad"
                 style="@style/IconOnlyButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:icon="@drawable/ic_console" />
+                app:icon="@drawable/ic_gamepad" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/touch"
                 style="@style/IconOnlyButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:icon="@drawable/ic_ps4" />
+                app:icon="@drawable/ic_touch" />
 
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
@@ -65,7 +65,7 @@
             layout="@layout/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_margin_double" />
+            android:layout_marginTop="@dimen/default_margin" />
 
     </LinearLayout>
 

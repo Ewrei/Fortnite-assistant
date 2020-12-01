@@ -31,6 +31,7 @@
             android:backgroundTint="@color/color_orange"
             android:onClick="@{(view) -> viewModel.onClick()}"
             android:text="@string/subscribe"
+            android:fontFamily="@font/futura_pt_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cancelAtAnyTime" />
@@ -43,6 +44,7 @@
             android:layout_marginTop="@dimen/default_margin_double"
             android:layout_marginEnd="@dimen/default_margin"
             android:gravity="center"
+            android:fontFamily="@font/futura_pt_medium"
             android:text="@string/cancel_at_any_time"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             app:layout_constraintEnd_toEndOf="parent"
@@ -96,6 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/half_default_margin"
                     android:text="@{item.price}"
+                    android:fontFamily="@font/fortnite_battlefest"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@color/color_orange"
                     tools:text="price" />
@@ -106,6 +109,7 @@
                     android:layout_marginTop="@dimen/half_default_margin"
                     android:layout_marginBottom="@dimen/half_default_margin"
                     android:text="@string/per_month"
+                    android:fontFamily="@font/futura_pt_medium"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
             </LinearLayout>
@@ -120,7 +124,7 @@
             android:text="@string/plus_subcription_title"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="?header_color"
-            android:textStyle="bold"
+            android:fontFamily="@font/futura_pt_bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/avatarImage" />
@@ -133,6 +137,7 @@
             android:drawableStart="@drawable/ic_disable_ads"
             android:drawablePadding="@dimen/default_margin"
             android:text="@string/disabling_ads"
+            android:fontFamily="@font/futura_pt_medium"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -146,6 +151,7 @@
             android:layout_marginTop="@dimen/half_default_margin"
             android:drawableStart="@drawable/ic_app"
             android:drawablePadding="@dimen/default_margin"
+            android:fontFamily="@font/futura_pt_medium"
             android:text="@string/additional_features"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             app:layout_constraintEnd_toEndOf="parent"
@@ -160,6 +166,7 @@
             android:drawableStart="@drawable/ic_burger"
             android:drawablePadding="@dimen/default_margin"
             android:text="@string/food_developer"
+            android:fontFamily="@font/futura_pt_medium"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             app:layout_constraintEnd_toStartOf="@+id/linearLayout"
             app:layout_constraintStart_toStartOf="parent"
@@ -212,11 +219,12 @@
                         android:text="@string/disabling_ads"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/darker_gray"
-                        android:textStyle="bold" />
+                        android:fontFamily="@font/futura_pt_bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/futura_pt_medium"
                         android:text="@string/remove_ads_body"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
@@ -232,6 +240,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/color_orange"
             android:text="@string/watch"
+            android:fontFamily="@font/futura_pt_medium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

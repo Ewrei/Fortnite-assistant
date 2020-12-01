@@ -11,7 +11,6 @@ import robin.vitalij.fortniteassitant.model.network.shop.OtherItemsDetails
 import robin.vitalij.fortniteassitant.model.network.shop.ShopItem
 
 internal class OtherItemsDetailsAdapter(
-    private val onClick: (shopItem: OtherItemsDetails) -> Unit,
     private val widthPixels: Int
 ) : RecyclerView.Adapter<OtherItemsDetailsHolder>() {
 
@@ -30,7 +29,7 @@ internal class OtherItemsDetailsAdapter(
                 parent,
                 false
             )
-        return OtherItemsDetailsHolder(binding, onClick, widthPixels)
+        return OtherItemsDetailsHolder(binding, widthPixels)
     }
 
     override fun onBindViewHolder(holder: OtherItemsDetailsHolder, position: Int) {

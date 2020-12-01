@@ -35,7 +35,6 @@
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginTop="@dimen/default_margin"
                     android:layout_marginBottom="@dimen/default_margin"
-                    android:background="@drawable/black_border"
                     app:imageUrl="@{item.avatarUrl}"
                     tools:srcCompat="@tools:sample/avatars" />
 
@@ -51,6 +50,7 @@
                         android:layout_marginStart="@dimen/default_margin"
                         android:layout_marginEnd="@dimen/default_margin_double"
                         android:text="@{item.userName}"
+                        android:fontFamily="@font/futura_pt_bold"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         tools:text="profile image" />
 
@@ -60,6 +60,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/default_margin"
                         android:text="@{item.playerId}"
+                        android:fontFamily="@font/futura_pt_medium"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textColor="@android:color/darker_gray"
                         tools:text="playerId" />
@@ -80,6 +81,7 @@
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginEnd="@dimen/default_margin"
                     android:layout_weight="1"
+                    android:fontFamily="@font/futura_pt_medium"
                     android:text="@{@string/level_format(item.level)}"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="?header_color"
@@ -92,6 +94,7 @@
                     android:layout_marginEnd="@dimen/default_margin"
                     android:layout_weight="1"
                     android:gravity="end"
+                    android:fontFamily="@font/futura_pt_medium"
                     android:text="@{item.playTime}"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="?header_color"
@@ -125,12 +128,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/matches"
+                        android:fontFamily="@font/futura_pt_medium"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textColor="?header_color" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/fortnite_battlefest"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         app:value="@{item.matches}"
                         tools:text="58" />
@@ -158,12 +163,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/wins_percent"
+                        android:fontFamily="@font/futura_pt_medium"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textColor="?header_color" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/fortnite_battlefest"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         app:percent="@{item.winRate}"
                         tools:text="3.2" />
@@ -191,12 +198,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/kd"
+                        android:fontFamily="@font/futura_pt_medium"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textColor="?header_color" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/fortnite_battlefest"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         app:value="@{item.kd}"
                         tools:text="1 230" />

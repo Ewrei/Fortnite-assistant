@@ -61,6 +61,8 @@
     <string name="player_soutlived">Player Soutlived</string>
     <string name="top_history">Top</string>
     <string name="score">Очки</string>
+    <string name="history_match_body">
+Данные по матчам могут группироваться. А так же при каждом обновление мы получаем последние 25 матчей, который могут группироваться.\n\nЭтот раздел бета. Если у вас работает не корректно сообщите нам</string>
 
     <!--Details statistics-->
     <string name="details_statistics">Детальная статистика</string>

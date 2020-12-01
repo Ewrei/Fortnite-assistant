@@ -17,6 +17,7 @@
         style="@style/DefaultCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
         android:layout_marginTop="@dimen/default_margin">
 
         <LinearLayout
@@ -28,7 +29,6 @@
                 android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/default_margin"
                 android:scaleType="fitStart"
                 android:adjustViewBounds="true"
                 app:imageUrl="@{item.fullBackground}"
@@ -41,13 +41,12 @@
                 android:id="@+id/type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
-                android:layout_marginEnd="@dimen/default_margin"
-                android:layout_marginBottom="@dimen/default_margin"
                 android:gravity="center"
                 android:textAllCaps="true"
+                android:layout_margin="@dimen/default_margin"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="10sp"
+                android:fontFamily="@font/futura_pt_medium"
                 app:typeShop="@{item.type}"
                 tools:text="type" />
 
@@ -62,7 +61,8 @@
                     android:id="@+id/oldPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/half_default_margin"
+                    android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/fortnite_battlefest"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:visibility="@{item.priceNoDiscount != item.price ? View.VISIBLE : View.GONE}"
                     app:value="@{item.priceNoDiscount}"
@@ -75,12 +75,15 @@
                     android:layout_marginEnd="@dimen/half_default_margin"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     app:value="@{item.price}"
+                    android:fontFamily="@font/fortnite_battlefest"
                     tools:text="1200" />
 
                 <ImageView
                     android:layout_width="@dimen/icon_size"
                     android:layout_height="@dimen/icon_size"
                     android:layout_marginEnd="@dimen/half_default_margin"
+                    android:layout_marginTop="@dimen/half_default_margin"
+                    android:layout_marginBottom="@dimen/half_default_margin"
                     app:srcCompat="@drawable/img_v_baks" />
             </TableRow>
 

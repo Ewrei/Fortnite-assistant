@@ -20,6 +20,6 @@
         android:layout_marginBottom="@dimen/default_margin"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:textColor="?header_color"
-        android:textStyle="bold"
+        android:fontFamily="@font/futura_pt_bold"
         tools:text="title" />
 </layout>

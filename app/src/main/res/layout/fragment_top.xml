@@ -44,43 +44,78 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TableRow
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/default_margin_double"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/parametr"
-                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                                    android:textColor="@color/color_orange" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    android:textStyle="bold"
-                                    app:topType="@{viewModel.topType}"
-                                    tools:text="topType" />
-
-                            </LinearLayout>
+                            android:layout_height="match_parent">
 
                             <ImageView
+                                android:id="@+id/imageView2"
                                 android:layout_width="@dimen/icon_size"
                                 android:layout_height="@dimen/icon_size"
                                 android:layout_gravity="center"
-                                android:layout_marginEnd="@dimen/default_margin_double"
+                                android:layout_marginEnd="@dimen/default_margin"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
                                 app:srcCompat="@drawable/ic_down_arrow"
                                 app:tint="@android:color/white" />
 
-                        </TableRow>
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:text="@string/platform"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                                android:textColor="@color/color_orange"
+                                app:layout_constraintEnd_toStartOf="@+id/textView3"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/typeBattles"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/default_margin_double"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                android:textStyle="bold"
+                                app:battlesType="@{viewModel.topFullModel.battlesType}"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="@+id/textView3"
+                                app:layout_constraintStart_toStartOf="@+id/textView3"
+                                app:layout_constraintTop_toBottomOf="@+id/textView"
+                                app:topType="@{viewModel.topType}"
+                                tools:text="type battles" />
+
+                            <TextView
+                                android:id="@+id/textView3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="16dp"
+                                android:text="@string/type_battles"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                                android:textColor="@color/color_orange"
+                                app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toEndOf="@+id/textView"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/platform"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:gameType="@{viewModel.topFullModel.gameType}"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                android:textStyle="bold"
+                                tools:text="platform"
+                                app:layout_constraintEnd_toEndOf="@+id/textView"
+                                app:layout_constraintStart_toStartOf="@+id/textView"
+                                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </com.google.android.material.card.MaterialCardView>
 

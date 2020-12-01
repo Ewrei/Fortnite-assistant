@@ -33,7 +33,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/fortnite_battlefest"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     app:value="@{item.value}"
                     tools:text="120 00" />
@@ -42,6 +42,7 @@
                     android:id="@+id/differenceOne"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/fortnite_battlefest"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     tools:text="+ 150" />
             </LinearLayout>
@@ -54,7 +55,7 @@
                 android:textAlignment="center"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:textColor="@android:color/darker_gray"
-                android:textStyle="bold"
+                android:fontFamily="@font/futura_pt_bold"
                 tools:text="title" />
 
             <LinearLayout
@@ -67,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/fortnite_battlefest"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     app:value="@{item.valueTwo}"
                     tools:text="120 00" />
@@ -77,6 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
+                    android:fontFamily="@font/fortnite_battlefest"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     tools:text="- 100" />
 

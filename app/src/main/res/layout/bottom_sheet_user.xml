@@ -24,21 +24,22 @@
             android:gravity="center"
             android:text="@string/account_action"
             android:textStyle="bold"
+            android:fontFamily="@font/futura_pt_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:textColor="@android:color/darker_gray" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/updateButton"
-            android:backgroundTint="@color/color_orange"
+            style="@style/DefaultButton"
+            android:layout_width="match_parent"
             android:layout_marginStart="@dimen/default_margin_double"
             android:layout_marginEnd="@dimen/default_margin_double"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/refresh" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/switchButton"
-            android:backgroundTint="@color/color_orange"
+            style="@style/DefaultButton"
             android:layout_marginStart="@dimen/default_margin_double"
             android:layout_marginEnd="@dimen/default_margin_double"
             android:layout_width="match_parent"
@@ -48,7 +49,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/compareWithYourself"
-            android:backgroundTint="@color/color_orange"
+            style="@style/DefaultButton"
             android:layout_marginStart="@dimen/default_margin_double"
             android:layout_marginEnd="@dimen/default_margin_double"
             android:layout_width="match_parent"
@@ -58,7 +59,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/removeAccount"
-            android:backgroundTint="@color/color_orange"
+            style="@style/DefaultButton"
             android:layout_marginStart="@dimen/default_margin_double"
             android:layout_marginEnd="@dimen/default_margin_double"
             android:layout_width="match_parent"

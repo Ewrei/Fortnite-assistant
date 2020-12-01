@@ -59,6 +59,7 @@
                             android:gravity="center"
                             android:paddingTop="@dimen/default_padding"
                             android:textStyle="bold"
+                            android:fontFamily="@font/futura_pt_bold"
                             android:text="@string/develop"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
@@ -67,6 +68,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:fontFamily="@font/futura_pt_medium"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                             tools:text="Version: 1.0.0" />
 
@@ -79,6 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/default_margin"
                     android:textColor="@android:color/darker_gray"
+                    android:fontFamily="@font/futura_pt_medium"
                     android:text="@string/application_info"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
@@ -101,6 +104,7 @@
                             android:layout_weight="1"
                             android:text="@string/developer_title"
                             android:textStyle="bold"
+                            android:fontFamily="@font/futura_pt_bold"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
                         <TextView
@@ -110,6 +114,7 @@
                             android:textColor="@android:color/darker_gray"
                             android:layout_marginTop="@dimen/default_margin"
                             android:layout_marginBottom="@dimen/default_margin"
+                            android:fontFamily="@font/futura_pt_medium"
                             android:text="@string/developer_body"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
@@ -121,6 +126,7 @@
                             android:autoLink="web|email"
                             android:drawableStart="@drawable/ic_gmail"
                             android:drawablePadding="@dimen/default_padding"
+                            android:fontFamily="@font/futura_pt_medium"
                             android:text="@string/gmail"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                             tools:ignore="RtlCompat" />
@@ -132,6 +138,7 @@
                             android:layout_marginEnd="@dimen/default_margin"
                             android:layout_marginBottom="@dimen/default_margin"
                             android:autoLink="web|email"
+                            android:fontFamily="@font/futura_pt_medium"
                             android:drawableStart="@drawable/ic_vk"
                             android:drawablePadding="@dimen/default_padding"
                             android:gravity="center"
@@ -146,6 +153,7 @@
                             android:layout_marginTop="@dimen/half_default_margin"
                             android:layout_marginEnd="@dimen/default_margin"
                             android:autoLink="web|email"
+                            android:fontFamily="@font/futura_pt_medium"
                             android:drawableStart="@drawable/ic_telegram"
                             android:drawablePadding="@dimen/default_padding"
                             android:text="@string/telegram_url"
@@ -158,13 +166,12 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/privacyPolicy"
-                    style="@style/Widget.MaterialComponents.Button"
+                    style="@style/DefaultButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginTop="@dimen/default_margin"
                     android:layout_marginEnd="@dimen/default_margin"
-                    android:backgroundTint="@color/color_orange"
                     android:text="@string/privacy_policy"
                     app:layout_constraintBottom_toTopOf="@+id/faceitProfile"
                     app:layout_constraintEnd_toEndOf="parent"

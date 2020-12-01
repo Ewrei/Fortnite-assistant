@@ -14,11 +14,11 @@ enum class GameType(val id: Int) {
     },
     GAMEPAD(2) {
         override fun getTitleRes() = R.string.all
-        override fun getImageRes() = R.drawable.ic_console
+        override fun getImageRes() = R.drawable.ic_gamepad
     },
     TOUCH(3) {
         override fun getTitleRes() = R.string.all
-        override fun getImageRes() = R.drawable.ic_ps4
+        override fun getImageRes() = R.drawable.ic_touch
     };
 
     abstract fun getTitleRes(): Int

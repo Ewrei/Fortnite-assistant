@@ -49,7 +49,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:icon="@drawable/ic_console" />
+                app:icon="@drawable/ic_gamepad" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/touch"
@@ -57,7 +57,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:icon="@drawable/ic_ps4" />
+                app:icon="@drawable/ic_touch" />
 
         </com.google.android.material.button.MaterialButtonToggleGroup>
 

@@ -18,7 +18,7 @@
         android:padding="@dimen/default_margin"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:textColor="@android:color/white"
-        android:textStyle="bold"
+        android:fontFamily="@font/futura_pt_bold"
         app:topType="@{item.topType}"
         tools:text="topType" />
 

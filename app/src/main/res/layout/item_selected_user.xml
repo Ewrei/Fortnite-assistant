@@ -47,6 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_margin"
+                    android:fontFamily="@font/futura_pt_bold"
                     android:text="@{item.userEntity.name}"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     tools:text="name" />
@@ -63,6 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/futura_pt_medium"
                     android:text="@{@string/matches_format(item.userEntity.all.overall.getMatchesString())}"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="?header_color"
@@ -89,12 +91,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/kills"
+                        android:fontFamily="@font/futura_pt_medium"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textColor="?header_color" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/fortnite_battlefest"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         app:value="@{item.userEntity.all.overall.kills}"
                         tools:text="1 230" />
@@ -122,12 +126,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/wins"
+                        android:fontFamily="@font/futura_pt_medium"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textColor="?header_color" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/fortnite_battlefest"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         app:value="@{item.userEntity.all.overall.wins}"
                         tools:text="1 230" />
@@ -155,12 +161,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/wins_percent"
+                        android:fontFamily="@font/futura_pt_medium"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textColor="?header_color" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/fortnite_battlefest"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         app:percent="@{item.userEntity.all.overall.winRate}"
                         tools:text="58 %" />
@@ -188,12 +196,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/deaths"
+                        android:fontFamily="@font/futura_pt_medium"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textColor="?header_color" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/fortnite_battlefest"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         app:value="@{item.userEntity.all.overall.deaths}"
                         tools:text="1 230" />

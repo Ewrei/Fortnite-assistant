@@ -4,6 +4,9 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import robin.vitalij.fortniteassitant.model.TopFullModel
+import robin.vitalij.fortniteassitant.model.enums.BattlesType
+import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.model.enums.TopType
 import robin.vitalij.fortniteassitant.repository.network.TopRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
@@ -14,6 +17,8 @@ class TopViewModel(
 ) : BaseViewModel() {
 
     var topType = ObservableField(TopType.KD)
+
+    var topFullModel = ObservableField(TopFullModel(TopType.MATCHES, GameType.ALL, BattlesType.SOLO))
 
     val mutableLiveData = MutableLiveData<List<TopUserModel>>()
 

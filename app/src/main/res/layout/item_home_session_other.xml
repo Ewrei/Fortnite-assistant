@@ -44,7 +44,7 @@
                 android:shadowDx="-2.4"
                 android:shadowDy="2.4"
                 android:shadowRadius="0.01"
-                android:textStyle="bold"
+                android:fontFamily="@font/futura_pt_bold"
                 android:text="@string/other_session"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 app:layout_constraintEnd_toEndOf="parent"

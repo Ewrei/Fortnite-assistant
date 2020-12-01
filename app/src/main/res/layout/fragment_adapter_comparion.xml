@@ -37,7 +37,6 @@
                     android:id="@+id/avatarOne"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
-                    android:background="@drawable/black_border"
                     app:imageUrl="@{model.playerModel.userEntity.image}"
                     tools:srcCompat="@tools:sample/avatars" />
 
@@ -48,6 +47,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/futura_pt_medium"
                     android:text="@{model.playerModel.userEntity.name}"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     tools:text="nicknameOne" />
@@ -74,7 +74,6 @@
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
                     android:layout_marginStart="@dimen/default_margin"
-                    android:background="@drawable/black_border"
                     app:imageUrl="@{model.playerTwoModel.userEntity.image}"
                     tools:srcCompat="@tools:sample/avatars" />
 
@@ -84,6 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/default_margin"
+                    android:fontFamily="@font/futura_pt_medium"
                     android:text="@{model.playerTwoModel.userEntity.name}"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     tools:text="nickNameTwo" />
@@ -127,7 +127,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:icon="@drawable/ic_console" />
+                app:icon="@drawable/ic_gamepad" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/touch"
@@ -135,7 +135,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:icon="@drawable/ic_ps4" />
+                app:icon="@drawable/ic_touch" />
 
         </com.google.android.material.button.MaterialButtonToggleGroup>
 

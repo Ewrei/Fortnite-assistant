@@ -17,7 +17,8 @@
         style="@style/DefaultCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin">
+        android:layout_marginTop="@dimen/default_margin"
+        app:cardCornerRadius="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,7 +29,6 @@
                 android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
-                android:layout_margin="@dimen/default_margin"
                 android:scaleType="fitCenter"
                 app:imageUrl="@{item.images.background}"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -40,13 +40,12 @@
                 android:id="@+id/inventoryName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginEnd="@dimen/default_margin"
+                android:layout_margin="@dimen/default_margin"
+                android:fontFamily="@font/futura_pt_bold"
                 android:gravity="center"
                 android:text="@{item.name}"
                 android:textAllCaps="true"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 tools:text="inventoryName" />
 
             <TextView
@@ -55,10 +54,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginEnd="@dimen/default_margin"
+                android:fontFamily="@font/futura_pt_medium"
                 android:gravity="center"
                 android:textAllCaps="true"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="10sp"
+                android:layout_marginBottom="@dimen/default_margin"
                 app:typeShop="@{item.type}"
                 tools:text="type" />
 

@@ -13,11 +13,15 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.android.synthetic.main.bottom_sheet_top.*
 import kotlinx.android.synthetic.main.recycler_view.*
+import kotlinx.android.synthetic.main.recycler_view.recyclerView
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.databinding.BottomSheetTopBinding
 import robin.vitalij.fortniteassitant.interfaces.TopResultCallback
+import robin.vitalij.fortniteassitant.model.TopFullModel
+import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.ui.bottomsheet.top.adapter.TopResultAdapter
 import robin.vitalij.fortniteassitant.ui.bottomsheet.top.adapter.viewmodel.TopResult
 import robin.vitalij.fortniteassitant.ui.bottomsheet.top.adapter.viewmodel.TopResultType
@@ -69,11 +73,17 @@ class TopResultFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
             it.let(::initAdapter)
         })
 
+        arguments?.let {
+            viewModel.topFullModel = it.getSerializable(TOP_FULL_MODEL) as TopFullModel
+        }
+
         viewModel.loadData()
+
+        setListeners()
     }
 
     override fun onStart() {
@@ -82,6 +92,10 @@ class TopResultFragment : BottomSheetDialogFragment() {
         activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
         val sheetContainer = requireView().parent as? ViewGroup ?: return
         sheetContainer.layoutParams.height = (displayMetrics.heightPixels - BOTTOM_SHEET_MARGIN_TOP)
+    }
+
+    private fun setListeners() {
+        typeBattlesSpinner.setItems(BattlesType.getTitles(requireContext()))
     }
 
     private fun initAdapter(list: List<TopResult>) {
@@ -112,14 +126,19 @@ class TopResultFragment : BottomSheetDialogFragment() {
     companion object {
 
         private const val TAG = "TopResultFragment"
+        private const val TOP_FULL_MODEL = "top_full_model"
         private const val MAX_SPAN_COUNT = 2
 
         fun show(
             fragmentManager: FragmentManager?,
+            topFullModel: TopFullModel,
             topResultCallback: TopResultCallback
         ) {
             fragmentManager?.let {
                 TopResultFragment().apply {
+                    arguments = Bundle().apply {
+                        putSerializable(TOP_FULL_MODEL, topFullModel)
+                    }
                     this.topResultCallback = topResultCallback
                 }.show(
                     it,

@@ -27,7 +27,7 @@
                 android:layout_margin="@dimen/default_margin_double"
                 android:text="@{item.title}"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textStyle="bold"
+                android:fontFamily="@font/futura_pt_bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -43,6 +43,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/futura_pt_medium"
                 app:value="@{item.inventoryModels.size()}"
                 tools:text="size" />
 

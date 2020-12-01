@@ -47,7 +47,6 @@
                             android:layout_marginStart="@dimen/default_margin_double"
                             android:layout_marginTop="@dimen/default_margin"
                             android:layout_marginBottom="@dimen/default_margin_double"
-                            android:background="@drawable/black_border"
                             app:imageUrl="@{viewModel.user.avatar}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -62,40 +61,42 @@
                             android:layout_marginStart="@dimen/default_margin_double"
                             android:layout_marginTop="@dimen/default_margin_double"
                             android:ellipsize="end"
+                            android:fontFamily="@font/futura_pt_bold"
                             android:maxLines="1"
                             android:text="@{viewModel.user.name}"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                            android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="@+id/profileImage"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:text="userName" />
 
+
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/refresh"
+                            style="@style/DefaultButton"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/default_margin_double"
                             android:layout_marginEnd="@dimen/default_margin_double"
-                            android:backgroundTint="@color/color_orange"
                             android:text="@string/refresh"
                             app:icon="@drawable/ic_refresh"
+                            app:iconTint="@android:color/black"
                             app:layout_constraintBottom_toTopOf="@+id/lastUpdate"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toEndOf="@+id/profileImage"
                             app:layout_constraintTop_toBottomOf="@+id/copyStatsLink" />
 
-
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/copyStatsLink"
+                            style="@style/DefaultButton"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/default_margin_double"
                             android:layout_marginEnd="@dimen/default_margin_double"
-                            android:backgroundTint="@color/color_orange"
                             android:text="@string/copy_stats_link"
                             app:icon="@drawable/ic_link"
+                            app:iconTint="@android:color/black"
                             app:layout_constraintBottom_toTopOf="@+id/refresh"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
@@ -108,6 +109,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/default_margin_double"
                             android:layout_marginEnd="@dimen/default_margin_double"
+                            android:fontFamily="@font/futura_pt_medium"
                             android:text="@{@string/last_date_update(viewModel.user.getLastUpdate())}"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -125,9 +127,9 @@
                         android:layout_marginStart="@dimen/default_margin_double"
                         android:layout_marginTop="@dimen/default_margin_double"
                         android:layout_marginEnd="@dimen/default_margin_double"
+                        android:fontFamily="@font/futura_pt_bold"
                         android:text="@string/add_functional"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                        android:textStyle="bold" />
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cardView"
@@ -160,9 +162,9 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/default_margin_double"
                                     android:layout_weight="1"
+                                    android:fontFamily="@font/futura_pt_medium"
                                     android:text="@string/search_player"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    android:textStyle="bold"
                                     app:layout_constraintBottom_toTopOf="@+id/hours"
                                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -193,9 +195,9 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/default_margin_double"
                                     android:layout_weight="1"
+                                    android:fontFamily="@font/futura_pt_medium"
                                     android:text="@string/compare_players"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    android:textStyle="bold"
                                     app:layout_constraintBottom_toTopOf="@+id/hours"
                                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -227,9 +229,9 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/default_margin_double"
                                     android:layout_weight="1"
+                                    android:fontFamily="@font/futura_pt_medium"
                                     android:text="@string/users"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    android:textStyle="bold"
                                     app:layout_constraintBottom_toTopOf="@+id/hours"
                                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -252,9 +254,9 @@
                         android:layout_marginStart="@dimen/default_margin_double"
                         android:layout_marginTop="@dimen/default_margin_double"
                         android:layout_marginEnd="@dimen/default_margin_double"
+                        android:fontFamily="@font/futura_pt_bold"
                         android:text="@string/disabling_ads"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                        android:textStyle="bold" />
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
                     <com.google.android.material.card.MaterialCardView
                         style="@style/DefaultCard"
@@ -286,9 +288,9 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/default_margin_double"
                                     android:layout_weight="1"
+                                    android:fontFamily="@font/futura_pt_medium"
                                     android:text="@string/disabling_ads"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    android:textStyle="bold"
                                     app:layout_constraintBottom_toTopOf="@+id/hours"
                                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -319,9 +321,9 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/default_margin_double"
                                     android:layout_weight="1"
+                                    android:fontFamily="@font/futura_pt_medium"
                                     android:text="@string/check_shopping"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    android:textStyle="bold"
                                     app:layout_constraintBottom_toTopOf="@+id/hours"
                                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -340,6 +342,7 @@
                                 android:layout_marginStart="@dimen/default_margin"
                                 android:layout_marginEnd="@dimen/default_margin"
                                 android:layout_marginBottom="@dimen/default_margin_double"
+                                android:fontFamily="@font/futura_pt_medium"
                                 android:text="@string/check_shopping_body"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                                 android:textColor="@android:color/darker_gray" />
@@ -354,9 +357,9 @@
                         android:layout_marginStart="@dimen/default_margin_double"
                         android:layout_marginTop="@dimen/default_margin_double"
                         android:layout_marginEnd="@dimen/default_margin_double"
+                        android:fontFamily="@font/futura_pt_bold"
                         android:text="@string/feedback"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                        android:textStyle="bold" />
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
                     <com.google.android.material.card.MaterialCardView
                         style="@style/DefaultCard"
@@ -388,9 +391,9 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/default_margin_double"
                                     android:layout_weight="1"
+                                    android:fontFamily="@font/futura_pt_medium"
                                     android:text="@string/to_contact_us"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    android:textStyle="bold"
                                     app:layout_constraintBottom_toTopOf="@+id/hours"
                                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -421,9 +424,9 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/default_margin_double"
                                     android:layout_weight="1"
+                                    android:fontFamily="@font/futura_pt_medium"
                                     android:text="@string/play_market_header"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    android:textStyle="bold"
                                     app:layout_constraintBottom_toTopOf="@+id/hours"
                                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -454,9 +457,9 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/default_margin_double"
                                     android:layout_weight="1"
+                                    android:fontFamily="@font/futura_pt_medium"
                                     android:text="@string/info_application"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    android:textStyle="bold"
                                     app:layout_constraintBottom_toTopOf="@+id/hours"
                                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -487,9 +490,9 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/default_margin_double"
                                     android:layout_weight="1"
+                                    android:fontFamily="@font/futura_pt_medium"
                                     android:text="@string/share_title"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    android:textStyle="bold"
                                     app:layout_constraintBottom_toTopOf="@+id/hours"
                                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -507,6 +510,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/default_margin"
                                 android:layout_marginEnd="@dimen/default_margin"
+                                android:fontFamily="@font/futura_pt_medium"
                                 android:text="@string/to_contact_us_body"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                                 android:textColor="@android:color/darker_gray" />
@@ -516,6 +520,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/default_margin"
                                 android:layout_marginEnd="@dimen/default_margin"
+                                android:fontFamily="@font/futura_pt_medium"
                                 android:text="@string/play_market_body"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                                 android:textColor="@android:color/darker_gray" />
@@ -526,6 +531,7 @@
                                 android:layout_marginStart="@dimen/default_margin"
                                 android:layout_marginEnd="@dimen/default_margin"
                                 android:layout_marginBottom="@dimen/default_margin_double"
+                                android:fontFamily="@font/futura_pt_medium"
                                 android:text="@string/share_body"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                                 android:textColor="@android:color/darker_gray" />

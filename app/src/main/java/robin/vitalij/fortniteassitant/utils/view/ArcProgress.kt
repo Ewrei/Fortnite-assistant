@@ -3,10 +3,7 @@ package robin.vitalij.fortniteassitant.utils.view
 import android.animation.ValueAnimator
 import android.content.Context
 import android.content.res.TypedArray
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.RectF
+import android.graphics.*
 import android.os.Bundle
 import android.os.Parcelable
 import android.text.TextPaint
@@ -261,13 +258,6 @@ class ArcProgress @JvmOverloads constructor(
                 textPaint!!
             )
             textPaint!!.textSize = suffixTextSize
-            val suffixHeight = textPaint!!.descent() + textPaint!!.ascent()
-            /*   canvas.drawText(
-                   suffixText!!,
-                   width / 2.0f + textPaint!!.measureText(progressText) + suffixTextPadding,
-                   textBaseline + textHeight - suffixHeight,
-                   textPaint!!
-               )*/
         }
         if (arcBottomHeight == 0f) {
             val radius = width / 2f
@@ -276,6 +266,8 @@ class ArcProgress @JvmOverloads constructor(
         }
         if (!TextUtils.isEmpty(getBottomText())) {
             textPaint!!.textSize = bottomTextSize
+           // textPaint!!.typeface = Typeface.createFromAsset(context.assets,"@font/futura_pt_medium")
+
             val bottomTextBaseline =
                 height - arcBottomHeight - (textPaint!!.descent() + textPaint!!.ascent()) / 2
             canvas.drawText(

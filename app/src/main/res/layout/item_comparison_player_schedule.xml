@@ -32,7 +32,7 @@
                 android:textAlignment="center"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:textColor="@android:color/darker_gray"
-                android:textStyle="bold"
+                android:fontFamily="@font/futura_pt_bold"
                 tools:text="title" />
 
             <com.github.mikephil.charting.charts.HorizontalBarChart

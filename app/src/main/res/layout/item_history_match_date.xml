@@ -20,7 +20,7 @@
         android:gravity="center"
         android:text="item.leftTo"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        android:textStyle="bold"
+        android:fontFamily="@font/futura_pt_bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

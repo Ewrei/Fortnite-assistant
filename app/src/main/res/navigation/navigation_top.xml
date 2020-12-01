@@ -8,8 +8,8 @@
 
     <fragment
         android:id="@+id/topScreen"
-        android:name="robin.vitalij.fortniteassitant.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_home"/>
+        android:name="robin.vitalij.fortniteassitant.ui.top.TopFragment"
+        android:label="@string/tab_title_top"
+        tools:layout="@layout/fragment_top"/>
 
 </navigation>

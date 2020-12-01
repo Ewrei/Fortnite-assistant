@@ -40,7 +40,6 @@
                 android:layout_height="125dp"
                 android:layout_marginStart="@dimen/default_margin_x4"
                 android:layout_marginTop="@dimen/default_margin_x4"
-                android:background="@drawable/black_border"
                 app:imageUrl="@{item.avatarUrl}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -55,7 +54,7 @@
                 android:maxLines="1"
                 android:text="@{item.userName}"
                 android:textSize="32sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/futura_pt_bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/profileImage"
                 app:layout_constraintTop_toTopOf="@+id/profileImage"
@@ -68,6 +67,7 @@
                 android:layout_marginStart="@dimen/default_margin_double"
                 android:layout_marginEnd="@dimen/default_margin_double"
                 android:text="@{item.playerId}"
+                android:fontFamily="@font/futura_pt_medium"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="@android:color/darker_gray"
                 app:layout_constraintEnd_toEndOf="@+id/imageView"
@@ -83,6 +83,7 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 app:layout_constraintBottom_toTopOf="@+id/matches"
                 app:layout_constraintStart_toEndOf="@+id/profileImage"
+                android:fontFamily="@font/fortnite_battlefest"
                 app:value="@{item.matchesPlayed}"
                 tools:text="matchesPlayed" />
 
@@ -92,6 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin_double"
                 android:text="@string/matches"
+                android:fontFamily="@font/futura_pt_medium"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="@android:color/darker_gray"
                 app:layout_constraintBottom_toBottomOf="@+id/profileImage"
@@ -102,6 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/default_margin_double"
+                android:fontFamily="@font/fortnite_battlefest"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 app:hoursGame="@{item.timeHours}"
                 app:layout_constraintBottom_toTopOf="@+id/hours"
@@ -114,6 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/default_margin_double"
                 android:text="@string/hours"
+                android:fontFamily="@font/futura_pt_medium"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="@android:color/darker_gray"
                 app:layout_constraintBottom_toBottomOf="@+id/profileImage"
@@ -124,7 +128,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#0a0a0a">
+            android:background="@color/colorPrimary">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/currentSeason"

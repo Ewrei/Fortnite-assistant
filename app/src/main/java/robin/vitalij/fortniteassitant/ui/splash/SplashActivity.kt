@@ -38,7 +38,7 @@ class SplashActivity : AppCompatActivity() {
         viewModel =
             ViewModelProvider(viewModelStore, viewModelFactory).get(SplashViewModel::class.java)
                 .apply {
-                    isUserAuthorised().observe(this@SplashActivity, Observer {
+                    isUserAuthorised().observe(this@SplashActivity, {
                         Handler().postDelayed({
                             if (!isSync) {
                                 isSync = true

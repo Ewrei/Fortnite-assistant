@@ -15,6 +15,7 @@
         android:layout_marginTop="@dimen/default_margin_double"
         android:layout_marginEnd="@dimen/default_margin"
         android:text="@{item.title}"
+        android:fontFamily="@font/futura_pt_bold"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textStyle="bold" />
 

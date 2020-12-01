@@ -46,7 +46,7 @@ fun Context.showDialog(@StringRes messageRes: Int) {
         .show()
 }
 
-fun Context.showDialog(icon: Drawable, title: String, message: String) {
+fun Context.showDialog(icon: Drawable?, title: String, message: String) {
     MaterialAlertDialogBuilder(this)
         .setTitle(title)
         .setMessage(message)

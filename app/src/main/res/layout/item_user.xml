@@ -40,7 +40,6 @@
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginTop="@dimen/default_margin"
                     android:layout_marginBottom="@dimen/default_margin"
-                    android:background="@drawable/black_border"
                     app:imageUrl="@{item.userEntity.avatar}"
                     tools:srcCompat="@tools:sample/avatars" />
 
@@ -50,6 +49,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_margin"
                     android:text="@{item.userEntity.name}"
+                    android:fontFamily="@font/futura_pt_bold"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     tools:text="name" />
             </TableRow>
@@ -64,6 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_margin"
+                    android:fontFamily="@font/futura_pt_medium"
                     android:text="@{@string/last_date_update(item.lastData)}"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     tools:text="Последнее обновление 9 января 2018 года" />
@@ -74,6 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/futura_pt_medium"
                     android:text="@{@string/matches_format(item.userEntity.all.overall.getMatchesString())}"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="?header_color"
@@ -100,12 +102,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/wins"
+                        android:fontFamily="@font/futura_pt_medium"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textColor="?header_color" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/fortnite_battlefest"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         app:value="@{item.userEntity.all.overall.wins}"
                         tools:text="1 230" />
@@ -134,12 +138,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/wins_percent"
+                        android:fontFamily="@font/futura_pt_medium"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textColor="?header_color" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/fortnite_battlefest"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         app:percent="@{item.userEntity.all.overall.winRate}"
                         tools:text="58 %" />
@@ -167,12 +173,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/kills"
+                        android:fontFamily="@font/futura_pt_medium"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textColor="?header_color" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/fortnite_battlefest"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         app:value="@{item.userEntity.all.overall.kills}"
                         tools:text="1 230" />
@@ -200,12 +208,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/kd"
+                        android:fontFamily="@font/futura_pt_medium"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textColor="?header_color" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/fortnite_battlefest"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         app:value="@{item.userEntity.all.overall.kd}"
                         tools:text="1 230" />

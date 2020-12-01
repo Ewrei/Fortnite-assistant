@@ -1,5 +1,6 @@
 package robin.vitalij.fortniteassitant.model.enums
 
+import android.content.Context
 import robin.vitalij.fortniteassitant.R
 
 enum class BattlesType {
@@ -23,4 +24,14 @@ enum class BattlesType {
     };
 
     abstract fun getTitleRes(): Int
+
+    companion object {
+        fun getTitles(context: Context): List<String> {
+            val list = arrayListOf<String>()
+            values().forEach {
+                list.add(context.getString(it.getTitleRes()))
+            }
+            return list
+        }
+    }
 }

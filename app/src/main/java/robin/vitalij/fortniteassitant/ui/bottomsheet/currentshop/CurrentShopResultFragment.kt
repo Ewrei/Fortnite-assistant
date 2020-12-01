@@ -74,7 +74,7 @@ class CurrentShopResultFragment : BottomSheetDialogFragment() {
             description.text = itemShop.description
             price.setValueText(itemShop.price)
 
-            if(itemShop.otherItemsDetails.isNotEmpty()) {
+            if (itemShop.otherItemsDetails.isNotEmpty()) {
                 initAdapter(itemShop.otherItemsDetails)
             }
         }
@@ -96,14 +96,6 @@ class CurrentShopResultFragment : BottomSheetDialogFragment() {
 
         recyclerView.run {
             adapter = OtherItemsDetailsAdapter(
-                onClick = {
-//                    startActivity(
-//                        InventoryDetailsActivity.getInventoryDetailsActivityIntent(
-//                            context,
-//                            it
-//                        )
-//                    )
-                },
                 widthPixels = widthPixels.toInt()
             )
             (adapter as OtherItemsDetailsAdapter).setData(list)

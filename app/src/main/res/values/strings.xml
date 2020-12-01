@@ -81,6 +81,9 @@
     <string name="player_soutlived">Player Soutlived</string>
     <string name="top_history">Top</string>
     <string name="score">Score</string>
+    <string name="history_match_body">
+Match data can be grouped. And also with each update we get the last 25 matches, which can be grouped.\n\n
+This section is beta. If it does not work correctly for you, let us know</string>
 
     <!--Home-->
     <string name="hours">Hours</string>
@@ -205,6 +208,8 @@
 
     <!--Top-->
     <string name="parametr">Parameter</string>
+    <string name="platform">Platform</string>
+    <string name="type_battles">Type battles</string>
 
     <!--Shop-->
     <string name="upcoming_shop">Upcoming</string>

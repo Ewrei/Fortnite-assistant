@@ -3,8 +3,10 @@ package robin.vitalij.fortniteassitant.ui.historymatch
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,10 +17,7 @@ import kotlinx.android.synthetic.main.recycler_view.*
 import kotlinx.android.synthetic.main.toolbar_center_title.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.observeToEmpty
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
-import robin.vitalij.fortniteassitant.common.extensions.pxFromDp
+import robin.vitalij.fortniteassitant.common.extensions.*
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.historymatch.adapter.HistoryMatchAdapter
 import robin.vitalij.fortniteassitant.ui.historymatch.adapter.viewmodel.HistoryMatch
@@ -65,6 +64,7 @@ class HistoryMatchFragment : BaseFragment() {
         })
 
         initToolbar()
+        initMenuItem()
     }
 
     private fun setNavigation() {
@@ -79,6 +79,18 @@ class HistoryMatchFragment : BaseFragment() {
             (adapter as HistoryMatchAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(Space(context.pxFromDp(R.dimen.default_margin), SPAN_COUNT))
+        }
+    }
+
+    private fun initMenuItem() {
+        toolbar.inflateMenu(R.menu.menu_info)
+        val item: MenuItem = toolbar.menu.findItem(R.id.action_info)
+        item.setOnMenuItemClickListener {
+            context?.showDialog(
+                ContextCompat.getDrawable(requireContext(), R.mipmap.ic_launcher),
+                getString(R.string.title_history_match), getString(R.string.history_match_body)
+            )
+            true
         }
     }
 

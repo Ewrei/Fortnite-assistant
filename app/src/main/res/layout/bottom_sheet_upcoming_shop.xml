@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_margin_double"
             android:layout_marginEnd="@dimen/default_margin_double"
+            android:fontFamily="@font/futura_pt_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:textStyle="bold"
             tools:text="name" />
@@ -42,6 +43,7 @@
             android:layout_marginStart="@dimen/default_margin_double"
             android:layout_marginTop="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin_double"
+            android:fontFamily="@font/futura_pt_medium"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@android:color/darker_gray"
             tools:text="description" />
@@ -63,6 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin_double"
                 android:layout_marginEnd="@dimen/default_margin_double"
+                android:fontFamily="@font/futura_pt_medium"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 tools:text="price" />
 

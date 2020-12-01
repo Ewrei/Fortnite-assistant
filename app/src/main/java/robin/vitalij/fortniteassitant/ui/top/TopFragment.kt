@@ -82,14 +82,14 @@ class TopFragment : BaseFragment() {
     }
 
     private fun setListener() {
-        typeTopCard.setOnClickListener {
-            TopResultFragment.show(childFragmentManager, object : TopResultCallback {
-                override fun checkTop(topType: TopType) {
-                    viewModel.topType.set(topType)
-                    viewModel.loadData()
-                }
-            })
-        }
+//        typeTopCard.setOnClickListener {
+//            TopResultFragment.show(childFragmentManager, object : TopResultCallback {
+//                override fun checkTop(topType: TopType) {
+//                    viewModel.topType.set(topType)
+//                    viewModel.loadData()
+//                }
+//            })
+//        }
     }
 
     private fun setNavigation() {

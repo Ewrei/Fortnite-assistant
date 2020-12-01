@@ -9,9 +9,7 @@ import robin.vitalij.fortniteassitant.common.extensions.DATE_PATTERN_SHORT_TIME
 import robin.vitalij.fortniteassitant.common.extensions.getDateStringFormat
 import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
 import robin.vitalij.fortniteassitant.common.extensions.setVisibility
-import robin.vitalij.fortniteassitant.model.enums.ChartsType
-import robin.vitalij.fortniteassitant.model.enums.ShopType
-import robin.vitalij.fortniteassitant.model.enums.TopType
+import robin.vitalij.fortniteassitant.model.enums.*
 
 object TextViewBinding {
 
@@ -38,6 +36,18 @@ object TextViewBinding {
     @BindingAdapter("value")
     fun TextView.setValueText(value: Int) {
         text = value.getStringFormat()
+    }
+
+    @JvmStatic
+    @BindingAdapter("gameType")
+    fun TextView.setGameType(gameType: GameType) {
+        setText(gameType.getTitleRes())
+    }
+
+    @JvmStatic
+    @BindingAdapter("battlesType")
+    fun TextView.setBattlesType(battlesType: BattlesType) {
+        setText(battlesType.getTitleRes())
     }
 
     @JvmStatic

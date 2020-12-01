@@ -7,7 +7,6 @@ import robin.vitalij.fortniteassitant.model.network.shop.OtherItemsDetails
 
 class OtherItemsDetailsHolder(
     var binding: ItemOtherItemsDetailsBinding,
-    val onClick: (inventoryModel: OtherItemsDetails) -> Unit,
     private val widthPixels: Int
 ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -15,9 +14,5 @@ class OtherItemsDetailsHolder(
         binding.item = item
         itemView.cardView.layoutParams.width = widthPixels
         itemView.cardView.requestLayout()
-
-        itemView.setOnClickListener {
-            onClick(item)
-        }
     }
 }

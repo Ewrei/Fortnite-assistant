@@ -1,11 +1,14 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.top
 
 import androidx.lifecycle.MutableLiveData
+import robin.vitalij.fortniteassitant.model.TopFullModel
 import robin.vitalij.fortniteassitant.ui.bottomsheet.top.adapter.viewmodel.TopResult
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
 
 class TopResultViewModel(private val resourceProvider: ResourceProvider) : BaseViewModel() {
+
+    lateinit var topFullModel: TopFullModel
 
     val mutableLiveData = MutableLiveData<List<TopResult>>()
 

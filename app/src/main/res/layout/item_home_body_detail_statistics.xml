@@ -11,13 +11,13 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/detailStatistics"
+        style="@style/DefaultButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/default_margin_double"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginStart="@dimen/default_margin"
         android:layout_marginTop="@dimen/default_margin"
-        android:layout_marginEnd="@dimen/default_margin_double"
+        android:layout_marginEnd="@dimen/default_margin"
         android:layout_marginBottom="@dimen/default_margin_double"
-        android:backgroundTint="@color/color_orange"
         android:text="@string/details_statistics"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
