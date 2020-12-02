@@ -12,6 +12,7 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
+        app:tabTextAppearance="@style/TabText"
         style="@style/DefaultColorTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -10,6 +10,7 @@ import android.text.TextPaint
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import com.github.lzyzsd.circleprogress.Utils
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
@@ -93,6 +94,7 @@ class ArcProgress @JvmOverloads constructor(
         textPaint?.color = textColor
         textPaint?.textSize = textSize
         textPaint?.isAntiAlias = true
+        textPaint?.typeface = ResourcesCompat.getFont(context, R.font.fortnite_battlefest)
         paint = Paint()
         paint!!.color = default_unfinished_color
         paint!!.isAntiAlias = true
@@ -199,7 +201,7 @@ class ArcProgress @JvmOverloads constructor(
         this.invalidate()
     }
 
-    fun getSuffixText(): String? {
+    private fun getSuffixText(): String? {
         return suffixText
     }
 
@@ -208,7 +210,7 @@ class ArcProgress @JvmOverloads constructor(
         this.invalidate()
     }
 
-    fun getSuffixTextPadding(): Float {
+    private fun getSuffixTextPadding(): Float {
         return suffixTextPadding
     }
 
@@ -266,7 +268,7 @@ class ArcProgress @JvmOverloads constructor(
         }
         if (!TextUtils.isEmpty(getBottomText())) {
             textPaint!!.textSize = bottomTextSize
-           // textPaint!!.typeface = Typeface.createFromAsset(context.assets,"@font/futura_pt_medium")
+            textPaint!!.typeface = ResourcesCompat.getFont(context, R.font.futura_pt_medium)
 
             val bottomTextBaseline =
                 height - arcBottomHeight - (textPaint!!.descent() + textPaint!!.ascent()) / 2

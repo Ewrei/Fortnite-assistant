@@ -42,7 +42,8 @@
         style="@style/DefaultColorTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabMode="auto" />
+        app:tabMode="auto"
+        app:tabTextAppearance="@style/TabText" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"

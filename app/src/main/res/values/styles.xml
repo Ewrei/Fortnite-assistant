@@ -1,4 +1,5 @@
 <resources>
+
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -64,10 +65,12 @@
 
     <style name="BaseMaterialDialogTitleText" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
         <item name="android:textColor">@color/text_color</item>
+        <item name="fontFamily">@font/futura_pt_bold</item>
     </style>
 
     <style name="BaseMaterialDialogBodyText" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
         <item name="android:textColor">@color/text_color</item>
+        <item name="fontFamily">@font/futura_pt_medium</item>
     </style>
 
     <style name="DefaultBackgroundCard" parent="Widget.MaterialComponents.CardView">
@@ -182,6 +185,14 @@
         <item name="strokeColor">@color/outlined_button_selector</item>
         <item name="android:textColor">@color/outlined_button_text_color</item>
         <item name="iconTint">@color/outlined_button_text_color</item>
+    </style>
+
+    <style name="TabText" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/futura_pt_bold</item>
+    </style>
+
+    <style name="TextBottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="fontFamily">@font/futura_pt_medium</item>
     </style>
 
 </resources>

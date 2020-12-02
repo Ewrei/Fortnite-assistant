@@ -339,8 +339,8 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/default_margin"
-                                android:layout_marginEnd="@dimen/default_margin"
+                                android:layout_marginStart="@dimen/default_margin_double"
+                                android:layout_marginEnd="@dimen/default_margin_double"
                                 android:layout_marginBottom="@dimen/default_margin_double"
                                 android:fontFamily="@font/futura_pt_medium"
                                 android:text="@string/check_shopping_body"
@@ -508,8 +508,8 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/default_margin"
-                                android:layout_marginEnd="@dimen/default_margin"
+                                android:layout_marginStart="@dimen/default_margin_double"
+                                android:layout_marginEnd="@dimen/default_margin_double"
                                 android:fontFamily="@font/futura_pt_medium"
                                 android:text="@string/to_contact_us_body"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -518,8 +518,8 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/default_margin"
-                                android:layout_marginEnd="@dimen/default_margin"
+                                android:layout_marginStart="@dimen/default_margin_double"
+                                android:layout_marginEnd="@dimen/default_margin_double"
                                 android:fontFamily="@font/futura_pt_medium"
                                 android:text="@string/play_market_body"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -528,8 +528,8 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/default_margin"
-                                android:layout_marginEnd="@dimen/default_margin"
+                                android:layout_marginStart="@dimen/default_margin_double"
+                                android:layout_marginEnd="@dimen/default_margin_double"
                                 android:layout_marginBottom="@dimen/default_margin_double"
                                 android:fontFamily="@font/futura_pt_medium"
                                 android:text="@string/share_body"

@@ -7,21 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.fragment_adapter_comparion.*
 import kotlinx.android.synthetic.main.fragment_adapter_comparison_many_account.*
-import kotlinx.android.synthetic.main.fragment_adapter_comparison_many_account.allStats
-import kotlinx.android.synthetic.main.fragment_adapter_comparison_many_account.gamepad
-import kotlinx.android.synthetic.main.fragment_adapter_comparison_many_account.keyboardMouse
-import kotlinx.android.synthetic.main.fragment_adapter_comparison_many_account.tabLayout
-import kotlinx.android.synthetic.main.fragment_adapter_comparison_many_account.touch
-import kotlinx.android.synthetic.main.fragment_adapter_comparison_many_account.viewPager
+import kotlinx.android.synthetic.main.layout_type_stats_group.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.ui.common.BaseViewPagerAdapter
 import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.statistics.ComparisonManyPlayersStatisticsFragment
-import robin.vitalij.fortniteassitant.ui.comparison.statistics.ComparisonStatisticsFragment
 import javax.inject.Inject
 
 

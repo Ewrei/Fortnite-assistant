@@ -5,59 +5,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/typeStatGroup"
-        android:layout_width="match_parent"
+    <include
+        layout="@layout/layout_type_stats_group"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin_double"
-        android:layout_marginStart="@dimen/default_margin_double"
-        android:layout_marginEnd="@dimen/default_margin_double"
-        android:gravity="center"
-        app:checkedButton="@id/allStats"
-        app:selectionRequired="true"
-        app:singleSelection="true">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/allStats"
-            style="@style/IconOnlyButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/all" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/keyboardMouse"
-            style="@style/IconOnlyButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            app:icon="@drawable/ic_desktop" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/gamepad"
-            style="@style/IconOnlyButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:icon="@drawable/ic_gamepad" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/touch"
-            style="@style/IconOnlyButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:icon="@drawable/ic_touch" />
-
-    </com.google.android.material.button.MaterialButtonToggleGroup>
+        android:layout_gravity="center" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         style="@style/DefaultColorTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabMode="fixed" />
+        app:tabMode="fixed"
+        app:tabTextAppearance="@style/TabText" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"

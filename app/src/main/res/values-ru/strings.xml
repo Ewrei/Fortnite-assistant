@@ -125,7 +125,7 @@
     <!--Application info-->
     <string name="develop">Разработчик: Виталий Робиновский\nvitalij.robin@gmail.com</string>
     <string name="version_format">Version: %s</string>
-    <string name="application_info">Приложение Cs Go Statistics предназначено для анализа и отслеживание вашей статистики, без авторизации в Steam</string>
+    <string name="application_info">Приложение Fortnite Assistant предназначено для анализа и отслеживание вашей статистики, без авторизации</string>
     <string name="developer_title">Связь с разработичком</string>
     <string name="developer_body">Вы нашли ошибку, или у вас есть идеи как сделать приложение лучше? Пишите</string>
     <string name="privacy_policy">Политика конфиденциальности</string>
@@ -151,7 +151,6 @@
     <string name="feedback">Обратная связь</string>
     <string name="add_functional">Доп. функционал</string>
     <string name="steam_functional">Steam функции</string>
-    <string name="steam_onlie">Онлайн в CS:GO</string>
 
     <string name="delete_account">Удалить пользователя</string>
     <string name="delete_account_message">Профиль был удален</string>
@@ -182,6 +181,8 @@
 
     <!--Top-->
     <string name="parametr">Parameter</string>
+    <string name="platform">Платформа</string>
+    <string name="type_battles">Тип боя</string>
 
     <!--Shop-->
     <string name="upcoming_shop">Предстоящие</string>
@@ -200,5 +201,12 @@
 
     <string name="the_kit_includes">В комплект входит</string>
 
+    <!--Wiki-->
+    <string name="wikipedia">Википедия</string>
+    <string name="battle_pass_rewards">Награды боевого пропуска</string>
+    <string name="quantity_format">Количество %d</string>
+    <string name="current_season">Текущий сезон</string>
+    <string name="season_format">Сезон № %s</string>
+    <string name="paid">Платное</string>
 
 </resources>

@@ -8,7 +8,7 @@ import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
 
 private const val SIX_THING = 6
 
-class InventoryMapperMapper(
+class InventoryMapper(
     private val resourceProvider: ResourceProvider
 ) :
     Mapper<ShopResponse, List<CurrentShopImpl>> {

@@ -55,11 +55,12 @@
                         android:id="@+id/searchButton"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:backgroundTint="@color/color_orange"
+                        android:backgroundTint="@color/background_button"
                         android:insetLeft="0dp"
                         android:insetTop="0dp"
                         android:insetRight="0dp"
                         android:insetBottom="0dp"
+                        app:iconTint="@android:color/black"
                         app:icon="@drawable/ic_search"
                         app:iconGravity="textStart"
                         app:iconPadding="0dp" />

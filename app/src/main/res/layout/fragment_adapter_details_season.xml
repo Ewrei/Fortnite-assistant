@@ -44,6 +44,7 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             style="@style/DefaultColorTabLayout"
+            app:tabTextAppearance="@style/TabText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabMode="auto" />

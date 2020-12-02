@@ -6,6 +6,7 @@ import android.widget.ImageButton
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.fragment_adapter_comparion.*
+import kotlinx.android.synthetic.main.layout_type_stats_group.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.databinding.FragmentAdapterComparionBinding

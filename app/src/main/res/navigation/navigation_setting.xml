@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_navigation_setting_to_navigation_users"
             app:destination="@id/navigation_users" />
+        <action
+            android:id="@+id/action_navigation_setting_start_to_wikiFragment"
+            app:destination="@id/navigation_wiki" />
     </fragment>
 
     <fragment
@@ -38,5 +41,18 @@
         android:name="robin.vitalij.fortniteassitant.ui.users.UsersFragment"
         android:label="@string/users"
         tools:layout="@layout/fragment_with_recyclerview_and_lce" />
+    <fragment
+        android:id="@+id/navigation_wiki"
+        tools:layout="@layout/fragment_wiki"
+        android:name="robin.vitalij.fortniteassitant.ui.wiki.WikiFragment"
+        android:label="@string/wikipedia" >
+        <action
+            android:id="@+id/action_navigation_wiki_to_battlePassRewardsFragment"
+            app:destination="@id/navigation_battles_pass_rewards" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_battles_pass_rewards"
+        android:name="robin.vitalij.fortniteassitant.ui.battlepassrewards.BattlePassRewardsFragment"
+        android:label="@string/battle_pass_rewards" />
 
 </navigation>

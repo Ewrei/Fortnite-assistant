@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -68,6 +69,7 @@ class SettingFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
         initToolbar()
+        initMenuItem()
     }
 
     private fun initToolbar() {
@@ -135,6 +137,15 @@ class SettingFragment : BaseFragment() {
 
     private fun openUri(uri: Uri) {
         startActivity(Intent(Intent.ACTION_VIEW, uri))
+    }
+
+    private fun initMenuItem() {
+        toolbar.inflateMenu(R.menu.menu_setting)
+        val item: MenuItem = toolbar.menu.findItem(R.id.action_wikipedia)
+        item.setOnMenuItemClickListener {
+            findNavController().navigate(R.id.navigation_wiki)
+            true
+        }
     }
 
     companion object {

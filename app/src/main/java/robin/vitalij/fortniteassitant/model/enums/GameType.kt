@@ -10,7 +10,7 @@ enum class GameType(val id: Int) {
     },
     KEYBOARD_MOUSE(1) {
         override fun getTitleRes() = R.string.all
-        override fun getImageRes() = R.drawable.ic_desktop
+        override fun getImageRes() = R.drawable.ic_keyboard
     },
     GAMEPAD(2) {
         override fun getTitleRes() = R.string.all

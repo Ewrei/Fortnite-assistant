@@ -6,6 +6,7 @@ import robin.vitalij.fortniteassitant.di.module.DatabaseModule
 import robin.vitalij.fortniteassitant.di.module.FortniteAppModule
 import robin.vitalij.fortniteassitant.di.module.NetworkModule
 import robin.vitalij.fortniteassitant.di.module.RepositoryModule
+import robin.vitalij.fortniteassitant.ui.battlepassrewards.BattlePassRewardsFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.CurrentShopResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
@@ -40,6 +41,7 @@ import robin.vitalij.fortniteassitant.ui.splash.SplashActivity
 import robin.vitalij.fortniteassitant.ui.subscription.SubscriptionsFragment
 import robin.vitalij.fortniteassitant.ui.top.TopFragment
 import robin.vitalij.fortniteassitant.ui.users.UsersFragment
+import robin.vitalij.fortniteassitant.ui.wiki.WikiFragment
 import javax.inject.Singleton
 
 @Singleton
@@ -76,6 +78,8 @@ interface AppComponent {
     fun inject(fragment: TopFragment)
     fun inject(fragment: CurrentShopFragment)
     fun inject(fragment: UpcomingShopFragment)
+    fun inject(fragment: WikiFragment)
+    fun inject(fragment: BattlePassRewardsFragment)
 
     fun inject(fragment: ProfileResultFragment)
     fun inject(fragment: ContactUsResultFragment)

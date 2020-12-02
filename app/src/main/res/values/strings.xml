@@ -146,14 +146,14 @@ This section is beta. If it does not work correctly for you, let us know</string
     <!--Application info-->
     <string name="develop">Developer: Vitaliy Robinovsky\nvitalij.robin@gmail.com</string>
     <string name="version_format">Version: %s</string>
-    <string name="application_info">The Cs Go Statistics application is designed to analyze and track your statistics, without authorization on Steam.</string>
+    <string name="application_info">The Fortnite Assistant application is designed to analyze and track your statistics, without authorization.</string>
     <string name="developer_title">Developer Link</string>
     <string name="developer_body">Have you found a bug, or do you have ideas on how to make the application better? Email</string>
     <string name="gmail" translatable="false">v.robin.projects@gmail.com</string>
     <string name="vk_url" translatable="false">https://vk.com/cs_go_assistant</string>
     <string name="telegram_url" translatable="false">https://t.me/cs_go_assistant</string>
     <string name="privacy_policy">Privacy policy</string>
-    <string name="privacy_policy_url" translatable="false">https://robinlabs.ru/privat.html#csgoassistant</string>
+    <string name="privacy_policy_url" translatable="false">https://robinlabs.ru/privat.html#fortniteassistant</string>
 
     <string name="purchases_message"> Your purchases have been restored </string>
     <string name="purchases_message_no"> You did not make purchases </string>
@@ -176,7 +176,6 @@ This section is beta. If it does not work correctly for you, let us know</string
     <string name="feedback">Feedback</string>
     <string name="add_functional">Add. functional</string>
     <string name="steam_functional">Steam functional</string>
-    <string name="steam_onlie">Online in CS:GO</string>
 
     <string name="delete_account">Delete user</string>
     <string name="delete_account_message">Profile has been deleted.</string>
@@ -227,5 +226,13 @@ This section is beta. If it does not work correctly for you, let us know</string
     <string name="special_featured">Special Featured</string>
 
     <string name="the_kit_includes">The kit includes</string>
+
+    <!--Wiki-->
+    <string name="wikipedia">Wikipedia</string>
+    <string name="battle_pass_rewards">Battle pass rewards</string>
+    <string name="quantity_format">Quantity %d</string>
+    <string name="current_season">Current season</string>
+    <string name="season_format">Season № %s</string>
+    <string name="paid">Paid</string>
 
 </resources>
