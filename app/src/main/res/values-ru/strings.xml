@@ -78,6 +78,7 @@
     <!--Charts-->
     <string name="kd_full">Kill/Death Ratio</string>
     <string name="win_rate">Win rate</string>
+    <string name="parameter_List">Список параметров</string>
 
     <!--Home-->
     <string name="hours">Часы</string>
@@ -204,7 +205,7 @@
     <!--Wiki-->
     <string name="wikipedia">Википедия</string>
     <string name="battle_pass_rewards">Награды боевого пропуска</string>
-    <string name="quantity_format">Количество %d</string>
+    <string name="quantity_format">Количество: %d</string>
     <string name="current_season">Текущий сезон</string>
     <string name="season_format">Сезон № %s</string>
     <string name="paid">Платное</string>

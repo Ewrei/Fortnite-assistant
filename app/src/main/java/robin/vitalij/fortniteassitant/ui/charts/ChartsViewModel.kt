@@ -3,7 +3,9 @@ package robin.vitalij.fortniteassitant.ui.charts
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import robin.vitalij.fortniteassitant.model.ChartsModel
+import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.ChartsType
+import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.repository.db.ChartsRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
@@ -16,9 +18,9 @@ class ChartsViewModel(
 
     val mutableLiveData = MutableLiveData<ChartsModel>()
 
-    fun loadData(chartsType: ChartsType) {
+    fun loadData(chartsType: ChartsType, battlesType: BattlesType, gameType: GameType) {
         chartsRepository
-            .loadData(preferenceManager.getPlayerId(), chartsType)
+            .loadData(preferenceManager.getPlayerId(), chartsType, battlesType, gameType)
             .observeOn(AndroidSchedulers.mainThread())
             .let(::setupProgressShow)
             .subscribe({

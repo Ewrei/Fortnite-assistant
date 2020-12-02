@@ -19,8 +19,12 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.binding.LineChartBinding.setSession
 import robin.vitalij.fortniteassitant.common.extensions.*
 import robin.vitalij.fortniteassitant.model.SessionModel
+import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.ChartsType
+import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
+import robin.vitalij.fortniteassitant.ui.comparison.BATTLES_TYPE
+import robin.vitalij.fortniteassitant.ui.comparison.GAME_TYPE
 import robin.vitalij.fortniteassitant.ui.main.MainActivity
 import robin.vitalij.fortniteassitant.ui.subscription.SubscriptionActivity
 import javax.inject.Inject
@@ -67,7 +71,11 @@ class ChartsFragment : BaseFragment() {
         setListeners()
 
         arguments?.let {
-            viewModel.loadData(it.getSerializable(CHARTS_TYPE) as ChartsType)
+            viewModel.loadData(
+                it.getSerializable(CHARTS_TYPE) as ChartsType,
+                it.getSerializable(BATTLES_TYPE) as BattlesType,
+                it.getSerializable(GAME_TYPE) as GameType
+            )
             arcProgress.setBottomText(getString((it.getSerializable(CHARTS_TYPE) as ChartsType).getTitleShortRes()))
             arcProgress.max = (it.getSerializable(CHARTS_TYPE) as ChartsType).getProgressMax()
         }

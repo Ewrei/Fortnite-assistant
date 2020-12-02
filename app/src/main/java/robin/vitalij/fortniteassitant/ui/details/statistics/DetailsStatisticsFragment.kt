@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.recycler_view.*
@@ -66,7 +65,9 @@ class DetailsStatisticsFragment : BaseFragment() {
     private fun initAdapter(list: List<HomeBodyStats>) {
         recyclerView.run {
             adapter = HomeBodyStatsAdapter({
-
+                //do nothing
+            }, {
+                //do nothing
             })
             (adapter as HomeBodyStatsAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)

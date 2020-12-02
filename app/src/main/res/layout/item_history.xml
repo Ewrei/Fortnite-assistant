@@ -27,7 +27,7 @@
                 android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/half_default_margin"
+                android:layout_margin="@dimen/default_margin"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 app:endTimeUpdate="@{item.endTimeUpdate}"
                 app:layout_constraintEnd_toEndOf="parent"

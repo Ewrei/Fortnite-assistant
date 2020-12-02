@@ -1,6 +1,7 @@
 package robin.vitalij.fortniteassitant.utils.mapper
 
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.differenceUser
 import robin.vitalij.fortniteassitant.common.extensions.getDetailStatisticsModelList
 import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
 import robin.vitalij.fortniteassitant.db.entity.UserEntity
@@ -64,7 +65,17 @@ class HomeMapper(
                 history.take(TWO_SESSION).forEach {
                     sessions.add(HomeSessionSessionViewModel(it))
                 }
-                sessions.add(HomeSessionOtherViewModel())
+
+                var lastHistory = histories[2].user
+                lastHistory = histories.last().user.differenceUser(lastHistory)
+
+                sessions.add(
+                    HomeSessionOtherViewModel(
+                        matches = lastHistory.all?.overall?.matches ?: 0,
+                        winRate = lastHistory.all?.overall?.winRate ?: 0.0,
+                        kd = lastHistory.all?.overall?.kd ?: 0.0
+                    )
+                )
                 list.add(
                     HomeSessionViewModel(
                         sessions

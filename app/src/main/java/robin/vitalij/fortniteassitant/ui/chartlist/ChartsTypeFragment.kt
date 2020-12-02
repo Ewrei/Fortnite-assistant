@@ -6,9 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.recycler_view.*
 import kotlinx.android.synthetic.main.toolbar_center_title.*
@@ -16,9 +13,11 @@ import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.interfaces.ChartsTypeCallback
+import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.ChartsType
+import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.ui.chartlist.adapter.ChartsTypeAdapter
-import robin.vitalij.fortniteassitant.ui.charts.ChartsFragment.Companion.CHARTS_TYPE
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import javax.inject.Inject
 
@@ -29,10 +28,12 @@ class ChartsTypeFragment : BaseFragment() {
 
     private lateinit var viewModel: ChartsTypeViewModel
 
+    private var chartsTypeCallback: ChartsTypeCallback? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_map, container, false)
+    ) = inflater.inflate(R.layout.fragment_home, container, false)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -50,28 +51,50 @@ class ChartsTypeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ChartsType.values().let(::initAdapter)
-        setNavigation()
+
+        arguments?.let {
+            viewModel.loadData(
+                it.get(BATTLES_TYPE) as BattlesType,
+                it.get(GAME_TYPE) as GameType
+            )
+        }
+
+        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
+            it.let(::initAdapter)
+        })
     }
 
-    private fun setNavigation() {
-        val navController = findNavController()
-        val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
-    }
-
-    private fun initAdapter(list: Array<ChartsType>) {
+    private fun initAdapter(list: List<ChartsType>) {
         recyclerView.run {
             adapter = ChartsTypeAdapter {
-                val navController = findNavController()
-
-                val bundle = Bundle().apply {
-                    putSerializable(CHARTS_TYPE, it)
+                arguments?.let { bundle ->
+                    chartsTypeCallback?.chartsTypeClick(
+                        it,
+                        bundle.get(BATTLES_TYPE) as BattlesType,
+                        bundle.get(GAME_TYPE) as GameType
+                    )
                 }
-                navController.navigate(R.id.navigation_charts, bundle)
             }
-            (adapter as ChartsTypeAdapter).setData(list.toList())
+            (adapter as ChartsTypeAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)
         }
+    }
+
+    companion object {
+        private const val BATTLES_TYPE = "battles_type"
+        private const val GAME_TYPE = "game_type"
+
+        fun newInstance(
+            battlesType: BattlesType,
+            gameType: GameType,
+            chartsTypeCallback: ChartsTypeCallback
+        ) =
+            ChartsTypeFragment().apply {
+                this.chartsTypeCallback = chartsTypeCallback
+                arguments = Bundle().apply {
+                    putSerializable(GAME_TYPE, gameType)
+                    putSerializable(BATTLES_TYPE, battlesType)
+                }
+            }
     }
 }

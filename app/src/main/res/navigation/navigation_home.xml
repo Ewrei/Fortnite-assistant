@@ -43,9 +43,9 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_charts_type"
-        android:name="robin.vitalij.fortniteassitant.ui.chartlist.ChartsTypeFragment"
-        android:label="ChartsTypeFragment"
-        tools:layout="@layout/fragment_map">
+        android:name="robin.vitalij.fortniteassitant.ui.chartlist.viewpager.AdapterChartsTypeFragment"
+        android:label="@string/parameter_List"
+        tools:layout="@layout/fragment_adapter_details_season">
         <action
             android:id="@+id/action_chartsTypeFragment_to_chartsFragment"
             app:destination="@id/navigation_charts" />

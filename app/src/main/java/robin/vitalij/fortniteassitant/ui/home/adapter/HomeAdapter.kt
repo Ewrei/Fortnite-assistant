@@ -17,6 +17,7 @@ import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.Home
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.HomeType
 
 class HomeAdapter(
+    private val openParameterList: () -> Unit,
     private val openDetailsStatistics: () -> Unit,
     private val openSessions: () -> Unit,
     private val openSession: (sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel>) -> Unit,
@@ -59,7 +60,7 @@ class HomeAdapter(
                         parent,
                         false
                     ),
-                    openDetailsStatistics
+                    openDetailsStatistics, openParameterList
                 )
             }
             HomeType.SESSION.id -> {

@@ -67,7 +67,9 @@ class DetailsSeasonStatisticsFragment : BaseFragment() {
     private fun initAdapter(list: List<HomeBodyStats>) {
         recyclerView.run {
             adapter = HomeBodyStatsAdapter({
-
+                //do nothing
+            }, {
+                //do nothing
             })
             (adapter as HomeBodyStatsAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)

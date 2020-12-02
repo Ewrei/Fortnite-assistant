@@ -11,7 +11,8 @@ import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adap
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.HomeBodyStatsType
 
 class HomeBodyStatsAdapter(
-    private val openDetailsStatistics: () -> Unit
+    private val openDetailsStatistics: () -> Unit,
+    private val openParameterList: () -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder<HomeBodyStats>>() {
 
     private val items = arrayListOf<HomeBodyStats>()
@@ -73,7 +74,8 @@ class HomeBodyStatsAdapter(
                         parent,
                         false
                     ),
-                    openDetailsStatistics
+                    openDetailsStatistics,
+                    openParameterList
                 )
             }
             HomeBodyStatsType.EMPTY.id -> {

@@ -69,6 +69,8 @@ class DetailsSessionStatisticsFragment : BaseFragment() {
         recyclerView.run {
             adapter = HomeBodyStatsAdapter({
                 //do nothing
+            }, {
+                //do nothing
             })
             (adapter as HomeBodyStatsAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)

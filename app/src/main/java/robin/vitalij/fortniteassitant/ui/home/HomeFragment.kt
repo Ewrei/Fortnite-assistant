@@ -2,7 +2,6 @@ package robin.vitalij.fortniteassitant.ui.home
 
 import android.content.Context
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,12 +16,11 @@ import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
-import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment.Companion.DETAIL_STATISTICS
 import robin.vitalij.fortniteassitant.ui.home.adapter.HomeAdapter
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.Home
 import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment
-import java.util.ArrayList
+import java.util.*
 import javax.inject.Inject
 
 class HomeFragment : BaseFragment() {
@@ -62,13 +60,21 @@ class HomeFragment : BaseFragment() {
 
     private fun initAdapter(list: List<Home>) {
         recyclerView.run {
-            adapter = HomeAdapter(openDetailsStatistics = {
-                findNavController().navigate(
-                    R.id.navigation_adapter_details_statistics,
-                    Bundle().apply {
-                        putParcelableArrayList(DETAIL_STATISTICS, viewModel.detailsStatistics)
-                    })
-            },
+            adapter = HomeAdapter(
+                openParameterList = {
+                    findNavController().navigate(
+                        R.id.navigation_charts_type,
+                        Bundle().apply {
+                            putParcelableArrayList(DETAIL_STATISTICS, viewModel.detailsStatistics)
+                        })
+                },
+                openDetailsStatistics = {
+                    findNavController().navigate(
+                        R.id.navigation_adapter_details_statistics,
+                        Bundle().apply {
+                            putParcelableArrayList(DETAIL_STATISTICS, viewModel.detailsStatistics)
+                        })
+                },
                 openSession = { sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel> ->
                     val bundle = Bundle().apply {
                         putLong(AdapterSessionFragment.SESSION_ID, sessionId)

@@ -12,7 +12,8 @@ import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.HomeStatisticsVi
 
 class HomeStatisticsViewHolder(
     override val binding: ItemHomeStatisticsBinding,
-    private val openDetailsStatistics: () -> Unit
+    private val openDetailsStatistics: () -> Unit,
+    private val openParameterList: () -> Unit
 ) : BaseViewHolder<Home>(binding) {
 
     override fun bind(item: Home) {
@@ -41,7 +42,7 @@ class HomeStatisticsViewHolder(
 
     private fun initAdapter(list: List<HomeBodyStats>) {
         itemView.recyclerView.run {
-            adapter = HomeBodyStatsAdapter(openDetailsStatistics)
+            adapter = HomeBodyStatsAdapter(openDetailsStatistics, openParameterList)
             (adapter as HomeBodyStatsAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)
         }

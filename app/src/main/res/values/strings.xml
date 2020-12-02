@@ -106,6 +106,7 @@ This section is beta. If it does not work correctly for you, let us know</string
     <!--Charts-->
     <string name="kd_full">Kill/Death Ratio</string>
     <string name="win_rate">Win rate</string>
+    <string name="parameter_List">Parameter List</string>
 
     <!--Subscription-->
     <string name="cancel_at_any_time">Cancel at any time on Google Play</string>
@@ -230,7 +231,7 @@ This section is beta. If it does not work correctly for you, let us know</string
     <!--Wiki-->
     <string name="wikipedia">Wikipedia</string>
     <string name="battle_pass_rewards">Battle pass rewards</string>
-    <string name="quantity_format">Quantity %d</string>
+    <string name="quantity_format">Quantity: %d</string>
     <string name="current_season">Current season</string>
     <string name="season_format">Season № %s</string>
     <string name="paid">Paid</string>

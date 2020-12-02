@@ -14,6 +14,7 @@ import robin.vitalij.fortniteassitant.ui.bottomsheet.top.TopResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.upcomingshop.UpcomingShopResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.user.UserResultFragment
 import robin.vitalij.fortniteassitant.ui.chartlist.ChartsTypeFragment
+import robin.vitalij.fortniteassitant.ui.chartlist.viewpager.AdapterChartsTypeFragment
 import robin.vitalij.fortniteassitant.ui.charts.ChartsFragment
 import robin.vitalij.fortniteassitant.ui.comparison.selected.ComparisonSelectedFragment
 import robin.vitalij.fortniteassitant.ui.comparison.selected.listuser.SelectedListUserFragment
@@ -80,6 +81,7 @@ interface AppComponent {
     fun inject(fragment: UpcomingShopFragment)
     fun inject(fragment: WikiFragment)
     fun inject(fragment: BattlePassRewardsFragment)
+    fun inject(fragment: AdapterChartsTypeFragment)
 
     fun inject(fragment: ProfileResultFragment)
     fun inject(fragment: ContactUsResultFragment)

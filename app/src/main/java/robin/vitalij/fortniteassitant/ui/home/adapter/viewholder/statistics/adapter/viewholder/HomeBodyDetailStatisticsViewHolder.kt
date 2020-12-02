@@ -9,7 +9,8 @@ import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adap
 
 class HomeBodyDetailStatisticsViewHolder(
     override val binding: ItemHomeBodyDetailStatisticsBinding,
-    private val openDetailsStatistics: () -> Unit
+    private val openDetailsStatistics: () -> Unit,
+    private val openParameterList: () -> Unit
 ) :
     BaseViewHolder<HomeBodyStats>(binding) {
 
@@ -17,6 +18,7 @@ class HomeBodyDetailStatisticsViewHolder(
         if (item is HomeBodeDetailsStatisticsViewModel) {
             binding.item = item
             itemView.detailStatistics.setSafeOnClickListener { openDetailsStatistics() }
+            itemView.parameterList.setSafeOnClickListener { openParameterList() }
         }
     }
 }
