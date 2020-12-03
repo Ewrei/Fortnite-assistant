@@ -107,7 +107,7 @@
                 android:paddingTop="@dimen/half_default_padding"
                 android:paddingBottom="@dimen/half_default_padding"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                android:visibility="@{item.free ? View.VISIBLE : View.GONE}"
+                android:visibility="@{!item.free ? View.VISIBLE : View.GONE}"
                 android:text="@string/paid"
                 android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -209,5 +209,6 @@
     <string name="current_season">Текущий сезон</string>
     <string name="season_format">Сезон № %s</string>
     <string name="paid">Платное</string>
+    <string name="free">Бесплатное</string>
 
 </resources>

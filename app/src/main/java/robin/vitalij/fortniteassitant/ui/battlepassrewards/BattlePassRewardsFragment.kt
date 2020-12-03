@@ -1,10 +1,14 @@
 package robin.vitalij.fortniteassitant.ui.battlepassrewards
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.text.Spannable
+import android.text.SpannableString
+import android.view.*
+import androidx.appcompat.widget.PopupMenu
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -20,9 +24,11 @@ import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.model.battlepassreward.BattlesPassRewardsModel
 import robin.vitalij.fortniteassitant.model.battlepassreward.SeasonModel
+import robin.vitalij.fortniteassitant.model.enums.BattlePassSortedType
 import robin.vitalij.fortniteassitant.ui.battlepassrewards.adapter.BattlesPassRewardsAdapter
 import robin.vitalij.fortniteassitant.ui.bottomsheet.battlepassrewards.BattlePassRewardsResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
+import robin.vitalij.fortniteassitant.utils.view.CustomTypeFaceSpan
 import javax.inject.Inject
 
 
@@ -66,6 +72,65 @@ class BattlePassRewardsFragment : BaseFragment() {
 
         setNavigation()
         setListeners()
+        setToolbarMenu()
+    }
+
+    private fun setToolbarMenu() {
+        toolbar.inflateMenu(R.menu.sorting_action_menu)
+
+        toolbar.menu.findItem(R.id.action_sort).setOnMenuItemClickListener {
+            showPopup(toolbar)
+            true
+        }
+    }
+
+    private fun showPopup(view: View) {
+        context?.let { it ->
+            val popup = PopupMenu(it, view)
+            popup.gravity = Gravity.END
+            val inflater: MenuInflater = popup.menuInflater
+            inflater.inflate(R.menu.menu_sort_achiviement, popup.menu)
+            popup.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.action_all -> {
+                        viewModel.sortedBattlesPassReward(BattlePassSortedType.ALL)
+                        true
+                    }
+                    R.id.action_paid -> {
+                        viewModel.sortedBattlesPassReward(BattlePassSortedType.PAID)
+                        true
+                    }
+                    R.id.action_free -> {
+                        viewModel.sortedBattlesPassReward(BattlePassSortedType.FREE)
+                        true
+                    }
+                }
+                false
+            }
+            popup.show()
+
+            val menu: Menu = popup.getMenu()
+            for (i in 0 until menu.size()) {
+                val mi = menu.getItem(i)
+                applyFontToMenuItem(mi)
+            }
+        }
+    }
+
+    private fun applyFontToMenuItem(mi: MenuItem) {
+        try {
+            val font = ResourcesCompat.getFont(requireContext(), R.font.futura_pt_medium)
+            val mNewTitle = SpannableString(mi.title)
+            mNewTitle.setSpan(
+                CustomTypeFaceSpan("", font!!, Color.WHITE),
+                0,
+                mNewTitle.length,
+                Spannable.SPAN_INCLUSIVE_INCLUSIVE
+            )
+            mi.title = mNewTitle
+        } catch (it: Throwable) {
+            //do nothing
+        }
     }
 
     private fun setListeners() {

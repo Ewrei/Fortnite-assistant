@@ -235,5 +235,6 @@ This section is beta. If it does not work correctly for you, let us know</string
     <string name="current_season">Current season</string>
     <string name="season_format">Season № %s</string>
     <string name="paid">Paid</string>
+    <string name="free">Free</string>
 
 </resources>
