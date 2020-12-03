@@ -35,4 +35,6 @@ class BattlesPassRewardsAdapter(
     }
 
     override fun getItemCount() = items.size
+
+    override fun getItemId(position: Int) = items[position].id
 }

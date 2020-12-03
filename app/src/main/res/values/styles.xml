@@ -83,7 +83,7 @@
     </style>
 
     <style name="DefaultButton" parent="Widget.MaterialComponents.Button">
-        <item name="cornerRadius">20dp</item>
+        <item name="cornerRadius">0dp</item>
         <item name="backgroundTint">@color/background_button</item>
         <item name="android:layout_marginStart">@dimen/default_margin</item>
         <item name="android:layout_marginEnd">@dimen/default_margin</item>

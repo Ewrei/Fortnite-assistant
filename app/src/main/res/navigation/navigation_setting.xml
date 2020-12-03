@@ -49,10 +49,17 @@
         <action
             android:id="@+id/action_navigation_wiki_to_battlePassRewardsFragment"
             app:destination="@id/navigation_battles_pass_rewards" />
+        <action
+            android:id="@+id/action_navigation_wiki_to_weaponFragment"
+            app:destination="@id/navigation_weapon" />
     </fragment>
     <fragment
         android:id="@+id/navigation_battles_pass_rewards"
         android:name="robin.vitalij.fortniteassitant.ui.battlepassrewards.BattlePassRewardsFragment"
         android:label="@string/battle_pass_rewards" />
+    <fragment
+        android:id="@+id/navigation_weapon"
+        android:name="robin.vitalij.fortniteassitant.ui.weapons.WeaponFragment"
+        android:label="@string/weapons" />
 
 </navigation>

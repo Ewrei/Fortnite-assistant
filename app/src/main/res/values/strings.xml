@@ -237,4 +237,16 @@ This section is beta. If it does not work correctly for you, let us know</string
     <string name="paid">Paid</string>
     <string name="free">Free</string>
 
+    <!--Weapons-->
+    <string name="weapons">Weapons</string>
+    <string name="dmg_pb">dmgPb</string>
+    <string name="firingRate">firingRate</string>
+    <string name="clipSize">clipSize</string>
+    <string name="reloadTime">reloadTime</string>
+    <string name="bulletsPerCartridge">bulletsPerCartridge</string>
+    <string name="spread">spread</string>
+    <string name="spreadDownsights">spreadDownsights</string>
+    <string name="damageZoneCritical">damageZoneCritical</string>
+
+
 </resources>

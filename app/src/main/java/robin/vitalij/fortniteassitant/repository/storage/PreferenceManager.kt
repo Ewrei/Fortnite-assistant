@@ -41,4 +41,8 @@ interface PreferenceManager {
     fun getSessionId(): String
 
     fun setSessionId(sessionId: String)
+
+    fun setWeaponDataLastUpdate(dataUpdate: Long)
+
+    fun getWeaponDataLastUpdate(): Long
 }

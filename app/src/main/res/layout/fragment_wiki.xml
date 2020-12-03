@@ -11,19 +11,36 @@
         android:layout_height="wrap_content" />
 
     <com.google.android.material.card.MaterialCardView
-        style="@style/DefaultCard"
         android:id="@+id/battlePassRewards"
-        android:layout_margin="@dimen/default_margin"
+        style="@style/DefaultCard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/futura_pt_bold"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_margin="@dimen/default_margin_double"
-            android:text="@string/battle_pass_rewards" />
+            android:fontFamily="@font/futura_pt_bold"
+            android:text="@string/battle_pass_rewards"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/weapons"
+        style="@style/DefaultCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin_double"
+            android:fontFamily="@font/futura_pt_bold"
+            android:text="@string/weapons"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
     </com.google.android.material.card.MaterialCardView>
 

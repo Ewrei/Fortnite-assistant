@@ -14,6 +14,7 @@ import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragme
 import robin.vitalij.fortniteassitant.ui.bottomsheet.top.TopResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.upcomingshop.UpcomingShopResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.user.UserResultFragment
+import robin.vitalij.fortniteassitant.ui.bottomsheet.weapon.WeaponResultFragment
 import robin.vitalij.fortniteassitant.ui.chartlist.ChartsTypeFragment
 import robin.vitalij.fortniteassitant.ui.chartlist.viewpager.AdapterChartsTypeFragment
 import robin.vitalij.fortniteassitant.ui.charts.ChartsFragment
@@ -43,6 +44,7 @@ import robin.vitalij.fortniteassitant.ui.splash.SplashActivity
 import robin.vitalij.fortniteassitant.ui.subscription.SubscriptionsFragment
 import robin.vitalij.fortniteassitant.ui.top.TopFragment
 import robin.vitalij.fortniteassitant.ui.users.UsersFragment
+import robin.vitalij.fortniteassitant.ui.weapons.WeaponFragment
 import robin.vitalij.fortniteassitant.ui.wiki.WikiFragment
 import javax.inject.Singleton
 
@@ -83,6 +85,7 @@ interface AppComponent {
     fun inject(fragment: WikiFragment)
     fun inject(fragment: BattlePassRewardsFragment)
     fun inject(fragment: AdapterChartsTypeFragment)
+    fun inject(fragment: WeaponFragment)
 
     fun inject(fragment: ProfileResultFragment)
     fun inject(fragment: ContactUsResultFragment)
@@ -91,4 +94,5 @@ interface AppComponent {
     fun inject(fragment: UpcomingShopResultFragment)
     fun inject(fragment: CurrentShopResultFragment)
     fun inject(fragment: BattlePassRewardsResultFragment)
+    fun inject(fragment: WeaponResultFragment)
 }

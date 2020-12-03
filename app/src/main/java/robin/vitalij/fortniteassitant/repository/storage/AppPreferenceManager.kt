@@ -14,6 +14,7 @@ private const val IS_ESTIMATE = "estimate"
 private const val ESTIMATE_SIZE = "estimate_size"
 
 private const val DATE_LAST_UPDATE = "date_last_update"
+private const val WEAPON_DATE_LAST_UPDATE = "weapon_date_last_update"
 private val SUBSCRIBE_DIALOG_TIME = "subscribe_dialog_time"
 private val SUBSCRIPTION_ACCESS = "subscription_access"
 private val SESSION_ID = "session_id"
@@ -99,5 +100,11 @@ class AppPreferenceManager(context: Context) :
 
     override fun setSessionId(sessionId: String) {
         sharedPreferences.edit().putString(SESSION_ID, sessionId).apply()
+    }
+
+    override fun getWeaponDataLastUpdate() = sharedPreferences.getLong(WEAPON_DATE_LAST_UPDATE, 0)
+
+    override fun setWeaponDataLastUpdate(dateUpdate: Long) {
+        sharedPreferences.edit().putLong(WEAPON_DATE_LAST_UPDATE, dateUpdate).apply()
     }
 }

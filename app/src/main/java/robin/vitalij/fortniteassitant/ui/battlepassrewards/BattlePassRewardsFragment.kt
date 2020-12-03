@@ -156,6 +156,8 @@ class BattlePassRewardsFragment : BaseFragment() {
                     childFragmentManager,
                     it.reward
                 )
+            }.apply {
+                setHasStableIds(true)
             }
             (adapter as BattlesPassRewardsAdapter).setData(list)
 

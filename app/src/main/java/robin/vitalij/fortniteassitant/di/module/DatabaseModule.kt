@@ -34,4 +34,8 @@ class DatabaseModule(context: Context) {
     @Singleton
     fun provideMatchDao() = appDatabase.matchDao()
 
+    @Provides
+    @Singleton
+    fun provideWeaponDao() = appDatabase.weaponDao()
+
 }

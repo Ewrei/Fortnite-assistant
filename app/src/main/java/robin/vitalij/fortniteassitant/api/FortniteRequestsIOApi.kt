@@ -4,6 +4,7 @@ import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 import robin.vitalij.fortniteassitant.model.network.BattlePassRewardsResponse
+import robin.vitalij.fortniteassitant.model.network.WeaponResponse
 import robin.vitalij.fortniteassitant.model.network.search.SearchResponse
 import robin.vitalij.fortniteassitant.model.network.shop.ShopResponse
 import robin.vitalij.fortniteassitant.model.network.shop.ShopUpcomingResponse
@@ -29,5 +30,8 @@ interface FortniteRequestsIOApi {
 
     @GET("/v1/battlepass")
     fun getBattlesPassRewards(@Query("lang") language: String, @Query("season") season: String): Single<BattlePassRewardsResponse>
+
+    @GET("/v1/loot/list")
+    fun getWeapons(@Query("lang") language: String): Single<WeaponResponse>
 
 }

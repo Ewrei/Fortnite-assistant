@@ -37,11 +37,12 @@ class SearchUserViewModel(
         saveUserRepository.saveUser(csGoFullProfileResponse, object :
             SaveUserCallback {
             override fun showOrHideProgressBar(isVisible: Boolean) {
+                activityProgressBarVisibility.value = isVisible
                 //do nothing
             }
 
             override fun showError(throwable: Throwable) {
-                //do nothing
+                activityProgressBarVisibility.value = false
             }
 
             override fun showMessage(title: String) {
@@ -49,6 +50,7 @@ class SearchUserViewModel(
             }
 
             override fun done() {
+                activityProgressBarVisibility.value = false
                 openMainScreen()
             }
         })

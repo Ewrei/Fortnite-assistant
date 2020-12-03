@@ -15,11 +15,11 @@ class BattlesPassRewardsMapper(private val resourceProvider: ResourceProvider) :
         val list = arrayListOf<BattlesPassRewardsModel>()
 
         obj.free.rewards.forEach {
-            list.add(BattlesPassRewardsModel(it, true))
+            list.add(BattlesPassRewardsModel(it, true, (it.id.hashCode() + it.tier).toLong()))
         }
 
         obj.paid.rewards.forEach {
-            list.add(BattlesPassRewardsModel(it, false))
+            list.add(BattlesPassRewardsModel(it, false, (it.id.hashCode() + it.tier).toLong()))
         }
 
         return FullBattlePassRewardModel(list.sortedBy { it.reward.tier }, getSeasons(obj.season))
@@ -33,7 +33,12 @@ class BattlesPassRewardsMapper(private val resourceProvider: ResourceProvider) :
         seasonId--
 
         for (i in seasonId downTo 2) {
-            list.add(SeasonModel(i, resourceProvider.getString(R.string.season_format, i.toString())))
+            list.add(
+                SeasonModel(
+                    i,
+                    resourceProvider.getString(R.string.season_format, i.toString())
+                )
+            )
         }
 
         return list

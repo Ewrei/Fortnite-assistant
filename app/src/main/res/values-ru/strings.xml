@@ -147,7 +147,7 @@
     <string name="users_body">Список сохраненных аккаунтов</string>
     <string name="steam_profile">Steam профиль</string>
     <string name="faceit_profile">Faceit профиль</string>
-    <string name="copy_stats_link">Cкопировать ссылку</string>
+    <string name="copy_stats_link">Ссылка</string>
     <string name="news_game">Новости</string>
     <string name="feedback">Обратная связь</string>
     <string name="add_functional">Доп. функционал</string>
@@ -210,5 +210,9 @@
     <string name="season_format">Сезон № %s</string>
     <string name="paid">Платное</string>
     <string name="free">Бесплатное</string>
+
+   <!--Weapons-->
+    <string name="weapons">Оружие</string>
+    <string name="dmg_pb">dmgPb</string>
 
 </resources>
