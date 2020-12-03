@@ -10,16 +10,21 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import kotlinx.android.synthetic.main.fragment_battle_pass_rewards.*
 import kotlinx.android.synthetic.main.recycler_view.*
 import kotlinx.android.synthetic.main.toolbar_center_title.*
+import kotlinx.android.synthetic.main.view_error.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.model.battlepassreward.BattlesPassRewardsModel
+import robin.vitalij.fortniteassitant.model.battlepassreward.SeasonModel
 import robin.vitalij.fortniteassitant.ui.battlepassrewards.adapter.BattlesPassRewardsAdapter
+import robin.vitalij.fortniteassitant.ui.bottomsheet.battlepassrewards.BattlePassRewardsResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import javax.inject.Inject
+
 
 private const val MAX_SPAN_COUNT = 2
 
@@ -55,7 +60,22 @@ class BattlePassRewardsFragment : BaseFragment() {
             it.let(::initAdapter)
         })
 
+        viewModel.mutableSeasonLiveData.observe(viewLifecycleOwner, {
+            seasonSpinner.setItems(it)
+        })
+
         setNavigation()
+        setListeners()
+    }
+
+    private fun setListeners() {
+        seasonSpinner.setOnItemSelectedListener { _, _, _, item ->
+            viewModel.loadData((item as SeasonModel).season.toString())
+        }
+
+        errorResolveButton.setOnClickListener {
+            viewModel.loadData("current")
+        }
     }
 
     private fun setNavigation() {
@@ -66,7 +86,12 @@ class BattlePassRewardsFragment : BaseFragment() {
 
     private fun initAdapter(list: List<BattlesPassRewardsModel>) {
         recyclerView.run {
-            adapter = BattlesPassRewardsAdapter {}
+            adapter = BattlesPassRewardsAdapter {
+                BattlePassRewardsResultFragment.show(
+                    childFragmentManager,
+                    it.reward
+                )
+            }
             (adapter as BattlesPassRewardsAdapter).setData(list)
 
             val gridlayoutManager = GridLayoutManager(

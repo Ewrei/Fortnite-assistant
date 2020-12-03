@@ -1,0 +1,18 @@
+package robin.vitalij.fortniteassitant.ui.bottomsheet.battlepassrewards
+
+import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
+import javax.inject.Inject
+
+class BattlePassRewardsResultViewModelFactory @Inject constructor(
+) : BaseViewModelFactory<BattlePassRewardsResultViewModel>(BattlePassRewardsResultViewModel::class.java) {
+
+    private var viewModel: BattlePassRewardsResultViewModel? = null
+
+    override fun createViewModel(): BattlePassRewardsResultViewModel {
+        return viewModel ?: run {
+            val model = BattlePassRewardsResultViewModel()
+            viewModel = model
+            return model
+        }
+    }
+}

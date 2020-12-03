@@ -7,6 +7,7 @@ import robin.vitalij.fortniteassitant.di.module.FortniteAppModule
 import robin.vitalij.fortniteassitant.di.module.NetworkModule
 import robin.vitalij.fortniteassitant.di.module.RepositoryModule
 import robin.vitalij.fortniteassitant.ui.battlepassrewards.BattlePassRewardsFragment
+import robin.vitalij.fortniteassitant.ui.bottomsheet.battlepassrewards.BattlePassRewardsResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.CurrentShopResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
@@ -89,4 +90,5 @@ interface AppComponent {
     fun inject(fragment: TopResultFragment)
     fun inject(fragment: UpcomingShopResultFragment)
     fun inject(fragment: CurrentShopResultFragment)
+    fun inject(fragment: BattlePassRewardsResultFragment)
 }

@@ -2,6 +2,7 @@ package robin.vitalij.fortniteassitant.model.network
 
 import com.google.gson.annotations.SerializedName
 import robin.vitalij.fortniteassitant.model.network.shop.OtherImage
+import java.io.Serializable
 
 class BattlePassRewardsResponse (
     @SerializedName("result") val result: Boolean,
@@ -24,4 +25,4 @@ class Reward(
     @SerializedName("quantity") val quantity: Int,
     @SerializedName("video") val video: Any?,
     @SerializedName("images") val images: OtherImage,
-)
+): Serializable

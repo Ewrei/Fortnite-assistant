@@ -30,6 +30,7 @@
                 app:arc_finished_color="@color/color_orange"
                 app:arc_max="100"
                 app:arc_progress="55"
+                android:layout_marginTop="@dimen/default_margin_double"
                 app:arc_stroke_width="16dp"
                 app:arc_suffix_text_size="36dp"
                 app:arc_text_color="@color/text_color"

@@ -28,7 +28,7 @@ class BattlePassRewardsViewModel(
 
     fun loadData(season: String) {
         battlesPassRewardRepository
-            .getBattlesPassReward()
+            .getBattlesPassReward(season)
             .observeOn(AndroidSchedulers.mainThread())
             .let(::setupProgressShow)
             .subscribe({
