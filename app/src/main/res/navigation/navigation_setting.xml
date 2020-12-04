@@ -67,6 +67,14 @@
     <fragment
         android:id="@+id/navigation_fish"
         android:name="robin.vitalij.fortniteassitant.ui.fishing.FishingFragment"
-        android:label="@string/fishing" />
+        android:label="@string/fishing" >
+        <action
+            android:id="@+id/action_navigation_fish_to_fishStatsFragment"
+            app:destination="@id/navigation_fish_stats" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_fish_stats"
+        android:name="robin.vitalij.fortniteassitant.ui.fishstats.FishStatsFragment"
+        android:label="@string/stats_fish" />
 
 </navigation>

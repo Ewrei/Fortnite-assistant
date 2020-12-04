@@ -14,6 +14,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.observeToError
+import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.db.entity.FishEntity
 import robin.vitalij.fortniteassitant.ui.bottomsheet.fish.adapter.FishResultAdapter
 import javax.inject.Inject
@@ -41,22 +43,28 @@ class FishResultFragment : BottomSheetDialogFragment() {
                 BottomSheetBehavior.from(it).skipCollapsed = true
             }
         }
-        return inflater.inflate(R.layout.bottom_sheet_recyclerview, container, false)
+        return inflater.inflate(R.layout.bottom_sheet_mvvm, container, false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FortniteApplication.appComponent.inject(this)
         viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(FishResultViewModel::class.java)
+            .get(FishResultViewModel::class.java).apply {
+                observeToProgressBar(this@FishResultFragment)
+                observeToError(this@FishResultFragment)
+            }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
-            val list = arrayListOf(it.getSerializable(FISH) as FishEntity)
-            list.let(::initAdapter)
+            viewModel.loadData((it.getString(FISH) ?: ""))
         }
+
+        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
+            it.let(::initAdapter)
+        })
     }
 
     override fun onStart() {
@@ -82,12 +90,12 @@ class FishResultFragment : BottomSheetDialogFragment() {
 
         fun show(
             fragmentManager: FragmentManager?,
-            fishEntity: FishEntity
+            fishId: String
         ) {
             fragmentManager?.let {
                 FishResultFragment().apply {
                     arguments = Bundle().apply {
-                        putSerializable(FISH, fishEntity)
+                        putString(FISH, fishId)
                     }
                 }.show(
                     it,

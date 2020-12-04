@@ -254,6 +254,8 @@ This section is beta. If it does not work correctly for you, let us know</string
     <string name="professional_fishing_rod">Professional fishing rod</string>
     <string name="max_stack_size">Max stack size</string>
     <string name="size">Size</string>
+    <string name="stats_fish">Your fishing stats</string>
+    <string name="centimeters_format" translatable="false">%.3f cm</string>
 
 
 </resources>

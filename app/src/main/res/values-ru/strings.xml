@@ -229,5 +229,6 @@
     <string name="professional_fishing_rod">Профессиональная удочка</string>
     <string name="max_stack_size">Макс. кол.</string>
     <string name="size">Размер</string>
+    <string name="stats_fish">Ваша статистика рыбалки</string>
 
 </resources>

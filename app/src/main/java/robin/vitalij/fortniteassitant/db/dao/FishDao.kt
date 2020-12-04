@@ -15,4 +15,7 @@ interface FishDao {
 
     @Query("SELECT * FROM Fish")
     fun getFish(): Single<List<FishEntity>>
+
+    @Query("SELECT * FROM Fish WHERE lower(id) = lower(:fishId)")
+    fun getFish(fishId: String): Single<FishEntity>
 }

@@ -28,6 +28,7 @@ import robin.vitalij.fortniteassitant.ui.comparison.viewpager.AdapterComparisonF
 import robin.vitalij.fortniteassitant.ui.details.statistics.DetailsStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.fishing.FishingFragment
+import robin.vitalij.fortniteassitant.ui.fishstats.FishStatsFragment
 import robin.vitalij.fortniteassitant.ui.history.HistoryFragment
 import robin.vitalij.fortniteassitant.ui.historymatch.HistoryMatchFragment
 import robin.vitalij.fortniteassitant.ui.home.HomeFragment
@@ -89,6 +90,7 @@ interface AppComponent {
     fun inject(fragment: AdapterChartsTypeFragment)
     fun inject(fragment: WeaponFragment)
     fun inject(fragment: FishingFragment)
+    fun inject(fragment: FishStatsFragment)
 
     fun inject(fragment: ProfileResultFragment)
     fun inject(fragment: ContactUsResultFragment)

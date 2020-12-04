@@ -45,4 +45,8 @@ interface PreferenceManager {
     fun setWeaponDataLastUpdate(dataUpdate: Long)
 
     fun getWeaponDataLastUpdate(): Long
+
+    fun setFishDataLastUpdate(dataUpdate: Long)
+
+    fun getFishDataLastUpdate(): Long
 }

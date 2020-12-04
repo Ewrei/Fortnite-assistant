@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.fishing
+package robin.vitalij.fortniteassitant.ui.fishstats
 
 import android.content.Context
 import android.os.Bundle
@@ -10,39 +10,41 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.fragment_fishing.*
+import kotlinx.android.synthetic.main.fragment_battle_pass_rewards.*
+import kotlinx.android.synthetic.main.recycler_view.*
 import kotlinx.android.synthetic.main.toolbar_center_title.*
 import kotlinx.android.synthetic.main.view_error.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
-import robin.vitalij.fortniteassitant.db.entity.FishEntity
+import robin.vitalij.fortniteassitant.model.battlepassreward.SeasonModel
+import robin.vitalij.fortniteassitant.model.network.FishStats
 import robin.vitalij.fortniteassitant.ui.bottomsheet.fish.FishResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
-import robin.vitalij.fortniteassitant.ui.fishing.adapter.FishAdapter
+import robin.vitalij.fortniteassitant.ui.fishstats.adapter.FishStatsAdapter
 import javax.inject.Inject
 
 private const val MAX_SPAN_COUNT = 3
 
-class FishingFragment : BaseFragment() {
+class FishStatsFragment : BaseFragment() {
 
     @Inject
-    lateinit var viewModelFactory: FishingViewModelFactory
+    lateinit var viewModelFactory: FishStatsViewModelFactory
 
-    private lateinit var viewModel: FishingViewModel
+    private lateinit var viewModel: FishStatsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_fishing, container, false)
+    ) = inflater.inflate(R.layout.fragment_battle_pass_rewards, container, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(FishingViewModel::class.java).apply {
-                observeToProgressBar(this@FishingFragment)
-                observeToError(this@FishingFragment)
+            .get(FishStatsViewModel::class.java).apply {
+                observeToProgressBar(this@FishStatsFragment)
+                observeToError(this@FishStatsFragment)
             }
     }
 
@@ -57,6 +59,10 @@ class FishingFragment : BaseFragment() {
             it.let(::initAdapter)
         })
 
+        viewModel.mutableSeasonLiveData.observe(viewLifecycleOwner, {
+            seasonSpinner.setItems(it)
+        })
+
         setListener()
         setNavigation()
     }
@@ -66,8 +72,8 @@ class FishingFragment : BaseFragment() {
             viewModel.loadData()
         }
 
-        statsFish.setOnClickListener {
-            findNavController().navigate(R.id.navigation_fish_stats)
+        seasonSpinner.setOnItemSelectedListener { _, _, _, item ->
+            viewModel.changeSeason((item as SeasonModel))
         }
     }
 
@@ -77,12 +83,12 @@ class FishingFragment : BaseFragment() {
         toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
-    private fun initAdapter(list: List<FishEntity>) {
+    private fun initAdapter(list: List<FishStats>) {
         recyclerView.run {
-            adapter = FishAdapter {
-                FishResultFragment.show(childFragmentManager, it.id)
+            adapter = FishStatsAdapter {
+                FishResultFragment.show(childFragmentManager, it.type)
             }
-            (adapter as FishAdapter).setData(list)
+            (adapter as FishStatsAdapter).setData(list)
 
             val gridlayoutManager = GridLayoutManager(
                 activity, MAX_SPAN_COUNT

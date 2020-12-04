@@ -34,6 +34,7 @@ class WeaponRepository @Inject constructor(
                 .flatMap {
                     val list = WeaponMapper().transform(it)
                     weaponDao.insertWeapons(list)
+                    preferenceManager.setWeaponDataLastUpdate(Date().time)
                     return@flatMap Single.just(list)
                 }
         } else {

@@ -26,8 +26,8 @@ class FishRepository @Inject constructor(
 ) {
 
     fun loadData(): Single<List<FishEntity>> {
-        return if (preferenceManager.getWeaponDataLastUpdate() == DEFAULT_DATE_UPDATE
-            || preferenceManager.getDateLastUpdate() < (Date().time - TimeUnit.DAYS.toMillis(
+        return if (preferenceManager.getFishDataLastUpdate() == DEFAULT_DATE_UPDATE
+            || preferenceManager.getFishDataLastUpdate() < (Date().time - TimeUnit.DAYS.toMillis(
                 ONE_MOUNT_DAY
             ))
         ) {
@@ -36,6 +36,7 @@ class FishRepository @Inject constructor(
                 .flatMap {
                     val list = FishMapper().transform(it)
                     fishDao.insertFish(list)
+                    preferenceManager.setFishDataLastUpdate(Date().time)
                     return@flatMap Single.just(list)
                 }
         } else {
@@ -43,4 +44,7 @@ class FishRepository @Inject constructor(
                 .subscribeOn(Schedulers.io())
         }
     }
+
+    fun loadData(fishId: String) = fishDao.getFish(fishId)
+        .subscribeOn(Schedulers.io())
 }
