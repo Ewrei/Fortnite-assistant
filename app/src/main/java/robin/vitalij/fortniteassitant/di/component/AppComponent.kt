@@ -10,6 +10,7 @@ import robin.vitalij.fortniteassitant.ui.battlepassrewards.BattlePassRewardsFrag
 import robin.vitalij.fortniteassitant.ui.bottomsheet.battlepassrewards.BattlePassRewardsResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.CurrentShopResultFragment
+import robin.vitalij.fortniteassitant.ui.bottomsheet.fish.FishResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.top.TopResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.upcomingshop.UpcomingShopResultFragment
@@ -26,6 +27,7 @@ import robin.vitalij.fortniteassitant.ui.comparison.statistics.ComparisonStatist
 import robin.vitalij.fortniteassitant.ui.comparison.viewpager.AdapterComparisonFragment
 import robin.vitalij.fortniteassitant.ui.details.statistics.DetailsStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment
+import robin.vitalij.fortniteassitant.ui.fishing.FishingFragment
 import robin.vitalij.fortniteassitant.ui.history.HistoryFragment
 import robin.vitalij.fortniteassitant.ui.historymatch.HistoryMatchFragment
 import robin.vitalij.fortniteassitant.ui.home.HomeFragment
@@ -86,6 +88,7 @@ interface AppComponent {
     fun inject(fragment: BattlePassRewardsFragment)
     fun inject(fragment: AdapterChartsTypeFragment)
     fun inject(fragment: WeaponFragment)
+    fun inject(fragment: FishingFragment)
 
     fun inject(fragment: ProfileResultFragment)
     fun inject(fragment: ContactUsResultFragment)
@@ -95,4 +98,5 @@ interface AppComponent {
     fun inject(fragment: CurrentShopResultFragment)
     fun inject(fragment: BattlePassRewardsResultFragment)
     fun inject(fragment: WeaponResultFragment)
+    fun inject(fragment: FishResultFragment)
 }

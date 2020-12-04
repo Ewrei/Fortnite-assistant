@@ -236,6 +236,7 @@ This section is beta. If it does not work correctly for you, let us know</string
     <string name="season_format">Season № %s</string>
     <string name="paid">Paid</string>
     <string name="free">Free</string>
+    <string name="fishing">Fishing</string>
 
     <!--Weapons-->
     <string name="weapons">Weapons</string>
@@ -247,6 +248,12 @@ This section is beta. If it does not work correctly for you, let us know</string
     <string name="spread">spread</string>
     <string name="spreadDownsights">spreadDownsights</string>
     <string name="damageZoneCritical">damageZoneCritical</string>
+    
+    <!--Fish-->
+    <string name="required">Required</string>
+    <string name="professional_fishing_rod">Professional fishing rod</string>
+    <string name="max_stack_size">Max stack size</string>
+    <string name="size">Size</string>
 
 
 </resources>

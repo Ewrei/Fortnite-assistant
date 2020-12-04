@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_navigation_wiki_to_weaponFragment"
             app:destination="@id/navigation_weapon" />
+        <action
+            android:id="@+id/action_navigation_wiki_to_navigation_fish"
+            app:destination="@id/navigation_fish" />
     </fragment>
     <fragment
         android:id="@+id/navigation_battles_pass_rewards"
@@ -61,5 +64,9 @@
         android:id="@+id/navigation_weapon"
         android:name="robin.vitalij.fortniteassitant.ui.weapons.WeaponFragment"
         android:label="@string/weapons" />
+    <fragment
+        android:id="@+id/navigation_fish"
+        android:name="robin.vitalij.fortniteassitant.ui.fishing.FishingFragment"
+        android:label="@string/fishing" />
 
 </navigation>

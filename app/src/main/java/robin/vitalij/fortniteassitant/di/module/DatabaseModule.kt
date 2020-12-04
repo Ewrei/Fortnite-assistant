@@ -38,4 +38,8 @@ class DatabaseModule(context: Context) {
     @Singleton
     fun provideWeaponDao() = appDatabase.weaponDao()
 
+    @Provides
+    @Singleton
+    fun provideFishDao() = appDatabase.fishDao()
+
 }

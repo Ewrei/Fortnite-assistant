@@ -4,19 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.bottom_contact_us.*
+import kotlinx.android.synthetic.main.bottom_sheet_recyclerview.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.intentGmail
 import robin.vitalij.fortniteassitant.common.extensions.intentTelegram
 import robin.vitalij.fortniteassitant.common.extensions.intentVk
-import robin.vitalij.fortniteassitant.databinding.BottomContactUsBinding
 import robin.vitalij.fortniteassitant.model.ContactUsModel
 import robin.vitalij.fortniteassitant.model.enums.ConfigType
 import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.adapter.ContactUsAdapter
@@ -32,13 +30,7 @@ class ContactUsResultFragment : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val dataBinding: BottomContactUsBinding =
-            DataBindingUtil.inflate(inflater, R.layout.bottom_contact_us, container, false)
-        dataBinding.lifecycleOwner = this@ContactUsResultFragment
-        dataBinding.viewModel = viewModel
-        return dataBinding.contentView
-    }
+    ) = inflater.inflate(R.layout.bottom_sheet_recyclerview, container, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +42,7 @@ class ContactUsResultFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
             it.let(::initAdapter)
         })
     }

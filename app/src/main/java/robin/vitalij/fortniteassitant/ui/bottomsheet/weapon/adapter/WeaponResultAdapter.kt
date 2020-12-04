@@ -8,7 +8,6 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.db.entity.WeaponEntity
 
 class WeaponResultAdapter(
-    private val onClick: (weaponEntity: WeaponEntity) -> Unit
 ) : RecyclerView.Adapter<WeaponResultHolder>() {
 
     private val items = arrayListOf<WeaponEntity>()
@@ -29,9 +28,6 @@ class WeaponResultAdapter(
 
     override fun onBindViewHolder(holder: WeaponResultHolder, position: Int) {
         holder.bind(items[position])
-        holder.itemView.setOnClickListener {
-            onClick(items[position])
-        }
     }
 
     override fun getItemCount() = items.size

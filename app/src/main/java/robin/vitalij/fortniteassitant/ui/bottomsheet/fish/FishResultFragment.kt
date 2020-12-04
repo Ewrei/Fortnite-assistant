@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.bottomsheet.weapon
+package robin.vitalij.fortniteassitant.ui.bottomsheet.fish
 
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -14,18 +14,18 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.db.entity.WeaponEntity
-import robin.vitalij.fortniteassitant.ui.bottomsheet.weapon.adapter.WeaponResultAdapter
+import robin.vitalij.fortniteassitant.db.entity.FishEntity
+import robin.vitalij.fortniteassitant.ui.bottomsheet.fish.adapter.FishResultAdapter
 import javax.inject.Inject
 
 const val BOTTOM_SHEET_MARGIN_TOP = 200
 
-class WeaponResultFragment : BottomSheetDialogFragment() {
+class FishResultFragment : BottomSheetDialogFragment() {
 
     @Inject
-    lateinit var viewModelFactory: WeaponResultViewModelFactory
+    lateinit var viewModelFactory: FishResultViewModelFactory
 
-    private lateinit var viewModel: WeaponResultViewModel
+    private lateinit var viewModel: FishResultViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +41,6 @@ class WeaponResultFragment : BottomSheetDialogFragment() {
                 BottomSheetBehavior.from(it).skipCollapsed = true
             }
         }
-
         return inflater.inflate(R.layout.bottom_sheet_recyclerview, container, false)
     }
 
@@ -49,13 +48,13 @@ class WeaponResultFragment : BottomSheetDialogFragment() {
         super.onCreate(savedInstanceState)
         FortniteApplication.appComponent.inject(this)
         viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(WeaponResultViewModel::class.java)
+            .get(FishResultViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
-            val list = arrayListOf(it.getSerializable(WEAPON) as WeaponEntity)
+            val list = arrayListOf(it.getSerializable(FISH) as FishEntity)
             list.let(::initAdapter)
         }
     }
@@ -68,27 +67,27 @@ class WeaponResultFragment : BottomSheetDialogFragment() {
         sheetContainer.layoutParams.height = (displayMetrics.heightPixels - BOTTOM_SHEET_MARGIN_TOP)
     }
 
-    private fun initAdapter(list: List<WeaponEntity>) {
+    private fun initAdapter(list: List<FishEntity>) {
         recyclerView.run {
-            adapter = WeaponResultAdapter()
-            (adapter as WeaponResultAdapter).setData(list)
+            adapter = FishResultAdapter()
+            (adapter as FishResultAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)
         }
     }
 
     companion object {
 
-        private const val TAG = "WeaponResultFragment"
-        private const val WEAPON = "Weapon"
+        private const val TAG = "FishResultFragment"
+        private const val FISH = "Fish"
 
         fun show(
             fragmentManager: FragmentManager?,
-            itemShopUpcoming: WeaponEntity
+            fishEntity: FishEntity
         ) {
             fragmentManager?.let {
-                WeaponResultFragment().apply {
+                FishResultFragment().apply {
                     arguments = Bundle().apply {
-                        putSerializable(WEAPON, itemShopUpcoming)
+                        putSerializable(FISH, fishEntity)
                     }
                 }.show(
                     it,

@@ -1,25 +1,23 @@
-package robin.vitalij.fortniteassitant.ui.weapons
+package robin.vitalij.fortniteassitant.ui.fishing
 
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
-import robin.vitalij.fortniteassitant.db.entity.WeaponEntity
-import robin.vitalij.fortniteassitant.model.HistoryUserModel
-import robin.vitalij.fortniteassitant.repository.WeaponRepository
-import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
+import robin.vitalij.fortniteassitant.db.entity.FishEntity
+import robin.vitalij.fortniteassitant.repository.FishRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 
-class WeaponViewModel(
-    private val weaponRepository: WeaponRepository
+class FishingViewModel(
+    private val fishRepository: FishRepository
 ) : BaseViewModel() {
 
-    val mutableLiveData = MutableLiveData<List<WeaponEntity>>()
+    val mutableLiveData = MutableLiveData<List<FishEntity>>()
 
     init {
         loadData()
     }
 
     fun loadData() {
-        weaponRepository
+        fishRepository
             .loadData()
             .observeOn(AndroidSchedulers.mainThread())
             .let(::setupProgressShow)

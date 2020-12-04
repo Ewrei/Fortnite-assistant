@@ -210,9 +210,24 @@
     <string name="season_format">Сезон № %s</string>
     <string name="paid">Платное</string>
     <string name="free">Бесплатное</string>
+    <string name="fishing">Рыбалка</string>
 
    <!--Weapons-->
     <string name="weapons">Оружие</string>
     <string name="dmg_pb">dmgPb</string>
+    <string name="firingRate">firingRate</string>
+    <string name="clipSize">clipSize</string>
+    <string name="reloadTime">reloadTime</string>
+    <string name="bulletsPerCartridge">bulletsPerCartridge</string>
+    <string name="spread">spread</string>
+    <string name="spreadDownsights">spreadDownsights</string>
+    <string name="damageZoneCritical">damageZoneCritical</string>
+
+
+    <!--Fish-->
+    <string name="required">Требуется</string>
+    <string name="professional_fishing_rod">Профессиональная удочка</string>
+    <string name="max_stack_size">Макс. кол.</string>
+    <string name="size">Размер</string>
 
 </resources>

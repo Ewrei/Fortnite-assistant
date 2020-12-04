@@ -66,5 +66,9 @@ class WikiFragment : BaseFragment() {
         weapons.setSafeOnClickListener {
             findNavController().navigate(R.id.navigation_weapon)
         }
+
+        fishing.setSafeOnClickListener {
+            findNavController().navigate(R.id.navigation_fish)
+        }
     }
 }
