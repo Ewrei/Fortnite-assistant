@@ -6,6 +6,7 @@ import robin.vitalij.fortniteassitant.di.module.DatabaseModule
 import robin.vitalij.fortniteassitant.di.module.FortniteAppModule
 import robin.vitalij.fortniteassitant.di.module.NetworkModule
 import robin.vitalij.fortniteassitant.di.module.RepositoryModule
+import robin.vitalij.fortniteassitant.ui.achiviements.AchievementsFragment
 import robin.vitalij.fortniteassitant.ui.battlepassrewards.BattlePassRewardsFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.battlepassrewards.BattlePassRewardsResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFragment
@@ -91,6 +92,7 @@ interface AppComponent {
     fun inject(fragment: WeaponFragment)
     fun inject(fragment: FishingFragment)
     fun inject(fragment: FishStatsFragment)
+    fun inject(fragment: AchievementsFragment)
 
     fun inject(fragment: ProfileResultFragment)
     fun inject(fragment: ContactUsResultFragment)

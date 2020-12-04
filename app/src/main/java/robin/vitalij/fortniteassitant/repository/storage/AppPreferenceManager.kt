@@ -16,6 +16,7 @@ private const val ESTIMATE_SIZE = "estimate_size"
 private const val DATE_LAST_UPDATE = "date_last_update"
 private const val WEAPON_DATE_LAST_UPDATE = "weapon_date_last_update"
 private const val FISH_DATE_LAST_UPDATE = "fish_date_last_update"
+private const val ACHIEVEMENT_DATE_LAST_UPDATE = "achievement_date_last_update"
 private val SUBSCRIBE_DIALOG_TIME = "subscribe_dialog_time"
 private val SUBSCRIPTION_ACCESS = "subscription_access"
 private val SESSION_ID = "session_id"
@@ -113,5 +114,11 @@ class AppPreferenceManager(context: Context) :
 
     override fun setFishDataLastUpdate(dateUpdate: Long) {
         sharedPreferences.edit().putLong(FISH_DATE_LAST_UPDATE, dateUpdate).apply()
+    }
+
+    override fun getAchievementDataLastUpdate() = sharedPreferences.getLong(ACHIEVEMENT_DATE_LAST_UPDATE, 0)
+
+    override fun setAchievementDataLastUpdate(dateUpdate: Long) {
+        sharedPreferences.edit().putLong(ACHIEVEMENT_DATE_LAST_UPDATE, dateUpdate).apply()
     }
 }

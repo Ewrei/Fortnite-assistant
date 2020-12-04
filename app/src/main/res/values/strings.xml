@@ -2,10 +2,8 @@
     <string name="app_name" translatable="false">Fortnite Assitant</string>
     <string name="application_url" translatable="false">https://play.google.com/store/apps/details?id=robin.vitalij.cs_go_assistant</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
     <string name="tab_title_history_match">History</string>
     <string name="tab_title_top">Leaderboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="title_item_shop">Item shop</string>
     <string name="title_setting">Settings</string>
 
@@ -256,6 +254,10 @@ This section is beta. If it does not work correctly for you, let us know</string
     <string name="size">Size</string>
     <string name="stats_fish">Your fishing stats</string>
     <string name="centimeters_format" translatable="false">%.3f cm</string>
+    <string name="empty_fish">"Buddy, don't you like fishing? Take a rod and go"</string>
+
+    <!--Achievement-->
+    <string name="achievements">Achievements</string>
 
 
 </resources>

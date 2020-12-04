@@ -2,6 +2,9 @@
 <resources>
     <string name="title_setting">Настройки</string>
     <string name="title_item_shop">Магазин</string>
+    <string name="title_home">Глав</string>
+    <string name="tab_title_history_match">История матчей</string>
+    <string name="tab_title_top">Лидеры</string>
 
     <string name="retry">Попробовать еще раз</string>
     <string name="unknown_error">Что-то пошло не так</string>
@@ -230,5 +233,9 @@
     <string name="max_stack_size">Макс. кол.</string>
     <string name="size">Размер</string>
     <string name="stats_fish">Ваша статистика рыбалки</string>
+    <string name="empty_fish">Дружище, ты что не любишь рыбалку? Бери удочку и вперед</string>
+
+    <!--Achievement-->
+    <string name="achievements">Достижения</string>
 
 </resources>

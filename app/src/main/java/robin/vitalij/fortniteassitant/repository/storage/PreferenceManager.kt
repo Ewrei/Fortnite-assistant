@@ -49,4 +49,8 @@ interface PreferenceManager {
     fun setFishDataLastUpdate(dataUpdate: Long)
 
     fun getFishDataLastUpdate(): Long
+
+    fun setAchievementDataLastUpdate(dataUpdate: Long)
+
+    fun getAchievementDataLastUpdate(): Long
 }

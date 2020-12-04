@@ -62,6 +62,13 @@
             android:layout_gravity="center"
             android:visibility="gone" />
 
+        <include
+            layout="@layout/view_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
     </FrameLayout>
 
 </LinearLayout>

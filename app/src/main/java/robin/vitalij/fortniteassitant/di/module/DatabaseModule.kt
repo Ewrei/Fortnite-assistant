@@ -42,4 +42,8 @@ class DatabaseModule(context: Context) {
     @Singleton
     fun provideFishDao() = appDatabase.fishDao()
 
+    @Provides
+    @Singleton
+    fun provideAchievementDao() = appDatabase.achievementDao()
+
 }

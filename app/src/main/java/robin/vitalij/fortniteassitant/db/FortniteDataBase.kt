@@ -6,7 +6,14 @@ import robin.vitalij.fortniteassitant.db.dao.*
 import robin.vitalij.fortniteassitant.db.entity.*
 
 @Database(
-    entities = [UserEntity::class, MatchEntity::class, PlayerSession::class, WeaponEntity::class, FishEntity::class],
+    entities = [
+        UserEntity::class,
+        MatchEntity::class,
+        PlayerSession::class,
+        WeaponEntity::class,
+        FishEntity::class,
+        AchievementEntity::class
+    ],
     version = 2
 )
 
@@ -21,5 +28,7 @@ abstract class FortniteDataBase : RoomDatabase() {
     abstract fun weaponDao(): WeaponDao
 
     abstract fun fishDao(): FishDao
+
+    abstract fun achievementDao(): AchievementDao
 
 }

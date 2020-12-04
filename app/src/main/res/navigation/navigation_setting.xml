@@ -55,6 +55,9 @@
         <action
             android:id="@+id/action_navigation_wiki_to_navigation_fish"
             app:destination="@id/navigation_fish" />
+        <action
+            android:id="@+id/action_navigation_wiki_to_achievementsFragment"
+            app:destination="@id/navigation_achievement" />
     </fragment>
     <fragment
         android:id="@+id/navigation_battles_pass_rewards"
@@ -76,5 +79,9 @@
         android:id="@+id/navigation_fish_stats"
         android:name="robin.vitalij.fortniteassitant.ui.fishstats.FishStatsFragment"
         android:label="@string/stats_fish" />
+    <fragment
+        android:id="@+id/navigation_achievement"
+        android:name="robin.vitalij.fortniteassitant.ui.achiviements.AchievementsFragment"
+        android:label="@string/achievements" />
 
 </navigation>

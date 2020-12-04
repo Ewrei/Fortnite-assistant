@@ -3,10 +3,7 @@ package robin.vitalij.fortniteassitant.api
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
-import robin.vitalij.fortniteassitant.model.network.BattlePassRewardsResponse
-import robin.vitalij.fortniteassitant.model.network.FishResponse
-import robin.vitalij.fortniteassitant.model.network.FishStatsResponse
-import robin.vitalij.fortniteassitant.model.network.WeaponResponse
+import robin.vitalij.fortniteassitant.model.network.*
 import robin.vitalij.fortniteassitant.model.network.search.SearchResponse
 import robin.vitalij.fortniteassitant.model.network.shop.ShopResponse
 import robin.vitalij.fortniteassitant.model.network.shop.ShopUpcomingResponse
@@ -41,4 +38,8 @@ interface FortniteRequestsIOApi {
 
     @GET("/v1/stats/fish")
     fun getFishStats(@Query("lang") language: String, @Query("accountId") accountId: String): Single<FishStatsResponse>
+
+    @GET("/v1/achievements")
+    fun getAchievements(@Query("lang") language: String): Single<AchievementResponse>
+
 }

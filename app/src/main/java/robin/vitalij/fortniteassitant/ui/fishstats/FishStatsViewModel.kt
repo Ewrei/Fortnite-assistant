@@ -2,8 +2,10 @@ package robin.vitalij.fortniteassitant.ui.fishstats
 
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
+import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.getSeason
 import robin.vitalij.fortniteassitant.db.entity.FishEntity
+import robin.vitalij.fortniteassitant.model.EmptyTextModel
 import robin.vitalij.fortniteassitant.model.battlepassreward.SeasonModel
 import robin.vitalij.fortniteassitant.model.network.FishStats
 import robin.vitalij.fortniteassitant.model.network.FishStatsResponse
@@ -36,6 +38,15 @@ class FishStatsViewModel(
                 fishStatsResponse= it
                 mutableLiveData.value = it.seasonStats.firstOrNull()?.fish ?: arrayListOf()
                 mutableSeasonLiveData.value = it.seasonStats.getSeason(resourceProvider)
+
+                emptyText(
+                    EmptyTextModel(
+                        it.seasonStats.isEmpty(),
+                        resourceProvider.getString(
+                            R.string.empty_fish
+                        )
+                    )
+                )
             }, error)
             .let(disposables::add)
     }
