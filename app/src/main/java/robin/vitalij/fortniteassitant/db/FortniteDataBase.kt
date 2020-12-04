@@ -2,6 +2,10 @@ package robin.vitalij.fortniteassitant.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import robin.vitalij.fortniteassitant.db.converter.OptionConverter
+import robin.vitalij.fortniteassitant.db.converter.StringConverter
+import robin.vitalij.fortniteassitant.db.converter.VariantConverter
 import robin.vitalij.fortniteassitant.db.dao.*
 import robin.vitalij.fortniteassitant.db.entity.*
 
@@ -12,11 +16,13 @@ import robin.vitalij.fortniteassitant.db.entity.*
         PlayerSession::class,
         WeaponEntity::class,
         FishEntity::class,
-        AchievementEntity::class
+        AchievementEntity::class,
+        CosmeticsNewEntity::class
     ],
     version = 2
 )
 
+@TypeConverters(VariantConverter::class, StringConverter::class, OptionConverter::class)
 abstract class FortniteDataBase : RoomDatabase() {
 
     abstract fun matchDao(): MatchDao
@@ -30,5 +36,7 @@ abstract class FortniteDataBase : RoomDatabase() {
     abstract fun fishDao(): FishDao
 
     abstract fun achievementDao(): AchievementDao
+
+    abstract fun cosmeticsNewDao(): CosmeticsNewDao
 
 }

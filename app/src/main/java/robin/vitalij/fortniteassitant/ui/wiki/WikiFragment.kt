@@ -74,5 +74,9 @@ class WikiFragment : BaseFragment() {
         achievements.setSafeOnClickListener {
             findNavController().navigate(R.id.navigation_achievement)
         }
+
+        cosmeticsNew.setSafeOnClickListener {
+            findNavController().navigate(R.id.navigation_cosmetics_new)
+        }
     }
 }

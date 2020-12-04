@@ -46,4 +46,8 @@ class DatabaseModule(context: Context) {
     @Singleton
     fun provideAchievementDao() = appDatabase.achievementDao()
 
+    @Provides
+    @Singleton
+    fun provideCosmeticsNewDao() = appDatabase.cosmeticsNewDao()
+
 }

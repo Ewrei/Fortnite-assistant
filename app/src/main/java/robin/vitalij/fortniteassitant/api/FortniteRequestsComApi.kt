@@ -5,6 +5,7 @@ import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import robin.vitalij.fortniteassitant.model.network.CosmeticsNewResponse
 import robin.vitalij.fortniteassitant.model.network.stats.PlayerStatsResponse
 
 interface FortniteRequestsComApi {
@@ -18,5 +19,8 @@ interface FortniteRequestsComApi {
 
     @GET("/v2/shop/br/combined")
     fun getShop(@Query("language") language: String): Single<ResponseBody>
+
+    @GET("/v2/cosmetics/br/new")
+    fun getCosmeticsNew(@Query("language") language: String): Single<CosmeticsNewResponse>
 
 }

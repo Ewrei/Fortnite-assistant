@@ -11,6 +11,7 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.db.entity.Images
 
 object ImageViewBinging {
 
@@ -32,6 +33,20 @@ object ImageViewBinging {
     fun ImageView.loadDrawable(drawableRes: Drawable) {
         Glide.with(context)
             .load(drawableRes)
+            .apply(
+                RequestOptions()
+                    .placeholder(getCircularProgressDrawable(context))
+                    .error(getErrorDrawable())
+            )
+            .into(this)
+    }
+
+
+    @JvmStatic
+    @BindingAdapter("images")
+    fun ImageView.loadImages(images: Images) {
+        Glide.with(context)
+            .load(images.featured ?: images.icon)
             .apply(
                 RequestOptions()
                     .placeholder(getCircularProgressDrawable(context))

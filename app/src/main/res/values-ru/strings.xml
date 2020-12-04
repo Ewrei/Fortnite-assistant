@@ -238,4 +238,7 @@
     <!--Achievement-->
     <string name="achievements">Достижения</string>
 
+    <!--Cosmetics-new-->
+    <string name="cosmetics_news">Недавно добавленная косметика</string>
+
 </resources>
