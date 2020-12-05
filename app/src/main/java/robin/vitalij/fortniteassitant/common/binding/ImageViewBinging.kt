@@ -6,14 +6,22 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.db.entity.Images
+import robin.vitalij.fortniteassitant.model.enums.RarityType
 
 object ImageViewBinging {
+
+    @JvmStatic
+    @BindingAdapter("rarity")
+    fun ImageView.loadBackgroundRarity(rarity: String) {
+        background = ContextCompat.getDrawable(context, RarityType.getRarityType(rarity).getBackgroundRes())
+    }
 
     @JvmStatic
     @BindingAdapter("drawableRes")

@@ -57,12 +57,12 @@ class FishingFragment : BaseFragment() {
             it.let(::initAdapter)
         })
 
-        setListener()
+        setListeners()
         setNavigation()
     }
 
-    private fun setListener() {
-        errorResolveButton.setOnClickListener {
+    private fun setListeners() {
+        setErrorResolveButtonClick {
             viewModel.loadData()
         }
 

@@ -16,6 +16,8 @@ import robin.vitalij.fortniteassitant.common.extensions.showApplicationDialog
 import robin.vitalij.fortniteassitant.common.extensions.showToast
 import robin.vitalij.fortniteassitant.databinding.BottomSheetUserBinding
 import robin.vitalij.fortniteassitant.interfaces.UsersCallback
+import robin.vitalij.fortniteassitant.model.enums.ComparisonDataType
+import robin.vitalij.fortniteassitant.ui.comparison.ComparisonActivity
 import javax.inject.Inject
 
 const val ACCOUNT_ID = "account_id"
@@ -53,12 +55,12 @@ class UserResultFragment : BottomSheetDialogFragment() {
             .get(UserResultViewModel::class.java).apply {
                 openCompare = {
                     dismiss()
-//                    startActivity(
-//                        ComparisonActivity.getComparisonActivityIntent(
-//                            requireContext(),
-//                            ComparisonDataType.COMPARE_WITH_YOURSELF
-//                        )
-//                    )
+                    startActivity(
+                        ComparisonActivity.getComparisonActivityIntent(
+                            requireContext(),
+                            ComparisonDataType.COMPARE_WITH_YOURSELF
+                        )
+                    )
                 }
 
                 showRemoveUserToast = {

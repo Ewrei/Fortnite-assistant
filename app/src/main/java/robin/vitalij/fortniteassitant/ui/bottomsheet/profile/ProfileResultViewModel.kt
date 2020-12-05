@@ -1,14 +1,13 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.profile
 
-import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import robin.vitalij.fortniteassitant.common.extensions.getErrorModel
+import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
 import robin.vitalij.fortniteassitant.repository.comparison.ComparisonListUserRepository
 import robin.vitalij.fortniteassitant.repository.comparison.ComparisonRepository
-import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
 import robin.vitalij.fortniteassitant.repository.network.GetUserRepository
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewmodel.Profile
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
@@ -35,8 +34,9 @@ class ProfileResultViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .let(::setupProgressShow)
             .subscribe({
-                playerModel.set(it)
+                it.stats.playerStatsData.image = avatarImage
                 it.avatar = avatarImage
+                playerModel.set(it)
                 mutableLiveData.value =
                     ProfileResultMapper(resourceProvider).transform(playerModel.get()!!)
             }, {

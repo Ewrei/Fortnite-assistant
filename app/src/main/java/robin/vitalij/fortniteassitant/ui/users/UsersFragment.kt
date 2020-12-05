@@ -41,7 +41,7 @@ class UsersFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         dataBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_users,

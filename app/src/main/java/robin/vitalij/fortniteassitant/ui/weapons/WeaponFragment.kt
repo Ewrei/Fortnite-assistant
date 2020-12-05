@@ -61,7 +61,7 @@ class WeaponFragment : BaseFragment() {
     }
 
     private fun setListener() {
-        errorResolveButton.setOnClickListener {
+        setErrorResolveButtonClick {
             viewModel.loadData()
         }
     }

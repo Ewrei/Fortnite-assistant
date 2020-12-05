@@ -11,7 +11,7 @@ class PlayerStatsResponse(
 )
 
 class PlayerStatsData(
-    @SerializedName("image") val image: String?,
+    @SerializedName("image") var image: String?,
     @SerializedName("account") val account: Account,
     @SerializedName("battlePass") val battlePass: BattlePass,
     @SerializedName("stats") val stats: Stats,

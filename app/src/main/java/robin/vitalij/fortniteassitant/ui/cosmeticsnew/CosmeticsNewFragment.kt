@@ -62,7 +62,7 @@ class CosmeticsNewFragment : BaseFragment() {
     }
 
     private fun setListener() {
-        errorResolveButton.setOnClickListener {
+        setErrorResolveButtonClick {
             viewModel.loadData()
         }
     }

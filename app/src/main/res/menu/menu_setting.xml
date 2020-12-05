@@ -4,7 +4,8 @@
 
     <item
         android:id="@+id/action_wikipedia"
-        android:icon="@drawable/ic_wikipedia"
+        android:icon="@drawable/ic_open_book"
+        android:iconTint="@android:color/white"
         android:title=""
         app:showAsAction="always" />
 

@@ -133,6 +133,10 @@ class SettingFragment : BaseFragment() {
         refresh.setOnClickListener {
             viewModel.update()
         }
+
+        wikiLayout.setOnClickListener {
+            findNavController().navigate(R.id.navigation_wiki)
+        }
     }
 
     private fun openUri(uri: Uri) {

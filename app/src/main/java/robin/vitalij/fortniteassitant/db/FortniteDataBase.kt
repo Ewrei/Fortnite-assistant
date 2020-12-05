@@ -20,7 +20,7 @@ import robin.vitalij.fortniteassitant.db.entity.*
         CosmeticsNewEntity::class,
         CosmeticsEntity::class
     ],
-    version = 2
+    version = 1
 )
 
 @TypeConverters(VariantConverter::class, StringConverter::class, OptionConverter::class)

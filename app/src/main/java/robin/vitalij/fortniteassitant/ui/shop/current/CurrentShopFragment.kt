@@ -56,6 +56,13 @@ class CurrentShopFragment : BaseFragment() {
         })
 
         viewModel.loadData()
+        setListener()
+    }
+
+    private fun setListener() {
+        setErrorResolveButtonClick {
+            viewModel.loadData()
+        }
     }
 
     private fun initAdapter(list: List<CurrentShopImpl>) {

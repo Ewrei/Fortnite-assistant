@@ -45,6 +45,7 @@
 
         <activity
             android:name=".ui.subscription.SubscriptionActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait" />
 
         <activity
