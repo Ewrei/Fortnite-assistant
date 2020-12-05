@@ -17,7 +17,8 @@ import robin.vitalij.fortniteassitant.db.entity.*
         WeaponEntity::class,
         FishEntity::class,
         AchievementEntity::class,
-        CosmeticsNewEntity::class
+        CosmeticsNewEntity::class,
+        CosmeticsEntity::class
     ],
     version = 2
 )
@@ -38,5 +39,7 @@ abstract class FortniteDataBase : RoomDatabase() {
     abstract fun achievementDao(): AchievementDao
 
     abstract fun cosmeticsNewDao(): CosmeticsNewDao
+
+    abstract fun cosmeticsDao(): CosmeticsDao
 
 }

@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_navigation_wiki_to_cosmeticsNewFragment"
             app:destination="@id/navigation_cosmetics_new" />
+        <action
+            android:id="@+id/action_navigation_wiki_to_catalogCosmeticsFragment"
+            app:destination="@id/navigation_catalog_cosmetics" />
     </fragment>
     <fragment
         android:id="@+id/navigation_battles_pass_rewards"
@@ -90,5 +93,17 @@
         android:id="@+id/navigation_cosmetics_new"
         android:name="robin.vitalij.fortniteassitant.ui.cosmeticsnew.CosmeticsNewFragment"
         android:label="@string/cosmetics_news" />
+    <fragment
+        android:id="@+id/navigation_catalog_cosmetics"
+        android:name="robin.vitalij.fortniteassitant.ui.cosmetics.CatalogCosmeticsFragment"
+        android:label="@string/cosmetics" >
+        <action
+            android:id="@+id/action_navigation_catalog_cosmetics_to_cosmeticsFragment"
+            app:destination="@id/navigation_cosmetics" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_cosmetics"
+        android:name="robin.vitalij.fortniteassitant.ui.cosmetics.catalog.CosmeticsFragment"
+        android:label="CosmeticsFragment" />
 
 </navigation>

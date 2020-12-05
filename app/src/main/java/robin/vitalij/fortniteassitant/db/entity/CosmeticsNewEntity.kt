@@ -10,16 +10,16 @@ class CosmeticsNewEntity(
     @PrimaryKey
     @SerializedName("id") var id: String,
     @SerializedName("name") var name: String,
-    @SerializedName("description") var description: String,
+    @SerializedName("description") var description: String?,
     @Embedded(prefix = "type") @SerializedName("type") var type: Type,
-    @Embedded(prefix = "rarity") @SerializedName("rarity") var rarity: Rarity,
+    @Embedded(prefix = "rarity") @SerializedName("rarity") var rarity: Rarity?,
     @Embedded(prefix = "series")@SerializedName("series") var series: Series?,
     @Embedded(prefix = "set") @SerializedName("set") var set: Set?,
-    @Embedded(prefix = "introduction") @SerializedName("introduction") var introduction: Introduction,
-    @Embedded(prefix = "images")@SerializedName("images") var images: Images,
+    @Embedded(prefix = "introduction") @SerializedName("introduction") var introduction: Introduction?,
+    @Embedded(prefix = "images")@SerializedName("images") var images: Images?,
     @SerializedName("variants") var variants: List<Variant>?,
-    @SerializedName("gameplayTags") var gameplayTags: List<String>,
-    @SerializedName("added") var added: String
+    @SerializedName("gameplayTags") var gameplayTags: List<String>?,
+    @SerializedName("added") var added: String?
 )
 
 class Series(
@@ -41,21 +41,21 @@ class Rarity(
 )
 
 class Set(
-    @SerializedName("value") var value: String,
-    @SerializedName("text") var text: String,
-    @SerializedName("backendValue") var backendValue: String
+    @SerializedName("value") var value: String?,
+    @SerializedName("text") var text: String?,
+    @SerializedName("backendValue") var backendValue: String?
 )
 
 class Introduction(
-    @SerializedName("chapter") var chapter: String,
-    @SerializedName("season") var season: String,
-    @SerializedName("text") var text: String,
-    @SerializedName("backendValue") var backendValue: Int
+    @SerializedName("chapter") var chapter: String?,
+    @SerializedName("season") var season: String?,
+    @SerializedName("text") var text: String?,
+    @SerializedName("backendValue") var backendValue: Int?
 )
 
 class Images(
-    @SerializedName("smallIcon") var smallIcon: String,
-    @SerializedName("icon") var icon: String,
+    @SerializedName("smallIcon") var smallIcon: String?,
+    @SerializedName("icon") var icon: String?,
     @SerializedName("featured") var featured: String?,
     @Embedded(prefix = "other") @SerializedName("other") var other: Other?
 )
@@ -67,7 +67,7 @@ class Other(
 class Variant(
     @SerializedName("channel") var channel: String,
     @SerializedName("type") var type: String,
-    @SerializedName("options") var options: List<Option>
+    @SerializedName("options") var options: List<Option>?
 )
 
 class Option(

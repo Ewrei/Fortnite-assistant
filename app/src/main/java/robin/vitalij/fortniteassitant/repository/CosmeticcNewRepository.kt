@@ -23,8 +23,8 @@ class CosmeticsNewRepositoryRepository @Inject constructor(
 ) {
 
     fun loadData(): Single<List<CosmeticsNewEntity>> {
-        return if (preferenceManager.getWeaponDataLastUpdate() == DEFAULT_DATE_UPDATE
-            || preferenceManager.getDateLastUpdate() < (Date().time - TimeUnit.DAYS.toMillis(
+        return if (preferenceManager.getCosmeticsNewDataLastUpdate() == DEFAULT_DATE_UPDATE
+            || preferenceManager.getCosmeticsNewDataLastUpdate() < (Date().time - TimeUnit.DAYS.toMillis(
                 THREE_DAY
             ))
         ) {
@@ -33,7 +33,7 @@ class CosmeticsNewRepositoryRepository @Inject constructor(
                 .flatMap {
                     cosmeticsNewDao.removeCosmeticsNew()
                     cosmeticsNewDao.insertCosmeticsNew(it.data.items)
-                    preferenceManager.setWeaponDataLastUpdate(Date().time)
+                    preferenceManager.setCosmeticsNewDataLastUpdate(Date().time)
                     return@flatMap Single.just(it.data.items)
                 }
         } else {

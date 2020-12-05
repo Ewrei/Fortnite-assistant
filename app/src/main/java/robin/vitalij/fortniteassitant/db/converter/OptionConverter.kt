@@ -12,19 +12,19 @@ class OptionConverter {
     var gson = Gson()
 
     @TypeConverter
-    fun toTypePurse(data: String): List<Option> {
+    fun toTypePurse(data: String?): List<Option>? {
 
         if (data == null) {
             return Collections.emptyList()
         }
 
-        val listType = object : TypeToken<List<Option>>() {}.type
+        val listType = object : TypeToken<List<Option>?>() {}.type
 
         return gson.fromJson(data, listType)
     }
 
     @TypeConverter
-    fun toOrdinal(list: List<Option>): String {
+    fun toOrdinal(list: List<Option>?): String? {
         return gson.toJson(list)
     }
 }

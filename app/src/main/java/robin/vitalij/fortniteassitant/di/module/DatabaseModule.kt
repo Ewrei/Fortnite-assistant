@@ -50,4 +50,8 @@ class DatabaseModule(context: Context) {
     @Singleton
     fun provideCosmeticsNewDao() = appDatabase.cosmeticsNewDao()
 
+    @Provides
+    @Singleton
+    fun provideCosmeticsDao() = appDatabase.cosmeticsDao()
+
 }

@@ -194,6 +194,16 @@
     <string name="featured">Рекомендуемые</string>
     <string name="unknown">Неизвестно</string>
     <string name="emote">Эмоция</string>
+    <string name="emoji">Эмодзи</string>
+    <string name="music">Музыка</string>
+    <string name="spray">Граффити</string>
+    <string name="wrap">Обёртка</string>
+    <string name="petcarrier">Питомец</string>
+    <string name="contrail">Воздушный След</string>
+    <string name="toy">Игрушка</string>
+    <string name="banner">Эмблема</string>
+    <string name="loading_screen">Экраны загрузки</string>
+    <string name="backpack">Украшение на спишу</string>
     <string name="outfit">Экипировка</string>
     <string name="pickaxe">Инструмент</string>
     <string name="glider">Дельтаплан</string>
@@ -240,5 +250,6 @@
 
     <!--Cosmetics-new-->
     <string name="cosmetics_news">Недавно добавленная косметика</string>
+    <string name="cosmetics">Косметика</string>
 
 </resources>

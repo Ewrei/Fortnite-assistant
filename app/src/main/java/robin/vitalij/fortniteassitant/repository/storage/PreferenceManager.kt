@@ -53,4 +53,12 @@ interface PreferenceManager {
     fun setAchievementDataLastUpdate(dataUpdate: Long)
 
     fun getAchievementDataLastUpdate(): Long
+
+    fun setCosmeticsNewDataLastUpdate(dataUpdate: Long)
+
+    fun getCosmeticsNewDataLastUpdate(): Long
+
+    fun setCosmeticsDataLastUpdate(dataUpdate: Long)
+
+    fun getCosmeticsDataLastUpdate(): Long
 }

@@ -26,6 +26,8 @@ import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.statist
 import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.viewpager.AdapterManyAccountFragment
 import robin.vitalij.fortniteassitant.ui.comparison.statistics.ComparisonStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.comparison.viewpager.AdapterComparisonFragment
+import robin.vitalij.fortniteassitant.ui.cosmetics.CatalogCosmeticsFragment
+import robin.vitalij.fortniteassitant.ui.cosmetics.catalog.CosmeticsFragment
 import robin.vitalij.fortniteassitant.ui.cosmeticsnew.CosmeticsNewFragment
 import robin.vitalij.fortniteassitant.ui.details.statistics.DetailsStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment
@@ -95,6 +97,8 @@ interface AppComponent {
     fun inject(fragment: FishStatsFragment)
     fun inject(fragment: AchievementsFragment)
     fun inject(fragment: CosmeticsNewFragment)
+    fun inject(fragment: CatalogCosmeticsFragment)
+    fun inject(fragment: CosmeticsFragment)
 
     fun inject(fragment: ProfileResultFragment)
     fun inject(fragment: ContactUsResultFragment)

@@ -7,8 +7,35 @@ enum class ShopType(val id: String) {
     EMOTE("emote") {
         override fun getTitleRes() = R.string.emote
     },
-    UNKNOWN("Unknown") {
-        override fun getTitleRes() = R.string.unknown
+    MUSIC("music") {
+        override fun getTitleRes() = R.string.music
+    },
+    SPRAY("spray") {
+        override fun getTitleRes() = R.string.spray
+    },
+    LOADING_SREEN("loadingscreen") {
+        override fun getTitleRes() = R.string.loading_screen
+    },
+    BACKPACK("backpack") {
+        override fun getTitleRes() = R.string.backpack
+    },
+    EMOJI("emoji") {
+        override fun getTitleRes() = R.string.emoji
+    },
+    WRAP("wrap") {
+        override fun getTitleRes() = R.string.wrap
+    },
+    PET_CARRIRER("petcarrier") {
+        override fun getTitleRes() = R.string.petcarrier
+    },
+    CONTRAIL("contrail") {
+        override fun getTitleRes() = R.string.contrail
+    },
+    TOY("toy") {
+        override fun getTitleRes() = R.string.toy
+    },
+    BANNER("banner") {
+        override fun getTitleRes() = R.string.banner
     },
     OUTFIT("outfit") {
         override fun getTitleRes() = R.string.outfit
@@ -21,6 +48,9 @@ enum class ShopType(val id: String) {
     },
     BUNDLE("bundle") {
         override fun getTitleRes() = R.string.bundle
+    },
+    UNKNOWN("Unknown") {
+        override fun getTitleRes() = R.string.unknown
     };
 
 
