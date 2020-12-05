@@ -10,6 +10,7 @@ import robin.vitalij.fortniteassitant.ui.achiviements.AchievementsFragment
 import robin.vitalij.fortniteassitant.ui.battlepassrewards.BattlePassRewardsFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.battlepassrewards.BattlePassRewardsResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFragment
+import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.CosmeticResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.CurrentShopResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.fish.FishResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
@@ -100,6 +101,7 @@ interface AppComponent {
     fun inject(fragment: CatalogCosmeticsFragment)
     fun inject(fragment: CosmeticsFragment)
 
+    fun inject(fragment: CosmeticResultFragment)
     fun inject(fragment: ProfileResultFragment)
     fun inject(fragment: ContactUsResultFragment)
     fun inject(fragment: UserResultFragment)

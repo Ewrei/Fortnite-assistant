@@ -171,7 +171,7 @@
     </style>
 
     <style name="DefaultChipChoice" parent="@style/Widget.MaterialComponents.Chip.Choice">
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@android:color/black</item>
         <item name="chipBackgroundColor">@color/color_orange</item>
     </style>
 

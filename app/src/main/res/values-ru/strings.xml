@@ -251,5 +251,7 @@
     <!--Cosmetics-new-->
     <string name="cosmetics_news">Недавно добавленная косметика</string>
     <string name="cosmetics">Косметика</string>
+    <string name="tags">Теги</string>
+    <string name="add_date_format">Добавлен %s</string>
 
 </resources>

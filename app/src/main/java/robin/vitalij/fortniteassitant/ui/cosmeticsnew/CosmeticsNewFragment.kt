@@ -18,6 +18,7 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.db.entity.CosmeticsNewEntity
+import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.CosmeticResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.cosmeticsnew.adapter.CosmeticsNewAdapter
 import javax.inject.Inject
@@ -75,7 +76,7 @@ class CosmeticsNewFragment : BaseFragment() {
     private fun initAdapter(list: List<CosmeticsNewEntity>) {
         recyclerView.run {
             adapter = CosmeticsNewAdapter {
-                // WeaponResultFragment.show(childFragmentManager, it)
+                CosmeticResultFragment.show(childFragmentManager, it.id, true)
             }
             (adapter as CosmeticsNewAdapter).setData(list)
             val gridlayoutManager = GridLayoutManager(

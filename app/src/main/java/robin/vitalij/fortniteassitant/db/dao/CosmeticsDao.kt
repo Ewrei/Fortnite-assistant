@@ -17,6 +17,9 @@ interface CosmeticsDao {
     @Query("SELECT * FROM Cosmetics WHERE typevalue = :type")
     fun getCosmetics(type: String): Single<List<CosmeticsEntity>>
 
+    @Query("SELECT * FROM Cosmetics WHERE id = :id")
+    fun getCosmetic(id: String): Single<CosmeticsEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCosmetics(list: List<CosmeticsEntity>)
 
