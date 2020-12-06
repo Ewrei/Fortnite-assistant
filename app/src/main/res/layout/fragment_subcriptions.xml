@@ -23,33 +23,6 @@
         android:layout_margin="@dimen/default_margin_double"
         android:orientation="vertical">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/subscribeClick"
-            style="@style/DefaultButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_margin_double"
-            android:onClick="@{(view) -> viewModel.onClick()}"
-            android:text="@string/subscribe"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cancelAtAnyTime" />
-
-        <TextView
-            android:id="@+id/cancelAtAnyTime"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginTop="@dimen/default_margin_double"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:gravity="center"
-            android:fontFamily="@font/futura_pt_medium"
-            android:text="@string/cancel_at_any_time"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/avatarImage"
             android:layout_width="wrap_content"
@@ -77,122 +50,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_cancel" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/default_margin_double"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/burger">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/half_default_margin"
-                    android:text="@{item.price}"
-                    android:fontFamily="@font/fortnite_battlefest"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/color_orange"
-                    tools:text="price" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/half_default_margin"
-                    android:layout_marginBottom="@dimen/half_default_margin"
-                    android:text="@string/per_month"
-                    android:fontFamily="@font/futura_pt_medium"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/subscriptionTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_margin_double"
-            android:text="@string/plus_subcription_title"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textColor="?header_color"
-            android:fontFamily="@font/futura_pt_bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/avatarImage" />
-
-        <TextView
-            android:id="@+id/disableAdsTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_margin_double"
-            android:drawableStart="@drawable/ic_disable_ads"
-            android:drawablePadding="@dimen/default_margin"
-            android:text="@string/disabling_ads"
-            android:fontFamily="@font/futura_pt_medium"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/subscriptionTitle" />
-
-        <TextView
-            android:id="@+id/functionPhone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/half_default_margin"
-            android:drawableStart="@drawable/ic_app"
-            android:drawablePadding="@dimen/default_margin"
-            android:fontFamily="@font/futura_pt_medium"
-            android:text="@string/additional_features"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/disableAdsTitle" />
-
-        <TextView
-            android:id="@+id/burger"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/half_default_margin"
-            android:drawableStart="@drawable/ic_burger"
-            android:drawablePadding="@dimen/default_margin"
-            android:text="@string/food_developer"
-            android:fontFamily="@font/futura_pt_medium"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-            app:layout_constraintEnd_toStartOf="@+id/linearLayout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/functionPhone" />
-
-        <include
-            android:id="@+id/layoutOr"
-            layout="@layout/layout_or"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_margin_double"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/subscribeClick" />
-
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
             style="@style/DefaultCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="@dimen/default_margin_double"
-            app:layout_constraintBottom_toTopOf="@+id/watchClick"
+            android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutOr"
-            app:layout_constraintVertical_bias="1.0">
+            app:layout_constraintTop_toBottomOf="@+id/avatarImage">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -215,10 +81,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/futura_pt_bold"
                         android:text="@string/disabling_ads"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:textColor="@android:color/darker_gray"
-                        android:fontFamily="@font/futura_pt_bold" />
+                        android:textColor="@android:color/darker_gray" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -238,10 +104,13 @@
             style="@style/DefaultButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="@string/watch"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

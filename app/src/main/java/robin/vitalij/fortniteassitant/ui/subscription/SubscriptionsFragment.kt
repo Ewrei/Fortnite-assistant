@@ -16,12 +16,10 @@ import com.google.android.gms.ads.rewarded.RewardedAdCallback
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.google.android.gms.ads.rewarded.ServerSideVerificationOptions
 import kotlinx.android.synthetic.main.fragment_subcriptions.*
-import org.solovyev.android.checkout.Checkout
 import robin.vitalij.fortniteassitant.BuildConfig
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.DATE_PATTERN_YEAR_TIME
-import robin.vitalij.fortniteassitant.common.extensions.getBilling
 import robin.vitalij.fortniteassitant.common.extensions.getDateStringFormat
 import robin.vitalij.fortniteassitant.databinding.FragmentSubcriptionsBinding
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
@@ -71,15 +69,15 @@ class SubscriptionsFragment : BaseFragment() {
 
         setListeners()
 
-        viewModel.checkout = Checkout.forActivity(requireActivity(), requireContext().getBilling())
-        viewModel.loadData()
+//        viewModel.checkout = Checkout.forActivity(requireActivity(), requireContext().getBilling())
+//        viewModel.loadData()
 
         initRewardedAdd()
     }
 
 
     override fun onDestroy() {
-        viewModel.checkout?.stop()
+        // viewModel.checkout?.stop()
         super.onDestroy()
     }
 
@@ -89,7 +87,7 @@ class SubscriptionsFragment : BaseFragment() {
         data: Intent?
     ) {
         super.onActivityResult(requestCode, resultCode, data)
-        viewModel.checkout?.onActivityResult(requestCode, resultCode, data)
+        //  viewModel.checkout?.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun setListeners() {

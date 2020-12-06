@@ -1,6 +1,5 @@
 package robin.vitalij.fortniteassitant.ui.setting
 
-import robin.vitalij.fortniteassitant.repository.BillingRepository
 import robin.vitalij.fortniteassitant.repository.db.UserRepository
 import robin.vitalij.fortniteassitant.repository.network.GetUserRepository
 import robin.vitalij.fortniteassitant.repository.network.SaveUserRepository
@@ -10,7 +9,6 @@ import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
 import javax.inject.Inject
 
 class SettingViewModelFactory @Inject constructor(
-    private val billingRepository: BillingRepository,
     private val userRepository: UserRepository,
     private val saveUserRepository: SaveUserRepository,
     private val getUserRepository: GetUserRepository,
@@ -23,7 +21,6 @@ class SettingViewModelFactory @Inject constructor(
     override fun createViewModel(): SettingViewModel {
         return viewModel ?: run {
             val model = SettingViewModel(
-                billingRepository,
                 userRepository,
                 saveUserRepository,
                 getUserRepository,

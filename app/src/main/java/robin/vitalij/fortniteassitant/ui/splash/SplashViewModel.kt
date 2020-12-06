@@ -8,7 +8,6 @@ import io.reactivex.disposables.CompositeDisposable
 import robin.vitalij.fortniteassitant.interfaces.NativeResult
 import robin.vitalij.fortniteassitant.interfaces.SaveUserCallback
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
-import robin.vitalij.fortniteassitant.repository.BillingRepository
 import robin.vitalij.fortniteassitant.repository.InterstitialAdRepository
 import robin.vitalij.fortniteassitant.repository.NativeRepository
 import robin.vitalij.fortniteassitant.repository.network.GetUserRepository
@@ -22,8 +21,7 @@ class SplashViewModel @Inject constructor(
     private val getUserRepository: GetUserRepository,
     private val saveUserRepository: SaveUserRepository,
     private val nativeRepository: NativeRepository,
-    private val interstitialAdRepository: InterstitialAdRepository,
-    billingRepository: BillingRepository
+    private val interstitialAdRepository: InterstitialAdRepository
 ) : ViewModel() {
 
     private val isUserAuthorised = MutableLiveData<Boolean>()
@@ -33,7 +31,6 @@ class SplashViewModel @Inject constructor(
     val disposables = CompositeDisposable()
 
     init {
-        billingRepository.startConnection(false)
 
         if (preferenceManager.getIsEstimate()) {
             preferenceManager.setEstimate((preferenceManager.getEstimate() + 1))

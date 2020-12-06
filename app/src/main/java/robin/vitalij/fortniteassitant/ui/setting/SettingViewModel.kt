@@ -6,7 +6,6 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.db.entity.UserEntity
 import robin.vitalij.fortniteassitant.interfaces.SaveUserCallback
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
-import robin.vitalij.fortniteassitant.repository.BillingRepository
 import robin.vitalij.fortniteassitant.repository.db.UserRepository
 import robin.vitalij.fortniteassitant.repository.network.GetUserRepository
 import robin.vitalij.fortniteassitant.repository.network.SaveUserRepository
@@ -15,7 +14,6 @@ import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
 
 class SettingViewModel(
-    private val billingRepository: BillingRepository,
     userRepository: UserRepository,
     private val saveUserRepository: SaveUserRepository,
     private val getUserRepository: GetUserRepository,
@@ -71,6 +69,6 @@ class SettingViewModel(
     }
 
     fun checkSubscription() {
-        billingRepository.startConnection(true)
+      //  billingRepository.startConnection(true)
     }
 }

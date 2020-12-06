@@ -104,9 +104,9 @@ class SettingFragment : BaseFragment() {
             startActivity(intent)
         }
 
-        checkShopping.setOnClickListener {
-            viewModel.checkSubscription()
-        }
+//        checkShopping.setOnClickListener {
+//            viewModel.checkSubscription()
+//        }
 
         shareApp.setOnClickListener {
             val shareActionText =
