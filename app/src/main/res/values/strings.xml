@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Fortnite Assitant</string>
+    <string name="app_name" translatable="false">Assitant</string>
     <string name="application_url" translatable="false">https://play.google.com/store/apps/details?id=robin.vitalij.cs_go_assistant</string>
     <string name="title_home">Home</string>
     <string name="tab_title_history_match">History</string>

@@ -28,6 +28,7 @@
             android:layout_gravity="center_vertical"
             android:adjustViewBounds="true"
             android:scaleType="fitStart"
+            app:rarity="@{item.rarity}"
             app:imageUrl="@{item.image}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

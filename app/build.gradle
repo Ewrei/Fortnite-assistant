@@ -15,8 +15,8 @@ android {
         applicationId "robin.vitalij.fortniteassitant"
         minSdkVersion 22
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -178,7 +178,7 @@ dependencies {
     def billing_version = "3.0.2"
     implementation "com.android.billingclient:billing:$billing_version"
 
-    def play_core_version = "1.8.3"
+    def play_core_version = "1.9.0"
     implementation "com.google.android.play:core:$play_core_version"
 
     def circle_progress_version = "1.2.1"

@@ -9,7 +9,7 @@ import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 import java.util.*
 
-private const val SUBSCRIPTION_ID = "subscription_cs_go"
+private const val SUBSCRIPTION_ID = "subscription_fortnite"
 
 class SubscriptionsViewModel(val preferenceManager: PreferenceManager) :
     BaseViewModel() {

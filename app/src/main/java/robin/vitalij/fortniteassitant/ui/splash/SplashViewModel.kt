@@ -39,7 +39,7 @@ class SplashViewModel @Inject constructor(
             preferenceManager.setEstimate((preferenceManager.getEstimate() + 1))
         }
 
-        loadNative()
+      //  loadNative()
         loadInterstitialAd()
     }
 
