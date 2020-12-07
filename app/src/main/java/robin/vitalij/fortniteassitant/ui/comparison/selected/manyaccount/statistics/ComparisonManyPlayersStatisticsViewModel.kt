@@ -9,7 +9,7 @@ import robin.vitalij.fortniteassitant.repository.comparison.ComparisonListUserRe
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.statistics.adapter.viewmodel.ComparisonManyPlayers
 import robin.vitalij.fortniteassitant.utils.mapper.ComparisonManyAccountsStatisticsMapper
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 class ComparisonManyPlayersStatisticsViewModel(
     private val resourceProvider: ResourceProvider,

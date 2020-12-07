@@ -9,7 +9,7 @@ import robin.vitalij.fortniteassitant.model.comparison.PlayerModel
 import robin.vitalij.fortniteassitant.repository.comparison.ComparisonListUserRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 class SelectedListViewModel(
     private val comparisonListUserRepository: ComparisonListUserRepository,

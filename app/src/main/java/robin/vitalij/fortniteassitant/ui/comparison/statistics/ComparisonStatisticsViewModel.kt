@@ -10,7 +10,7 @@ import robin.vitalij.fortniteassitant.repository.comparison.ComparisonProfileRep
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel.ComparisonPlayer
 import robin.vitalij.fortniteassitant.utils.mapper.ComparisonPlayersMapper
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 class ComparisonStatisticsViewModel(
     private val comparisonProfileRepository: ComparisonProfileRepository,

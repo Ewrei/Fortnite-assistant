@@ -6,7 +6,7 @@ import robin.vitalij.fortniteassitant.db.dao.CosmeticsNewDao
 import robin.vitalij.fortniteassitant.db.entity.*
 import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter.viewmodel.Cosmetics
 import robin.vitalij.fortniteassitant.utils.mapper.CosmeticMapper
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 import javax.inject.Inject
 
 class CosmeticsResultRepository @Inject constructor(

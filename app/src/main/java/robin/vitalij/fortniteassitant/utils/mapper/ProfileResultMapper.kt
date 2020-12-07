@@ -10,7 +10,7 @@ import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewmodel.P
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewmodel.ProfileHeaderViewModel
 import robin.vitalij.fortniteassitant.utils.TextUtils
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 class ProfileResultMapper(
     private val resourceProvider: ResourceProvider

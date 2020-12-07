@@ -2,7 +2,6 @@ package robin.vitalij.fortniteassitant.ui.season.statistics
 
 import robin.vitalij.fortniteassitant.repository.network.GetSeasonStatisticsRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
 import javax.inject.Inject
 
 class DetailsSeasonStatisticsViewModelFactory @Inject constructor(

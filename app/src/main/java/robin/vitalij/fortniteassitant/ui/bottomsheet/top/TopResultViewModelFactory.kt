@@ -1,7 +1,7 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.top
 
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 import javax.inject.Inject
 
 class TopResultViewModelFactory @Inject constructor(

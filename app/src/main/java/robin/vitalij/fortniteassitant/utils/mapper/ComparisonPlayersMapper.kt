@@ -10,7 +10,7 @@ import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel
 import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel.ComparisonStatisticsHeaderViewModel
 import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel.ComparisonStatisticsViewModel
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 class ComparisonPlayersMapper(
     private val resourceProvider: ResourceProvider,

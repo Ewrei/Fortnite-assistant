@@ -8,7 +8,7 @@ import robin.vitalij.fortniteassitant.db.entity.UserEntity
 import robin.vitalij.fortniteassitant.db.projection.UserHistory
 import robin.vitalij.fortniteassitant.model.FullHomeModel
 import robin.vitalij.fortniteassitant.utils.mapper.HomeMapper
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 import javax.inject.Inject
 
 class HomeRepository @Inject constructor(

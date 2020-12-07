@@ -5,7 +5,7 @@ import io.reactivex.schedulers.Schedulers
 import robin.vitalij.fortniteassitant.api.FortniteRequestsIOApi
 import robin.vitalij.fortniteassitant.utils.LocaleUtils
 import robin.vitalij.fortniteassitant.utils.mapper.InventoryMapper
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 import javax.inject.Inject
 
 class GetCurrentShopRepository @Inject constructor(

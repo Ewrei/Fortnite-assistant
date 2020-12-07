@@ -9,7 +9,7 @@ import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.HomeBodyStats
 import robin.vitalij.fortniteassitant.utils.mapper.DetailsStatisticsMapper
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 import javax.inject.Inject
 import javax.inject.Singleton
 

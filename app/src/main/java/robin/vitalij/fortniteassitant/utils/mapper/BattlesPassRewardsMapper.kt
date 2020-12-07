@@ -6,7 +6,7 @@ import robin.vitalij.fortniteassitant.model.battlepassreward.FullBattlePassRewar
 import robin.vitalij.fortniteassitant.model.battlepassreward.SeasonModel
 import robin.vitalij.fortniteassitant.model.network.BattlePassRewardsResponse
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 class BattlesPassRewardsMapper(private val resourceProvider: ResourceProvider) :
     Mapper<BattlePassRewardsResponse, FullBattlePassRewardModel> {

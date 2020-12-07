@@ -9,7 +9,7 @@ import robin.vitalij.fortniteassitant.repository.db.UserRepository
 import robin.vitalij.fortniteassitant.repository.network.SaveUserRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(

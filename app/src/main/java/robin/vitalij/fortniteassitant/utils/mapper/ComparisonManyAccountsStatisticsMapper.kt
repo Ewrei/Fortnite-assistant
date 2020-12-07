@@ -11,7 +11,7 @@ import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.statist
 import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.statistics.adapter.viewmodel.ComparisonManyPlayersHeaderViewModel
 import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.statistics.adapter.viewmodel.ComparisonManyPlayersScheduleViewModel
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 class ComparisonManyAccountsStatisticsMapper(
     private val resourceProvider: ResourceProvider,

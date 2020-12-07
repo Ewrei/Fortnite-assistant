@@ -10,7 +10,7 @@ import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.model.network.stats.*
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.*
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 private const val TWO_SESSION = 2
 

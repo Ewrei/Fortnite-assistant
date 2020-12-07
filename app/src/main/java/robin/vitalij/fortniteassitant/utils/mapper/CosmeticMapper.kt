@@ -9,7 +9,7 @@ import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter.viewmodel.
 import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter.viewmodel.CosmeticsTagViewModel
 import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter.viewmodel.CosmeticsVariantViewModel
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 class CosmeticMapper(private val resourceProvider: ResourceProvider) :
     Mapper<CosmeticsEntity, List<Cosmetics>> {

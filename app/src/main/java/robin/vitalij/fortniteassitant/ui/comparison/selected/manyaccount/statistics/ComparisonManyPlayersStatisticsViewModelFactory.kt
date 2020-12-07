@@ -2,7 +2,7 @@ package robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.statis
 
 import robin.vitalij.fortniteassitant.repository.comparison.ComparisonListUserRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 import javax.inject.Inject
 
 class ComparisonManyPlayersStatisticsViewModelFactory @Inject constructor(

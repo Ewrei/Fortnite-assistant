@@ -5,7 +5,7 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.model.ContactUsModel
 import robin.vitalij.fortniteassitant.model.enums.ConfigType
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 class ContactUsResultViewModel(private val resourceProvider: ResourceProvider) : BaseViewModel() {
 

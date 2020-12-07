@@ -13,7 +13,7 @@ import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewmodel.P
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 import robin.vitalij.fortniteassitant.utils.mapper.PlayerUserMapper
 import robin.vitalij.fortniteassitant.utils.mapper.ProfileResultMapper
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 
 class ProfileResultViewModel(

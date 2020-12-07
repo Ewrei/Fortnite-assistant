@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.getSeason
-import robin.vitalij.fortniteassitant.db.entity.FishEntity
 import robin.vitalij.fortniteassitant.model.EmptyTextModel
 import robin.vitalij.fortniteassitant.model.battlepassreward.SeasonModel
 import robin.vitalij.fortniteassitant.model.network.FishStats
@@ -12,7 +11,7 @@ import robin.vitalij.fortniteassitant.model.network.FishStatsResponse
 import robin.vitalij.fortniteassitant.repository.FishStatsRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 class FishStatsViewModel(
     private val fishStatsRepository: FishStatsRepository,

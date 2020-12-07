@@ -18,7 +18,7 @@ import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adap
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.*
 import robin.vitalij.fortniteassitant.utils.TextUtils
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 private const val TWO_SESSION = 2
 

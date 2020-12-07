@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.utils.view
+package robin.vitalij.fortniteassitant.utils
 
 import android.content.Context
 

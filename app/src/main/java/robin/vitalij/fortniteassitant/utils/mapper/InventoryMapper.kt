@@ -4,7 +4,7 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.model.network.shop.ShopResponse
 import robin.vitalij.fortniteassitant.ui.shop.current.adapter.viewmodel.*
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 private const val SIX_THING = 6
 
