@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -28,116 +26,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.core.widget.NestedScrollView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:descendantFocusability="blocksDescendants"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/typeTopCard"
-                        style="@style/DefaultCard"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <ImageView
-                                android:id="@+id/imageView2"
-                                android:layout_width="@dimen/icon_size"
-                                android:layout_height="@dimen/icon_size"
-                                android:layout_gravity="center"
-                                android:layout_marginEnd="@dimen/default_margin"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:srcCompat="@drawable/ic_down_arrow"
-                                app:tint="@android:color/white" />
-
-                            <TextView
-                                android:id="@+id/textView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="16dp"
-                                android:layout_marginEnd="16dp"
-                                android:text="@string/platform"
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                                android:textColor="@color/color_orange"
-                                app:layout_constraintEnd_toStartOf="@+id/textView3"
-                                app:layout_constraintHorizontal_bias="0.5"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <TextView
-                                android:id="@+id/typeBattles"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="@dimen/default_margin_double"
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                android:textStyle="bold"
-                                app:battlesType="@{viewModel.topFullModel.battlesType}"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="@+id/textView3"
-                                app:layout_constraintStart_toStartOf="@+id/textView3"
-                                app:layout_constraintTop_toBottomOf="@+id/textView"
-                                app:topType="@{viewModel.topType}"
-                                tools:text="type battles" />
-
-                            <TextView
-                                android:id="@+id/textView3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="16dp"
-                                android:layout_marginTop="16dp"
-                                android:text="@string/type_battles"
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                                android:textColor="@color/color_orange"
-                                app:layout_constraintEnd_toStartOf="@+id/imageView2"
-                                app:layout_constraintHorizontal_bias="0.5"
-                                app:layout_constraintStart_toEndOf="@+id/textView"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <TextView
-                                android:id="@+id/platform"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:gameType="@{viewModel.topFullModel.gameType}"
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                android:textStyle="bold"
-                                tools:text="platform"
-                                app:layout_constraintEnd_toEndOf="@+id/textView"
-                                app:layout_constraintStart_toStartOf="@+id/textView"
-                                app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/default_margin_double"
-                        android:gravity="end"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:textColor="@color/color_orange"
-                        app:topType="@{viewModel.topType}"
-                        tools:text="topType" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:overScrollMode="never" />
-
-                </LinearLayout>
-
-            </androidx.core.widget.NestedScrollView>
+                android:layout_height="match_parent"
+                android:overScrollMode="never" />
 
             <include
                 layout="@layout/progress_view"

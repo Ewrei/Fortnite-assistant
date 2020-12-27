@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -24,6 +25,7 @@
             <include
                 layout="@layout/layout_type_stats_group"
                 android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center" />
 
@@ -31,9 +33,11 @@
                 android:id="@+id/typeBattlesSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin_double"
-                android:layout_marginEnd="@dimen/default_margin_double"
-                android:backgroundTint="@android:color/black" />
+                android:layout_marginStart="@dimen/default_margin_x4"
+                android:layout_marginEnd="@dimen/default_margin_x4"
+                android:layout_marginTop="@dimen/default_margin"
+                android:fontFamily="@font/futura_pt_bold"
+                app:ms_background_color="@color/colorPrimaryDark" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"

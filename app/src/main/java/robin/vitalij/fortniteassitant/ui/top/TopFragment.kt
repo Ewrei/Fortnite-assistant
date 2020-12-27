@@ -12,9 +12,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_top.*
-import kotlinx.android.synthetic.main.recycler_view.recyclerView
+import kotlinx.android.synthetic.main.recycler_view.*
 import kotlinx.android.synthetic.main.toolbar_center_title.*
+import kotlinx.android.synthetic.main.view_error.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
@@ -23,15 +23,15 @@ import robin.vitalij.fortniteassitant.common.extensions.saveUser
 import robin.vitalij.fortniteassitant.databinding.FragmentTopBinding
 import robin.vitalij.fortniteassitant.interfaces.RegistrationProfileCallback
 import robin.vitalij.fortniteassitant.interfaces.TopResultCallback
+import robin.vitalij.fortniteassitant.model.TopFullModel
 import robin.vitalij.fortniteassitant.model.enums.AvatarType
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
-import robin.vitalij.fortniteassitant.model.enums.TopType
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.top.TopResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.top.adapter.TopAdapter
-import robin.vitalij.fortniteassitant.ui.top.adapter.TopUserModel
+import robin.vitalij.fortniteassitant.ui.top.adapter.viewmodel.Top
 import javax.inject.Inject
 
 
@@ -45,7 +45,7 @@ class TopFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val dataBinding: FragmentTopBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_top,
@@ -79,17 +79,14 @@ class TopFragment : BaseFragment() {
 
         setNavigation()
         setListener()
+
+        viewModel.loadData()
     }
 
     private fun setListener() {
-//        typeTopCard.setOnClickListener {
-//            TopResultFragment.show(childFragmentManager, object : TopResultCallback {
-//                override fun checkTop(topType: TopType) {
-//                    viewModel.topType.set(topType)
-//                    viewModel.loadData()
-//                }
-//            })
-//        }
+        setErrorResolveButtonClick {
+            viewModel.loadData()
+        }
     }
 
     private fun setNavigation() {
@@ -98,9 +95,9 @@ class TopFragment : BaseFragment() {
         toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
-    private fun initAdapter(list: List<TopUserModel>) {
+    private fun initAdapter(list: List<Top>) {
         recyclerView.run {
-            adapter = TopAdapter() {
+            adapter = TopAdapter(onClick = {
                 ProfileResultFragment.show(
                     childFragmentManager,
                     it,
@@ -112,7 +109,16 @@ class TopFragment : BaseFragment() {
                         }
 
                     })
-            }
+            }, onTopClick = {
+                TopResultFragment.show(childFragmentManager,
+                    viewModel.topType.get() ?: TopFullModel(),
+                    object : TopResultCallback {
+                        override fun checkTop(topFullModel: TopFullModel) {
+                            viewModel.topType.set(topFullModel)
+                            viewModel.loadData()
+                        }
+                    })
+            })
             (adapter as TopAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)
         }

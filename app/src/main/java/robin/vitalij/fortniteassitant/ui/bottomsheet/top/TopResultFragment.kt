@@ -7,13 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.bottom_sheet_top.*
+import kotlinx.android.synthetic.main.fragment_adapter_comparion.*
+import kotlinx.android.synthetic.main.layout_type_stats_group.*
 import kotlinx.android.synthetic.main.recycler_view.*
 import kotlinx.android.synthetic.main.recycler_view.recyclerView
 import robin.vitalij.fortniteassitant.FortniteApplication
@@ -22,10 +23,12 @@ import robin.vitalij.fortniteassitant.databinding.BottomSheetTopBinding
 import robin.vitalij.fortniteassitant.interfaces.TopResultCallback
 import robin.vitalij.fortniteassitant.model.TopFullModel
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
+import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.ui.bottomsheet.top.adapter.TopResultAdapter
 import robin.vitalij.fortniteassitant.ui.bottomsheet.top.adapter.viewmodel.TopResult
 import robin.vitalij.fortniteassitant.ui.bottomsheet.top.adapter.viewmodel.TopResultType
 import javax.inject.Inject
+
 
 const val BOTTOM_SHEET_MARGIN_TOP = 200
 
@@ -38,10 +41,14 @@ class TopResultFragment : BottomSheetDialogFragment() {
 
     private var topResultCallback: TopResultCallback? = null
 
+    private var gameType: GameType = GameType.ALL
+
+    private var battlesType: BattlesType = BattlesType.OVERALL
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         dialog?.setOnShowListener { dialog ->
             val d = dialog as BottomSheetDialog
             val bottomSheetInternal =
@@ -94,14 +101,10 @@ class TopResultFragment : BottomSheetDialogFragment() {
         sheetContainer.layoutParams.height = (displayMetrics.heightPixels - BOTTOM_SHEET_MARGIN_TOP)
     }
 
-    private fun setListeners() {
-        typeBattlesSpinner.setItems(BattlesType.getTitles(requireContext()))
-    }
-
     private fun initAdapter(list: List<TopResult>) {
         recyclerView.run {
             adapter = TopResultAdapter {
-                topResultCallback?.checkTop(it)
+                topResultCallback?.checkTop(TopFullModel(it, gameType, battlesType))
                 dismiss()
             }
             (adapter as TopResultAdapter).setData(list)
@@ -120,6 +123,30 @@ class TopResultFragment : BottomSheetDialogFragment() {
             }
 
             layoutManager = gridlayoutManager
+        }
+    }
+
+    private fun setListeners() {
+        typeBattlesSpinner.setItems(BattlesType.getTitles(requireContext()))
+
+        typeBattlesSpinner.setOnItemSelectedListener { view, position, id, item ->
+            battlesType = BattlesType.values()[position]
+        }
+
+        allStats.setOnClickListener {
+            gameType = GameType.ALL
+        }
+
+        keyboardMouse.setOnClickListener {
+            gameType = GameType.KEYBOARD_MOUSE
+        }
+
+        gamepad.setOnClickListener {
+            gameType = GameType.GAMEPAD
+        }
+
+        touch.setOnClickListener {
+            gameType = GameType.TOUCH
         }
     }
 

@@ -1,22 +1,30 @@
 package robin.vitalij.fortniteassitant.utils.mapper
 
+import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
+import robin.vitalij.fortniteassitant.model.TopFullModel
 import robin.vitalij.fortniteassitant.model.enums.TopType
 import robin.vitalij.fortniteassitant.model.network.TopUser
-import robin.vitalij.fortniteassitant.ui.top.adapter.TopUserModel
+import robin.vitalij.fortniteassitant.ui.top.adapter.viewmodel.Top
+import robin.vitalij.fortniteassitant.ui.top.adapter.viewmodel.TopHeaderViewModel
+import robin.vitalij.fortniteassitant.ui.top.adapter.viewmodel.TopViewModel
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
 
-class TopUserMapper(private val topType: TopType) :
-    Mapper<List<TopUser>, List<TopUserModel>> {
+class TopUserMapper(private val topType: TopFullModel) :
+    Mapper<List<TopUser>, List<Top>> {
 
-    override fun transform(obj: List<TopUser>): List<TopUserModel> {
-        val list = arrayListOf<TopUserModel>()
+    override fun transform(obj: List<TopUser>): List<Top> {
+        val list = arrayListOf<Top>()
         var position = 1
+
+        list.add(TopHeaderViewModel(topType))
+
         obj.forEach {
             list.add(
-                TopUserModel(
+                TopViewModel(
                     position = position,
-                    userName = it.userName,
-                    playerId = it.playerId,
+                    userName = it.userName ?: "----",
+                    playerId = it.accountId,
+                    avatar = "",
                     value = getValue(it)
                 )
             )
@@ -26,26 +34,20 @@ class TopUserMapper(private val topType: TopType) :
     }
 
     private fun getValue(topUser: TopUser): String {
-        return ""
-//        return when (topType) {
-//            return else -> ""
-//            TopType.TIME_PLAYED -> (topUser.timePlayed / 60).getStringFormat()
-//            TopType.SCORE -> topUser.score.getStringFormat()
-//            TopType.KD -> topUser.kd.getStringFormat()
-//            TopType.KR -> topUser.kr.getStringFormat()
-//            TopType.KILLS -> topUser.kills.getStringFormat()
-//            TopType.DEATHS -> topUser.deaths.getStringFormat()
-//            TopType.HEADSHOTS -> topUser.headshots.getStringFormat()
-//            TopType.HEADSHOTS_PERCENT -> topUser.headshotsPercent.getStringFormat("%")
-//            TopType.BOMBS_PLANED -> topUser.bombsPlanted.getStringFormat()
-//            TopType.BOMBS_DEFUSED -> topUser.bombsDefused.getStringFormat()
-//            TopType.MVP -> topUser.mvp.getStringFormat()
-//            TopType.WINS -> topUser.wins.getStringFormat()
-//            TopType.WINS_PERCENT -> topUser.wlPercentage.getStringFormat("%")
-//            TopType.MATCHES_PLAYED -> topUser.matchesPlayed.getStringFormat()
-//            TopType.ROUNDS -> topUser.roundsPlayed.getStringFormat()
-//            TopType.ROUNDS_WON -> topUser.roundsWon.getStringFormat()
-//            TopType.ROUNDS_PERCENTAGE -> topUser.roundsPercentage.getStringFormat()
+        return when (topType.topType) {
+            TopType.KD -> topUser.kd.getStringFormat()
+            TopType.MATCHES -> topUser.matches.getStringFormat()
+            TopType.TIME_PLAYED -> topUser.minutesPlayed.getStringFormat()
+            TopType.PLAYERS_OUTLIVED -> topUser.playersOutlived.getStringFormat()
+            TopType.SCORE -> topUser.score.getStringFormat()
+            TopType.KILLS -> topUser.kills.getStringFormat()
+            TopType.DEATHS -> topUser.deaths.getStringFormat()
+            TopType.WINS -> topUser.wins.getStringFormat()
+            TopType.WINS_PERCENT -> topUser.winRate.getStringFormat()
+            TopType.SCORE_PER_MATCH -> topUser.scorePerMatch.getStringFormat()
+            TopType.SCORE_PER_MIN -> topUser.scorePerMin.getStringFormat()
+            TopType.KILLS_PER_MIN -> topUser.killsPerMin.getStringFormat()
+            TopType.KILLS_PER_MATCH -> topUser.killsPerMatch.getStringFormat()
+        }
     }
-    //}
 }

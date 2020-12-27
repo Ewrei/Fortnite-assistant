@@ -8,6 +8,7 @@ import robin.vitalij.fortniteassitant.db.projection.User
 import robin.vitalij.fortniteassitant.interfaces.SaveUserCallback
 import robin.vitalij.fortniteassitant.model.SaveUserModel
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
+import robin.vitalij.fortniteassitant.model.network.stats.PlayerStatsResponse
 import robin.vitalij.fortniteassitant.repository.db.UserRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.utils.mapper.SaveUserMapper
@@ -18,6 +19,7 @@ import javax.inject.Singleton
 class SaveUserRepository @Inject constructor(
     private val userRepository: UserRepository,
     private val preferenceManager: PreferenceManager,
+    private val topRepository: TopRepository
 ) {
 
     @SuppressLint("CheckResult")
@@ -36,6 +38,7 @@ class SaveUserRepository @Inject constructor(
                         if ((t.userEntity.all?.overall?.matches != user.userEntity.all?.overall?.matches) && t.userEntity.all?.overall?.matches != 0) {
                             user.userEntity.avatar = t.userEntity.avatar
                             saveData(user, saveUserCallback)
+                            saveTop(fortniteProfileResponse.stats)
                         } else {
                             saveUserCallback.showOrHideProgressBar(false)
                             saveUserCallback.done()
@@ -43,6 +46,7 @@ class SaveUserRepository @Inject constructor(
                     }
 
                     override fun onComplete() {
+                        saveTop(fortniteProfileResponse.stats)
                         saveData(
                             user,
                             saveUserCallback
@@ -75,5 +79,9 @@ class SaveUserRepository @Inject constructor(
                 saveUserCallback.showError(e)
             }
         })
+    }
+
+    private fun saveTop(playerStatsResponse: PlayerStatsResponse) {
+        topRepository.updateTopUser(playerStatsResponse)
     }
 }

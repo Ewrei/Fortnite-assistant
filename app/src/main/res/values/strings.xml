@@ -52,6 +52,9 @@
     <string name="play_time">%s h. all</string>
     <string name="level_format">Level %d</string>
     <string name="all">All</string>
+    <string name="keyboard_mouse">Keyboard mouse</string>
+    <string name="gamepad">Gamepad</string>
+    <string name="touch">Touch</string>
     <string name="no_results_for_this_platform">No results for this platform</string>
     <string name="overall_battles" translatable="false">Overall</string>
     <string name="solo_battles" translatable="false">Solo</string>
@@ -274,6 +277,10 @@ This section is beta. If it does not work correctly for you, let us know</string
     <string name="cosmetics">Cosmetics</string>
     <string name="tags">Tags</string>
     <string name="add_date_format">Added %s</string>
+
+    <string name="play_time_full">Play time</string>
+    <string name="general">General</string>
+    <string name="combat">Combat</string>
 
 
 </resources>

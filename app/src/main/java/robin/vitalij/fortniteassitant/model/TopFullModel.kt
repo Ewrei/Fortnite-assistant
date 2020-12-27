@@ -6,7 +6,7 @@ import robin.vitalij.fortniteassitant.model.enums.TopType
 import java.io.Serializable
 
 class TopFullModel(
-    val topType: TopType,
-    val gameType: GameType,
-    val battlesType: BattlesType
+    val topType: TopType = TopType.KD,
+    val gameType: GameType = GameType.ALL,
+    val battlesType: BattlesType = BattlesType.OVERALL
 ): Serializable
