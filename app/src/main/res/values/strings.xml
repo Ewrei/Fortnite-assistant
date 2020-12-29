@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">Assitant</string>
-    <string name="application_url" translatable="false">https://play.google.com/store/apps/details?id=robin.vitalij.cs_go_assistant</string>
+    <string name="application_url" translatable="false">https://play.google.com/store/apps/details?id=robin.vitalij.fortniteassitant</string>
     <string name="title_home">Home</string>
     <string name="tab_title_history_match">History</string>
     <string name="tab_title_top">Leaderboard</string>
@@ -52,9 +52,9 @@
     <string name="play_time">%s h. all</string>
     <string name="level_format">Level %d</string>
     <string name="all">All</string>
-    <string name="keyboard_mouse">Keyboard mouse</string>
-    <string name="gamepad">Gamepad</string>
-    <string name="touch">Touch</string>
+    <string name="keyboard_mouse" translatable="false">>Keyboard mouse</string>
+    <string name="gamepad" translatable="false">>Gamepad</string>
+    <string name="touch" translatable="false">>Touch</string>
     <string name="no_results_for_this_platform">No results for this platform</string>
     <string name="overall_battles" translatable="false">Overall</string>
     <string name="solo_battles" translatable="false">Solo</string>
@@ -152,8 +152,8 @@ This section is beta. If it does not work correctly for you, let us know</string
     <string name="developer_title">Developer Link</string>
     <string name="developer_body">Have you found a bug, or do you have ideas on how to make the application better? Email</string>
     <string name="gmail" translatable="false">v.robin.projects@gmail.com</string>
-    <string name="vk_url" translatable="false">https://vk.com/cs_go_assistant</string>
-    <string name="telegram_url" translatable="false">https://t.me/cs_go_assistant</string>
+    <string name="vk_url" translatable="false">https://vk.com/fort_assistant/</string>
+    <string name="telegram_url" translatable="false">https://t.me/fort_assistant</string>
     <string name="privacy_policy">Privacy policy</string>
     <string name="privacy_policy_url" translatable="false">https://robinlabs.ru/privat.html#fortniteassistant</string>
 
@@ -278,9 +278,9 @@ This section is beta. If it does not work correctly for you, let us know</string
     <string name="tags">Tags</string>
     <string name="add_date_format">Added %s</string>
 
-    <string name="play_time_full">Play time</string>
-    <string name="general">General</string>
-    <string name="combat">Combat</string>
+    <string name="play_time_full" translatable="false">Play time</string>
+    <string name="general" translatable="false"> >General</string>
+    <string name="combat" translatable="false"> >Combat</string>
 
 
 </resources>

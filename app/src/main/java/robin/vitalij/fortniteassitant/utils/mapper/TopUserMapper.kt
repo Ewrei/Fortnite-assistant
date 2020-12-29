@@ -22,7 +22,7 @@ class TopUserMapper(private val topType: TopFullModel) :
             list.add(
                 TopViewModel(
                     position = position,
-                    userName = it.userName ?: "----",
+                    userName = it.userName ?: "Скоро добавлю ник",
                     playerId = it.accountId,
                     avatar = "",
                     value = getValue(it)
