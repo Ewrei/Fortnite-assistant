@@ -12,7 +12,7 @@ class FortniteApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         appComponent = getComponent()
-        MobileAds.initialize(this, BuildConfig.ADMOD_ID)
+        MobileAds.initialize(this)
     }
 
     private fun getComponent(): AppComponent {

@@ -26,19 +26,19 @@ class ProfileResultMapper(
                 playerId = obj.stats.playerStatsData.account.id,
                 level = obj.stats.playerStatsData.battlePass.level,
                 progress = obj.stats.playerStatsData.battlePass.progress,
-                matches = obj.stats.playerStatsData.stats.all?.overall!!.matches,
-                kd = obj.stats.playerStatsData.stats.all.overall.kd,
-                winRate = obj.stats.playerStatsData.stats.all.overall.winRate,
+                matches = obj.stats.playerStatsData.stats.all?.overall?.matches ?: 0,
+                kd = obj.stats.playerStatsData.stats.all?.overall?.kd ?: 0.0,
+                winRate = obj.stats.playerStatsData.stats.all?.overall?.winRate ?: 0.0,
                 playTime = resourceProvider.getString(
                     R.string.play_time,
                     TextUtils.getAverage(
-                        obj.stats.playerStatsData.stats.all.overall.minutesPlayed.toDouble(),
+                        obj.stats.playerStatsData.stats.all?.overall?.minutesPlayed?.toDouble(),
                         60.0
                     ).getStringFormat()
                 ),
                 totalMatches = resourceProvider.getString(
                     R.string.matches_format,
-                    obj.stats.playerStatsData.stats.all.overall.matches.getStringFormat()
+                    obj.stats.playerStatsData.stats.all?.overall?.matches.getStringFormat()
                 )
             )
         )
