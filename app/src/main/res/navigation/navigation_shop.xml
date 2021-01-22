@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_news"
-        android:name="robin.vitalij.fortniteassitant.ui.news.NewsFragment"
+        android:name="robin.vitalij.fortniteassitant.ui.news.fragment.NewsFragment"
         android:label="NewsFragment" />
 
 </navigation>

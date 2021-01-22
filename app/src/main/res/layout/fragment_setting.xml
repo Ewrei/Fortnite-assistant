@@ -244,6 +244,39 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/newsLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:padding="@dimen/default_padding_double">
+
+                                <ImageView
+                                    android:layout_width="@dimen/icon_size"
+                                    android:layout_height="@dimen/icon_size"
+                                    app:srcCompat="@drawable/ic_news"
+                                    app:tint="@android:color/white" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/default_margin_double"
+                                    android:layout_weight="1"
+                                    android:text="@string/news_game"
+                                    android:fontFamily="@font/futura_pt_medium"
+                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                    app:layout_constraintBottom_toTopOf="@+id/hours"
+                                    app:layout_constraintEnd_toEndOf="parent" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/icon_size"
+                                    android:layout_height="@dimen/icon_size"
+                                    android:padding="@dimen/half_default_padding"
+                                    app:srcCompat="@drawable/ic_arrow_right"
+                                    app:tint="@android:color/white" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:id="@+id/wikiLayout"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"

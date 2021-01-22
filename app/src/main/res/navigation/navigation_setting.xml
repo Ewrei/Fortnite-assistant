@@ -92,7 +92,11 @@
     <fragment
         android:id="@+id/navigation_cosmetics_new"
         android:name="robin.vitalij.fortniteassitant.ui.cosmeticsnew.CosmeticsNewFragment"
-        android:label="@string/cosmetics_news" />
+        android:label="@string/cosmetics_news" >
+        <action
+            android:id="@+id/action_navigation_cosmetics_new_to_adapterNewsFragment"
+            app:destination="@id/navigation_news" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_catalog_cosmetics"
         android:name="robin.vitalij.fortniteassitant.ui.cosmetics.CatalogCosmeticsFragment"
@@ -105,5 +109,9 @@
         android:id="@+id/navigation_cosmetics"
         android:name="robin.vitalij.fortniteassitant.ui.cosmetics.catalog.CosmeticsFragment"
         android:label="CosmeticsFragment" />
+    <fragment
+        android:id="@+id/navigation_news"
+        android:name="robin.vitalij.fortniteassitant.ui.news.viewpager.AdapterNewsFragment"
+        android:label="@string/news_game" />
 
 </navigation>

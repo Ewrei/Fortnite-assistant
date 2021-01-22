@@ -171,6 +171,9 @@ This section is beta. If it does not work correctly for you, let us know</string
     <string name="compare_players">Player comparison</string>
     <string name="users">Accounts</string>
     <string name="news_game">News game</string>
+    <string name="br_news" translatable="false">Battle Royale</string>
+    <string name="stw_news" translatable="false">STW</string>
+    <string name="creative_news" translatable="false">Creative news</string>
     <string name="users_body">List of saved accounts</string>
     <string name="steam_profile">Steam profile</string>
     <string name="faceit_profile">Faceit profile</string>

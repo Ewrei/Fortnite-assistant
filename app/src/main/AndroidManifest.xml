@@ -46,6 +46,12 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait" />
 
+
+        <activity
+            android:name=".ui.news.VideoActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".ui.subscription.SubscriptionActivity"
             android:theme="@style/AppTheme.NoActionBar"

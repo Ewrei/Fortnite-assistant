@@ -42,4 +42,7 @@ interface FortniteRequestsIOApi {
     @GET("/v1/achievements")
     fun getAchievements(@Query("lang") language: String): Single<AchievementResponse>
 
+    @GET("/v1/news")
+    fun getNews(@Query("lang") language: String, @Query("type") type: String): Single<NewsResponse>
+
 }

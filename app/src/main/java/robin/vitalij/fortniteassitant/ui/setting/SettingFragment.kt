@@ -38,7 +38,7 @@ class SettingFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val dataBinding: FragmentSettingBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_setting,
@@ -97,6 +97,10 @@ class SettingFragment : BaseFragment() {
 
         applicationInfo.setOnClickListener {
             navController.navigate(R.id.navigation_application_info)
+        }
+
+        newsLayout.setOnClickListener {
+            navController.navigate(R.id.navigation_news)
         }
 
         subscriptionLayout.setOnClickListener {

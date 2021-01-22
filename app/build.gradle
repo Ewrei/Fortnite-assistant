@@ -15,8 +15,8 @@ android {
         applicationId "robin.vitalij.fortniteassitant"
         minSdkVersion 22
         targetSdkVersion 30
-        versionCode 5
-        versionName "1.0.1"
+        versionCode 6
+        versionName "1.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -154,10 +154,10 @@ dependencies {
     implementation "com.google.firebase:firebase-ads:$ads_version"
 
     //Firebase
-    def firebase_analytics_version = "18.0.0"
+    def firebase_analytics_version = "18.0.1"
     implementation "com.google.firebase:firebase-analytics:$firebase_analytics_version"
 
-    def firebase_core_version = "18.0.0"
+    def firebase_core_version = "18.0.1"
     implementation "com.google.firebase:firebase-core:$firebase_core_version"
 
     def firebase_crashlytics_version = "17.3.0"
@@ -183,6 +183,9 @@ dependencies {
 
     def swipedecorator_version = "1.2.1"
     implementation "it.xabaras.android:recyclerview-swipedecorator:$swipedecorator_version"
+
+    def exoplayer_version = "2.11.3"
+    implementation "com.google.android.exoplayer:exoplayer:$exoplayer_version"
 
     implementation project(':materialspinner')
 

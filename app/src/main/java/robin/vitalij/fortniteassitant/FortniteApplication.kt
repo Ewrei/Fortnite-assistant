@@ -1,6 +1,7 @@
 package robin.vitalij.fortniteassitant
 
 import android.app.Application
+import com.google.android.exoplayer2.upstream.cache.SimpleCache
 import com.google.android.gms.ads.MobileAds
 import robin.vitalij.fortniteassitant.di.component.AppComponent
 import robin.vitalij.fortniteassitant.di.component.DaggerAppComponent
@@ -26,6 +27,8 @@ class FortniteApplication : Application() {
     companion object {
 
         lateinit var appComponent: AppComponent
+
+        var simpleCache: SimpleCache? = null
 
     }
 }

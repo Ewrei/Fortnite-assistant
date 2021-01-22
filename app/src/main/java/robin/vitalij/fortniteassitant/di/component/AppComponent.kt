@@ -1,7 +1,6 @@
 package robin.vitalij.fortniteassitant.di.component
 
 import dagger.Component
-import robin.vitalij.fortniteassitant.ui.main.MainActivity
 import robin.vitalij.fortniteassitant.di.module.DatabaseModule
 import robin.vitalij.fortniteassitant.di.module.FortniteAppModule
 import robin.vitalij.fortniteassitant.di.module.NetworkModule
@@ -37,7 +36,9 @@ import robin.vitalij.fortniteassitant.ui.fishstats.FishStatsFragment
 import robin.vitalij.fortniteassitant.ui.history.HistoryFragment
 import robin.vitalij.fortniteassitant.ui.historymatch.HistoryMatchFragment
 import robin.vitalij.fortniteassitant.ui.home.HomeFragment
-import robin.vitalij.fortniteassitant.ui.news.NewsFragment
+import robin.vitalij.fortniteassitant.ui.main.MainActivity
+import robin.vitalij.fortniteassitant.ui.news.fragment.NewsFragment
+import robin.vitalij.fortniteassitant.ui.news.viewpager.AdapterNewsFragment
 import robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment
 import robin.vitalij.fortniteassitant.ui.season.statistics.DetailsSeasonStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.season.viewpager.AdapterDetailsSeasonStatisticsFragment
@@ -100,6 +101,7 @@ interface AppComponent {
     fun inject(fragment: CosmeticsNewFragment)
     fun inject(fragment: CatalogCosmeticsFragment)
     fun inject(fragment: CosmeticsFragment)
+    fun inject(fragment: AdapterNewsFragment)
 
     fun inject(fragment: CosmeticResultFragment)
     fun inject(fragment: ProfileResultFragment)
