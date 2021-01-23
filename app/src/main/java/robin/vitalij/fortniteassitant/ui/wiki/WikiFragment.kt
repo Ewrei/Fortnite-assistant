@@ -82,5 +82,9 @@ class WikiFragment : BaseFragment() {
         cosmetics.setSafeOnClickListener {
             findNavController().navigate(R.id.navigation_catalog_cosmetics)
         }
+
+        banners.setSafeOnClickListener {
+            findNavController().navigate(R.id.navigation_banner)
+        }
     }
 }

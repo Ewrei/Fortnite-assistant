@@ -1,115 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/content_view"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <include
-        layout="@layout/toolbar_center_title"
+    <LinearLayout
+        android:id="@+id/content_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/battlePassRewards"
-        style="@style/DefaultCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin">
+        <include
+            layout="@layout/toolbar_center_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/battlePassRewards"
+            style="@style/DefaultCard"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin_double"
-            android:fontFamily="@font/futura_pt_bold"
-            android:text="@string/battle_pass_rewards"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+            android:layout_margin="@dimen/default_margin">
 
-    </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin_double"
+                android:fontFamily="@font/futura_pt_bold"
+                android:text="@string/battle_pass_rewards"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/weapons"
-        style="@style/DefaultCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin">
+        </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/weapons"
+            style="@style/DefaultCard"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin_double"
-            android:fontFamily="@font/futura_pt_bold"
-            android:text="@string/weapons"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+            android:layout_margin="@dimen/default_margin">
 
-    </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin_double"
+                android:fontFamily="@font/futura_pt_bold"
+                android:text="@string/weapons"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/fishing"
-        style="@style/DefaultCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin">
+        </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/fishing"
+            style="@style/DefaultCard"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin_double"
-            android:fontFamily="@font/futura_pt_bold"
-            android:text="@string/fishing"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+            android:layout_margin="@dimen/default_margin">
 
-    </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin_double"
+                android:fontFamily="@font/futura_pt_bold"
+                android:text="@string/fishing"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/achievements"
-        style="@style/DefaultCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin">
+        </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/achievements"
+            style="@style/DefaultCard"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin_double"
-            android:fontFamily="@font/futura_pt_bold"
-            android:text="@string/achievements"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+            android:layout_margin="@dimen/default_margin">
 
-    </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin_double"
+                android:fontFamily="@font/futura_pt_bold"
+                android:text="@string/achievements"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cosmeticsNew"
-        style="@style/DefaultCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin">
+        </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cosmeticsNew"
+            style="@style/DefaultCard"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin_double"
-            android:fontFamily="@font/futura_pt_bold"
-            android:text="@string/cosmetics_news"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+            android:layout_margin="@dimen/default_margin">
 
-    </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin_double"
+                android:fontFamily="@font/futura_pt_bold"
+                android:text="@string/cosmetics_news"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cosmetics"
-        style="@style/DefaultCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin">
+        </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cosmetics"
+            style="@style/DefaultCard"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin_double"
-            android:fontFamily="@font/futura_pt_bold"
-            android:text="@string/cosmetics"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+            android:layout_margin="@dimen/default_margin">
 
-    </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin_double"
+                android:fontFamily="@font/futura_pt_bold"
+                android:text="@string/cosmetics"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
-</LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/banners"
+            style="@style/DefaultCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin_double"
+                android:fontFamily="@font/futura_pt_bold"
+                android:text="@string/banners"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</ScrollView>

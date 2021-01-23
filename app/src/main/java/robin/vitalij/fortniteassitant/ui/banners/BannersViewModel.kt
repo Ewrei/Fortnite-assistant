@@ -1,23 +1,23 @@
-package robin.vitalij.fortniteassitant.ui.cosmeticsnew
+package robin.vitalij.fortniteassitant.ui.banners
 
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
-import robin.vitalij.fortniteassitant.db.entity.CosmeticsNewEntity
-import robin.vitalij.fortniteassitant.repository.CosmeticsNewRepository
+import robin.vitalij.fortniteassitant.db.entity.BannerEntity
+import robin.vitalij.fortniteassitant.repository.BannerRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 
-class CosmeticsNewViewModel(
-    private val cosmeticsNewRepository: CosmeticsNewRepository
+class BannersViewModel(
+    private val bannerRepository: BannerRepository
 ) : BaseViewModel() {
 
-    val mutableLiveData = MutableLiveData<List<CosmeticsNewEntity>>()
+    val mutableLiveData = MutableLiveData<List<BannerEntity>>()
 
     init {
         loadData()
     }
 
     fun loadData() {
-        cosmeticsNewRepository
+        bannerRepository
             .loadData()
             .observeOn(AndroidSchedulers.mainThread())
             .let(::setupProgressShow)

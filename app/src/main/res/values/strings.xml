@@ -278,6 +278,7 @@ This section is beta. If it does not work correctly for you, let us know</string
     <!--Cosmetics-new-->
     <string name="cosmetics_news">Newly added cosmetics</string>
     <string name="cosmetics">Cosmetics</string>
+    <string name="banners">Banners</string>
     <string name="tags">Tags</string>
     <string name="add_date_format">Added %s</string>
 

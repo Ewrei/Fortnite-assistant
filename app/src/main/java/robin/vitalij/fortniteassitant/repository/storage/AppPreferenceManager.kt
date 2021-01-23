@@ -19,6 +19,7 @@ private const val FISH_DATE_LAST_UPDATE = "fish_date_last_update"
 private const val ACHIEVEMENT_DATE_LAST_UPDATE = "achievement_date_last_update"
 private const val COSMETICS_DATE_LAST_UPDATE = "cosmetics_date_last_update"
 private const val COSMETICS_NEW_DATE_LAST_UPDATE = "cosmetics_new_date_last_update"
+private const val BANNER_DATE_LAST_UPDATE = "banner"
 private val SUBSCRIBE_DIALOG_TIME = "subscribe_dialog_time"
 private val SUBSCRIPTION_ACCESS = "subscription_access"
 private val SESSION_ID = "session_id"
@@ -132,6 +133,12 @@ class AppPreferenceManager(context: Context) :
     }
 
     override fun getCosmeticsDataLastUpdate() = sharedPreferences.getLong(COSMETICS_DATE_LAST_UPDATE, 0)
+
+    override fun setBannerDataLastUpdate(dateUpdate: Long) {
+        sharedPreferences.edit().putLong(BANNER_DATE_LAST_UPDATE, dateUpdate).apply()
+    }
+
+    override fun getBannerDataLastUpdate() = sharedPreferences.getLong(BANNER_DATE_LAST_UPDATE, 0)
 
     override fun setCosmeticsDataLastUpdate(dateUpdate: Long) {
         sharedPreferences.edit().putLong(COSMETICS_DATE_LAST_UPDATE, dateUpdate).apply()

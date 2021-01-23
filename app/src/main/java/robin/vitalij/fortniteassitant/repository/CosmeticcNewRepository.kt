@@ -16,7 +16,7 @@ private const val THREE_DAY = 3L
 private const val DEFAULT_DATE_UPDATE = 0L
 
 @Singleton
-class CosmeticsNewRepositoryRepository @Inject constructor(
+class CosmeticsNewRepository @Inject constructor(
     private val cosmeticsNewDao: CosmeticsNewDao,
     private val fortniteRequestsComApi: FortniteRequestsComApi,
     private val preferenceManager: PreferenceManager

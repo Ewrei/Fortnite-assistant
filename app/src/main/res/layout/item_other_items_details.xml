@@ -58,7 +58,7 @@
                 android:gravity="center"
                 android:textAllCaps="true"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="10sp"
+                android:textSize="@dimen/small_10_text_size"
                 android:layout_marginBottom="@dimen/default_margin"
                 app:typeShop="@{item.type}"
                 tools:text="type" />

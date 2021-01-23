@@ -45,7 +45,7 @@
                 android:textAllCaps="true"
                 android:layout_margin="@dimen/default_margin"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="10sp"
+                android:textSize="@dimen/small_10_text_size"
                 android:fontFamily="@font/futura_pt_medium"
                 app:typeShop="@{item.type}"
                 tools:text="type" />

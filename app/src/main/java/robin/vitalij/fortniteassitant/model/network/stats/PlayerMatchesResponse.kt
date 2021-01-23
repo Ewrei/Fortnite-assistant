@@ -7,7 +7,7 @@ class PlayerMatchesResponse(
     @SerializedName("account") val account: String,
     @SerializedName("name") val name: String,
     @SerializedName("max_results") val maxResults: Int,
-    @SerializedName("matches") val matches: List<MatchesPlayer>
+    @SerializedName("matches") val matches: List<MatchesPlayer>?
 )
 
 class MatchesPlayer(

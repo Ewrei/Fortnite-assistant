@@ -225,7 +225,7 @@
     <string name="free">Бесплатное</string>
     <string name="fishing">Рыбалка</string>
 
-   <!--Weapons-->
+    <!--Weapons-->
     <string name="weapons">Оружие</string>
     <string name="dmg_pb">dmgPb</string>
     <string name="firingRate">firingRate</string>

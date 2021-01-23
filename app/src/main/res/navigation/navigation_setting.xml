@@ -64,6 +64,9 @@
         <action
             android:id="@+id/action_navigation_wiki_to_catalogCosmeticsFragment"
             app:destination="@id/navigation_catalog_cosmetics" />
+        <action
+            android:id="@+id/action_navigation_wiki_to_bannersFragment"
+            app:destination="@id/navigation_banner" />
     </fragment>
     <fragment
         android:id="@+id/navigation_battles_pass_rewards"
@@ -113,5 +116,9 @@
         android:id="@+id/navigation_news"
         android:name="robin.vitalij.fortniteassitant.ui.news.viewpager.AdapterNewsFragment"
         android:label="@string/news_game" />
+    <fragment
+        android:id="@+id/navigation_banner"
+        android:name="robin.vitalij.fortniteassitant.ui.banners.BannersFragment"
+        android:label="@string/banners" />
 
 </navigation>

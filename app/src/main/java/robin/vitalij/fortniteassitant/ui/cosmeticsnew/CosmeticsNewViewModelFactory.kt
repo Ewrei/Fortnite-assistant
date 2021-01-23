@@ -1,11 +1,11 @@
 package robin.vitalij.fortniteassitant.ui.cosmeticsnew
 
-import robin.vitalij.fortniteassitant.repository.CosmeticsNewRepositoryRepository
+import robin.vitalij.fortniteassitant.repository.CosmeticsNewRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
 import javax.inject.Inject
 
 class CosmeticsNewViewModelFactory @Inject constructor(
-    private var cosmeticsNewRepositoryRepository: CosmeticsNewRepositoryRepository
+    private var cosmeticsNewRepository: CosmeticsNewRepository
 ) : BaseViewModelFactory<CosmeticsNewViewModel>(CosmeticsNewViewModel::class.java) {
 
     private var viewModel: CosmeticsNewViewModel? = null
@@ -13,7 +13,7 @@ class CosmeticsNewViewModelFactory @Inject constructor(
     override fun createViewModel(): CosmeticsNewViewModel {
         return viewModel ?: run {
             val model =
-                CosmeticsNewViewModel(cosmeticsNewRepositoryRepository)
+                CosmeticsNewViewModel(cosmeticsNewRepository)
             viewModel = model
             return model
         }

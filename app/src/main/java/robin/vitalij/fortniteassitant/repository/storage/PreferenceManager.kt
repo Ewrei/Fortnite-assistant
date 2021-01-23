@@ -61,4 +61,8 @@ interface PreferenceManager {
     fun setCosmeticsDataLastUpdate(dataUpdate: Long)
 
     fun getCosmeticsDataLastUpdate(): Long
+
+    fun setBannerDataLastUpdate(dataUpdate: Long)
+
+    fun getBannerDataLastUpdate(): Long
 }
