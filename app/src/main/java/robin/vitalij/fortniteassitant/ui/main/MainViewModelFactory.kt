@@ -1,6 +1,7 @@
 package robin.vitalij.fortniteassitant.ui.main
 
 import robin.vitalij.fortniteassitant.repository.InterstitialAdRepository
+import robin.vitalij.fortniteassitant.repository.RewardedAdRepository
 import robin.vitalij.fortniteassitant.repository.db.UserRepository
 import robin.vitalij.fortniteassitant.repository.network.SaveUserRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
@@ -13,6 +14,7 @@ class MainViewModelFactory @Inject constructor(
     private val userRepository: UserRepository,
     private val interstitialAdRepository: InterstitialAdRepository,
     private val resourceProvider: ResourceProvider,
+    private val rewardedAdRepository: RewardedAdRepository,
     private val saveUserRepository: SaveUserRepository
 ) : BaseViewModelFactory<MainViewModel>(MainViewModel::class.java) {
 
@@ -25,6 +27,7 @@ class MainViewModelFactory @Inject constructor(
                 userRepository,
                 interstitialAdRepository,
                 saveUserRepository,
+                rewardedAdRepository,
                 resourceProvider
             )
             viewModel = model

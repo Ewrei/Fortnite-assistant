@@ -35,7 +35,6 @@ class VideoActivity : AppCompatActivity() {
         initializePlayer()
     }
 
-
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount <= 1) {
             finish()
@@ -49,6 +48,11 @@ class VideoActivity : AppCompatActivity() {
             onBackPressed()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        simpleExoPlayer?.stop()
     }
 
     private fun setToolbar() {

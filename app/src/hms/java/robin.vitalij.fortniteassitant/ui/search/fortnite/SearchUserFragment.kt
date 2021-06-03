@@ -12,9 +12,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import kotlinx.android.synthetic.main.fragment_search_steam.*
+import com.huawei.hms.ads.AdListener
+import com.huawei.hms.ads.AdParam
+import com.huawei.hms.ads.BannerAdSize
+import kotlinx.android.synthetic.hms.fragment_search_steam.*
 import kotlinx.android.synthetic.main.recycler_view.*
 import kotlinx.android.synthetic.main.toolbar_center_title.*
 import robin.vitalij.fortniteassitant.FortniteApplication
@@ -37,8 +38,6 @@ class SearchUserFragment : BaseFragment() {
     lateinit var viewModelFactory: SearchUserViewModelFactory
 
     private lateinit var viewModel: SearchUserViewModel
-
-    lateinit var adRequest: AdRequest
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -90,8 +89,11 @@ class SearchUserFragment : BaseFragment() {
         if (viewModel.preferenceManager.getIsSubscription() || viewModel.preferenceManager.getDisableAdvertising() >= Date().time) {
             adView.setVisibility(false)
         } else {
-            adRequest = AdRequest.Builder().build()
-            adView.loadAd(adRequest)
+            val adParam = AdParam.Builder().build()
+            adView.loadAd(adParam)
+            adView.adId = "testw6vs28auh3"
+            adView.bannerAdSize = BannerAdSize.BANNER_SIZE_SMART
+            adView.loadAd(adParam)
         }
     }
 
@@ -113,17 +115,22 @@ class SearchUserFragment : BaseFragment() {
                 adView?.setVisibility(true)
             }
 
-            override fun onAdFailedToLoad(errorCode: Int) {
+            override fun onAdFailed(adError: Int) {
                 adView?.setVisibility(false)
-                adView?.loadAd(adRequest)
             }
 
-            override fun onAdOpened() {}
+            override fun onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
 
-            override fun onAdLeftApplication() {
+            override fun onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
             }
 
             override fun onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
             }
         }
 

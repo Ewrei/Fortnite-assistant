@@ -2,14 +2,11 @@ package robin.vitalij.fortniteassitant.ui.splash
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.android.gms.ads.formats.UnifiedNativeAd
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import robin.vitalij.fortniteassitant.interfaces.NativeResult
 import robin.vitalij.fortniteassitant.interfaces.SaveUserCallback
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
 import robin.vitalij.fortniteassitant.repository.InterstitialAdRepository
-import robin.vitalij.fortniteassitant.repository.NativeRepository
 import robin.vitalij.fortniteassitant.repository.network.GetUserRepository
 import robin.vitalij.fortniteassitant.repository.network.SaveUserRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
@@ -20,7 +17,6 @@ class SplashViewModel @Inject constructor(
     val preferenceManager: PreferenceManager,
     private val getUserRepository: GetUserRepository,
     private val saveUserRepository: SaveUserRepository,
-    private val nativeRepository: NativeRepository,
     private val interstitialAdRepository: InterstitialAdRepository
 ) : ViewModel() {
 
@@ -36,15 +32,7 @@ class SplashViewModel @Inject constructor(
             preferenceManager.setEstimate((preferenceManager.getEstimate() + 1))
         }
 
-      //  loadNative()
         loadInterstitialAd()
-    }
-
-    private fun loadNative() {
-        nativeRepository.loadNativeAds(object : NativeResult {
-            override fun onSusses(data: List<UnifiedNativeAd>) {
-            }
-        })
     }
 
     private fun loadInterstitialAd() {

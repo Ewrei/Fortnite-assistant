@@ -5,6 +5,7 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.interfaces.SaveUserCallback
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
 import robin.vitalij.fortniteassitant.repository.InterstitialAdRepository
+import robin.vitalij.fortniteassitant.repository.RewardedAdRepository
 import robin.vitalij.fortniteassitant.repository.db.UserRepository
 import robin.vitalij.fortniteassitant.repository.network.SaveUserRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
@@ -17,6 +18,7 @@ class MainViewModel @Inject constructor(
     private val userRepository: UserRepository,
     val interstitialAdRepository: InterstitialAdRepository,
     private val saveUserRepository: SaveUserRepository,
+    val rewardedAdRepository: RewardedAdRepository,
     resourceProvider: ResourceProvider
 ) : BaseViewModel() {
 

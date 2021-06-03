@@ -19,9 +19,6 @@ interface FortniteRequestsComApi {
         @Query("image") image: String
     ): Single<PlayerStatsResponse>
 
-    @GET("/v2/shop/br/combined")
-    fun getShop(@Query("language") language: String): Single<ResponseBody>
-
     @GET("/v2/cosmetics/br/new")
     fun getCosmeticsNew(@Query("language") language: String): Single<CosmeticsNewResponse>
 

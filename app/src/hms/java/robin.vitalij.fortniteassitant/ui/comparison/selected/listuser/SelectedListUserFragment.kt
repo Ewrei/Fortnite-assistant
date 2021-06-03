@@ -8,16 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.rewarded.*
+import com.huawei.hms.ads.reward.Reward
+import com.huawei.hms.ads.reward.RewardAdStatusListener
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 import kotlinx.android.synthetic.main.fragment_selected_user.*
-import robin.vitalij.fortniteassitant.BuildConfig
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.*
@@ -29,6 +27,7 @@ import robin.vitalij.fortniteassitant.ui.comparison.ComparisonActivity
 import robin.vitalij.fortniteassitant.ui.comparison.selected.listuser.adapter.SelectedListUserAdapter
 import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.ManyAccountActivity
 import robin.vitalij.fortniteassitant.ui.subscription.SubscriptionActivity
+import java.util.*
 import javax.inject.Inject
 
 
@@ -41,12 +40,10 @@ class SelectedListUserFragment : BaseFragment() {
 
     private var selectedListUserAdapter: SelectedListUserAdapter? = null
 
-    private var rewardedAd: RewardedAd? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val dataBinding: FragmentSelectedUserBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_selected_user, container, false)
         dataBinding.lifecycleOwner = this@SelectedListUserFragment
@@ -70,14 +67,12 @@ class SelectedListUserFragment : BaseFragment() {
         setToolbarTitle(R.string.selected_user)
         setListener()
 
-        viewModel.data.observe(viewLifecycleOwner, Observer{
+        viewModel.data.observe(viewLifecycleOwner, {
             it?.let(::initAdapter)
             comparisonButton.setVisibility(it.isNotEmpty())
         })
 
         viewModel.loadData()
-
-        initRewardedAdd()
 
         val itemTouchHelper = ItemTouchHelper(simpleCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
@@ -147,26 +142,18 @@ class SelectedListUserFragment : BaseFragment() {
         }
     }
 
-    private fun initRewardedAdd() {
-        rewardedAd = RewardedAd(context, BuildConfig.VIDEO_ID)
-        val serverSideVerificationOptions: ServerSideVerificationOptions =
-            ServerSideVerificationOptions.Builder().build()
-        rewardedAd?.setServerSideVerificationOptions(serverSideVerificationOptions)
-        val adRequest: AdRequest = AdRequest.Builder().build()
-        rewardedAd?.loadAd(adRequest, object : RewardedAdLoadCallback() {
-            override fun onRewardedAdLoaded() {
-                //do nothing
-            }
-        })
-    }
-
     private fun onDisplayButtonClicked(getAnWard: () -> Unit) {
-        if (rewardedAd?.isLoaded == true) {
-            rewardedAd?.show(activity, object : RewardedAdCallback() {
-                override fun onUserEarnedReward(reward: RewardItem) {
-                    getAnWard()
-                }
-            })
+        if (viewModel.rewardedAdRepository.defaultRewardedAd != null) {
+            viewModel.rewardedAdRepository.defaultRewardedAd?.show(requireActivity(),
+                object : RewardAdStatusListener() {
+                    override fun onRewardAdClosed() {
+                        viewModel.rewardedAdRepository.loadReward(requireContext())
+                    }
+
+                    override fun onRewarded(reward: Reward) {
+                        getAnWard()
+                    }
+                })
         }
     }
 

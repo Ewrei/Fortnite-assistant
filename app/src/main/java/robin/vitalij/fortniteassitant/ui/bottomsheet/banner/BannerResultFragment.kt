@@ -17,9 +17,7 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.db.entity.BannerEntity
-import robin.vitalij.fortniteassitant.db.entity.FishEntity
 import robin.vitalij.fortniteassitant.ui.bottomsheet.banner.adapter.BannerResultAdapter
-import robin.vitalij.fortniteassitant.ui.bottomsheet.fish.adapter.FishResultAdapter
 import javax.inject.Inject
 
 const val BOTTOM_SHEET_MARGIN_TOP = 200

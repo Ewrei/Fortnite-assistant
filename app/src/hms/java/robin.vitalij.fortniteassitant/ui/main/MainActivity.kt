@@ -11,8 +11,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.rewarded.*
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
@@ -23,15 +21,16 @@ import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.tasks.Task
-import kotlinx.android.synthetic.main.activity_main.*
+import com.huawei.hms.ads.AdListener
+import com.huawei.hms.ads.AdParam
+import com.huawei.hms.ads.BannerAdSize
+import com.huawei.hms.ads.reward.Reward
+import com.huawei.hms.ads.reward.RewardAdStatusListener
+import kotlinx.android.synthetic.hms.activity_main.*
 import kotlinx.android.synthetic.main.loading_layout.*
-import robin.vitalij.fortniteassitant.BuildConfig
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
-import robin.vitalij.fortniteassitant.common.extensions.setVisibility
-import robin.vitalij.fortniteassitant.common.extensions.setupWithNavController
-import robin.vitalij.fortniteassitant.common.extensions.showApplicationDialog
+import robin.vitalij.fortniteassitant.common.extensions.*
 import robin.vitalij.fortniteassitant.databinding.ActivityMainBinding
 import robin.vitalij.fortniteassitant.interfaces.ProgressBarActivityController
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
@@ -52,16 +51,12 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
 
     var binding: ActivityMainBinding? = null
 
-    private lateinit var adRequest: AdRequest
-
     private var currentNavController: LiveData<NavController>? = null
 
     private var appUpdateManager: AppUpdateManager? = null
     private var inAppUpdateType = 0
     private var appUpdateInfoTask: Task<AppUpdateInfo>? = null
     private lateinit var installStateUpdatedListener: InstallStateUpdatedListener
-
-    private var rewardedAd: RewardedAd? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,8 +92,9 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
         initEstimate()
         initAppUpdateManager()
         openSubscriptionDialog()
-        initRewardedAdd()
         initBanner()
+
+        setListener()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -135,17 +131,22 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
     }
 
     fun onDisplayButtonClicked(getAnWard: () -> Unit) {
-        if (rewardedAd?.isLoaded == true) {
-            rewardedAd?.show(this, object : RewardedAdCallback() {
-                override fun onUserEarnedReward(reward: RewardItem) {
-                    val date = Date()
-                    val instance = Calendar.getInstance()
-                    instance.time = date
-                    instance.add(Calendar.DAY_OF_MONTH, 2)
-                    viewModel.preferenceManager.setSubscriptionAccess(instance.time.time)
-                    getAnWard()
-                }
-            })
+        if (viewModel.rewardedAdRepository.defaultRewardedAd != null) {
+            viewModel.rewardedAdRepository.defaultRewardedAd?.show(this,
+                object : RewardAdStatusListener() {
+                    override fun onRewardAdClosed() {
+                        viewModel.rewardedAdRepository.loadReward(this@MainActivity)
+                    }
+
+                    override fun onRewarded(reward: Reward) {
+                        val date = Date()
+                        val instance = Calendar.getInstance()
+                        instance.time = date
+                        instance.add(Calendar.DAY_OF_MONTH, 2)
+                        viewModel.preferenceManager.setSubscriptionAccess(instance.time.time)
+                        getAnWard()
+                    }
+                })
         }
     }
 
@@ -157,8 +158,11 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
         if (viewModel.preferenceManager.getIsSubscription() || viewModel.preferenceManager.getDisableAdvertising() >= Date().time) {
             adView.setVisibility(false)
         } else {
-            adRequest = AdRequest.Builder().build()
-            adView.loadAd(adRequest)
+            val adParam = AdParam.Builder().build()
+            adView.loadAd(adParam)
+            adView.adId = "testw6vs28auh3"
+            adView.bannerAdSize = BannerAdSize.BANNER_SIZE_SMART
+            adView.loadAd(adParam)
         }
     }
 
@@ -250,17 +254,29 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
         }
     }
 
-    private fun initRewardedAdd() {
-        rewardedAd = RewardedAd(this, BuildConfig.VIDEO_ID)
-        val serverSideVerificationOptions: ServerSideVerificationOptions =
-            ServerSideVerificationOptions.Builder().build()
-        rewardedAd!!.setServerSideVerificationOptions(serverSideVerificationOptions)
-        val adRequest: AdRequest = AdRequest.Builder().build()
-        rewardedAd?.loadAd(adRequest, object : RewardedAdLoadCallback() {
-            override fun onRewardedAdLoaded() {
-                //do nothing
+    private fun setListener() {
+        adView?.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                adView?.setVisibility(true)
             }
-        })
-    }
 
+            override fun onAdFailed(adError: Int) {
+                adView?.setVisibility(false)
+            }
+
+            override fun onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            override fun onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            override fun onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        }
+    }
 }

@@ -6,6 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
 import robin.vitalij.fortniteassitant.model.comparison.PlayerModel
+import robin.vitalij.fortniteassitant.repository.RewardedAdRepository
 import robin.vitalij.fortniteassitant.repository.comparison.ComparisonListUserRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
@@ -14,6 +15,7 @@ import robin.vitalij.fortniteassitant.utils.ResourceProvider
 class SelectedListViewModel(
     private val comparisonListUserRepository: ComparisonListUserRepository,
     private val resourceProvider: ResourceProvider,
+    val rewardedAdRepository: RewardedAdRepository,
     val preferenceManager: PreferenceManager
 ) : BaseViewModel() {
 

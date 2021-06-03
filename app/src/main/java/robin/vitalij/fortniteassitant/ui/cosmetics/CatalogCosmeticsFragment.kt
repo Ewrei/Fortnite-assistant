@@ -17,12 +17,10 @@ import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
-import robin.vitalij.fortniteassitant.db.entity.CosmeticsNewEntity
 import robin.vitalij.fortniteassitant.model.enums.ShopType
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.cosmetics.adapter.CatalogCosmeticsAdapter
 import robin.vitalij.fortniteassitant.ui.cosmetics.catalog.CosmeticsFragment.Companion.SHOP_TYPE
-import robin.vitalij.fortniteassitant.ui.cosmeticsnew.adapter.CosmeticsNewAdapter
 import javax.inject.Inject
 
 private const val MAX_SPAN_COUNT = 2

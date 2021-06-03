@@ -10,13 +10,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.rewarded.RewardedAd
-import com.google.android.gms.ads.rewarded.RewardedAdCallback
-import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
-import com.google.android.gms.ads.rewarded.ServerSideVerificationOptions
 import kotlinx.android.synthetic.main.fragment_subcriptions.*
-import robin.vitalij.fortniteassitant.BuildConfig
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.DATE_PATTERN_YEAR_TIME
@@ -34,8 +28,6 @@ class SubscriptionsFragment : BaseFragment() {
     private lateinit var viewModel: SubscriptionsViewModel
 
     private lateinit var dataBinding: FragmentSubcriptionsBinding
-
-    private var rewardedAd: RewardedAd? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,8 +63,6 @@ class SubscriptionsFragment : BaseFragment() {
 
 //        viewModel.checkout = Checkout.forActivity(requireActivity(), requireContext().getBilling())
 //        viewModel.loadData()
-
-        initRewardedAdd()
     }
 
 
@@ -95,36 +85,21 @@ class SubscriptionsFragment : BaseFragment() {
         watchClick.setOnClickListener { onDisplayButtonClicked({}) }
     }
 
-    private fun initRewardedAdd() {
-        rewardedAd = RewardedAd(context, BuildConfig.VIDEO_ID)
-        val serverSideVerificationOptions: ServerSideVerificationOptions =
-            ServerSideVerificationOptions.Builder().build()
-        rewardedAd!!.setServerSideVerificationOptions(serverSideVerificationOptions)
-        val adRequest: AdRequest = AdRequest.Builder().build()
-        rewardedAd?.loadAd(adRequest, object : RewardedAdLoadCallback() {
-            override fun onRewardedAdLoaded() {
-                //do nothing
-            }
-        })
-    }
-
     private fun onDisplayButtonClicked(getAnWard: () -> Unit) {
-        if (rewardedAd?.isLoaded == true) {
-            rewardedAd?.show(requireActivity(), object : RewardedAdCallback() {
-                override fun onUserEarnedReward(reward: com.google.android.gms.ads.rewarded.RewardItem) {
-                    Toast.makeText(
-                        activity,
-                        String.format(
-                            getString(R.string.reclam_info) + viewModel.saveData().time.getDateStringFormat(
-                                DATE_PATTERN_YEAR_TIME,
-                                true
-                            )
-                        ),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    getAnWard()
-                }
-            })
+        if (viewModel.rewardedAdRepository.defaultRewardedAd != null) {
+            viewModel.rewardedAdRepository.defaultRewardedAd?.show(requireActivity()) {
+                Toast.makeText(
+                    activity,
+                    String.format(
+                        getString(R.string.reclam_info) + viewModel.saveData().time.getDateStringFormat(
+                            DATE_PATTERN_YEAR_TIME,
+                            true
+                        )
+                    ),
+                    Toast.LENGTH_SHORT
+                ).show()
+                getAnWard()
+            }
         }
     }
 

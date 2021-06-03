@@ -5,13 +5,17 @@ import androidx.lifecycle.MutableLiveData
 //import org.solovyev.android.checkout.Checkout.EmptyListener
 //import org.solovyev.android.checkout.Inventory.Products
 import robin.vitalij.fortniteassitant.model.SubscriptionModel
+import robin.vitalij.fortniteassitant.repository.RewardedAdRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 import java.util.*
 
 private const val SUBSCRIPTION_ID = "subscription_fortnite"
 
-class SubscriptionsViewModel(val preferenceManager: PreferenceManager) :
+class SubscriptionsViewModel(
+    val preferenceManager: PreferenceManager,
+    val rewardedAdRepository: RewardedAdRepository
+) :
     BaseViewModel() {
 
     var data = MutableLiveData<SubscriptionModel>()

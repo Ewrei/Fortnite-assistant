@@ -7,14 +7,15 @@ import android.os.Bundle
 import android.view.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_search_steam.*
+import com.huawei.hms.ads.AdListener
+import com.huawei.hms.ads.AdParam
+import com.huawei.hms.ads.BannerAdSize
+import kotlinx.android.synthetic.hms.fragment_comparion.*
+import kotlinx.android.synthetic.hms.fragment_comparion.adView
 import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.closeKeyboard
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
-import robin.vitalij.fortniteassitant.common.extensions.setSafeOnClickListener
+import robin.vitalij.fortniteassitant.common.extensions.*
 import robin.vitalij.fortniteassitant.interfaces.RegistrationProfileCallback
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
@@ -25,6 +26,7 @@ import robin.vitalij.fortniteassitant.ui.comparison.selected.listuser.SelectedLi
 import robin.vitalij.fortniteassitant.ui.main.MainActivity
 import robin.vitalij.fortniteassitant.ui.search.adapter.SearchAdapter
 import robin.vitalij.fortniteassitant.utils.view.SelectedComparisonImageView
+import java.util.*
 import javax.inject.Inject
 
 class ComparisonSelectedFragment : BaseFragment() {
@@ -90,7 +92,20 @@ class ComparisonSelectedFragment : BaseFragment() {
         })
 
         setListeners()
+        initBanner()
 
+    }
+
+    private fun initBanner() {
+        if (viewModel.preferenceManager.getIsSubscription() || viewModel.preferenceManager.getDisableAdvertising() >= Date().time) {
+            adView.setVisibility(false)
+        } else {
+            val adParam = AdParam.Builder().build()
+            adView.loadAd(adParam)
+            adView.adId = "testw6vs28auh3"
+            adView.bannerAdSize = BannerAdSize.BANNER_SIZE_SMART
+            adView.loadAd(adParam)
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -107,6 +122,30 @@ class ComparisonSelectedFragment : BaseFragment() {
             }
             if (searchInputEditText.text.toString().length >= resources.getInteger(R.integer.min_length)) {
                 viewModel.searchPlayer(searchInputEditText.text.toString())
+            }
+        }
+
+        adView?.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                adView?.setVisibility(true)
+            }
+
+            override fun onAdFailed(adError: Int) {
+                adView?.setVisibility(false)
+            }
+
+            override fun onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            override fun onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            override fun onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
             }
         }
     }

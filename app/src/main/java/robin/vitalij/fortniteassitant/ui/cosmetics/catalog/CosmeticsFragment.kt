@@ -21,7 +21,6 @@ import robin.vitalij.fortniteassitant.db.entity.CosmeticsEntity
 import robin.vitalij.fortniteassitant.model.enums.ShopType
 import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.CosmeticResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
-import robin.vitalij.fortniteassitant.ui.cosmetics.adapter.CatalogCosmeticsAdapter
 import robin.vitalij.fortniteassitant.ui.cosmetics.catalog.adapter.CosmeticsAdapter
 import javax.inject.Inject
 
