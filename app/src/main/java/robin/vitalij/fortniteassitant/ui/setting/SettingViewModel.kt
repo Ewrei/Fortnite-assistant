@@ -46,6 +46,8 @@ class SettingViewModel(
             .let(disposables::add)
     }
 
+    fun getPlayerId() = preferenceManager.getPlayerId()
+
     private fun saveUser(fortniteProfileResponse: FortniteProfileResponse) {
         saveUserRepository.saveUser(
             fortniteProfileResponse,

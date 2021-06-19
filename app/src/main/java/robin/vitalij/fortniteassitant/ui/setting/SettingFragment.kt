@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.google.firebase.dynamiclinks.ktx.shortLinkAsync
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_setting.*
 import kotlinx.android.synthetic.main.toolbar_center_title.*
 import robin.vitalij.fortniteassitant.FortniteApplication
@@ -127,7 +130,27 @@ class SettingFragment : BaseFragment() {
         }
 
         copyStatsLink.setOnClickListener {
-            context?.showDialog(R.string.no_function)
+            Firebase.dynamicLinks.shortLinkAsync {
+                longLink = Uri.parse(
+                    "https://fortniteassitant.page.link/?link=" +
+                            "https://fastfly-7bcba.firebaseapp.com/user/${viewModel.getPlayerId()}/&apn=robin.vitalij.fortniteassitant"
+                )
+            }.addOnSuccessListener { shortLink ->
+                val shareActionText =
+                    "${resources.getString(R.string.app_name)}\n${
+                        String.format(
+                            getString(R.string.you_can_see_the_profile_format),
+                            viewModel.user.get()?.name
+                        )
+                    }\n$shortLink"
+                startActivity(Intent.createChooser(Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, shareActionText)
+                    type = "text/plain"
+                }, getString(R.string.share_user_title)))
+            }.addOnFailureListener {
+                context?.showDialog(R.string.no_function)
+            }
         }
 
         refresh.setOnClickListener {

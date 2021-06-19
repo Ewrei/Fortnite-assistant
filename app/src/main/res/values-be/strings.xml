@@ -255,4 +255,7 @@
     <string name="tags">Теги</string>
     <string name="add_date_format">Добавлен %s</string>
 
+    <string name="share_user_title">Поделиться ссылкой на профиль</string>
+    <string name="you_can_see_the_profile_format">Ты можешь посмотреть профиль %s по ссылке</string>
+
 </resources>

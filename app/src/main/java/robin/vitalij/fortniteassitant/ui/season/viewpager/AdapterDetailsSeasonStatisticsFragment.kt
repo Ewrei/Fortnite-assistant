@@ -131,5 +131,9 @@ class AdapterDetailsSeasonStatisticsFragment : BaseFragment() {
                 addTabs(viewModel.detailsStatistics[position])
             }
         }
+
+        setErrorResolveButtonClick {
+            viewModel.loadData()
+        }
     }
 }

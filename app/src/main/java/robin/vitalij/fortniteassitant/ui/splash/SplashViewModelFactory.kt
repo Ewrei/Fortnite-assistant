@@ -1,5 +1,6 @@
 package robin.vitalij.fortniteassitant.ui.splash
 
+import robin.vitalij.fortniteassitant.repository.FirebaseDynamicLinkRepository
 import robin.vitalij.fortniteassitant.repository.InterstitialAdRepository
 import robin.vitalij.fortniteassitant.repository.network.GetUserRepository
 import robin.vitalij.fortniteassitant.repository.network.SaveUserRepository
@@ -11,7 +12,8 @@ class SplashViewModelFactory @Inject constructor(
     private val preferenceManager: PreferenceManager,
     private val getUserRepository: GetUserRepository,
     private val saveUserRepository: SaveUserRepository,
-    private val interstitialAdRepository: InterstitialAdRepository
+    private val interstitialAdRepository: InterstitialAdRepository,
+    private val firebaseDynamicLinkRepository: FirebaseDynamicLinkRepository
 ) : BaseViewModelFactory<SplashViewModel>(SplashViewModel::class.java) {
 
     private var viewModel: SplashViewModel? = null
@@ -22,7 +24,8 @@ class SplashViewModelFactory @Inject constructor(
                 preferenceManager,
                 getUserRepository,
                 saveUserRepository,
-                interstitialAdRepository
+                interstitialAdRepository,
+                firebaseDynamicLinkRepository
             )
             viewModel = model
             return model

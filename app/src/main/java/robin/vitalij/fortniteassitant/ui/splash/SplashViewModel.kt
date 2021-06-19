@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import robin.vitalij.fortniteassitant.interfaces.SaveUserCallback
+import robin.vitalij.fortniteassitant.model.enums.FirebaseDynamicLinkType
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
+import robin.vitalij.fortniteassitant.repository.FirebaseDynamicLinkRepository
 import robin.vitalij.fortniteassitant.repository.InterstitialAdRepository
 import robin.vitalij.fortniteassitant.repository.network.GetUserRepository
 import robin.vitalij.fortniteassitant.repository.network.SaveUserRepository
@@ -17,7 +19,8 @@ class SplashViewModel @Inject constructor(
     val preferenceManager: PreferenceManager,
     private val getUserRepository: GetUserRepository,
     private val saveUserRepository: SaveUserRepository,
-    private val interstitialAdRepository: InterstitialAdRepository
+    private val interstitialAdRepository: InterstitialAdRepository,
+    private val firebaseDynamicLinkRepository: FirebaseDynamicLinkRepository
 ) : ViewModel() {
 
     private val isUserAuthorised = MutableLiveData<Boolean>()
@@ -33,6 +36,11 @@ class SplashViewModel @Inject constructor(
         }
 
         loadInterstitialAd()
+    }
+
+    fun setFirebaseDynamicLink(firebaseDynamicLinkType: FirebaseDynamicLinkType, id: String) {
+        firebaseDynamicLinkRepository.id = id
+        firebaseDynamicLinkRepository.firebaseDynamicLinkType = firebaseDynamicLinkType
     }
 
     private fun loadInterstitialAd() {

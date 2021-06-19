@@ -1,5 +1,6 @@
 package robin.vitalij.fortniteassitant.ui.common
 
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.progress_view.*
 import kotlinx.android.synthetic.main.view_empty.*
@@ -23,13 +24,16 @@ abstract class BaseFragment : Fragment(), ProgressBarController, ErrorController
     ) {
         context?.let { context ->
             errorView.setVisibility(true)
-            errorText.text = context.getString(
-                errorModel.textResourceId
-            )
-            /*    if (errorModel.errors.isNotEmpty()) errorModel.errors.getMessage() else context.getString(
+            errorText.text =
+                if (errorModel.errors != null) errorModel.errors.error else context.getString(
                     errorModel.textResourceId
-                )*/
-            errorImage.setImageDrawable(context.getDrawable(errorModel.imageResourceId))
+                )
+            errorImage.setImageDrawable(
+                ContextCompat.getDrawable(
+                    context,
+                    errorModel.imageResourceId
+                )
+            )
             errorModel.descriptionResourceId?.let {
                 errorDescription.setVisibility(true)
                 errorDescription.setText(errorModel.descriptionResourceId)
@@ -51,7 +55,7 @@ abstract class BaseFragment : Fragment(), ProgressBarController, ErrorController
     }
 
     fun showSwipeRefreshLayout(show: Boolean) {
-       // swipeRefreshLayout?.isRefreshing = show
+        // swipeRefreshLayout?.isRefreshing = show
     }
 
     fun setEmptyText(emptyTextModel: EmptyTextModel) {
