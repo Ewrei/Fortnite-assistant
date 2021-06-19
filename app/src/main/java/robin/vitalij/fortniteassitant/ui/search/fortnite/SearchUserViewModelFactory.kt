@@ -1,5 +1,6 @@
 package robin.vitalij.fortniteassitant.ui.search.fortnite
 
+import robin.vitalij.fortniteassitant.repository.FirebaseDynamicLinkRepository
 import robin.vitalij.fortniteassitant.repository.network.GetSearchUserRepository
 import robin.vitalij.fortniteassitant.repository.network.SaveUserRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
@@ -9,6 +10,7 @@ import javax.inject.Inject
 class SearchUserViewModelFactory @Inject constructor(
     private val getSearchUserRepository: GetSearchUserRepository,
     private val saveUserRepository: SaveUserRepository,
+    private val firebaseDynamicLinkRepository: FirebaseDynamicLinkRepository,
     private val preferenceManager: PreferenceManager
 ) : BaseViewModelFactory<SearchUserViewModel>(SearchUserViewModel::class.java) {
 
@@ -20,6 +22,7 @@ class SearchUserViewModelFactory @Inject constructor(
                 SearchUserViewModel(
                     getSearchUserRepository,
                     saveUserRepository,
+                    firebaseDynamicLinkRepository,
                     preferenceManager
                 )
             viewModel = model

@@ -3,7 +3,9 @@ package robin.vitalij.fortniteassitant.ui.main
 import androidx.databinding.ObservableField
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.interfaces.SaveUserCallback
+import robin.vitalij.fortniteassitant.model.enums.FirebaseDynamicLinkType
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
+import robin.vitalij.fortniteassitant.repository.FirebaseDynamicLinkRepository
 import robin.vitalij.fortniteassitant.repository.InterstitialAdRepository
 import robin.vitalij.fortniteassitant.repository.RewardedAdRepository
 import robin.vitalij.fortniteassitant.repository.db.UserRepository
@@ -19,12 +21,16 @@ class MainViewModel @Inject constructor(
     val interstitialAdRepository: InterstitialAdRepository,
     private val saveUserRepository: SaveUserRepository,
     val rewardedAdRepository: RewardedAdRepository,
+    private val firebaseDynamicLinkRepository: FirebaseDynamicLinkRepository,
     resourceProvider: ResourceProvider
 ) : BaseViewModel() {
 
-    val showLoadingTitle = ObservableField(resourceProvider.getString(R.string.update_body))
-
     lateinit var openMainScreen: () -> Unit
+
+    lateinit var openFirebaseDynamicLink: (
+        firebaseDynamicLinkType: FirebaseDynamicLinkType,
+        id: String
+    ) -> Unit
 
     fun saveUser(fortniteProfileResponse: FortniteProfileResponse) {
         saveUserRepository.saveUser(fortniteProfileResponse, object :
@@ -49,5 +55,18 @@ class MainViewModel @Inject constructor(
                 openMainScreen()
             }
         })
+    }
+
+    fun checkFirebaseDynamicLink() {
+        if (firebaseDynamicLinkRepository.firebaseDynamicLinkType != null && firebaseDynamicLinkRepository.id != null) {
+            openFirebaseDynamicLink(
+                firebaseDynamicLinkRepository.firebaseDynamicLinkType!!,
+                firebaseDynamicLinkRepository.id!!,
+            )
+        }
+    }
+
+    fun clearFirebaseDynamicLink() {
+        firebaseDynamicLinkRepository.clear()
     }
 }

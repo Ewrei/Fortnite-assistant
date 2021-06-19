@@ -1,4 +1,5 @@
 <resources>
+    <string name="full_app_name" translatable="false">Fortnite Assitant</string>
     <string name="app_name" translatable="false">Assitant</string>
     <string name="application_url" translatable="false">https://play.google.com/store/apps/details?id=robin.vitalij.fortniteassitant</string>
     <string name="title_home">Home</string>

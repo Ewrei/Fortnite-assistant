@@ -22,6 +22,8 @@ import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.*
 import robin.vitalij.fortniteassitant.interfaces.RegistrationProfileCallback
+import robin.vitalij.fortniteassitant.model.enums.AvatarType
+import robin.vitalij.fortniteassitant.model.enums.FirebaseDynamicLinkType
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
@@ -65,6 +67,27 @@ class SearchUserFragment : BaseFragment() {
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
                 }
+
+                openFirebaseDynamicLink = { firebaseDynamicLinkType: FirebaseDynamicLinkType,
+                                            id: String ->
+                    when (firebaseDynamicLinkType) {
+                        FirebaseDynamicLinkType.USER -> {
+                            ProfileResultFragment.show(
+                                childFragmentManager,
+                                id,
+                                AvatarType.values().random().getImageUrl(),
+                                ProfileResultType.FULL,
+                                object : RegistrationProfileCallback {
+                                    override fun addedProfile(fortniteProfileResponse: FortniteProfileResponse) {
+                                        saveUser(fortniteProfileResponse)
+                                    }
+
+                                })
+
+                            viewModel.clearFirebaseDynamicLink()
+                        }
+                    }
+                }
             }
     }
 
@@ -85,6 +108,8 @@ class SearchUserFragment : BaseFragment() {
 
         initBanner()
         setListeners()
+
+        viewModel.checkFirebaseDynamicLink()
     }
 
     private fun initBanner() {

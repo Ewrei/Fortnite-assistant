@@ -137,12 +137,12 @@ class SettingFragment : BaseFragment() {
                 )
             }.addOnSuccessListener { shortLink ->
                 val shareActionText =
-                    "${resources.getString(R.string.app_name)}\n${
+                    "${resources.getString(R.string.full_app_name)}\n${
                         String.format(
                             getString(R.string.you_can_see_the_profile_format),
                             viewModel.user.get()?.name
                         )
-                    }\n$shortLink"
+                    }\n${shortLink.shortLink}"
                 startActivity(Intent.createChooser(Intent().apply {
                     action = Intent.ACTION_SEND
                     putExtra(Intent.EXTRA_TEXT, shareActionText)

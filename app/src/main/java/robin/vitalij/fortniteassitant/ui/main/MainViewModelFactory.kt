@@ -1,5 +1,6 @@
 package robin.vitalij.fortniteassitant.ui.main
 
+import robin.vitalij.fortniteassitant.repository.FirebaseDynamicLinkRepository
 import robin.vitalij.fortniteassitant.repository.InterstitialAdRepository
 import robin.vitalij.fortniteassitant.repository.RewardedAdRepository
 import robin.vitalij.fortniteassitant.repository.db.UserRepository
@@ -15,7 +16,8 @@ class MainViewModelFactory @Inject constructor(
     private val interstitialAdRepository: InterstitialAdRepository,
     private val resourceProvider: ResourceProvider,
     private val rewardedAdRepository: RewardedAdRepository,
-    private val saveUserRepository: SaveUserRepository
+    private val saveUserRepository: SaveUserRepository,
+    private val firebaseDynamicLinkRepository: FirebaseDynamicLinkRepository
 ) : BaseViewModelFactory<MainViewModel>(MainViewModel::class.java) {
 
     private var viewModel: MainViewModel? = null
@@ -28,6 +30,7 @@ class MainViewModelFactory @Inject constructor(
                 interstitialAdRepository,
                 saveUserRepository,
                 rewardedAdRepository,
+                firebaseDynamicLinkRepository,
                 resourceProvider
             )
             viewModel = model

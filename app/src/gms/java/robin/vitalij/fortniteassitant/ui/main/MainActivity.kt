@@ -35,7 +35,12 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.*
 import robin.vitalij.fortniteassitant.databinding.ActivityMainBinding
 import robin.vitalij.fortniteassitant.interfaces.ProgressBarActivityController
+import robin.vitalij.fortniteassitant.interfaces.RegistrationProfileCallback
+import robin.vitalij.fortniteassitant.model.enums.AvatarType
+import robin.vitalij.fortniteassitant.model.enums.FirebaseDynamicLinkType
+import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
+import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
 import robin.vitalij.fortniteassitant.ui.subscription.SubscriptionActivity
 import java.util.*
 import javax.inject.Inject
@@ -80,6 +85,27 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
                                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         )
                     }
+
+                    openFirebaseDynamicLink = { firebaseDynamicLinkType: FirebaseDynamicLinkType,
+                                                id: String ->
+                        when (firebaseDynamicLinkType) {
+                            FirebaseDynamicLinkType.USER -> {
+                                ProfileResultFragment.show(
+                                    supportFragmentManager,
+                                    id,
+                                    AvatarType.values().random().getImageUrl(),
+                                    ProfileResultType.FULL,
+                                    object : RegistrationProfileCallback {
+                                        override fun addedProfile(fortniteProfileResponse: FortniteProfileResponse) {
+                                            saveUser(fortniteProfileResponse)
+                                        }
+
+                                    })
+
+                                viewModel.clearFirebaseDynamicLink()
+                            }
+                        }
+                    }
                 }
 
         initInterstitialAd()
@@ -98,6 +124,8 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
         openSubscriptionDialog()
         initBanner()
         setListener()
+
+        viewModel.checkFirebaseDynamicLink()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
