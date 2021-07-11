@@ -28,7 +28,10 @@ interface FortniteRequestsIOApi {
     fun getUpcomingShop(@Query("lang") language: String): Single<ShopUpcomingResponse>
 
     @GET("/v1/battlepass")
-    fun getBattlesPassRewards(@Query("lang") language: String, @Query("season") season: String): Single<BattlePassRewardsResponse>
+    fun getBattlesPassRewards(
+        @Query("lang") language: String,
+        @Query("season") season: String
+    ): Single<BattlePassRewardsResponse>
 
     @GET("/v1/loot/list")
     fun getWeapons(@Query("lang") language: String): Single<WeaponResponse>
@@ -37,12 +40,18 @@ interface FortniteRequestsIOApi {
     fun getFish(@Query("lang") language: String): Single<FishResponse>
 
     @GET("/v1/stats/fish")
-    fun getFishStats(@Query("lang") language: String, @Query("accountId") accountId: String): Single<FishStatsResponse>
+    fun getFishStats(
+        @Query("lang") language: String,
+        @Query("accountId") accountId: String
+    ): Single<FishStatsResponse>
 
     @GET("/v1/achievements")
     fun getAchievements(@Query("lang") language: String): Single<AchievementResponse>
 
     @GET("/v1/news")
     fun getNews(@Query("lang") language: String, @Query("type") type: String): Single<NewsResponse>
+
+    @GET("/v2/game/crew")
+    fun getGameCrew(@Query("lang") language: String): Single<List<CrewModel>>
 
 }

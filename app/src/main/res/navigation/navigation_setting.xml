@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_navigation_setting_start_to_wikiFragment"
             app:destination="@id/navigation_wiki" />
+        <action
+            android:id="@+id/action_navigation_setting_start_to_navigation_game_crew"
+            app:destination="@id/navigation_game_crew" />
     </fragment>
 
     <fragment
@@ -116,6 +119,16 @@
         android:id="@+id/navigation_news"
         android:name="robin.vitalij.fortniteassitant.ui.news.viewpager.AdapterNewsFragment"
         android:label="@string/news_game" />
+    <fragment
+        android:id="@+id/navigation_game_crew"
+        android:name="robin.vitalij.fortniteassitant.ui.crew.main.GameCrewFragment"
+        android:label="@string/fortnite_crew_information" />
+
+    <fragment
+        android:id="@+id/navigation_crew_details"
+        android:name="robin.vitalij.fortniteassitant.ui.crew.details.CrewViewDetailsFragment"
+        android:label="@string/fortnite_crew_information" />
+
     <fragment
         android:id="@+id/navigation_banner"
         android:name="robin.vitalij.fortniteassitant.ui.banners.BannersFragment"

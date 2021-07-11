@@ -6,7 +6,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.db.entity.CosmeticsEntity
-import robin.vitalij.fortniteassitant.db.entity.CosmeticsNewEntity
 
 class CosmeticsAdapter(
     private val onClick: (cosmeticsEntity: CosmeticsEntity) -> Unit

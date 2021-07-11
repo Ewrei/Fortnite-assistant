@@ -290,4 +290,6 @@ This section is beta. If it does not work correctly for you, let us know</string
     <string name="share_user_title">Share profile link</string>
     <string name="you_can_see_the_profile_format">You can see the profile %s here</string>
 
+    <string name="fortnite_crew_information" translatable="false">Fortnite crew information </string>
+
 </resources>

@@ -106,6 +106,14 @@ class SettingFragment : BaseFragment() {
             navController.navigate(R.id.navigation_news)
         }
 
+        newsLayout.setOnClickListener {
+            navController.navigate(R.id.navigation_news)
+        }
+
+        crewLayout.setOnClickListener {
+            navController.navigate(R.id.navigation_game_crew)
+        }
+
         subscriptionLayout.setOnClickListener {
             val intent = Intent(context, SubscriptionActivity::class.java)
             startActivity(intent)

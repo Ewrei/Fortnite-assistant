@@ -45,11 +45,11 @@ enum class RarityType(val id: String) {
     companion object {
         fun getRarityType(id: String?): RarityType {
             for (rarityType in values())
-                if (rarityType.id == id) {
+                if (rarityType.id.equals(id, true)) {
                     return rarityType
                 }
 
-            return RarityType.UNCOMMON
+            return UNCOMMON
         }
     }
 }
