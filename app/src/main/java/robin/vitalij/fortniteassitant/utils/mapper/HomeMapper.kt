@@ -16,9 +16,9 @@ import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.viewmodel.HomeSessionSessionViewModel
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.*
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.*
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 import robin.vitalij.fortniteassitant.utils.TextUtils
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
-import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 private const val TWO_SESSION = 2
 
@@ -43,6 +43,8 @@ class HomeMapper(
                     userLastEntity.all?.overall?.minutesPlayed?.toDouble(),
                     60.0
                 ),
+                level = userLastEntity.level,
+                progress = userLastEntity.progress
             )
         )
 

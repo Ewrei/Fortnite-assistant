@@ -5,7 +5,9 @@ data class HomeHeaderViewModel(
     val userName: String,
     val playerId: String,
     val matchesPlayed: Int,
-    val timeHours: Double
+    val timeHours: Double,
+    val level: Int,
+    val progress: Int
 ) : Home {
     override fun getType() = HomeType.HEADER
 }

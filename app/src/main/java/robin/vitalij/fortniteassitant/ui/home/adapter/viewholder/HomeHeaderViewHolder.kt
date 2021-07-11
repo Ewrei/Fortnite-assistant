@@ -24,6 +24,8 @@ class HomeHeaderViewHolder(
             itemView.detailsStatistics.setSafeOnClickListener {
                 openDetailsStatistics()
             }
+
+            binding.roundCornerProgressBar.progress = item.progress.toFloat()
         }
     }
 }

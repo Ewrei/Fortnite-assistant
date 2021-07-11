@@ -49,7 +49,7 @@
     <string name="wins_percent">Победы %</string>
     <string name="kd">KD</string>
     <string name="play_time">%s ч. всего</string>
-    <string name="level_format">Уровень %d</string> 
+    <string name="level_format">Уровень %d</string>
     <string name="all">Вся</string>
     <string name="no_results_for_this_platform">Нет результатов для этой платформы</string>
     <string name="kills">Убийства</string>
