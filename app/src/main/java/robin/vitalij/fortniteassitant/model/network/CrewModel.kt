@@ -1,12 +1,9 @@
 package robin.vitalij.fortniteassitant.model.network
 
 import android.os.Parcelable
-import androidx.room.Embedded
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
-import robin.vitalij.fortniteassitant.db.entity.Rarity
 import robin.vitalij.fortniteassitant.db.entity.Series
-import robin.vitalij.fortniteassitant.db.entity.Type
 
 class CrewModel(
     @SerializedName("type") var type: String,
@@ -36,7 +33,7 @@ class CrewImageModel(
 class CrewRewardsModel(
     @SerializedName("quantity") var quantity: Int,
     @SerializedName("item") var item: CrewItemModel
-):Parcelable
+) : Parcelable
 
 @Parcelize
 class CrewItemModel(
@@ -44,10 +41,16 @@ class CrewItemModel(
     @SerializedName("name") var name: String,
     @SerializedName("description") var description: String?,
     @SerializedName("type") var type: CrewItemTypeModel,
-    @Embedded(prefix = "rarity") @SerializedName("rarity") var rarity: Rarity?,
+    @SerializedName("rarity") var rarity: CrewItemRarityModel?,
     @SerializedName("series") var series: Series?,
     @SerializedName("images") var images: CrewItemImageModel?,
-): Parcelable
+) : Parcelable
+
+@Parcelize
+class CrewItemRarityModel(
+    @SerializedName("id") var id: String,
+    @SerializedName("name") var name: String
+) : Parcelable
 
 @Parcelize
 class CrewItemImageModel(
@@ -55,10 +58,10 @@ class CrewItemImageModel(
     @SerializedName("featured") var featured: String?,
     @SerializedName("background") var background: String?,
     @SerializedName("full_background") var fullBackground: String?
-): Parcelable
+) : Parcelable
 
 @Parcelize
 class CrewItemTypeModel(
     @SerializedName("id") var id: String,
     @SerializedName("name") var name: String
-): Parcelable
+) : Parcelable

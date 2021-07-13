@@ -15,6 +15,9 @@ import robin.vitalij.fortniteassitant.utils.mapper.SaveUserMapper
 import javax.inject.Inject
 import javax.inject.Singleton
 
+private const val ONE_HUNDRED_MATCHES = 100
+private const val ZERO_MATCHES = 0
+
 @Singleton
 class SaveUserRepository @Inject constructor(
     private val userRepository: UserRepository,
@@ -29,7 +32,7 @@ class SaveUserRepository @Inject constructor(
     ) {
         val user = SaveUserMapper().transform(fortniteProfileResponse)
 
-        if (user.userEntity.all?.overall?.matches == 0 || user.userEntity.playerId == "") {
+        if (user.userEntity.all?.overall?.matches == ZERO_MATCHES || user.userEntity.playerId == "") {
             saveUserCallback.showError(Throwable())
         } else {
             userRepository.getFullUser(user.userEntity.playerId)
@@ -82,6 +85,8 @@ class SaveUserRepository @Inject constructor(
     }
 
     private fun saveTop(playerStatsResponse: PlayerStatsResponse) {
-        topRepository.updateTopUser(playerStatsResponse)
+        if (playerStatsResponse.playerStatsData.stats.all?.overall?.matches ?: ZERO_MATCHES >= ONE_HUNDRED_MATCHES) {
+            topRepository.updateTopUser(playerStatsResponse)
+        }
     }
 }

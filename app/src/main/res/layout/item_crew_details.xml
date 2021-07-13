@@ -37,7 +37,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:rarity="@{item.item.type.id}"
+                app:rarity="@{item.item.rarity.id}"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
@@ -67,6 +67,32 @@
                 android:textColor="@android:color/darker_gray"
                 android:textSize="@dimen/small_10_text_size"
                 tools:text="type" />
+
+            <TableRow
+                android:id="@+id/tableRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="@dimen/default_margin"
+                android:background="@android:color/black"
+                android:gravity="end|center_vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/type">
+
+                <TextView
+                    android:id="@+id/quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/half_default_margin"
+                    android:layout_marginEnd="@dimen/half_default_margin"
+                    android:layout_marginBottom="@dimen/half_default_margin"
+                    android:fontFamily="@font/fortnite_battlefest"
+                    android:text="@{@string/quantity_format(item.quantity)}"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    tools:text="Quantity 10" />
+
+            </TableRow>
 
         </LinearLayout>
 
