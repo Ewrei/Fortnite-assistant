@@ -292,4 +292,6 @@ This section is beta. If it does not work correctly for you, let us know</string
 
     <string name="fortnite_crew_information" translatable="false">Fortnite crew information </string>
 
+    <string name="empty_search_user">We are unable to find your profile</string>
+
 </resources>

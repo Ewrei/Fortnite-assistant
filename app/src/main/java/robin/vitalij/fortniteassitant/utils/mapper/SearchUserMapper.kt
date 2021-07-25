@@ -10,14 +10,21 @@ class SearchUserMapper() :
 
     override fun transform(obj: SearchResponse): List<SearchSteamUser> {
         val list = arrayListOf<SearchSteamUser>()
-        obj.allMatches.forEach { matches ->
-            matches.matches.firstOrNull()?.value?.let {
 
-                list.add(SearchSteamUser(matches.accountId, it, AvatarType.values().random().getImageUrl()))
+        if (obj.result) {
+            obj.allMatches.forEach { matches ->
+                matches.matches.firstOrNull()?.value?.let {
+
+                    list.add(
+                        SearchSteamUser(
+                            matches.accountId,
+                            it,
+                            AvatarType.values().random().getImageUrl()
+                        )
+                    )
+                }
             }
         }
         return list
     }
-
-
 }

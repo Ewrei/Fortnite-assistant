@@ -2,7 +2,9 @@ package robin.vitalij.fortniteassitant.ui.search.fortnite
 
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
+import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.interfaces.SaveUserCallback
+import robin.vitalij.fortniteassitant.model.EmptyTextModel
 import robin.vitalij.fortniteassitant.model.enums.FirebaseDynamicLinkType
 import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
@@ -11,12 +13,14 @@ import robin.vitalij.fortniteassitant.repository.network.GetSearchUserRepository
 import robin.vitalij.fortniteassitant.repository.network.SaveUserRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 class SearchUserViewModel(
     private val getSearchUserRepository: GetSearchUserRepository,
     private val saveUserRepository: SaveUserRepository,
     private val firebaseDynamicLinkRepository: FirebaseDynamicLinkRepository,
-    val preferenceManager: PreferenceManager
+    val preferenceManager: PreferenceManager,
+    private val resourceProvider: ResourceProvider
 ) : BaseViewModel() {
 
     lateinit var openFirebaseDynamicLink: (
@@ -34,6 +38,16 @@ class SearchUserViewModel(
             .let(::setupProgressShow)
             .subscribe({
                 mutableLiveData.value = it
+
+                emptyText(
+                    EmptyTextModel(
+                        it.isEmpty(),
+                        resourceProvider.getString(
+                            R.string.empty_search_user
+                        )
+                    )
+                )
+
             }, {
                 it.printStackTrace()
             })

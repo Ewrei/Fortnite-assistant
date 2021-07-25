@@ -5,7 +5,8 @@ import com.google.gson.annotations.SerializedName
 class SearchResponse(
     @SerializedName("result") val result: Boolean,
     @SerializedName("account_id") val accountId: String,
-    @SerializedName("all_matches") val allMatches: List<Matches>
+    @SerializedName("all_matches") val allMatches: List<Matches>,
+    @SerializedName("error") val error: String
 )
 
 class Matches(

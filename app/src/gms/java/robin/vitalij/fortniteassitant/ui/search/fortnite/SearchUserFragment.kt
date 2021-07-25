@@ -55,6 +55,7 @@ class SearchUserFragment : BaseFragment() {
             .get(SearchUserViewModel::class.java).apply {
                 observeToProgressBar(this@SearchUserFragment)
                 observeToError(this@SearchUserFragment)
+                observeToEmpty(this@SearchUserFragment)
                 observeToProgressBar(
                     this@SearchUserFragment,
                     activity = activity as AppCompatActivity
@@ -93,8 +94,7 @@ class SearchUserFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            usersEmpty.setVisibility(it.isEmpty())
+        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
             it?.let(::initAdapter)
         })
 

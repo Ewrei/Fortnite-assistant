@@ -109,33 +109,6 @@
                 android:layout_gravity="center"
                 android:visibility="gone" />
 
-            <LinearLayout
-                android:id="@+id/usersEmpty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/default_margin_double"
-                android:visibility="gone"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/search_steam_no_found"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/searchById"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/default_margin"
-                    android:backgroundTint="@color/color_orange"
-                    android:text="@string/try_button" />
-
-            </LinearLayout>
-
         </FrameLayout>
 
         <com.google.android.gms.ads.AdView
