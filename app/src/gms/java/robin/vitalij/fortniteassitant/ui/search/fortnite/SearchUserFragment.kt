@@ -113,7 +113,14 @@ class SearchUserFragment : BaseFragment() {
     }
 
     private fun initBanner() {
-        if (viewModel.preferenceManager.getIsSubscription() || viewModel.preferenceManager.getDisableAdvertising() >= Date().time) {
+        var profileResultType: ProfileResultType = ProfileResultType.NEW
+        arguments?.let {
+            profileResultType = it.getSerializable(IS_COMPARISON_VISIBLE) as ProfileResultType
+        }
+
+        if (viewModel.preferenceManager.getIsSubscription() || viewModel.preferenceManager.getDisableAdvertising() >= Date().time
+            || profileResultType == ProfileResultType.FULL
+        ) {
             adView.setVisibility(false)
         } else {
             adRequest = AdRequest.Builder().build()

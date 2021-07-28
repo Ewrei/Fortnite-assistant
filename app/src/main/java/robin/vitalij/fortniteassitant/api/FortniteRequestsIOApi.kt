@@ -11,7 +11,7 @@ import robin.vitalij.fortniteassitant.model.network.stats.PlayerMatchesResponse
 
 interface FortniteRequestsIOApi {
 
-    @GET("/lookup")
+    @GET("/v1/lookup")
     fun getSearch(
         @Query("username") username: String,
         @Query("strict") strict: Boolean
