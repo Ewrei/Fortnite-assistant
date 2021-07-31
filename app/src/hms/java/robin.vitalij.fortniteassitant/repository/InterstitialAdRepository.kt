@@ -1,5 +1,6 @@
 package robin.vitalij.fortniteassitant.repository
 
+import android.app.Activity
 import android.content.Context
 import com.huawei.hms.ads.AdListener
 import com.huawei.hms.ads.AdParam
@@ -28,7 +29,7 @@ class InterstitialAdRepository @Inject constructor(
         if (preferenceManager.getDisableAdvertising() <= Date().time && !(preferenceManager.getIsSubscription())
         ) {
             interstitialAd = InterstitialAd(context)
-            interstitialAd?.adId = "testb4znbuh3n2"
+            interstitialAd?.adId = "f9dsy6bpf3"
             interstitialAd?.adListener = object : AdListener() {
                 override fun onAdLoaded() {
                     super.onAdLoaded()

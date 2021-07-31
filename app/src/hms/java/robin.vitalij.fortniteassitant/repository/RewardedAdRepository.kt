@@ -19,7 +19,7 @@ class RewardedAdRepository @Inject constructor(context: Context) {
 
     fun loadReward(context: Context) {
         if (defaultRewardedAd == null) {
-            defaultRewardedAd = RewardAd(context, "testx9dtjwj8hp")
+            defaultRewardedAd = RewardAd(context, "d8p2p7tbzb")
         }
         val rewardAdLoadListener: RewardAdLoadListener = object : RewardAdLoadListener() {
             override fun onRewardAdFailedToLoad(errorCode: Int) {

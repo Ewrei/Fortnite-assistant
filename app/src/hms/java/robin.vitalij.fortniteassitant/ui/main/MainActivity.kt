@@ -160,7 +160,7 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
         } else {
             val adParam = AdParam.Builder().build()
             adView.loadAd(adParam)
-            adView.adId = "testw6vs28auh3"
+            adView.adId = "v6ebe0s0g2"
             adView.bannerAdSize = BannerAdSize.BANNER_SIZE_SMART
             adView.loadAd(adParam)
         }
