@@ -5,7 +5,7 @@ import robin.vitalij.fortniteassitant.model.network.search.SearchResponse
 import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
 
-class SearchUserMapper() :
+class SearchUserMapper :
     Mapper<SearchResponse, List<SearchSteamUser>> {
 
     override fun transform(obj: SearchResponse): List<SearchSteamUser> {

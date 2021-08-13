@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.huawei.hms.ads.AdListener
 import com.huawei.hms.ads.AdParam
 import com.huawei.hms.ads.BannerAdSize
-import kotlinx.android.synthetic.hms.fragment_search_steam.*
+import kotlinx.android.synthetic.hms.fragment_search_user.*
 import kotlinx.android.synthetic.main.recycler_view.*
 import kotlinx.android.synthetic.main.toolbar_center_title.*
 import robin.vitalij.fortniteassitant.FortniteApplication
@@ -28,6 +28,8 @@ import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileRespons
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.main.MainActivity
+import robin.vitalij.fortniteassitant.ui.search.SearchUserViewModel
+import robin.vitalij.fortniteassitant.ui.search.SearchUserViewModelFactory
 import robin.vitalij.fortniteassitant.ui.search.adapter.SearchAdapter
 import java.util.*
 import javax.inject.Inject
@@ -42,7 +44,7 @@ class SearchUserFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_search_steam, container, false)
+    ) = inflater.inflate(R.layout.fragment_search_user, container, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -142,6 +144,10 @@ class SearchUserFragment : BaseFragment() {
             if (searchInputEditText.text.toString().length >= resources.getInteger(R.integer.min_length)) {
                 viewModel.searchPlayer(searchInputEditText.text.toString())
             }
+        }
+
+        strictUserSwitch.setOnCheckedChangeListener { it, isChecked ->
+            viewModel.strict = !isChecked
         }
     }
 

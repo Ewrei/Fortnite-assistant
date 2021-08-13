@@ -28,7 +28,7 @@ class ComparisonSelectedViewModel(
 
     val nickname = ObservableField("")
 
-    val visibility = ObservableField<Boolean>(true)
+    val visibility = ObservableField(true)
 
     var mutableLiveData = MutableLiveData<List<SearchSteamUser>>()
 
@@ -51,7 +51,7 @@ class ComparisonSelectedViewModel(
     }
 
     fun searchPlayer(searchName: String) {
-        getSearchUserRepository.getSearch(searchName)
+        getSearchUserRepository.getSearch(searchName, false)
             .observeOn(AndroidSchedulers.mainThread())
             .let(::setupProgressShow)
             .subscribe({

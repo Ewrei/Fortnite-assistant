@@ -1,6 +1,5 @@
 package robin.vitalij.fortniteassitant.repository
 
-import android.app.Activity
 import android.content.Context
 import com.huawei.hms.ads.AdListener
 import com.huawei.hms.ads.AdParam

@@ -28,7 +28,5 @@ class FortniteApplication : Application() {
 
         lateinit var appComponent: AppComponent
 
-        var simpleCache: SimpleCache? = null
-
     }
 }

@@ -5,6 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import robin.vitalij.fortniteassitant.model.network.*
 import robin.vitalij.fortniteassitant.model.network.search.SearchResponse
+import robin.vitalij.fortniteassitant.model.network.search.SearchUserModel
 import robin.vitalij.fortniteassitant.model.network.shop.ShopResponse
 import robin.vitalij.fortniteassitant.model.network.shop.ShopUpcomingResponse
 import robin.vitalij.fortniteassitant.model.network.stats.PlayerMatchesResponse
@@ -16,6 +17,11 @@ interface FortniteRequestsIOApi {
         @Query("username") username: String,
         @Query("strict") strict: Boolean
     ): Single<SearchResponse>
+
+    @GET("/v1/lookup")
+    fun getSearch(
+        @Query("username") username: String
+    ): Single<SearchUserModel>
 
 
     @GET("v1/matches")
@@ -53,5 +59,8 @@ interface FortniteRequestsIOApi {
 
     @GET("/v2/game/crew")
     fun getGameCrew(@Query("lang") language: String): Single<List<CrewModel>>
+
+    @GET("/v2/game/vehicles")
+    fun getGameVehicles(@Query("lang") language: String): Single<VehiclesResponse>
 
 }

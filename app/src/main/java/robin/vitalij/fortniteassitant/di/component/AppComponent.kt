@@ -57,6 +57,7 @@ import robin.vitalij.fortniteassitant.ui.splash.SplashActivity
 import robin.vitalij.fortniteassitant.ui.subscription.SubscriptionsFragment
 import robin.vitalij.fortniteassitant.ui.top.TopFragment
 import robin.vitalij.fortniteassitant.ui.users.UsersFragment
+import robin.vitalij.fortniteassitant.ui.vehicles.VehiclesFragment
 import robin.vitalij.fortniteassitant.ui.weapons.WeaponFragment
 import robin.vitalij.fortniteassitant.ui.wiki.WikiFragment
 import javax.inject.Singleton
@@ -109,6 +110,7 @@ interface AppComponent {
     fun inject(fragment: BannersFragment)
     fun inject(fragment: GameCrewFragment)
     fun inject(fragment: CrewViewDetailsFragment)
+    fun inject(fragment: VehiclesFragment)
 
     fun inject(fragment: CosmeticResultFragment)
     fun inject(fragment: ProfileResultFragment)

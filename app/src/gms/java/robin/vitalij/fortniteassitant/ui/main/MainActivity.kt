@@ -26,8 +26,6 @@ import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.tasks.Task
 import kotlinx.android.synthetic.gms.activity_main.*
-import kotlinx.android.synthetic.main.fragment_search_steam.*
-import kotlinx.android.synthetic.main.fragment_search_steam.adView
 import kotlinx.android.synthetic.main.loading_layout.*
 import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication

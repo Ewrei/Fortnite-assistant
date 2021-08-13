@@ -294,4 +294,9 @@ This section is beta. If it does not work correctly for you, let us know</string
 
     <string name="empty_search_user">We are unable to find your profile</string>
 
+    <string name="look_for_similar">"I don't remember the exact name, look for similar"</string>
+    
+    <!--Vehicles-->
+    <string name="vehicles">Vehicles</string>
+
 </resources>

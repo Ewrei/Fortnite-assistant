@@ -31,7 +31,7 @@
         android:id="@+id/navigation_search"
         android:name="robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment"
         android:label="@string/search_player"
-        tools:layout="@layout/fragment_search_steam" />
+        tools:layout="@layout/fragment_search_user" />
 
     <fragment
         android:id="@+id/navigation_application_info"
@@ -70,6 +70,9 @@
         <action
             android:id="@+id/action_navigation_wiki_to_bannersFragment"
             app:destination="@id/navigation_banner" />
+        <action
+            android:id="@+id/action_navigation_wiki_to_vehiclesFragment"
+            app:destination="@id/navigation_vehicles" />
     </fragment>
     <fragment
         android:id="@+id/navigation_battles_pass_rewards"
@@ -121,6 +124,7 @@
         android:label="@string/news_game" />
     <fragment
         android:id="@+id/navigation_game_crew"
+        tools:layout="@layout/fragment_history"
         android:name="robin.vitalij.fortniteassitant.ui.crew.main.GameCrewFragment"
         android:label="@string/fortnite_crew_information" />
 
@@ -133,5 +137,9 @@
         android:id="@+id/navigation_banner"
         android:name="robin.vitalij.fortniteassitant.ui.banners.BannersFragment"
         android:label="@string/banners" />
+    <fragment
+        android:id="@+id/navigation_vehicles"
+        android:name="robin.vitalij.fortniteassitant.ui.vehicles.VehiclesFragment"
+        android:label="@string/vehicles" />
 
 </navigation>

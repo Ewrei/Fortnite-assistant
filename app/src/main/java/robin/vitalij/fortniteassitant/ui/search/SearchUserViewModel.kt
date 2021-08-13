@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.search.fortnite
+package robin.vitalij.fortniteassitant.ui.search
 
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -28,12 +28,14 @@ class SearchUserViewModel(
         id: String
     ) -> Unit
 
-    var mutableLiveData = MutableLiveData<List<SearchSteamUser>>()
-
     lateinit var openMainScreen: () -> Unit
 
+    var mutableLiveData = MutableLiveData<List<SearchSteamUser>>()
+
+    var strict: Boolean =  true
+
     fun searchPlayer(searchName: String) {
-        getSearchUserRepository.getSearch(searchName)
+        getSearchUserRepository.getSearch(searchName, strict)
             .observeOn(AndroidSchedulers.mainThread())
             .let(::setupProgressShow)
             .subscribe({

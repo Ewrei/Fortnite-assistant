@@ -86,5 +86,9 @@ class WikiFragment : BaseFragment() {
         banners.setSafeOnClickListener {
             findNavController().navigate(R.id.navigation_banner)
         }
+
+        vehicles.setSafeOnClickListener {
+            findNavController().navigate(R.id.navigation_vehicles)
+        }
     }
 }

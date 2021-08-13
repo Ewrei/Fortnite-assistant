@@ -258,4 +258,11 @@
     <string name="share_user_title">Поделиться ссылкой на профиль</string>
     <string name="you_can_see_the_profile_format">Ты можешь посмотреть профиль %s по ссылке</string>
 
+    <string name="empty_search_user">Мы не можем найти ваш профиль</string>
+
+    <string name="look_for_similar">Я не помню точного имени, искать похожие</string>
+
+    <!--Vehicles-->
+    <string name="vehicles">Транспортные средства</string>
+
 </resources>

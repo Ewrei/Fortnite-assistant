@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.search.fortnite
+package robin.vitalij.fortniteassitant.ui.search
 
 import robin.vitalij.fortniteassitant.repository.FirebaseDynamicLinkRepository
 import robin.vitalij.fortniteassitant.repository.network.GetSearchUserRepository

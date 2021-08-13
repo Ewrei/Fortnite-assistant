@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.crew.main
+package robin.vitalij.fortniteassitant.ui.vehicles
 
 import android.content.Context
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.recycler_view.*
 import kotlinx.android.synthetic.main.toolbar_center_title.*
 import kotlinx.android.synthetic.main.view_error.*
@@ -17,21 +17,21 @@ import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
-import robin.vitalij.fortniteassitant.model.network.CrewModel
-import robin.vitalij.fortniteassitant.model.network.CrewRewardsModel
+import robin.vitalij.fortniteassitant.model.network.VehicleModel
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
-import robin.vitalij.fortniteassitant.ui.crew.details.CrewViewDetailsFragment
-import robin.vitalij.fortniteassitant.ui.crew.main.adapter.GameCrewAdapter
-import robin.vitalij.fortniteassitant.ui.news.VideoActivity
+import robin.vitalij.fortniteassitant.ui.vehicles.adapter.VehiclesAdapter
 import java.util.*
 import javax.inject.Inject
 
-class GameCrewFragment : BaseFragment() {
+private const val MAX_SPAN_COUNT = 2
+private const val VEHICLES_SPAN_COUNT = 1
+
+class VehiclesFragment : BaseFragment() {
 
     @Inject
-    lateinit var viewModelFactory: CrewViewModelFactory
+    lateinit var viewModelFactory: VehiclesViewModelFactory
 
-    private lateinit var viewModel: GameCrewViewModel
+    private lateinit var viewModel: VehiclesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,9 +41,9 @@ class GameCrewFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(GameCrewViewModel::class.java).apply {
-                observeToProgressBar(this@GameCrewFragment)
-                observeToError(this@GameCrewFragment)
+            .get(VehiclesViewModel::class.java).apply {
+                observeToProgressBar(this@VehiclesFragment)
+                observeToError(this@VehiclesFragment)
             }
     }
 
@@ -74,25 +74,30 @@ class GameCrewFragment : BaseFragment() {
         toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
-    private fun initAdapter(list: List<CrewModel>) {
+    private fun initAdapter(list: List<VehicleModel>) {
         recyclerView.run {
-            adapter = GameCrewAdapter(onClick = {
-                val bundle = Bundle().apply {
-                    putString(CrewViewDetailsFragment.NAME, it.descriptions.title)
-                    putParcelableArrayList(
-                        CrewViewDetailsFragment.CREW_REWARDS_MODEL,
-                        it.rewards as ArrayList<CrewRewardsModel>
-                    )
-                }
+            adapter = VehiclesAdapter(onClick = {
+//                val bundle = Bundle().apply {
+//                    putString(CrewViewDetailsFragment.NAME, it.descriptions.title)
+//                    putParcelableArrayList(
+//                        CrewViewDetailsFragment.CREW_REWARDS_MODEL,
+//                        it.rewards as ArrayList<CrewRewardsModel>
+//                    )
+//                }
+//
+//                findNavController().navigate(R.id.navigation_crew_details, bundle)
+            })
+            (adapter as VehiclesAdapter).setData(list)
 
-                findNavController().navigate(R.id.navigation_crew_details, bundle)
-            },
-                onVideoClick = { videoUrl: String, videoName: String ->
-                    startActivity(VideoActivity.newInstance(context, videoUrl, videoName))
-                })
-            (adapter as GameCrewAdapter).setData(list)
+            val gridlayoutManager = GridLayoutManager(
+                activity, MAX_SPAN_COUNT
+            )
 
-            layoutManager = LinearLayoutManager(context)
+            gridlayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int) = VEHICLES_SPAN_COUNT
+            }
+
+            layoutManager = gridlayoutManager
         }
     }
 }

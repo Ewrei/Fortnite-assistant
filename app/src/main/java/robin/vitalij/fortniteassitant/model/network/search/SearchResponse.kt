@@ -21,3 +21,8 @@ class MatchesBody(
     @SerializedName("value") val value: String,
     @SerializedName("platform") val platform: String
 )
+
+class SearchUserModel(
+    @SerializedName("result") val result: Boolean,
+    @SerializedName("account_id") val accountId: String
+)
