@@ -18,6 +18,7 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.model.network.VehicleModel
+import robin.vitalij.fortniteassitant.ui.bottomsheet.vehicles.VehiclesResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.vehicles.adapter.VehiclesAdapter
 import java.util.*
@@ -77,15 +78,7 @@ class VehiclesFragment : BaseFragment() {
     private fun initAdapter(list: List<VehicleModel>) {
         recyclerView.run {
             adapter = VehiclesAdapter(onClick = {
-//                val bundle = Bundle().apply {
-//                    putString(CrewViewDetailsFragment.NAME, it.descriptions.title)
-//                    putParcelableArrayList(
-//                        CrewViewDetailsFragment.CREW_REWARDS_MODEL,
-//                        it.rewards as ArrayList<CrewRewardsModel>
-//                    )
-//                }
-//
-//                findNavController().navigate(R.id.navigation_crew_details, bundle)
+                VehiclesResultFragment.show(childFragmentManager, it)
             })
             (adapter as VehiclesAdapter).setData(list)
 

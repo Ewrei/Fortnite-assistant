@@ -1,6 +1,8 @@
 package robin.vitalij.fortniteassitant.model.network
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 class VehiclesResponse(
     @SerializedName("result") val result: Boolean,
@@ -8,6 +10,7 @@ class VehiclesResponse(
     @SerializedName("vehicles") val vehicles: List<VehicleModel>
 )
 
+@Parcelize
 class VehicleModel(
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String,
@@ -15,8 +18,9 @@ class VehicleModel(
     @SerializedName("stats") val stats: VehicleStatsModel,
     @SerializedName("spawnNames") val spawnNames: List<String>,
     @SerializedName("gears") val gears: List<VehicleGearsModel>
-)
+) : Parcelable
 
+@Parcelize
 class VehicleGearsModel(
     @SerializedName("TopSpeed") val topSpeed: String,
     @SerializedName("MinSpeed") val minSpeed: String,
@@ -25,8 +29,15 @@ class VehicleGearsModel(
     @SerializedName("SteeringAngleMultiplier") val steeringAngleMultiplier: String,
     @SerializedName("bAutoBrake") val bAutoBrake: Boolean,
     @SerializedName("bIgnoreGravity") val bIgnoreGravity: Boolean
-)
+) : Parcelable {
 
+    fun getBAutoBrakeString() = bAutoBrake.toString()
+
+    fun getBIgnoreGravityString() = bIgnoreGravity.toString()
+
+}
+
+@Parcelize
 class VehicleStatsModel(
     @SerializedName("Default.Valet.MinSpawnPercent.SportsCar") val minSpawnPercent: String,
     @SerializedName("Default.Valet.MaxSpawnPercent.SportsCar") val maxSpawnPercent: String,
@@ -39,4 +50,4 @@ class VehicleStatsModel(
     @SerializedName("Default.Valet.ScalePontoonTickRate.Front.SportsCar") val scalePontoonTickRateFront: String,
     @SerializedName("AthenaValetSmall.Defaults.FortAttributeSet_VehicleFuel.MinFuelAtSpawn") val fortAttributeSetVehicleFuelMinFuelAtSpawn: String,
     @SerializedName("AthenaValetSmall.Defaults.FortAttributeSet_VehicleFuel.MaxFuelAtSpawn") val FortAttributeSetVehicleFuelMaxFuelAtSpawn: String,
-)
+) : Parcelable

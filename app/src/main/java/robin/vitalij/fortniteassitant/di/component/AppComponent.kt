@@ -18,6 +18,7 @@ import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragme
 import robin.vitalij.fortniteassitant.ui.bottomsheet.top.TopResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.upcomingshop.UpcomingShopResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.user.UserResultFragment
+import robin.vitalij.fortniteassitant.ui.bottomsheet.vehicles.VehiclesResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.weapon.WeaponResultFragment
 import robin.vitalij.fortniteassitant.ui.chartlist.ChartsTypeFragment
 import robin.vitalij.fortniteassitant.ui.chartlist.viewpager.AdapterChartsTypeFragment
@@ -123,4 +124,5 @@ interface AppComponent {
     fun inject(fragment: WeaponResultFragment)
     fun inject(fragment: FishResultFragment)
     fun inject(fragment: BannerResultFragment)
+    fun inject(fragment: VehiclesResultFragment)
 }

@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.bottomsheet.weapon
+package robin.vitalij.fortniteassitant.ui.bottomsheet.vehicles
 
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -14,18 +14,20 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.db.entity.WeaponEntity
-import robin.vitalij.fortniteassitant.ui.bottomsheet.weapon.adapter.WeaponResultAdapter
+import robin.vitalij.fortniteassitant.model.network.VehicleModel
+import robin.vitalij.fortniteassitant.ui.bottomsheet.vehicles.adapter.VehiclesResultAdapter
+import robin.vitalij.fortniteassitant.ui.bottomsheet.vehicles.adapter.VehiclesResultListItem
+import robin.vitalij.fortniteassitant.utils.mapper.VehiclesResultMapper
 import javax.inject.Inject
 
 const val BOTTOM_SHEET_MARGIN_TOP = 200
 
-class WeaponResultFragment : BottomSheetDialogFragment() {
+class VehiclesResultFragment : BottomSheetDialogFragment() {
 
     @Inject
-    lateinit var viewModelFactory: WeaponResultViewModelFactory
+    lateinit var viewModelFactory: VehiclesResultViewModelFactory
 
-    private lateinit var viewModel: WeaponResultViewModel
+    private lateinit var viewModel: VehiclesResultViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,14 +51,17 @@ class WeaponResultFragment : BottomSheetDialogFragment() {
         super.onCreate(savedInstanceState)
         FortniteApplication.appComponent.inject(this)
         viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(WeaponResultViewModel::class.java)
+            .get(VehiclesResultViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
-            val list = arrayListOf(it.getSerializable(WEAPON) as WeaponEntity)
-            list.let(::initAdapter)
+            val vehicleModel: VehicleModel = it.getParcelable(VEHICLES)!!
+
+            VehiclesResultMapper().transform(vehicleModel).apply {
+                this.let(::initAdapter)
+            }
         }
     }
 
@@ -68,27 +73,29 @@ class WeaponResultFragment : BottomSheetDialogFragment() {
         sheetContainer.layoutParams.height = (displayMetrics.heightPixels - BOTTOM_SHEET_MARGIN_TOP)
     }
 
-    private fun initAdapter(list: List<WeaponEntity>) {
+    private fun initAdapter(list: List<VehiclesResultListItem>) {
         recyclerView.run {
-            adapter = WeaponResultAdapter()
-            (adapter as WeaponResultAdapter).setData(list)
+            adapter = VehiclesResultAdapter(
+                layoutInflater = layoutInflater
+            )
+            (adapter as VehiclesResultAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)
         }
     }
 
     companion object {
 
-        private const val TAG = "WeaponResultFragment"
-        private const val WEAPON = "Weapon"
+        private const val TAG = "VehiclesResultFragment"
+        private const val VEHICLES = "Vehicles"
 
         fun show(
             fragmentManager: FragmentManager?,
-            weaponEntity: WeaponEntity
+            vehicleModel: VehicleModel
         ) {
             fragmentManager?.let {
-                WeaponResultFragment().apply {
+                VehiclesResultFragment().apply {
                     arguments = Bundle().apply {
-                        putSerializable(WEAPON, weaponEntity)
+                        putParcelable(VEHICLES, vehicleModel)
                     }
                 }.show(
                     it,
