@@ -60,6 +60,10 @@ class SettingFragment : BaseFragment() {
                 observeToProgressBar(this@SettingFragment)
                 observeToProgressBar(this@SettingFragment, activity = activity as AppCompatActivity)
                 observeToError(this@SettingFragment)
+
+                openDialogError = {
+                    context?.showDialog(it)
+                }
             }
     }
 
@@ -167,6 +171,10 @@ class SettingFragment : BaseFragment() {
 
         wikiLayout.setOnClickListener {
             findNavController().navigate(R.id.navigation_wiki)
+        }
+
+        setErrorResolveButtonClick {
+            viewModel.loadData()
         }
     }
 

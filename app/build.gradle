@@ -15,8 +15,8 @@ android {
         applicationId "robin.vitalij.fortniteassitant"
         minSdkVersion 22
         targetSdkVersion 30
-        versionCode 11
-        versionName "1.0.6"
+        versionCode 12
+        versionName "1.0.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -124,7 +124,7 @@ dependencies {
     implementation "com.google.android.material:material:$material_version"
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
 
-    def constraintlayout_version = "2.0.4"
+    def constraintlayout_version = "2.1.0"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
 
     def navigation_version = "2.3.5"
@@ -134,14 +134,14 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
 
     //Dagger 2
-    def dagger_version = "2.35.1"
+    def dagger_version = "2.38.1"
     implementation "com.google.dagger:dagger:$dagger_version"
 
     def dagger_compiler_version = "2.23.2"
     kapt "com.google.dagger:dagger-compiler:$dagger_compiler_version"
 
     //Glide
-    def glide_version = '4.11.0'
+    def glide_version = '4.12.0'
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 
@@ -156,13 +156,13 @@ dependencies {
     def rxjava2_rxandroid_version = "2.1.1"
     implementation "io.reactivex.rxjava2:rxandroid:$rxjava2_rxandroid_version"
 
-    def rxjava2_rxjava_version = "2.2.19"
+    def rxjava2_rxjava_version = "2.2.21"
     implementation "io.reactivex.rxjava2:rxjava:$rxjava2_rxjava_version"
 
-    def gson_version = "2.8.6"
+    def gson_version = "2.8.7"
     implementation "com.google.code.gson:gson:$gson_version"
 
-    def retrofit2_adapter_version = "2.7.0"
+    def retrofit2_adapter_version = "2.9.0"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_adapter_version"
 
     def mp_android_chart_version = 'v3.0.2'
@@ -190,7 +190,7 @@ dependencies {
     def firebase_core_version = "19.0.0"
     implementation "com.google.firebase:firebase-core:$firebase_core_version"
 
-    def firebase_crashlytics_version = "18.2.0"
+    def firebase_crashlytics_version = "18.2.1"
     implementation "com.google.firebase:firebase-crashlytics:$firebase_crashlytics_version"
 
     def firebase_firestore_ktx_version = "23.0.3"
@@ -214,7 +214,7 @@ dependencies {
     def sufficientlysecure_version = "3.9"
     implementation "org.sufficientlysecure:html-textview:$sufficientlysecure_version"
 
-    def swipedecorator_version = "1.2.1"
+    def swipedecorator_version = "1.2.2"
     implementation "it.xabaras.android:recyclerview-swipedecorator:$swipedecorator_version"
 
     def exoplayer_version = "2.11.3"

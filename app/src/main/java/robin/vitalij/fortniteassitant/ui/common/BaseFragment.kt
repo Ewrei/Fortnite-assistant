@@ -16,7 +16,7 @@ import robin.vitalij.fortniteassitant.model.ErrorModel
 abstract class BaseFragment : Fragment(), ProgressBarController, ErrorController {
 
     override fun showOrHideProgressBar(show: Boolean) {
-        loading_container.setVisibility(show)
+        progressContainer.setVisibility(show)
     }
 
     override fun setError(

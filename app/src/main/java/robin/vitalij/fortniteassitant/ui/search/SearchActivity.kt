@@ -1,7 +1,5 @@
 package robin.vitalij.fortniteassitant.ui.search
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import kotlinx.android.synthetic.main.loading_layout.*
 import robin.vitalij.fortniteassitant.common.extensions.setVisibility
@@ -30,11 +28,5 @@ class SearchActivity : BaseActivity(), ProgressBarActivityController {
         loading_container.setVisibility(show)
         loadTitle.setVisibility(title.isNotBlank())
         loadTitle.text = title
-    }
-
-    companion object {
-
-        fun newInstance(context: Context) = Intent(context, SearchActivity::class.java)
-
     }
 }

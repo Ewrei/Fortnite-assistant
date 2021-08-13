@@ -14,16 +14,22 @@ import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 class SettingViewModel(
-    userRepository: UserRepository,
+    private val userRepository: UserRepository,
     private val saveUserRepository: SaveUserRepository,
     private val getUserRepository: GetUserRepository,
     private val preferenceManager: PreferenceManager,
     private val resourceProvider: ResourceProvider
 ) : BaseViewModel() {
 
+    lateinit var openDialogError: (titleError: String) -> Unit
+
     val user = ObservableField<UserEntity>()
 
     init {
+        loadData()
+    }
+
+    fun loadData() {
         userRepository.getUser(preferenceManager.getPlayerId())
             .observeOn(AndroidSchedulers.mainThread())
             .let(::setupProgressShow)
@@ -34,15 +40,18 @@ class SettingViewModel(
     }
 
     fun update() {
-        activityProgressBarVisibility.value = true
         textActivityVisibility.set(resourceProvider.getString(R.string.user_update))
+        activityProgressBarVisibility.value = true
+
         getUserRepository
             .getUser(preferenceManager.getPlayerId())
             .observeOn(AndroidSchedulers.mainThread())
             .let(::setupActivityProgressShow)
             .subscribe({
                 saveUser(it)
-            }, error)
+            }, {
+                openDialogError(it.message ?: it.toString())
+            })
             .let(disposables::add)
     }
 
@@ -71,6 +80,6 @@ class SettingViewModel(
     }
 
     fun checkSubscription() {
-      //  billingRepository.startConnection(true)
+        //  billingRepository.startConnection(true)
     }
 }

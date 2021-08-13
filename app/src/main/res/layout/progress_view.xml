@@ -9,7 +9,7 @@
     </data>
 
     <LinearLayout
-        android:id="@+id/loading_container"
+        android:id="@+id/progressContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="true"
