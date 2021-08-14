@@ -4,6 +4,7 @@ import android.content.Context
 import com.huawei.hms.ads.AdListener
 import com.huawei.hms.ads.AdParam
 import com.huawei.hms.ads.InterstitialAd
+import robin.vitalij.fortniteassitant.BuildConfig
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import java.util.*
 import javax.inject.Inject
@@ -28,7 +29,7 @@ class InterstitialAdRepository @Inject constructor(
         if (preferenceManager.getDisableAdvertising() <= Date().time && !(preferenceManager.getIsSubscription())
         ) {
             interstitialAd = InterstitialAd(context)
-            interstitialAd?.adId = "f9dsy6bpf3"
+            interstitialAd?.adId = BuildConfig.HUAWEI_INTERSTITIAL_ID
             interstitialAd?.adListener = object : AdListener() {
                 override fun onAdLoaded() {
                     super.onAdLoaded()

@@ -13,6 +13,7 @@ import com.huawei.hms.ads.BannerAdSize
 import kotlinx.android.synthetic.hms.fragment_comparion.*
 import kotlinx.android.synthetic.hms.fragment_comparion.adView
 import kotlinx.android.synthetic.main.recycler_view.*
+import robin.vitalij.fortniteassitant.BuildConfig
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.*
@@ -102,7 +103,7 @@ class ComparisonSelectedFragment : BaseFragment() {
         } else {
             val adParam = AdParam.Builder().build()
             adView.loadAd(adParam)
-            adView.adId = "v6ebe0s0g2"
+            adView.adId = BuildConfig.HUAWEI_BANNER_ID
             adView.bannerAdSize = BannerAdSize.BANNER_SIZE_SMART
             adView.loadAd(adParam)
         }

@@ -33,6 +33,9 @@ android {
         def BANNER_ID = "BANNER_ID"
         def INTERSTITIAL_ID = "INTERSTITIAL_ID"
         def BILLING_ID = "BILLING_ID"
+        def HUAWEI_BANNER_ID = "HUAWEI_BANNER_ID"
+        def HUAWEI_INTERSTITIAL_ID = "HUAWEI_INTERSTITIAL_ID"
+        def HUAWEI_VIDEO_ID = "HUAWEI_VIDEO_ID"
 
         debug {
             buildConfigField "String", FORTNITE_KEY, props.fortnite_key
@@ -44,6 +47,10 @@ android {
             buildConfigField "String", VIDEO_ID, props.video_ad_id_stage
             resValue "string", BANNER_ID, props.banner_id_stage
             buildConfigField "String", INTERSTITIAL_ID, props.interstitial_id_stage
+
+            buildConfigField "String", HUAWEI_BANNER_ID, props.huawei_banner_id_stage
+            buildConfigField "String", HUAWEI_INTERSTITIAL_ID, props.huawei_interstitial_id_stage
+            buildConfigField "String", HUAWEI_VIDEO_ID, props.huawei_video_id_stage
         }
         release {
             buildConfigField "String", FORTNITE_KEY, props.fortnite_key
@@ -55,6 +62,10 @@ android {
             buildConfigField "String", VIDEO_ID, props.video_ad_id
             resValue "string", BANNER_ID, props.banner_id
             buildConfigField "String", INTERSTITIAL_ID, props.interstitial_id
+
+            buildConfigField "String", HUAWEI_BANNER_ID, props.huawei_banner_id
+            buildConfigField "String", HUAWEI_INTERSTITIAL_ID, props.huawei_interstitial_id
+            buildConfigField "String", HUAWEI_VIDEO_ID, props.huawei_video_id
 
             // <-- disable proguard
             minifyEnabled false // <-- enable minification
@@ -103,6 +114,10 @@ android {
 
     dataBinding {
         enabled = true
+    }
+
+    buildFeatures {
+        viewBinding true
     }
 }
 

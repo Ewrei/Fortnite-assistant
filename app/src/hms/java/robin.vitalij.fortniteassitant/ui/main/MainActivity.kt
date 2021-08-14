@@ -28,6 +28,7 @@ import com.huawei.hms.ads.reward.Reward
 import com.huawei.hms.ads.reward.RewardAdStatusListener
 import kotlinx.android.synthetic.hms.activity_main.*
 import kotlinx.android.synthetic.main.loading_layout.*
+import robin.vitalij.fortniteassitant.BuildConfig
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.*
@@ -160,7 +161,7 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
         } else {
             val adParam = AdParam.Builder().build()
             adView.loadAd(adParam)
-            adView.adId = "v6ebe0s0g2"
+            adView.adId = BuildConfig.HUAWEI_BANNER_ID
             adView.bannerAdSize = BannerAdSize.BANNER_SIZE_SMART
             adView.loadAd(adParam)
         }

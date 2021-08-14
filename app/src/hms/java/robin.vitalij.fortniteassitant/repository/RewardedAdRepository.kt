@@ -5,6 +5,7 @@ import android.widget.Toast
 import com.huawei.hms.ads.AdParam
 import com.huawei.hms.ads.reward.RewardAd
 import com.huawei.hms.ads.reward.RewardAdLoadListener
+import robin.vitalij.fortniteassitant.BuildConfig
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,7 +20,7 @@ class RewardedAdRepository @Inject constructor(context: Context) {
 
     fun loadReward(context: Context) {
         if (defaultRewardedAd == null) {
-            defaultRewardedAd = RewardAd(context, "d8p2p7tbzb")
+            defaultRewardedAd = RewardAd(context, BuildConfig.HUAWEI_VIDEO_ID)
         }
         val rewardAdLoadListener: RewardAdLoadListener = object : RewardAdLoadListener() {
             override fun onRewardAdFailedToLoad(errorCode: Int) {

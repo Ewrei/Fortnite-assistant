@@ -21,6 +21,15 @@ props.interstitial_id_stage = stageProdProperty['interstitial_id']
 props.native_id_stage = stageProdProperty['native_id']
 props.video_ad_id_stage = stageProdProperty['video_ad_id']
 
+//Huawei
+props.huawei_banner_id = adalProdProperty['huawei_banner_id']
+props.huawei_interstitial_id = adalProdProperty['huawei_interstitial_id']
+props.huawei_video_id = adalProdProperty['huawei_video_id']
+
+props.huawei_banner_id_stage = stageProdProperty['huawei_banner_id']
+props.huawei_interstitial_id_stage = stageProdProperty['huawei_interstitial_id']
+props.huawei_video_id_stage = stageProdProperty['huawei_video_id']
+
 ext.props = props
 
 def getConfigProperty(fileName){
