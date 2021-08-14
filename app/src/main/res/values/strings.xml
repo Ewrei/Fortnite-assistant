@@ -2,6 +2,8 @@
     <string name="full_app_name" translatable="false">Fortnite Assitant</string>
     <string name="app_name" translatable="false">Assitant</string>
     <string name="application_url" translatable="false">https://play.google.com/store/apps/details?id=robin.vitalij.fortniteassitant</string>
+    <string name="current_map_url" translatable="false">https://media.fortniteapi.io/images/map.png?showPOI=true</string>
+
     <string name="title_home">Home</string>
     <string name="tab_title_history_match">History</string>
     <string name="tab_title_top">Leaderboard</string>
@@ -300,5 +302,7 @@ This section is beta. If it does not work correctly for you, let us know</string
     
     <!--Vehicles-->
     <string name="vehicles">Vehicles</string>
+
+    <string name="current_map">Current map</string>
 
 </resources>

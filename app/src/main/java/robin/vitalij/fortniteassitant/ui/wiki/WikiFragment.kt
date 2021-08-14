@@ -17,6 +17,7 @@ import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.common.extensions.setSafeOnClickListener
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
+import robin.vitalij.fortniteassitant.ui.pngread.PngReadDetailsFragment
 import javax.inject.Inject
 
 
@@ -89,6 +90,13 @@ class WikiFragment : BaseFragment() {
 
         vehicles.setSafeOnClickListener {
             findNavController().navigate(R.id.navigation_vehicles)
+        }
+
+        currentMap.setSafeOnClickListener {
+            findNavController().navigate(R.id.navigation_png_read_details, Bundle().apply {
+                putString(PngReadDetailsFragment.IMAGE_URL, getString(R.string.current_map_url))
+                putString(PngReadDetailsFragment.TITLE, getString(R.string.current_map))
+            })
         }
     }
 }

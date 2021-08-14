@@ -73,6 +73,9 @@
         <action
             android:id="@+id/action_navigation_wiki_to_vehiclesFragment"
             app:destination="@id/navigation_vehicles" />
+        <action
+            android:id="@+id/action_navigation_wiki_to_navigation_png_read_details"
+            app:destination="@id/navigation_png_read_details" />
     </fragment>
     <fragment
         android:id="@+id/navigation_battles_pass_rewards"
@@ -135,11 +138,17 @@
 
     <fragment
         android:id="@+id/navigation_banner"
+        tools:layout="@layout/fragment_history"
         android:name="robin.vitalij.fortniteassitant.ui.banners.BannersFragment"
         android:label="@string/banners" />
     <fragment
         android:id="@+id/navigation_vehicles"
         android:name="robin.vitalij.fortniteassitant.ui.vehicles.VehiclesFragment"
         android:label="@string/vehicles" />
+    <fragment
+        android:id="@+id/navigation_png_read_details"
+        android:name="robin.vitalij.fortniteassitant.ui.pngread.PngReadDetailsFragment"
+        tools:layout="@layout/fragment_png_read"
+        android:label="" />
 
 </navigation>

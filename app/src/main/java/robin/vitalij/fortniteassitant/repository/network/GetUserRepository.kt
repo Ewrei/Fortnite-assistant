@@ -1,6 +1,7 @@
 package robin.vitalij.fortniteassitant.repository.network
 
 import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 import robin.vitalij.fortniteassitant.api.FortniteRequestsComApi
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
 import javax.inject.Inject
@@ -13,12 +14,13 @@ class GetUserRepository @Inject constructor(
 ) {
 
     fun getUser(playerId: String): Single<FortniteProfileResponse> {
-        return fortniteRequestsComApi.getStats(playerId, TIME_WINDOW, TYPE_IMAGE).flatMap {
-            return@flatMap Single.just(
-                FortniteProfileResponse(
-                    stats = it
+        return fortniteRequestsComApi.getStats(playerId, TIME_WINDOW, TYPE_IMAGE)
+            .subscribeOn(Schedulers.io()).flatMap {
+                return@flatMap Single.just(
+                    FortniteProfileResponse(
+                        stats = it
+                    )
                 )
-            )
-        }
+            }
     }
 }

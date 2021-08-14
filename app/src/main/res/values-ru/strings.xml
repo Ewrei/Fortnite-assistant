@@ -267,4 +267,6 @@
     <!--Vehicles-->
     <string name="vehicles">Транспортные средства</string>
 
+    <string name="current_map">Текущая карта</string>
+
 </resources>

@@ -25,7 +25,7 @@ import robin.vitalij.fortniteassitant.ui.history.adapter.HistoryAdapter
 import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.DATE
 import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.SESSION_ID
 import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.SESSION_LAST_ID
-import java.util.ArrayList
+import java.util.*
 import javax.inject.Inject
 
 
@@ -73,19 +73,18 @@ class HistoryFragment : BaseFragment() {
 
     private fun initAdapter(list: List<HistoryUserModel>) {
         recyclerView.run {
-            adapter = HistoryAdapter { sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel> ->
-                val bundle = Bundle().apply {
-                    putLong(SESSION_ID, sessionId)
-                    putLong(SESSION_LAST_ID, sessionLast)
-                    putString(DATE, sessionDate)
-                    putParcelableArrayList(
-                        AdapterDetailsStatisticsFragment.DETAIL_STATISTICS,
-                        detailsStats as ArrayList<DetailStatisticsModel>
-                    )
+            adapter =
+                HistoryAdapter { sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel> ->
+                    findNavController().navigate(R.id.navigation_adapter_session, Bundle().apply {
+                        putLong(SESSION_ID, sessionId)
+                        putLong(SESSION_LAST_ID, sessionLast)
+                        putString(DATE, sessionDate)
+                        putParcelableArrayList(
+                            AdapterDetailsStatisticsFragment.DETAIL_STATISTICS,
+                            detailsStats as ArrayList<DetailStatisticsModel>
+                        )
+                    })
                 }
-
-                findNavController().navigate(R.id.navigation_adapter_session, bundle)
-            }
             (adapter as HistoryAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)
         }

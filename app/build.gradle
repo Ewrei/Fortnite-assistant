@@ -15,8 +15,8 @@ android {
         applicationId "robin.vitalij.fortniteassitant"
         minSdkVersion 22
         targetSdkVersion 30
-        versionCode 12
-        versionName "1.0.7"
+        versionCode 13
+        versionName "1.0.8"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -222,6 +222,9 @@ dependencies {
 
     def round_corner_progress_bar_version = "2.0.3"
     implementation "com.akexorcist:RoundCornerProgressBar:$round_corner_progress_bar_version"
+
+    def photo_view_version = "2.3.0"
+    implementation "com.github.chrisbanes:PhotoView:$photo_view_version"
 
     implementation project(':materialspinner')
 
