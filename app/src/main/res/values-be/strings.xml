@@ -269,4 +269,7 @@
 
     <string name="current_map">Текущая карта</string>
 
+    <string name="your_current_position_format">Ваша текущая позиция: %s</string>
+    <string name="your_value_format">Ваша значение: %s</string>
+
 </resources>

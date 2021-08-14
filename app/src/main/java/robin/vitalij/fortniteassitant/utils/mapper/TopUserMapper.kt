@@ -1,26 +1,31 @@
 package robin.vitalij.fortniteassitant.utils.mapper
 
+import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
 import robin.vitalij.fortniteassitant.model.TopFullModel
 import robin.vitalij.fortniteassitant.model.enums.TopType
 import robin.vitalij.fortniteassitant.model.network.TopUser
-import robin.vitalij.fortniteassitant.ui.top.adapter.viewmodel.Top
-import robin.vitalij.fortniteassitant.ui.top.adapter.viewmodel.TopHeaderViewModel
-import robin.vitalij.fortniteassitant.ui.top.adapter.viewmodel.TopViewModel
+import robin.vitalij.fortniteassitant.ui.top.adapter.TopListItem
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
 
-class TopUserMapper(private val topType: TopFullModel) :
-    Mapper<List<TopUser>, List<Top>> {
+class TopUserMapper(
+    private val topType: TopFullModel,
+    private val playerId: String,
+    private val resourceProvider: ResourceProvider
+) : Mapper<List<TopUser>, List<TopListItem>> {
 
-    override fun transform(obj: List<TopUser>): List<Top> {
-        val list = arrayListOf<Top>()
+    override fun transform(obj: List<TopUser>): List<TopListItem> {
+        val list = arrayListOf<TopListItem>()
+        val tops = arrayListOf<TopListItem.PlayerItem>()
+
         var position = 1
 
-        list.add(TopHeaderViewModel(topType))
+        list.add(TopListItem.HeaderItem(topType))
 
         obj.forEach {
-            list.add(
-                TopViewModel(
+            tops.add(
+                TopListItem.PlayerItem(
                     position = position,
                     userName = it.userName ?: "Скоро добавлю ник",
                     playerId = it.accountId,
@@ -30,6 +35,24 @@ class TopUserMapper(private val topType: TopFullModel) :
             )
             position++
         }
+
+        tops.find { it.playerId == playerId }?.let {
+            list.add(
+                TopListItem.CurrentPositionItem(
+                    position = resourceProvider.getString(
+                        R.string.your_current_position_format,
+                        it.position.getStringFormat()
+                    ),
+                    value = resourceProvider.getString(
+                        R.string.your_value_format,
+                        it.value
+                    )
+                )
+            )
+        }
+
+        list.addAll(tops)
+
         return list
     }
 

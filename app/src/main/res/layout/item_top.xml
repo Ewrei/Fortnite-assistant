@@ -9,7 +9,7 @@
 
         <variable
             name="item"
-            type="robin.vitalij.fortniteassitant.ui.top.adapter.viewmodel.TopViewModel" />
+            type="robin.vitalij.fortniteassitant.ui.top.adapter.TopListItem.PlayerItem" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

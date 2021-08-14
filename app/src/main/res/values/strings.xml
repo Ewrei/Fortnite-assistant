@@ -305,4 +305,7 @@ This section is beta. If it does not work correctly for you, let us know</string
 
     <string name="current_map">Current map</string>
 
+    <string name="your_current_position_format">Your current position: %s</string>
+    <string name="your_value_format">Your value: %s</string>
+
 </resources>

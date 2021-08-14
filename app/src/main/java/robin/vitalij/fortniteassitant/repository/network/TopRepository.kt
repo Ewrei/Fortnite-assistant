@@ -7,6 +7,8 @@ import io.reactivex.schedulers.Schedulers
 import robin.vitalij.fortniteassitant.api.SteamChartRequestsApi
 import robin.vitalij.fortniteassitant.model.TopFullModel
 import robin.vitalij.fortniteassitant.model.network.stats.PlayerStatsResponse
+import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 import robin.vitalij.fortniteassitant.utils.mapper.TopUserMapper
 import java.util.*
 import javax.inject.Inject
@@ -14,7 +16,9 @@ import javax.inject.Singleton
 
 @Singleton
 class TopRepository @Inject constructor(
-    private val steamChartRequestsApi: SteamChartRequestsApi
+    private val steamChartRequestsApi: SteamChartRequestsApi,
+    private val resourceProvider: ResourceProvider,
+    private val preferenceManager: PreferenceManager
 ) {
     val disposables = CompositeDisposable()
 
@@ -35,6 +39,12 @@ class TopRepository @Inject constructor(
         topType.battlesType.getServer(),
         topType.gameType.getServer()
     ).flatMap {
-        return@flatMap Observable.just(TopUserMapper(topType).transform(it))
+        return@flatMap Observable.just(
+            TopUserMapper(
+                topType,
+                preferenceManager.getPlayerId(),
+                resourceProvider
+            ).transform(it)
+        )
     }
 }

@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -31,7 +30,7 @@ import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragme
 import robin.vitalij.fortniteassitant.ui.bottomsheet.top.TopResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.top.adapter.TopAdapter
-import robin.vitalij.fortniteassitant.ui.top.adapter.viewmodel.Top
+import robin.vitalij.fortniteassitant.ui.top.adapter.TopListItem
 import javax.inject.Inject
 
 
@@ -73,7 +72,7 @@ class TopFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
             it.let(::initAdapter)
         })
 
@@ -95,7 +94,7 @@ class TopFragment : BaseFragment() {
         toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
-    private fun initAdapter(list: List<Top>) {
+    private fun initAdapter(list: List<TopListItem>) {
         recyclerView.run {
             adapter = TopAdapter(onClick = {
                 ProfileResultFragment.show(
