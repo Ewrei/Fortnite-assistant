@@ -39,7 +39,6 @@ import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatist
 import robin.vitalij.fortniteassitant.ui.fishing.FishingFragment
 import robin.vitalij.fortniteassitant.ui.fishstats.FishStatsFragment
 import robin.vitalij.fortniteassitant.ui.history.HistoryFragment
-import robin.vitalij.fortniteassitant.ui.historymatch.HistoryMatchFragment
 import robin.vitalij.fortniteassitant.ui.home.HomeFragment
 import robin.vitalij.fortniteassitant.ui.main.MainActivity
 import robin.vitalij.fortniteassitant.ui.news.fragment.NewsFragment
@@ -72,7 +71,6 @@ interface AppComponent {
 
     fun inject(fragment: NewsFragment)
     fun inject(fragment: SearchUserFragment)
-    fun inject(fragment: HistoryMatchFragment)
     fun inject(fragment: HomeFragment)
     fun inject(fragment: DetailsStatisticsFragment)
     fun inject(fragment: AdapterDetailsStatisticsFragment)

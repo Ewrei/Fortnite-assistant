@@ -295,6 +295,8 @@ This section is beta. If it does not work correctly for you, let us know</string
     <string name="empty_search_user">We are unable to find your profile</string>
 
     <string name="look_for_similar">"I don't remember the exact name, look for similar"</string>
+
+    <string name="empty_session">"You don't have any gaming sessions yet. Play a match and update data"</string>
     
     <!--Vehicles-->
     <string name="vehicles">Vehicles</string>

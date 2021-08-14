@@ -5,7 +5,6 @@ import androidx.room.Query
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Single
-import robin.vitalij.fortniteassitant.db.entity.MatchEntity
 import robin.vitalij.fortniteassitant.db.entity.UserEntity
 import robin.vitalij.fortniteassitant.db.projection.User
 import robin.vitalij.fortniteassitant.db.projection.UserHistory

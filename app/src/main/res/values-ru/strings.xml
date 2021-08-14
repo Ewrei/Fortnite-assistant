@@ -262,6 +262,8 @@
 
     <string name="look_for_similar">Я не помню точного имени, искать похожие</string>
 
+    <string name="empty_session">У вас еще нет игровых сессий. Сыграйте матч и обновите данные</string>
+
     <!--Vehicles-->
     <string name="vehicles">Транспортные средства</string>
 

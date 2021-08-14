@@ -8,7 +8,6 @@ import robin.vitalij.fortniteassitant.model.network.search.SearchResponse
 import robin.vitalij.fortniteassitant.model.network.search.SearchUserModel
 import robin.vitalij.fortniteassitant.model.network.shop.ShopResponse
 import robin.vitalij.fortniteassitant.model.network.shop.ShopUpcomingResponse
-import robin.vitalij.fortniteassitant.model.network.stats.PlayerMatchesResponse
 
 interface FortniteRequestsIOApi {
 
@@ -22,10 +21,6 @@ interface FortniteRequestsIOApi {
     fun getSearch(
         @Query("username") username: String
     ): Single<SearchUserModel>
-
-
-    @GET("v1/matches")
-    fun getMatches(@Query("account") account: String): Single<PlayerMatchesResponse>
 
     @GET("/v1/shop")
     fun getCurrentShop(@Query("lang") language: String): Single<ShopResponse>

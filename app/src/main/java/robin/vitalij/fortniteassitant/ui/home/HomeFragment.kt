@@ -41,7 +41,6 @@ class HomeFragment : BaseFragment() {
             .get(HomeViewModel::class.java).apply {
                 observeToProgressBar(this@HomeFragment)
                 observeToError(this@HomeFragment)
-                observeToEmpty(this@HomeFragment)
             }
     }
 

@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.recycler_view.*
 import kotlinx.android.synthetic.main.toolbar_center_title.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.observeToEmpty
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
@@ -38,7 +39,7 @@ class HistoryFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_history, container, false)
+    ) = inflater.inflate(R.layout.fragment_recycler_view_with_toolbar, container, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +47,7 @@ class HistoryFragment : BaseFragment() {
             .get(HistoryViewModel::class.java).apply {
                 observeToProgressBar(this@HistoryFragment)
                 observeToError(this@HistoryFragment)
+                observeToEmpty(this@HistoryFragment)
             }
     }
 

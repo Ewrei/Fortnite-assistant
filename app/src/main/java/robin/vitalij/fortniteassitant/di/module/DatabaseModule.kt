@@ -17,7 +17,8 @@ class DatabaseModule(context: Context) {
         .databaseBuilder(context, FortniteDataBase::class.java, DATABASE_NAME)
         .allowMainThreadQueries()
         .addMigrations(
-            Migration.MIGRATION_1_2
+            Migration.MIGRATION_1_2,
+            Migration.MIGRATION_2_3
         )
         .build()
 
@@ -32,10 +33,6 @@ class DatabaseModule(context: Context) {
     @Provides
     @Singleton
     fun provideSaveDao() = appDatabase.saveDao()
-
-    @Provides
-    @Singleton
-    fun provideMatchDao() = appDatabase.matchDao()
 
     @Provides
     @Singleton

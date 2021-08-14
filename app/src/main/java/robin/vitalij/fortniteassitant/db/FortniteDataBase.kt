@@ -13,7 +13,6 @@ import robin.vitalij.fortniteassitant.db.entity.*
 @Database(
     entities = [
         UserEntity::class,
-        MatchEntity::class,
         PlayerSession::class,
         WeaponEntity::class,
         FishEntity::class,
@@ -22,7 +21,7 @@ import robin.vitalij.fortniteassitant.db.entity.*
         CosmeticsEntity::class,
         BannerEntity::class
     ],
-    version = 2
+    version = 3
 )
 
 @TypeConverters(
@@ -32,8 +31,6 @@ import robin.vitalij.fortniteassitant.db.entity.*
     BannerConverter::class
 )
 abstract class FortniteDataBase : RoomDatabase() {
-
-    abstract fun matchDao(): MatchDao
 
     abstract fun saveDao(): SaveDao
 

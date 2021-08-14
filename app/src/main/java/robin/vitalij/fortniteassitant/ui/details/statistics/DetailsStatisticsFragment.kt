@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.observeToEmpty
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
@@ -38,7 +37,6 @@ class DetailsStatisticsFragment : BaseFragment() {
             .get(DetailsStatisticsViewModel::class.java).apply {
                 observeToProgressBar(this@DetailsStatisticsFragment)
                 observeToError(this@DetailsStatisticsFragment)
-                observeToEmpty(this@DetailsStatisticsFragment)
             }
     }
 

@@ -9,4 +9,10 @@ object Migration {
             database.execSQL("CREATE TABLE `Banner` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `description` TEXT, `devName` TEXT NOT NULL, `category` TEXT NOT NULL, `fullUsageRights` INTEGER NOT NULL, `bannerImage` TEXT NOT NULL, PRIMARY KEY(`id`))")
         }
     }
+
+    val MIGRATION_2_3: Migration = object : androidx.room.migration.Migration(2, 3) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL("DROP TABLE `Match`")
+        }
+    }
 }

@@ -8,8 +8,8 @@
 
     <fragment
         android:id="@+id/historyMatch"
-        android:name="robin.vitalij.fortniteassitant.ui.historymatch.HistoryMatchFragment"
-        android:label="@string/title_history_match"
-        tools:layout="@layout/fragment_home"/>
+        android:name="robin.vitalij.fortniteassitant.ui.history.HistoryFragment"
+        android:label="@string/game_sessions"
+        tools:layout="@layout/fragment_history"/>
 
 </navigation>
