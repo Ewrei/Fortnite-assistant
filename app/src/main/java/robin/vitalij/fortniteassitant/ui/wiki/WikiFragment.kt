@@ -9,13 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import kotlinx.android.synthetic.main.fragment_wiki.*
-import kotlinx.android.synthetic.main.toolbar_center_title.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.common.extensions.setSafeOnClickListener
+import robin.vitalij.fortniteassitant.databinding.FragmentWikiBinding
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.pngread.PngReadDetailsFragment
 import javax.inject.Inject
@@ -28,10 +27,17 @@ class WikiFragment : BaseFragment() {
 
     private lateinit var viewModel: WikiViewModel
 
+    private var _binding: FragmentWikiBinding? = null
+
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_wiki, container, false)
+    ): View {
+        _binding = FragmentWikiBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,46 +59,51 @@ class WikiFragment : BaseFragment() {
         setListeners()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun setNavigation() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
     private fun setListeners() {
-        battlePassRewards.setSafeOnClickListener {
+        binding.battlePassRewards.setSafeOnClickListener {
             findNavController().navigate(R.id.navigation_battles_pass_rewards)
         }
 
-        weapons.setSafeOnClickListener {
+        binding.weapons.setSafeOnClickListener {
             findNavController().navigate(R.id.navigation_weapon)
         }
 
-        fishing.setSafeOnClickListener {
+        binding.fishing.setSafeOnClickListener {
             findNavController().navigate(R.id.navigation_fish)
         }
 
-        achievements.setSafeOnClickListener {
+        binding.achievements.setSafeOnClickListener {
             findNavController().navigate(R.id.navigation_achievement)
         }
 
-        cosmeticsNew.setSafeOnClickListener {
+        binding.cosmeticsNew.setSafeOnClickListener {
             findNavController().navigate(R.id.navigation_cosmetics_new)
         }
 
-        cosmetics.setSafeOnClickListener {
+        binding.cosmetics.setSafeOnClickListener {
             findNavController().navigate(R.id.navigation_catalog_cosmetics)
         }
 
-        banners.setSafeOnClickListener {
+        binding.banners.setSafeOnClickListener {
             findNavController().navigate(R.id.navigation_banner)
         }
 
-        vehicles.setSafeOnClickListener {
+        binding.vehicles.setSafeOnClickListener {
             findNavController().navigate(R.id.navigation_vehicles)
         }
 
-        currentMap.setSafeOnClickListener {
+        binding.currentMap.setSafeOnClickListener {
             findNavController().navigate(R.id.navigation_png_read_details, Bundle().apply {
                 putString(PngReadDetailsFragment.IMAGE_URL, getString(R.string.current_map_url))
                 putString(PngReadDetailsFragment.TITLE, getString(R.string.current_map))

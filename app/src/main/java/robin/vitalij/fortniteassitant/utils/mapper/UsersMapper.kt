@@ -1,7 +1,7 @@
 package robin.vitalij.fortniteassitant.utils.mapper
 
 import robin.vitalij.fortniteassitant.db.entity.UserEntity
-import robin.vitalij.fortniteassitant.ui.users.adapter.UserModel
+import robin.vitalij.fortniteassitant.model.UserModel
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
 
 class UsersMapper(private val playerId: String) :

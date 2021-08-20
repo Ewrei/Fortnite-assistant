@@ -6,7 +6,7 @@ import robin.vitalij.fortniteassitant.databinding.ItemUpcomingShopBinding
 import robin.vitalij.fortniteassitant.model.network.shop.ItemShopUpcoming
 
 class UpcomingShopHolder(
-    var binding: ItemUpcomingShopBinding
+    private val binding: ItemUpcomingShopBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: ItemShopUpcoming) {

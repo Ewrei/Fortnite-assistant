@@ -3,12 +3,12 @@ package robin.vitalij.fortniteassitant.ui.users.adapter
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_user.view.*
 import robin.vitalij.fortniteassitant.databinding.ItemUserBinding
+import robin.vitalij.fortniteassitant.model.UserModel
 
 class UsersHolder(
-    var binding: ItemUserBinding,
-    val onClick: (playerId: String, playerName: String) -> Unit
-) :
-    RecyclerView.ViewHolder(binding.root) {
+    private val binding: ItemUserBinding,
+    private val onClick: (playerId: String, playerName: String) -> Unit
+) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: UserModel) {
         binding.item = item

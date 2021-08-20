@@ -10,7 +10,7 @@ import robin.vitalij.fortniteassitant.repository.network.GetUserRepository
 import robin.vitalij.fortniteassitant.repository.network.SaveUserRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
-import robin.vitalij.fortniteassitant.ui.users.adapter.UserModel
+import robin.vitalij.fortniteassitant.model.UserModel
 import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 class UsersViewModel(

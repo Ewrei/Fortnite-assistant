@@ -5,7 +5,7 @@ import robin.vitalij.fortniteassitant.databinding.ItemWeaponBinding
 import robin.vitalij.fortniteassitant.db.entity.WeaponEntity
 
 class WeaponHolder(
-    var binding: ItemWeaponBinding
+    private val binding: ItemWeaponBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: WeaponEntity) {

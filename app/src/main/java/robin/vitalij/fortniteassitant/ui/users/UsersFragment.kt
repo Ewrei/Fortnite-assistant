@@ -24,7 +24,7 @@ import robin.vitalij.fortniteassitant.interfaces.UsersCallback
 import robin.vitalij.fortniteassitant.ui.bottomsheet.user.UserResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.main.MainActivity
-import robin.vitalij.fortniteassitant.ui.users.adapter.UserModel
+import robin.vitalij.fortniteassitant.model.UserModel
 import robin.vitalij.fortniteassitant.ui.users.adapter.UsersAdapter
 import javax.inject.Inject
 

@@ -127,7 +127,7 @@
         android:label="@string/news_game" />
     <fragment
         android:id="@+id/navigation_game_crew"
-        tools:layout="@layout/fragment_history"
+        tools:layout="@layout/fragment_recycler_view_with_toolbar"
         android:name="robin.vitalij.fortniteassitant.ui.crew.main.GameCrewFragment"
         android:label="@string/fortnite_crew_information" />
 
@@ -138,7 +138,7 @@
 
     <fragment
         android:id="@+id/navigation_banner"
-        tools:layout="@layout/fragment_history"
+        tools:layout="@layout/fragment_recycler_view_with_toolbar"
         android:name="robin.vitalij.fortniteassitant.ui.banners.BannersFragment"
         android:label="@string/banners" />
     <fragment

@@ -58,7 +58,7 @@
     <fragment
         android:id="@+id/navigation_history"
         android:name="robin.vitalij.fortniteassitant.ui.history.HistoryFragment"
-        tools:layout="@layout/fragment_history"
+        tools:layout="@layout/fragment_recycler_view_with_toolbar"
         android:label="@string/game_sessions" >
         <action
             android:id="@+id/action_navigation_history_to_adapterSessionFragment2"

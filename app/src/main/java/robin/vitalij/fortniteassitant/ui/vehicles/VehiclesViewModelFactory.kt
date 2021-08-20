@@ -5,7 +5,7 @@ import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
 import javax.inject.Inject
 
 class VehiclesViewModelFactory @Inject constructor(
-    private var gameVehiclesRepository: GameVehiclesRepository
+    private val gameVehiclesRepository: GameVehiclesRepository
 ) : BaseViewModelFactory<VehiclesViewModel>(VehiclesViewModel::class.java) {
 
     private var viewModel: VehiclesViewModel? = null

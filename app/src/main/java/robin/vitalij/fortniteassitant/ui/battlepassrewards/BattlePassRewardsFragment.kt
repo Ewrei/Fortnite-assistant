@@ -75,7 +75,7 @@ class BattlePassRewardsFragment : BaseFragment() {
     }
 
     private fun setToolbarMenu() {
-        toolbar.inflateMenu(R.menu.sorting_action_menu)
+        toolbar.inflateMenu(R.menu.menu_sorting_action)
 
         toolbar.menu.findItem(R.id.action_sort).setOnMenuItemClickListener {
             showPopup(toolbar)

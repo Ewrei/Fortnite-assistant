@@ -2,7 +2,7 @@ package robin.vitalij.fortniteassitant.repository.db
 
 import io.reactivex.Flowable
 import robin.vitalij.fortniteassitant.db.dao.UserDao
-import robin.vitalij.fortniteassitant.ui.users.adapter.UserModel
+import robin.vitalij.fortniteassitant.model.UserModel
 import robin.vitalij.fortniteassitant.utils.mapper.UsersMapper
 import javax.inject.Inject
 

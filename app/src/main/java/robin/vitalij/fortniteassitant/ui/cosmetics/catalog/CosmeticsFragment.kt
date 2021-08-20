@@ -10,13 +10,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.recycler_view.*
-import kotlinx.android.synthetic.main.toolbar_center_title.*
-import kotlinx.android.synthetic.main.view_error.*
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewWithToolbarBinding
 import robin.vitalij.fortniteassitant.db.entity.CosmeticsEntity
 import robin.vitalij.fortniteassitant.model.enums.ShopType
 import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.CosmeticResultFragment
@@ -33,10 +30,17 @@ class CosmeticsFragment : BaseFragment() {
 
     private lateinit var viewModel: CosmeticsViewModel
 
+    private var _binding: FragmentRecyclerViewWithToolbarBinding? = null
+
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_history, container, false)
+    ): View {
+        _binding = FragmentRecyclerViewWithToolbarBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,13 +67,18 @@ class CosmeticsFragment : BaseFragment() {
 
         arguments?.let {
             val shopType = it.getSerializable(SHOP_TYPE) as ShopType
-            toolbar.title = getString(shopType.getTitleRes())
+            binding.toolbarInclude.toolbar.title = getString(shopType.getTitleRes())
             viewModel.loadData(shopType)
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun setListener() {
-        errorResolveButton.setOnClickListener {
+        setErrorResolveButtonClick {
             arguments?.let {
                 val shopType = it.getSerializable(SHOP_TYPE) as ShopType
                 viewModel.loadData(shopType)
@@ -80,11 +89,11 @@ class CosmeticsFragment : BaseFragment() {
     private fun setNavigation() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
     private fun initAdapter(list: List<CosmeticsEntity>) {
-        recyclerView.run {
+        binding.recyclerViewInclude.recyclerView.run {
             adapter = CosmeticsAdapter {
                 CosmeticResultFragment.show(childFragmentManager, it.id, false)
             }

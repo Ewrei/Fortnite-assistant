@@ -10,13 +10,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.recycler_view.*
-import kotlinx.android.synthetic.main.toolbar_center_title.*
-import kotlinx.android.synthetic.main.view_error.*
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewWithToolbarBinding
 import robin.vitalij.fortniteassitant.db.entity.AchievementEntity
 import robin.vitalij.fortniteassitant.ui.achiviements.adapter.AchievementsAdapter
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
@@ -30,10 +27,22 @@ class AchievementsFragment : BaseFragment() {
 
     private lateinit var viewModel: AchievementsViewModel
 
+    private var _binding: FragmentRecyclerViewWithToolbarBinding? = null
+
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_history, container, false)
+    ): View {
+        _binding = FragmentRecyclerViewWithToolbarBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +69,7 @@ class AchievementsFragment : BaseFragment() {
     }
 
     private fun setListener() {
-        errorResolveButton.setOnClickListener {
+        setErrorResolveButtonClick {
             viewModel.loadData()
         }
     }
@@ -68,11 +77,11 @@ class AchievementsFragment : BaseFragment() {
     private fun setNavigation() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
     private fun initAdapter(list: List<AchievementEntity>) {
-        recyclerView.run {
+        binding.recyclerViewInclude.recyclerView.run {
             adapter = AchievementsAdapter()
             (adapter as AchievementsAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)
