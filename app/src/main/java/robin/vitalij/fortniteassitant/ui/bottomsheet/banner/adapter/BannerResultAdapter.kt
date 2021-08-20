@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.db.entity.BannerEntity
 
-class BannerResultAdapter(
-) : RecyclerView.Adapter<BannerResultHolder>() {
+class BannerResultAdapter : RecyclerView.Adapter<BannerResultHolder>() {
 
     private val items = arrayListOf<BannerEntity>()
 

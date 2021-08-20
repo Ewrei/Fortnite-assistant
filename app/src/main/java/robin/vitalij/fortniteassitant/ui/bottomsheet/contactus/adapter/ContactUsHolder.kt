@@ -5,7 +5,7 @@ import robin.vitalij.fortniteassitant.databinding.ItemContactUsBinding
 import robin.vitalij.fortniteassitant.model.ContactUsModel
 
 class ContactUsHolder(
-    var binding: ItemContactUsBinding
+    private val binding: ItemContactUsBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: ContactUsModel) {

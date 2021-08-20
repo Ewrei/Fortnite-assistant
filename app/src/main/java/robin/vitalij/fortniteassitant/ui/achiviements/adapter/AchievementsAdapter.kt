@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.db.entity.AchievementEntity
 
-class AchievementsAdapter(
-) : RecyclerView.Adapter<AchievementsHolder>() {
+class AchievementsAdapter : RecyclerView.Adapter<AchievementsHolder>() {
 
     private val items = arrayListOf<AchievementEntity>()
 

@@ -5,7 +5,7 @@ import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
 import javax.inject.Inject
 
 class BattlePassRewardsViewModelFactory @Inject constructor(
-    private var battlesPassRewardRepository: BattlesPassRewardRepository
+    private val battlesPassRewardRepository: BattlesPassRewardRepository
 ) : BaseViewModelFactory<BattlePassRewardsViewModel>(BattlePassRewardsViewModel::class.java) {
 
     private var viewModel: BattlePassRewardsViewModel? = null

@@ -1,8 +1,6 @@
 package robin.vitalij.fortniteassitant.common.binding
 
 import android.content.Context
-import android.graphics.Color
-import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import android.widget.ImageView
@@ -20,7 +18,8 @@ object ImageViewBinging {
     @JvmStatic
     @BindingAdapter("rarity")
     fun ImageView.loadBackgroundRarity(rarity: String) {
-        background = ContextCompat.getDrawable(context, RarityType.getRarityType(rarity).getBackgroundRes())
+        background =
+            ContextCompat.getDrawable(context, RarityType.getRarityType(rarity).getBackgroundRes())
     }
 
     @JvmStatic
@@ -88,13 +87,12 @@ object ImageViewBinging {
             .into(this)
     }
 
-    private fun getCircularProgressDrawable(context: Context): CircularProgressDrawable {
-        val circularProgressDrawable = CircularProgressDrawable(context)
-        circularProgressDrawable.strokeWidth = getFloat(R.dimen.circular_stroke_width, context)
-        circularProgressDrawable.centerRadius = getFloat(R.dimen.circular_center_radius, context)
-        circularProgressDrawable.start()
-        return circularProgressDrawable
-    }
+    private fun getCircularProgressDrawable(context: Context) =
+        CircularProgressDrawable(context).apply {
+            strokeWidth = getFloat(R.dimen.circular_stroke_width, context)
+            centerRadius = getFloat(R.dimen.circular_center_radius, context)
+            start()
+        }
 
     private fun getFloat(res: Int, context: Context): Float {
         val outValue = TypedValue()

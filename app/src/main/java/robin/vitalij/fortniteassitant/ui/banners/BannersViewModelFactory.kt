@@ -5,7 +5,7 @@ import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
 import javax.inject.Inject
 
 class BannersViewModelFactory @Inject constructor(
-    private var bannerRepository: BannerRepository
+    private val bannerRepository: BannerRepository
 ) : BaseViewModelFactory<BannersViewModel>(BannersViewModel::class.java) {
 
     private var viewModel: BannersViewModel? = null
