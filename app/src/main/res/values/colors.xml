@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="colorPrimary">#310B54</color>
+    <color name="colorPrimaryDark">#2A084A</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="color_surface">#37474f</color>
+
+    <color name="color_green_elo">#00ff00</color>
+    <color name="color_red_elo">#fc0000</color>
+
+    <color name="background_segment_dark">#AE000000</color>
+    <color name="profile_tint">#BF000000</color>
+
+    <color name="color_primary_dark_face_it">#852A00</color>
+
+    <color name="color_background_face_it">#0A0C0C</color>
+
+    <color name="text_color">#EBEFF3</color>
+
+    <color name="divider_light">#E5E5E5</color>
+
+    <color name="color_orange">#FFD251</color>
+    <color name="color_orange_full">#57493C</color>
+
+    <color name="tab_background_selected">#FFD251</color>
+    <color name="tab_background_unselected">#FFFFFF</color>
+
+    <color name="background_app">#310B54</color>
+
+    <!--Contact us-->
+    <color name="telegram">#0288D1</color>
+    <color name="vk">#5277a5</color>
+    <color name="phone">#D32F2F</color>
+
+    <color name="card_background_color">#310B54</color>
+
+    <color name="share_color">#f4a42c</color>
+
+    <color name="no_subscription_background">#D9000000</color>
+
+    <color name="background_dark">#B41D1B1B</color>
+    <color name="background_no_dark">#B4575151</color>
+
+    <color name="loading_background">#E41D1B1B</color>
+
+    <color name="background_button">#f5ff00</color>
+</resources>

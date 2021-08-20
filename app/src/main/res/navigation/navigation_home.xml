@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_home"
+    app:startDestination="@+id/homeScreen">
+
+    <fragment
+        android:id="@+id/homeScreen"
+        android:name="robin.vitalij.fortniteassitant.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeScreen_to_adapterDetailsStatisticsFragment"
+            app:destination="@id/navigation_adapter_details_statistics" />
+        <action
+            android:id="@+id/action_homeScreen_to_chartsTypeFragment"
+            app:destination="@id/navigation_charts_type" />
+        <action
+            android:id="@+id/action_homeScreen_to_chartsFragment"
+            app:destination="@id/navigation_charts" />
+        <action
+            android:id="@+id/action_homeScreen_to_historyFragment"
+            app:destination="@id/navigation_history" />
+        <action
+            android:id="@+id/action_homeScreen_to_adapterSessionFragment2"
+            app:destination="@id/navigation_adapter_session" />
+        <action
+            android:id="@+id/action_homeScreen_to_adapterDetailsSeasonStatisticsFragment"
+            app:destination="@id/navigation_adapter_details_season_statistics" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_adapter_details_statistics"
+        android:name="robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment"
+        android:label="@string/details_statistics"
+        tools:layout="@layout/fragment_adapter_details_statistics">
+        <action
+            android:id="@+id/action_navigation_adapter_details_statistics_to_chartsFragment"
+            app:destination="@id/navigation_charts" />
+        <action
+            android:id="@+id/action_navigation_adapter_details_statistics_to_navigation_charts_type"
+            app:destination="@id/navigation_charts_type" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_charts_type"
+        android:name="robin.vitalij.fortniteassitant.ui.chartlist.viewpager.AdapterChartsTypeFragment"
+        android:label="@string/parameter_List"
+        tools:layout="@layout/fragment_adapter_details_season">
+        <action
+            android:id="@+id/action_chartsTypeFragment_to_chartsFragment"
+            app:destination="@id/navigation_charts" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_charts"
+        android:name="robin.vitalij.fortniteassitant.ui.charts.ChartsFragment"
+        android:label="ChartsFragment"
+        tools:layout="@layout/fragment_charts" />
+    <fragment
+        android:id="@+id/navigation_history"
+        android:name="robin.vitalij.fortniteassitant.ui.history.HistoryFragment"
+        tools:layout="@layout/fragment_history"
+        android:label="@string/game_sessions" >
+        <action
+            android:id="@+id/action_navigation_history_to_adapterSessionFragment2"
+            app:destination="@id/navigation_adapter_session" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_adapter_session"
+        android:name="robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment"
+        android:label="AdapterSessionFragment" />
+    <fragment
+        android:id="@+id/navigation_adapter_details_season_statistics"
+        tools:layout="@layout/fragment_adapter_details_season"
+        android:name="robin.vitalij.fortniteassitant.ui.season.viewpager.AdapterDetailsSeasonStatisticsFragment"
+        android:label="@string/current_season_statistics" />
+
+</navigation>

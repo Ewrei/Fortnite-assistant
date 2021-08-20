@@ -1,0 +1,311 @@
+<resources>
+    <string name="full_app_name" translatable="false">Fortnite Assitant</string>
+    <string name="app_name" translatable="false">Assitant</string>
+    <string name="application_url" translatable="false">https://play.google.com/store/apps/details?id=robin.vitalij.fortniteassitant</string>
+    <string name="current_map_url" translatable="false">https://media.fortniteapi.io/images/map.png?showPOI=true</string>
+
+    <string name="title_home">Home</string>
+    <string name="tab_title_history_match">History</string>
+    <string name="tab_title_top">Leaderboard</string>
+    <string name="title_item_shop">Item shop</string>
+    <string name="title_setting">Settings</string>
+
+    <string name="retry">Try one more time</string>
+    <string name="repeat">Repeat</string>
+    <string name="unknown_error">Something went wrong</string>
+    <string name="network_error">Please check your internet connection and try again</string>
+    <string name="firebase_limit_error">The server has exceeded the request limit. We will try to fix it in the near future.</string>
+
+    <!--No subscription-->
+    <string name="no_subscription_content">Upgrade your account to access additional statistics</string>
+    <string name="no_subscription_content_2">Or watch the video ad to get 2 days access </string>
+    <string name="watch_video_ads">Watch video ads </string>
+
+    <string name="limited_content">This content is limited. To access full content, you can view ads or subscribe</string>
+    <string name="watch_advertisement">View ad</string>
+    <string name="subscribe">Subscribe</string>
+
+    <!--Dialog-->
+    <string name="app_estimate_ok">Rate now</string>
+    <string name="app_estimate_netral">Later</string>
+    <string name="app_estimate_no">Do not remind</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+
+    <!--Search-->
+    <string name="search_steam_no_found">"Can't find yourself on Steam? Try it via Steam Profile Link, SteamID64, or CustomURL"</string>
+    <string name="search_hint">"Profile link on Steam, SteamID64, or CustomURL"</string>
+    <string name="search">Search</string>
+    <string name="search_player">Search player</string>
+    <string name="search_user_steam">Search for a player on Steam</string>
+    <string name="try_button">Try</string>
+
+    <!--Users-->
+    <string name="account_action">Account action</string>
+    <string name="refresh">Refresh</string>
+    <string name="to_switch">Switch</string>
+    <string name="compare_with_yourself">Compare with yourself </string>
+    <string name="user_update">Updating user data</string>
+    <string name="add">Add</string>
+    <string name="add_to_comparison">Add to comparison</string>
+    <string name="matches">Matches</string>
+    <string name="matches_format">%s matches</string>
+    <string name="wins_percent">Wins %</string>
+    <string name="kd">KD</string>
+    <string name="play_time">%s h. all</string>
+    <string name="level_format">Level %d</string>
+    <string name="all">All</string>
+    <string name="keyboard_mouse" translatable="false">>Keyboard mouse</string>
+    <string name="gamepad" translatable="false">>Gamepad</string>
+    <string name="touch" translatable="false">>Touch</string>
+    <string name="no_results_for_this_platform">No results for this platform</string>
+    <string name="overall_battles" translatable="false">Overall</string>
+    <string name="solo_battles" translatable="false">Solo</string>
+    <string name="duo_battles" translatable="false">Duo</string>
+    <string name="trio_battles" translatable="false">Trio</string>
+    <string name="squad_battles" translatable="false">Squad</string>
+    <string name="ltm_battles" translatable="false">Ltm</string>
+    <string name="kills">Kills</string>
+    <string name="killsPerMin">Kills per. min</string>
+    <string name="killsPerMatch">Kills per. match</string>
+    <string name="deaths" translatable="false">Deaths</string>
+    <string name="top_one" translatable="false">Top 1</string>
+    <string name="top_ten" translatable="false">Top 10</string>
+    <string name="top_three" translatable="false">Top 3</string>
+    <string name="top_six" translatable="false">Top 6</string>
+    <string name="top_twenty_five" translatable="false">Top 25</string>
+    <string name="top_twelve" translatable="false">Top 12</string>
+    <string name="top_five" translatable="false">Top 5</string>
+    <string name="minutes_played">Minutes Played</string>
+    <string name="user_empty_stats">Could not find stats for the requested profile</string>
+    <string name="save_the_user">Save the user</string>
+
+    <!--History match-->
+    <string name="title_history_match">History matches</string>
+    <string name="player_soutlived">Player Soutlived</string>
+    <string name="top_history">Top</string>
+    <string name="score">Score</string>
+    <string name="history_match_body">
+Match data can be grouped. And also with each update we get the last 25 matches, which can be grouped.\n\n
+This section is beta. If it does not work correctly for you, let us know</string>
+
+    <!--Home-->
+    <string name="hours">Hours</string>
+    <string name="no_information">No information</string>
+    <string name="game_sessions">Game sessions</string>
+    <string name="other_session">Other sessions</string>
+    <string name="current_season_statistics">Current season</string>
+
+    <!--Details statistics-->
+    <string name="details_statistics">Detailed statistics</string>
+    <string name="avg_score">Avg. score</string>
+    <string name="score_per_min">Score per min</string>
+    <string name="score_per_match">Score per match</string>
+    <string name="last_modified">Last modified</string>
+    <string name="other">Other</string>
+    <string name="kills_per_min">Kills per min</string>
+    <string name="kills_per_match">Kills per match</string>
+    <string name="players_outlived">Players Outlived</string>
+
+    <!--Charts-->
+    <string name="kd_full">Kill/Death Ratio</string>
+    <string name="win_rate">Win rate</string>
+    <string name="parameter_List">Parameter List</string>
+
+    <!--Subscription-->
+    <string name="cancel_at_any_time">Cancel at any time on Google Play</string>
+    <string name="subscription_features">Disabling ads; \n Access to all functions in the application</string>
+    <string name="plus_subcription_title">Subscription Benefits:</string>
+    <string name="additional_features">Access to all application features</string>
+    <string name="food_developer">Food Developer</string>
+    <string name="remove_ads_body">In order to remove ads from the application for 96 hours, watch video ads</string>
+    <string name="reclam_info">Advertising has been disabled until </string>
+    <string name="reclam_info2">Ads have not loaded yet </string>
+    <string name="reclam_body">Advertising helps the application develop. The next time the show will be in one hour</string>
+    <string name="subscription">Subscription</string>
+    <string name="watch">Watch</string>
+    <string name="per_month">per month</string>
+    <string name="or">Or</string>
+    <string name="disabling_ads">Disabling ads</string>
+
+    <!--Main-->
+    <string name="play_market_header">Rate me on the Play Market</string>
+    <string name="play_market_body">Do you like to use this app? Please help us become a 5 star app!</string>
+
+    <!--Update-->
+    <string name="downloaded_update_snackbar">An update has just been downloaded. \ nRestart to update</string>
+    <string name="install">Install</string>
+    <string name="app_download_starts">App download starts…</string>
+    <string name="app_download_canceled">Application download canceled.</string>
+    <string name="app_download_failed">Failed to download the app</string>
+    <string name="update_body">Receiving data from the server</string>
+
+    <!--To contact us-->
+    <string name="to_contact_us">To contact us</string>
+    <string name="to_contact_us_body">Did you find an error? Or do you have an idea? Email us</string>
+    <string name="contact_telegram">Write to Telegram</string>
+    <string name="contact_vk">Write to Vkontakte</string>
+    <string name="contact_gmail">Email me</string>
+    <string name="message_no_set_telegram">"You don't have Telegram installed"</string>
+
+    <!--Application info-->
+    <string name="develop">Developer: Vitaliy Robinovsky\nvitalij.robin@gmail.com</string>
+    <string name="version_format">Version: %s</string>
+    <string name="application_info">The Fortnite Assistant application is designed to analyze and track your statistics, without authorization.</string>
+    <string name="developer_title">Developer Link</string>
+    <string name="developer_body">Have you found a bug, or do you have ideas on how to make the application better? Email</string>
+    <string name="gmail" translatable="false">v.robin.projects@gmail.com</string>
+    <string name="vk_url" translatable="false">https://vk.com/fort_assistant/</string>
+    <string name="telegram_url" translatable="false">https://t.me/fort_assistant</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="privacy_policy_url" translatable="false">https://robinlabs.ru/privat.html#fortniteassistant</string>
+
+    <string name="purchases_message"> Your purchases have been restored </string>
+    <string name="purchases_message_no"> You did not make purchases </string>
+    <string name="purchases_user_canceled">You have canceled your subscription </string>
+
+    <string name="check_shopping">Shopping Recovery</string>
+    <string name="check_shopping_body">Checks your shopping cart. If the purchase was made, advertising will be disabled</string>
+
+    <!--Settings-->
+    <string name="info_application">About the application</string>
+    <string name="share_title">Share the app</string>
+    <string name="share_body">Do your friends play cs go? Share this app with them.</string>
+    <string name="compare_players">Player comparison</string>
+    <string name="users">Accounts</string>
+    <string name="news_game">News game</string>
+    <string name="br_news" translatable="false">Battle Royale</string>
+    <string name="stw_news" translatable="false">STW</string>
+    <string name="creative_news" translatable="false">Creative news</string>
+    <string name="users_body">List of saved accounts</string>
+    <string name="steam_profile">Steam profile</string>
+    <string name="faceit_profile">Faceit profile</string>
+    <string name="copy_stats_link">Copy stats link</string>
+    <string name="feedback">Feedback</string>
+    <string name="add_functional">Add. functional</string>
+    <string name="steam_functional">Steam functional</string>
+
+    <string name="delete_account">Delete user</string>
+    <string name="delete_account_message">Profile has been deleted.</string>
+    <string name="delete_account_title">Are you sure you want to delete %s?</string>
+
+    <string name="wins">Wins</string>
+
+    <!--Users-->
+    <string name="last_date_update">Last update %s</string>
+
+    <string name="vs" translatable="false">VS</string>
+
+    <!--Comparison-->
+    <string name="comparison_player_format"> Compare %s players</string>
+    <string name="comparison_no_players_selected_dialog_body">To compare players you need to select at least two players</string>
+    <string name="content_restriction_dialog">This function has limitations. To access it, subscribe or watch a short advertisement</string>
+    <string name="added_comparison">Add to comparison</string>
+    <string name="selected_user">Selected users</string>
+    <string name="player_omparison"> Player comparison </string>
+    <string name="statistics_title">Statistics</string>
+    <string name="important">Important</string>
+
+    <string name="delete">Delete</string>
+
+    <string name="players_did_not_participate_in_battles">Players did not participate in battles</string>
+    <string name="tops">Leaderboard</string>
+
+    <string name="no_function">This function will be available in the next version of the application.</string>
+
+    <!--Top-->
+    <string name="parametr">Parameter</string>
+    <string name="platform">Platform</string>
+    <string name="type_battles">Type battles</string>
+
+    <!--Shop-->
+    <string name="upcoming_shop">Upcoming</string>
+    <string name="current_shop">Current</string>
+    <string name="featured">Featured</string>
+    <string name="emote">Emote</string>
+    <string name="music">Music</string>
+    <string name="spray">Spray</string>
+    <string name="loading_screen">Loadings Screen</string>
+    <string name="backpack">Back Bling</string>
+    <string name="emoji">Emoticon</string>
+    <string name="wrap">Wrap</string>
+    <string name="petcarrier">Pet</string>
+    <string name="contrail">Contrail</string>
+    <string name="toy">Toy</string>
+    <string name="banner">Banner</string>
+    <string name="unknown">Unknown</string>
+    <string name="outfit">Outfit</string>
+    <string name="pickaxe">Pickaxe</string>
+    <string name="glider">Glider</string>
+    <string name="bundle">Items included</string>
+
+    <string name="daily">Daily</string>
+    <string name="special_daily">Special Daily</string>
+    <string name="special_featured">Special Featured</string>
+
+    <string name="the_kit_includes">The kit includes</string>
+
+    <!--Wiki-->
+    <string name="wikipedia">Wikipedia</string>
+    <string name="battle_pass_rewards">Battle pass rewards</string>
+    <string name="quantity_format">Quantity: %d</string>
+    <string name="current_season">Current season</string>
+    <string name="season_format">Season № %s</string>
+    <string name="paid">Paid</string>
+    <string name="free">Free</string>
+    <string name="fishing">Fishing</string>
+
+    <!--Weapons-->
+    <string name="weapons">Weapons</string>
+    <string name="dmg_pb">dmgPb</string>
+    <string name="firingRate">firingRate</string>
+    <string name="clipSize">clipSize</string>
+    <string name="reloadTime">reloadTime</string>
+    <string name="bulletsPerCartridge">bulletsPerCartridge</string>
+    <string name="spread">spread</string>
+    <string name="spreadDownsights">spreadDownsights</string>
+    <string name="damageZoneCritical">damageZoneCritical</string>
+    
+    <!--Fish-->
+    <string name="required">Required</string>
+    <string name="professional_fishing_rod">Professional fishing rod</string>
+    <string name="max_stack_size">Max stack size</string>
+    <string name="size">Size</string>
+    <string name="stats_fish">Your fishing stats</string>
+    <string name="centimeters_format" translatable="false">%.3f cm</string>
+    <string name="empty_fish">"Buddy, don't you like fishing? Take a rod and go"</string>
+
+    <!--Achievement-->
+    <string name="achievements">Achievements</string>
+
+    <!--Cosmetics-new-->
+    <string name="cosmetics_news">Newly added cosmetics</string>
+    <string name="cosmetics">Cosmetics</string>
+    <string name="banners">Banners</string>
+    <string name="tags">Tags</string>
+    <string name="add_date_format">Added %s</string>
+
+    <string name="play_time_full" translatable="false">Play time</string>
+    <string name="general" translatable="false"> >General</string>
+    <string name="combat" translatable="false"> >Combat</string>
+
+    <string name="share_user_title">Share profile link</string>
+    <string name="you_can_see_the_profile_format">You can see the profile %s here</string>
+
+    <string name="fortnite_crew_information" translatable="false">Fortnite crew information </string>
+
+    <string name="empty_search_user">We are unable to find your profile</string>
+
+    <string name="look_for_similar">"I don't remember the exact name, look for similar"</string>
+
+    <string name="empty_session">"You don't have any gaming sessions yet. Play a match and update data"</string>
+    
+    <!--Vehicles-->
+    <string name="vehicles">Vehicles</string>
+
+    <string name="current_map">Current map</string>
+
+    <string name="your_current_position_format">Your current position: %s</string>
+    <string name="your_value_format">Your value: %s</string>
+
+</resources>

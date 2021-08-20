@@ -1,0 +1,249 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'com.google.firebase.crashlytics'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "robin.vitalij.fortniteassitant"
+        minSdkVersion 22
+        targetSdkVersion 30
+        versionCode 13
+        versionName "1.0.8"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
+
+        manifestPlaceholders = [admodApiKey: rootProject.ext.admod_id]
+    }
+
+    buildTypes {
+        def FORTNITE_KEY = "FORTNITE_KEY"
+        def ADMOD_ID = "ADMOD_ID"
+        def NATIVE_ID = "NATIVE_ID"
+        def VIDEO_ID = "VIDEO_ID"
+        def BANNER_ID = "BANNER_ID"
+        def INTERSTITIAL_ID = "INTERSTITIAL_ID"
+        def BILLING_ID = "BILLING_ID"
+        def HUAWEI_BANNER_ID = "HUAWEI_BANNER_ID"
+        def HUAWEI_INTERSTITIAL_ID = "HUAWEI_INTERSTITIAL_ID"
+        def HUAWEI_VIDEO_ID = "HUAWEI_VIDEO_ID"
+
+        debug {
+            buildConfigField "String", FORTNITE_KEY, props.fortnite_key
+
+            buildConfigField "String", ADMOD_ID, props.admod_id_stage
+            buildConfigField "String", BILLING_ID, props.billing_id
+
+            buildConfigField "String", NATIVE_ID, props.native_id_stage
+            buildConfigField "String", VIDEO_ID, props.video_ad_id_stage
+            resValue "string", BANNER_ID, props.banner_id_stage
+            buildConfigField "String", INTERSTITIAL_ID, props.interstitial_id_stage
+
+            buildConfigField "String", HUAWEI_BANNER_ID, props.huawei_banner_id_stage
+            buildConfigField "String", HUAWEI_INTERSTITIAL_ID, props.huawei_interstitial_id_stage
+            buildConfigField "String", HUAWEI_VIDEO_ID, props.huawei_video_id_stage
+        }
+        release {
+            buildConfigField "String", FORTNITE_KEY, props.fortnite_key
+
+            buildConfigField "String", ADMOD_ID, props.admod_id
+            buildConfigField "String", BILLING_ID, props.billing_id
+
+            buildConfigField "String", NATIVE_ID, props.native_id
+            buildConfigField "String", VIDEO_ID, props.video_ad_id
+            resValue "string", BANNER_ID, props.banner_id
+            buildConfigField "String", INTERSTITIAL_ID, props.interstitial_id
+
+            buildConfigField "String", HUAWEI_BANNER_ID, props.huawei_banner_id
+            buildConfigField "String", HUAWEI_INTERSTITIAL_ID, props.huawei_interstitial_id
+            buildConfigField "String", HUAWEI_VIDEO_ID, props.huawei_video_id
+
+            // <-- disable proguard
+            minifyEnabled false // <-- enable minification
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "version"
+    productFlavors {
+        gms {
+            dimension "version"
+            versionNameSuffix "-gms"
+        }
+        hms {
+            dimension "version"
+            versionNameSuffix "-hms"
+        }
+    }
+    sourceSets {
+        gms {
+            res {
+                srcDirs 'src/gms/res', 'src/gms/res/2', 'src/gms/res/3'
+            }
+            java {
+                srcDirs 'src/gms/java'
+            }
+        }
+        hms {
+            res {
+                srcDirs 'src/hms/res'
+            }
+            java {
+                srcDirs 'src/hms/java'
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    def coroutine_adapter_version = "0.9.2"
+    def retrofit2_version = "2.9.0"
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    def androidx_version = "1.3.1"
+    def material_version = "1.4.0"
+    def recyclerview_version = "1.2.1"
+    implementation "androidx.appcompat:appcompat:$androidx_version"
+    implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
+
+    def constraintlayout_version = "2.1.0"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
+
+    def navigation_version = "2.3.5"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+
+    //Dagger 2
+    def dagger_version = "2.38.1"
+    implementation "com.google.dagger:dagger:$dagger_version"
+
+    def dagger_compiler_version = "2.23.2"
+    kapt "com.google.dagger:dagger-compiler:$dagger_compiler_version"
+
+    //Glide
+    def glide_version = '4.12.0'
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+
+    def room_version = '2.2.6'
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    def lifecycle_version = '2.3.1'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
+    def rxjava2_rxandroid_version = "2.1.1"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxjava2_rxandroid_version"
+
+    def rxjava2_rxjava_version = "2.2.21"
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava2_rxjava_version"
+
+    def gson_version = "2.8.7"
+    implementation "com.google.code.gson:gson:$gson_version"
+
+    def retrofit2_adapter_version = "2.9.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_adapter_version"
+
+    def mp_android_chart_version = 'v3.0.2'
+    implementation "com.github.PhilJay:MPAndroidChart:$mp_android_chart_version"
+
+    //Okhttp3
+    def okhttp3_version = '4.4.1'
+    implementation "com.squareup.okhttp3:okhttp:$okhttp3_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
+
+    //Retrofit2
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$coroutine_adapter_version"
+
+    //Ads
+    def ads_version = "20.2.0"
+    gmsImplementation "com.google.android.gms:play-services-ads:$ads_version"
+    gmsImplementation "com.google.firebase:firebase-ads:$ads_version"
+
+    //Firebase
+    def firebase_analytics_version = "19.0.0"
+    implementation "com.google.firebase:firebase-analytics:$firebase_analytics_version"
+
+    def firebase_core_version = "19.0.0"
+    implementation "com.google.firebase:firebase-core:$firebase_core_version"
+
+    def firebase_crashlytics_version = "18.2.1"
+    implementation "com.google.firebase:firebase-crashlytics:$firebase_crashlytics_version"
+
+    def firebase_firestore_ktx_version = "23.0.3"
+    implementation "com.google.firebase:firebase-firestore-ktx:$firebase_firestore_ktx_version"
+
+    def firebase_dynamic_links_version = "20.1.1"
+    implementation "com.google.firebase:firebase-dynamic-links-ktx:$firebase_dynamic_links_version"
+
+    def multidex_version = "2.0.1"
+    implementation "androidx.multidex:multidex:$multidex_version"
+
+    def timber_version = "4.7.1"
+    implementation "com.jakewharton.timber:timber:$timber_version"
+
+    def play_core_version = "1.10.0"
+    implementation "com.google.android.play:core:$play_core_version"
+
+    def circle_progress_version = "1.2.1"
+    implementation "com.github.lzyzsd:circleprogress:$circle_progress_version"
+
+    def sufficientlysecure_version = "3.9"
+    implementation "org.sufficientlysecure:html-textview:$sufficientlysecure_version"
+
+    def swipedecorator_version = "1.2.2"
+    implementation "it.xabaras.android:recyclerview-swipedecorator:$swipedecorator_version"
+
+    def exoplayer_version = "2.11.3"
+    implementation "com.google.android.exoplayer:exoplayer:$exoplayer_version"
+
+    def round_corner_progress_bar_version = "2.0.3"
+    implementation "com.akexorcist:RoundCornerProgressBar:$round_corner_progress_bar_version"
+
+    def photo_view_version = "2.3.0"
+    implementation "com.github.chrisbanes:PhotoView:$photo_view_version"
+
+    implementation project(':materialspinner')
+
+    hmsImplementation('com.huawei.hms:ads-lite:13.4.41.304')
+    hmsImplementation('com.huawei.hms:ads-consent:3.4.41.304')
+
+}

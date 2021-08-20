@@ -1,0 +1,3 @@
+include ':materialspinner'
+include ':app'
+rootProject.name = "Fortnite Assitant"

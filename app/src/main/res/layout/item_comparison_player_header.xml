@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="item"
+            type="robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel.ComparisonStatisticsHeaderViewModel" />
+
+    </data>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:text="@{item.title}"
+        android:textColor="@color/color_orange"
+        android:fontFamily="@font/futura_pt_bold"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+</layout>

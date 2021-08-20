@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_setting"
+    app:startDestination="@+id/navigation_setting_start">
+
+    <fragment
+        android:id="@+id/navigation_setting_start"
+        android:name="robin.vitalij.fortniteassitant.ui.setting.SettingFragment"
+        android:label="@string/title_setting"
+        tools:layout="@layout/fragment_setting">
+        <action
+            android:id="@+id/action_navigation_setting_to_searchUserFragment"
+            app:destination="@id/navigation_search" />
+        <action
+            android:id="@+id/action_navigation_setting_to_applicationInfoFragment"
+            app:destination="@id/navigation_application_info" />
+        <action
+            android:id="@+id/action_navigation_setting_to_navigation_users"
+            app:destination="@id/navigation_users" />
+        <action
+            android:id="@+id/action_navigation_setting_start_to_wikiFragment"
+            app:destination="@id/navigation_wiki" />
+        <action
+            android:id="@+id/action_navigation_setting_start_to_navigation_game_crew"
+            app:destination="@id/navigation_game_crew" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment"
+        android:label="@string/search_player"
+        tools:layout="@layout/fragment_search_user" />
+
+    <fragment
+        android:id="@+id/navigation_application_info"
+        android:name="robin.vitalij.fortniteassitant.ui.setting.applicationinfo.ApplicationInfoFragment"
+        android:label="@string/info_application"
+        tools:layout="@layout/fragment_application_info" />
+
+    <fragment
+        android:id="@+id/navigation_users"
+        android:name="robin.vitalij.fortniteassitant.ui.users.UsersFragment"
+        android:label="@string/users"
+        tools:layout="@layout/fragment_with_recyclerview_and_lce" />
+    <fragment
+        android:id="@+id/navigation_wiki"
+        tools:layout="@layout/fragment_wiki"
+        android:name="robin.vitalij.fortniteassitant.ui.wiki.WikiFragment"
+        android:label="@string/wikipedia" >
+        <action
+            android:id="@+id/action_navigation_wiki_to_battlePassRewardsFragment"
+            app:destination="@id/navigation_battles_pass_rewards" />
+        <action
+            android:id="@+id/action_navigation_wiki_to_weaponFragment"
+            app:destination="@id/navigation_weapon" />
+        <action
+            android:id="@+id/action_navigation_wiki_to_navigation_fish"
+            app:destination="@id/navigation_fish" />
+        <action
+            android:id="@+id/action_navigation_wiki_to_achievementsFragment"
+            app:destination="@id/navigation_achievement" />
+        <action
+            android:id="@+id/action_navigation_wiki_to_cosmeticsNewFragment"
+            app:destination="@id/navigation_cosmetics_new" />
+        <action
+            android:id="@+id/action_navigation_wiki_to_catalogCosmeticsFragment"
+            app:destination="@id/navigation_catalog_cosmetics" />
+        <action
+            android:id="@+id/action_navigation_wiki_to_bannersFragment"
+            app:destination="@id/navigation_banner" />
+        <action
+            android:id="@+id/action_navigation_wiki_to_vehiclesFragment"
+            app:destination="@id/navigation_vehicles" />
+        <action
+            android:id="@+id/action_navigation_wiki_to_navigation_png_read_details"
+            app:destination="@id/navigation_png_read_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_battles_pass_rewards"
+        android:name="robin.vitalij.fortniteassitant.ui.battlepassrewards.BattlePassRewardsFragment"
+        android:label="@string/battle_pass_rewards" />
+    <fragment
+        android:id="@+id/navigation_weapon"
+        android:name="robin.vitalij.fortniteassitant.ui.weapons.WeaponFragment"
+        android:label="@string/weapons" />
+    <fragment
+        android:id="@+id/navigation_fish"
+        android:name="robin.vitalij.fortniteassitant.ui.fishing.FishingFragment"
+        android:label="@string/fishing" >
+        <action
+            android:id="@+id/action_navigation_fish_to_fishStatsFragment"
+            app:destination="@id/navigation_fish_stats" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_fish_stats"
+        android:name="robin.vitalij.fortniteassitant.ui.fishstats.FishStatsFragment"
+        android:label="@string/stats_fish" />
+    <fragment
+        android:id="@+id/navigation_achievement"
+        android:name="robin.vitalij.fortniteassitant.ui.achiviements.AchievementsFragment"
+        android:label="@string/achievements" />
+    <fragment
+        android:id="@+id/navigation_cosmetics_new"
+        android:name="robin.vitalij.fortniteassitant.ui.cosmeticsnew.CosmeticsNewFragment"
+        android:label="@string/cosmetics_news" >
+        <action
+            android:id="@+id/action_navigation_cosmetics_new_to_adapterNewsFragment"
+            app:destination="@id/navigation_news" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_catalog_cosmetics"
+        android:name="robin.vitalij.fortniteassitant.ui.cosmetics.CatalogCosmeticsFragment"
+        android:label="@string/cosmetics" >
+        <action
+            android:id="@+id/action_navigation_catalog_cosmetics_to_cosmeticsFragment"
+            app:destination="@id/navigation_cosmetics" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_cosmetics"
+        android:name="robin.vitalij.fortniteassitant.ui.cosmetics.catalog.CosmeticsFragment"
+        android:label="CosmeticsFragment" />
+    <fragment
+        android:id="@+id/navigation_news"
+        android:name="robin.vitalij.fortniteassitant.ui.news.viewpager.AdapterNewsFragment"
+        android:label="@string/news_game" />
+    <fragment
+        android:id="@+id/navigation_game_crew"
+        tools:layout="@layout/fragment_history"
+        android:name="robin.vitalij.fortniteassitant.ui.crew.main.GameCrewFragment"
+        android:label="@string/fortnite_crew_information" />
+
+    <fragment
+        android:id="@+id/navigation_crew_details"
+        android:name="robin.vitalij.fortniteassitant.ui.crew.details.CrewViewDetailsFragment"
+        android:label="@string/fortnite_crew_information" />
+
+    <fragment
+        android:id="@+id/navigation_banner"
+        tools:layout="@layout/fragment_history"
+        android:name="robin.vitalij.fortniteassitant.ui.banners.BannersFragment"
+        android:label="@string/banners" />
+    <fragment
+        android:id="@+id/navigation_vehicles"
+        android:name="robin.vitalij.fortniteassitant.ui.vehicles.VehiclesFragment"
+        android:label="@string/vehicles" />
+    <fragment
+        android:id="@+id/navigation_png_read_details"
+        android:name="robin.vitalij.fortniteassitant.ui.pngread.PngReadDetailsFragment"
+        tools:layout="@layout/fragment_png_read"
+        android:label="" />
+
+</navigation>
