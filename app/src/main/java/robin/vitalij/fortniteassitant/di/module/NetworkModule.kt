@@ -11,6 +11,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import robin.vitalij.fortniteassitant.api.FortniteRequestsComApi
 import robin.vitalij.fortniteassitant.api.FortniteRequestsIOApi
+import robin.vitalij.fortniteassitant.api.SteamChartRequestsApi
 import java.security.cert.CertificateException
 import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
@@ -24,6 +25,7 @@ import javax.net.ssl.X509TrustManager
 const val TIMEOUT_SEC = 30L
 private const val ROOT_FORTNITE_COM_URL = "https://fortnite-api.com"
 private const val ROOT_FORTNITE_IO_URL = "https://fortniteapi.io"
+private const val STEAM_CHART_URL = "http://194-67-110-123.cloudvps.regruhosting.ru"
 
 private const val AUTHORIZATION = "Authorization"
 
@@ -42,6 +44,20 @@ class NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         return retrofit.create(FortniteRequestsComApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSteamChartRequestsApi(): SteamChartRequestsApi {
+        val okHttpClient = HttpClientFactory(false)
+            .createHttpClient()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(STEAM_CHART_URL)
+            .client(okHttpClient)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        return retrofit.create(SteamChartRequestsApi::class.java)
     }
 
     @Provides

@@ -3,7 +3,6 @@ package robin.vitalij.fortniteassitant.common.extensions
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import robin.vitalij.fortniteassitant.interfaces.ErrorController
 import robin.vitalij.fortniteassitant.interfaces.ProgressBarActivityController
 import robin.vitalij.fortniteassitant.interfaces.ProgressBarController
@@ -14,7 +13,7 @@ fun BaseViewModel.observeToProgressBar(
     lifecycleOwner: LifecycleOwner,
     activity: AppCompatActivity
 ) {
-    activityProgressBarVisibility.observe(lifecycleOwner, Observer { show ->
+    activityProgressBarVisibility.observe(lifecycleOwner, { show ->
         (activity as? ProgressBarActivityController)?.showOrHideProgressBar(
             show,
             textActivityVisibility.get() ?: ""
@@ -23,13 +22,13 @@ fun BaseViewModel.observeToProgressBar(
 }
 
 fun BaseViewModel.observeToProgressBar(fragment: Fragment) {
-    progressBarVisibility.observe(fragment, Observer { show ->
+    progressBarVisibility.observe(fragment, { show ->
         (fragment as? ProgressBarController)?.showOrHideProgressBar(show)
     })
 }
 
 fun BaseViewModel.observeToError(fragment: Fragment) {
-    errorVisibility.observe(fragment, Observer {
+    errorVisibility.observe(fragment, {
         if (it) {
             (fragment as? ErrorController)?.setError(errorModel)
         } else if (it == false) {
@@ -39,19 +38,19 @@ fun BaseViewModel.observeToError(fragment: Fragment) {
 }
 
 fun BaseViewModel.observeSwipeRefresh(fragment: Fragment) {
-    showSwipeRefreshLayout.observe(fragment, Observer {
+    showSwipeRefreshLayout.observe(fragment, {
         (fragment as? BaseFragment)?.showSwipeRefreshLayout(it)
     })
 }
 
 fun BaseViewModel.observeToEmpty(fragment: Fragment) {
-    emptyTextViewVisibility.observe(fragment, Observer {
+    emptyTextViewVisibility.observe(fragment, {
         (fragment as? BaseFragment)?.setEmptyText(it)
     })
 }
 
 fun BaseViewModel.observeToSubscriptionAccess(fragment: Fragment) {
-    subscriptionAccessVisibility.observe(fragment, Observer {
+    subscriptionAccessVisibility.observe(fragment, {
         (fragment as? BaseFragment)?.setSubscriptionAccessVisibility(it)
     })
 }

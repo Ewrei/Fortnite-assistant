@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="robin.vitalij.fortniteassitant.model.battlepassreward.BattlesPassRewardsModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        style="@style/DefaultCard"
+        app:strokeColor="@color/background_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        app:cardCornerRadius="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitStart"
+                app:imageUrl="@{item.reward.images.fullBackground}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin"
+                android:fontFamily="@font/futura_pt_medium"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="@dimen/small_10_text_size"
+                app:layout_constraintBottom_toTopOf="@+id/tableRow"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image"
+                app:typeShop="@{item.reward.type}"
+                tools:text="type" />
+
+            <TableRow
+                android:id="@+id/tableRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_gravity="bottom"
+                android:background="@android:color/black"
+                android:gravity="end|center_vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/type">
+
+
+                <TextView
+                    android:id="@+id/quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/half_default_margin"
+                    android:layout_marginEnd="@dimen/half_default_margin"
+                    android:layout_marginBottom="@dimen/half_default_margin"
+                    android:fontFamily="@font/fortnite_battlefest"
+                    android:text="@{@string/quantity_format(item.reward.quantity)}"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    tools:text="Quantity 10" />
+
+            </TableRow>
+
+            <TextView
+                android:id="@+id/tier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                tools:text="tier"
+                android:fontFamily="@font/fortnite_battlefest"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/image"
+                app:value="@{item.reward.tier}" />
+
+            <TextView
+                android:id="@+id/paid"
+                android:background="@drawable/paid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:fontFamily="@font/futura_pt_medium"
+                android:paddingStart="@dimen/default_padding"
+                android:paddingEnd="@dimen/default_padding"
+                android:paddingTop="@dimen/half_default_padding"
+                android:paddingBottom="@dimen/half_default_padding"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:visibility="@{!item.free ? View.VISIBLE : View.GONE}"
+                android:text="@string/paid"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

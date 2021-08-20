@@ -21,9 +21,9 @@
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin_double"
             android:layout_marginEnd="@dimen/default_margin"
+            android:fontFamily="@font/futura_pt_bold"
             android:text="@{item.title}"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:textStyle="bold"
             tools:text="type battles" />
 
         <com.google.android.material.card.MaterialCardView
@@ -31,7 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checkable="false"
-            android:clickable="false">
+            android:clickable="false"
+            app:cardBackgroundColor="@color/colorPrimaryDark">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -45,13 +46,13 @@
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginTop="@dimen/default_margin_double"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/fortnite_battlefest"
                     android:gravity="center"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/guideline2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:value="@{item.matches.matches}"
+                    app:value="@{item.matches}"
                     tools:text="matches" />
 
                 <TextView
@@ -60,6 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/futura_pt_medium"
                     android:gravity="center"
                     android:text="@string/matches"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -75,13 +77,13 @@
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginTop="@dimen/default_margin_double"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/fortnite_battlefest"
                     android:gravity="center"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:percent="@{item.matches.winRate}"
+                    app:percent="@{item.winRate}"
                     tools:text="winRate" />
 
                 <TextView
@@ -90,6 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/futura_pt_medium"
                     android:gravity="center"
                     android:text="@string/wins_percent"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -105,13 +108,13 @@
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginTop="@dimen/default_margin_double"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/fortnite_battlefest"
                     android:gravity="center"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/guideline2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view1"
-                    app:value="@{item.matches.kills}"
+                    app:value="@{item.kills}"
                     tools:text="kills" />
 
                 <TextView
@@ -120,6 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/futura_pt_medium"
                     android:gravity="center"
                     android:text="@string/kills"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -135,13 +139,13 @@
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginTop="@dimen/default_margin_double"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/fortnite_battlefest"
                     android:gravity="center"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
                     app:layout_constraintTop_toBottomOf="@+id/view2"
-                    app:value="@{item.matches.deaths}"
+                    app:value="@{item.deaths}"
                     tools:text="deaths" />
 
                 <TextView
@@ -150,6 +154,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/futura_pt_medium"
                     android:gravity="center"
                     android:text="@string/deaths"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -165,13 +170,13 @@
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginTop="@dimen/default_margin_double"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/fortnite_battlefest"
                     android:gravity="center"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/guideline2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view3"
-                    app:value="@{item.matches.killsPerMin}"
+                    app:value="@{item.killsPerMin}"
                     tools:text="killsPerMin" />
 
                 <TextView
@@ -180,6 +185,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/futura_pt_medium"
                     android:gravity="center"
                     android:text="@string/killsPerMin"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -195,13 +201,13 @@
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginTop="@dimen/default_margin_double"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/fortnite_battlefest"
                     android:gravity="center"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
                     app:layout_constraintTop_toBottomOf="@+id/view4"
-                    app:value="@{item.matches.killsPerMatch}"
+                    app:value="@{item.killsPerMatch}"
                     tools:text="killsPerMatch" />
 
                 <TextView
@@ -210,6 +216,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/futura_pt_medium"
                     android:gravity="center"
                     android:text="@string/killsPerMatch"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -320,13 +327,13 @@
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginTop="@dimen/default_margin_double"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/fortnite_battlefest"
                     android:gravity="center"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/guideline2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view5"
-                    app:value="@{item.matches.kd}"
+                    app:value="@{item.kd}"
                     tools:text="kd" />
 
                 <TextView
@@ -335,6 +342,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/futura_pt_medium"
                     android:gravity="center"
                     android:text="@string/kd"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -350,13 +358,13 @@
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginTop="@dimen/default_margin_double"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/fortnite_battlefest"
                     android:gravity="center"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
                     app:layout_constraintTop_toBottomOf="@+id/view6"
-                    app:value="@{item.matches.wins}"
+                    app:value="@{item.wins}"
                     tools:text="topOne" />
 
                 <TextView
@@ -365,6 +373,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/futura_pt_medium"
                     android:gravity="center"
                     android:text="@string/top_one"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -380,13 +389,13 @@
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginTop="@dimen/default_margin_double"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/fortnite_battlefest"
                     android:gravity="center"
+                    android:text="@{item.valueOne}"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/guideline2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view7"
-                    app:value="@{item.matches.top10}"
                     tools:text="top 10" />
 
                 <TextView
@@ -396,8 +405,9 @@
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginEnd="@dimen/default_margin"
                     android:layout_marginBottom="@dimen/default_margin_double"
+                    android:fontFamily="@font/futura_pt_medium"
                     android:gravity="center"
-                    android:text="@string/top_ten"
+                    android:text="@{item.titleOne}"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="@android:color/darker_gray"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -412,13 +422,13 @@
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginTop="@dimen/default_margin_double"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/fortnite_battlefest"
                     android:gravity="center"
+                    android:text="@{item.valueTwo}"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
                     app:layout_constraintTop_toBottomOf="@+id/view8"
-                    app:value="@{item.matches.top25}"
                     tools:text="top 25" />
 
                 <TextView
@@ -427,8 +437,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/futura_pt_medium"
                     android:gravity="center"
-                    android:text="@string/top_twenty_five"
+                    android:text="@{item.titleTwo}"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="@android:color/darker_gray"
                     app:layout_constraintEnd_toEndOf="parent"

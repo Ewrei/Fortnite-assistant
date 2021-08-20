@@ -4,7 +4,7 @@ import robin.vitalij.fortniteassitant.repository.comparison.ComparisonListUserRe
 import robin.vitalij.fortniteassitant.repository.comparison.ComparisonRepository
 import robin.vitalij.fortniteassitant.repository.network.GetUserRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 import javax.inject.Inject
 
 class ProfileResultViewModelFactory @Inject constructor(

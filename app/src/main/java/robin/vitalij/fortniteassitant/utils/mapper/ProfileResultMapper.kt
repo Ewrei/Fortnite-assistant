@@ -10,33 +10,35 @@ import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewmodel.P
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewmodel.ProfileHeaderViewModel
 import robin.vitalij.fortniteassitant.utils.TextUtils
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
-import robin.vitalij.fortniteassitant.utils.view.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
-class ProfileResultMapper(private val resourceProvider: ResourceProvider) :
+class ProfileResultMapper(
+    private val resourceProvider: ResourceProvider
+) :
     Mapper<FortniteProfileResponse, List<Profile>> {
 
     override fun transform(obj: FortniteProfileResponse): List<Profile> {
         val list = arrayListOf<Profile>()
         list.add(
             ProfileHeaderViewModel(
-                avatarUrl = "",
+                avatarUrl = obj.avatar,
                 userName = obj.stats.playerStatsData.account.name,
                 playerId = obj.stats.playerStatsData.account.id,
                 level = obj.stats.playerStatsData.battlePass.level,
                 progress = obj.stats.playerStatsData.battlePass.progress,
-                matches = obj.stats.playerStatsData.stats.all?.overall!!.matches,
-                kd = obj.stats.playerStatsData.stats.all.overall.kd,
-                winRate = obj.stats.playerStatsData.stats.all.overall.winRate,
+                matches = obj.stats.playerStatsData.stats.all?.overall?.matches ?: 0,
+                kd = obj.stats.playerStatsData.stats.all?.overall?.kd ?: 0.0,
+                winRate = obj.stats.playerStatsData.stats.all?.overall?.winRate ?: 0.0,
                 playTime = resourceProvider.getString(
                     R.string.play_time,
                     TextUtils.getAverage(
-                        obj.stats.playerStatsData.stats.all.overall.minutesPlayed.toDouble(),
+                        obj.stats.playerStatsData.stats.all?.overall?.minutesPlayed?.toDouble(),
                         60.0
                     ).getStringFormat()
                 ),
                 totalMatches = resourceProvider.getString(
                     R.string.matches_format,
-                    obj.stats.playerStatsData.stats.all.overall.matches.getStringFormat()
+                    obj.stats.playerStatsData.stats.all?.overall?.matches.getStringFormat()
                 )
             )
         )
@@ -71,7 +73,20 @@ class ProfileResultMapper(private val resourceProvider: ResourceProvider) :
                 list.add(
                     BodyStatsStats(
                         resourceProvider.getString(R.string.solo_battles),
-                        it
+                        score = it.score,
+                        wins = it.wins,
+                        kills = it.kills,
+                        killsPerMin = it.killsPerMin,
+                        killsPerMatch = it.killsPerMatch,
+                        deaths = it.deaths,
+                        kd = it.kd,
+                        matches = it.matches,
+                        winRate = it.winRate,
+                        minutesPlayed = it.minutesPlayed,
+                        titleOne = resourceProvider.getString(R.string.top_ten),
+                        valueOne = it.top10.getStringFormat(),
+                        titleTwo = resourceProvider.getString(R.string.top_twenty_five),
+                        valueTwo = it.top25.getStringFormat()
                     )
                 )
             }
@@ -80,7 +95,20 @@ class ProfileResultMapper(private val resourceProvider: ResourceProvider) :
                 list.add(
                     BodyStatsStats(
                         resourceProvider.getString(R.string.duo_battles),
-                        it
+                        score = it.score,
+                        wins = it.wins,
+                        kills = it.kills,
+                        killsPerMin = it.killsPerMin,
+                        killsPerMatch = it.killsPerMatch,
+                        deaths = it.deaths,
+                        kd = it.kd,
+                        matches = it.matches,
+                        winRate = it.winRate,
+                        minutesPlayed = it.minutesPlayed,
+                        titleOne = resourceProvider.getString(R.string.top_five),
+                        valueOne = it.top5.getStringFormat(),
+                        titleTwo = resourceProvider.getString(R.string.top_twelve),
+                        valueTwo = it.top12.getStringFormat()
                     )
                 )
             }
@@ -89,7 +117,20 @@ class ProfileResultMapper(private val resourceProvider: ResourceProvider) :
                 list.add(
                     BodyStatsStats(
                         resourceProvider.getString(R.string.trio_battles),
-                        it
+                        score = it.score,
+                        wins = it.wins,
+                        kills = it.kills,
+                        killsPerMin = it.killsPerMin,
+                        killsPerMatch = it.killsPerMatch,
+                        deaths = it.deaths,
+                        kd = it.kd,
+                        matches = it.matches,
+                        winRate = it.winRate,
+                        minutesPlayed = it.minutesPlayed,
+                        titleOne = resourceProvider.getString(R.string.top_three),
+                        valueOne = it.top3.getStringFormat(),
+                        titleTwo = resourceProvider.getString(R.string.top_six),
+                        valueTwo = it.top6.getStringFormat()
                     )
                 )
             }
@@ -98,7 +139,20 @@ class ProfileResultMapper(private val resourceProvider: ResourceProvider) :
                 list.add(
                     BodyStatsStats(
                         resourceProvider.getString(R.string.squad_battles),
-                        it
+                        score = it.score,
+                        wins = it.wins,
+                        kills = it.kills,
+                        killsPerMin = it.killsPerMin,
+                        killsPerMatch = it.killsPerMatch,
+                        deaths = it.deaths,
+                        kd = it.kd,
+                        matches = it.matches,
+                        winRate = it.winRate,
+                        minutesPlayed = it.minutesPlayed,
+                        titleOne = resourceProvider.getString(R.string.top_three),
+                        valueOne = it.top3.getStringFormat(),
+                        titleTwo = resourceProvider.getString(R.string.top_six),
+                        valueTwo = it.top6.getStringFormat()
                     )
                 )
             }

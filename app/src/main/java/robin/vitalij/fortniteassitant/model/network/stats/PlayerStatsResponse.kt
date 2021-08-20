@@ -2,6 +2,8 @@ package robin.vitalij.fortniteassitant.model.network.stats
 
 import androidx.room.Embedded
 import com.google.gson.annotations.SerializedName
+import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
+import robin.vitalij.fortniteassitant.utils.TextUtils
 
 class PlayerStatsResponse(
     @SerializedName("status") val status: Int,
@@ -9,7 +11,7 @@ class PlayerStatsResponse(
 )
 
 class PlayerStatsData(
-    @SerializedName("image") val image: String?,
+    @SerializedName("image") var image: String?,
     @SerializedName("account") val account: Account,
     @SerializedName("battlePass") val battlePass: BattlePass,
     @SerializedName("stats") val stats: Stats,
@@ -34,10 +36,10 @@ class Stats(
 
 class StatsTypeDevice(
     @Embedded(prefix = "overall") @SerializedName("overall") val overall: Overall?,
-    @Embedded(prefix = "solo") @SerializedName("solo") val solo: Matches?,
-    @Embedded(prefix = "duo") @SerializedName("duo") val duo: Matches?,
-    @Embedded(prefix = "trio") @SerializedName("trio") val trio: Matches?,
-    @Embedded(prefix = "squad") @SerializedName("squad") val squad: Matches?,
+    @Embedded(prefix = "solo") @SerializedName("solo") val solo: SoloMatches?,
+    @Embedded(prefix = "duo") @SerializedName("duo") val duo: DuoMatches?,
+    @Embedded(prefix = "trio") @SerializedName("trio") val trio: TrioMatches?,
+    @Embedded(prefix = "squad") @SerializedName("squad") val squad: TrioMatches?,
     @Embedded(prefix = "ltm") @SerializedName("ltm") val ltm: Ltm?
 )
 
@@ -56,15 +58,19 @@ class Overall(
     @SerializedName("killsPerMin") val killsPerMin: Double,
     @SerializedName("killsPerMatch") val killsPerMatch: Double,
     @SerializedName("deaths") val deaths: Int,
-    @SerializedName("kd") val kd: Double,
+    @SerializedName("kd") var kd: Double,
     @SerializedName("matches") val matches: Int,
-    @SerializedName("winRate") val winRate: Double,
+    @SerializedName("winRate") var winRate: Double,
     @SerializedName("minutesPlayed") val minutesPlayed: Int,
     @SerializedName("playersOutlived") val playersOutlived: Long,
     @SerializedName("lastModified") val lastModified: String
-)
+) {
+    fun getAvgScore(): Double = TextUtils.getAverage(score.toDouble(), matches.toDouble())
 
-class Matches(
+    fun getMatchesString() = matches.getStringFormat()
+}
+
+class SoloMatches(
     @SerializedName("score") val score: Long,
     @SerializedName("scorePerMin") val scorePerMin: Double,
     @SerializedName("scorePerMatch") val scorePerMatch: Double,
@@ -75,13 +81,57 @@ class Matches(
     @SerializedName("killsPerMin") val killsPerMin: Double,
     @SerializedName("killsPerMatch") val killsPerMatch: Double,
     @SerializedName("deaths") val deaths: Int,
-    @SerializedName("kd") val kd: Double,
+    @SerializedName("kd") var kd: Double,
     @SerializedName("matches") val matches: Int,
-    @SerializedName("winRate") val winRate: Double,
+    @SerializedName("winRate") var winRate: Double,
     @SerializedName("minutesPlayed") val minutesPlayed: Int,
     @SerializedName("playersOutlived") val playersOutlived: Long,
     @SerializedName("lastModified") val lastModified: String
-)
+) {
+    fun getAvgScore(): Double = TextUtils.getAverage(score.toDouble(), matches.toDouble())
+}
+
+class DuoMatches(
+    @SerializedName("score") val score: Long,
+    @SerializedName("scorePerMin") val scorePerMin: Double,
+    @SerializedName("scorePerMatch") val scorePerMatch: Double,
+    @SerializedName("wins") val wins: Int,
+    @SerializedName("top5") val top5: Int,
+    @SerializedName("top12") val top12: Int,
+    @SerializedName("kills") val kills: Int,
+    @SerializedName("killsPerMin") val killsPerMin: Double,
+    @SerializedName("killsPerMatch") val killsPerMatch: Double,
+    @SerializedName("deaths") val deaths: Int,
+    @SerializedName("kd") var kd: Double,
+    @SerializedName("matches") val matches: Int,
+    @SerializedName("winRate") var winRate: Double,
+    @SerializedName("minutesPlayed") val minutesPlayed: Int,
+    @SerializedName("playersOutlived") val playersOutlived: Long,
+    @SerializedName("lastModified") val lastModified: String
+) {
+    fun getAvgScore(): Double = TextUtils.getAverage(score.toDouble(), matches.toDouble())
+}
+
+class TrioMatches(
+    @SerializedName("score") val score: Long,
+    @SerializedName("scorePerMin") val scorePerMin: Double,
+    @SerializedName("scorePerMatch") val scorePerMatch: Double,
+    @SerializedName("wins") val wins: Int,
+    @SerializedName("top3") val top3: Int,
+    @SerializedName("top6") val top6: Int,
+    @SerializedName("kills") val kills: Int,
+    @SerializedName("killsPerMin") val killsPerMin: Double,
+    @SerializedName("killsPerMatch") val killsPerMatch: Double,
+    @SerializedName("deaths") val deaths: Int,
+    @SerializedName("kd") var kd: Double,
+    @SerializedName("matches") val matches: Int,
+    @SerializedName("winRate") var winRate: Double,
+    @SerializedName("minutesPlayed") val minutesPlayed: Int,
+    @SerializedName("playersOutlived") val playersOutlived: Long,
+    @SerializedName("lastModified") val lastModified: String
+) {
+    fun getAvgScore(): Double = TextUtils.getAverage(score.toDouble(), matches.toDouble())
+}
 
 class Ltm(
     @SerializedName("score") val score: Long,
@@ -92,10 +142,12 @@ class Ltm(
     @SerializedName("killsPerMin") val killsPerMin: Double,
     @SerializedName("killsPerMatch") val killsPerMatch: Double,
     @SerializedName("deaths") val deaths: Int,
-    @SerializedName("kd") val kd: Double,
+    @SerializedName("kd") var kd: Double,
     @SerializedName("matches") val matches: Int,
-    @SerializedName("winRate") val winRate: Double,
+    @SerializedName("winRate") var winRate: Double,
     @SerializedName("minutesPlayed") val minutesPlayed: Int,
     @SerializedName("playersOutlived") val playersOutlived: Long,
     @SerializedName("lastModified") val lastModified: String
-)
+) {
+    fun getAvgScore(): Double = TextUtils.getAverage(score.toDouble(), matches.toDouble())
+}

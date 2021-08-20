@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.HomeHeaderViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="0dp"
+                android:layout_height="170dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:tint="@color/profile_tint"
+                app:drawable="@{@drawable/img_profile_phone}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ImageView
+                android:id="@+id/profileImage"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_marginStart="@dimen/default_margin_double"
+                android:layout_marginTop="@dimen/default_margin_double"
+                app:imageUrl="@{item.avatarUrl}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin_double"
+                android:layout_marginEnd="@dimen/default_margin_double"
+                android:maxLines="1"
+                android:text="@{item.userName}"
+                android:textSize="32sp"
+                android:fontFamily="@font/futura_pt_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/profileImage"
+                app:layout_constraintTop_toTopOf="@+id/profileImage"
+                tools:text="userName" />
+
+            <TextView
+                android:id="@+id/steamId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin_double"
+                android:layout_marginEnd="@dimen/default_margin_double"
+                android:text="@{item.playerId}"
+                android:fontFamily="@font/futura_pt_medium"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toEndOf="@+id/profileImage"
+                app:layout_constraintTop_toBottomOf="@+id/userName"
+                tools:text="steamId" />
+
+            <TextView
+                android:id="@+id/matchesPlayed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin_double"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                app:layout_constraintBottom_toTopOf="@+id/matches"
+                app:layout_constraintStart_toEndOf="@+id/profileImage"
+                android:fontFamily="@font/fortnite_battlefest"
+                app:fontFamily="@font/fortnite_battlefest"
+                app:value="@{item.matchesPlayed}"
+                tools:text="100" />
+
+            <TextView
+                android:id="@+id/matches"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin_double"
+                android:text="@string/matches"
+                android:fontFamily="@font/futura_pt_medium"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/darker_gray"
+                app:layout_constraintBottom_toBottomOf="@+id/profileImage"
+                app:layout_constraintStart_toEndOf="@+id/profileImage" />
+
+            <TextView
+                android:id="@+id/hoursGame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/default_margin_double"
+                android:fontFamily="@font/fortnite_battlefest"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                app:hoursGame="@{item.timeHours}"
+                app:layout_constraintBottom_toTopOf="@+id/hours"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="23.5" />
+
+            <TextView
+                android:id="@+id/hours"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/default_margin_double"
+                android:text="@string/hours"
+                android:fontFamily="@font/futura_pt_medium"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/darker_gray"
+                app:layout_constraintBottom_toBottomOf="@+id/profileImage"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{@string/level_format(item.level)}"
+                android:fontFamily="@font/fortnite_battlefest"
+                app:fontFamily="@font/fortnite_battlefest"
+                tools:text="Level 5"
+                app:layout_constraintStart_toStartOf="@+id/profileImage"
+                app:layout_constraintTop_toBottomOf="@+id/profileImage" />
+
+            <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
+                android:id="@+id/roundCornerProgressBar"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/level"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/level"
+                app:layout_constraintTop_toTopOf="@+id/level"
+                app:rcBackgroundColor="@color/color_orange_full"
+                app:rcBackgroundPadding="1dp"
+                app:rcMax="100"
+                app:rcProgressColor="@color/color_orange"
+                app:rcRadius="4dp" />
+
+            <TextView
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:percent="@{item.progress}"
+                android:fontFamily="@font/futura_pt_medium"
+                app:fontFamily="@font/futura_pt_medium"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="@dimen/small_10_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/roundCornerProgressBar"
+                app:layout_constraintStart_toStartOf="@+id/roundCornerProgressBar"
+                app:layout_constraintTop_toBottomOf="@+id/roundCornerProgressBar"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/currentSeason"
+                style="@style/DefaultTextButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/current_season_statistics"
+                android:textColor="@color/color_orange" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/detailsStatistics"
+                style="@style/DefaultTextButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/details_statistics"
+                android:textColor="@color/color_orange" />
+
+        </TableRow>
+
+    </LinearLayout>
+
+</layout>

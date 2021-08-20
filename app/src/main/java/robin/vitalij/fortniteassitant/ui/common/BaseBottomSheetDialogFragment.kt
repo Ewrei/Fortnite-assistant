@@ -1,5 +1,6 @@
 package robin.vitalij.fortniteassitant.ui.common
 
+import androidx.core.content.ContextCompat
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.progress_view.*
 import kotlinx.android.synthetic.main.view_error.*
@@ -12,7 +13,7 @@ abstract class BaseBottomSheetDialogFragment : BottomSheetDialogFragment(),
     ProgressBarController, ErrorController {
 
     override fun showOrHideProgressBar(show: Boolean) {
-        loading_container.setVisibility(show)
+        progressContainer.setVisibility(show)
     }
 
     override fun setError(
@@ -26,7 +27,9 @@ abstract class BaseBottomSheetDialogFragment : BottomSheetDialogFragment(),
             /*    if (errorModel.errors.isNotEmpty()) errorModel.errors.getMessage() else context.getString(
                     errorModel.textResourceId
                 )*/
-            errorImage.setImageDrawable(context.getDrawable(errorModel.imageResourceId))
+            errorImage.setImageDrawable(
+                ContextCompat.getDrawable(context, errorModel.imageResourceId)
+            )
             errorModel.descriptionResourceId?.let {
                 errorDescription.setVisibility(true)
                 errorDescription.setText(errorModel.descriptionResourceId)

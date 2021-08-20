@@ -8,8 +8,18 @@
 
     <fragment
         android:id="@+id/historyMatch"
-        android:name="robin.vitalij.fortniteassitant.ui.history.HistoryMatchFragment"
-        android:label="@string/title_history_match"
-        tools:layout="@layout/fragment_home"/>
+        android:name="robin.vitalij.fortniteassitant.ui.history.HistoryFragment"
+        android:label="@string/game_sessions"
+        tools:layout="@layout/fragment_history">
+        <action
+            android:id="@+id/action_historyMatch_to_navigation_adapter_session"
+            app:destination="@id/navigation_adapter_session" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_adapter_session"
+        tools:layout="@layout/fragment_adapter_details_statistics"
+        android:name="robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment"
+        android:label="AdapterSessionFragment" />
 
 </navigation>

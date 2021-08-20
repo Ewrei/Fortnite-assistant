@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Transaction
-import robin.vitalij.fortniteassitant.db.entity.MatchEntity
 import robin.vitalij.fortniteassitant.db.entity.PlayerSession
 import robin.vitalij.fortniteassitant.db.entity.UserEntity
 import robin.vitalij.fortniteassitant.model.SaveUserModel
@@ -20,7 +19,6 @@ interface SaveDao {
         saveUserModel.userEntity.playerSessionId = sessionId
 
         insertUser(saveUserModel.userEntity)
-        insertMatch(saveUserModel.matches)
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -28,8 +26,5 @@ interface SaveDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUser(userEntity: UserEntity)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertMatch(maps: List<MatchEntity>)
 
 }

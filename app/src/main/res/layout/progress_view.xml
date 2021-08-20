@@ -9,22 +9,18 @@
     </data>
 
     <LinearLayout
-        android:id="@+id/loading_container"
+        android:id="@+id/progressContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="true"
         android:gravity="center"
         android:orientation="vertical">
 
-        <net.bohush.geometricprogressview.GeometricProgressView
+        <ProgressBar
             android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:gp_color="@color/color_orange"
-            app:gp_duration="1000"
-            app:gp_figure_padding="3dp"
-            app:gp_number_of_angles="6"
-            app:gp_type="kite"
             android:elevation="@dimen/default_elevation"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

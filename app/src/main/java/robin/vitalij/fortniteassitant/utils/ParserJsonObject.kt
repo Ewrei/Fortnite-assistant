@@ -8,21 +8,14 @@ import robin.vitalij.fortniteassitant.model.ErrorModel2
 
 object ParserJsonObject {
 
-    fun getErrors(getResponse: String?): List<ErrorModel2> {
-        val list = arrayListOf<ErrorModel2>()
-
+    fun getError(getResponse: String?): ErrorModel2? {
         try {
-            val jsonArray = JSONArray(getResponse)
-            for (i in 0 until jsonArray.length()) {
-                val jsonObject1: JSONObject = jsonArray.getJSONObject(i)
-                list.add(Gson().fromJson(jsonObject1.toString(), ErrorModel2::class.java))
-            }
-            return list
+            return (Gson().fromJson(getResponse.toString(), ErrorModel2::class.java))
 
         } catch (e: JSONException) {
             e.printStackTrace()
         }
 
-        return list
+        return null
     }
 }

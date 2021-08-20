@@ -7,9 +7,10 @@ data class ErrorModel(
     val imageResourceId: Int,
     val descriptionResourceId: Int? = null,
     val isButtonVisible: Boolean = false,
-    val errors: List<ErrorModel2> = arrayListOf()
+    val errors: ErrorModel2? = null
 )
 
 data class ErrorModel2(
-    @SerializedName("message") var message: String
+    @SerializedName("status") var status: String,
+    @SerializedName("error") var error: String
 )

@@ -1,8 +1,5 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-
     <dimen name="half_default_margin">4dp</dimen>
     <dimen name="default_margin">8dp</dimen>
     <dimen name="default_margin_double">16dp</dimen>
@@ -13,7 +10,7 @@
     <dimen name="default_padding_double">16dp</dimen>
     <dimen name="default_padding_quoter">32dp</dimen>
 
-    <dimen name="default_divider_height">0.5dp</dimen>
+    <dimen name="default_divider_height">1dp</dimen>
 
     <dimen name="icon_size">24dp</dimen>
     <dimen name="icon_size_medium">36dp</dimen>
@@ -45,7 +42,7 @@
 
     <dimen name="button_height">62dp</dimen>
     <dimen name="card_stroke_width">1dp</dimen>
-    <dimen name="card_corner_radius">4dp</dimen>
+    <dimen name="card_corner_radius">20dp</dimen>
     <dimen name="default_elevation">8dp</dimen>
 
     <!--Inventory details-->
@@ -64,4 +61,6 @@
 
     <dimen name="map_image_height">100dp</dimen>
     <dimen name="geometric_progress_view_size">100dp</dimen>
+
+    <dimen name="small_10_text_size">10sp</dimen>
 </resources>

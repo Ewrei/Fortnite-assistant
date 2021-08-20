@@ -11,7 +11,7 @@ class BodyStatsEmptyViewHolder(
 
     override fun bind(item: BodyStats) {
         if (item is BodyStatsEmpty) {
-            binding.item = item
+            binding.item = item.emptyTitle
         }
     }
 }

@@ -26,7 +26,7 @@ fun Throwable?.getErrorModel(isUser: Boolean = false): ErrorModel {
                 R.drawable.ic_unknown_error,
                 null,
                 true,
-                ParserJsonObject.getErrors(this.response()?.errorBody()?.string())
+                ParserJsonObject.getError(this.response()?.errorBody()?.string())
             )
         }
         is FirebaseFirestoreException -> {
@@ -80,7 +80,7 @@ private fun getUserError(error: HttpException): ErrorModel {
             R.drawable.ic_unknown_error,
             null,
             true,
-            ParserJsonObject.getErrors(error.response()?.errorBody()?.string())
+            ParserJsonObject.getError(error.response()?.errorBody()?.string())
         )
     }
 }

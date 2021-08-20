@@ -34,6 +34,7 @@
             android:layout_marginTop="@dimen/default_margin_double"
             android:layout_marginEnd="@dimen/default_margin"
             android:gravity="center"
+            android:fontFamily="@font/futura_pt_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
         <TextView
@@ -44,15 +45,15 @@
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
+            android:fontFamily="@font/futura_pt_medium"
             android:gravity="center"
             android:visibility="gone" />
 
         <com.google.android.material.button.MaterialButton
+            style="@style/DefaultButton"
             android:id="@+id/errorResolveButton"
-            android:backgroundTint="@color/color_orange"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
             android:text="@string/repeat"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/default_margin"

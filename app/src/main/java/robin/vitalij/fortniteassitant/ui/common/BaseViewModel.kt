@@ -62,6 +62,13 @@ open class BaseViewModel : ViewModel() {
             .doOnDispose { activityProgressBarVisibility.value = false }
     }
 
+    protected fun <T> setupActivityProgressShow(single: Single<T>): Single<T> {
+        return single.doOnSubscribe { activityProgressBarVisibility.value = true  }
+            .doOnSuccess {activityProgressBarVisibility.value = false  }
+            .doOnError { activityProgressBarVisibility.value = false  }
+            .doOnDispose { activityProgressBarVisibility.value = false  }
+    }
+
     protected fun <T> setupProgressShow(observable: Observable<T>): Observable<T> {
         return observable.doOnSubscribe { showProgressBar() }
             .doOnNext { hideProgressBar() }

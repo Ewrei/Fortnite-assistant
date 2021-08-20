@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardBackgroundColor="@android:color/black">
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_double"
+        android:singleLine="true"
+        android:text=""
+        android:fontFamily="@font/fortnite_battlefest"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/white"
+        tools:text="hello" />
+
+</com.google.android.material.card.MaterialCardView>

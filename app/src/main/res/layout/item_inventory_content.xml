@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="robin.vitalij.fortniteassitant.model.network.shop.ShopItem" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        style="@style/DefaultCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
+        android:layout_marginTop="@dimen/default_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitStart"
+                android:adjustViewBounds="true"
+                app:imageUrl="@{item.fullBackground}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:layout_margin="@dimen/default_margin"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="@dimen/small_10_text_size"
+                android:fontFamily="@font/futura_pt_medium"
+                app:typeShop="@{item.type}"
+                tools:text="type" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@android:color/black"
+                android:gravity="end|center_vertical">
+
+                <TextView
+                    android:id="@+id/oldPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/fortnite_battlefest"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:visibility="@{item.priceNoDiscount != item.price ? View.VISIBLE : View.GONE}"
+                    app:value="@{item.priceNoDiscount}"
+                    tools:text="1300" />
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/half_default_margin"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    app:value="@{item.price}"
+                    android:fontFamily="@font/fortnite_battlefest"
+                    tools:text="1200" />
+
+                <ImageView
+                    android:layout_width="@dimen/icon_size"
+                    android:layout_height="@dimen/icon_size"
+                    android:layout_marginEnd="@dimen/half_default_margin"
+                    android:layout_marginTop="@dimen/half_default_margin"
+                    android:layout_marginBottom="@dimen/half_default_margin"
+                    app:srcCompat="@drawable/img_v_baks" />
+            </TableRow>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

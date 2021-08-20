@@ -1,0 +1,119 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+
+        <variable
+            name="viewModel"
+            type="robin.vitalij.fortniteassitant.ui.comparison.viewpager.AdapterComparisonViewModel" />
+
+        <variable
+            name="model"
+            type="robin.vitalij.fortniteassitant.model.comparison.ComparisonProfileResponse" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/contentView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:orientation="horizontal">
+
+            <TableRow
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/avatarOne"
+                    android:layout_width="@dimen/icon_size_medium"
+                    android:layout_height="@dimen/icon_size_medium"
+                    app:imageUrl="@{model.playerModel.userEntity.avatar}"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/nicknameOne"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:layout_marginEnd="@dimen/default_margin"
+                    android:fontFamily="@font/futura_pt_medium"
+                    android:text="@{model.playerModel.userEntity.name}"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    tools:text="nicknameOne" />
+
+            </TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/vs"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textColor="@color/color_red_elo"
+                android:textStyle="bold" />
+
+            <TableRow
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end">
+
+                <ImageView
+                    android:id="@+id/avatarTwo"
+                    android:layout_width="@dimen/icon_size_medium"
+                    android:layout_height="@dimen/icon_size_medium"
+                    android:layout_marginStart="@dimen/default_margin"
+                    app:imageUrl="@{model.playerTwoModel.userEntity.avatar}"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/nickNameTwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:fontFamily="@font/futura_pt_medium"
+                    android:text="@{model.playerTwoModel.userEntity.name}"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    tools:text="nickNameTwo" />
+
+            </TableRow>
+
+        </LinearLayout>
+
+        <include
+            layout="@layout/layout_type_stats_group"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:tabMode="scrollable"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                app:tabTextAppearance="@style/TabText"
+                style="@style/DefaultColorTabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </androidx.viewpager.widget.ViewPager>
+
+    </LinearLayout>
+
+</layout>

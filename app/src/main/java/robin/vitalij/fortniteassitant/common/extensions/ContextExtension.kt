@@ -11,17 +11,17 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.StringRes
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import org.solovyev.android.checkout.Billing
+//import org.solovyev.android.checkout.Billing
 import robin.vitalij.fortniteassitant.BuildConfig
 import robin.vitalij.fortniteassitant.R
 
 
-fun Context.getBilling() =
-    Billing(this, object : Billing.DefaultConfiguration() {
-        override fun getPublicKey(): String {
-            return BuildConfig.BILLING_ID
-        }
-    })
+//fun Context.getBilling() =
+//    Billing(this, object : Billing.DefaultConfiguration() {
+//        override fun getPublicKey(): String {
+//            return BuildConfig.BILLING_ID
+//        }
+//    })
 
 fun Context.showToast(title: String) {
     Toast.makeText(this, title, Toast.LENGTH_SHORT).show()
@@ -46,7 +46,7 @@ fun Context.showDialog(@StringRes messageRes: Int) {
         .show()
 }
 
-fun Context.showDialog(icon: Drawable, title: String, message: String) {
+fun Context.showDialog(icon: Drawable?, title: String, message: String) {
     MaterialAlertDialogBuilder(this)
         .setTitle(title)
         .setMessage(message)
@@ -94,6 +94,36 @@ fun Context.showDialog(
         .setPositiveButton(this.getString(R.string.yes), onPositiveClickListener)
         .setNegativeButton(this.getString(R.string.no)) { dialog, _ -> dialog.cancel() }
         .create().show()
+}
+
+fun Context.showDialog(
+title: String?,
+message: String?,
+positiveClick: () -> Unit,
+neutralClick: () -> Unit
+) {
+    MaterialAlertDialogBuilder(this)
+        .setTitle(title)
+        .setMessage(message)
+        .setCancelable(true)
+        .setPositiveButton(android.R.string.ok) { dialog, _ ->
+            run {
+                dialog.dismiss()
+                positiveClick()
+            }
+        }
+        .setNegativeButton(android.R.string.no) { dialog, _ ->
+            run {
+                dialog.dismiss()
+            }
+        }
+        .setNeutralButton(R.string.subscription) { dialog, _ ->
+            run {
+                dialog.dismiss()
+                neutralClick()
+            }
+        }
+        .show()
 }
 
 

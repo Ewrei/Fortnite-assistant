@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="title_setting">Настройки</string>
+    <string name="title_item_shop">Магазин</string>
+    <string name="title_home">Глав</string>
+    <string name="tab_title_history_match">История матчей</string>
+    <string name="tab_title_top">Лидеры</string>
+
     <string name="retry">Попробовать еще раз</string>
     <string name="unknown_error">Что-то пошло не так</string>
     <string name="repeat">Повторить</string>
@@ -43,10 +49,227 @@
     <string name="wins_percent">Победы %</string>
     <string name="kd">KD</string>
     <string name="play_time">%s ч. всего</string>
-    <string name="level_format">Уровень %d</string> 
+    <string name="level_format">Уровень %d</string>
     <string name="all">Вся</string>
     <string name="no_results_for_this_platform">Нет результатов для этой платформы</string>
     <string name="kills">Убийства</string>
     <string name="user_empty_stats">Не удалось найти статистику по запрошенному профилю</string>
     <string name="save_the_user">Сохраняем пользователя</string>
+    <string name="killsPerMin">Убийств за. мин</string>
+    <string name="killsPerMatch">Убийств за матч</string>
+    <string name="minutes_played">Минуты в игре</string>
+
+    <!--History match-->
+    <string name="title_history_match">История матчей</string>
+    <string name="player_soutlived">Player Soutlived</string>
+    <string name="top_history">Top</string>
+    <string name="score">Очки</string>
+    <string name="history_match_body">
+Данные по матчам могут группироваться. А так же при каждом обновление мы получаем последние 25 матчей, который могут группироваться.\n\nЭтот раздел бета. Если у вас работает не корректно сообщите нам</string>
+
+    <!--Details statistics-->
+    <string name="details_statistics">Детальная статистика</string>
+    <string name="avg_score">Avg. score</string>
+    <string name="score_per_min">Score per min</string>
+    <string name="score_per_match">Score per match</string>
+    <string name="last_modified">Last modified</string>
+    <string name="other">Other</string>
+    <string name="kills_per_min">Kills per min</string>
+    <string name="kills_per_match">Kills per match</string>
+    <string name="players_outlived">Players Outlived</string>
+
+    <!--Charts-->
+    <string name="kd_full">Kill/Death Ratio</string>
+    <string name="win_rate">Win rate</string>
+    <string name="parameter_List">Список параметров</string>
+
+    <!--Home-->
+    <string name="hours">Часы</string>
+    <string name="no_information">Нет информации</string>
+    <string name="game_sessions">Игровые сессии</string>
+    <string name="other_session">Другие сессии</string>
+    <string name="current_season_statistics">Текущий сезон</string>
+
+    <!--Subscription-->
+    <string name="disabling_ads">Отключение рекламы</string>
+    <string name="cancel_at_any_time">Отмените в любое время в Google Play</string>
+    <string name="subscription_features">Отключение рекламы;\nДоступ ко всем функциям в приложение</string>
+    <string name="plus_subcription_title">Плюсы подписки:</string>
+    <string name="additional_features">Доступ ко всем функциям приложения</string>
+    <string name="food_developer">На еду разработчику</string>
+    <string name="remove_ads_body">Для того чтоб убрать рекламу с приложения на 96 часов, просмотрите видеорекламу</string>
+    <string name="reclam_info">Реклама отключена до </string>
+    <string name="reclam_info2">Реклама еще не загрузилась </string>
+    <string name="reclam_body">Реклама помогает развиваться приложению. Следующий раз показ будет через один час</string>
+    <string name="subscription">Подписка</string>
+    <string name="watch">Смотреть</string>
+    <string name="per_month">в месяц</string>
+    <string name="or">Или</string>
+
+    <!--Main-->
+    <string name="play_market_header">Оцените нас на Play Market</string>
+    <string name="play_market_body">Вам нравится использовать это приложение? Пожалуйста, помогите нам стать 5-звездочным приложением!</string>
+
+    <!--Update-->
+    <string name="downloaded_update_snackbar">Только что было скачано обновление.\nПерезагрузите, чтобы обновить</string>
+    <string name="install">Установить</string>
+    <string name="app_download_starts">Начинается загрузка приложения…</string>
+    <string name="app_download_canceled">Скачивание приложения отменено.</string>
+    <string name="app_download_failed">Не удалось скачать приложение.</string>
+    <string name="update_body">Получение данных от сервера</string>
+
+    <!--To contact us-->
+    <string name="to_contact_us">Связаться с нами</string>
+    <string name="to_contact_us_body">Вы нашли ошибку? Или у вас появилась идея? Пишите нам</string>
+    <string name="contact_telegram">Написать в Telegram</string>
+    <string name="contact_vk">Написать в Вконтакте</string>
+    <string name="contact_gmail">Написать на почту</string>
+    <string name="message_no_set_telegram">У вас не установлен Telegram</string>
+
+    <!--Application info-->
+    <string name="develop">Разработчик: Виталий Робиновский\nvitalij.robin@gmail.com</string>
+    <string name="version_format">Version: %s</string>
+    <string name="application_info">Приложение Fortnite Assistant предназначено для анализа и отслеживание вашей статистики, без авторизации</string>
+    <string name="developer_title">Связь с разработичком</string>
+    <string name="developer_body">Вы нашли ошибку, или у вас есть идеи как сделать приложение лучше? Пишите</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
+
+    <string name="purchases_message">Ваши покупки былы восстановлены</string>
+    <string name="purchases_message_no">Вы не совершали покупок</string>
+    <string name="purchases_user_canceled">Вы отменили подписку</string>
+
+    <string name="check_shopping">Восстановление покупок</string>
+    <string name="check_shopping_body">Проверяет вашу корзину покупок. Если покупка была совершена, реклама будет отключена</string>
+
+    <!--Settings-->
+    <string name="info_application">О приложение</string>
+    <string name="share_title">Поделиться приложением</string>
+    <string name="share_body">Ваши друзья играют в cs go? Поделитесь этим приложением с ними.</string>
+    <string name="compare_players">Сравнение игроков</string>
+    <string name="users">Аккаунты</string>
+    <string name="users_body">Список сохраненных аккаунтов</string>
+    <string name="steam_profile">Steam профиль</string>
+    <string name="faceit_profile">Faceit профиль</string>
+    <string name="copy_stats_link">Ссылка</string>
+    <string name="news_game">Новости</string>
+    <string name="feedback">Обратная связь</string>
+    <string name="add_functional">Доп. функционал</string>
+    <string name="steam_functional">Steam функции</string>
+
+    <string name="delete_account">Удалить пользователя</string>
+    <string name="delete_account_message">Профиль был удален</string>
+    <string name="delete_account_title">Вы точно хотите %s удалить?</string>
+
+    <string name="wins">Победы</string>
+
+    <string name="tops">Leaderboard</string>
+
+    <!--Users-->
+    <string name="last_date_update">Последнее обновление %s</string>
+
+    <!--Comparison-->
+    <string name="comparison_player_format">Сравнить %s игроков</string>
+    <string name="comparison_no_players_selected_dialog_body">Для сравнение игроков нужно выбрать минимум двух игроков</string>
+    <string name="content_restriction_dialog">Эта функция имеет ограничения. Для доступа к ней, оформите подписку или посмотрите короткую рекламу</string>
+    <string name="added_comparison">Добавление в сравнение</string>
+    <string name="selected_user">Выбранные пользователи</string>
+    <string name="player_omparison">Сравнение игроков</string>
+    <string name="statistics_title">Статистика</string>
+    <string name="important">Важное</string>
+
+    <string name="delete">Удалить</string>
+
+    <string name="players_did_not_participate_in_battles">Игроки не участвовали в боях</string>
+
+    <string name="no_function">Данная функция будет доступна в следущей версии приложения</string>
+
+    <!--Top-->
+    <string name="parametr">Parameter</string>
+    <string name="platform">Платформа</string>
+    <string name="type_battles">Тип боя</string>
+
+    <!--Shop-->
+    <string name="upcoming_shop">Предстоящие</string>
+    <string name="current_shop">Текущий</string>
+    <string name="featured">Рекомендуемые</string>
+    <string name="unknown">Неизвестно</string>
+    <string name="emote">Эмоция</string>
+    <string name="emoji">Эмодзи</string>
+    <string name="music">Музыка</string>
+    <string name="spray">Граффити</string>
+    <string name="wrap">Обёртка</string>
+    <string name="petcarrier">Питомец</string>
+    <string name="contrail">Воздушный След</string>
+    <string name="toy">Игрушка</string>
+    <string name="banner">Эмблема</string>
+    <string name="loading_screen">Экраны загрузки</string>
+    <string name="backpack">Украшение на спишу</string>
+    <string name="outfit">Экипировка</string>
+    <string name="pickaxe">Инструмент</string>
+    <string name="glider">Дельтаплан</string>
+    <string name="bundle">Предметы в комплекте</string>
+
+    <string name="daily">Ежедневно</string>
+    <string name="special_daily">Особое</string>
+    <string name="special_featured">Специальные предложения</string>
+
+    <string name="the_kit_includes">В комплект входит</string>
+
+    <!--Wiki-->
+    <string name="wikipedia">Википедия</string>
+    <string name="battle_pass_rewards">Награды боевого пропуска</string>
+    <string name="quantity_format">Количество: %d</string>
+    <string name="current_season">Текущий сезон</string>
+    <string name="season_format">Сезон № %s</string>
+    <string name="paid">Платное</string>
+    <string name="free">Бесплатное</string>
+    <string name="fishing">Рыбалка</string>
+
+   <!--Weapons-->
+    <string name="weapons">Оружие</string>
+    <string name="dmg_pb">dmgPb</string>
+    <string name="firingRate">firingRate</string>
+    <string name="clipSize">clipSize</string>
+    <string name="reloadTime">reloadTime</string>
+    <string name="bulletsPerCartridge">bulletsPerCartridge</string>
+    <string name="spread">spread</string>
+    <string name="spreadDownsights">spreadDownsights</string>
+    <string name="damageZoneCritical">damageZoneCritical</string>
+
+
+    <!--Fish-->
+    <string name="required">Требуется</string>
+    <string name="professional_fishing_rod">Профессиональная удочка</string>
+    <string name="max_stack_size">Макс. кол.</string>
+    <string name="size">Размер</string>
+    <string name="stats_fish">Ваша статистика рыбалки</string>
+    <string name="empty_fish">Дружище, ты что не любишь рыбалку? Бери удочку и вперед</string>
+
+    <!--Achievement-->
+    <string name="achievements">Достижения</string>
+
+    <!--Cosmetics-new-->
+    <string name="cosmetics_news">Недавно добавленная косметика</string>
+    <string name="cosmetics">Косметика</string>
+    <string name="banners">Баннеры</string>
+    <string name="tags">Теги</string>
+    <string name="add_date_format">Добавлен %s</string>
+
+    <string name="share_user_title">Поделиться ссылкой на профиль</string>
+    <string name="you_can_see_the_profile_format">Ты можешь посмотреть профиль %s по ссылке</string>
+
+    <string name="empty_search_user">Мы не можем найти ваш профиль</string>
+
+    <string name="look_for_similar">Я не помню точного имени, искать похожие</string>
+
+    <string name="empty_session">У вас еще нет игровых сессий. Сыграйте матч и обновите данные</string>
+
+    <!--Vehicles-->
+    <string name="vehicles">Транспортные средства</string>
+
+    <string name="current_map">Текущая карта</string>
+
+    <string name="your_current_position_format">Ваша текущая позиция: %s</string>
+    <string name="your_value_format">Ваша значение: %s</string>
+
 </resources>

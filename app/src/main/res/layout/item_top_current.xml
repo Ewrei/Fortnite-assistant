@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="robin.vitalij.fortniteassitant.ui.top.adapter.TopListItem.CurrentPositionItem" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/DefaultCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin_double"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/position"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="@{item.position}"
+                android:fontFamily="@font/futura_pt_medium"
+                app:fontFamily="@font/futura_pt_medium"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textStyle="bold"
+                tools:text="position" />
+
+            <TextView
+                android:id="@+id/value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/half_default_margin"
+                android:singleLine="true"
+                android:text="@{item.value}"
+                android:textColor="@color/color_orange"
+                android:fontFamily="@font/futura_pt_bold"
+                app:fontFamily="@font/futura_pt_bold"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textStyle="bold"
+                tools:text="value" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

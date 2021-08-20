@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel.ComparisonScheduleViewModel" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/DefaultCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checkable="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/battlesTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{item.title}"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/darker_gray"
+                android:fontFamily="@font/futura_pt_bold"
+                tools:text="title" />
+
+            <com.github.mikephil.charting.charts.HorizontalBarChart
+                android:id="@+id/killsChart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/horizontal_bar_chart_height"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/battlesTitle" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

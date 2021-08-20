@@ -1,7 +1,7 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewholder.body
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.item_profile_body.view.*
+import kotlinx.android.synthetic.main.layout_type_stats_group.view.*
 import kotlinx.android.synthetic.main.recycler_view.view.*
 import robin.vitalij.fortniteassitant.databinding.ItemProfileBodyBinding
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewholder.body.adapter.BodyStatsAdapter

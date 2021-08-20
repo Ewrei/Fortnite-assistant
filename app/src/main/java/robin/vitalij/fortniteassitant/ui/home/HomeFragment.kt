@@ -1,47 +1,100 @@
 package robin.vitalij.fortniteassitant.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import kotlinx.android.synthetic.main.fragment_home.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.recycler_view.*
+import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.ui.search.SearchActivity
+import robin.vitalij.fortniteassitant.common.extensions.observeToEmpty
+import robin.vitalij.fortniteassitant.common.extensions.observeToError
+import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
+import robin.vitalij.fortniteassitant.ui.common.BaseFragment
+import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment.Companion.DETAIL_STATISTICS
+import robin.vitalij.fortniteassitant.ui.home.adapter.HomeAdapter
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.Home
+import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment
+import java.util.*
+import javax.inject.Inject
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    @Inject
+    lateinit var viewModelFactory: HomeViewModelFactory
+
+    private lateinit var viewModel: HomeViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+    ) = inflater.inflate(R.layout.fragment_home, container, false)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
+            .get(HomeViewModel::class.java).apply {
+                observeToProgressBar(this@HomeFragment)
+                observeToError(this@HomeFragment)
+            }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        FortniteApplication.appComponent.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        news.setOnClickListener {
-            val navController = findNavController()
-            navController.navigate(R.id.navigation_news)
-        }
+        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
+            it.let(::initAdapter)
+        })
+    }
 
-        search.setOnClickListener {
-            startActivity(SearchActivity.newInstance(requireContext()))
+    private fun initAdapter(list: List<Home>) {
+        recyclerView.run {
+            adapter = HomeAdapter(
+                openParameterList = {
+                    findNavController().navigate(
+                        R.id.navigation_charts_type,
+                        Bundle().apply {
+                            putParcelableArrayList(DETAIL_STATISTICS, viewModel.detailsStatistics)
+                        })
+                },
+                openDetailsStatistics = {
+                    findNavController().navigate(
+                        R.id.navigation_adapter_details_statistics,
+                        Bundle().apply {
+                            putParcelableArrayList(DETAIL_STATISTICS, viewModel.detailsStatistics)
+                        })
+                },
+                openSession = { sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel> ->
+                    val bundle = Bundle().apply {
+                        putLong(AdapterSessionFragment.SESSION_ID, sessionId)
+                        putLong(AdapterSessionFragment.SESSION_LAST_ID, sessionLast)
+                        putString(AdapterSessionFragment.DATE, sessionDate)
+                        putParcelableArrayList(
+                            DETAIL_STATISTICS,
+                            detailsStats as ArrayList<DetailStatisticsModel>
+                        )
+                    }
+
+                    findNavController().navigate(R.id.navigation_adapter_session, bundle)
+                },
+                openSessions = {
+                    findNavController().navigate(R.id.navigation_history)
+                },
+                openSeason = {
+                    findNavController().navigate(R.id.navigation_adapter_details_season_statistics)
+                })
+            (adapter as HomeAdapter).setData(list)
+            layoutManager = LinearLayoutManager(context)
         }
     }
 }
