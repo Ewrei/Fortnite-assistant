@@ -5,14 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewBinding
 import robin.vitalij.fortniteassitant.model.network.shop.ItemShopUpcoming
 import robin.vitalij.fortniteassitant.ui.bottomsheet.upcomingshop.UpcomingShopResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
@@ -27,10 +25,22 @@ class UpcomingShopFragment : BaseFragment() {
 
     private lateinit var viewModel: UpcomingShopViewModel
 
+    private var _binding: FragmentRecyclerViewBinding? = null
+
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_achievements, container, false)
+    ): View {
+        _binding = FragmentRecyclerViewBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +58,7 @@ class UpcomingShopFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
             it.let(::initAdapter)
         })
 
@@ -63,11 +73,12 @@ class UpcomingShopFragment : BaseFragment() {
     }
 
     private fun initAdapter(list: List<ItemShopUpcoming>) {
-        recyclerView.run {
+        binding.recyclerViewInclude.recyclerView.run {
             adapter = UpcomingShopAdapter {
                 UpcomingShopResultFragment.show(
                     childFragmentManager,
-                    it,)
+                    it,
+                )
             }
             (adapter as UpcomingShopAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)

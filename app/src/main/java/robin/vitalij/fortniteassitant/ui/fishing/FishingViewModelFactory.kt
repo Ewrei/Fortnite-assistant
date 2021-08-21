@@ -5,7 +5,7 @@ import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
 import javax.inject.Inject
 
 class FishingViewModelFactory @Inject constructor(
-    private var fishRepository: FishRepository
+    private val fishRepository: FishRepository
 ) : BaseViewModelFactory<FishingViewModel>(FishingViewModel::class.java) {
 
     private var viewModel: FishingViewModel? = null

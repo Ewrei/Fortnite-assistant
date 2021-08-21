@@ -22,14 +22,6 @@ class HomeBodyStatsAdapter(
         items.addAll(data)
     }
 
-    fun updateData(data: List<HomeBodyStats>) {
-        if (items != data) {
-            items.clear()
-            items.addAll(data)
-            notifyDataSetChanged()
-        }
-    }
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

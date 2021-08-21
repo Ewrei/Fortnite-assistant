@@ -7,13 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.recycler_view.*
-import kotlinx.android.synthetic.main.toolbar_center_title.*
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToEmpty
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewBinding
 import robin.vitalij.fortniteassitant.model.enums.NewsType
 import robin.vitalij.fortniteassitant.model.network.NewsModel
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
@@ -29,10 +27,22 @@ class NewsFragment : BaseFragment() {
 
     private lateinit var viewModel: NewsViewModel
 
+    private var _binding: FragmentRecyclerViewBinding? = null
+
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_achievements, container, false)
+    ): View {
+        _binding = FragmentRecyclerViewBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +72,7 @@ class NewsFragment : BaseFragment() {
     }
 
     private fun initAdapter(list: List<NewsModel>) {
-        recyclerView.run {
+        binding.recyclerViewInclude.recyclerView.run {
             adapter = NewsAdapter(
                 onVideoClick = { videoUrl: String, videoName: String ->
                     startActivity(VideoActivity.newInstance(context, videoUrl, videoName))

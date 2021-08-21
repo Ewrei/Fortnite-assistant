@@ -2,18 +2,16 @@ package robin.vitalij.fortniteassitant.ui.shop.current
 
 import android.content.Context
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.getScreenWidth
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewBinding
 import robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.CurrentShopResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.shop.current.adapter.CurrentShopAdapter
@@ -22,6 +20,9 @@ import robin.vitalij.fortniteassitant.ui.shop.current.adapter.viewmodel.CurrentS
 import javax.inject.Inject
 
 private const val MAX_SPAN_COUNT = 2
+private const val SHOP_SPAN_COUNT = 1
+
+private const val WIDTH_PIXELS_PERCENT = 0.35
 
 class CurrentShopFragment : BaseFragment() {
 
@@ -30,10 +31,22 @@ class CurrentShopFragment : BaseFragment() {
 
     private lateinit var viewModel: CurrentShopViewModel
 
+    private var _binding: FragmentRecyclerViewBinding? = null
+
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_achievements, container, false)
+    ): View {
+        _binding = FragmentRecyclerViewBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +64,7 @@ class CurrentShopFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
             it.let(::initAdapter)
         })
 
@@ -66,11 +79,7 @@ class CurrentShopFragment : BaseFragment() {
     }
 
     private fun initAdapter(list: List<CurrentShopImpl>) {
-        val displayMetrics = DisplayMetrics()
-        activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
-        val widthPixels = displayMetrics.widthPixels * 0.35
-
-        recyclerView.run {
+        binding.recyclerViewInclude.recyclerView.run {
             adapter = CurrentShopAdapter(
                 onClick = {
                     CurrentShopResultFragment.show(
@@ -78,7 +87,7 @@ class CurrentShopFragment : BaseFragment() {
                         it,
                     )
                 },
-                widthPixels = widthPixels.toInt()
+                widthPixels = activity?.getScreenWidth(WIDTH_PIXELS_PERCENT) ?: 0
             )
             (adapter as CurrentShopAdapter).setData(list)
 
@@ -89,7 +98,7 @@ class CurrentShopFragment : BaseFragment() {
             gridlayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {
                     return when (adapter?.getItemViewType(position)) {
-                        CurrentShopType.SHOP_ITEM.id -> 1
+                        CurrentShopType.SHOP_ITEM.id -> SHOP_SPAN_COUNT
                         else -> MAX_SPAN_COUNT
                     }
                 }

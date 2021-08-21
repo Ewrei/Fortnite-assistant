@@ -6,7 +6,7 @@ import robin.vitalij.fortniteassitant.databinding.ItemNewsBinding
 import robin.vitalij.fortniteassitant.model.network.NewsModel
 
 class NewsHolder(
-    var binding: ItemNewsBinding,
+    private val binding: ItemNewsBinding,
     private val onVideoClick: (videoUrl: String, videoName: String) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 

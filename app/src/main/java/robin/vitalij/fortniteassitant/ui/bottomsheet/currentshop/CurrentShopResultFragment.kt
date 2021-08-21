@@ -16,6 +16,7 @@ import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
 import robin.vitalij.fortniteassitant.common.binding.TextViewBinding.setValueText
+import robin.vitalij.fortniteassitant.common.extensions.getScreenWidth
 import robin.vitalij.fortniteassitant.common.extensions.setVisibility
 import robin.vitalij.fortniteassitant.databinding.BottomSheetCurrentShopBinding
 import robin.vitalij.fortniteassitant.model.network.shop.OtherItemsDetails
@@ -24,6 +25,7 @@ import robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.adapter.OtherIt
 import javax.inject.Inject
 
 const val BOTTOM_SHEET_MARGIN_TOP = 200
+private const val WIDTH_PIXELS_PERCENT = 0.35
 
 class CurrentShopResultFragment : BottomSheetDialogFragment() {
 
@@ -35,7 +37,7 @@ class CurrentShopResultFragment : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         dialog?.setOnShowListener { dialog ->
             val d = dialog as BottomSheetDialog
             val bottomSheetInternal =
@@ -90,13 +92,9 @@ class CurrentShopResultFragment : BottomSheetDialogFragment() {
 
     private fun initAdapter(list: List<OtherItemsDetails>) {
         theKitIncludes.setVisibility(true)
-        val displayMetrics = DisplayMetrics()
-        activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
-        val widthPixels = displayMetrics.widthPixels * 0.35
-
         recyclerView.run {
             adapter = OtherItemsDetailsAdapter(
-                widthPixels = widthPixels.toInt()
+                widthPixels = activity?.getScreenWidth(WIDTH_PIXELS_PERCENT) ?: 0
             )
             (adapter as OtherItemsDetailsAdapter).setData(list)
         }

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.recycler_view.*
@@ -52,7 +51,7 @@ class DetailsSeasonStatisticsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
             it.let(::initAdapter)
         })
 

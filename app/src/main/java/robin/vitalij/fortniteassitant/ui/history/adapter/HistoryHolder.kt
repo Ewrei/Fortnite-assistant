@@ -11,8 +11,8 @@ import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 import robin.vitalij.fortniteassitant.model.HistoryUserModel
 
 class HistoryHolder(
-    var binding: ItemHistoryBinding,
-    val onClick: (sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel>) -> Unit
+    private val binding: ItemHistoryBinding,
+    private val onClick: (sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel>) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: HistoryUserModel) {

@@ -5,13 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import kotlinx.android.synthetic.main.fragment_application_info.*
-import kotlinx.android.synthetic.main.toolbar_center_title.*
 import robin.vitalij.fortniteassitant.BuildConfig
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
@@ -27,19 +24,16 @@ class ApplicationInfoFragment : BaseFragment() {
 
     private lateinit var viewModel: ApplicationInfoViewModel
 
+    private var _binding: FragmentApplicationInfoBinding? = null
+
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val dataBinding: FragmentApplicationInfoBinding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.fragment_application_info,
-            container,
-            false
-        )
-        dataBinding.lifecycleOwner = this@ApplicationInfoFragment
-        dataBinding.viewModel = viewModel
-        return dataBinding.root
+    ): View {
+        _binding = FragmentApplicationInfoBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,19 +49,24 @@ class ApplicationInfoFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        version.text = getString(R.string.version_format, BuildConfig.VERSION_NAME)
+        binding.version.text = getString(R.string.version_format, BuildConfig.VERSION_NAME)
         setNavigation()
         setListener()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun setNavigation() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
     private fun setListener() {
-        privacyPolicy.setOnClickListener {
+        binding.privacyPolicy.setOnClickListener {
             startActivity(
                 WebActivity.newInstance(
                     context,
@@ -76,10 +75,5 @@ class ApplicationInfoFragment : BaseFragment() {
                 )
             )
         }
-    }
-
-    companion object {
-
-        fun newInstance() = ApplicationInfoFragment()
     }
 }

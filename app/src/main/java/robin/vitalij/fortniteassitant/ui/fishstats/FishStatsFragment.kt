@@ -28,6 +28,7 @@ import robin.vitalij.fortniteassitant.ui.fishstats.adapter.FishStatsAdapter
 import javax.inject.Inject
 
 private const val MAX_SPAN_COUNT = 3
+private const val FISH_SPAN_COUNT = 1
 
 class FishStatsFragment : BaseFragment() {
 
@@ -99,7 +100,7 @@ class FishStatsFragment : BaseFragment() {
             )
 
             gridlayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int) = 1
+                override fun getSpanSize(position: Int) = FISH_SPAN_COUNT
             }
 
             layoutManager = gridlayoutManager

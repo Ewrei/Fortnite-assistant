@@ -8,7 +8,7 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 import robin.vitalij.fortniteassitant.model.HistoryUserModel
 
-internal class HistoryAdapter(val onClick: (sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel>) -> Unit) :
+class HistoryAdapter(private val onClick: (sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel>) -> Unit) :
     RecyclerView.Adapter<HistoryHolder>() {
 
     private val items = arrayListOf<HistoryUserModel>()

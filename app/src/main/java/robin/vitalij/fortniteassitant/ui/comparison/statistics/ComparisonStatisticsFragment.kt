@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewBinding
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
@@ -32,10 +30,22 @@ class ComparisonStatisticsFragment : BaseFragment() {
 
     private var isSchedule: Boolean = false
 
+    private var _binding: FragmentRecyclerViewBinding? = null
+
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_achievements, container, false)
+    ): View {
+        _binding = FragmentRecyclerViewBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +67,7 @@ class ComparisonStatisticsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.data.observe(viewLifecycleOwner, Observer {
+        viewModel.data.observe(viewLifecycleOwner, {
             it.let(::initAdapter)
         })
 
@@ -68,14 +78,14 @@ class ComparisonStatisticsFragment : BaseFragment() {
         this.isSchedule = isSchedule
         viewModel.loadSchedule(isSchedule)
     }
-    
+
     fun loadGameType(gameType: GameType) {
         viewModel.gameType = gameType
         viewModel.loadSchedule(isSchedule)
     }
 
     private fun initAdapter(list: List<ComparisonPlayer>) {
-        recyclerView.run {
+        binding.recyclerViewInclude.recyclerView.run {
             adapter = ComparisonStatisticsAdapter()
             (adapter as ComparisonStatisticsAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)

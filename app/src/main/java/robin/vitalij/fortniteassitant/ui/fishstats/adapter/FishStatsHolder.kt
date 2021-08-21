@@ -9,7 +9,7 @@ import robin.vitalij.fortniteassitant.db.entity.WeaponEntity
 import robin.vitalij.fortniteassitant.model.network.FishStats
 
 class FishStatsHolder(
-    var binding: ItemFishStatsBinding
+    private val binding: ItemFishStatsBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: FishStats) {

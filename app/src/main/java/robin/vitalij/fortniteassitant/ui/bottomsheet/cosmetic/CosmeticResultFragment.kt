@@ -14,11 +14,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.getScreenWidth
 import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter.CosmeticsResultAdapter
 import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter.viewmodel.Cosmetics
 import javax.inject.Inject
 
 const val BOTTOM_SHEET_MARGIN_TOP = 200
+private const val WIDTH_PIXELS_PERCENT = 0.35
 
 class CosmeticResultFragment : BottomSheetDialogFragment() {
 
@@ -74,14 +76,10 @@ class CosmeticResultFragment : BottomSheetDialogFragment() {
     }
 
     private fun initAdapter(list: List<Cosmetics>) {
-        val displayMetrics = DisplayMetrics()
-        activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
-        val widthPixels = displayMetrics.widthPixels * 0.35
-
         recyclerView.run {
             adapter = CosmeticsResultAdapter(
                 layoutInflater,
-                widthPixels.toInt()
+                activity?.getScreenWidth(WIDTH_PIXELS_PERCENT) ?: 0
             )
             (adapter as CosmeticsResultAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)

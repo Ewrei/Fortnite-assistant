@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class DetailsStatisticsViewModelFactory @Inject constructor(
     private val detailsStatisticsRepository: DetailsStatisticsRepository,
-    private var preferenceManager: PreferenceManager
+    private val preferenceManager: PreferenceManager
 ) : BaseViewModelFactory<DetailsStatisticsViewModel>(
     DetailsStatisticsViewModel::class.java
 ) {
