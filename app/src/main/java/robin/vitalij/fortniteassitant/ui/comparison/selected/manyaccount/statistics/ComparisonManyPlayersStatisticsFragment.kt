@@ -5,14 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewBinding
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
@@ -22,8 +20,6 @@ import robin.vitalij.fortniteassitant.ui.comparison.GAME_TYPE
 import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.statistics.adapter.ComparisonManyPlayerAdapter
 import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.statistics.adapter.viewmodel.ComparisonManyPlayers
 import javax.inject.Inject
-
-private const val IS_OTHER = "is_other"
 
 class ComparisonManyPlayersStatisticsFragment :
     BaseFragment() {
@@ -35,6 +31,18 @@ class ComparisonManyPlayersStatisticsFragment :
     lateinit var preferenceManager: PreferenceManager
 
     private lateinit var viewModel: ComparisonManyPlayersStatisticsViewModel
+
+    private var _binding: FragmentRecyclerViewBinding? = null
+
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentRecyclerViewBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +61,7 @@ class ComparisonManyPlayersStatisticsFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.data.observe(viewLifecycleOwner, Observer {
+        viewModel.data.observe(viewLifecycleOwner, {
             it.let(::initAdapter)
         })
 
@@ -64,13 +72,13 @@ class ComparisonManyPlayersStatisticsFragment :
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_with_recyclerview_and_lce, container, false)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     private fun initAdapter(list: List<ComparisonManyPlayers>) {
-        recyclerView.run {
+        binding.recyclerViewInclude.recyclerView.run {
             adapter = ComparisonManyPlayerAdapter {}
             (adapter as ComparisonManyPlayerAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)

@@ -7,24 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.recycler_view.*
-import kotlinx.android.synthetic.main.toolbar_center_title.*
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
-import robin.vitalij.fortniteassitant.databinding.FragmentUsersBinding
+import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewWithToolbarBinding
 import robin.vitalij.fortniteassitant.interfaces.UsersCallback
+import robin.vitalij.fortniteassitant.model.UserModel
 import robin.vitalij.fortniteassitant.ui.bottomsheet.user.UserResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.main.MainActivity
-import robin.vitalij.fortniteassitant.model.UserModel
 import robin.vitalij.fortniteassitant.ui.users.adapter.UsersAdapter
 import javax.inject.Inject
 
@@ -35,21 +31,16 @@ class UsersFragment : BaseFragment() {
 
     private lateinit var viewModel: UsersViewModel
 
-    private lateinit var dataBinding: FragmentUsersBinding
+    private var _binding: FragmentRecyclerViewWithToolbarBinding? = null
+
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        dataBinding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.fragment_users,
-            container,
-            false
-        )
-        dataBinding.lifecycleOwner = this@UsersFragment
-        dataBinding.viewModel = viewModel
-        return dataBinding.root
+        _binding = FragmentRecyclerViewWithToolbarBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,14 +68,19 @@ class UsersFragment : BaseFragment() {
         setNavigation()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun setNavigation() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
     private fun initAdapter(list: List<UserModel>) {
-        recyclerView.run {
+        binding.recyclerViewInclude.recyclerView.run {
             adapter = UsersAdapter { playerId, playerName ->
                 UserResultFragment.show(
                     childFragmentManager,
