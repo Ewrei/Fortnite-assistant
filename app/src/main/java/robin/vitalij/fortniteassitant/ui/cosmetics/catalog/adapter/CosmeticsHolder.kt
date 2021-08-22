@@ -5,7 +5,7 @@ import robin.vitalij.fortniteassitant.databinding.ItemCosmeticsBinding
 import robin.vitalij.fortniteassitant.db.entity.CosmeticsEntity
 
 class CosmeticsHolder(
-    var binding: ItemCosmeticsBinding
+    private val binding: ItemCosmeticsBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: CosmeticsEntity) {

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.model.comparison.PlayerModel
 
-internal class SelectedListUserAdapter(val onClick: (playerModel: PlayerModel) -> Unit) :
+internal class SelectedListUserAdapter(private val onClick: (playerModel: PlayerModel) -> Unit) :
     RecyclerView.Adapter<SelectedListUserHolder>() {
 
     val items = arrayListOf<PlayerModel>()
@@ -29,7 +29,7 @@ internal class SelectedListUserAdapter(val onClick: (playerModel: PlayerModel) -
             R.layout.item_selected_user,
             parent,
             false
-        ), onClick
+        )
     )
 
     override fun onBindViewHolder(holder: SelectedListUserHolder, position: Int) {

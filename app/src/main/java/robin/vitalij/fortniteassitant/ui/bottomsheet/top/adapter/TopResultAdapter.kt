@@ -5,8 +5,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.databinding.ItemTopResultContentBinding
-import robin.vitalij.fortniteassitant.databinding.ItemTopResultHeaderBinding
 import robin.vitalij.fortniteassitant.model.enums.TopType
 import robin.vitalij.fortniteassitant.ui.bottomsheet.top.adapter.viewholder.TopContentViewHolder
 import robin.vitalij.fortniteassitant.ui.bottomsheet.top.adapter.viewholder.TopHeaderViewHolder
@@ -28,31 +26,34 @@ class TopResultAdapter(private val onClick: (topType: TopType) -> Unit) :
         val inflater = LayoutInflater.from(parent.context)
         when (viewType) {
             TopResultType.CONTENT.id -> {
-                val binding = DataBindingUtil.inflate<ItemTopResultContentBinding>(
-                    inflater,
-                    R.layout.item_top_result_content,
-                    parent,
-                    false
+                return TopContentViewHolder(
+                    DataBindingUtil.inflate(
+                        inflater,
+                        R.layout.item_top_result_content,
+                        parent,
+                        false
+                    ), onClick
                 )
-                return TopContentViewHolder(binding, onClick)
             }
             TopResultType.HEADER.id -> {
-                val binding = DataBindingUtil.inflate<ItemTopResultHeaderBinding>(
-                    inflater,
-                    R.layout.item_top_result_header,
-                    parent,
-                    false
+                return TopHeaderViewHolder(
+                    DataBindingUtil.inflate(
+                        inflater,
+                        R.layout.item_top_result_header,
+                        parent,
+                        false
+                    )
                 )
-                return TopHeaderViewHolder(binding)
             }
             else -> {
-                val binding = DataBindingUtil.inflate<ItemTopResultHeaderBinding>(
-                    inflater,
-                    R.layout.item_top_result_header,
-                    parent,
-                    false
+                return TopHeaderViewHolder(
+                    DataBindingUtil.inflate(
+                        inflater,
+                        R.layout.item_top_result_header,
+                        parent,
+                        false
+                    )
                 )
-                return TopHeaderViewHolder(binding)
             }
         }
     }
@@ -64,4 +65,5 @@ class TopResultAdapter(private val onClick: (topType: TopType) -> Unit) :
     }
 
     override fun getItemViewType(position: Int) = items[position].getType().id
+
 }

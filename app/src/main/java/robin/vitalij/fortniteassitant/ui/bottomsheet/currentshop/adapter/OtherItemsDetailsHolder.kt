@@ -6,7 +6,7 @@ import robin.vitalij.fortniteassitant.databinding.ItemOtherItemsDetailsBinding
 import robin.vitalij.fortniteassitant.model.network.shop.OtherItemsDetails
 
 class OtherItemsDetailsHolder(
-    var binding: ItemOtherItemsDetailsBinding,
+    private val binding: ItemOtherItemsDetailsBinding,
     private val widthPixels: Int
 ) : RecyclerView.ViewHolder(binding.root) {
 

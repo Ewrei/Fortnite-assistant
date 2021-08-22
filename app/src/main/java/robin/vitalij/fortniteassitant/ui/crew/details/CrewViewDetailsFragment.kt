@@ -64,18 +64,11 @@ class CrewViewDetailsFragment : BaseFragment() {
             it.let(::initAdapter)
         })
 
-        setListener()
         setNavigation()
 
         arguments?.let {
             viewModel.mutableLiveData.value = it.getParcelableArrayList(CREW_REWARDS_MODEL)
             binding.toolbarInclude.toolbar.title = it.getString(NAME)
-        }
-    }
-
-    private fun setListener() {
-        setErrorResolveButtonClick {
-            viewModel.loadData()
         }
     }
 

@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.databinding.ItemInventoryContentBinding
 import robin.vitalij.fortniteassitant.model.network.shop.ShopItem
 
 internal class InventoryContentAdapter(
@@ -20,16 +19,14 @@ internal class InventoryContentAdapter(
         items.addAll(data)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InventoryContentHolder {
-        val binding: ItemInventoryContentBinding =
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                R.layout.item_inventory_content,
-                parent,
-                false
-            )
-        return InventoryContentHolder(binding, onClick, widthPixels)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = InventoryContentHolder(
+        DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            R.layout.item_inventory_content,
+            parent,
+            false
+        ), onClick, widthPixels
+    )
 
     override fun onBindViewHolder(holder: InventoryContentHolder, position: Int) {
         holder.bind(items[position])

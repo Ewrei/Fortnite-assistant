@@ -9,7 +9,7 @@ import robin.vitalij.fortniteassitant.db.entity.WeaponEntity
 import robin.vitalij.fortniteassitant.model.enums.ShopType
 
 class CatalogCosmeticsHolder(
-    var binding: ItemCatalogCosmeticsBinding
+    private val binding: ItemCatalogCosmeticsBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: ShopType) {

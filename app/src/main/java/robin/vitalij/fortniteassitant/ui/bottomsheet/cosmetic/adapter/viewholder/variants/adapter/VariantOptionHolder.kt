@@ -6,7 +6,7 @@ import robin.vitalij.fortniteassitant.databinding.ItemOptionBinding
 import robin.vitalij.fortniteassitant.db.entity.Option
 
 class VariantOptionHolder(
-    var binding: ItemOptionBinding,
+    private val binding: ItemOptionBinding,
     private val widthPixels: Int
 ) : RecyclerView.ViewHolder(binding.root) {
 

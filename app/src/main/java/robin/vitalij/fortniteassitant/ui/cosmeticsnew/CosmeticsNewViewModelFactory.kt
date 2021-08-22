@@ -5,7 +5,7 @@ import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
 import javax.inject.Inject
 
 class CosmeticsNewViewModelFactory @Inject constructor(
-    private var cosmeticsNewRepository: CosmeticsNewRepository
+    private val cosmeticsNewRepository: CosmeticsNewRepository
 ) : BaseViewModelFactory<CosmeticsNewViewModel>(CosmeticsNewViewModel::class.java) {
 
     private var viewModel: CosmeticsNewViewModel? = null

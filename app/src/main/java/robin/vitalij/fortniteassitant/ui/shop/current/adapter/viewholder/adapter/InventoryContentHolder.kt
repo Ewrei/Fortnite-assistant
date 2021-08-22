@@ -7,8 +7,8 @@ import robin.vitalij.fortniteassitant.databinding.ItemInventoryContentBinding
 import robin.vitalij.fortniteassitant.model.network.shop.ShopItem
 
 class InventoryContentHolder(
-    var binding: ItemInventoryContentBinding,
-    val onClick: (inventoryModel: ShopItem) -> Unit,
+    private val binding: ItemInventoryContentBinding,
+    private val onClick: (inventoryModel: ShopItem) -> Unit,
     private val widthPixels: Int
 ) : RecyclerView.ViewHolder(binding.root) {
 

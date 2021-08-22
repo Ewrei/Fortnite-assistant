@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <include
+        android:id="@+id/toolbarInclude"
         layout="@layout/toolbar_center_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -39,6 +40,7 @@
                     app:ms_background_color="@color/colorPrimary" />
 
                 <include
+                    android:id="@+id/recyclerViewInclude"
                     layout="@layout/recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />

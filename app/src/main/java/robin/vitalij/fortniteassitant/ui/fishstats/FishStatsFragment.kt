@@ -15,11 +15,11 @@ import kotlinx.android.synthetic.main.recycler_view.*
 import kotlinx.android.synthetic.main.toolbar_center_title.*
 import kotlinx.android.synthetic.main.view_error.*
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToEmpty
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.common.extensions.setVisibility
+import robin.vitalij.fortniteassitant.databinding.FragmentBattlePassRewardsBinding
 import robin.vitalij.fortniteassitant.model.battlepassreward.SeasonModel
 import robin.vitalij.fortniteassitant.model.network.FishStats
 import robin.vitalij.fortniteassitant.ui.bottomsheet.fish.FishResultFragment
@@ -37,10 +37,17 @@ class FishStatsFragment : BaseFragment() {
 
     private lateinit var viewModel: FishStatsViewModel
 
+    private var _binding: FragmentBattlePassRewardsBinding? = null
+
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_battle_pass_rewards, container, false)
+    ): View {
+        _binding = FragmentBattlePassRewardsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,12 +71,17 @@ class FishStatsFragment : BaseFragment() {
         })
 
         viewModel.mutableSeasonLiveData.observe(viewLifecycleOwner, {
-            seasonSpinner.setVisibility(it.isNotEmpty())
-            seasonSpinner.setItems(it)
+            binding.seasonSpinner.setVisibility(it.isNotEmpty())
+            binding.seasonSpinner.setItems(it)
         })
 
         setListener()
         setNavigation()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun setListener() {
@@ -77,7 +89,7 @@ class FishStatsFragment : BaseFragment() {
             viewModel.loadData()
         }
 
-        seasonSpinner.setOnItemSelectedListener { _, _, _, item ->
+        binding.seasonSpinner.setOnItemSelectedListener { _, _, _, item ->
             viewModel.changeSeason((item as SeasonModel))
         }
     }
@@ -85,25 +97,23 @@ class FishStatsFragment : BaseFragment() {
     private fun setNavigation() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
     private fun initAdapter(list: List<FishStats>) {
-        recyclerView.run {
+        binding.recyclerViewInclude.recyclerView.run {
             adapter = FishStatsAdapter {
                 FishResultFragment.show(childFragmentManager, it.type)
             }
             (adapter as FishStatsAdapter).setData(list)
 
-            val gridlayoutManager = GridLayoutManager(
+            layoutManager = GridLayoutManager(
                 activity, MAX_SPAN_COUNT
-            )
-
-            gridlayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int) = FISH_SPAN_COUNT
+            ).apply {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int) = FISH_SPAN_COUNT
+                }
             }
-
-            layoutManager = gridlayoutManager
         }
     }
 }

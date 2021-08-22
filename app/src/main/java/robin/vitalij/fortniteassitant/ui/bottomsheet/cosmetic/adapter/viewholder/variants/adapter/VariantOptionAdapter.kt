@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.databinding.ItemOptionBinding
 import robin.vitalij.fortniteassitant.db.entity.Option
 
 internal class VariantOptionAdapter(
@@ -19,16 +18,14 @@ internal class VariantOptionAdapter(
         items.addAll(data)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VariantOptionHolder {
-        val binding: ItemOptionBinding =
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                R.layout.item_option,
-                parent,
-                false
-            )
-        return VariantOptionHolder(binding, widthPixels)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = VariantOptionHolder(
+        DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            R.layout.item_option,
+            parent,
+            false
+        ), widthPixels
+    )
 
     override fun onBindViewHolder(holder: VariantOptionHolder, position: Int) {
         holder.bind(items[position])
