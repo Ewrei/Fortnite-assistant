@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="robin.vitalij.fortniteassitant.model.HistoryUserModel" />
+            type="robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.HomeSessionListItem.SessionItem" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -57,7 +57,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideline33"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/mapImage"
-                app:value="@{item.userEntity.all.overall.matches}"
+                app:value="@{item.historyUserModel.userEntity.all.overall.matches}"
                 tools:text="matches" />
 
             <TextView
@@ -82,7 +82,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideline66"
                 app:layout_constraintStart_toStartOf="@+id/guideline33"
                 app:layout_constraintTop_toBottomOf="@+id/mapImage"
-                app:percent="@{item.userEntity.all.overall.winRate}"
+                app:percent="@{item.historyUserModel.userEntity.all.overall.winRate}"
                 tools:text="kd" />
 
             <TextView
@@ -109,7 +109,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline66"
                 app:layout_constraintTop_toBottomOf="@+id/mapImage"
-                app:value="@{item.userEntity.all.overall.kd}"
+                app:value="@{item.historyUserModel.userEntity.all.overall.kd}"
                 tools:text="kd" />
 
             <TextView
@@ -137,11 +137,11 @@
                 android:shadowRadius="0.01"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:fontFamily="@font/futura_pt_bold"
-                app:endTimeUpdate="@{item.endTimeUpdate}"
+                app:endTimeUpdate="@{item.historyUserModel.endTimeUpdate}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/mapImage"
-                app:startTimeUpdate="@{item.startTimeUpdate}"
+                app:startTimeUpdate="@{item.historyUserModel.startTimeUpdate}"
                 tools:text="sessionDate" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

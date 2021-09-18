@@ -11,9 +11,7 @@ import robin.vitalij.fortniteassitant.model.network.stats.DuoMatches
 import robin.vitalij.fortniteassitant.model.network.stats.SoloMatches
 import robin.vitalij.fortniteassitant.model.network.stats.StatsTypeDevice
 import robin.vitalij.fortniteassitant.model.network.stats.TrioMatches
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.viewmodel.HomeSession
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.viewmodel.HomeSessionOtherViewModel
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.viewmodel.HomeSessionSessionViewModel
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.HomeSessionListItem
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.*
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.*
 import robin.vitalij.fortniteassitant.utils.ResourceProvider
@@ -53,9 +51,9 @@ class HomeMapper(
             list.add(HomeTitleViewModel(resourceProvider.getString(R.string.game_sessions)))
 
             if (history.size <= TWO_SESSION) {
-                val sessions = arrayListOf<HomeSession>()
+                val sessions = arrayListOf<HomeSessionListItem>()
                 history.forEach {
-                    sessions.add(HomeSessionSessionViewModel(it))
+                    sessions.add(HomeSessionListItem.SessionItem(it))
                 }
                 list.add(
                     HomeSessionViewModel(
@@ -63,16 +61,16 @@ class HomeMapper(
                     )
                 )
             } else {
-                val sessions = arrayListOf<HomeSession>()
+                val sessions = arrayListOf<HomeSessionListItem>()
                 history.take(TWO_SESSION).forEach {
-                    sessions.add(HomeSessionSessionViewModel(it))
+                    sessions.add(HomeSessionListItem.SessionItem(it))
                 }
 
                 var lastHistory = histories[2].user
                 lastHistory = histories.last().user.differenceUser(lastHistory)
 
                 sessions.add(
-                    HomeSessionOtherViewModel(
+                    HomeSessionListItem.OtherItem(
                         matches = lastHistory.all?.overall?.matches ?: 0,
                         winRate = lastHistory.all?.overall?.winRate ?: 0.0,
                         kd = lastHistory.all?.overall?.kd ?: 0.0

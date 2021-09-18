@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.viewmodel.HomeSessionOtherViewModel" />
+            type="robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.HomeSessionListItem.OtherItem" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

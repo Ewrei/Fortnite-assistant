@@ -5,7 +5,7 @@ import robin.vitalij.fortniteassitant.databinding.ItemHomeSessionBinding
 import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 import robin.vitalij.fortniteassitant.ui.common.BaseViewHolder
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.HomeSessionAdapter
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.viewmodel.HomeSession
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.HomeSessionListItem
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.Home
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.HomeSessionViewModel
 
@@ -24,7 +24,7 @@ class HomeStatisticsSessionViewHolder(
         }
     }
 
-    private fun createSessionAdapter(list: List<HomeSession>): HomeSessionAdapter {
+    private fun createSessionAdapter(list: List<HomeSessionListItem>): HomeSessionAdapter {
         val adapter = HomeSessionAdapter(
             openSessions = openSessions,
             openSession = openSession

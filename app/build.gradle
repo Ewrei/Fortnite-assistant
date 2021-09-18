@@ -199,10 +199,10 @@ dependencies {
     gmsImplementation "com.google.firebase:firebase-ads:$ads_version"
 
     //Firebase
-    def firebase_analytics_version = "19.0.0"
+    def firebase_analytics_version = "19.0.1"
     implementation "com.google.firebase:firebase-analytics:$firebase_analytics_version"
 
-    def firebase_core_version = "19.0.0"
+    def firebase_core_version = "19.0.1"
     implementation "com.google.firebase:firebase-core:$firebase_core_version"
 
     def firebase_crashlytics_version = "18.2.1"
@@ -220,7 +220,7 @@ dependencies {
     def timber_version = "4.7.1"
     implementation "com.jakewharton.timber:timber:$timber_version"
 
-    def play_core_version = "1.10.0"
+    def play_core_version = "1.10.1"
     implementation "com.google.android.play:core:$play_core_version"
 
     def circle_progress_version = "1.2.1"

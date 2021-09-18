@@ -30,15 +30,15 @@ fun Throwable?.getErrorModel(isUser: Boolean = false): ErrorModel {
             )
         }
         is FirebaseFirestoreException -> {
-            if (this.code == FirebaseFirestoreException.Code.RESOURCE_EXHAUSTED) {
-                errorModel = ErrorModel(
+            errorModel = if (this.code == FirebaseFirestoreException.Code.RESOURCE_EXHAUSTED) {
+                ErrorModel(
                     R.string.firebase_limit_error,
                     R.drawable.ic_unknown_error,
                     null,
                     true
                 )
             } else {
-                errorModel = ErrorModel(
+                ErrorModel(
                     R.string.unknown_error,
                     R.drawable.ic_unknown_error,
                     null,
