@@ -9,7 +9,7 @@
 
         <variable
             name="item"
-            type="robin.vitalij.fortniteassitant.model.network.shop.OtherItemsDetails" />
+            type="robin.vitalij.fortniteassitant.model.network.shop.GrantedModel" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -60,7 +60,7 @@
                 android:textColor="@android:color/darker_gray"
                 android:textSize="@dimen/small_10_text_size"
                 android:layout_marginBottom="@dimen/default_margin"
-                app:typeShop="@{item.type}"
+                app:typeShop="@{item.type.id}"
                 tools:text="type" />
 
         </LinearLayout>

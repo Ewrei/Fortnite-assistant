@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.shop.current
+package robin.vitalij.fortniteassitant.ui.shop.current_new
 
 import android.content.Context
 import android.os.Bundle
@@ -8,21 +8,15 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.common.extensions.getScreenWidth
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewBinding
+import robin.vitalij.fortniteassitant.model.network.shop.ShopNewItem
 import robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.CurrentShopResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
-import robin.vitalij.fortniteassitant.ui.shop.current.adapter.CurrentShopAdapter
-import robin.vitalij.fortniteassitant.ui.shop.current.adapter.viewmodel.CurrentShopImpl
-import robin.vitalij.fortniteassitant.ui.shop.current.adapter.viewmodel.CurrentShopType
+import robin.vitalij.fortniteassitant.ui.shop.current_new.adapter.CurrentShopAdapter
+import robin.vitalij.fortniteassitant.utils.GridSpacingItemDecoration
 import javax.inject.Inject
-
-private const val MAX_SPAN_COUNT = 2
-private const val SHOP_SPAN_COUNT = 1
-
-private const val WIDTH_PIXELS_PERCENT = 0.35
 
 class CurrentShopFragment : BaseFragment() {
 
@@ -78,7 +72,7 @@ class CurrentShopFragment : BaseFragment() {
         }
     }
 
-    private fun initAdapter(list: List<CurrentShopImpl>) {
+    private fun initAdapter(list: List<ShopNewItem>) {
         binding.recyclerViewInclude.recyclerView.run {
             adapter = CurrentShopAdapter(
                 onClick = {
@@ -87,23 +81,15 @@ class CurrentShopFragment : BaseFragment() {
                         it,
                     )
                 },
-                widthPixels = activity?.getScreenWidth(WIDTH_PIXELS_PERCENT) ?: 0
             )
             (adapter as CurrentShopAdapter).setData(list)
 
-            val gridlayoutManager = GridLayoutManager(
-                activity, MAX_SPAN_COUNT
-            )
-
-            gridlayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int): Int {
-                    return when (adapter?.getItemViewType(position)) {
-                        CurrentShopType.SHOP_ITEM.id -> SHOP_SPAN_COUNT
-                        else -> MAX_SPAN_COUNT
-                    }
-                }
-            }
-            layoutManager = gridlayoutManager
+            layoutManager = GridLayoutManager(requireContext(), MAX_SPAN_COUNT)
+            addItemDecoration(GridSpacingItemDecoration(MAX_SPAN_COUNT, 20, true))
         }
+    }
+
+    companion object {
+        private const val MAX_SPAN_COUNT = 2
     }
 }

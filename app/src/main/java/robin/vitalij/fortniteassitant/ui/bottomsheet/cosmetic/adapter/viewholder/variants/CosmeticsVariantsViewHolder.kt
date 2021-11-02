@@ -1,6 +1,6 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter.viewholder.variants
 
-import kotlinx.android.synthetic.main.item_inventory_two_column.view.*
+
 import robin.vitalij.fortniteassitant.databinding.ItemCosmeticsVariantBinding
 import robin.vitalij.fortniteassitant.db.entity.Option
 import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter.viewholder.variants.adapter.VariantOptionAdapter
@@ -16,7 +16,7 @@ class CosmeticsVariantsViewHolder(
     override fun bind(item: Cosmetics) {
         (item as? CosmeticsVariantViewModel)?.let {
             binding.item = item
-            itemView.recyclerView.run {
+            binding.recyclerView.run {
                 item.variant.options?.let {
                     adapter = initVariantOptionsAdapter(it)
                 }

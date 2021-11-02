@@ -139,7 +139,7 @@ dependencies {
     implementation "com.google.android.material:material:$material_version"
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
 
-    def constraintlayout_version = "2.1.0"
+    def constraintlayout_version = "2.1.1"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
 
     def navigation_version = "2.3.5"
@@ -184,7 +184,7 @@ dependencies {
     implementation "com.github.PhilJay:MPAndroidChart:$mp_android_chart_version"
 
     //Okhttp3
-    def okhttp3_version = '4.4.1'
+    def okhttp3_version = '5.0.0-alpha.2'
     implementation "com.squareup.okhttp3:okhttp:$okhttp3_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
 
@@ -199,19 +199,19 @@ dependencies {
     gmsImplementation "com.google.firebase:firebase-ads:$ads_version"
 
     //Firebase
-    def firebase_analytics_version = "19.0.1"
+    def firebase_analytics_version = "20.0.0"
     implementation "com.google.firebase:firebase-analytics:$firebase_analytics_version"
 
-    def firebase_core_version = "19.0.1"
+    def firebase_core_version = "20.0.0"
     implementation "com.google.firebase:firebase-core:$firebase_core_version"
 
-    def firebase_crashlytics_version = "18.2.1"
+    def firebase_crashlytics_version = "18.2.4"
     implementation "com.google.firebase:firebase-crashlytics:$firebase_crashlytics_version"
 
-    def firebase_firestore_ktx_version = "23.0.3"
+    def firebase_firestore_ktx_version = "24.0.0"
     implementation "com.google.firebase:firebase-firestore-ktx:$firebase_firestore_ktx_version"
 
-    def firebase_dynamic_links_version = "20.1.1"
+    def firebase_dynamic_links_version = "21.0.0"
     implementation "com.google.firebase:firebase-dynamic-links-ktx:$firebase_dynamic_links_version"
 
     def multidex_version = "2.0.1"
@@ -220,7 +220,7 @@ dependencies {
     def timber_version = "4.7.1"
     implementation "com.jakewharton.timber:timber:$timber_version"
 
-    def play_core_version = "1.10.1"
+    def play_core_version = "1.10.2"
     implementation "com.google.android.play:core:$play_core_version"
 
     def circle_progress_version = "1.2.1"

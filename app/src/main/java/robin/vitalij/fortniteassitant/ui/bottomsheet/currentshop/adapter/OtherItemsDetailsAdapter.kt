@@ -5,15 +5,16 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.model.network.shop.GrantedModel
 import robin.vitalij.fortniteassitant.model.network.shop.OtherItemsDetails
 
 internal class OtherItemsDetailsAdapter(
     private val widthPixels: Int
 ) : RecyclerView.Adapter<OtherItemsDetailsHolder>() {
 
-    private val items = arrayListOf<OtherItemsDetails>()
+    private val items = arrayListOf<GrantedModel>()
 
-    fun setData(data: List<OtherItemsDetails>) {
+    fun setData(data: List<GrantedModel>) {
         items.clear()
         items.addAll(data)
     }

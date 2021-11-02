@@ -6,6 +6,7 @@ import retrofit2.http.Query
 import robin.vitalij.fortniteassitant.model.network.*
 import robin.vitalij.fortniteassitant.model.network.search.SearchResponse
 import robin.vitalij.fortniteassitant.model.network.search.SearchUserModel
+import robin.vitalij.fortniteassitant.model.network.shop.ShopNewResponse
 import robin.vitalij.fortniteassitant.model.network.shop.ShopResponse
 import robin.vitalij.fortniteassitant.model.network.shop.ShopUpcomingResponse
 
@@ -42,8 +43,8 @@ interface FortniteRequestsIOApi {
         @Query(USERNAME_QUERY) username: String
     ): Single<SearchUserModel>
 
-    @GET("/$VERSION_FIRST_PATCH/$SHOP_PATCH")
-    fun getCurrentShop(@Query(LANG_QUERY) language: String): Single<ShopResponse>
+    @GET("/$VERSION_SECOND_PATCH/$SHOP_PATCH")
+    fun getCurrentShop(@Query(LANG_QUERY) language: String): Single<ShopNewResponse>
 
     @GET("/$VERSION_FIRST_PATCH/$ITEMS_PATCH/$UPCOMING_PATCH")
     fun getUpcomingShop(@Query(LANG_QUERY) language: String): Single<ShopUpcomingResponse>

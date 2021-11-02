@@ -50,7 +50,7 @@ import robin.vitalij.fortniteassitant.ui.session.statistics.DetailsSessionStatis
 import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment
 import robin.vitalij.fortniteassitant.ui.setting.SettingFragment
 import robin.vitalij.fortniteassitant.ui.setting.applicationinfo.ApplicationInfoFragment
-import robin.vitalij.fortniteassitant.ui.shop.current.CurrentShopFragment
+import robin.vitalij.fortniteassitant.ui.shop.current_new.CurrentShopFragment
 import robin.vitalij.fortniteassitant.ui.shop.upcoming.UpcomingShopFragment
 import robin.vitalij.fortniteassitant.ui.shop.viewpager.AdapterShoppingFragment
 import robin.vitalij.fortniteassitant.ui.splash.SplashActivity
@@ -93,7 +93,6 @@ interface AppComponent {
     fun inject(fragment: AdapterDetailsSeasonStatisticsFragment)
     fun inject(fragment: AdapterShoppingFragment)
     fun inject(fragment: TopFragment)
-    fun inject(fragment: CurrentShopFragment)
     fun inject(fragment: UpcomingShopFragment)
     fun inject(fragment: WikiFragment)
     fun inject(fragment: BattlePassRewardsFragment)
@@ -110,6 +109,7 @@ interface AppComponent {
     fun inject(fragment: GameCrewFragment)
     fun inject(fragment: CrewViewDetailsFragment)
     fun inject(fragment: VehiclesFragment)
+    fun inject(fragment: CurrentShopFragment)
 
     fun inject(fragment: CosmeticResultFragment)
     fun inject(fragment: ProfileResultFragment)

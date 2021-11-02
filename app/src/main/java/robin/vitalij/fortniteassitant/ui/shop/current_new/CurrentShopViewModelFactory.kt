@@ -1,7 +1,6 @@
-package robin.vitalij.fortniteassitant.ui.shop.current
+package robin.vitalij.fortniteassitant.ui.shop.current_new
 
 import robin.vitalij.fortniteassitant.repository.network.GetCurrentShopRepository
-import robin.vitalij.fortniteassitant.repository.network.TopRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
 import javax.inject.Inject
 

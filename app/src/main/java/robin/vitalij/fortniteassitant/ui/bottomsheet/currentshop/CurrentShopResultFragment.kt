@@ -14,13 +14,16 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.bottom_sheet_current_shop.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadBackgroundRarity
 import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
 import robin.vitalij.fortniteassitant.common.binding.TextViewBinding.setValueText
 import robin.vitalij.fortniteassitant.common.extensions.getScreenWidth
 import robin.vitalij.fortniteassitant.common.extensions.setVisibility
 import robin.vitalij.fortniteassitant.databinding.BottomSheetCurrentShopBinding
+import robin.vitalij.fortniteassitant.model.network.shop.GrantedModel
 import robin.vitalij.fortniteassitant.model.network.shop.OtherItemsDetails
 import robin.vitalij.fortniteassitant.model.network.shop.ShopItem
+import robin.vitalij.fortniteassitant.model.network.shop.ShopNewItem
 import robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.adapter.OtherItemsDetailsAdapter
 import javax.inject.Inject
 
@@ -70,14 +73,15 @@ class CurrentShopResultFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
-            val itemShop = it.getSerializable(ITEM_SHOP_CURRENT) as ShopItem
-            imageView.loadImage(itemShop.fullBackground)
-            name.text = itemShop.name
-            description.text = itemShop.description
-            price.setValueText(itemShop.price)
+            val itemShop = it.getSerializable(ITEM_SHOP_CURRENT) as ShopNewItem
+            imageView.loadImage(itemShop.displayAssets.first().fullBackground)
+            imageView.loadBackgroundRarity(itemShop.rarity.id)
+            name.text = itemShop.displayName
+            description.text = itemShop.displayDescription
+            price.setValueText(itemShop.price.finalPrice)
 
-            if (itemShop.otherItemsDetails.isNotEmpty()) {
-                initAdapter(itemShop.otherItemsDetails)
+            if (itemShop.granted.size > 1) {
+                initAdapter(itemShop.granted)
             }
         }
     }
@@ -90,7 +94,7 @@ class CurrentShopResultFragment : BottomSheetDialogFragment() {
         sheetContainer.layoutParams.height = (displayMetrics.heightPixels - BOTTOM_SHEET_MARGIN_TOP)
     }
 
-    private fun initAdapter(list: List<OtherItemsDetails>) {
+    private fun initAdapter(list: List<GrantedModel>) {
         theKitIncludes.setVisibility(true)
         recyclerView.run {
             adapter = OtherItemsDetailsAdapter(
@@ -107,7 +111,7 @@ class CurrentShopResultFragment : BottomSheetDialogFragment() {
 
         fun show(
             fragmentManager: FragmentManager?,
-            shopUpcoming: ShopItem
+            shopUpcoming: ShopNewItem
         ) {
             fragmentManager?.let {
                 CurrentShopResultFragment().apply {
