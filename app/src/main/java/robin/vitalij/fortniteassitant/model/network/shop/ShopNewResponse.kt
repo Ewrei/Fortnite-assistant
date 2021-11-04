@@ -7,6 +7,11 @@ class ShopNewResponse (
     @SerializedName("shop") val shops: List<ShopNewItem>,
 )
 
+class ShopAdapterItem(
+    val section: SectionModel,
+    val shops: List<ShopNewItem>
+)
+
 class ShopNewItem(
     @SerializedName("mainId") val mainId: String,
     @SerializedName("displayName") val displayName: String,
@@ -24,6 +29,7 @@ class ShopNewItem(
     @SerializedName("series") val series: SeriesModel?,
     @SerializedName("banner") val banner: BannerModel?,
     @SerializedName("offerTag") val offerTag: OfferTagModel?,
+    @SerializedName("section") val section: SectionModel,
     @SerializedName("granted") val granted: List<GrantedModel>,
 ): Serializable
 
@@ -44,6 +50,13 @@ class PriceModel(
 class RarityModel(
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String,
+): Serializable
+
+data class SectionModel(
+    @SerializedName("id") val id: String,
+    @SerializedName("name") val name: String?,
+    @SerializedName("landingPriority") val landingPriority: Int
+
 ): Serializable
 
 class SeriesModel(

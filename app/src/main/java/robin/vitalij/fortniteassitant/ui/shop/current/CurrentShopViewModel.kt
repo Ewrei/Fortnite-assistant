@@ -1,8 +1,9 @@
-package robin.vitalij.fortniteassitant.ui.shop.current_new
+package robin.vitalij.fortniteassitant.ui.shop.current
 
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import robin.vitalij.fortniteassitant.model.network.shop.ShopAdapterItem
 import robin.vitalij.fortniteassitant.model.network.shop.ShopNewItem
 import robin.vitalij.fortniteassitant.repository.network.GetCurrentShopRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
@@ -11,7 +12,7 @@ class CurrentShopViewModel(
     private val getCurrentShopRepository: GetCurrentShopRepository
 ) : BaseViewModel() {
 
-    val mutableLiveData = MutableLiveData<List<ShopNewItem>>()
+    val mutableLiveData = MutableLiveData<List<ShopAdapterItem>>()
 
     fun loadData() {
         getCurrentShopRepository.getCurrentShop()

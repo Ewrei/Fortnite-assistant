@@ -18,7 +18,7 @@ import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseViewPagerAdapter
-import robin.vitalij.fortniteassitant.ui.shop.current_new.CurrentShopFragment
+import robin.vitalij.fortniteassitant.ui.shop.current.CurrentShopFragment
 import robin.vitalij.fortniteassitant.ui.shop.upcoming.UpcomingShopFragment
 import javax.inject.Inject
 

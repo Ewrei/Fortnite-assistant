@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.shop.current_new.adapter
+package robin.vitalij.fortniteassitant.ui.shop.current.adapter
 
 import android.graphics.Paint
 import androidx.core.view.isVisible

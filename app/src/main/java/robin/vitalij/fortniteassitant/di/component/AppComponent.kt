@@ -50,7 +50,7 @@ import robin.vitalij.fortniteassitant.ui.session.statistics.DetailsSessionStatis
 import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment
 import robin.vitalij.fortniteassitant.ui.setting.SettingFragment
 import robin.vitalij.fortniteassitant.ui.setting.applicationinfo.ApplicationInfoFragment
-import robin.vitalij.fortniteassitant.ui.shop.current_new.CurrentShopFragment
+import robin.vitalij.fortniteassitant.ui.shop.current.CurrentShopFragment
 import robin.vitalij.fortniteassitant.ui.shop.upcoming.UpcomingShopFragment
 import robin.vitalij.fortniteassitant.ui.shop.viewpager.AdapterShoppingFragment
 import robin.vitalij.fortniteassitant.ui.splash.SplashActivity

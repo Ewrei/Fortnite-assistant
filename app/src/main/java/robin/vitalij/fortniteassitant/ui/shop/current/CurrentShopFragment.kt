@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.shop.current_new
+package robin.vitalij.fortniteassitant.ui.shop.current
 
 import android.content.Context
 import android.os.Bundle
@@ -7,14 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewBinding
+import robin.vitalij.fortniteassitant.model.network.shop.ShopAdapterItem
 import robin.vitalij.fortniteassitant.model.network.shop.ShopNewItem
 import robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.CurrentShopResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
-import robin.vitalij.fortniteassitant.ui.shop.current_new.adapter.CurrentShopAdapter
+import robin.vitalij.fortniteassitant.ui.shop.current.adapter.CurrentShopAdapter
+import robin.vitalij.fortniteassitant.ui.shop.current.header_adapter.HeaderShopAdapter
 import robin.vitalij.fortniteassitant.utils.GridSpacingItemDecoration
 import javax.inject.Inject
 
@@ -72,9 +75,9 @@ class CurrentShopFragment : BaseFragment() {
         }
     }
 
-    private fun initAdapter(list: List<ShopNewItem>) {
+    private fun initAdapter(list: List<ShopAdapterItem>) {
         binding.recyclerViewInclude.recyclerView.run {
-            adapter = CurrentShopAdapter(
+            adapter = HeaderShopAdapter(
                 onClick = {
                     CurrentShopResultFragment.show(
                         childFragmentManager,
@@ -82,14 +85,8 @@ class CurrentShopFragment : BaseFragment() {
                     )
                 },
             )
-            (adapter as CurrentShopAdapter).setData(list)
-
-            layoutManager = GridLayoutManager(requireContext(), MAX_SPAN_COUNT)
-            addItemDecoration(GridSpacingItemDecoration(MAX_SPAN_COUNT, 20, true))
+            (adapter as HeaderShopAdapter).setData(list)
+            layoutManager = LinearLayoutManager(context)
         }
-    }
-
-    companion object {
-        private const val MAX_SPAN_COUNT = 2
     }
 }

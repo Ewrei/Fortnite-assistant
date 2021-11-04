@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.shop.current_new
+package robin.vitalij.fortniteassitant.ui.shop.current
 
 import robin.vitalij.fortniteassitant.repository.network.GetCurrentShopRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
