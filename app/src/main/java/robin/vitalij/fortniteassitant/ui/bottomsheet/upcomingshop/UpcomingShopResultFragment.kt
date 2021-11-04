@@ -14,6 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.bottom_sheet_upcoming_shop.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadBackgroundRarity
 import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
 import robin.vitalij.fortniteassitant.common.binding.TextViewBinding.setValueText
 import robin.vitalij.fortniteassitant.databinding.BottomSheetUpcomingShopBinding
@@ -67,9 +68,13 @@ class UpcomingShopResultFragment : BottomSheetDialogFragment() {
         arguments?.let {
             val itemShop = it.getSerializable(ITEM_SHOP_UPCOMING) as ItemShopUpcoming
             imageView.loadImage(itemShop.images.fullBackground)
+            imageView.loadBackgroundRarity(itemShop.rarity.id)
             name.text = itemShop.name
             description.text = itemShop.description
             price.setValueText(itemShop.price)
+
+            addedDate.text = getString(R.string.add_date_format, itemShop.added.date)
+            addVersion.text = itemShop.added.version
         }
     }
 

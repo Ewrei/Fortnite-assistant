@@ -29,6 +29,7 @@
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginBottom="@dimen/default_margin"
+                app:rarity="@{item.rarity.id}"
                 app:imageUrl="@{item.images.background}"
                 tools:src="@drawable/ic_cop" />
 

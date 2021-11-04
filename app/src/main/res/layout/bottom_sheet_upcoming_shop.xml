@@ -20,9 +20,12 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="300dp"
             android:layout_margin="@dimen/default_margin_double"
+            android:layout_gravity="center"
+            android:scaleType="fitStart"
+            android:adjustViewBounds="true"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
@@ -70,6 +73,30 @@
                 tools:text="price" />
 
         </TableRow>
+
+        <TextView
+            android:id="@+id/addedDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin_double"
+            android:layout_marginEnd="@dimen/default_margin_double"
+            android:layout_marginTop="@dimen/default_margin_x4"
+            android:fontFamily="@font/futura_pt_bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
+            tools:text="addedDate" />
+
+        <TextView
+            android:id="@+id/addVersion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin_double"
+            android:layout_marginEnd="@dimen/default_margin_double"
+            android:fontFamily="@font/futura_pt_medium"
+            app:fontFamily="@font/futura_pt_medium"
+            android:textColor="@android:color/darker_gray"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            tools:text="addedDate" />
 
     </LinearLayout>
 
