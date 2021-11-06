@@ -22,7 +22,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <ImageView
@@ -31,6 +31,7 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:scaleType="fitStart"
+                app:layout_constraintDimensionRatio="16:9"
                 app:imageUrl="@{item.images.apiRender}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -51,25 +52,43 @@
                 app:srcCompat="@drawable/ic_youtube" />
 
             <TextView
-                android:id="@+id/type"
+                android:id="@+id/descriptionsTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin_double"
                 android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginEnd="@dimen/default_margin_double"
-                android:text="@{item.type}"
+                android:gravity="center"
+                android:text="@{item.descriptions.title}"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 app:fontFamily="@font/futura_pt_bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image"
+                tools:text="descriptions Title" />
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin_double"
+                android:layout_marginBottom="@dimen/default_margin_double"
+                android:gravity="start"
+                android:layout_marginEnd="@dimen/default_margin_double"
+                android:text="@{item.type}"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/darker_gray"
+                app:fontFamily="@font/fortnite_battlefest"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionsTitle"
                 tools:text="type" />
 
             <TextView
                 android:id="@+id/date"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin_double"
                 android:layout_marginEnd="@dimen/default_margin_double"
                 android:layout_marginBottom="@dimen/default_margin_double"
                 android:gravity="end"
@@ -79,8 +98,7 @@
                 app:fontFamily="@font/fortnite_battlefest"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/type"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionsTitle"
                 tools:text="date" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

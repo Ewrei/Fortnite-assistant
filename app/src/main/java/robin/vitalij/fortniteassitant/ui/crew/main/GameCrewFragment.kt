@@ -2,6 +2,7 @@ package robin.vitalij.fortniteassitant.ui.crew.main
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,8 @@ class GameCrewFragment : BaseFragment() {
     private var _binding: FragmentRecyclerViewWithToolbarBinding? = null
 
     private val binding get() = _binding!!
+
+    private var recyclerViewState: Parcelable? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,6 +75,12 @@ class GameCrewFragment : BaseFragment() {
         setNavigation()
     }
 
+    override fun onPause() {
+        super.onPause()
+        recyclerViewState =
+            binding.recyclerViewInclude.recyclerView.layoutManager?.onSaveInstanceState()
+    }
+
     private fun setListener() {
         setErrorResolveButtonClick {
             viewModel.loadData()
@@ -103,6 +112,11 @@ class GameCrewFragment : BaseFragment() {
             (adapter as GameCrewAdapter).setData(list)
 
             layoutManager = LinearLayoutManager(context)
+
+            recyclerViewState?.let {
+                layoutManager?.onRestoreInstanceState(recyclerViewState)
+                recyclerViewState = null
+            }
         }
     }
 }
