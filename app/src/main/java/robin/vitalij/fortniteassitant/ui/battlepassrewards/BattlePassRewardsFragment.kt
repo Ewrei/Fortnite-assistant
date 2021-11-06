@@ -13,14 +13,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.fragment_battle_pass_rewards.*
-import kotlinx.android.synthetic.main.recycler_view.*
-import kotlinx.android.synthetic.main.toolbar_center_title.*
 import kotlinx.android.synthetic.main.view_error.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.databinding.FragmentBattlePassRewardsBinding
 import robin.vitalij.fortniteassitant.model.battlepassreward.BattlesPassRewardsModel
 import robin.vitalij.fortniteassitant.model.battlepassreward.SeasonModel
 import robin.vitalij.fortniteassitant.model.enums.BattlePassSortedType
@@ -40,10 +38,15 @@ class BattlePassRewardsFragment : BaseFragment() {
 
     private lateinit var viewModel: BattlePassRewardsViewModel
 
+    private lateinit var binding: FragmentBattlePassRewardsBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_battle_pass_rewards, container, false)
+    ): View {
+        binding = FragmentBattlePassRewardsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +69,7 @@ class BattlePassRewardsFragment : BaseFragment() {
         })
 
         viewModel.mutableSeasonLiveData.observe(viewLifecycleOwner, {
-            seasonSpinner.setItems(it)
+            binding.seasonSpinner.setItems(it)
         })
 
         setNavigation()
@@ -75,10 +78,10 @@ class BattlePassRewardsFragment : BaseFragment() {
     }
 
     private fun setToolbarMenu() {
-        toolbar.inflateMenu(R.menu.menu_sorting_action)
+        binding.toolbarInclude.toolbar.inflateMenu(R.menu.menu_sorting_action)
 
-        toolbar.menu.findItem(R.id.action_sort).setOnMenuItemClickListener {
-            showPopup(toolbar)
+        binding.toolbarInclude.toolbar.menu.findItem(R.id.action_sort).setOnMenuItemClickListener {
+            showPopup(binding.toolbarInclude.toolbar)
             true
         }
     }
@@ -133,7 +136,7 @@ class BattlePassRewardsFragment : BaseFragment() {
     }
 
     private fun setListeners() {
-        seasonSpinner.setOnItemSelectedListener { _, _, _, item ->
+        binding.seasonSpinner.setOnItemSelectedListener { _, _, _, item ->
             viewModel.loadData((item as SeasonModel).season.toString())
         }
 
@@ -145,11 +148,11 @@ class BattlePassRewardsFragment : BaseFragment() {
     private fun setNavigation() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
     private fun initAdapter(list: List<BattlesPassRewardsModel>) {
-        recyclerView.run {
+        binding.recyclerViewInclude.recyclerView.run {
             adapter = BattlesPassRewardsAdapter {
                 BattlePassRewardsResultFragment.show(
                     childFragmentManager,
