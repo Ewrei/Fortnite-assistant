@@ -15,8 +15,8 @@ android {
         applicationId "robin.vitalij.fortniteassitant"
         minSdkVersion 22
         targetSdkVersion 30
-        versionCode 14
-        versionName "1.0.9"
+        versionCode 15
+        versionName "1.1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -139,7 +139,7 @@ dependencies {
     implementation "com.google.android.material:material:$material_version"
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
 
-    def constraintlayout_version = "2.1.1"
+    def constraintlayout_version = "2.1.2"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
 
     def navigation_version = "2.3.5"
