@@ -21,12 +21,14 @@ import kotlinx.android.synthetic.main.toolbar_center_title.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.*
+import robin.vitalij.fortniteassitant.interfaces.InputAccountIdCallback
 import robin.vitalij.fortniteassitant.interfaces.RegistrationProfileCallback
 import robin.vitalij.fortniteassitant.model.enums.AvatarType
 import robin.vitalij.fortniteassitant.model.enums.FirebaseDynamicLinkType
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
+import robin.vitalij.fortniteassitant.ui.bottomsheet.input_account_id.InputAccountIdResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.main.MainActivity
@@ -180,6 +182,39 @@ class SearchUserFragment : BaseFragment() {
 
         strictUserSwitch.setOnCheckedChangeListener { it, isChecked ->
             viewModel.strict = !isChecked
+        }
+
+        iKnowMyAccountIdButton.setOnClickListener {
+            InputAccountIdResultFragment.show(
+                childFragmentManager,
+                object : InputAccountIdCallback {
+                    override fun sendAccountId(accountId: String) {
+                        arguments?.let { bundle ->
+                            context.closeKeyboard(view)
+                            ProfileResultFragment.show(
+                                childFragmentManager,
+                                accountId,
+                                AvatarType.values().random().getImageUrl(),
+                                bundle.getSerializable(IS_COMPARISON_VISIBLE) as ProfileResultType,
+                                object : RegistrationProfileCallback {
+                                    override fun addedProfile(fortniteProfileResponse: FortniteProfileResponse) {
+                                        viewModel.textActivityVisibility.set(getString(R.string.save_the_user))
+                                        viewModel.saveUser(fortniteProfileResponse)
+                                    }
+                                })
+                        }
+                    }
+                })
+        }
+
+        howToFindAccountIdButton.setOnClickListener {
+            startActivity(
+                WebActivity.newInstance(
+                    context,
+                    getString(R.string.how_to_find_account_id_url),
+                    getString(R.string.how_to_find_account_id)
+                )
+            )
         }
     }
 

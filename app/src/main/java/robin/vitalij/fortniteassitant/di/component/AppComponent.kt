@@ -14,6 +14,7 @@ import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFr
 import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.CosmeticResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.CurrentShopResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.fish.FishResultFragment
+import robin.vitalij.fortniteassitant.ui.bottomsheet.input_account_id.InputAccountIdResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.top.TopResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.upcomingshop.UpcomingShopResultFragment
@@ -123,4 +124,5 @@ interface AppComponent {
     fun inject(fragment: FishResultFragment)
     fun inject(fragment: BannerResultFragment)
     fun inject(fragment: VehiclesResultFragment)
+    fun inject(fragment: InputAccountIdResultFragment)
 }

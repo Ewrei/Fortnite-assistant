@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="robin.vitalij.fortniteassitant.ui.bottomsheet.input_account_id.InputAccountIdResultViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/default_elevation"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/default_padding_double"
+        android:paddingEnd="@dimen/default_padding_double"
+        tools:ignore="UnusedAttribute">
+
+        <TextView
+            android:id="@+id/enterBarcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin_double"
+            android:layout_marginTop="@dimen/default_margin_double"
+            android:layout_marginEnd="@dimen/default_margin_double"
+            android:gravity="center"
+            android:fontFamily="@font/futura_pt_medium"
+            app:fontFamily="@font/futura_pt_medium"
+            android:text="@string/input_account_id"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputAccountIdTextInput"
+            style="@style/CustomOutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            android:layout_marginBottom="@dimen/default_margin_double"
+            android:layout_marginTop="@dimen/default_margin_double"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputAccountIdInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/account_id"
+                android:fontFamily="@font/futura_pt_medium"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/sendButton"
+            style="@style/DefaultButton"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/default_margin_double"
+            android:text="@string/send" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/howToFindAccountIdButton"
+            style="@style/DefaultButton"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:backgroundTint="@color/telegram"
+            android:textColor="@color/white"
+            android:layout_marginBottom="@dimen/default_margin_double"
+            android:text="@string/how_to_find_account_id" />
+
+    </LinearLayout>
+
+</layout>
