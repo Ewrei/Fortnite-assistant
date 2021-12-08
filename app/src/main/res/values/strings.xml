@@ -4,6 +4,8 @@
     <string name="application_url" translatable="false">https://play.google.com/store/apps/details?id=robin.vitalij.fortniteassitant</string>
     <string name="current_map_url" translatable="false">https://media.fortniteapi.io/images/map.png?showPOI=true</string>
     <string name="how_to_find_account_id_url" translatable="false">https://youtu.be/YuoXP4V4hGo</string>
+    <string name="found_account_id_in_epic_games_url">https://youtu.be/O6dv-YnFUzs</string>
+    <string name="found_account_id_in_fortnite_url">https://youtu.be/t1gcUEZr8Ag</string>
 
     <string name="title_home">Home</string>
     <string name="tab_title_history_match">History</string>
@@ -314,4 +316,8 @@ This section is beta. If it does not work correctly for you, let us know</string
     <string name="input_account_id">Enter your account ID</string>
     <string name="account_id">Your account ID</string>
     <string name="how_to_find_account_id">How to find out account ID</string>
+
+    <string name="how_to_find_out_your_account_in_epic_game">How to find the account ID in the Epic game store</string>
+    <string name="how_to_find_out_your_account_in_fortnite">How to find your Fortnite account ID</string>
+
 </resources>

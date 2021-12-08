@@ -15,8 +15,8 @@ android {
         applicationId "robin.vitalij.fortniteassitant"
         minSdkVersion 22
         targetSdkVersion 30
-        versionCode 15
-        versionName "1.1.0"
+        versionCode 16
+        versionName "1.1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -194,7 +194,7 @@ dependencies {
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$coroutine_adapter_version"
 
     //Ads
-    def ads_version = "20.4.0"
+    def ads_version = "20.5.0"
     gmsImplementation "com.google.android.gms:play-services-ads:$ads_version"
     gmsImplementation "com.google.firebase:firebase-ads:$ads_version"
 
@@ -205,7 +205,7 @@ dependencies {
     def firebase_core_version = "20.0.0"
     implementation "com.google.firebase:firebase-core:$firebase_core_version"
 
-    def firebase_crashlytics_version = "18.2.4"
+    def firebase_crashlytics_version = "18.2.5"
     implementation "com.google.firebase:firebase-crashlytics:$firebase_crashlytics_version"
 
     def firebase_firestore_ktx_version = "24.0.0"

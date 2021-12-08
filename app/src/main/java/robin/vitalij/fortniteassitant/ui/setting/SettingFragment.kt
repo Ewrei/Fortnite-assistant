@@ -138,7 +138,7 @@ class SettingFragment : BaseFragment() {
         }
 
         contactUs.setOnClickListener {
-            ContactUsResultFragment.show(childFragmentManager)
+            ContactUsResultFragment.show(childFragmentManager, true)
         }
 
         copyStatsLink.setOnClickListener {

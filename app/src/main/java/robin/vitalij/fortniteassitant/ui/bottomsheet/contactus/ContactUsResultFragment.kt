@@ -12,11 +12,12 @@ import kotlinx.android.synthetic.main.bottom_sheet_recyclerview.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.intentGmail
-import robin.vitalij.fortniteassitant.common.extensions.intentTelegram
+import robin.vitalij.fortniteassitant.common.extensions.intentUrl
 import robin.vitalij.fortniteassitant.common.extensions.intentVk
 import robin.vitalij.fortniteassitant.model.ContactUsModel
 import robin.vitalij.fortniteassitant.model.enums.ConfigType
 import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.adapter.ContactUsAdapter
+import robin.vitalij.fortniteassitant.ui.web.WebActivity
 import javax.inject.Inject
 
 class ContactUsResultFragment : BottomSheetDialogFragment() {
@@ -44,6 +45,10 @@ class ContactUsResultFragment : BottomSheetDialogFragment() {
         viewModel.mutableLiveData.observe(viewLifecycleOwner, {
             it.let(::initAdapter)
         })
+
+        arguments?.let {
+            viewModel.loadData(it.getBoolean(ARG_IS_CONTACT_US))
+        }
     }
 
     private fun initAdapter(list: List<ContactUsModel>) {
@@ -53,11 +58,20 @@ class ContactUsResultFragment : BottomSheetDialogFragment() {
                     ConfigType.GMAIL -> {
                         activity?.intentGmail(it.url)
                     }
-                    ConfigType.TELEGRAM -> {
-                        activity?.intentTelegram(it.url)
-                    }
                     ConfigType.VK -> {
                         activity?.intentVk(it.url)
+                    }
+                    ConfigType.FOUND_ACCOUNT_ID_IN_EPIC_GAMES, ConfigType.FOUND_ACCOUNT_ID_IN_FORTNITE -> {
+                        startActivity(
+                            WebActivity.newInstance(
+                                context,
+                                it.url,
+                                getString(it.configType.getNameRes())
+                            )
+                        )
+                    }
+                    else -> {
+                        activity?.intentUrl(it.url)
                     }
                 }
             }
@@ -69,13 +83,19 @@ class ContactUsResultFragment : BottomSheetDialogFragment() {
     companion object {
 
         private const val TAG = "ContactUsResultFragment"
+        private const val ARG_IS_CONTACT_US = "arg_is_contact_us"
 
-        fun show(fragmentManager: FragmentManager?) {
+        fun show(fragmentManager: FragmentManager?, isContactUs: Boolean) {
             fragmentManager?.let {
-                ContactUsResultFragment().show(
-                    it,
-                    TAG
-                )
+                ContactUsResultFragment().apply {
+                    arguments = Bundle().apply {
+                        putBoolean(ARG_IS_CONTACT_US, isContactUs)
+                    }
+                }
+                    .show(
+                        it,
+                        TAG
+                    )
             }
         }
     }

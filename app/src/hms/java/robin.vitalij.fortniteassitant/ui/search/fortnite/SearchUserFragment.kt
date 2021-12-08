@@ -181,13 +181,7 @@ class SearchUserFragment : BaseFragment() {
 
 
         howToFindAccountIdButton.setOnClickListener {
-            startActivity(
-                WebActivity.newInstance(
-                    context,
-                    getString(R.string.how_to_find_account_id_url),
-                    getString(R.string.how_to_find_account_id)
-                )
-            )
+            ContactUsResultFragment.show(childFragmentManager, false)
         }
     }
 

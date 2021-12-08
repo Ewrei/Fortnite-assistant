@@ -19,7 +19,7 @@ import robin.vitalij.fortniteassitant.common.extensions.setClickableButton
 import robin.vitalij.fortniteassitant.common.extensions.setOnMultiEditorActionListener
 import robin.vitalij.fortniteassitant.databinding.BottomInputAccoountIdBinding
 import robin.vitalij.fortniteassitant.interfaces.InputAccountIdCallback
-import robin.vitalij.fortniteassitant.ui.web.WebActivity
+import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFragment
 import javax.inject.Inject
 
 class InputAccountIdResultFragment : BottomSheetDialogFragment() {
@@ -91,13 +91,7 @@ class InputAccountIdResultFragment : BottomSheetDialogFragment() {
         }
 
         dataBinding.howToFindAccountIdButton.setOnClickListener {
-            startActivity(
-                WebActivity.newInstance(
-                    context,
-                    getString(R.string.how_to_find_account_id_url),
-                    getString(R.string.how_to_find_account_id)
-                )
-            )
+            ContactUsResultFragment.show(childFragmentManager, false)
         }
     }
 

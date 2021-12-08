@@ -14,8 +14,10 @@
         style="@style/DefaultButton"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_height"
-        android:layout_marginStart="@dimen/default_margin_double"
-        android:layout_marginEnd="@dimen/default_margin_double"
+        android:layout_marginStart="@dimen/default_margin_x4"
+        android:layout_marginTop="@dimen/half_default_margin"
+        android:layout_marginBottom="@dimen/half_default_margin"
+        android:layout_marginEnd="@dimen/default_margin_x4"
         android:textColor="@android:color/white"
         app:configType="@{item.configType}"
         tools:text="contact" />

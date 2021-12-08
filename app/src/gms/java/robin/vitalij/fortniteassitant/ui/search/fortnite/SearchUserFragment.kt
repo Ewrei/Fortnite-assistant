@@ -28,6 +28,7 @@ import robin.vitalij.fortniteassitant.model.enums.FirebaseDynamicLinkType
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
+import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.input_account_id.InputAccountIdResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
@@ -35,6 +36,7 @@ import robin.vitalij.fortniteassitant.ui.main.MainActivity
 import robin.vitalij.fortniteassitant.ui.search.SearchUserViewModel
 import robin.vitalij.fortniteassitant.ui.search.SearchUserViewModelFactory
 import robin.vitalij.fortniteassitant.ui.search.adapter.SearchAdapter
+import robin.vitalij.fortniteassitant.ui.web.WebActivity
 import java.util.*
 import javax.inject.Inject
 
@@ -208,13 +210,7 @@ class SearchUserFragment : BaseFragment() {
         }
 
         howToFindAccountIdButton.setOnClickListener {
-            startActivity(
-                WebActivity.newInstance(
-                    context,
-                    getString(R.string.how_to_find_account_id_url),
-                    getString(R.string.how_to_find_account_id)
-                )
-            )
+            ContactUsResultFragment.show(childFragmentManager, false)
         }
     }
 
