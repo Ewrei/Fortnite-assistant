@@ -15,7 +15,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
+import com.unity3d.services.banners.BannerErrorInfo
+import com.unity3d.services.banners.BannerView
+import com.unity3d.services.banners.UnityBannerSize
+import kotlinx.android.synthetic.gms.fragment_comparion.*
 import kotlinx.android.synthetic.gms.fragment_search_user.*
+import kotlinx.android.synthetic.gms.fragment_search_user.adView
+import kotlinx.android.synthetic.gms.fragment_search_user.banner_ads_view
+import kotlinx.android.synthetic.gms.fragment_search_user.searchButton
+import kotlinx.android.synthetic.gms.fragment_search_user.searchInputEditText
 import kotlinx.android.synthetic.main.recycler_view.*
 import kotlinx.android.synthetic.main.toolbar_center_title.*
 import robin.vitalij.fortniteassitant.FortniteApplication
@@ -36,7 +44,6 @@ import robin.vitalij.fortniteassitant.ui.main.MainActivity
 import robin.vitalij.fortniteassitant.ui.search.SearchUserViewModel
 import robin.vitalij.fortniteassitant.ui.search.SearchUserViewModelFactory
 import robin.vitalij.fortniteassitant.ui.search.adapter.SearchAdapter
-import robin.vitalij.fortniteassitant.ui.web.WebActivity
 import java.util.*
 import javax.inject.Inject
 
@@ -154,7 +161,12 @@ class SearchUserFragment : BaseFragment() {
 
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 adView?.setVisibility(false)
-                adView?.loadAd(adRequest)
+
+                if(context.checkIfNetworkAvailable()) {
+                    initUnityAdsBanner()
+                } else {
+                    adView?.loadAd(adRequest)
+                }
             }
 
             override fun onAdOpened() {
@@ -235,6 +247,36 @@ class SearchUserFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(context)
             (adapter as SearchAdapter).setData(list)
         }
+    }
+
+    private fun initUnityAdsBanner() {
+        val bannerListener = object : BannerView.IListener {
+            override fun onBannerLoaded(bannerAdView: BannerView?) {
+                banner_ads_view?.removeView(bannerAdView)
+                banner_ads_view?.addView(bannerAdView)
+                banner_ads_view?.setVisibility(true)
+            }
+
+            override fun onBannerClick(bannerAdView: BannerView?) {
+                //do nothing
+            }
+
+            override fun onBannerFailedToLoad(
+                bannerAdView: BannerView?,
+                errorInfo: BannerErrorInfo?
+            ) {
+                banner_ads_view?.setVisibility(false)
+            }
+
+            override fun onBannerLeftApplication(bannerView: BannerView?) {
+                //do nothing
+            }
+        }
+
+        val bannerView = BannerView(activity, "Banner_Android", UnityBannerSize(320, 50))
+        bannerView.listener = bannerListener
+        bannerView.load()
+        banner_ads_view.addView(bannerView);
     }
 
     companion object {

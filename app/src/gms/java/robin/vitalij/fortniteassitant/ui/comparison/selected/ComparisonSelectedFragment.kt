@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
+import com.unity3d.services.banners.BannerErrorInfo
+import com.unity3d.services.banners.BannerView
+import com.unity3d.services.banners.UnityBannerSize
 import kotlinx.android.synthetic.gms.fragment_comparion.*
 import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
@@ -120,7 +123,12 @@ class ComparisonSelectedFragment : BaseFragment() {
 
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 adView?.setVisibility(false)
-                adView?.loadAd(adRequest)
+
+                if(context.checkIfNetworkAvailable()) {
+                    initUnityAdsBanner()
+                } else {
+                    adView?.loadAd(adRequest)
+                }
             }
 
             override fun onAdOpened() {
@@ -166,6 +174,36 @@ class ComparisonSelectedFragment : BaseFragment() {
             adRequest = AdRequest.Builder().build()
             adView.loadAd(adRequest)
         }
+    }
+
+    private fun initUnityAdsBanner() {
+        val bannerListener = object : BannerView.IListener {
+            override fun onBannerLoaded(bannerAdView: BannerView?) {
+                banner_ads_view?.removeView(bannerAdView)
+                banner_ads_view?.addView(bannerAdView)
+                banner_ads_view?.setVisibility(true)
+            }
+
+            override fun onBannerClick(bannerAdView: BannerView?) {
+                //do nothing
+            }
+
+            override fun onBannerFailedToLoad(
+                bannerAdView: BannerView?,
+                errorInfo: BannerErrorInfo?
+            ) {
+                banner_ads_view?.setVisibility(false)
+            }
+
+            override fun onBannerLeftApplication(bannerView: BannerView?) {
+                //do nothing
+            }
+        }
+
+        val bannerView = BannerView(activity, "Banner_Android", UnityBannerSize(320, 50))
+        bannerView.listener = bannerListener
+        bannerView.load()
+        banner_ads_view.addView(bannerView);
     }
 
     companion object {

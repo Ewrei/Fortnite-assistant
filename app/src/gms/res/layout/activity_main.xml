@@ -33,6 +33,14 @@
                 app:adSize="SMART_BANNER"
                 app:adUnitId="@string/BANNER_ID" />
 
+            <LinearLayout
+                android:id="@+id/banner_ads_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:visibility="gone" />
+
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_nav"
                 android:theme="@style/TextBottomNavigationView"

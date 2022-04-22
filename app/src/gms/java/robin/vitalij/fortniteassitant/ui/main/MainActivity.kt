@@ -25,9 +25,12 @@ import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.tasks.Task
+import com.unity3d.services.banners.BannerErrorInfo
+import com.unity3d.services.banners.BannerView
+import com.unity3d.services.banners.UnityBannerSize
 import kotlinx.android.synthetic.gms.activity_main.*
+import kotlinx.android.synthetic.gms.activity_main.adView
 import kotlinx.android.synthetic.main.loading_layout.*
-import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.*
@@ -64,6 +67,11 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
     private var inAppUpdateType = 0
     private var appUpdateInfoTask: Task<AppUpdateInfo>? = null
     private lateinit var installStateUpdatedListener: InstallStateUpdatedListener
+
+    private val listener =
+        NavController.OnDestinationChangedListener { controller, destination, arguments ->
+            initInterstitialAd()
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,8 +114,6 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
                     }
                 }
 
-        initInterstitialAd()
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding?.viewModel = viewModel
 
@@ -129,6 +135,16 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         setupBottomNavigationBar()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        currentNavController?.value?.addOnDestinationChangedListener(listener)
+    }
+
+    override fun onPause() {
+        currentNavController?.value?.removeOnDestinationChangedListener(listener)
+        super.onPause()
     }
 
     private fun setupBottomNavigationBar() {
@@ -160,8 +176,8 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
     }
 
     fun onDisplayButtonClicked(getAnWard: () -> Unit) {
-        if (viewModel.rewardedAdRepository.defaultRewardedAd != null) {
-            viewModel.rewardedAdRepository.defaultRewardedAd?.show(this) {
+        if (viewModel.rewardedAdRepository.isLoadVideo()) {
+            viewModel.rewardedAdRepository.showReward(this) {
                 val date = Date()
                 val instance = Calendar.getInstance()
                 instance.time = date
@@ -281,7 +297,12 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
 
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 adView?.setVisibility(false)
-                adView?.loadAd(adRequest)
+
+                if(this@MainActivity.checkIfNetworkAvailable()) {
+                    initUnityAdsBanner()
+                } else {
+                    adView?.loadAd(adRequest)
+                }
             }
 
             override fun onAdOpened() {
@@ -298,5 +319,35 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
                 // to the app after tapping on an ad.
             }
         }
+    }
+
+    private fun initUnityAdsBanner() {
+        val bannerListener = object : BannerView.IListener {
+            override fun onBannerLoaded(bannerAdView: BannerView?) {
+                banner_ads_view?.removeView(bannerAdView)
+                banner_ads_view?.addView(bannerAdView)
+                banner_ads_view?.setVisibility(true)
+            }
+
+            override fun onBannerClick(bannerAdView: BannerView?) {
+                //do nothing
+            }
+
+            override fun onBannerFailedToLoad(
+                bannerAdView: BannerView?,
+                errorInfo: BannerErrorInfo?
+            ) {
+                banner_ads_view?.setVisibility(false)
+            }
+
+            override fun onBannerLeftApplication(bannerView: BannerView?) {
+                //do nothing
+            }
+        }
+
+        val bannerView = BannerView(this, "Banner_Android", UnityBannerSize(320, 50))
+        bannerView.listener = bannerListener
+        bannerView.load()
+        banner_ads_view.addView(bannerView);
     }
 }
