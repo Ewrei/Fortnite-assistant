@@ -5,16 +5,13 @@ import android.content.IntentSender
 import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.rewarded.*
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
@@ -25,15 +22,14 @@ import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.tasks.Task
-import com.unity3d.services.banners.BannerErrorInfo
-import com.unity3d.services.banners.BannerView
-import com.unity3d.services.banners.UnityBannerSize
 import kotlinx.android.synthetic.gms.activity_main.*
-import kotlinx.android.synthetic.gms.activity_main.adView
 import kotlinx.android.synthetic.main.loading_layout.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.*
+import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.common.extensions.setVisibility
+import robin.vitalij.fortniteassitant.common.extensions.setupWithNavController
+import robin.vitalij.fortniteassitant.common.extensions.showApplicationDialog
 import robin.vitalij.fortniteassitant.databinding.ActivityMainBinding
 import robin.vitalij.fortniteassitant.interfaces.ProgressBarActivityController
 import robin.vitalij.fortniteassitant.interfaces.RegistrationProfileCallback
@@ -58,8 +54,6 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
     lateinit var viewModel: MainViewModel
 
     var binding: ActivityMainBinding? = null
-
-    private lateinit var adRequest: AdRequest
 
     private var currentNavController: LiveData<NavController>? = null
 
@@ -127,7 +121,6 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
         initAppUpdateManager()
         openSubscriptionDialog()
         initBanner()
-        setListener()
 
         viewModel.checkFirebaseDynamicLink()
     }
@@ -194,10 +187,10 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
 
     private fun initBanner() {
         if (viewModel.preferenceManager.getIsSubscription() || viewModel.preferenceManager.getDisableAdvertising() >= Date().time) {
-            adView.setVisibility(false)
+            customBannerView.setVisibility(false)
         } else {
-            adRequest = AdRequest.Builder().build()
-            adView.loadAd(adRequest)
+            customBannerView.setVisibility(true)
+            customBannerView.startBanner(getString(R.string.BANNER_ID), this)
         }
     }
 
@@ -287,67 +280,5 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
             }
             viewModel.preferenceManager.setSubscribeDialogTime(Date().time)
         }
-    }
-
-    private fun setListener() {
-        adView?.adListener = object : AdListener() {
-            override fun onAdLoaded() {
-                adView?.setVisibility(true)
-            }
-
-            override fun onAdFailedToLoad(adError: LoadAdError) {
-                adView?.setVisibility(false)
-
-                if(this@MainActivity.checkIfNetworkAvailable()) {
-                    initUnityAdsBanner()
-                } else {
-                    adView?.loadAd(adRequest)
-                }
-            }
-
-            override fun onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-            }
-
-            override fun onAdClicked() {
-                // Code to be executed when the user clicks on an ad.
-            }
-
-            override fun onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
-            }
-        }
-    }
-
-    private fun initUnityAdsBanner() {
-        val bannerListener = object : BannerView.IListener {
-            override fun onBannerLoaded(bannerAdView: BannerView?) {
-                banner_ads_view?.removeView(bannerAdView)
-                banner_ads_view?.addView(bannerAdView)
-                banner_ads_view?.setVisibility(true)
-            }
-
-            override fun onBannerClick(bannerAdView: BannerView?) {
-                //do nothing
-            }
-
-            override fun onBannerFailedToLoad(
-                bannerAdView: BannerView?,
-                errorInfo: BannerErrorInfo?
-            ) {
-                banner_ads_view?.setVisibility(false)
-            }
-
-            override fun onBannerLeftApplication(bannerView: BannerView?) {
-                //do nothing
-            }
-        }
-
-        val bannerView = BannerView(this, "Banner_Android", UnityBannerSize(320, 50))
-        bannerView.listener = bannerListener
-        bannerView.load()
-        banner_ads_view.addView(bannerView);
     }
 }

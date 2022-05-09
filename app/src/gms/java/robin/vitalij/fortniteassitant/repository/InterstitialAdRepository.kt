@@ -11,6 +11,7 @@ import com.unity3d.ads.UnityAdsShowOptions
 import robin.vitalij.fortniteassitant.BuildConfig
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.repository.unity.InterstitialUnityAdRepository
+import robin.vitalij.fortniteassitant.repository.yandex.InterstitialYandexAdRepository
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -19,13 +20,13 @@ import javax.inject.Singleton
 class InterstitialAdRepository @Inject constructor(
     private val preferenceManager: PreferenceManager,
     private val interstitialUnityAdRepository: InterstitialUnityAdRepository,
+    private val interstitialYandexAdRepository: InterstitialYandexAdRepository,
     private val context: Context
 ) {
 
     private var ad: InterstitialAd? = null
 
     private var isAdsShow: Boolean = false
-
 
     fun showInterstitial(activity: Activity) {
         if (ad != null && !isAdsShow) {
@@ -50,7 +51,10 @@ class InterstitialAdRepository @Inject constructor(
 
             ad?.show(activity)
         } else
-            if (interstitialUnityAdRepository.isInterstitialUnityAdLoad && !isAdsShow) {
+            if (interstitialYandexAdRepository.interstitialAd?.isLoaded == true && !isAdsShow) {
+                isAdsShow = true
+                interstitialYandexAdRepository.interstitialAd?.show()
+            } else if (interstitialUnityAdRepository.isInterstitialUnityAdLoad && !isAdsShow) {
                 isAdsShow = true
                 UnityAds.show(activity,
                     InterstitialUnityAdRepository.PLACEMENT_ID,
@@ -86,6 +90,7 @@ class InterstitialAdRepository @Inject constructor(
     fun initInterstitialAd(interstitialAdCallback: () -> Unit) {
         if (preferenceManager.getDisableAdvertising() <= Date().time && !(preferenceManager.getIsSubscription())) {
             interstitialUnityAdRepository.loadInterstitial()
+            interstitialYandexAdRepository.loadInterstitial()
 
             val adRequest = AdRequest.Builder().build()
             InterstitialAd.load(

@@ -12,16 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.LoadAdError
-import com.unity3d.services.banners.BannerErrorInfo
-import com.unity3d.services.banners.BannerView
-import com.unity3d.services.banners.UnityBannerSize
-import kotlinx.android.synthetic.gms.fragment_comparion.*
 import kotlinx.android.synthetic.gms.fragment_search_user.*
-import kotlinx.android.synthetic.gms.fragment_search_user.adView
-import kotlinx.android.synthetic.gms.fragment_search_user.banner_ads_view
 import kotlinx.android.synthetic.gms.fragment_search_user.searchButton
 import kotlinx.android.synthetic.gms.fragment_search_user.searchInputEditText
 import kotlinx.android.synthetic.main.recycler_view.*
@@ -53,8 +44,6 @@ class SearchUserFragment : BaseFragment() {
     lateinit var viewModelFactory: SearchUserViewModelFactory
 
     private lateinit var viewModel: SearchUserViewModel
-
-    lateinit var adRequest: AdRequest
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -107,9 +96,9 @@ class SearchUserFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
+        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
             it?.let(::initAdapter)
-        })
+        }
 
         arguments?.let {
             if (it.getSerializable(IS_COMPARISON_VISIBLE) as ProfileResultType == ProfileResultType.FULL) {
@@ -134,10 +123,10 @@ class SearchUserFragment : BaseFragment() {
         if (viewModel.preferenceManager.getIsSubscription() || viewModel.preferenceManager.getDisableAdvertising() >= Date().time
             || profileResultType == ProfileResultType.FULL
         ) {
-            adView.setVisibility(false)
+            customBannerView.setVisibility(false)
         } else {
-            adRequest = AdRequest.Builder().build()
-            adView.loadAd(adRequest)
+            customBannerView.setVisibility(true)
+            customBannerView.startBanner(getString(R.string.BANNER_ID), activity)
         }
     }
 
@@ -152,36 +141,6 @@ class SearchUserFragment : BaseFragment() {
         recyclerView.setOnTouchListener { v, event ->
             context.closeKeyboard(view)
             false
-        }
-
-        adView?.adListener = object : AdListener() {
-            override fun onAdLoaded() {
-                adView?.setVisibility(true)
-            }
-
-            override fun onAdFailedToLoad(adError: LoadAdError) {
-                adView?.setVisibility(false)
-
-                if(context.checkIfNetworkAvailable()) {
-                    initUnityAdsBanner()
-                } else {
-                    adView?.loadAd(adRequest)
-                }
-            }
-
-            override fun onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-            }
-
-            override fun onAdClicked() {
-                // Code to be executed when the user clicks on an ad.
-            }
-
-            override fun onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
-            }
         }
 
         searchButton.setSafeOnClickListener {
@@ -247,36 +206,6 @@ class SearchUserFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(context)
             (adapter as SearchAdapter).setData(list)
         }
-    }
-
-    private fun initUnityAdsBanner() {
-        val bannerListener = object : BannerView.IListener {
-            override fun onBannerLoaded(bannerAdView: BannerView?) {
-                banner_ads_view?.removeView(bannerAdView)
-                banner_ads_view?.addView(bannerAdView)
-                banner_ads_view?.setVisibility(true)
-            }
-
-            override fun onBannerClick(bannerAdView: BannerView?) {
-                //do nothing
-            }
-
-            override fun onBannerFailedToLoad(
-                bannerAdView: BannerView?,
-                errorInfo: BannerErrorInfo?
-            ) {
-                banner_ads_view?.setVisibility(false)
-            }
-
-            override fun onBannerLeftApplication(bannerView: BannerView?) {
-                //do nothing
-            }
-        }
-
-        val bannerView = BannerView(activity, "Banner_Android", UnityBannerSize(320, 50))
-        bannerView.listener = bannerListener
-        bannerView.load()
-        banner_ads_view.addView(bannerView);
     }
 
     companion object {

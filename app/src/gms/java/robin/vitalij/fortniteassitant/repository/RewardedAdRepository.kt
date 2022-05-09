@@ -12,13 +12,16 @@ import com.unity3d.ads.UnityAds
 import com.unity3d.ads.UnityAdsShowOptions
 import robin.vitalij.fortniteassitant.BuildConfig
 import robin.vitalij.fortniteassitant.repository.unity.RewardAdUnityRepository
+import robin.vitalij.fortniteassitant.repository.yandex.RewardAdYandexRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class RewardedAdRepository @Inject constructor(
     private val context: Context,
-    private val rewardAdUnityRepository: RewardAdUnityRepository
+    private val rewardAdUnityRepository: RewardAdUnityRepository,
+    private val rewardAdYandexRepository: RewardAdYandexRepository
+
 ) {
 
     private var defaultRewardedAd: RewardedAd? = null
@@ -26,26 +29,34 @@ class RewardedAdRepository @Inject constructor(
     init {
         loadAdmodReward()
         rewardAdUnityRepository.load()
+        rewardAdYandexRepository.load()
     }
 
-    fun isLoadVideo() = defaultRewardedAd != null || rewardAdUnityRepository.isLoadAds
+    fun isLoadVideo() =
+        defaultRewardedAd != null || rewardAdUnityRepository.isLoadAds || (rewardAdYandexRepository.rewardedAd?.isLoaded == true)
 
     fun showReward(activity: Activity, getAnWard: () -> Unit) {
-        if(defaultRewardedAd != null) {
-            defaultRewardedAd?.show(activity) {
-                defaultRewardedAd = null
-                loadAdmodReward()
-                getAnWard()
+        when {
+            defaultRewardedAd != null -> {
+                defaultRewardedAd?.show(activity) {
+                    defaultRewardedAd = null
+                    loadAdmodReward()
+                    getAnWard()
+                }
             }
-        } else
-            if(rewardAdUnityRepository.isLoadAds) {
+            rewardAdYandexRepository.rewardedAd?.isLoaded == true -> {
+                loadRewardYandexAds(getAnWard)
+            }
+            rewardAdUnityRepository.isLoadAds -> {
                 loadRewardUnityAds(activity, getAnWard)
             }
+        }
     }
 
     fun loadReward() {
         loadAdmodReward()
         rewardAdUnityRepository.load()
+        rewardAdYandexRepository.load()
     }
 
     private fun loadAdmodReward() {
@@ -65,7 +76,15 @@ class RewardedAdRepository @Inject constructor(
 
     }
 
-    private fun loadRewardUnityAds(activity: Activity, getAnWard:() -> Unit) {
+    private fun loadRewardYandexAds(getAnWard: () -> Unit) {
+        if (rewardAdYandexRepository.rewardedAd?.isLoaded == true) {
+            rewardAdYandexRepository.rewardedAd?.show()
+            rewardAdYandexRepository.onRewarded = getAnWard
+
+        }
+    }
+
+    private fun loadRewardUnityAds(activity: Activity, getAnWard: () -> Unit) {
         if (rewardAdUnityRepository.isLoadAds) {
             UnityAds.show(
                 activity,
