@@ -37,6 +37,7 @@ import robin.vitalij.fortniteassitant.model.enums.AvatarType
 import robin.vitalij.fortniteassitant.model.enums.FirebaseDynamicLinkType
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
+import robin.vitalij.fortniteassitant.ui.ads_gift_fever.BasicRulesActivity
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
 import robin.vitalij.fortniteassitant.ui.subscription.SubscriptionActivity
 import java.util.*
@@ -123,6 +124,11 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
         initBanner()
 
         viewModel.checkFirebaseDynamicLink()
+
+        if(viewModel.preferenceManager.getShowBasicRulesDate() < Date()) {
+            startActivity(BasicRulesActivity.newInstance(this))
+            viewModel.preferenceManager.setShowBasicRulesDate(Date(Date().time + SEVEN_DAY))
+        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -280,5 +286,9 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
             }
             viewModel.preferenceManager.setSubscribeDialogTime(Date().time)
         }
+    }
+
+    companion object {
+        const val SEVEN_DAY = 60000 * 60 * 24 * 7
     }
 }

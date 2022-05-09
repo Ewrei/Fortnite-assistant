@@ -6,6 +6,7 @@ import robin.vitalij.fortniteassitant.di.module.FortniteAppModule
 import robin.vitalij.fortniteassitant.di.module.NetworkModule
 import robin.vitalij.fortniteassitant.di.module.RepositoryModule
 import robin.vitalij.fortniteassitant.ui.achiviements.AchievementsFragment
+import robin.vitalij.fortniteassitant.ui.ads_gift_fever.BasicRulesFragment
 import robin.vitalij.fortniteassitant.ui.banners.BannersFragment
 import robin.vitalij.fortniteassitant.ui.battlepassrewards.BattlePassRewardsFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.banner.BannerResultFragment
@@ -125,4 +126,5 @@ interface AppComponent {
     fun inject(fragment: BannerResultFragment)
     fun inject(fragment: VehiclesResultFragment)
     fun inject(fragment: InputAccountIdResultFragment)
+    fun inject(fragment: BasicRulesFragment)
 }

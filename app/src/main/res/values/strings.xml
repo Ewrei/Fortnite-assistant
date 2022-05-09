@@ -6,6 +6,7 @@
     <string name="how_to_find_account_id_url" translatable="false">https://youtu.be/YuoXP4V4hGo</string>
     <string name="found_account_id_in_epic_games_url">https://youtu.be/O6dv-YnFUzs</string>
     <string name="found_account_id_in_fortnite_url">https://youtu.be/t1gcUEZr8Ag</string>
+    <string name="gift_fever_url" translatable="false">https://giftfever.page.link/referral_program</string>
 
     <string name="title_home">Home</string>
     <string name="tab_title_history_match">History</string>
@@ -319,5 +320,9 @@ This section is beta. If it does not work correctly for you, let us know</string
 
     <string name="how_to_find_out_your_account_in_epic_game">How to find the account ID in the Epic game store</string>
     <string name="how_to_find_out_your_account_in_fortnite">How to find your Fortnite account ID</string>
+
+    <string name="download_app">DOWNLOAD APP</string>
+    <string name="free_skins_and_promo_codes">Free Skins\nand PromoCodes</string>
+    <string name="for_your_favorite_games">for your favorite games - CS:GO, WoT, Fortnite, Free Fire, Steam games, League of Legends etc. Complete simple game tasks and get your gifts!</string>
 
 </resources>

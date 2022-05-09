@@ -59,6 +59,10 @@ fun FragmentActivity.intentVk(vkUrl: String) {
     }
 }
 
+fun FragmentActivity.intentView(url: String?) {
+    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+}
+
 private fun isAppAvailable(
     context: Context,
     appName: String

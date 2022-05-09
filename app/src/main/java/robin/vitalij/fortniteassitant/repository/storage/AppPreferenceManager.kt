@@ -2,6 +2,7 @@ package robin.vitalij.fortniteassitant.repository.storage
 
 import android.content.Context
 import android.content.SharedPreferences
+import java.util.*
 import javax.inject.Singleton
 
 private const val SHARED_PREFERENCES = "shared_preferences"
@@ -23,6 +24,8 @@ private const val BANNER_DATE_LAST_UPDATE = "banner"
 private val SUBSCRIBE_DIALOG_TIME = "subscribe_dialog_time"
 private val SUBSCRIPTION_ACCESS = "subscription_access"
 private val SESSION_ID = "session_id"
+
+private val SHOW_BASIC_RULES_DATE = "show_basic_rules_date"
 
 @Singleton
 class AppPreferenceManager(context: Context) :
@@ -143,4 +146,11 @@ class AppPreferenceManager(context: Context) :
     override fun setCosmeticsDataLastUpdate(dateUpdate: Long) {
         sharedPreferences.edit().putLong(COSMETICS_DATE_LAST_UPDATE, dateUpdate).apply()
     }
+
+    override fun setShowBasicRulesDate(date: Date) {
+        sharedPreferences.edit().putLong(SHOW_BASIC_RULES_DATE, date.time).apply()
+    }
+
+    override fun getShowBasicRulesDate(): Date = Date(sharedPreferences.getLong(SHOW_BASIC_RULES_DATE, 0))
+
 }
