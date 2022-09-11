@@ -3,10 +3,10 @@ package robin.vitalij.fortniteassitant.repository.db
 import io.reactivex.Single
 import robin.vitalij.fortniteassitant.db.dao.CosmeticsDao
 import robin.vitalij.fortniteassitant.db.dao.CosmeticsNewDao
-import robin.vitalij.fortniteassitant.db.entity.*
-import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter.viewmodel.Cosmetics
-import robin.vitalij.fortniteassitant.utils.mapper.CosmeticMapper
+import robin.vitalij.fortniteassitant.db.entity.CosmeticsEntity
+import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter.CosmeticsListItem
 import robin.vitalij.fortniteassitant.utils.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.mapper.CosmeticMapper
 import javax.inject.Inject
 
 class CosmeticsResultRepository @Inject constructor(
@@ -15,7 +15,10 @@ class CosmeticsResultRepository @Inject constructor(
     private val resourceProvider: ResourceProvider
 ) {
 
-    fun getCosmetics(cosmeticsId: String, isCosmeticsNew: Boolean): Single<List<Cosmetics>> {
+    fun getCosmetics(
+        cosmeticsId: String,
+        isCosmeticsNew: Boolean
+    ): Single<List<CosmeticsListItem>> {
         if (isCosmeticsNew) {
             return cosmeticsNewDao.getCosmetic(cosmeticsId).flatMap {
                 return@flatMap Single.just(

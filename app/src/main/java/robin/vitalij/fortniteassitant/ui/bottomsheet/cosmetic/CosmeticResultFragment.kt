@@ -5,18 +5,19 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.getScreenWidth
+import robin.vitalij.fortniteassitant.databinding.BottomSheetMvvmBinding
+import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter.CosmeticsListItem
 import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter.CosmeticsResultAdapter
-import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter.viewmodel.Cosmetics
 import javax.inject.Inject
 
 const val BOTTOM_SHEET_MARGIN_TOP = 200
@@ -28,6 +29,8 @@ class CosmeticResultFragment : BottomSheetDialogFragment() {
     lateinit var viewModelFactory: CosmeticResultViewModelFactory
 
     private lateinit var viewModel: CosmeticResultViewModel
+
+    private lateinit var binding: BottomSheetMvvmBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +46,8 @@ class CosmeticResultFragment : BottomSheetDialogFragment() {
                 BottomSheetBehavior.from(it).skipCollapsed = true
             }
         }
-        return inflater.inflate(R.layout.bottom_sheet_mvvm, container, false)
+        binding = BottomSheetMvvmBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,14 +61,14 @@ class CosmeticResultFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
             viewModel.loadData(
-                it.getString(COSMETIC_ID) ?: "",
-                it.getBoolean(IS_COSMETIC_NEW, false)
+                it.getString(ARG_COSMETIC_ID) ?: "",
+                it.getBoolean(ARG_IS_COSMETIC_NEW, false)
             )
         }
 
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
+        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
             it.let(::initAdapter)
-        })
+        }
     }
 
     override fun onStart() {
@@ -75,13 +79,13 @@ class CosmeticResultFragment : BottomSheetDialogFragment() {
         sheetContainer.layoutParams.height = (displayMetrics.heightPixels - BOTTOM_SHEET_MARGIN_TOP)
     }
 
-    private fun initAdapter(list: List<Cosmetics>) {
-        recyclerView.run {
+    private fun initAdapter(list: List<CosmeticsListItem>) {
+        binding.recyclerViewInclude.recyclerView.run {
             adapter = CosmeticsResultAdapter(
                 layoutInflater,
                 activity?.getScreenWidth(WIDTH_PIXELS_PERCENT) ?: 0
             )
-            (adapter as CosmeticsResultAdapter).setData(list)
+            (adapter as CosmeticsResultAdapter).updateData(list)
             layoutManager = LinearLayoutManager(context)
         }
     }
@@ -89,8 +93,8 @@ class CosmeticResultFragment : BottomSheetDialogFragment() {
     companion object {
 
         private const val TAG = "CosmeticResultFragment"
-        private const val COSMETIC_ID = "cosmetic_id"
-        private const val IS_COSMETIC_NEW = "is_cosmetic_new"
+        private const val ARG_COSMETIC_ID = "arg_cosmetic_id"
+        private const val ARG_IS_COSMETIC_NEW = "arg_is_cosmetic_new"
 
         fun show(
             fragmentManager: FragmentManager?,
@@ -99,14 +103,11 @@ class CosmeticResultFragment : BottomSheetDialogFragment() {
         ) {
             fragmentManager?.let {
                 CosmeticResultFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(COSMETIC_ID, cosmeticId)
-                        putBoolean(IS_COSMETIC_NEW, isCosmeticNew)
-                    }
-                }.show(
-                    it,
-                    TAG
-                )
+                    arguments = bundleOf(
+                        ARG_COSMETIC_ID to cosmeticId,
+                        ARG_IS_COSMETIC_NEW to isCosmeticNew
+                    )
+                }.show(it, TAG)
             }
         }
     }

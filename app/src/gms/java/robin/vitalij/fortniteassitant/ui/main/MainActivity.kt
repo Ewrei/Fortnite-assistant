@@ -160,7 +160,10 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,
             containerId = R.id.nav_host_container,
-            intent = intent
+            intent = intent,
+            changeNavigationTab = {
+                initInterstitialAd()
+            }
         )
 
         currentNavController = controller

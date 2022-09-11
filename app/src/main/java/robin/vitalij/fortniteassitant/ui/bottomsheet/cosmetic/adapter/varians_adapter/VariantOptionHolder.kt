@@ -1,7 +1,7 @@
-package robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter.viewholder.variants.adapter
+package robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter.varians_adapter
 
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_option.view.*
+import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
 import robin.vitalij.fortniteassitant.databinding.ItemOptionBinding
 import robin.vitalij.fortniteassitant.db.entity.Option
 
@@ -11,8 +11,10 @@ class VariantOptionHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: Option) {
-        binding.item = item
-        itemView.cardView.layoutParams.width = widthPixels
-        itemView.cardView.requestLayout()
+        binding.cardView.layoutParams.width = widthPixels
+        binding.cardView.requestLayout()
+
+        binding.image.loadImage(item.image)
+        binding.inventoryName.text = item.name
     }
 }

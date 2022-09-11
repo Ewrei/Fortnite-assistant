@@ -23,7 +23,8 @@ fun BottomNavigationView.setupWithNavController(
     navGraphIds: List<Int>,
     fragmentManager: FragmentManager,
     containerId: Int,
-    intent: Intent
+    intent: Intent,
+    changeNavigationTab: () -> Unit
 ): LiveData<NavController> {
 
     // Map of tags
@@ -128,6 +129,8 @@ fun BottomNavigationView.setupWithNavController(
 
     // Finally, ensure that we update our BottomNavigationView when the back stack changes
     fragmentManager.addOnBackStackChangedListener {
+        changeNavigationTab()
+
         if (!isOnFirstFragment && !fragmentManager.isOnBackStack(firstFragmentTag)) {
             this.selectedItemId = firstFragmentGraphId
         }

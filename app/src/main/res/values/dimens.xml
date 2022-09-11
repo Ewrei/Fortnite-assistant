@@ -64,4 +64,5 @@
     <dimen name="geometric_progress_view_size">100dp</dimen>
 
     <dimen name="small_10_text_size">10sp</dimen>
+    <dimen name="cosmetic_image_size">250dp</dimen>
 </resources>

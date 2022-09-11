@@ -1,17 +1,15 @@
-package robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter.viewholder.variants.adapter
+package robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter.varians_adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.databinding.ItemOptionBinding
 import robin.vitalij.fortniteassitant.db.entity.Option
 
-internal class VariantOptionAdapter(
-    private val widthPixels: Int
-) : RecyclerView.Adapter<VariantOptionHolder>() {
+internal class VariantOptionAdapter(private val widthPixels: Int) :
+    RecyclerView.Adapter<VariantOptionHolder>() {
 
-    private val items = arrayListOf<Option>()
+    private val items = mutableListOf<Option>()
 
     fun setData(data: List<Option>) {
         items.clear()
@@ -19,9 +17,8 @@ internal class VariantOptionAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = VariantOptionHolder(
-        DataBindingUtil.inflate(
+        ItemOptionBinding.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_option,
             parent,
             false
         ), widthPixels
@@ -32,4 +29,5 @@ internal class VariantOptionAdapter(
     }
 
     override fun getItemCount() = items.size
+
 }
