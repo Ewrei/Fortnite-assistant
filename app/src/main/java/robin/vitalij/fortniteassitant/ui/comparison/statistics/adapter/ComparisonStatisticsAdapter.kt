@@ -15,9 +15,9 @@ import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewholde
 import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel.ComparisonPlayer
 import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel.ComparisonPlayerType
 
-class ComparisonStatisticsAdapter() : RecyclerView.Adapter<BaseViewHolder<ComparisonPlayer>>() {
+class ComparisonStatisticsAdapter : RecyclerView.Adapter<BaseViewHolder<ComparisonPlayer>>() {
 
-    private val items = arrayListOf<ComparisonPlayer>()
+    private val items = mutableListOf<ComparisonPlayer>()
 
     fun setData(data: List<ComparisonPlayer>) {
         items.clear()

@@ -101,7 +101,7 @@ class ComparisonSelectedFragment : BaseFragment() {
         searchButton.setSafeOnClickListener {
             context?.closeKeyboard(view)
             if (searchInputEditText.text.toString().isEmpty()) {
-                viewModel.mutableLiveData.value = arrayListOf()
+                viewModel.mutableLiveData.value = emptyList()
             }
             if (searchInputEditText.text.toString().length >= resources.getInteger(R.integer.min_length)) {
                 viewModel.searchPlayer(searchInputEditText.text.toString())

@@ -11,7 +11,7 @@ internal class NewsAdapter(
     private val onVideoClick: (videoUrl: String, videoName: String) -> Unit
 ) : RecyclerView.Adapter<NewsHolder>() {
 
-    private val items = arrayListOf<NewsModel>()
+    private val items = mutableListOf<NewsModel>()
 
     fun setData(data: List<NewsModel>) {
         items.clear()

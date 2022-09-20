@@ -12,7 +12,7 @@ internal class OtherItemsDetailsAdapter(
     private val widthPixels: Int
 ) : RecyclerView.Adapter<OtherItemsDetailsHolder>() {
 
-    private val items = arrayListOf<GrantedModel>()
+    private val items = mutableListOf<GrantedModel>()
 
     fun setData(data: List<GrantedModel>) {
         items.clear()

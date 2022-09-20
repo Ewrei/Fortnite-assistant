@@ -16,7 +16,7 @@ class AdapterDetailsSeasonStatisticsViewModel(
 
     val mutableLiveData = MutableLiveData<List<DetailStatisticsModel>>()
 
-    var detailsStatistics: ArrayList<DetailStatisticsModel> = arrayListOf()
+    var detailsStatistics: MutableList<DetailStatisticsModel> = mutableListOf()
 
     fun loadData() {
         getSeasonStatisticsRepository.getSeasonStats(preferenceManager.getPlayerId())

@@ -10,7 +10,7 @@ import robin.vitalij.fortniteassitant.model.UserModel
 internal class UsersAdapter(val onClick: (accountId: String, playerName: String) -> Unit) :
     RecyclerView.Adapter<UsersHolder>() {
 
-    private val items = arrayListOf<UserModel>()
+    private val items = mutableListOf<UserModel>()
 
     fun setData(data: List<UserModel>) {
         items.clear()

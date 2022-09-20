@@ -18,7 +18,7 @@ class ProfileResultMapper(
     Mapper<FortniteProfileResponse, List<Profile>> {
 
     override fun transform(obj: FortniteProfileResponse): List<Profile> {
-        val list = arrayListOf<Profile>()
+        val list = mutableListOf<Profile>()
         list.add(
             ProfileHeaderViewModel(
                 avatarUrl = obj.avatar,
@@ -55,7 +55,7 @@ class ProfileResultMapper(
     }
 
     private fun getAllBodyStats(statsTypeDevice: StatsTypeDevice?): List<BodyStats> {
-        val list = arrayListOf<BodyStats>()
+        val list = mutableListOf<BodyStats>()
 
         if (statsTypeDevice == null || statsTypeDevice.overall?.matches == 0) {
             list.add(BodyStatsEmpty(resourceProvider.getString(R.string.no_results_for_this_platform)))

@@ -11,7 +11,7 @@ class VehiclesAdapter(
     private val onClick: (vehicleModel: VehicleModel) -> Unit,
 ) : RecyclerView.Adapter<VehiclesHolder>() {
 
-    private val items = arrayListOf<VehicleModel>()
+    private val items = mutableListOf<VehicleModel>()
 
     fun setData(data: List<VehicleModel>) {
         items.clear()

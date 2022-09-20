@@ -12,10 +12,6 @@ class AchievementsViewModel(
 
     val mutableLiveData = MutableLiveData<List<AchievementEntity>>()
 
-    init {
-        loadData()
-    }
-
     fun loadData() {
         achievementRepository
             .loadData()

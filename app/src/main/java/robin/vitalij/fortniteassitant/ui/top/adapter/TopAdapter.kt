@@ -11,7 +11,7 @@ class TopAdapter(
     private val onTopClick: () -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var items = arrayListOf<TopListItem>()
+    private val items = mutableListOf<TopListItem>()
 
     fun setData(data: List<TopListItem>) {
         items.clear()

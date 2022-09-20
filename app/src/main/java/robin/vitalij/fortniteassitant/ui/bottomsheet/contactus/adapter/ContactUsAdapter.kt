@@ -10,7 +10,7 @@ import robin.vitalij.fortniteassitant.model.ContactUsModel
 internal class ContactUsAdapter(val onclick: (contactUsModel: ContactUsModel) -> Unit) :
     RecyclerView.Adapter<ContactUsHolder>() {
 
-    private val items = arrayListOf<ContactUsModel>()
+    private val items = mutableListOf<ContactUsModel>()
 
     fun setData(data: List<ContactUsModel>) {
         items.clear()

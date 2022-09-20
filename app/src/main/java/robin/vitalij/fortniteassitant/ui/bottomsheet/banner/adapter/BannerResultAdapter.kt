@@ -9,7 +9,7 @@ import robin.vitalij.fortniteassitant.db.entity.BannerEntity
 
 class BannerResultAdapter : RecyclerView.Adapter<BannerResultHolder>() {
 
-    private val items = arrayListOf<BannerEntity>()
+    private val items = mutableListOf<BannerEntity>()
 
     fun setData(data: List<BannerEntity>) {
         items.clear()

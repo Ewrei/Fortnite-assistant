@@ -10,7 +10,7 @@ import robin.vitalij.fortniteassitant.model.enums.ChartsType
 class ChartsTypeAdapter(private val onClick: (chartsType: ChartsType) -> Unit) :
     RecyclerView.Adapter<ChartsTypeHolder>() {
 
-    private val items = arrayListOf<ChartsType>()
+    private val items = mutableListOf<ChartsType>()
 
     fun setData(data: List<ChartsType>) {
         items.clear()

@@ -10,7 +10,7 @@ import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
 internal class SearchAdapter(private val onClick: (accountId: SearchSteamUser) -> Unit) :
     RecyclerView.Adapter<SearchHolder>() {
 
-    private val items = arrayListOf<SearchSteamUser>()
+    private val items = mutableListOf<SearchSteamUser>()
 
     fun setData(data: List<SearchSteamUser>) {
         items.clear()

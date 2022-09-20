@@ -16,8 +16,8 @@ class TopUserMapper(
 ) : Mapper<List<TopUser>, List<TopListItem>> {
 
     override fun transform(obj: List<TopUser>): List<TopListItem> {
-        val list = arrayListOf<TopListItem>()
-        val tops = arrayListOf<TopListItem.PlayerItem>()
+        val list = mutableListOf<TopListItem>()
+        val tops = mutableListOf<TopListItem.PlayerItem>()
 
         var position = 1
 

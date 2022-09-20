@@ -11,7 +11,7 @@ class WeaponAdapter(
     private val onClick: (weaponEntity: WeaponEntity) -> Unit
 ) : RecyclerView.Adapter<WeaponHolder>() {
 
-    private val items = arrayListOf<WeaponEntity>()
+    private val items = mutableListOf<WeaponEntity>()
 
     fun setData(data: List<WeaponEntity>) {
         items.clear()

@@ -31,7 +31,7 @@ class ChartsMapper(
     private fun generateSessionModels(
         sessions: List<UserHistory>
     ): List<SessionModel> {
-        val sessionModels = arrayListOf<SessionTempModel>()
+        val sessionModels = mutableListOf<SessionTempModel>()
         sessions.forEach {
             sessionModels.add(
                 SessionTempModel(

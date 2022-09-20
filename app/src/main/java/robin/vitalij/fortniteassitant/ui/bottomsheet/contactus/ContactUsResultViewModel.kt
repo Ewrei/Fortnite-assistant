@@ -21,7 +21,7 @@ class ContactUsResultViewModel(private val resourceProvider: ResourceProvider) :
     }
 
     private fun getContacts(): List<ContactUsModel> {
-        val list = arrayListOf<ContactUsModel>()
+        val list = mutableListOf<ContactUsModel>()
         list.add(ContactUsModel(resourceProvider.getString(R.string.gmail), ConfigType.GMAIL))
         list.add(
             ContactUsModel(
@@ -34,7 +34,7 @@ class ContactUsResultViewModel(private val resourceProvider: ResourceProvider) :
     }
 
     private fun getFoundAccountId(): List<ContactUsModel> {
-        val list = arrayListOf<ContactUsModel>()
+        val list = mutableListOf<ContactUsModel>()
         list.add(ContactUsModel(resourceProvider.getString(R.string.found_account_id_in_epic_games_url), ConfigType.FOUND_ACCOUNT_ID_IN_EPIC_GAMES))
         list.add(ContactUsModel(resourceProvider.getString(R.string.found_account_id_in_fortnite_url), ConfigType.FOUND_ACCOUNT_ID_IN_FORTNITE))
 

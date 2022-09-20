@@ -9,7 +9,7 @@ class SearchUserMapper :
     Mapper<SearchResponse, List<SearchSteamUser>> {
 
     override fun transform(obj: SearchResponse): List<SearchSteamUser> {
-        val list = arrayListOf<SearchSteamUser>()
+        val list = mutableListOf<SearchSteamUser>()
 
         if (obj.result) {
             obj.allMatches.forEach { matches ->

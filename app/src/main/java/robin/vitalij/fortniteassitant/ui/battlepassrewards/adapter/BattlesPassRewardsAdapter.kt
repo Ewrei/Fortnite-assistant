@@ -11,7 +11,7 @@ class BattlesPassRewardsAdapter(
     private val onClick: (battlesPassRewardsModel: BattlesPassRewardsModel) -> Unit
 ) : RecyclerView.Adapter<BattlesPassRewardsHolder>() {
 
-    private val items = arrayListOf<BattlesPassRewardsModel>()
+    private val items = mutableListOf<BattlesPassRewardsModel>()
 
     fun setData(data: List<BattlesPassRewardsModel>) {
         items.clear()

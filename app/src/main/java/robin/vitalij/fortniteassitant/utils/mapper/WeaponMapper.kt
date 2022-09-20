@@ -4,11 +4,11 @@ import robin.vitalij.fortniteassitant.db.entity.WeaponEntity
 import robin.vitalij.fortniteassitant.model.network.WeaponResponse
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
 
-class WeaponMapper() :
-    Mapper<WeaponResponse, List<WeaponEntity>> {
+class WeaponMapper : Mapper<WeaponResponse, List<WeaponEntity>> {
 
     override fun transform(obj: WeaponResponse): List<WeaponEntity> {
-        val list = arrayListOf<WeaponEntity>()
+        val list = mutableListOf<WeaponEntity>()
+
         obj.weapons.forEach {
             list.add(
                 WeaponEntity(

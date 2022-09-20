@@ -11,7 +11,7 @@ class BannersAdapter(
     private val onClick: (bannerEntity: BannerEntity) -> Unit
 ) : RecyclerView.Adapter<BannersHolder>() {
 
-    private val items = arrayListOf<BannerEntity>()
+    private val items = mutableListOf<BannerEntity>()
 
     fun setData(data: List<BannerEntity>) {
         items.clear()

@@ -10,7 +10,7 @@ import robin.vitalij.fortniteassitant.model.comparison.PlayerModel
 internal class SelectedListUserAdapter(private val onClick: (playerModel: PlayerModel) -> Unit) :
     RecyclerView.Adapter<SelectedListUserHolder>() {
 
-    val items = arrayListOf<PlayerModel>()
+    val items = mutableListOf<PlayerModel>()
 
     fun setData(data: List<PlayerModel>) {
         items.clear()

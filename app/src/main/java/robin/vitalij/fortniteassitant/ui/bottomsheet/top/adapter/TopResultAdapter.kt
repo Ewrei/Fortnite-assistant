@@ -15,7 +15,7 @@ import robin.vitalij.fortniteassitant.ui.common.BaseViewHolder
 class TopResultAdapter(private val onClick: (topType: TopType) -> Unit) :
     RecyclerView.Adapter<BaseViewHolder<TopResult>>() {
 
-    private val items = arrayListOf<TopResult>()
+    private val items = mutableListOf<TopResult>()
 
     fun setData(data: List<TopResult>) {
         items.clear()

@@ -11,7 +11,7 @@ import robin.vitalij.fortniteassitant.model.HistoryUserModel
 class HistoryAdapter(private val onClick: (sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel>) -> Unit) :
     RecyclerView.Adapter<HistoryHolder>() {
 
-    private val items = arrayListOf<HistoryUserModel>()
+    private val items = mutableListOf<HistoryUserModel>()
 
     fun setData(data: List<HistoryUserModel>) {
         items.clear()

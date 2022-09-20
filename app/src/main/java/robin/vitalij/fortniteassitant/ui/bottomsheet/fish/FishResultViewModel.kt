@@ -18,7 +18,7 @@ class FishResultViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .let(::setupProgressShow)
             .subscribe({
-                mutableLiveData.value = arrayListOf(it)
+                mutableLiveData.value = mutableListOf(it)
             }, error)
             .let(disposables::add)
     }

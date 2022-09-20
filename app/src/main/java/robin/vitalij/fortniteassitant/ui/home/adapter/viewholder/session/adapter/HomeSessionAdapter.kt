@@ -13,7 +13,7 @@ class HomeSessionAdapter(
     private val openSession: (sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel>) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var items = mutableListOf<HomeSessionListItem>()
+    private val items = mutableListOf<HomeSessionListItem>()
 
     fun setData(data: List<HomeSessionListItem>) {
         items.clear()

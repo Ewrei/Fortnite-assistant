@@ -35,7 +35,7 @@ class FishStatsViewModel(
             .let(::setupProgressShow)
             .subscribe({
                 fishStatsResponse= it
-                mutableLiveData.value = it.seasonStats.firstOrNull()?.fish ?: arrayListOf()
+                mutableLiveData.value = it.seasonStats.firstOrNull()?.fish ?: emptyList()
                 mutableSeasonLiveData.value = it.seasonStats.getSeason(resourceProvider)
 
                 emptyText(

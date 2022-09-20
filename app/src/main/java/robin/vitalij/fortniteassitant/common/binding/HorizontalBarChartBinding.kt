@@ -63,7 +63,7 @@ object HorizontalBarChartBinding {
         yLeft.axisMinimum = 0f
         yLeft.isEnabled = false
 
-        val values = arrayListOf<String>()
+        val values = mutableListOf<String>()
         manyPlayerSchedules.forEach {
             values.add(it.accountName)
         }

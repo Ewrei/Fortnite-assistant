@@ -14,7 +14,6 @@ import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewWithToolbarBinding
-import robin.vitalij.fortniteassitant.db.entity.AchievementEntity
 import robin.vitalij.fortniteassitant.ui.achiviements.adapter.AchievementsAdapter
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import javax.inject.Inject
@@ -27,21 +26,16 @@ class AchievementsFragment : BaseFragment() {
 
     private lateinit var viewModel: AchievementsViewModel
 
-    private var _binding: FragmentRecyclerViewWithToolbarBinding? = null
+    private lateinit var binding: FragmentRecyclerViewWithToolbarBinding
 
-    private val binding get() = _binding!!
+    private var achievementsAdapter = AchievementsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentRecyclerViewWithToolbarBinding.inflate(inflater, container, false)
+        binding = FragmentRecyclerViewWithToolbarBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,12 +54,15 @@ class AchievementsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
-            it.let(::initAdapter)
-        })
+        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
+            achievementsAdapter.updateData(it)
+        }
 
         setListener()
         setNavigation()
+        initializeRecyclerView()
+
+        viewModel.loadData()
     }
 
     private fun setListener() {
@@ -80,10 +77,9 @@ class AchievementsFragment : BaseFragment() {
         binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
-    private fun initAdapter(list: List<AchievementEntity>) {
+    private fun initializeRecyclerView() {
         binding.recyclerViewInclude.recyclerView.run {
-            adapter = AchievementsAdapter()
-            (adapter as AchievementsAdapter).setData(list)
+            adapter = achievementsAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }

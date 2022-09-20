@@ -10,7 +10,7 @@ import robin.vitalij.fortniteassitant.model.network.CrewRewardsModel
 class GameCrewViewDetailsAdapter(
 ) : RecyclerView.Adapter<GameCrewViewDetailsHolder>() {
 
-    private val items = arrayListOf<CrewRewardsModel>()
+    private val items = mutableListOf<CrewRewardsModel>()
 
     fun setData(data: List<CrewRewardsModel>) {
         items.clear()

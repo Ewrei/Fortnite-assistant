@@ -24,7 +24,7 @@ class HomeAdapter(
     private val openSeason: () -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder<Home>>() {
 
-    private val items = arrayListOf<Home>()
+    private val items = mutableListOf<Home>()
 
     fun setData(data: List<Home>) {
         items.clear()

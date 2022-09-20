@@ -11,7 +11,7 @@ class VehiclesResultAdapter(
     private val layoutInflater: LayoutInflater
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var items = mutableListOf<VehiclesResultListItem>()
+    private val items = mutableListOf<VehiclesResultListItem>()
 
     fun setData(data: List<VehiclesResultListItem>) {
         items.clear()

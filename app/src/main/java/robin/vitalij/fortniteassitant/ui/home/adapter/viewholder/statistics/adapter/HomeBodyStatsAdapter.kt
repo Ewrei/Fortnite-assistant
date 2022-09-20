@@ -15,7 +15,7 @@ class HomeBodyStatsAdapter(
     private val openParameterList: () -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder<HomeBodyStats>>() {
 
-    private val items = arrayListOf<HomeBodyStats>()
+    private val items = mutableListOf<HomeBodyStats>()
 
     fun setData(data: List<HomeBodyStats>) {
         items.clear()

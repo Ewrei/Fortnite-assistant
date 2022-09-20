@@ -12,7 +12,7 @@ class FishStatsAdapter(
     private val onClick: (fishStats: FishStats) -> Unit
 ) : RecyclerView.Adapter<FishStatsHolder>() {
 
-    private val items = arrayListOf<FishStats>()
+    private val items = mutableListOf<FishStats>()
 
     fun setData(data: List<FishStats>) {
         items.clear()

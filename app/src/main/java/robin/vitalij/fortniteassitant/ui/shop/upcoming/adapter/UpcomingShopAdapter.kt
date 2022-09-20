@@ -11,7 +11,7 @@ class UpcomingShopAdapter(
     private val onClick: (itemShopUpcoming: ItemShopUpcoming) -> Unit
 ) : RecyclerView.Adapter<UpcomingShopHolder>() {
 
-    private val items = arrayListOf<ItemShopUpcoming>()
+    private val items = mutableListOf<ItemShopUpcoming>()
 
     fun setData(data: List<ItemShopUpcoming>) {
         items.clear()

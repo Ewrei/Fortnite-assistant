@@ -12,7 +12,7 @@ class GameCrewAdapter(
     private val onVideoClick: (videoUrl: String, videoName: String) -> Unit
 ) : RecyclerView.Adapter<GameCrewHolder>() {
 
-    private val items = arrayListOf<CrewModel>()
+    private val items = mutableListOf<CrewModel>()
 
     fun setData(data: List<CrewModel>) {
         items.clear()

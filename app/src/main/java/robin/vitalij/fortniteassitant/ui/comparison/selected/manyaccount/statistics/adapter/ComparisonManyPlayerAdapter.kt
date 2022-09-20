@@ -17,7 +17,7 @@ class ComparisonManyPlayerAdapter(
     val onClick: (profileAdapterImpl: ComparisonManyPlayers) -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder<ComparisonManyPlayers>>() {
 
-    private val items = arrayListOf<ComparisonManyPlayers>()
+    private val items = mutableListOf<ComparisonManyPlayers>()
 
     fun setData(data: List<ComparisonManyPlayers>) {
         items.clear()

@@ -5,11 +5,10 @@ import robin.vitalij.fortniteassitant.db.entity.FishEntity
 import robin.vitalij.fortniteassitant.model.network.FishResponse
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
 
-class FishMapper() :
-    Mapper<FishResponse, List<FishEntity>> {
+class FishMapper : Mapper<FishResponse, List<FishEntity>> {
 
     override fun transform(obj: FishResponse): List<FishEntity> {
-        val list = arrayListOf<FishEntity>()
+        val list = mutableListOf<FishEntity>()
         obj.fishes.forEach {
             list.add(
                 FishEntity(

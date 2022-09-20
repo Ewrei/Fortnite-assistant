@@ -8,7 +8,7 @@ class UsersMapper(private val playerId: String) :
     Mapper<List<UserEntity>, List<UserModel>> {
 
     override fun transform(obj: List<UserEntity>): List<UserModel> {
-        val list = arrayListOf<UserModel>()
+        val list = mutableListOf<UserModel>()
         obj.filter { it.all?.overall?.matches != 0 }.forEach {
             list.add(UserModel(it, it.playerId == playerId))
         }

@@ -10,7 +10,7 @@ import robin.vitalij.fortniteassitant.db.entity.WeaponEntity
 class WeaponResultAdapter(
 ) : RecyclerView.Adapter<WeaponResultHolder>() {
 
-    private val items = arrayListOf<WeaponEntity>()
+    private val items = mutableListOf<WeaponEntity>()
 
     fun setData(data: List<WeaponEntity>) {
         items.clear()

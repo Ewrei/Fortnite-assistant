@@ -26,7 +26,7 @@ class HomeMapper(
 ) : Mapper<List<UserEntity>, FullHomeModel> {
 
     override fun transform(obj: List<UserEntity>): FullHomeModel {
-        val list = arrayListOf<Home>()
+        val list = mutableListOf<Home>()
 
         val userEntity: UserEntity = obj.last()
         val userLastEntity: UserEntity = obj.first()
@@ -51,7 +51,7 @@ class HomeMapper(
             list.add(HomeTitleViewModel(resourceProvider.getString(R.string.game_sessions)))
 
             if (history.size <= TWO_SESSION) {
-                val sessions = arrayListOf<HomeSessionListItem>()
+                val sessions = mutableListOf<HomeSessionListItem>()
                 history.forEach {
                     sessions.add(HomeSessionListItem.SessionItem(it))
                 }
@@ -61,7 +61,7 @@ class HomeMapper(
                     )
                 )
             } else {
-                val sessions = arrayListOf<HomeSessionListItem>()
+                val sessions = mutableListOf<HomeSessionListItem>()
                 history.take(TWO_SESSION).forEach {
                     sessions.add(HomeSessionListItem.SessionItem(it))
                 }
@@ -97,7 +97,7 @@ class HomeMapper(
     }
 
     private fun getAllBodyStats(statsTypeDevice: StatsTypeDevice?): List<HomeBodyStats> {
-        val list = arrayListOf<HomeBodyStats>()
+        val list = mutableListOf<HomeBodyStats>()
 
         if (statsTypeDevice == null || statsTypeDevice.overall?.matches == 0) {
             list.add(HomeBodyEmptyViewModel(resourceProvider.getString(R.string.no_results_for_this_platform)))
@@ -178,7 +178,7 @@ class HomeMapper(
         soloMatches: SoloMatches,
         battlesTitle: String
     ): List<HomeBodyStats> {
-        val list = arrayListOf<HomeBodyStats>()
+        val list = mutableListOf<HomeBodyStats>()
 
         list.add(HomeBodyHeaderViewModel(battlesTitle))
 
@@ -217,7 +217,7 @@ class HomeMapper(
         soloMatches: DuoMatches,
         battlesTitle: String
     ): List<HomeBodyStats> {
-        val list = arrayListOf<HomeBodyStats>()
+        val list = mutableListOf<HomeBodyStats>()
 
         list.add(HomeBodyHeaderViewModel(battlesTitle))
 
@@ -256,7 +256,7 @@ class HomeMapper(
         trioMatches: TrioMatches,
         battlesTitle: String
     ): List<HomeBodyStats> {
-        val list = arrayListOf<HomeBodyStats>()
+        val list = mutableListOf<HomeBodyStats>()
 
         list.add(HomeBodyHeaderViewModel(battlesTitle))
 

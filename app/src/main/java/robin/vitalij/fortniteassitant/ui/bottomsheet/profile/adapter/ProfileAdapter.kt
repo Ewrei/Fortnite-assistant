@@ -14,7 +14,7 @@ import robin.vitalij.fortniteassitant.ui.common.BaseViewHolder
 class ProfileAdapter(
 ) : RecyclerView.Adapter<BaseViewHolder<Profile>>() {
 
-    private val items = arrayListOf<Profile>()
+    private val items = mutableListOf<Profile>()
 
     fun setData(data: List<Profile>) {
         items.clear()

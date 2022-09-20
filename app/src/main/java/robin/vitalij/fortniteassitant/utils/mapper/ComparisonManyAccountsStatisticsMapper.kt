@@ -20,7 +20,7 @@ class ComparisonManyAccountsStatisticsMapper(
 ) : Mapper<List<PlayerModel>, List<ComparisonManyPlayers>> {
 
     override fun transform(obj: List<PlayerModel>): List<ComparisonManyPlayers> {
-        val users = arrayListOf<UserCompary>()
+        val users = mutableListOf<UserCompary>()
 
         obj.forEach {
             users.add(
@@ -44,7 +44,7 @@ class ComparisonManyAccountsStatisticsMapper(
             )
         }
 
-        val list = arrayListOf<ComparisonManyPlayers>()
+        val list = mutableListOf<ComparisonManyPlayers>()
 
         when (battlesType) {
             BattlesType.OVERALL -> {
@@ -73,7 +73,7 @@ class ComparisonManyAccountsStatisticsMapper(
     private fun getOverallMatches(
         statisticUsers: List<UserCompary>
     ): List<ComparisonManyPlayers> {
-        val list = arrayListOf<ComparisonManyPlayers>()
+        val list = mutableListOf<ComparisonManyPlayers>()
 
         list.add(
             ComparisonManyPlayersScheduleViewModel(
@@ -248,7 +248,7 @@ class ComparisonManyAccountsStatisticsMapper(
         statisticUsers: List<UserCompary>,
         typeParameter: TypeParameter
     ): List<ManyPlayerSchedule> {
-        val list = arrayListOf<ManyPlayerSchedule>()
+        val list = mutableListOf<ManyPlayerSchedule>()
 
         statisticUsers.forEach {
             list.add(

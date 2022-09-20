@@ -12,7 +12,7 @@ class CatalogCosmeticsAdapter(
     private val onClick: (shopType: ShopType) -> Unit
 ) : RecyclerView.Adapter<CatalogCosmeticsHolder>() {
 
-    private val items = arrayListOf<ShopType>()
+    private val items = mutableListOf<ShopType>()
 
     fun setData(data: List<ShopType>) {
         items.clear()

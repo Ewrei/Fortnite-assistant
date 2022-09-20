@@ -25,8 +25,8 @@ fun UserEntity.differenceUser(userEntityLast: UserEntity): UserEntity {
     )
 }
 
-fun UserEntity.getDetailStatisticsModelList(): ArrayList<DetailStatisticsModel> {
-    val list = arrayListOf<DetailStatisticsModel>()
+fun UserEntity.getDetailStatisticsModelList(): MutableList<DetailStatisticsModel> {
+    val list = mutableListOf<DetailStatisticsModel>()
 
     all?.let {
         list.add(getDetailStatisticsModel(GameType.ALL, it))
@@ -51,7 +51,7 @@ private fun getDetailStatisticsModel(
     gameType: GameType,
     statsTypeDevice: StatsTypeDevice
 ): DetailStatisticsModel {
-    val battlesTypes: ArrayList<BattlesType> = arrayListOf()
+    val battlesTypes = mutableListOf<BattlesType>()
     statsTypeDevice.overall?.let {
         battlesTypes.add(BattlesType.OVERALL)
     }

@@ -13,9 +13,9 @@ import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewholder.
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewholder.body.adapter.viewmodel.BodyStatsType
 import robin.vitalij.fortniteassitant.ui.common.BaseViewHolder
 
-class BodyStatsAdapter() : RecyclerView.Adapter<BaseViewHolder<BodyStats>>() {
+class BodyStatsAdapter : RecyclerView.Adapter<BaseViewHolder<BodyStats>>() {
 
-    private val items = arrayListOf<BodyStats>()
+    private val items = mutableListOf<BodyStats>()
 
     fun setData(data: List<BodyStats>) {
         items.clear()

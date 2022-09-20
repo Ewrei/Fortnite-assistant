@@ -7,10 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.db.entity.FishEntity
 
-class FishResultAdapter(
-) : RecyclerView.Adapter<FishResultHolder>() {
+class FishResultAdapter : RecyclerView.Adapter<FishResultHolder>() {
 
-    private val items = arrayListOf<FishEntity>()
+    private val items = mutableListOf<FishEntity>()
 
     fun setData(data: List<FishEntity>) {
         items.clear()

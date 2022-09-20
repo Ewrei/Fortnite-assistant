@@ -21,7 +21,7 @@ class DetailsStatisticsMapper(
 ) : Mapper<List<UserEntity>, List<HomeBodyStats>> {
 
     override fun transform(obj: List<UserEntity>): List<HomeBodyStats> {
-        val list = arrayListOf<HomeBodyStats>()
+        val list = mutableListOf<HomeBodyStats>()
 
         val userEntity: UserEntity = obj.last()
         val userLastEntity: UserEntity = obj.first()
@@ -45,7 +45,7 @@ class DetailsStatisticsMapper(
     }
 
     private fun getAllBodyStats(statsTypeDevice: StatsTypeDevice): List<HomeBodyStats> {
-        val list = arrayListOf<HomeBodyStats>()
+        val list = mutableListOf<HomeBodyStats>()
 
         when (battlesType) {
             BattlesType.OVERALL -> {
@@ -102,7 +102,7 @@ class DetailsStatisticsMapper(
     }
 
     private fun getOverallBodyStats(overall: Overall): List<HomeBodyStats> {
-        val list = arrayListOf<HomeBodyStats>()
+        val list = mutableListOf<HomeBodyStats>()
 
         list.add(
             HomeBodyStatsViewModel(
@@ -181,7 +181,7 @@ class DetailsStatisticsMapper(
     private fun getSoloMatchesBodyStats(
         soloMatches: SoloMatches
     ): List<HomeBodyStats> {
-        val list = arrayListOf<HomeBodyStats>()
+        val list = mutableListOf<HomeBodyStats>()
 
         list.add(
             HomeBodyStatsViewModel(
@@ -247,7 +247,7 @@ class DetailsStatisticsMapper(
     private fun getDuoMatchesBodyStats(
         soloMatches: DuoMatches,
     ): List<HomeBodyStats> {
-        val list = arrayListOf<HomeBodyStats>()
+        val list = mutableListOf<HomeBodyStats>()
 
         list.add(
             HomeBodyStatsViewModel(
@@ -313,7 +313,7 @@ class DetailsStatisticsMapper(
     private fun getThreeMatchesBodyStats(
         trioMatches: TrioMatches,
     ): List<HomeBodyStats> {
-        val list = arrayListOf<HomeBodyStats>()
+        val list = mutableListOf<HomeBodyStats>()
 
         list.add(
             HomeBodyStatsViewModel(
@@ -379,7 +379,7 @@ class DetailsStatisticsMapper(
     private fun getLtmMatchesBodyStats(
         ltm: Ltm
     ): List<HomeBodyStats> {
-        val list = arrayListOf<HomeBodyStats>()
+        val list = mutableListOf<HomeBodyStats>()
 
         list.add(
             HomeBodyStatsViewModel(

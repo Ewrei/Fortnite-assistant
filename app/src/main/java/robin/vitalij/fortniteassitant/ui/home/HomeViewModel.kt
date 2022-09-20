@@ -24,7 +24,8 @@ class HomeViewModel(
             .let(::setupProgressShow)
             .subscribe({
                 mutableLiveData.value = it.homes
-                detailsStatistics = it.details
+                detailsStatistics.clear()
+                detailsStatistics.addAll(it.details)
             }, error)
             .let(disposables::add)
     }

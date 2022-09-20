@@ -11,7 +11,7 @@ class CosmeticsNewAdapter(
     private val onClick: (cosmeticsNewEntity: CosmeticsNewEntity) -> Unit
 ) : RecyclerView.Adapter<CosmeticsNewHolder>() {
 
-    private val items = arrayListOf<CosmeticsNewEntity>()
+    private val items = mutableListOf<CosmeticsNewEntity>()
 
     fun setData(data: List<CosmeticsNewEntity>) {
         items.clear()
