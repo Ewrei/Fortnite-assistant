@@ -1,221 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/DefaultCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/default_margin"
+    android:checkable="false">
 
-    <data>
-
-        <variable
-            name="item"
-            type="robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewmodel.ProfileHeaderViewModel" />
-    </data>
-
-    <com.google.android.material.card.MaterialCardView
-        style="@style/DefaultCard"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
-        android:checkable="false">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="parent">
 
-        <LinearLayout
+        <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="parent">
+            android:gravity="center_vertical">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical">
+            <ImageView
+                android:id="@+id/avatarImage"
+                android:layout_width="@dimen/icon_size_large"
+                android:layout_height="@dimen/icon_size_large"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/default_margin"
+                tools:srcCompat="@tools:sample/avatars" />
 
-                <ImageView
-                    android:id="@+id/avatarImage"
-                    android:layout_width="@dimen/icon_size_large"
-                    android:layout_height="@dimen/icon_size_large"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/default_margin"
-                    android:layout_marginBottom="@dimen/default_margin"
-                    app:imageUrl="@{item.avatarUrl}"
-                    tools:srcCompat="@tools:sample/avatars" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/profileName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/default_margin"
-                        android:layout_marginEnd="@dimen/default_margin_double"
-                        android:text="@{item.userName}"
-                        android:fontFamily="@font/futura_pt_bold"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                        tools:text="profile image" />
-
-                    <TextView
-                        android:id="@+id/playerId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/default_margin"
-                        android:text="@{item.playerId}"
-                        android:fontFamily="@font/futura_pt_medium"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:textColor="@android:color/darker_gray"
-                        tools:text="playerId" />
-
-                </LinearLayout>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/default_margin">
-
-                <TextView
-                    android:id="@+id/matches"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/futura_pt_medium"
-                    android:text="@{@string/level_format(item.level)}"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    android:textColor="?header_color"
-                    tools:text="Level 1" />
-
-                <TextView
-                    android:id="@+id/playTime"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:fontFamily="@font/futura_pt_medium"
-                    android:text="@{item.playTime}"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    android:textColor="?header_color"
-                    tools:text="play time" />
-
-            </TableRow>
-
-            <TableRow
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/default_margin">
+                android:orientation="vertical">
 
-                <View
-                    style="@style/DefaultDivider"
-                    android:layout_width="@dimen/default_divider_height"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/default_margin"
-                    android:layout_marginBottom="@dimen/default_margin" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/profileName"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/half_default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:layout_marginBottom="@dimen/half_default_margin"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:layout_marginEnd="@dimen/default_margin_double"
+                    android:fontFamily="@font/futura_pt_bold"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    tools:text="profile image" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/matches"
-                        android:fontFamily="@font/futura_pt_medium"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:textColor="?header_color" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/fortnite_battlefest"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        app:value="@{item.matches}"
-                        tools:text="58" />
-
-                </LinearLayout>
-
-                <View
-                    style="@style/DefaultDivider"
-                    android:layout_width="@dimen/default_divider_height"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/default_margin"
-                    android:layout_marginBottom="@dimen/default_margin" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/playerId"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/half_default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:layout_marginBottom="@dimen/half_default_margin"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:fontFamily="@font/futura_pt_medium"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="@android:color/darker_gray"
+                    tools:text="playerId" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/wins_percent"
-                        android:fontFamily="@font/futura_pt_medium"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:textColor="?header_color" />
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/fortnite_battlefest"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        app:percent="@{item.winRate}"
-                        tools:text="3.2" />
+        </TableRow>
 
-                </LinearLayout>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/default_margin">
 
-                <View
-                    style="@style/DefaultDivider"
-                    android:layout_width="@dimen/default_divider_height"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/default_margin"
-                    android:layout_marginBottom="@dimen/default_margin" />
+            <TextView
+                android:id="@+id/matches"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:layout_weight="1"
+                android:fontFamily="@font/futura_pt_medium"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="?header_color"
+                tools:text="Level 1" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
+            <TextView
+                android:id="@+id/playTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:layout_weight="1"
+                android:fontFamily="@font/futura_pt_medium"
+                android:gravity="end"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="?header_color"
+                tools:text="play time" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin">
+
+            <View
+                style="@style/DefaultDivider"
+                android:layout_width="@dimen/default_divider_height"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/default_margin" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/half_default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/half_default_margin"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/half_default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:layout_marginBottom="@dimen/half_default_margin"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:fontFamily="@font/futura_pt_medium"
+                    android:text="@string/matches"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="?header_color" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/kd"
-                        android:fontFamily="@font/futura_pt_medium"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:textColor="?header_color" />
+                <TextView
+                    android:id="@+id/allMatches"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/fortnite_battlefest"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    tools:text="58" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/fortnite_battlefest"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        app:value="@{item.kd}"
-                        tools:text="1 230" />
+            </LinearLayout>
 
-                </LinearLayout>
+            <View
+                style="@style/DefaultDivider"
+                android:layout_width="@dimen/default_divider_height"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/default_margin" />
 
-            </TableRow>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/half_default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/half_default_margin"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/futura_pt_medium"
+                    android:text="@string/wins_percent"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="?header_color" />
 
-    </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:id="@+id/winRate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/fortnite_battlefest"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    tools:text="3.2" />
 
-</layout>
+            </LinearLayout>
+
+            <View
+                style="@style/DefaultDivider"
+                android:layout_width="@dimen/default_divider_height"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/default_margin" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/half_default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/half_default_margin"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/futura_pt_medium"
+                    android:text="@string/kd"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="?header_color" />
+
+                <TextView
+                    android:id="@+id/kd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/fortnite_battlefest"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    tools:text="1 230" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -9,11 +9,11 @@ import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileRespons
 import robin.vitalij.fortniteassitant.repository.comparison.ComparisonListUserRepository
 import robin.vitalij.fortniteassitant.repository.comparison.ComparisonRepository
 import robin.vitalij.fortniteassitant.repository.network.GetUserRepository
-import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewmodel.Profile
+import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.ProfileListItem
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 import robin.vitalij.fortniteassitant.utils.mapper.PlayerUserMapper
 import robin.vitalij.fortniteassitant.utils.mapper.ProfileResultMapper
-import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 
 class ProfileResultViewModel(
@@ -23,7 +23,7 @@ class ProfileResultViewModel(
     private val resourceProvider: ResourceProvider
 ) : BaseViewModel() {
 
-    val mutableLiveData = MutableLiveData<List<Profile>>()
+    val mutableLiveData = MutableLiveData<List<ProfileListItem>>()
 
     var playerModel: ObservableField<FortniteProfileResponse> = ObservableField()
 

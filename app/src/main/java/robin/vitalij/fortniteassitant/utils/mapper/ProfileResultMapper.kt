@@ -4,23 +4,20 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
 import robin.vitalij.fortniteassitant.model.network.stats.StatsTypeDevice
+import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.ProfileListItem
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewholder.body.adapter.viewmodel.*
-import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewmodel.Profile
-import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewmodel.ProfileBodyViewModel
-import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewmodel.ProfileHeaderViewModel
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 import robin.vitalij.fortniteassitant.utils.TextUtils
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
-import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 class ProfileResultMapper(
     private val resourceProvider: ResourceProvider
-) :
-    Mapper<FortniteProfileResponse, List<Profile>> {
+) : Mapper<FortniteProfileResponse, List<ProfileListItem>> {
 
-    override fun transform(obj: FortniteProfileResponse): List<Profile> {
-        val list = mutableListOf<Profile>()
+    override fun transform(obj: FortniteProfileResponse): List<ProfileListItem> {
+        val list = mutableListOf<ProfileListItem>()
         list.add(
-            ProfileHeaderViewModel(
+            ProfileListItem.HeaderItem(
                 avatarUrl = obj.avatar,
                 userName = obj.stats.playerStatsData.account.name,
                 playerId = obj.stats.playerStatsData.account.id,
@@ -44,11 +41,11 @@ class ProfileResultMapper(
         )
 
         list.add(
-            ProfileBodyViewModel(
-                getAllBodyStats(obj.stats.playerStatsData.stats.all),
-                getAllBodyStats(obj.stats.playerStatsData.stats.keyboardMouse),
-                getAllBodyStats(obj.stats.playerStatsData.stats.gamepad),
-                getAllBodyStats(obj.stats.playerStatsData.stats.touch)
+            ProfileListItem.BodyItem(
+                all = getAllBodyStats(obj.stats.playerStatsData.stats.all),
+                keyboardMouse = getAllBodyStats(obj.stats.playerStatsData.stats.keyboardMouse),
+                gamepad = getAllBodyStats(obj.stats.playerStatsData.stats.gamepad),
+                touch = getAllBodyStats(obj.stats.playerStatsData.stats.touch)
             )
         )
         return list
