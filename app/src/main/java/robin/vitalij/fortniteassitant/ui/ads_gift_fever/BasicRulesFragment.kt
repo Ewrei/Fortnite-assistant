@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.dpToPx
 import robin.vitalij.fortniteassitant.common.extensions.getStatusBarHeight
 import robin.vitalij.fortniteassitant.common.extensions.intentView
 import robin.vitalij.fortniteassitant.common.extensions.setMarginTop
@@ -38,12 +37,12 @@ class BasicRulesFragment : BaseFragment() {
         setListeners()
 
         binding.logoIconImage.setMarginTop(
-            resources.getStatusBarHeight() + resources.dpToPx(16),
-            marginLeft = resources.dpToPx(16)
+            resources.getStatusBarHeight() + resources.getDimensionPixelSize(R.dimen.default_margin_double),
+            marginLeft = resources.getDimensionPixelSize(R.dimen.default_margin_double)
         )
         binding.closeImageButton.setMarginTop(
-            resources.getStatusBarHeight() + resources.dpToPx(8),
-            marginRight = resources.dpToPx(16)
+            resources.getStatusBarHeight() + resources.getDimensionPixelSize(R.dimen.default_margin),
+            marginRight = resources.getDimensionPixelSize(R.dimen.default_margin_double)
         )
     }
 
@@ -55,12 +54,12 @@ class BasicRulesFragment : BaseFragment() {
 
     private fun setListeners() {
         binding.downloadAppButton.setOnClickListener {
-            activity?.intentView(getString(R.string.gift_fever_url))
             val calendar = Calendar.getInstance()
             calendar.add(Calendar.MONTH, TWO_MOUNT)
             calendar.time
             preferenceManager.setShowBasicRulesDate(calendar.time)
 
+            activity?.intentView(getString(R.string.gift_fever_url))
             activity?.finish()
         }
 

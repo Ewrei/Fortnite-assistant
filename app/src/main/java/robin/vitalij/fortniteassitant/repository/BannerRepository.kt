@@ -3,6 +3,7 @@ package robin.vitalij.fortniteassitant.repository
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import robin.vitalij.fortniteassitant.api.FortniteRequestsComApi
+import robin.vitalij.fortniteassitant.common.extensions.convertToBannerEntities
 import robin.vitalij.fortniteassitant.db.dao.BannerDao
 import robin.vitalij.fortniteassitant.db.entity.BannerEntity
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
@@ -31,16 +32,19 @@ class BannerRepository @Inject constructor(
             fortniteRequestsComApi.getBanners(LocaleUtils.locale)
                 .subscribeOn(Schedulers.io())
                 .flatMap {
-                    bannerDao.removeBanner()
-                    bannerDao.insertBanner(it.data)
+                    val banners = it.data.convertToBannerEntities()
+
+                    bannerDao.removeBanners()
+                    bannerDao.insertBanners(banners)
                     preferenceManager.setBannerDataLastUpdate(Date().time)
-                    return@flatMap Single.just(it.data)
+                    return@flatMap Single.just(banners)
                 }
         } else {
-            bannerDao.getBanner()
+            bannerDao.getBanners()
                 .subscribeOn(Schedulers.io())
         }
     }
 
     fun getBannerId(bannerId: String) = bannerDao.getBanner(bannerId)
+
 }

@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.databinding.BottomSheetMvvmBinding
 import robin.vitalij.fortniteassitant.db.entity.FishEntity
 import robin.vitalij.fortniteassitant.ui.bottomsheet.fish.adapter.FishResultAdapter
 import javax.inject.Inject
@@ -28,6 +28,8 @@ class FishResultFragment : BottomSheetDialogFragment() {
     lateinit var viewModelFactory: FishResultViewModelFactory
 
     private lateinit var viewModel: FishResultViewModel
+
+    private lateinit var binding: BottomSheetMvvmBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +45,8 @@ class FishResultFragment : BottomSheetDialogFragment() {
                 BottomSheetBehavior.from(it).skipCollapsed = true
             }
         }
-        return inflater.inflate(R.layout.bottom_sheet_mvvm, container, false)
+        binding = BottomSheetMvvmBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,9 +65,9 @@ class FishResultFragment : BottomSheetDialogFragment() {
             viewModel.loadData((it.getString(FISH) ?: ""))
         }
 
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
+        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
             it.let(::initAdapter)
-        })
+        }
     }
 
     override fun onStart() {
@@ -76,7 +79,7 @@ class FishResultFragment : BottomSheetDialogFragment() {
     }
 
     private fun initAdapter(list: List<FishEntity>) {
-        recyclerView.run {
+        binding.recyclerViewInclude.recyclerView.run {
             adapter = FishResultAdapter()
             (adapter as FishResultAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)

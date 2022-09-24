@@ -15,4 +15,5 @@ class BannerConverter {
 
     @TypeConverter
     fun toOrdinal(list: BannerImage) = gson.toJson(list)
+
 }

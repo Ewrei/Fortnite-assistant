@@ -12,10 +12,6 @@ class BannersViewModel(
 
     val mutableLiveData = MutableLiveData<List<BannerEntity>>()
 
-    init {
-        loadData()
-    }
-
     fun loadData() {
         bannerRepository
             .loadData()

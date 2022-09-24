@@ -14,13 +14,10 @@ import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewWithToolbarBinding
-import robin.vitalij.fortniteassitant.db.entity.BannerEntity
 import robin.vitalij.fortniteassitant.ui.banners.adapter.BannersAdapter
 import robin.vitalij.fortniteassitant.ui.bottomsheet.banner.BannerResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import javax.inject.Inject
-
-private const val MAX_SPAN_COUNT = 2
 
 class BannersFragment : BaseFragment() {
 
@@ -29,21 +26,23 @@ class BannersFragment : BaseFragment() {
 
     private lateinit var viewModel: BannersViewModel
 
-    private var _binding: FragmentRecyclerViewWithToolbarBinding? = null
+    private lateinit var binding: FragmentRecyclerViewWithToolbarBinding
 
-    private val binding get() = _binding!!
+    private var bannersAdapter = BannersAdapter {
+        BannerResultFragment.show(childFragmentManager, it.id)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        FortniteApplication.appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentRecyclerViewWithToolbarBinding.inflate(inflater, container, false)
+        binding = FragmentRecyclerViewWithToolbarBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,19 +54,17 @@ class BannersFragment : BaseFragment() {
             }
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        FortniteApplication.appComponent.inject(this)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
-            it.let(::initAdapter)
-        })
-
         setListener()
         setNavigation()
+        initializeRecyclerView()
+
+        viewModel.loadData()
+
+        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
+            bannersAdapter.updateData(it)
+        }
     }
 
     private fun setListener() {
@@ -82,21 +79,21 @@ class BannersFragment : BaseFragment() {
         binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
-    private fun initAdapter(list: List<BannerEntity>) {
+    private fun initializeRecyclerView() {
         binding.recyclerViewInclude.recyclerView.run {
-            adapter = BannersAdapter {
-                BannerResultFragment.show(childFragmentManager, it.id)
-            }
-            (adapter as BannersAdapter).setData(list)
-            val gridlayoutManager = GridLayoutManager(
+            adapter = bannersAdapter
+            layoutManager = GridLayoutManager(
                 activity, MAX_SPAN_COUNT
-            )
-
-            gridlayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int) = 1
+            ).apply {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int) = BANNER_SPAN_COUNT
+                }
             }
-
-            layoutManager = gridlayoutManager
         }
+    }
+
+    companion object {
+        private const val MAX_SPAN_COUNT = 2
+        private const val BANNER_SPAN_COUNT = 1
     }
 }
