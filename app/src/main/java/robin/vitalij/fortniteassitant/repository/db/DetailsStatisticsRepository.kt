@@ -4,9 +4,9 @@ import io.reactivex.Flowable
 import robin.vitalij.fortniteassitant.db.dao.UserDao
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.HomeBodyStats
-import robin.vitalij.fortniteassitant.utils.mapper.DetailsStatisticsMapper
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsListItem
 import robin.vitalij.fortniteassitant.utils.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.mapper.DetailsStatisticsMapper
 import javax.inject.Inject
 
 class DetailsStatisticsRepository @Inject constructor(
@@ -18,7 +18,7 @@ class DetailsStatisticsRepository @Inject constructor(
         playerId: String,
         battlesType: BattlesType,
         gameType: GameType
-    ): Flowable<List<HomeBodyStats>> =
+    ): Flowable<List<HomeBodyStatsListItem>> =
         userDao.getLastTwoUserEntities(playerId).flatMap {
             return@flatMap Flowable.just(
                 DetailsStatisticsMapper(

@@ -1,12 +1,12 @@
 package robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel
 
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.HomeBodyStats
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsListItem
 
 data class HomeStatisticsViewModel(
-    val all: List<HomeBodyStats>,
-    val keyboardMouse: List<HomeBodyStats>,
-    val gamepad: List<HomeBodyStats>,
-    val touch: List<HomeBodyStats>
+    val all: List<HomeBodyStatsListItem>,
+    val keyboardMouse: List<HomeBodyStatsListItem>,
+    val gamepad: List<HomeBodyStatsListItem>,
+    val touch: List<HomeBodyStatsListItem>
 ) : Home {
     override fun getType() = HomeType.STATISTICS
 }

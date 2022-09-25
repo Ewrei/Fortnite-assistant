@@ -16,7 +16,7 @@ import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsAdapter
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.HomeBodyStats
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsListItem
 import javax.inject.Inject
 
 class DetailsStatisticsFragment : BaseFragment() {
@@ -60,7 +60,7 @@ class DetailsStatisticsFragment : BaseFragment() {
         }
     }
 
-    private fun initAdapter(list: List<HomeBodyStats>) {
+    private fun initAdapter(list: List<HomeBodyStatsListItem>) {
         recyclerView.run {
             adapter = HomeBodyStatsAdapter({
                 //do nothing

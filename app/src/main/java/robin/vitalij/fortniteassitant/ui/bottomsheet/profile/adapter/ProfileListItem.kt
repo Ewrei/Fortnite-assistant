@@ -1,6 +1,6 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter
 
-import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewholder.body.adapter.viewmodel.BodyStats
+import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.stats_adapter.BodyStatsListItem
 
 sealed class ProfileListItem {
 
@@ -15,13 +15,13 @@ sealed class ProfileListItem {
         val winRate: Double,
         val playTime: String,
         val totalMatches: String
-    ): ProfileListItem()
+    ) : ProfileListItem()
 
     data class BodyItem(
-        val all: List<BodyStats>,
-        val keyboardMouse: List<BodyStats>,
-        val gamepad: List<BodyStats>,
-        val touch: List<BodyStats>
-    ): ProfileListItem()
+        val all: List<BodyStatsListItem>,
+        val keyboardMouse: List<BodyStatsListItem>,
+        val gamepad: List<BodyStatsListItem>,
+        val touch: List<BodyStatsListItem>
+    ) : ProfileListItem()
 
 }

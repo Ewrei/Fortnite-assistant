@@ -12,6 +12,7 @@ import robin.vitalij.fortniteassitant.model.network.stats.SoloMatches
 import robin.vitalij.fortniteassitant.model.network.stats.StatsTypeDevice
 import robin.vitalij.fortniteassitant.model.network.stats.TrioMatches
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.HomeSessionListItem
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsListItem
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.*
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.*
 import robin.vitalij.fortniteassitant.utils.ResourceProvider
@@ -96,16 +97,16 @@ class HomeMapper(
         return FullHomeModel(homes = list, userLastEntity.getDetailStatisticsModelList())
     }
 
-    private fun getAllBodyStats(statsTypeDevice: StatsTypeDevice?): List<HomeBodyStats> {
-        val list = mutableListOf<HomeBodyStats>()
+    private fun getAllBodyStats(statsTypeDevice: StatsTypeDevice?): List<HomeBodyStatsListItem> {
+        val list = mutableListOf<HomeBodyStatsListItem>()
 
         if (statsTypeDevice == null || statsTypeDevice.overall?.matches == 0) {
-            list.add(HomeBodyEmptyViewModel(resourceProvider.getString(R.string.no_results_for_this_platform)))
+            list.add(HomeBodyStatsListItem.EmptyItem(resourceProvider.getString(R.string.no_results_for_this_platform)))
         } else {
-            list.add(HomeBodyHeaderViewModel(resourceProvider.getString(R.string.overall_battles)))
+            list.add(HomeBodyStatsListItem.HeaderItem(resourceProvider.getString(R.string.overall_battles)))
 
             list.add(
-                HomeBodyStatsViewModel(
+                HomeBodyStatsListItem.StatsItem(
                     leftTop = statsTypeDevice.overall!!.matches.getStringFormat(),
                     leftTopTitle = resourceProvider.getString(R.string.matches),
                     rightTop = statsTypeDevice.overall.kd.getStringFormat(),
@@ -120,7 +121,7 @@ class HomeMapper(
             )
 
             list.add(
-                HomeBodyStatsShortViewModel(
+                HomeBodyStatsListItem.StatsShortItem(
                     leftTop = statsTypeDevice.overall.wins.getStringFormat(),
                     leftTopTitle = resourceProvider.getString(R.string.top_one),
                     rightTop = statsTypeDevice.overall.top3.getStringFormat(),
@@ -168,7 +169,7 @@ class HomeMapper(
                 )
             }
 
-            list.add(HomeBodeDetailsStatisticsViewModel(resourceProvider.getString(R.string.overall_battles)))
+            list.add(HomeBodyStatsListItem.DetailStatisticsItem)
         }
 
         return list
@@ -177,13 +178,13 @@ class HomeMapper(
     private fun getSoloMatchesBodyStats(
         soloMatches: SoloMatches,
         battlesTitle: String
-    ): List<HomeBodyStats> {
-        val list = mutableListOf<HomeBodyStats>()
+    ): List<HomeBodyStatsListItem> {
+        val list = mutableListOf<HomeBodyStatsListItem>()
 
-        list.add(HomeBodyHeaderViewModel(battlesTitle))
+        list.add(HomeBodyStatsListItem.HeaderItem(battlesTitle))
 
         list.add(
-            HomeBodyStatsViewModel(
+            HomeBodyStatsListItem.StatsItem(
                 leftTop = soloMatches.matches.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.matches),
                 rightTop = soloMatches.kd.getStringFormat(),
@@ -198,7 +199,7 @@ class HomeMapper(
         )
 
         list.add(
-            HomeBodyStatsShortViewModel(
+            HomeBodyStatsListItem.StatsShortItem(
                 leftTop = soloMatches.wins.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.top_one),
                 rightTop = soloMatches.top10.getStringFormat(),
@@ -216,13 +217,13 @@ class HomeMapper(
     private fun getDuoMatchesBodyStats(
         soloMatches: DuoMatches,
         battlesTitle: String
-    ): List<HomeBodyStats> {
-        val list = mutableListOf<HomeBodyStats>()
+    ): List<HomeBodyStatsListItem> {
+        val list = mutableListOf<HomeBodyStatsListItem>()
 
-        list.add(HomeBodyHeaderViewModel(battlesTitle))
+        list.add(HomeBodyStatsListItem.HeaderItem(battlesTitle))
 
         list.add(
-            HomeBodyStatsViewModel(
+            HomeBodyStatsListItem.StatsItem(
                 leftTop = soloMatches.matches.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.matches),
                 rightTop = soloMatches.kd.getStringFormat(),
@@ -237,7 +238,7 @@ class HomeMapper(
         )
 
         list.add(
-            HomeBodyStatsShortViewModel(
+            HomeBodyStatsListItem.StatsShortItem(
                 leftTop = soloMatches.wins.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.top_one),
                 rightTop = soloMatches.top5.getStringFormat(),
@@ -255,13 +256,13 @@ class HomeMapper(
     private fun getThreeMatchesBodyStats(
         trioMatches: TrioMatches,
         battlesTitle: String
-    ): List<HomeBodyStats> {
-        val list = mutableListOf<HomeBodyStats>()
+    ): List<HomeBodyStatsListItem> {
+        val list = mutableListOf<HomeBodyStatsListItem>()
 
-        list.add(HomeBodyHeaderViewModel(battlesTitle))
+        list.add(HomeBodyStatsListItem.HeaderItem(battlesTitle))
 
         list.add(
-            HomeBodyStatsViewModel(
+            HomeBodyStatsListItem.StatsItem(
                 leftTop = trioMatches.matches.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.matches),
                 rightTop = trioMatches.kd.getStringFormat(),
@@ -276,7 +277,7 @@ class HomeMapper(
         )
 
         list.add(
-            HomeBodyStatsShortViewModel(
+            HomeBodyStatsListItem.StatsShortItem(
                 leftTop = trioMatches.wins.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.top_one),
                 rightTop = trioMatches.top3.getStringFormat(),

@@ -7,15 +7,14 @@ import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.repository.db.DetailsStatisticsRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.HomeBodyStats
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.Home
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsListItem
 
 class DetailsStatisticsViewModel(
     private val detailsStatisticsRepository: DetailsStatisticsRepository,
     private val preferenceManager: PreferenceManager
 ) : BaseViewModel() {
 
-    val mutableLiveData = MutableLiveData<List<HomeBodyStats>>()
+    val mutableLiveData = MutableLiveData<List<HomeBodyStatsListItem>>()
 
     fun loadData(battlesType: BattlesType, gameType: GameType) {
         detailsStatisticsRepository

@@ -1,189 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/DefaultCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:checkable="false"
+    android:clickable="false">
 
-    <data>
-
-        <variable
-            name="item"
-            type="robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.HomeBodyStatsShortViewModel" />
-    </data>
-
-    <com.google.android.material.card.MaterialCardView
-        style="@style/DefaultCard"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:checkable="false"
-        android:clickable="false">
+        android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/kills"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin_double"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:fontFamily="@font/fortnite_battlefest"
+            android:gravity="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="kills" />
 
-            <TextView
-                android:id="@+id/kills"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
-                android:layout_marginTop="@dimen/default_margin_double"
-                android:layout_marginEnd="@dimen/default_margin"
-                android:gravity="center"
-                android:text="@{item.leftTop}"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:fontFamily="@font/fortnite_battlefest"
-                app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="kills" />
+        <TextView
+            android:id="@+id/killsTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:fontFamily="@font/futura_pt_medium"
+            android:gravity="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/kills"
+            tools:text="leftTopTitle" />
 
-            <TextView
-                android:id="@+id/killsTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
-                android:layout_marginEnd="@dimen/default_margin"
-                android:gravity="center"
-                android:text="@{item.leftTopTitle}"
-                android:fontFamily="@font/futura_pt_medium"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                android:textColor="@android:color/darker_gray"
-                app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/kills"
-                tools:text="leftTopTitle" />
+        <TextView
+            android:id="@+id/shotsFired"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin_double"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:fontFamily="@font/fortnite_battlefest"
+            android:gravity="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="shotsFired" />
 
-            <TextView
-                android:id="@+id/shotsFired"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
-                android:layout_marginTop="@dimen/default_margin_double"
-                android:layout_marginEnd="@dimen/default_margin"
-                android:gravity="center"
-                android:text="@{item.rightTop}"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:fontFamily="@font/fortnite_battlefest"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline2"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="shotsFired" />
-
-            <TextView
-                android:id="@+id/shotsFiredTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
-                android:layout_marginEnd="@dimen/default_margin"
-                android:gravity="center"
-                android:fontFamily="@font/futura_pt_medium"
-                android:text="@{item.rightTopTitle}"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                android:textColor="@android:color/darker_gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline2"
-                app:layout_constraintTop_toBottomOf="@+id/kills"
-                tools:text="rightTopTitle" />
+        <TextView
+            android:id="@+id/shotsFiredTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:fontFamily="@font/futura_pt_medium"
+            android:gravity="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/kills"
+            tools:text="rightTopTitle" />
 
 
-            <TextView
-                android:id="@+id/shotsHit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
-                android:layout_marginTop="@dimen/default_margin_double"
-                android:layout_marginEnd="@dimen/default_margin"
-                android:gravity="center"
-                android:text="@{item.leftBottom}"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:fontFamily="@font/fortnite_battlefest"
-                app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view3"
-                tools:text="shotsHit" />
+        <TextView
+            android:id="@+id/shotsHit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin_double"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:fontFamily="@font/fortnite_battlefest"
+            android:gravity="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view3"
+            tools:text="shotsHit" />
 
-            <TextView
-                android:id="@+id/shotsHitTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
-                android:layout_marginEnd="@dimen/default_margin"
-                android:layout_marginBottom="@dimen/default_margin_double"
-                android:gravity="center"
-                android:fontFamily="@font/futura_pt_medium"
-                android:text="@{item.leftBottomTitle}"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                android:textColor="@android:color/darker_gray"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/shotsHit"
-                tools:text="leftBottomTitle" />
+        <TextView
+            android:id="@+id/shotsHitTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/default_margin_double"
+            android:fontFamily="@font/futura_pt_medium"
+            android:gravity="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shotsHit"
+            tools:text="leftBottomTitle" />
 
-            <TextView
-                android:id="@+id/shotsAccuracy"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
-                android:layout_marginTop="@dimen/default_margin_double"
-                android:layout_marginEnd="@dimen/default_margin"
-                android:gravity="center"
-                android:text="@{item.rightBottom}"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:fontFamily="@font/fortnite_battlefest"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline2"
-                app:layout_constraintTop_toBottomOf="@+id/view4"
-                tools:text="shotsFired" />
+        <TextView
+            android:id="@+id/shotsAccuracy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin_double"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:fontFamily="@font/fortnite_battlefest"
+            android:gravity="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/view4"
+            tools:text="shotsFired" />
 
-            <TextView
-                android:id="@+id/shotsAccuracyTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
-                android:layout_marginEnd="@dimen/default_margin"
-                android:gravity="center"
-                android:text="@{item.rightBottomTitle}"
-                android:fontFamily="@font/futura_pt_medium"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                android:textColor="@android:color/darker_gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline2"
-                app:layout_constraintTop_toBottomOf="@+id/shotsAccuracy"
-                tools:text="rightBottomTitle" />
+        <TextView
+            android:id="@+id/shotsAccuracyTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:fontFamily="@font/futura_pt_medium"
+            android:gravity="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/shotsAccuracy"
+            tools:text="rightBottomTitle" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
-            <View
-                android:id="@+id/view3"
-                style="@style/DefaultDivider"
-                android:layout_width="0dp"
-                android:layout_marginStart="@dimen/default_margin"
-                android:layout_marginTop="@dimen/default_margin_double"
-                android:layout_marginEnd="@dimen/default_margin_double"
-                app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/killsTitle" />
+        <View
+            android:id="@+id/view3"
+            style="@style/DefaultDivider"
+            android:layout_width="0dp"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin_double"
+            android:layout_marginEnd="@dimen/default_margin_double"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/killsTitle" />
 
-            <View
-                android:id="@+id/view4"
-                style="@style/DefaultDivider"
-                android:layout_width="0dp"
-                android:layout_marginStart="@dimen/default_margin_double"
-                android:layout_marginTop="@dimen/default_margin_double"
-                android:layout_marginEnd="@dimen/default_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline2"
-                app:layout_constraintTop_toBottomOf="@+id/killsTitle" />
+        <View
+            android:id="@+id/view4"
+            style="@style/DefaultDivider"
+            android:layout_width="0dp"
+            android:layout_marginStart="@dimen/default_margin_double"
+            android:layout_marginTop="@dimen/default_margin_double"
+            android:layout_marginEnd="@dimen/default_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/killsTitle" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.google.android.material.card.MaterialCardView>
-
-</layout>
+</com.google.android.material.card.MaterialCardView>

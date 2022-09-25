@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <variable
-            name="item"
-            type="String" />
-    </data>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/default_margin"
-        android:layout_marginEnd="@dimen/default_margin_double"
-        android:text="@{item}"
-        android:fontFamily="@font/futura_pt_bold"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-        android:textColor="@android:color/darker_gray"
-        tools:text="profile image" />
-
-</layout>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/default_margin"
+    android:layout_marginEnd="@dimen/default_margin_double"
+    android:fontFamily="@font/futura_pt_bold"
+    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+    android:textColor="@android:color/darker_gray"
+    tools:text="title title" />

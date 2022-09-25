@@ -7,9 +7,9 @@ import robin.vitalij.fortniteassitant.api.FortniteRequestsComApi
 import robin.vitalij.fortniteassitant.db.entity.UserEntity
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.HomeBodyStats
-import robin.vitalij.fortniteassitant.utils.mapper.DetailsStatisticsMapper
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsListItem
 import robin.vitalij.fortniteassitant.utils.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.mapper.DetailsStatisticsMapper
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -25,7 +25,7 @@ class GetSeasonStatisticsRepository @Inject constructor(
         fortniteRequestsComApi.getStats(playerId, "season", "all")
             .subscribeOn(Schedulers.io())
 
-    fun loadData(battlesType: BattlesType, gameType: GameType): Observable<List<HomeBodyStats>> =
+    fun loadData(battlesType: BattlesType, gameType: GameType): Observable<List<HomeBodyStatsListItem>> =
         seasonStats
             .subscribeOn(Schedulers.io())
             .flatMap {

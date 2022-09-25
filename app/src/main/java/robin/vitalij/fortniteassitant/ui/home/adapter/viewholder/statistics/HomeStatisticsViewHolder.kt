@@ -6,7 +6,7 @@ import kotlinx.android.synthetic.main.recycler_view.view.*
 import robin.vitalij.fortniteassitant.databinding.ItemHomeStatisticsBinding
 import robin.vitalij.fortniteassitant.ui.common.BaseViewHolder
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsAdapter
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.HomeBodyStats
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsListItem
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.Home
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.HomeStatisticsViewModel
 
@@ -40,7 +40,7 @@ class HomeStatisticsViewHolder(
         }
     }
 
-    private fun initAdapter(list: List<HomeBodyStats>) {
+    private fun initAdapter(list: List<HomeBodyStatsListItem>) {
         itemView.recyclerView.run {
             adapter = HomeBodyStatsAdapter(openDetailsStatistics, openParameterList)
             (adapter as HomeBodyStatsAdapter).setData(list)

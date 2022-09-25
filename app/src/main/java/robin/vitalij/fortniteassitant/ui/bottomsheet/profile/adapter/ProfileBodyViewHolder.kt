@@ -3,8 +3,8 @@ package robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.databinding.ItemProfileBodyBinding
-import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewholder.body.adapter.BodyStatsAdapter
-import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewholder.body.adapter.viewmodel.BodyStats
+import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.stats_adapter.BodyStatsAdapter
+import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.stats_adapter.BodyStatsListItem
 
 class ProfileBodyViewHolder(
     private val binding: ItemProfileBodyBinding
@@ -30,7 +30,7 @@ class ProfileBodyViewHolder(
         }
     }
 
-    private fun initAdapter(list: List<BodyStats>) {
+    private fun initAdapter(list: List<BodyStatsListItem>) {
         binding.recyclerViewInclude.recyclerView.run {
             adapter = BodyStatsAdapter()
             (adapter as BodyStatsAdapter).setData(list)

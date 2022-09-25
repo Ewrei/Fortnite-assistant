@@ -8,7 +8,7 @@ import robin.vitalij.fortniteassitant.db.dao.UserDao
 import robin.vitalij.fortniteassitant.db.entity.UserEntity
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.HomeBodyStats
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsListItem
 import robin.vitalij.fortniteassitant.utils.ResourceProvider
 import javax.inject.Inject
 
@@ -22,7 +22,7 @@ class HomeSessionRepository @Inject constructor(
         gameType: GameType,
         sessionId: Long,
         sessionLastId: Long
-    ): Single<List<HomeBodyStats>> {
+    ): Single<List<HomeBodyStatsListItem>> {
         val sessionMap = userDao.getUserEntitySessionId(sessionId)
         val lastSessionMap = userDao.getUserEntitySessionId(sessionLastId)
 

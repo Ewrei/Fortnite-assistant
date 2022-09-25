@@ -9,23 +9,23 @@ import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.Home
 
 class HomeViewModel(
-    homeRepository: HomeRepository,
-    preferenceManager: PreferenceManager
+    private val homeRepository: HomeRepository,
+    private val preferenceManager: PreferenceManager
 ) : BaseViewModel() {
 
     val mutableLiveData = MutableLiveData<List<Home>>()
 
     var detailsStatistics: ArrayList<DetailStatisticsModel> = arrayListOf()
 
-    init {
+    fun loadData() {
         homeRepository
             .loadData(preferenceManager.getPlayerId())
             .observeOn(AndroidSchedulers.mainThread())
             .let(::setupProgressShow)
             .subscribe({
-                mutableLiveData.value = it.homes
                 detailsStatistics.clear()
                 detailsStatistics.addAll(it.details)
+                mutableLiveData.value = it.homes
             }, error)
             .let(disposables::add)
     }
