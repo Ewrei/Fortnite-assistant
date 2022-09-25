@@ -1,33 +1,39 @@
 package robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session
 
-import kotlinx.android.synthetic.main.item_home_session.view.*
+import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.databinding.ItemHomeSessionBinding
 import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
-import robin.vitalij.fortniteassitant.ui.common.BaseViewHolder
+import robin.vitalij.fortniteassitant.model.actions.HomeActions
+import robin.vitalij.fortniteassitant.ui.home.adapter.HomeListItem
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.HomeSessionAdapter
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.HomeSessionListItem
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.Home
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.HomeSessionViewModel
 
 class HomeStatisticsSessionViewHolder(
-    override val binding: ItemHomeSessionBinding,
-    private val openSessions: () -> Unit,
-    private val openSession: (sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel>) -> Unit
-) : BaseViewHolder<Home>(binding) {
+    private val binding: ItemHomeSessionBinding,
+    private val onHomeAction: (homeActions: HomeActions) -> Unit
+) : RecyclerView.ViewHolder(binding.root) {
 
-    override fun bind(item: Home) {
-        if (item is HomeSessionViewModel) {
-            binding.item = item
-            itemView.recyclerView.run {
-                adapter = createSessionAdapter(item.sessions)
-            }
+    fun bind(item: HomeListItem.SessionItem) {
+        binding.recyclerView.run {
+            adapter = createSessionAdapter(item.sessions)
         }
     }
 
     private fun createSessionAdapter(list: List<HomeSessionListItem>): HomeSessionAdapter {
         val adapter = HomeSessionAdapter(
-            openSessions = openSessions,
-            openSession = openSession
+            openSessions = {
+                onHomeAction(HomeActions.OpenSessions)
+            },
+            openSession = { sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel> ->
+                onHomeAction(
+                    HomeActions.OpenSession(
+                        sessionId,
+                        sessionLast,
+                        sessionDate,
+                        detailsStats
+                    )
+                )
+            }
         )
         if (list.isNotEmpty()) {
             adapter.setData(list)

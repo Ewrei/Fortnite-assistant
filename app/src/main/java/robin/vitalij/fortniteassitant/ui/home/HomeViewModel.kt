@@ -6,14 +6,14 @@ import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 import robin.vitalij.fortniteassitant.repository.db.HomeRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.Home
+import robin.vitalij.fortniteassitant.ui.home.adapter.HomeListItem
 
 class HomeViewModel(
     private val homeRepository: HomeRepository,
     private val preferenceManager: PreferenceManager
 ) : BaseViewModel() {
 
-    val mutableLiveData = MutableLiveData<List<Home>>()
+    val mutableLiveData = MutableLiveData<List<HomeListItem>>()
 
     var detailsStatistics: ArrayList<DetailStatisticsModel> = arrayListOf()
 

@@ -11,10 +11,9 @@ import robin.vitalij.fortniteassitant.model.network.stats.DuoMatches
 import robin.vitalij.fortniteassitant.model.network.stats.SoloMatches
 import robin.vitalij.fortniteassitant.model.network.stats.StatsTypeDevice
 import robin.vitalij.fortniteassitant.model.network.stats.TrioMatches
+import robin.vitalij.fortniteassitant.ui.home.adapter.HomeListItem
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapter.HomeSessionListItem
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsListItem
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.*
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.*
 import robin.vitalij.fortniteassitant.utils.ResourceProvider
 import robin.vitalij.fortniteassitant.utils.TextUtils
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
@@ -27,13 +26,13 @@ class HomeMapper(
 ) : Mapper<List<UserEntity>, FullHomeModel> {
 
     override fun transform(obj: List<UserEntity>): FullHomeModel {
-        val list = mutableListOf<Home>()
+        val list = mutableListOf<HomeListItem>()
 
         val userEntity: UserEntity = obj.last()
         val userLastEntity: UserEntity = obj.first()
 
         list.add(
-            HomeHeaderViewModel(
+            HomeListItem.HeaderItem(
                 avatarUrl = userLastEntity.avatar ?: "",
                 userName = userLastEntity.name,
                 playerId = userLastEntity.playerId,
@@ -49,7 +48,7 @@ class HomeMapper(
 
         val history = HistoryMapper().transform(histories)
         if (history.isNotEmpty()) {
-            list.add(HomeTitleViewModel(resourceProvider.getString(R.string.game_sessions)))
+            list.add(HomeListItem.TitleItem(resourceProvider.getString(R.string.game_sessions)))
 
             if (history.size <= TWO_SESSION) {
                 val sessions = mutableListOf<HomeSessionListItem>()
@@ -57,7 +56,7 @@ class HomeMapper(
                     sessions.add(HomeSessionListItem.SessionItem(it))
                 }
                 list.add(
-                    HomeSessionViewModel(
+                    HomeListItem.SessionItem(
                         sessions
                     )
                 )
@@ -78,7 +77,7 @@ class HomeMapper(
                     )
                 )
                 list.add(
-                    HomeSessionViewModel(
+                    HomeListItem.SessionItem(
                         sessions
                     )
                 )
@@ -86,7 +85,7 @@ class HomeMapper(
         }
 
         list.add(
-            HomeStatisticsViewModel(
+            HomeListItem.StatisticsItem(
                 getAllBodyStats(userLastEntity.all),
                 getAllBodyStats(userLastEntity.keyboardMouse),
                 getAllBodyStats(userLastEntity.gamepad),

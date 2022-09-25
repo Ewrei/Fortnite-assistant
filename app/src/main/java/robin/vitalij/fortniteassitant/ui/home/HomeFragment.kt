@@ -15,6 +15,7 @@ import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.databinding.FragmentHomeBinding
 import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
+import robin.vitalij.fortniteassitant.model.actions.HomeActions
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment.Companion.DETAIL_STATISTICS
 import robin.vitalij.fortniteassitant.ui.home.adapter.HomeAdapter
@@ -30,35 +31,7 @@ class HomeFragment : BaseFragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
-    private var homeAdapter = HomeAdapter(
-        openParameterList = {
-            findNavController().navigate(
-                R.id.navigation_charts_type,
-                bundleOf(DETAIL_STATISTICS to viewModel.detailsStatistics)
-            )
-        },
-        openDetailsStatistics = {
-            findNavController().navigate(
-                R.id.navigation_adapter_details_statistics,
-                bundleOf(DETAIL_STATISTICS to viewModel.detailsStatistics)
-            )
-        },
-        openSession = { sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel> ->
-            findNavController().navigate(
-                R.id.navigation_adapter_session, bundleOf(
-                    AdapterSessionFragment.SESSION_ID to sessionId,
-                    AdapterSessionFragment.SESSION_LAST_ID to sessionLast,
-                    AdapterSessionFragment.DATE to sessionDate,
-                    DETAIL_STATISTICS to detailsStats as ArrayList<DetailStatisticsModel>
-                )
-            )
-        },
-        openSessions = {
-            findNavController().navigate(R.id.navigation_history)
-        },
-        openSeason = {
-            findNavController().navigate(R.id.navigation_adapter_details_season_statistics)
-        })
+    private var homeAdapter = HomeAdapter(::onHomeActions)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -104,6 +77,39 @@ class HomeFragment : BaseFragment() {
     private fun setListener() {
         setErrorResolveButtonClick {
             viewModel.loadData()
+        }
+    }
+
+    private fun onHomeActions(homeActions: HomeActions) {
+        when (homeActions) {
+            is HomeActions.OpenParameterList -> {
+                findNavController().navigate(
+                    R.id.navigation_charts_type,
+                    bundleOf(DETAIL_STATISTICS to viewModel.detailsStatistics)
+                )
+            }
+            is HomeActions.OpenDetailsStatistics -> {
+                findNavController().navigate(
+                    R.id.navigation_adapter_details_statistics,
+                    bundleOf(DETAIL_STATISTICS to viewModel.detailsStatistics)
+                )
+            }
+            is HomeActions.OpenSessions -> {
+                findNavController().navigate(R.id.navigation_history)
+            }
+            is HomeActions.OpenSession -> {
+                findNavController().navigate(
+                    R.id.navigation_adapter_session, bundleOf(
+                        AdapterSessionFragment.SESSION_ID to homeActions.sessionId,
+                        AdapterSessionFragment.SESSION_LAST_ID to homeActions.sessionLast,
+                        AdapterSessionFragment.DATE to homeActions.sessionDate,
+                        DETAIL_STATISTICS to homeActions.detailsStats as ArrayList<DetailStatisticsModel>
+                    )
+                )
+            }
+            is HomeActions.OpenSeason -> {
+                findNavController().navigate(R.id.navigation_adapter_details_season_statistics)
+            }
         }
     }
 }

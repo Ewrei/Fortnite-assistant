@@ -1,8 +1,8 @@
 package robin.vitalij.fortniteassitant.model
 
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.Home
+import robin.vitalij.fortniteassitant.ui.home.adapter.HomeListItem
 
 class FullHomeModel(
-    val homes: List<Home>,
+    val homes: List<HomeListItem>,
     val details: MutableList<DetailStatisticsModel>
 )
