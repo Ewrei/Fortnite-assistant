@@ -9,7 +9,7 @@
 
         <variable
             name="item"
-            type="robin.vitalij.fortniteassitant.model.network.FishStats" />
+            type="robin.vitalij.fortniteassitant.model.network.FishStatsModel" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

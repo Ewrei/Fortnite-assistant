@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -18,10 +19,9 @@ import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.common.extensions.observeToEmpty
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
-import robin.vitalij.fortniteassitant.common.extensions.setVisibility
 import robin.vitalij.fortniteassitant.databinding.FragmentBattlePassRewardsBinding
-import robin.vitalij.fortniteassitant.model.battlepassreward.SeasonModel
-import robin.vitalij.fortniteassitant.model.network.FishStats
+import robin.vitalij.fortniteassitant.model.battle_pass_reward.SeasonModel
+import robin.vitalij.fortniteassitant.model.network.FishStatsModel
 import robin.vitalij.fortniteassitant.ui.bottomsheet.fish.FishResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.fishstats.adapter.FishStatsAdapter
@@ -66,14 +66,14 @@ class FishStatsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
+        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
             it.let(::initAdapter)
-        })
+        }
 
-        viewModel.mutableSeasonLiveData.observe(viewLifecycleOwner, {
-            binding.seasonSpinner.setVisibility(it.isNotEmpty())
+        viewModel.mutableSeasonLiveData.observe(viewLifecycleOwner) {
+            binding.seasonSpinner.isVisible = it.isNotEmpty()
             binding.seasonSpinner.setItems(it)
-        })
+        }
 
         setListener()
         setNavigation()
@@ -100,7 +100,7 @@ class FishStatsFragment : BaseFragment() {
         binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
-    private fun initAdapter(list: List<FishStats>) {
+    private fun initAdapter(list: List<FishStatsModel>) {
         binding.recyclerViewInclude.recyclerView.run {
             adapter = FishStatsAdapter {
                 FishResultFragment.show(childFragmentManager, it.type)

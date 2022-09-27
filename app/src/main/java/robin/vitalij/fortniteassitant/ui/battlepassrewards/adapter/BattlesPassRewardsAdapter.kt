@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.model.battlepassreward.BattlesPassRewardsModel
+import robin.vitalij.fortniteassitant.model.battle_pass_reward.BattlesPassRewardsModel
 
 class BattlesPassRewardsAdapter(
     private val onClick: (battlesPassRewardsModel: BattlesPassRewardsModel) -> Unit

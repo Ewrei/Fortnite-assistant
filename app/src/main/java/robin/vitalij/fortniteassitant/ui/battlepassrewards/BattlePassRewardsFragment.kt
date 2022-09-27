@@ -19,8 +19,8 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.databinding.FragmentBattlePassRewardsBinding
-import robin.vitalij.fortniteassitant.model.battlepassreward.BattlesPassRewardsModel
-import robin.vitalij.fortniteassitant.model.battlepassreward.SeasonModel
+import robin.vitalij.fortniteassitant.model.battle_pass_reward.BattlesPassRewardsModel
+import robin.vitalij.fortniteassitant.model.battle_pass_reward.SeasonModel
 import robin.vitalij.fortniteassitant.model.enums.BattlePassSortedType
 import robin.vitalij.fortniteassitant.ui.battlepassrewards.adapter.BattlesPassRewardsAdapter
 import robin.vitalij.fortniteassitant.ui.bottomsheet.battlepassrewards.BattlePassRewardsResultFragment

@@ -3,36 +3,36 @@ package robin.vitalij.fortniteassitant.model.network
 import com.google.gson.annotations.SerializedName
 
 class WeaponResponse(
-    @SerializedName("result") var result: Boolean,
-    @SerializedName("lang") var lang: String,
-    @SerializedName("weapons") var weapons: List<Weapon>
+    @SerializedName("result") val result: Boolean,
+    @SerializedName("lang") val lang: String,
+    @SerializedName("weapons") val weapons: List<Weapon>
 )
 
 class Weapon(
-    @SerializedName("id") var id: String,
-    @SerializedName("enabled") var enabled: Boolean,
-    @SerializedName("name") var name: String,
-    @SerializedName("description") var description: String?,
-    @SerializedName("rarity") var rarity: String,
-    @SerializedName("type") var type: String,
-    @SerializedName("gameplayTags") var gameplayTags: List<String>,
-    @SerializedName("searchTags") var searchTags: String,
-    @SerializedName("images") var images: Image?,
-    @SerializedName("mainStats") var mainStats: MainStats
+    @SerializedName("id") val id: String,
+    @SerializedName("enabled") val enabled: Boolean,
+    @SerializedName("name") val name: String,
+    @SerializedName("description") val description: String?,
+    @SerializedName("rarity") val rarity: String,
+    @SerializedName("type") val type: String,
+    @SerializedName("gameplayTags") val gameplayTags: List<String>,
+    @SerializedName("searchTags") val searchTags: String,
+    @SerializedName("images") val images: Image?,
+    @SerializedName("mainStats") val mainStats: MainStats
 )
 
 class Image(
-    @SerializedName("icon") var icon: String,
-    @SerializedName("background") var background: String?
+    @SerializedName("icon") val icon: String,
+    @SerializedName("background") val background: String?
 )
 
 class MainStats(
-    @SerializedName("DmgPB") var dmgPB: Double,
-    @SerializedName("FiringRate") var firingRate: Double,
-    @SerializedName("ClipSize") var clipSize: Double,
-    @SerializedName("ReloadTime") var reloadTime: Double,
-    @SerializedName("BulletsPerCartridge") var bulletsPerCartridge: Double,
-    @SerializedName("Spread") var spread: Double,
-    @SerializedName("SpreadDownsights") var spreadDownsights: Double,
-    @SerializedName("DamageZone_Critical") var damageZoneCritical: Double
+    @SerializedName("DmgPB") val dmgPB: Double,
+    @SerializedName("FiringRate") val firingRate: Double,
+    @SerializedName("ClipSize") val clipSize: Double,
+    @SerializedName("ReloadTime") val reloadTime: Double,
+    @SerializedName("BulletsPerCartridge") val bulletsPerCartridge: Double,
+    @SerializedName("Spread") val spread: Double,
+    @SerializedName("SpreadDownsights") val spreadDownsights: Double,
+    @SerializedName("DamageZone_Critical") val damageZoneCritical: Double
 )

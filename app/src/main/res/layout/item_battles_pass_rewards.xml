@@ -9,7 +9,7 @@
 
         <variable
             name="item"
-            type="robin.vitalij.fortniteassitant.model.battlepassreward.BattlesPassRewardsModel" />
+            type="robin.vitalij.fortniteassitant.model.battle_pass_reward.BattlesPassRewardsModel" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

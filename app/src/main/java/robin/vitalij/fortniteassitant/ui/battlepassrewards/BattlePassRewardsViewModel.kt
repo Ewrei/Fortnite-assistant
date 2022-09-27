@@ -2,8 +2,8 @@ package robin.vitalij.fortniteassitant.ui.battlepassrewards
 
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
-import robin.vitalij.fortniteassitant.model.battlepassreward.BattlesPassRewardsModel
-import robin.vitalij.fortniteassitant.model.battlepassreward.SeasonModel
+import robin.vitalij.fortniteassitant.model.battle_pass_reward.BattlesPassRewardsModel
+import robin.vitalij.fortniteassitant.model.battle_pass_reward.SeasonModel
 import robin.vitalij.fortniteassitant.model.enums.BattlePassSortedType
 import robin.vitalij.fortniteassitant.repository.network.BattlesPassRewardRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel

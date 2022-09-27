@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.model.battlepassreward
+package robin.vitalij.fortniteassitant.model.battle_pass_reward
 
 import robin.vitalij.fortniteassitant.model.network.Reward
 

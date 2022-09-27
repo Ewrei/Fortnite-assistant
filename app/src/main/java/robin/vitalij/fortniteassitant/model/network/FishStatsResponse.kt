@@ -3,20 +3,20 @@ package robin.vitalij.fortniteassitant.model.network
 import com.google.gson.annotations.SerializedName
 
 class FishStatsResponse(
-    @SerializedName("result") var result: Boolean = false,
-    @SerializedName("lang") var lang: String = "",
-    @SerializedName("stats") var seasonStats: List<SeasonStatsFish> = arrayListOf()
+    @SerializedName("result") val result: Boolean = false,
+    @SerializedName("lang") val lang: String = "",
+    @SerializedName("stats") val seasonStats: List<SeasonStatsFishModel> = arrayListOf()
 )
 
-class SeasonStatsFish(
-    @SerializedName("season") var season: Int,
-    @SerializedName("fish") var fish: List<FishStats>
+class SeasonStatsFishModel(
+    @SerializedName("season") val season: Int,
+    @SerializedName("fish") val fish: List<FishStatsModel>
 )
 
-class FishStats(
-    @SerializedName("type") var type: String,
-    @SerializedName("name") var name: String,
-    @SerializedName("description") var description: String,
-    @SerializedName("image") var image: String,
-    @SerializedName("length") var length: Double
+class FishStatsModel(
+    @SerializedName("type") val type: String,
+    @SerializedName("name") val name: String,
+    @SerializedName("description") val description: String,
+    @SerializedName("image") val image: String,
+    @SerializedName("length") val length: Double
 )

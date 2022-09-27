@@ -1,9 +1,9 @@
 package robin.vitalij.fortniteassitant.utils.mapper
 
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.model.battlepassreward.BattlesPassRewardsModel
-import robin.vitalij.fortniteassitant.model.battlepassreward.FullBattlePassRewardModel
-import robin.vitalij.fortniteassitant.model.battlepassreward.SeasonModel
+import robin.vitalij.fortniteassitant.model.battle_pass_reward.BattlesPassRewardsModel
+import robin.vitalij.fortniteassitant.model.battle_pass_reward.FullBattlePassRewardModel
+import robin.vitalij.fortniteassitant.model.battle_pass_reward.SeasonModel
 import robin.vitalij.fortniteassitant.model.network.BattlePassRewardsResponse
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
 import robin.vitalij.fortniteassitant.utils.ResourceProvider

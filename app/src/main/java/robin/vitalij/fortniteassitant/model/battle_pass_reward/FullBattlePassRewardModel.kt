@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.model.battlepassreward
+package robin.vitalij.fortniteassitant.model.battle_pass_reward
 
 class FullBattlePassRewardModel (
     val battlesPassRewards: List<BattlesPassRewardsModel>,
