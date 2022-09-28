@@ -5,6 +5,7 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -62,7 +63,7 @@ class FishResultFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
-            viewModel.loadData((it.getString(FISH) ?: ""))
+            viewModel.loadData((it.getString(ARG_FISH_ID) ?: ""))
         }
 
         viewModel.mutableLiveData.observe(viewLifecycleOwner) {
@@ -89,22 +90,15 @@ class FishResultFragment : BottomSheetDialogFragment() {
     companion object {
 
         private const val TAG = "FishResultFragment"
-        private const val FISH = "Fish"
+        private const val ARG_FISH_ID = "arg_fish_id"
 
         fun show(
-            fragmentManager: FragmentManager?,
+            fragmentManager: FragmentManager,
             fishId: String
         ) {
-            fragmentManager?.let {
-                FishResultFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(FISH, fishId)
-                    }
-                }.show(
-                    it,
-                    TAG
-                )
-            }
+            FishResultFragment().apply {
+                arguments = bundleOf(ARG_FISH_ID to fishId)
+            }.show(fragmentManager, TAG)
         }
     }
 }

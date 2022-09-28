@@ -2,25 +2,26 @@ package robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.databinding.ItemContactUsBinding
 import robin.vitalij.fortniteassitant.model.ContactUsModel
 
-internal class ContactUsAdapter(val onclick: (contactUsModel: ContactUsModel) -> Unit) :
+class ContactUsAdapter(val onClick: (contactUsModel: ContactUsModel) -> Unit) :
     RecyclerView.Adapter<ContactUsHolder>() {
 
     private val items = mutableListOf<ContactUsModel>()
 
-    fun setData(data: List<ContactUsModel>) {
-        items.clear()
-        items.addAll(data)
+    fun updateData(data: List<ContactUsModel>) {
+        if (items != data) {
+            items.clear()
+            items.addAll(data)
+            notifyDataSetChanged()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ContactUsHolder(
-        DataBindingUtil.inflate(
+        ItemContactUsBinding.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_contact_us,
             parent,
             false
         )
@@ -29,9 +30,10 @@ internal class ContactUsAdapter(val onclick: (contactUsModel: ContactUsModel) ->
     override fun onBindViewHolder(holder: ContactUsHolder, position: Int) {
         holder.bind(items[position])
         holder.itemView.setOnClickListener {
-            onclick(items[position])
+            onClick(items[position])
         }
     }
 
     override fun getItemCount() = items.size
+
 }

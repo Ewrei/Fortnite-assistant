@@ -5,13 +5,12 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.bottom_sheet_battles_pass_rewards.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
@@ -28,6 +27,8 @@ class BattlePassRewardsResultFragment : BottomSheetDialogFragment() {
 
     private lateinit var viewModel: BattlePassRewardsResultViewModel
 
+    private lateinit var binding: BottomSheetBattlesPassRewardsBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,16 +43,8 @@ class BattlePassRewardsResultFragment : BottomSheetDialogFragment() {
                 BottomSheetBehavior.from(it).skipCollapsed = true
             }
         }
-        val dataBinding =
-            DataBindingUtil.inflate<BottomSheetBattlesPassRewardsBinding>(
-                inflater,
-                R.layout.bottom_sheet_battles_pass_rewards,
-                container,
-                false
-            )
-        dataBinding.lifecycleOwner = this@BattlePassRewardsResultFragment
-        dataBinding.viewModel = viewModel
-        return dataBinding.root
+        binding = BottomSheetBattlesPassRewardsBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,12 +56,14 @@ class BattlePassRewardsResultFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         arguments?.let {
-            val itemShop = it.getSerializable(REWARD) as Reward
-            imageView.loadImage(itemShop.images.fullBackground)
-            name.text = itemShop.name
-            description.text = itemShop.description
-            quantity.text = String.format(getString(R.string.quantity_format, itemShop.quantity))
+            val itemShop = it.getSerializable(ARG_REWARD) as Reward
+            binding.imageView.loadImage(itemShop.images.fullBackground)
+            binding.name.text = itemShop.name
+            binding.description.text = itemShop.description
+            binding.quantity.text =
+                String.format(getString(R.string.quantity_format, itemShop.quantity))
         }
     }
 
@@ -83,22 +78,15 @@ class BattlePassRewardsResultFragment : BottomSheetDialogFragment() {
     companion object {
 
         private const val TAG = "BattlePassRewardsResultFragment"
-        private const val REWARD = "Reward"
+        private const val ARG_REWARD = "arg_reward"
 
         fun show(
-            fragmentManager: FragmentManager?,
+            fragmentManager: FragmentManager,
             reward: Reward
         ) {
-            fragmentManager?.let {
-                BattlePassRewardsResultFragment().apply {
-                    arguments = Bundle().apply {
-                        putSerializable(REWARD, reward)
-                    }
-                }.show(
-                    it,
-                    TAG
-                )
-            }
+            BattlePassRewardsResultFragment().apply {
+                arguments = bundleOf(ARG_REWARD to reward)
+            }.show(fragmentManager, TAG)
         }
     }
 }

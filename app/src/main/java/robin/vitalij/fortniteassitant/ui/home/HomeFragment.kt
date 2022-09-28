@@ -17,7 +17,7 @@ import robin.vitalij.fortniteassitant.databinding.FragmentHomeBinding
 import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 import robin.vitalij.fortniteassitant.model.actions.HomeActions
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
-import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment.Companion.DETAIL_STATISTICS
+import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment.Companion.ARG_DETAIL_STATISTICS
 import robin.vitalij.fortniteassitant.ui.home.adapter.HomeAdapter
 import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment
 import javax.inject.Inject
@@ -85,13 +85,13 @@ class HomeFragment : BaseFragment() {
             is HomeActions.OpenParameterList -> {
                 findNavController().navigate(
                     R.id.navigation_charts_type,
-                    bundleOf(DETAIL_STATISTICS to viewModel.detailsStatistics)
+                    bundleOf(ARG_DETAIL_STATISTICS to viewModel.detailsStatistics)
                 )
             }
             is HomeActions.OpenDetailsStatistics -> {
                 findNavController().navigate(
                     R.id.navigation_adapter_details_statistics,
-                    bundleOf(DETAIL_STATISTICS to viewModel.detailsStatistics)
+                    bundleOf(ARG_DETAIL_STATISTICS to viewModel.detailsStatistics)
                 )
             }
             is HomeActions.OpenSessions -> {
@@ -100,10 +100,10 @@ class HomeFragment : BaseFragment() {
             is HomeActions.OpenSession -> {
                 findNavController().navigate(
                     R.id.navigation_adapter_session, bundleOf(
-                        AdapterSessionFragment.SESSION_ID to homeActions.sessionId,
-                        AdapterSessionFragment.SESSION_LAST_ID to homeActions.sessionLast,
-                        AdapterSessionFragment.DATE to homeActions.sessionDate,
-                        DETAIL_STATISTICS to homeActions.detailsStats as ArrayList<DetailStatisticsModel>
+                        AdapterSessionFragment.ARG_SESSION_ID to homeActions.sessionId,
+                        AdapterSessionFragment.ARG_SESSION_LAST_ID to homeActions.sessionLast,
+                        AdapterSessionFragment.ARG_DATE to homeActions.sessionDate,
+                        ARG_DETAIL_STATISTICS to homeActions.detailsStats as ArrayList<DetailStatisticsModel>
                     )
                 )
             }

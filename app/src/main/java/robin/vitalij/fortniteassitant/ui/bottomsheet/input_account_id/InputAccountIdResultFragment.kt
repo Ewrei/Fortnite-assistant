@@ -100,17 +100,12 @@ class InputAccountIdResultFragment : BottomSheetDialogFragment() {
         private const val TAG = "InputAccountIdResultFragment"
 
         fun show(
-            fragmentManager: FragmentManager?,
+            fragmentManager: FragmentManager,
             inputAccountIdCallback: InputAccountIdCallback
         ) {
-            fragmentManager?.let {
-                InputAccountIdResultFragment().apply {
-                    this.accountIdCallback = inputAccountIdCallback
-                }.show(
-                    it,
-                    TAG
-                )
-            }
+            InputAccountIdResultFragment().apply {
+                this.accountIdCallback = inputAccountIdCallback
+            }.show(fragmentManager, TAG)
         }
     }
 }

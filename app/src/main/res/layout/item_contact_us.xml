@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <variable
-            name="item"
-            type="robin.vitalij.fortniteassitant.model.ContactUsModel" />
-    </data>
-
-    <com.google.android.material.button.MaterialButton
-        style="@style/DefaultButton"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginStart="@dimen/default_margin_x4"
-        android:layout_marginTop="@dimen/half_default_margin"
-        android:layout_marginBottom="@dimen/half_default_margin"
-        android:layout_marginEnd="@dimen/default_margin_x4"
-        android:textColor="@android:color/white"
-        app:configType="@{item.configType}"
-        tools:text="contact" />
-</layout>
+<com.google.android.material.button.MaterialButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/button"
+    style="@style/DefaultButton"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/button_height"
+    android:layout_marginStart="@dimen/default_margin_x4"
+    android:layout_marginTop="@dimen/half_default_margin"
+    android:layout_marginEnd="@dimen/default_margin_x4"
+    android:layout_marginBottom="@dimen/half_default_margin"
+    android:textColor="@android:color/white"
+    tools:text="contact" />

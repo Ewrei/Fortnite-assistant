@@ -12,7 +12,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.fragment_adapter_details_statistics.*
 import kotlinx.android.synthetic.main.fragment_adapter_details_statistics.toolbar
-import kotlinx.android.synthetic.main.toolbar_center_title.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToEmpty
@@ -53,11 +52,11 @@ class AdapterSessionFragment : BaseFragment() {
             }
 
         arguments?.let {
-            viewModel.sessionLastId = it.getLong(SESSION_LAST_ID)
-            viewModel.sessionId = it.getLong(SESSION_ID)
+            viewModel.sessionLastId = it.getLong(ARG_SESSION_LAST_ID)
+            viewModel.sessionId = it.getLong(ARG_SESSION_ID)
             viewModel.detailsStatistics =
                 it.getParcelableArrayList<DetailStatisticsModel>(
-                    AdapterDetailsStatisticsFragment.DETAIL_STATISTICS
+                    AdapterDetailsStatisticsFragment.ARG_DETAIL_STATISTICS
                 ) as ArrayList<DetailStatisticsModel>
         }
     }
@@ -87,7 +86,7 @@ class AdapterSessionFragment : BaseFragment() {
     private fun initToolbar() {
         setNavigation()
         arguments?.let {
-            toolbar.title = it.getString(DATE)
+            toolbar.title = it.getString(ARG_DATE)
         }
     }
 
@@ -147,8 +146,8 @@ class AdapterSessionFragment : BaseFragment() {
     }
 
     companion object {
-        const val SESSION_ID = "session_id"
-        const val SESSION_LAST_ID = "session_last_id"
-        const val DATE = "date"
+        const val ARG_SESSION_ID = "arg_session_id"
+        const val ARG_SESSION_LAST_ID = "arg_session_last_id"
+        const val ARG_DATE = "arg_date"
     }
 }

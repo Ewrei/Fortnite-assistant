@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -21,10 +22,9 @@ import robin.vitalij.fortniteassitant.model.HistoryUserModel
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.history.adapter.HistoryAdapter
-import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.DATE
-import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.SESSION_ID
-import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.SESSION_LAST_ID
-import java.util.*
+import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.ARG_DATE
+import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.ARG_SESSION_ID
+import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.ARG_SESSION_LAST_ID
 import javax.inject.Inject
 
 
@@ -64,9 +64,9 @@ class HistoryFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
+        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
             it.let(::initAdapter)
-        })
+        }
 
         setNavigation()
     }
@@ -86,15 +86,15 @@ class HistoryFragment : BaseFragment() {
         binding.recyclerViewInclude.recyclerView.run {
             adapter =
                 HistoryAdapter { sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel> ->
-                    findNavController().navigate(R.id.navigation_adapter_session, Bundle().apply {
-                        putLong(SESSION_ID, sessionId)
-                        putLong(SESSION_LAST_ID, sessionLast)
-                        putString(DATE, sessionDate)
-                        putParcelableArrayList(
-                            AdapterDetailsStatisticsFragment.DETAIL_STATISTICS,
-                            detailsStats as ArrayList<DetailStatisticsModel>
+                    findNavController().navigate(
+                        R.id.navigation_adapter_session,
+                        bundleOf(
+                            ARG_SESSION_ID to sessionId,
+                            ARG_SESSION_LAST_ID to sessionLast,
+                            ARG_DATE to sessionDate,
+                            AdapterDetailsStatisticsFragment.ARG_DETAIL_STATISTICS to detailsStats as ArrayList<DetailStatisticsModel>
                         )
-                    })
+                    )
                 }
             (adapter as HistoryAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)

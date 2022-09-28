@@ -24,7 +24,7 @@ import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.ProfileAdap
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.ProfileListItem
 import robin.vitalij.fortniteassitant.ui.common.BaseBottomSheetDialogFragment
 import robin.vitalij.fortniteassitant.ui.comparison.ComparisonActivity
-import robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment.Companion.IS_COMPARISON_VISIBLE
+import robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment.Companion.ARG_PROFILE_RESULT_TYPE
 import javax.inject.Inject
 
 const val ACCOUNT_ID = "account_id"
@@ -82,7 +82,7 @@ class ProfileResultFragment : BaseBottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.compareWithYourself.isVisible =
-            arguments?.getBoolean(IS_COMPARISON_VISIBLE) ?: false
+            arguments?.getBoolean(ARG_PROFILE_RESULT_TYPE) ?: false
         setListeners()
 
         viewModel.mutableLiveData.observe(viewLifecycleOwner) {

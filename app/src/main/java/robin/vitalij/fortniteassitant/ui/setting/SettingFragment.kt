@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -27,7 +28,7 @@ import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.comparison.selected.ComparisonSelectedActivity
-import robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment.Companion.IS_COMPARISON_VISIBLE
+import robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment.Companion.ARG_PROFILE_RESULT_TYPE
 import robin.vitalij.fortniteassitant.ui.subscription.SubscriptionActivity
 import javax.inject.Inject
 
@@ -91,15 +92,11 @@ class SettingFragment : BaseFragment() {
         }
 
         searchLayout.setOnClickListener {
-            val bundle = Bundle().apply {
-                putSerializable(IS_COMPARISON_VISIBLE, ProfileResultType.FULL)
-            }
-            navController.navigate(R.id.navigation_search, bundle)
+            navController.navigate(R.id.navigation_search, bundleOf(ARG_PROFILE_RESULT_TYPE to ProfileResultType.FULL))
         }
 
         comparisonLayout.setOnClickListener {
-            val intent = Intent(context, ComparisonSelectedActivity::class.java)
-            context?.startActivity(intent)
+            context?.startActivity(Intent(context, ComparisonSelectedActivity::class.java))
         }
 
         applicationInfo.setOnClickListener {
@@ -119,8 +116,7 @@ class SettingFragment : BaseFragment() {
         }
 
         subscriptionLayout.setOnClickListener {
-            val intent = Intent(context, SubscriptionActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(context, ComparisonSelectedActivity::class.java))
         }
 
         shareApp.setOnClickListener {

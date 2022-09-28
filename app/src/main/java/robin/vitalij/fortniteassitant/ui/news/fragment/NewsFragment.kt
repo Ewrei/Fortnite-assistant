@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import robin.vitalij.fortniteassitant.FortniteApplication
@@ -63,7 +64,7 @@ class NewsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let {
-            viewModel.loadData(it.getSerializable(NEWS_TYPE) as NewsType)
+            viewModel.loadData(it.getSerializable(ARG_NEWS_TYPE) as NewsType)
         }
 
         viewModel.mutableLiveData.observe(viewLifecycleOwner, {
@@ -84,12 +85,10 @@ class NewsFragment : BaseFragment() {
     }
 
     companion object {
-        private const val NEWS_TYPE = "news_type"
+        private const val ARG_NEWS_TYPE = "arg_news_type"
 
         fun newInstance(newsType: NewsType) = NewsFragment().apply {
-            arguments = Bundle().apply {
-                putSerializable(NEWS_TYPE, newsType)
-            }
+            arguments = bundleOf(ARG_NEWS_TYPE to newsType)
         }
     }
 

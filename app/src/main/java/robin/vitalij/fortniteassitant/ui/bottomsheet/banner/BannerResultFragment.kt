@@ -5,6 +5,7 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,8 +20,6 @@ import robin.vitalij.fortniteassitant.databinding.BottomSheetMvvmBinding
 import robin.vitalij.fortniteassitant.db.entity.BannerEntity
 import robin.vitalij.fortniteassitant.ui.bottomsheet.banner.adapter.BannerResultAdapter
 import javax.inject.Inject
-
-const val BOTTOM_SHEET_MARGIN_TOP = 200
 
 class BannerResultFragment : BottomSheetDialogFragment() {
 
@@ -62,7 +61,7 @@ class BannerResultFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
-            viewModel.loadData((it.getString(BANNER) ?: ""))
+            viewModel.loadData((it.getString(ARG_BANNER_ID) ?: ""))
         }
 
         viewModel.mutableLiveData.observe(viewLifecycleOwner) {
@@ -89,22 +88,16 @@ class BannerResultFragment : BottomSheetDialogFragment() {
     companion object {
 
         private const val TAG = "BannerResultFragment"
-        private const val BANNER = "Banner"
+        private const val ARG_BANNER_ID = "arg_banner_id"
+        const val BOTTOM_SHEET_MARGIN_TOP = 200
 
         fun show(
-            fragmentManager: FragmentManager?,
-            fishId: String
+            fragmentManager: FragmentManager,
+            bannerId: String
         ) {
-            fragmentManager?.let {
-                BannerResultFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(BANNER, fishId)
-                    }
-                }.show(
-                    it,
-                    TAG
-                )
-            }
+            BannerResultFragment().apply {
+                arguments = bundleOf(ARG_BANNER_ID to bannerId)
+            }.show(fragmentManager, TAG)
         }
     }
 }

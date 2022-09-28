@@ -50,7 +50,7 @@ class AdapterDetailsStatisticsFragment : BaseFragment() {
 
         arguments?.let {
             viewModel.detailsStatistics =
-                it.getParcelableArrayList<DetailStatisticsModel>(DETAIL_STATISTICS) as ArrayList<DetailStatisticsModel>
+                it.getParcelableArrayList<DetailStatisticsModel>(ARG_DETAIL_STATISTICS) as ArrayList<DetailStatisticsModel>
         }
     }
 
@@ -127,6 +127,6 @@ class AdapterDetailsStatisticsFragment : BaseFragment() {
     }
 
     companion object {
-        const val DETAIL_STATISTICS = "detail_statistics"
+        const val ARG_DETAIL_STATISTICS = "arg_detail_statistics"
     }
 }

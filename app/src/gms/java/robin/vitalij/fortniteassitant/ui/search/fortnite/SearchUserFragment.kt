@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -101,7 +102,7 @@ class SearchUserFragment : BaseFragment() {
         }
 
         arguments?.let {
-            if (it.getSerializable(IS_COMPARISON_VISIBLE) as ProfileResultType == ProfileResultType.FULL) {
+            if (it.getSerializable(ARG_PROFILE_RESULT_TYPE) as ProfileResultType == ProfileResultType.FULL) {
                 setNavigation()
             } else {
                 toolbar.title = getString(R.string.search_player)
@@ -117,7 +118,7 @@ class SearchUserFragment : BaseFragment() {
     private fun initBanner() {
         var profileResultType: ProfileResultType = ProfileResultType.NEW
         arguments?.let {
-            profileResultType = it.getSerializable(IS_COMPARISON_VISIBLE) as ProfileResultType
+            profileResultType = it.getSerializable(ARG_PROFILE_RESULT_TYPE) as ProfileResultType
         }
 
         if (viewModel.preferenceManager.getIsSubscription() || viewModel.preferenceManager.getDisableAdvertising() >= Date().time
@@ -168,7 +169,7 @@ class SearchUserFragment : BaseFragment() {
                                 childFragmentManager,
                                 accountId,
                                 AvatarType.values().random().getImageUrl(),
-                                bundle.getSerializable(IS_COMPARISON_VISIBLE) as ProfileResultType,
+                                bundle.getSerializable(ARG_PROFILE_RESULT_TYPE) as ProfileResultType,
                                 object : RegistrationProfileCallback {
                                     override fun addedProfile(fortniteProfileResponse: FortniteProfileResponse) {
                                         viewModel.textActivityVisibility.set(getString(R.string.save_the_user))
@@ -194,7 +195,7 @@ class SearchUserFragment : BaseFragment() {
                         childFragmentManager,
                         it.accountId,
                         it.avatarImage,
-                        bundle.getSerializable(IS_COMPARISON_VISIBLE) as ProfileResultType,
+                        bundle.getSerializable(ARG_PROFILE_RESULT_TYPE) as ProfileResultType,
                         object : RegistrationProfileCallback {
                             override fun addedProfile(fortniteProfileResponse: FortniteProfileResponse) {
                                 viewModel.textActivityVisibility.set(getString(R.string.save_the_user))
@@ -209,12 +210,10 @@ class SearchUserFragment : BaseFragment() {
     }
 
     companion object {
-        const val IS_COMPARISON_VISIBLE = "is_comparison_visible"
+        const val ARG_PROFILE_RESULT_TYPE = "arg_profile_result_type"
 
         fun newInstance(profileResultType: ProfileResultType) = SearchUserFragment().apply {
-            arguments = Bundle().apply {
-                putSerializable(IS_COMPARISON_VISIBLE, profileResultType)
-            }
+            arguments = bundleOf(ARG_PROFILE_RESULT_TYPE to profileResultType)
         }
     }
 }

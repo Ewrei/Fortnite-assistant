@@ -11,7 +11,6 @@ class ContactUsResultViewModel(private val resourceProvider: ResourceProvider) :
 
     var mutableLiveData = MutableLiveData<List<ContactUsModel>>()
 
-
     fun loadData(isContactUs: Boolean) {
         if(isContactUs) {
             mutableLiveData.value = getContacts()

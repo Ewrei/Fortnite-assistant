@@ -13,13 +13,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.view_error.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.databinding.FragmentBattlePassRewardsBinding
-import robin.vitalij.fortniteassitant.model.battle_pass_reward.BattlesPassRewardsModel
 import robin.vitalij.fortniteassitant.model.battle_pass_reward.SeasonModel
 import robin.vitalij.fortniteassitant.model.enums.BattlePassSortedType
 import robin.vitalij.fortniteassitant.ui.battlepassrewards.adapter.BattlesPassRewardsAdapter
@@ -29,8 +27,6 @@ import robin.vitalij.fortniteassitant.utils.view.CustomTypeFaceSpan
 import javax.inject.Inject
 
 
-private const val MAX_SPAN_COUNT = 2
-
 class BattlePassRewardsFragment : BaseFragment() {
 
     @Inject
@@ -39,6 +35,20 @@ class BattlePassRewardsFragment : BaseFragment() {
     private lateinit var viewModel: BattlePassRewardsViewModel
 
     private lateinit var binding: FragmentBattlePassRewardsBinding
+
+    private val battlesPassRewardsAdapter = BattlesPassRewardsAdapter {
+        BattlePassRewardsResultFragment.show(
+            childFragmentManager,
+            it.reward
+        )
+    }.apply {
+        setHasStableIds(true)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        FortniteApplication.appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,24 +67,20 @@ class BattlePassRewardsFragment : BaseFragment() {
             }
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        FortniteApplication.appComponent.inject(this)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
-            it.let(::initAdapter)
-        })
+        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
+            battlesPassRewardsAdapter.updateData(it)
+        }
 
-        viewModel.mutableSeasonLiveData.observe(viewLifecycleOwner, {
+        viewModel.mutableSeasonLiveData.observe(viewLifecycleOwner) {
             binding.seasonSpinner.setItems(it)
-        })
+        }
 
         setNavigation()
         setListeners()
         setToolbarMenu()
+        initializeRecyclerView()
     }
 
     private fun setToolbarMenu() {
@@ -140,7 +146,7 @@ class BattlePassRewardsFragment : BaseFragment() {
             viewModel.loadData((item as SeasonModel).season.toString())
         }
 
-        errorResolveButton.setOnClickListener {
+        setErrorResolveButtonClick {
             viewModel.loadData("current")
         }
     }
@@ -151,27 +157,21 @@ class BattlePassRewardsFragment : BaseFragment() {
         binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
-    private fun initAdapter(list: List<BattlesPassRewardsModel>) {
+    private fun initializeRecyclerView() {
         binding.recyclerViewInclude.recyclerView.run {
-            adapter = BattlesPassRewardsAdapter {
-                BattlePassRewardsResultFragment.show(
-                    childFragmentManager,
-                    it.reward
-                )
-            }.apply {
-                setHasStableIds(true)
-            }
-            (adapter as BattlesPassRewardsAdapter).setData(list)
-
-            val gridlayoutManager = GridLayoutManager(
+            adapter = battlesPassRewardsAdapter
+            layoutManager = GridLayoutManager(
                 activity, MAX_SPAN_COUNT
-            )
-
-            gridlayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int) = 1
+            ).apply {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int) = BATTLES_PASS_REWARDS_SPAN_COUNT
+                }
             }
-
-            layoutManager = gridlayoutManager
         }
+    }
+
+    companion object {
+        private const val MAX_SPAN_COUNT = 2
+        private const val BATTLES_PASS_REWARDS_SPAN_COUNT = 1
     }
 }

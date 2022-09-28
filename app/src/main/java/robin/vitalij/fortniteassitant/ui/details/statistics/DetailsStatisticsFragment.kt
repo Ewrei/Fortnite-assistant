@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.recycler_view.*
@@ -48,14 +49,14 @@ class DetailsStatisticsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
+        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
             it.let(::initAdapter)
-        })
+        }
 
         arguments?.let {
             viewModel.loadData(
-                it.getSerializable(BATTLES_TYPE) as BattlesType,
-                it.getSerializable(GAME_TYPE) as GameType
+                it.getSerializable(ARG_BATTLES_TYPE) as BattlesType,
+                it.getSerializable(ARG_GAME_TYPE) as GameType
             )
         }
     }
@@ -73,15 +74,15 @@ class DetailsStatisticsFragment : BaseFragment() {
     }
 
     companion object {
-        private const val BATTLES_TYPE = "battles_type"
-        private const val GAME_TYPE = "game_type"
+        private const val ARG_BATTLES_TYPE = "arg_battles_type"
+        private const val ARG_GAME_TYPE = "arg_game_type"
 
         fun newInstance(battlesType: BattlesType, gameType: GameType) =
             DetailsStatisticsFragment().apply {
-                arguments = Bundle().apply {
-                    putSerializable(GAME_TYPE, gameType)
-                    putSerializable(BATTLES_TYPE, battlesType)
-                }
+                arguments = bundleOf(
+                    ARG_GAME_TYPE to gameType,
+                    ARG_BATTLES_TYPE to battlesType
+                )
             }
     }
 }
