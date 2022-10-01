@@ -6,6 +6,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.databinding.ItemVehiclesResultGearBinding
+import robin.vitalij.fortniteassitant.databinding.ItemVehiclesResultHeaderBinding
+import robin.vitalij.fortniteassitant.databinding.ItemVehiclesResultTagBinding
 
 class VehiclesResultAdapter(
     private val layoutInflater: LayoutInflater
@@ -33,9 +36,8 @@ class VehiclesResultAdapter(
         return when (viewType) {
             R.layout.item_vehicles_result_header -> {
                 VehiclesResultHeaderViewHolder(
-                    DataBindingUtil.inflate(
+                    ItemVehiclesResultHeaderBinding.inflate(
                         inflater,
-                        R.layout.item_vehicles_result_header,
                         parent,
                         false
                     )
@@ -43,9 +45,8 @@ class VehiclesResultAdapter(
             }
             R.layout.item_vehicles_result_tag -> {
                 VehiclesResultTagViewHolder(
-                    DataBindingUtil.inflate(
+                    ItemVehiclesResultTagBinding.inflate(
                         inflater,
-                        R.layout.item_vehicles_result_tag,
                         parent,
                         false
                     ),
@@ -54,9 +55,8 @@ class VehiclesResultAdapter(
             }
             R.layout.item_vehicles_result_gear -> {
                 VehiclesResultGearViewHolder(
-                    DataBindingUtil.inflate(
+                    ItemVehiclesResultGearBinding.inflate(
                         inflater,
-                        R.layout.item_vehicles_result_gear,
                         parent,
                         false
                     )
@@ -88,4 +88,5 @@ class VehiclesResultAdapter(
         is VehiclesResultListItem.TagItem -> R.layout.item_vehicles_result_tag
         is VehiclesResultListItem.GearItem -> R.layout.item_vehicles_result_gear
     }
+
 }

@@ -1,224 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/default_margin_double"
+    android:layout_marginTop="@dimen/default_margin_double"
+    android:layout_marginEnd="@dimen/default_margin_double"
+    android:orientation="vertical">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <variable
-            name="item"
-            type="robin.vitalij.fortniteassitant.ui.bottomsheet.vehicles.adapter.VehiclesResultListItem.GearItem" />
-    </data>
-
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/default_margin_double"
-        android:layout_marginTop="@dimen/default_margin_double"
-        android:layout_marginEnd="@dimen/default_margin_double"
-        android:orientation="vertical">
+        android:fontFamily="@font/futura_pt_bold"
+        android:gravity="center"
+        android:text="Gear"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textColor="@color/text_color"
+        app:fontFamily="@font/futura_pt_bold" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/futura_pt_medium"
+            android:text="TopSpeed"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/darker_gray"
+            app:fontFamily="@font/futura_pt_medium" />
+
+        <TextView
+            android:id="@+id/topSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/futura_pt_bold"
-            android:text="Gear"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/text_color"
-            app:fontFamily="@font/futura_pt_bold" />
+            app:fontFamily="@font/futura_pt_bold"
+            tools:text="TopSpeed" />
 
-        <TableRow
-            android:layout_width="match_parent"
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin">
+
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin">
+            android:layout_weight="1"
+            android:fontFamily="@font/futura_pt_medium"
+            android:text="MinSpeed"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/darker_gray"
+            app:fontFamily="@font/futura_pt_medium" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/futura_pt_medium"
-                android:text="TopSpeed"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@android:color/darker_gray"
-                app:fontFamily="@font/futura_pt_medium" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/futura_pt_bold"
-                android:text="@{item.vehicleGearsModel.topSpeed}"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@color/text_color"
-                app:fontFamily="@font/futura_pt_bold"
-                tools:text="TopSpeed" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/minSpeed"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin">
+            android:fontFamily="@font/futura_pt_bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/text_color"
+            app:fontFamily="@font/futura_pt_bold"
+            tools:text="minSpeed" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/futura_pt_medium"
-                android:text="MinSpeed"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@android:color/darker_gray"
-                app:fontFamily="@font/futura_pt_medium" />
+    </TableRow>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/futura_pt_bold"
-                android:text="@{item.vehicleGearsModel.minSpeed}"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@color/text_color"
-                app:fontFamily="@font/futura_pt_bold"
-                tools:text="minSpeed" />
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin">
 
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin">
+            android:layout_weight="1"
+            android:fontFamily="@font/futura_pt_medium"
+            android:text="PushForce"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/darker_gray"
+            app:fontFamily="@font/futura_pt_medium" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/futura_pt_medium"
-                android:text="PushForce"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@android:color/darker_gray"
-                app:fontFamily="@font/futura_pt_medium" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/futura_pt_bold"
-                android:text="@{item.vehicleGearsModel.pushForce}"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@color/text_color"
-                app:fontFamily="@font/futura_pt_bold"
-                tools:text="PushForce" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/pushForce"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin">
+            android:fontFamily="@font/futura_pt_bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/text_color"
+            app:fontFamily="@font/futura_pt_bold"
+            tools:text="PushForce" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/futura_pt_medium"
-                android:text="RampTime"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@android:color/darker_gray"
-                app:fontFamily="@font/futura_pt_medium" />
+    </TableRow>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/futura_pt_bold"
-                android:text="@{item.vehicleGearsModel.rampTime}"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@color/text_color"
-                app:fontFamily="@font/futura_pt_bold"
-                tools:text="RampTime" />
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin">
 
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin">
+            android:layout_weight="1"
+            android:fontFamily="@font/futura_pt_medium"
+            android:text="RampTime"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/darker_gray"
+            app:fontFamily="@font/futura_pt_medium" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/futura_pt_medium"
-                android:text="SteeringAngleMultiplier"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@android:color/darker_gray"
-                app:fontFamily="@font/futura_pt_medium" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/futura_pt_bold"
-                android:text="@{item.vehicleGearsModel.steeringAngleMultiplier}"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@color/text_color"
-                app:fontFamily="@font/futura_pt_bold"
-                tools:text="SteeringAngleMultiplier" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/rampTime"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin">
+            android:fontFamily="@font/futura_pt_bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/text_color"
+            app:fontFamily="@font/futura_pt_bold"
+            tools:text="RampTime" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/futura_pt_medium"
-                android:text="bAutoBrake"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@android:color/darker_gray"
-                app:fontFamily="@font/futura_pt_medium" />
+    </TableRow>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/futura_pt_bold"
-                android:text="@{item.vehicleGearsModel.getBAutoBrakeString()}"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@color/text_color"
-                app:fontFamily="@font/futura_pt_bold"
-                tools:text="bAutoBrake" />
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin">
 
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin">
+            android:layout_weight="1"
+            android:fontFamily="@font/futura_pt_medium"
+            android:text="SteeringAngleMultiplier"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/darker_gray"
+            app:fontFamily="@font/futura_pt_medium" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/futura_pt_medium"
-                android:text="bIgnoreGravity"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@android:color/darker_gray"
-                app:fontFamily="@font/futura_pt_medium" />
+        <TextView
+            android:id="@+id/steeringAngleMultiplier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/futura_pt_bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/text_color"
+            app:fontFamily="@font/futura_pt_bold"
+            tools:text="SteeringAngleMultiplier" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/futura_pt_bold"
-                android:text="@{item.vehicleGearsModel.getBIgnoreGravityString()}"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@color/text_color"
-                app:fontFamily="@font/futura_pt_bold"
-                tools:text="bIgnoreGravity" />
+    </TableRow>
 
-        </TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin">
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/futura_pt_medium"
+            android:text="bAutoBrake"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/darker_gray"
+            app:fontFamily="@font/futura_pt_medium" />
 
-</layout>
+        <TextView
+            android:id="@+id/bAutoBrake"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/futura_pt_bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/text_color"
+            app:fontFamily="@font/futura_pt_bold"
+            tools:text="bAutoBrake" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/futura_pt_medium"
+            android:text="bIgnoreGravity"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/darker_gray"
+            app:fontFamily="@font/futura_pt_medium" />
+
+        <TextView
+            android:id="@+id/bIgnoreGravity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/futura_pt_bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/text_color"
+            app:fontFamily="@font/futura_pt_bold"
+            tools:text="bIgnoreGravity" />
+
+    </TableRow>
+
+</LinearLayout>

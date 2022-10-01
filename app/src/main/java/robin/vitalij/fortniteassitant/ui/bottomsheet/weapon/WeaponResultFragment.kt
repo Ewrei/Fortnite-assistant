@@ -5,20 +5,19 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.databinding.BottomSheetRecyclerviewBinding
 import robin.vitalij.fortniteassitant.db.entity.WeaponEntity
 import robin.vitalij.fortniteassitant.ui.bottomsheet.weapon.adapter.WeaponResultAdapter
 import javax.inject.Inject
-
-const val BOTTOM_SHEET_MARGIN_TOP = 200
 
 class WeaponResultFragment : BottomSheetDialogFragment() {
 
@@ -26,6 +25,10 @@ class WeaponResultFragment : BottomSheetDialogFragment() {
     lateinit var viewModelFactory: WeaponResultViewModelFactory
 
     private lateinit var viewModel: WeaponResultViewModel
+
+    private lateinit var binding: BottomSheetRecyclerviewBinding
+
+    private val weaponResultAdapter = WeaponResultAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +45,8 @@ class WeaponResultFragment : BottomSheetDialogFragment() {
             }
         }
 
-        return inflater.inflate(R.layout.bottom_sheet_recyclerview, container, false)
+        binding = BottomSheetRecyclerviewBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,9 +59,10 @@ class WeaponResultFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
-            val list = arrayListOf(it.getSerializable(WEAPON) as WeaponEntity)
-            list.let(::initAdapter)
+            weaponResultAdapter.updateData(arrayListOf(it.getSerializable(ARG_WEAPON) as WeaponEntity))
         }
+
+        initializeRecyclerView()
     }
 
     override fun onStart() {
@@ -68,10 +73,9 @@ class WeaponResultFragment : BottomSheetDialogFragment() {
         sheetContainer.layoutParams.height = (displayMetrics.heightPixels - BOTTOM_SHEET_MARGIN_TOP)
     }
 
-    private fun initAdapter(list: List<WeaponEntity>) {
-        recyclerView.run {
-            adapter = WeaponResultAdapter()
-            (adapter as WeaponResultAdapter).setData(list)
+    private fun initializeRecyclerView() {
+        binding.recyclerView.run {
+            adapter = weaponResultAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
@@ -79,22 +83,14 @@ class WeaponResultFragment : BottomSheetDialogFragment() {
     companion object {
 
         private const val TAG = "WeaponResultFragment"
-        private const val WEAPON = "Weapon"
+        private const val ARG_WEAPON = "arg_weapon"
 
-        fun show(
-            fragmentManager: FragmentManager?,
-            weaponEntity: WeaponEntity
-        ) {
-            fragmentManager?.let {
-                WeaponResultFragment().apply {
-                    arguments = Bundle().apply {
-                        putSerializable(WEAPON, weaponEntity)
-                    }
-                }.show(
-                    it,
-                    TAG
-                )
-            }
+        private const val BOTTOM_SHEET_MARGIN_TOP = 200
+
+        fun show(fragmentManager: FragmentManager, weaponEntity: WeaponEntity) {
+            WeaponResultFragment().apply {
+                arguments = bundleOf(ARG_WEAPON to weaponEntity)
+            }.show(fragmentManager, TAG)
         }
     }
 }

@@ -29,13 +29,7 @@ class VehicleGearsModel(
     @SerializedName("SteeringAngleMultiplier") val steeringAngleMultiplier: String,
     @SerializedName("bAutoBrake") val bAutoBrake: Boolean,
     @SerializedName("bIgnoreGravity") val bIgnoreGravity: Boolean
-) : Parcelable {
-
-    fun getBAutoBrakeString() = bAutoBrake.toString()
-
-    fun getBIgnoreGravityString() = bIgnoreGravity.toString()
-
-}
+) : Parcelable
 
 @Parcelize
 class VehicleStatsModel(

@@ -9,6 +9,6 @@ class ChartsTypeHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: ChartsType) {
-        binding.item = item
+        binding.chartsType.setText(item.getTitleRes())
     }
 }
