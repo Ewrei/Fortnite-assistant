@@ -1,17 +1,16 @@
-package robin.vitalij.fortniteassitant.ui.cosmetics.catalog.adapter
+package robin.vitalij.fortniteassitant.ui.cosmetics_new.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadBackgroundRarity
-import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
 import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImages
-import robin.vitalij.fortniteassitant.databinding.ItemCosmeticsBinding
-import robin.vitalij.fortniteassitant.db.entity.CosmeticsEntity
+import robin.vitalij.fortniteassitant.databinding.ItemCosmeticsNewBinding
+import robin.vitalij.fortniteassitant.db.entity.CosmeticsNewEntity
 
-class CosmeticsHolder(
-    private val binding: ItemCosmeticsBinding
+class CosmeticsNewHolder(
+    private val binding: ItemCosmeticsNewBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: CosmeticsEntity) {
+    fun bind(item: CosmeticsNewEntity) {
         binding.name.text = item.name
         binding.type.text = item.type.displayValue
 

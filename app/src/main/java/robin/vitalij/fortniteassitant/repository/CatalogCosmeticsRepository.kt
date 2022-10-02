@@ -47,4 +47,5 @@ class CatalogCosmeticsRepository @Inject constructor(
     }
 
     fun getCosmetics(shopType: ShopType): Single<List<CosmeticsEntity>> = cosmeticsDao.getCosmetics(shopType.id)
+
 }

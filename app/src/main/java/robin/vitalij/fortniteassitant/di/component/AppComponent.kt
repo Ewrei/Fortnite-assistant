@@ -33,7 +33,7 @@ import robin.vitalij.fortniteassitant.ui.comparison.statistics.ComparisonStatist
 import robin.vitalij.fortniteassitant.ui.comparison.viewpager.AdapterComparisonFragment
 import robin.vitalij.fortniteassitant.ui.cosmetics.CatalogCosmeticsFragment
 import robin.vitalij.fortniteassitant.ui.cosmetics.catalog.CosmeticsFragment
-import robin.vitalij.fortniteassitant.ui.cosmeticsnew.CosmeticsNewFragment
+import robin.vitalij.fortniteassitant.ui.cosmetics_new.CosmeticsNewFragment
 import robin.vitalij.fortniteassitant.ui.crew.details.CrewViewDetailsFragment
 import robin.vitalij.fortniteassitant.ui.crew.main.GameCrewFragment
 import robin.vitalij.fortniteassitant.ui.details.statistics.DetailsStatisticsFragment

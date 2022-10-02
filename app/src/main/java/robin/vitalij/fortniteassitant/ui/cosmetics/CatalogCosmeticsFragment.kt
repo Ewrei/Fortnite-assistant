@@ -63,9 +63,9 @@ class CatalogCosmeticsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
+        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
             it.let(::initAdapter)
-        })
+        }
 
         setListener()
         setNavigation()

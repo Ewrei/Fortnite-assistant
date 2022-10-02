@@ -14,7 +14,6 @@ import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewWithToolbarBinding
-import robin.vitalij.fortniteassitant.db.entity.CosmeticsEntity
 import robin.vitalij.fortniteassitant.model.enums.ShopType
 import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.CosmeticResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
@@ -33,6 +32,10 @@ class CosmeticsFragment : BaseFragment() {
     private var _binding: FragmentRecyclerViewWithToolbarBinding? = null
 
     private val binding get() = _binding!!
+
+    private val cosmeticsAdapter = CosmeticsAdapter {
+        CosmeticResultFragment.show(childFragmentManager, it.id, false)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,12 +61,14 @@ class CosmeticsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
-            it.let(::initAdapter)
-        })
+
+        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
+            cosmeticsAdapter.updateData(it)
+        }
 
         setListener()
         setNavigation()
+        initializeRecyclerView()
 
         arguments?.let {
             val shopType = it.getSerializable(SHOP_TYPE) as ShopType
@@ -92,21 +97,16 @@ class CosmeticsFragment : BaseFragment() {
         binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
-    private fun initAdapter(list: List<CosmeticsEntity>) {
+    private fun initializeRecyclerView() {
         binding.recyclerViewInclude.recyclerView.run {
-            adapter = CosmeticsAdapter {
-                CosmeticResultFragment.show(childFragmentManager, it.id, false)
-            }
-            (adapter as CosmeticsAdapter).setData(list)
-            val gridlayoutManager = GridLayoutManager(
+            adapter = cosmeticsAdapter
+            layoutManager = GridLayoutManager(
                 activity, MAX_SPAN_COUNT
-            )
-
-            gridlayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int) = 1
+            ).apply {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int) = 1
+                }
             }
-
-            layoutManager = gridlayoutManager
         }
     }
 

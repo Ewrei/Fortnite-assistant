@@ -17,7 +17,7 @@ object ImageViewBinging {
 
     @JvmStatic
     @BindingAdapter("rarity")
-    fun ImageView.loadBackgroundRarity(rarity: String) {
+    fun ImageView.loadBackgroundRarity(rarity: String?) {
         background =
             ContextCompat.getDrawable(context, RarityType.getRarityType(rarity).getBackgroundRes())
     }
@@ -51,9 +51,9 @@ object ImageViewBinging {
 
     @JvmStatic
     @BindingAdapter("images")
-    fun ImageView.loadImages(images: Images) {
+    fun ImageView.loadImages(images: Images?) {
         Glide.with(context)
-            .load(images.featured ?: images.icon)
+            .load(images?.featured ?: images?.icon)
             .apply(
                 RequestOptions()
                     .placeholder(getCircularProgressDrawable(context))

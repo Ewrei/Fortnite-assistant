@@ -1,10 +1,9 @@
-package robin.vitalij.fortniteassitant.ui.cosmeticsnew.adapter
+package robin.vitalij.fortniteassitant.ui.cosmetics_new.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.databinding.ItemCosmeticsNewBinding
 import robin.vitalij.fortniteassitant.db.entity.CosmeticsNewEntity
 
 class CosmeticsNewAdapter(
@@ -19,9 +18,8 @@ class CosmeticsNewAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CosmeticsNewHolder(
-        DataBindingUtil.inflate(
+        ItemCosmeticsNewBinding.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_cosmetics_new,
             parent,
             false
         )

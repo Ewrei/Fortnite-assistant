@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.cosmeticsnew
+package robin.vitalij.fortniteassitant.ui.cosmetics_new
 
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers

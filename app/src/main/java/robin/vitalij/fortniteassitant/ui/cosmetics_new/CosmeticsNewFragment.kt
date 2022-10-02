@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.cosmeticsnew
+package robin.vitalij.fortniteassitant.ui.cosmetics_new
 
 import android.content.Context
 import android.os.Bundle
@@ -17,7 +17,7 @@ import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewWithToolba
 import robin.vitalij.fortniteassitant.db.entity.CosmeticsNewEntity
 import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.CosmeticResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
-import robin.vitalij.fortniteassitant.ui.cosmeticsnew.adapter.CosmeticsNewAdapter
+import robin.vitalij.fortniteassitant.ui.cosmetics_new.adapter.CosmeticsNewAdapter
 import javax.inject.Inject
 
 private const val MAX_SPAN_COUNT = 2
@@ -62,9 +62,9 @@ class CosmeticsNewFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
+        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
             it.let(::initAdapter)
-        })
+        }
 
         setListener()
         setNavigation()

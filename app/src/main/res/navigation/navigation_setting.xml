@@ -103,7 +103,7 @@
         android:label="@string/achievements" />
     <fragment
         android:id="@+id/navigation_cosmetics_new"
-        android:name="robin.vitalij.fortniteassitant.ui.cosmeticsnew.CosmeticsNewFragment"
+        android:name="robin.vitalij.fortniteassitant.ui.cosmetics_new.CosmeticsNewFragment"
         android:label="@string/cosmetics_news" >
         <action
             android:id="@+id/action_navigation_cosmetics_new_to_adapterNewsFragment"

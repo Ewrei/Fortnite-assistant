@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.databinding.ItemCatalogCosmeticsBinding
+import robin.vitalij.fortniteassitant.databinding.ItemChartsTypeBinding
 import robin.vitalij.fortniteassitant.db.entity.CosmeticsNewEntity
 import robin.vitalij.fortniteassitant.model.enums.ShopType
 
@@ -20,9 +22,8 @@ class CatalogCosmeticsAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CatalogCosmeticsHolder(
-        DataBindingUtil.inflate(
+        ItemCatalogCosmeticsBinding.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_catalog_cosmetics,
             parent,
             false
         )
