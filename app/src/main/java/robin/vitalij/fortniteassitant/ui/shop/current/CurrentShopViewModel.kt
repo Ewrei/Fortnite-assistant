@@ -1,10 +1,13 @@
 package robin.vitalij.fortniteassitant.ui.shop.current
 
-import androidx.lifecycle.MutableLiveData
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.network.shop.ShopAdapterItem
-import robin.vitalij.fortniteassitant.model.network.shop.ShopNewItem
 import robin.vitalij.fortniteassitant.repository.network.GetCurrentShopRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 
@@ -12,16 +15,19 @@ class CurrentShopViewModel(
     private val getCurrentShopRepository: GetCurrentShopRepository
 ) : BaseViewModel() {
 
-    val mutableLiveData = MutableLiveData<List<ShopAdapterItem>>()
+    private val currentShopState =
+        MutableStateFlow<LoadingState<List<ShopAdapterItem>>>(LoadingState.Loading)
+
+    val currentShopResult: StateFlow<LoadingState<List<ShopAdapterItem>>> = currentShopState
+
+    private var job: Job? = null
 
     fun loadData() {
-        getCurrentShopRepository.getCurrentShop()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .let(::setupProgressShow)
-            .subscribe({
-                mutableLiveData.value = it
-            }, error)
-            .let(disposables::add)
+        job?.cancel()
+        job = viewModelScope.launch {
+            getCurrentShopRepository.getCurrentShop().collect { loadingState ->
+                currentShopState.value = loadingState
+            }
+        }
     }
 }

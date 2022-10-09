@@ -254,4 +254,7 @@ dependencies {
 
     gmsImplementation 'com.yandex.android:mobmetricalib:4.1.1'
 
+    def viewbindingpropertydelegate_version = "1.5.6"
+    implementation "com.github.kirich1409:viewbindingpropertydelegate-noreflection:$viewbindingpropertydelegate_version"
+
 }

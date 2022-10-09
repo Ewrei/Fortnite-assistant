@@ -2,53 +2,41 @@ package robin.vitalij.fortniteassitant.ui.shop.upcoming
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
 import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewBinding
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.network.shop.ItemShopUpcoming
 import robin.vitalij.fortniteassitant.ui.bottomsheet.upcomingshop.UpcomingShopResultFragment
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.shop.upcoming.adapter.UpcomingShopAdapter
 import javax.inject.Inject
 
 
-class UpcomingShopFragment : BaseFragment() {
+class UpcomingShopFragment : Fragment(R.layout.fragment_recycler_view) {
 
     @Inject
     lateinit var viewModelFactory: UpcomingShopViewModelFactory
 
-    private lateinit var viewModel: UpcomingShopViewModel
+    private val viewModel: UpcomingShopViewModel by viewModels { viewModelFactory }
 
-    private var _binding: FragmentRecyclerViewBinding? = null
+    private val binding by viewBinding(FragmentRecyclerViewBinding::bind)
 
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentRecyclerViewBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(UpcomingShopViewModel::class.java).apply {
-                observeToProgressBar(this@UpcomingShopFragment)
-                observeToError(this@UpcomingShopFragment)
-            }
+    private val upcomingShopAdapter = UpcomingShopAdapter {
+        UpcomingShopResultFragment.show(
+            childFragmentManager,
+            it,
+        )
     }
 
     override fun onAttach(context: Context) {
@@ -58,30 +46,48 @@ class UpcomingShopFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
-            it.let(::initAdapter)
-        })
+        setListener()
+        initializeRecyclerView()
+
+        lifecycleScope.launch {
+            viewModel.upcomingShopResult.collect {
+                handleUpcomingShopResult(it)
+            }
+        }
 
         viewModel.loadData()
-        setListener()
     }
 
     private fun setListener() {
-        setErrorResolveButtonClick {
+        binding.errorViewInclude.errorResolveButton.setOnClickListener {
             viewModel.loadData()
         }
     }
 
-    private fun initAdapter(list: List<ItemShopUpcoming>) {
+    private fun initializeRecyclerView() {
         binding.recyclerViewInclude.recyclerView.run {
-            adapter = UpcomingShopAdapter {
-                UpcomingShopResultFragment.show(
-                    childFragmentManager,
-                    it,
-                )
-            }
-            (adapter as UpcomingShopAdapter).setData(list)
+            adapter = upcomingShopAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
+
+    private fun handleUpcomingShopResult(result: LoadingState<List<ItemShopUpcoming>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
+            }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                upcomingShopAdapter.updateData(result.data)
+            }
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                }
+            }
+        }
+    }
+
 }

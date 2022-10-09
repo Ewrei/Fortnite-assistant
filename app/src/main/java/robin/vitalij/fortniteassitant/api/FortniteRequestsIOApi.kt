@@ -44,10 +44,10 @@ interface FortniteRequestsIOApi {
     ): Single<SearchUserModel>
 
     @GET("/$VERSION_SECOND_PATCH/$SHOP_PATCH")
-    fun getCurrentShop(@Query(LANG_QUERY) language: String): Single<ShopNewResponse>
+    suspend fun getCurrentShop(@Query(LANG_QUERY) language: String): ShopNewResponse
 
     @GET("/$VERSION_SECOND_PATCH/$ITEMS_PATCH/$UPCOMING_PATCH")
-    fun getUpcomingShop(@Query(LANG_QUERY) language: String): Single<ShopUpcomingResponse>
+    suspend fun getUpcomingShop(@Query(LANG_QUERY) language: String): ShopUpcomingResponse
 
     @GET("/$VERSION_FIRST_PATCH/$BATTLE_PASS_PATCH")
     fun getBattlesPassRewards(

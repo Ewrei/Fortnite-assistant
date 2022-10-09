@@ -7,16 +7,10 @@ import robin.vitalij.fortniteassitant.databinding.ItemHeaderShopBinding
 import robin.vitalij.fortniteassitant.model.network.shop.ShopAdapterItem
 import robin.vitalij.fortniteassitant.model.network.shop.ShopNewItem
 
-class HeaderShopAdapter(
-    private val onClick: (shopNewItem: ShopNewItem) -> Unit
-) : RecyclerView.Adapter<HeaderShopHolder>() {
+class HeaderShopAdapter(private val onClick: (shopNewItem: ShopNewItem) -> Unit) :
+    RecyclerView.Adapter<HeaderShopHolder>() {
 
     private val items = mutableListOf<ShopAdapterItem>()
-
-    fun setData(data: List<ShopAdapterItem>) {
-        items.clear()
-        items.addAll(data)
-    }
 
     fun updateData(data: List<ShopAdapterItem>) {
         if (items != data) {
@@ -36,4 +30,5 @@ class HeaderShopAdapter(
     }
 
     override fun getItemCount() = items.size
+
 }
