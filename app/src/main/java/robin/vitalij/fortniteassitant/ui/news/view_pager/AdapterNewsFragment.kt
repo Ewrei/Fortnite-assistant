@@ -1,52 +1,34 @@
-package robin.vitalij.fortniteassitant.ui.news.viewpager
+package robin.vitalij.fortniteassitant.ui.news.view_pager
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import kotlinx.android.synthetic.main.fragment_adapter_shop.*
-import kotlinx.android.synthetic.main.toolbar_center_title.*
+import by.kirich1409.viewbindingdelegate.viewBinding
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.observeToEmpty
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.databinding.FragmentAdapterShopBinding
 import robin.vitalij.fortniteassitant.model.enums.NewsType
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseViewPagerAdapter
 import robin.vitalij.fortniteassitant.ui.news.fragment.NewsFragment
 import javax.inject.Inject
 
 private const val DEFAULT_LAST_TAB_VALUE = Integer.MAX_VALUE
 
-class AdapterNewsFragment : BaseFragment() {
+class AdapterNewsFragment : Fragment(R.layout.fragment_adapter_shop) {
 
     @Inject
     lateinit var viewModelFactory: AdapterNewsViewModelFactory
 
-    private lateinit var viewModel: AdapterNewsViewModel
+    private val viewModel: AdapterNewsViewModel by viewModels { viewModelFactory }
+
+    private val binding by viewBinding(FragmentAdapterShopBinding::bind)
 
     private var lastTab: Int = DEFAULT_LAST_TAB_VALUE
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_adapter_shop, container, false)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(AdapterNewsViewModel::class.java).apply {
-                observeToProgressBar(this@AdapterNewsFragment)
-                observeToError(this@AdapterNewsFragment)
-                observeToEmpty(this@AdapterNewsFragment)
-            }
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -55,8 +37,9 @@ class AdapterNewsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tabLayout.setupWithViewPager(viewPager)
-        viewPager.offscreenPageLimit = 3
+        binding.tabLayout.setupWithViewPager(binding.viewPager)
+        binding.viewPager.offscreenPageLimit = OFF_SCREEN_PAGE_LIMIT
+
         setNavigation()
         addTabs()
     }
@@ -72,12 +55,12 @@ class AdapterNewsFragment : BaseFragment() {
     }
 
     private fun saveSelectedTab() {
-        lastTab = viewPager.currentItem
+        lastTab = binding.viewPager.currentItem
     }
 
     private fun restoreSelectedTab() {
         if (lastTab != DEFAULT_LAST_TAB_VALUE) {
-            viewPager.currentItem = lastTab
+            binding.viewPager.currentItem = lastTab
         }
     }
 
@@ -98,12 +81,19 @@ class AdapterNewsFragment : BaseFragment() {
             getString(NewsType.CREATIVE_NEWS.getTitleRes())
         )
 
-        viewPager.adapter = pagerAdapter
+        binding.viewPager.adapter = pagerAdapter
     }
 
     private fun setNavigation() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
+
+    companion object {
+
+        private const val OFF_SCREEN_PAGE_LIMIT = 3
+
+    }
+
 }

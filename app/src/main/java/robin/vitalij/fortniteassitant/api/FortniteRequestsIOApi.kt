@@ -7,7 +7,6 @@ import robin.vitalij.fortniteassitant.model.network.*
 import robin.vitalij.fortniteassitant.model.network.search.SearchResponse
 import robin.vitalij.fortniteassitant.model.network.search.SearchUserModel
 import robin.vitalij.fortniteassitant.model.network.shop.ShopNewResponse
-import robin.vitalij.fortniteassitant.model.network.shop.ShopResponse
 import robin.vitalij.fortniteassitant.model.network.shop.ShopUpcomingResponse
 
 const val LOOKUP_PATCH = "lookup"
@@ -71,10 +70,10 @@ interface FortniteRequestsIOApi {
     fun getAchievements(@Query(LANG_QUERY) language: String): Single<AchievementResponse>
 
     @GET("/$VERSION_FIRST_PATCH/$NEWS_PATCH")
-    fun getNews(
+    suspend fun getNews(
         @Query(LANG_QUERY) language: String,
         @Query(TYPE_QUERY) type: String
-    ): Single<NewsResponse>
+    ): NewsResponse
 
     @GET("/$VERSION_SECOND_PATCH/$GAME_PATCH/$CREW_PATCH")
     fun getGameCrew(@Query(LANG_QUERY) language: String): Single<List<CrewModel>>

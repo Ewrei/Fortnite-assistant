@@ -44,7 +44,7 @@ import robin.vitalij.fortniteassitant.ui.history.HistoryFragment
 import robin.vitalij.fortniteassitant.ui.home.HomeFragment
 import robin.vitalij.fortniteassitant.ui.main.MainActivity
 import robin.vitalij.fortniteassitant.ui.news.fragment.NewsFragment
-import robin.vitalij.fortniteassitant.ui.news.viewpager.AdapterNewsFragment
+import robin.vitalij.fortniteassitant.ui.news.view_pager.AdapterNewsFragment
 import robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment
 import robin.vitalij.fortniteassitant.ui.season.statistics.DetailsSeasonStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.season.viewpager.AdapterDetailsSeasonStatisticsFragment

@@ -123,7 +123,7 @@
         android:label="CosmeticsFragment" />
     <fragment
         android:id="@+id/navigation_news"
-        android:name="robin.vitalij.fortniteassitant.ui.news.viewpager.AdapterNewsFragment"
+        android:name="robin.vitalij.fortniteassitant.ui.news.view_pager.AdapterNewsFragment"
         android:label="@string/news_game" />
     <fragment
         android:id="@+id/navigation_game_crew"

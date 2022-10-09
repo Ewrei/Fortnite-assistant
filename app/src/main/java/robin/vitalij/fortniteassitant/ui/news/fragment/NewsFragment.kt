@@ -2,85 +2,103 @@ package robin.vitalij.fortniteassitant.ui.news.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.common.extensions.observeToEmpty
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
 import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewBinding
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.NewsType
 import robin.vitalij.fortniteassitant.model.network.NewsModel
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.news.VideoActivity
 import robin.vitalij.fortniteassitant.ui.news.fragment.adapter.NewsAdapter
 import javax.inject.Inject
 
 
-class NewsFragment : BaseFragment() {
+class NewsFragment : Fragment(R.layout.fragment_recycler_view) {
 
     @Inject
     lateinit var viewModelFactory: NewsViewModelFactory
 
-    private lateinit var viewModel: NewsViewModel
+    private val viewModel: NewsViewModel by viewModels { viewModelFactory }
 
-    private var _binding: FragmentRecyclerViewBinding? = null
+    private val binding by viewBinding(FragmentRecyclerViewBinding::bind)
 
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentRecyclerViewBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(NewsViewModel::class.java).apply {
-                observeToProgressBar(this@NewsFragment)
-                observeToError(this@NewsFragment)
-                observeToEmpty(this@NewsFragment)
-            }
-    }
+    private val newsAdapter = NewsAdapter(
+        onVideoClick = { videoUrl: String, videoName: String ->
+            startActivity(VideoActivity.newInstance(context, videoUrl, videoName))
+        }
+    )
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         FortniteApplication.appComponent.inject(this)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         arguments?.let {
-            viewModel.loadData(it.getSerializable(ARG_NEWS_TYPE) as NewsType)
+            viewModel.newsType = it.getSerializable(ARG_NEWS_TYPE) as NewsType
         }
-
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
-            it.let(::initAdapter)
-        })
     }
 
-    private fun initAdapter(list: List<NewsModel>) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setListener()
+        initializeRecyclerView()
+
+        binding.viewEmptyInclude.empty.setText(R.string.no_information)
+
+        lifecycleScope.launch {
+            viewModel.newsResult.collect {
+                handleNewsResult(it)
+            }
+        }
+
+        viewModel.loadData()
+    }
+
+    private fun setListener() {
+        binding.errorViewInclude.errorResolveButton.setOnClickListener {
+            viewModel.loadData()
+        }
+    }
+
+    private fun initializeRecyclerView() {
         binding.recyclerViewInclude.recyclerView.run {
-            adapter = NewsAdapter(
-                onVideoClick = { videoUrl: String, videoName: String ->
-                    startActivity(VideoActivity.newInstance(context, videoUrl, videoName))
-                }
-            )
-            (adapter as NewsAdapter).setData(list)
+            adapter = newsAdapter
             layoutManager = LinearLayoutManager(context)
+        }
+    }
+
+    private fun handleNewsResult(result: LoadingState<List<NewsModel>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
+            }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                newsAdapter.updateData(result.data)
+                binding.viewEmptyInclude.emptyView.isVisible = result.data.isEmpty()
+            }
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                }
+            }
         }
     }
 
