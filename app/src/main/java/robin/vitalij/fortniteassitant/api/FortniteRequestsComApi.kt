@@ -38,6 +38,6 @@ interface FortniteRequestsComApi {
     fun getCosmetics(@Query(LANGUAGE_QUERY) language: String): Single<CosmeticsResponse>
 
     @GET("/$VERSION_FIRST_PATCH/$BANNERS_PATCH")
-    fun getBanners(@Query(LANGUAGE_QUERY) language: String): Single<BannerResponse>
+    suspend fun getBanners(@Query(LANGUAGE_QUERY) language: String): BannerResponse
 
 }

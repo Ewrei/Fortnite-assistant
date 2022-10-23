@@ -2,31 +2,37 @@ package robin.vitalij.fortniteassitant.ui.banners
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
 import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewWithToolbarBinding
+import robin.vitalij.fortniteassitant.db.entity.BannerEntity
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.ui.banners.adapter.BannersAdapter
 import robin.vitalij.fortniteassitant.ui.bottomsheet.banner.BannerResultFragment
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import javax.inject.Inject
 
-class BannersFragment : BaseFragment() {
+class BannersFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) {
 
     @Inject
     lateinit var viewModelFactory: BannersViewModelFactory
 
-    private lateinit var viewModel: BannersViewModel
+    private val viewModel: BannersViewModel by viewModels { viewModelFactory }
 
-    private lateinit var binding: FragmentRecyclerViewWithToolbarBinding
+    private val binding by viewBinding(FragmentRecyclerViewWithToolbarBinding::bind)
 
     private var bannersAdapter = BannersAdapter {
         BannerResultFragment.show(childFragmentManager, it.id)
@@ -37,38 +43,23 @@ class BannersFragment : BaseFragment() {
         FortniteApplication.appComponent.inject(this)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentRecyclerViewWithToolbarBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(BannersViewModel::class.java).apply {
-                observeToProgressBar(this@BannersFragment)
-                observeToError(this@BannersFragment)
-            }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setListener()
         setNavigation()
         initializeRecyclerView()
 
-        viewModel.loadData()
-
-        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
-            bannersAdapter.updateData(it)
+        lifecycleScope.launch {
+            viewModel.bannersResult.collect {
+                handleBannersResult(it)
+            }
         }
+
+        viewModel.loadData()
     }
 
     private fun setListener() {
-        setErrorResolveButtonClick {
+        binding.errorViewInclude.errorResolveButton.setOnClickListener {
             viewModel.loadData()
         }
     }
@@ -87,6 +78,26 @@ class BannersFragment : BaseFragment() {
             ).apply {
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int) = BANNER_SPAN_COUNT
+                }
+            }
+        }
+    }
+
+    private fun handleBannersResult(result: LoadingState<List<BannerEntity>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
+            }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                bannersAdapter.updateData(result.data)
+            }
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
                 }
             }
         }

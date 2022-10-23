@@ -11,7 +11,7 @@ import robin.vitalij.fortniteassitant.db.entity.BannerEntity
 interface BannerDao {
 
     @Query("SELECT * FROM Banner")
-    fun getBanners(): Single<List<BannerEntity>>
+    suspend fun getBanners(): List<BannerEntity>
 
     @Query("SELECT * FROM Banner WHERE id = :id")
     fun getBanner(id: String): Single<BannerEntity>
