@@ -55,7 +55,7 @@ interface FortniteRequestsIOApi {
     ): Single<BattlePassRewardsResponse>
 
     @GET("/$VERSION_FIRST_PATCH/$LOOT_PATCH/$LIST_PATCH")
-    fun getWeapons(@Query(LANG_QUERY) language: String): Single<WeaponResponse>
+    suspend fun getWeapons(@Query(LANG_QUERY) language: String): WeaponResponse
 
     @GET("/$VERSION_FIRST_PATCH/$LOOT_PATCH/$FISH_PATCH")
     suspend fun getFish(@Query(LANG_QUERY) language: String): FishResponse

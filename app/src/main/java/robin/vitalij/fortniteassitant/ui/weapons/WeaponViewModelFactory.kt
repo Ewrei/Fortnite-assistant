@@ -12,8 +12,7 @@ class WeaponViewModelFactory @Inject constructor(
 
     override fun createViewModel(): WeaponViewModel {
         return viewModel ?: run {
-            val model =
-                WeaponViewModel(weaponRepository)
+            val model = WeaponViewModel(weaponRepository)
             viewModel = model
             return model
         }

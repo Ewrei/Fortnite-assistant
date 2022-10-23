@@ -22,7 +22,7 @@ class Weapon(
 )
 
 class Image(
-    @SerializedName("icon") val icon: String,
+    @SerializedName("icon") val icon: String?,
     @SerializedName("background") val background: String?
 )
 

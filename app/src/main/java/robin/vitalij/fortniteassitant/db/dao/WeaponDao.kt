@@ -11,7 +11,7 @@ import robin.vitalij.fortniteassitant.db.entity.WeaponEntity
 interface WeaponDao {
 
     @Query("SELECT * FROM Weapon")
-    fun getWeapons(): Single<List<WeaponEntity>>
+    suspend fun getWeapons(): List<WeaponEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertWeapons(list :List<WeaponEntity>)

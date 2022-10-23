@@ -2,51 +2,41 @@ package robin.vitalij.fortniteassitant.ui.weapons
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
 import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewWithToolbarBinding
 import robin.vitalij.fortniteassitant.db.entity.WeaponEntity
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.ui.bottomsheet.weapon.WeaponResultFragment
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.weapons.adapter.WeaponAdapter
 import javax.inject.Inject
 
 
-class WeaponFragment : BaseFragment() {
+class WeaponFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) {
 
     @Inject
     lateinit var viewModelFactory: WeaponViewModelFactory
 
-    private lateinit var viewModel: WeaponViewModel
+    private val viewModel: WeaponViewModel by viewModels { viewModelFactory }
 
-    private var _binding: FragmentRecyclerViewWithToolbarBinding? = null
+    private val binding by viewBinding(FragmentRecyclerViewWithToolbarBinding::bind)
 
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentRecyclerViewWithToolbarBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(WeaponViewModel::class.java).apply {
-                observeToProgressBar(this@WeaponFragment)
-                observeToError(this@WeaponFragment)
-            }
+    private val weaponAdapter = WeaponAdapter {
+        WeaponResultFragment.show(childFragmentManager, it)
     }
 
     override fun onAttach(context: Context) {
@@ -56,21 +46,21 @@ class WeaponFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
-            it.let(::initAdapter)
-        })
-
         setListener()
         setNavigation()
-    }
+        initializeRecyclerView()
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        lifecycleScope.launch {
+            viewModel.weaponsResult.collect {
+                handleWeaponsResult(it)
+            }
+        }
+
+        viewModel.loadData()
     }
 
     private fun setListener() {
-        setErrorResolveButtonClick {
+        binding.errorViewInclude.errorResolveButton.setOnClickListener {
             viewModel.loadData()
         }
     }
@@ -81,13 +71,31 @@ class WeaponFragment : BaseFragment() {
         binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
-    private fun initAdapter(list: List<WeaponEntity>) {
+    private fun initializeRecyclerView() {
         binding.recyclerViewInclude.recyclerView.run {
-            adapter = WeaponAdapter {
-                WeaponResultFragment.show(childFragmentManager, it)
-            }
-            (adapter as WeaponAdapter).setData(list)
+            adapter = weaponAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
+
+    private fun handleWeaponsResult(result: LoadingState<List<WeaponEntity>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
+            }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                weaponAdapter.updateData(result.data)
+            }
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                }
+            }
+        }
+    }
+
 }

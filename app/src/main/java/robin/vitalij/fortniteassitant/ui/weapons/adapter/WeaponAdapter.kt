@@ -5,6 +5,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.databinding.ItemBannerBinding
+import robin.vitalij.fortniteassitant.databinding.ItemWeaponBinding
+import robin.vitalij.fortniteassitant.db.entity.BannerEntity
 import robin.vitalij.fortniteassitant.db.entity.WeaponEntity
 
 class WeaponAdapter(
@@ -13,15 +16,17 @@ class WeaponAdapter(
 
     private val items = mutableListOf<WeaponEntity>()
 
-    fun setData(data: List<WeaponEntity>) {
-        items.clear()
-        items.addAll(data)
+    fun updateData(data: List<WeaponEntity>) {
+        if (items != data) {
+            items.clear()
+            items.addAll(data)
+            notifyDataSetChanged()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = WeaponHolder(
-        DataBindingUtil.inflate(
+        ItemWeaponBinding.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_weapon,
             parent,
             false
         )
