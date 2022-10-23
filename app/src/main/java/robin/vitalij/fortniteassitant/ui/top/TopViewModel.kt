@@ -1,30 +1,35 @@
 package robin.vitalij.fortniteassitant.ui.top
 
-import androidx.databinding.ObservableField
-import androidx.lifecycle.MutableLiveData
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.TopFullModel
 import robin.vitalij.fortniteassitant.repository.network.TopRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 import robin.vitalij.fortniteassitant.ui.top.adapter.TopListItem
 
-class TopViewModel(
-    private val topRepository: TopRepository
-) : BaseViewModel() {
+class TopViewModel(private val topRepository: TopRepository) : BaseViewModel() {
 
-    var topType = ObservableField(TopFullModel())
+    var topType: TopFullModel = TopFullModel()
 
-    val mutableLiveData = MutableLiveData<List<TopListItem>>()
+    private val topState =
+        MutableStateFlow<LoadingState<List<TopListItem>>>(LoadingState.Loading)
+
+    val topResult: StateFlow<LoadingState<List<TopListItem>>> = topState
+
+    private var job: Job? = null
 
     fun loadData() {
-        topRepository.getTopUsers(topType.get() ?: TopFullModel())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .let(::setupProgressShow)
-            .subscribe({
-                mutableLiveData.value = it
-            }, error)
-            .let(disposables::add)
+        job?.cancel()
+        job = viewModelScope.launch {
+            topRepository.getTopUsers(topType).collect { loadingState ->
+                topState.value = loadingState
+            }
+        }
     }
+
 }

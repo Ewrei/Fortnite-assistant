@@ -5,7 +5,15 @@ import robin.vitalij.fortniteassitant.common.extensions.DATE_PATTERN_YEAR_TIME
 import robin.vitalij.fortniteassitant.common.extensions.getDateStringFormat
 import robin.vitalij.fortniteassitant.model.network.stats.StatsTypeDevice
 
-@Entity(tableName = "User")
+@Entity(
+    tableName = "User",
+    foreignKeys = [ForeignKey(
+        entity = PlayerSession::class,
+        parentColumns = ["playerSessionId"],
+        childColumns = ["playerSessionId"],
+        onDelete = ForeignKey.CASCADE
+    )]
+)
 class UserEntity(
     @ColumnInfo(name = "player_id") var playerId: String = "",
     @ColumnInfo(name = "name") var name: String = "",
@@ -21,12 +29,6 @@ class UserEntity(
 ) {
 
     @PrimaryKey
-    @ForeignKey(
-        entity = PlayerSession::class,
-        parentColumns = ["playerSessionId"],
-        childColumns = ["playerSessionId"],
-        onDelete = ForeignKey.CASCADE
-    )
     var playerSessionId: Long = 0
 
     fun getLastUpdate(): String = timeUpdate.getDateStringFormat(DATE_PATTERN_YEAR_TIME)

@@ -13,7 +13,7 @@ class BattlesPassRewardRepository @Inject constructor(
     private val resourceProvider: ResourceProvider
 ) {
 
-    fun getBattlesPassReward(season: String = "current") =
+    fun getBattlesPassReward(season: String) =
         fortniteRequestsIOApi.getBattlesPassRewards(LocaleUtils.locale, season)
             .subscribeOn(Schedulers.io())
             .flatMap {

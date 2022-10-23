@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.model.network.CrewModel
+import robin.vitalij.fortniteassitant.model.network.NewsModel
 
 class GameCrewAdapter(
     private val onClick: (crewModel: CrewModel) -> Unit,
@@ -14,9 +15,12 @@ class GameCrewAdapter(
 
     private val items = mutableListOf<CrewModel>()
 
-    fun setData(data: List<CrewModel>) {
-        items.clear()
-        items.addAll(data)
+    fun updateData(data: List<CrewModel>) {
+        if (items != data) {
+            items.clear()
+            items.addAll(data)
+            notifyDataSetChanged()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = GameCrewHolder(

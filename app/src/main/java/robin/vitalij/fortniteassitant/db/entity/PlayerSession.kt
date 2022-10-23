@@ -5,14 +5,8 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-@Entity
+@Entity()
 class PlayerSession(
-    @ForeignKey(
-        entity = UserEntity::class,
-        parentColumns = ["playerId"],
-        childColumns = ["playerId"],
-        onDelete = ForeignKey.CASCADE
-    )
     var accountId: String,
     val timestamp: Long
 ) : Serializable {

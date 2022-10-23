@@ -21,7 +21,7 @@ import robin.vitalij.fortniteassitant.db.entity.*
         CosmeticsEntity::class,
         BannerEntity::class
     ],
-    version = 3
+    version = 4
 )
 
 @TypeConverters(

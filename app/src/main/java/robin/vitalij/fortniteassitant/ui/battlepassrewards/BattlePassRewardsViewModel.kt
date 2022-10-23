@@ -19,7 +19,7 @@ class BattlePassRewardsViewModel(
 
     init {
         battlesPassRewardRepository
-            .getBattlesPassReward()
+            .getBattlesPassReward(CURRENT_SEASON)
             .observeOn(AndroidSchedulers.mainThread())
             .let(::setupProgressShow)
             .subscribe({
@@ -30,7 +30,7 @@ class BattlePassRewardsViewModel(
             .let(disposables::add)
     }
 
-    fun loadData(season: String) {
+    fun changeSeason(season: String) {
         battlesPassRewardRepository
             .getBattlesPassReward(season)
             .observeOn(AndroidSchedulers.mainThread())
@@ -56,4 +56,9 @@ class BattlePassRewardsViewModel(
                 }
             }
     }
+
+    companion object {
+        private const val CURRENT_SEASON = "current"
+    }
+
 }

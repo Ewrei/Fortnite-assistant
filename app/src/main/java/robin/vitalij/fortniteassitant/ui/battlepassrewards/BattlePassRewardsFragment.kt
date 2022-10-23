@@ -143,11 +143,11 @@ class BattlePassRewardsFragment : BaseFragment() {
 
     private fun setListeners() {
         binding.seasonSpinner.setOnItemSelectedListener { _, _, _, item ->
-            viewModel.loadData((item as SeasonModel).season.toString())
+            viewModel.changeSeason((item as SeasonModel).season.toString())
         }
 
         setErrorResolveButtonClick {
-            viewModel.loadData("current")
+            viewModel.changeSeason("current")
         }
     }
 

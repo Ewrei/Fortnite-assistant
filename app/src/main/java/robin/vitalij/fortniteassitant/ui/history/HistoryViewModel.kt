@@ -1,40 +1,37 @@
 package robin.vitalij.fortniteassitant.ui.history
 
-import androidx.lifecycle.MutableLiveData
-import io.reactivex.android.schedulers.AndroidSchedulers
-import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.model.EmptyTextModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.model.HistoryUserModel
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.repository.db.HistoryRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
-import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 class HistoryViewModel(
-    historyRepository: HistoryRepository,
-    preferenceManager: PreferenceManager,
-    resourceProvider: ResourceProvider
+    private val historyRepository: HistoryRepository,
+    private val preferenceManager: PreferenceManager
 ) : BaseViewModel() {
 
-    val mutableLiveData = MutableLiveData<List<HistoryUserModel>>()
+    private val historiesState =
+        MutableStateFlow<LoadingState<List<HistoryUserModel>>>(LoadingState.Loading)
 
-    init {
-        historyRepository
-            .loadData(preferenceManager.getPlayerId())
-            .observeOn(AndroidSchedulers.mainThread())
-            .let(::setupProgressShow)
-            .subscribe({
-                mutableLiveData.value = it
+    val historiesResult: StateFlow<LoadingState<List<HistoryUserModel>>> = historiesState
 
-                emptyText(
-                    EmptyTextModel(
-                        it.isEmpty(),
-                        resourceProvider.getString(
-                            R.string.empty_session
-                        )
-                    )
-                )
-            }, error)
-            .let(disposables::add)
+    private var job: Job? = null
+
+    fun loadData() {
+        job?.cancel()
+        job = viewModelScope.launch {
+            historyRepository.getUserHistory(preferenceManager.getPlayerId())
+                .collect { loadingState ->
+                    historiesState.value = loadingState
+                }
+        }
     }
+
 }

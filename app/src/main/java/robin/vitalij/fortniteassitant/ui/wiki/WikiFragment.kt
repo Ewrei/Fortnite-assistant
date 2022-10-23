@@ -105,8 +105,8 @@ class WikiFragment : BaseFragment() {
 
         binding.currentMap.setSafeOnClickListener {
             findNavController().navigate(R.id.navigation_png_read_details, Bundle().apply {
-                putString(PngReadDetailsFragment.IMAGE_URL, getString(R.string.current_map_url))
-                putString(PngReadDetailsFragment.TITLE, getString(R.string.current_map))
+                putString(PngReadDetailsFragment.ARG_IMAGE_URL, getString(R.string.current_map_url))
+                putString(PngReadDetailsFragment.ARG_TITLE, getString(R.string.current_map))
             })
         }
     }

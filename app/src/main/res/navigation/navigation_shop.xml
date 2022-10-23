@@ -10,7 +10,7 @@
         android:id="@+id/homeScreen"
         android:name="robin.vitalij.fortniteassitant.ui.shop.viewpager.AdapterShoppingFragment"
         android:label="@string/title_item_shop"
-        tools:layout="@layout/fragment_dashboard">
+        tools:layout="@layout/fragment_adapter_shop">
         <action
             android:id="@+id/action_homeScreen_to_newsFragment2"
             app:destination="@id/navigation_news" />

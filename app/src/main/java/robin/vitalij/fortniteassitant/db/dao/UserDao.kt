@@ -18,11 +18,17 @@ interface UserDao {
     @Query("SELECT * FROM User WHERE player_id = :playerId order by playerSessionId desc limit 1")
     fun getFlowableUserEntity(playerId: String): Flowable<UserEntity>
 
+    @Query("SELECT * FROM User WHERE player_id = :playerId order by playerSessionId desc limit 1")
+    suspend fun getUserEntity(playerId: String): UserEntity
+
     @Query("SELECT * FROM User WHERE player_id = :playerId order by playerSessionId desc limit 2")
     fun getLastTwoUserEntities(playerId: String): Flowable<List<UserEntity>>
 
     @Query("SELECT * FROM PlayerSession WHERE accountId = :playerId ORDER BY playerSessionId DESC")
     fun getUserHistory(playerId: String): Flowable<List<UserHistory>>
+
+    @Query("SELECT * FROM PlayerSession WHERE accountId = :playerId ORDER BY playerSessionId DESC")
+    suspend fun getUserHistoryNewVersion(playerId: String): List<UserHistory>
 
     @Query("SELECT * FROM User WHERE playerSessionId = :playerSessionId")
     fun getUserEntitySessionId(playerSessionId: Long): Single<UserEntity>
