@@ -2,56 +2,41 @@ package robin.vitalij.fortniteassitant.ui.cosmetics.catalog
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
 import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewWithToolbarBinding
+import robin.vitalij.fortniteassitant.db.entity.CosmeticsEntity
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.ShopType
 import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.CosmeticResultFragment
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.cosmetics.catalog.adapter.CosmeticsAdapter
 import javax.inject.Inject
 
-private const val MAX_SPAN_COUNT = 2
-
-class CosmeticsFragment : BaseFragment() {
+class CosmeticsFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) {
 
     @Inject
     lateinit var viewModelFactory: CosmeticsViewModelFactory
 
-    private lateinit var viewModel: CosmeticsViewModel
+    private val viewModel: CosmeticsViewModel by viewModels { viewModelFactory }
 
-    private var _binding: FragmentRecyclerViewWithToolbarBinding? = null
-
-    private val binding get() = _binding!!
+    private val binding by viewBinding(FragmentRecyclerViewWithToolbarBinding::bind)
 
     private val cosmeticsAdapter = CosmeticsAdapter {
         CosmeticResultFragment.show(childFragmentManager, it.id, false)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentRecyclerViewWithToolbarBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(CosmeticsViewModel::class.java).apply {
-                observeToProgressBar(this@CosmeticsFragment)
-                observeToError(this@CosmeticsFragment)
-            }
     }
 
     override fun onAttach(context: Context) {
@@ -59,35 +44,33 @@ class CosmeticsFragment : BaseFragment() {
         FortniteApplication.appComponent.inject(this)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            viewModel.shopType = it.getSerializable(ARG_SHOP_TYPE) as ShopType
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
-            cosmeticsAdapter.updateData(it)
-        }
-
         setListener()
         setNavigation()
         initializeRecyclerView()
 
-        arguments?.let {
-            val shopType = it.getSerializable(SHOP_TYPE) as ShopType
-            binding.toolbarInclude.toolbar.title = getString(shopType.getTitleRes())
-            viewModel.loadData(shopType)
+        lifecycleScope.launch {
+            viewModel.cosmeticsResult.collect {
+                handleCosmeticsResult(it)
+            }
         }
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        binding.toolbarInclude.toolbar.title = getString(viewModel.shopType.getTitleRes())
+
+        viewModel.loadData()
     }
 
     private fun setListener() {
-        setErrorResolveButtonClick {
-            arguments?.let {
-                val shopType = it.getSerializable(SHOP_TYPE) as ShopType
-                viewModel.loadData(shopType)
-            }
+        binding.errorViewInclude.errorResolveButton.setOnClickListener {
+            viewModel.loadData()
         }
     }
 
@@ -100,17 +83,39 @@ class CosmeticsFragment : BaseFragment() {
     private fun initializeRecyclerView() {
         binding.recyclerViewInclude.recyclerView.run {
             adapter = cosmeticsAdapter
-            layoutManager = GridLayoutManager(
-                activity, MAX_SPAN_COUNT
-            ).apply {
+            layoutManager = GridLayoutManager(activity, MAX_SPAN_COUNT).apply {
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                    override fun getSpanSize(position: Int) = 1
+                    override fun getSpanSize(position: Int) = COSMETICS_SPAN_COUNT
+                }
+            }
+        }
+    }
+
+    private fun handleCosmeticsResult(result: LoadingState<List<CosmeticsEntity>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
+            }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                cosmeticsAdapter.updateData(result.data)
+            }
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
                 }
             }
         }
     }
 
     companion object {
-        const val SHOP_TYPE = "shop_type"
+        const val ARG_SHOP_TYPE = "arg_shop_type"
+        private const val MAX_SPAN_COUNT = 2
+        private const val COSMETICS_SPAN_COUNT = 1
+
     }
+
 }
