@@ -58,7 +58,7 @@ interface FortniteRequestsIOApi {
     fun getWeapons(@Query(LANG_QUERY) language: String): Single<WeaponResponse>
 
     @GET("/$VERSION_FIRST_PATCH/$LOOT_PATCH/$FISH_PATCH")
-    fun getFish(@Query(LANG_QUERY) language: String): Single<FishResponse>
+    suspend fun getFish(@Query(LANG_QUERY) language: String): FishResponse
 
     @GET("/$VERSION_FIRST_PATCH/$STATS_PATCH/$FISH_PATCH")
     fun getFishStats(

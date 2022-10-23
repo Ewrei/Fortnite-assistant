@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.db.entity.BannerEntity
 import robin.vitalij.fortniteassitant.db.entity.FishEntity
 import robin.vitalij.fortniteassitant.db.entity.WeaponEntity
 
@@ -14,9 +15,12 @@ class FishAdapter(
 
     private val items = mutableListOf<FishEntity>()
 
-    fun setData(data: List<FishEntity>) {
-        items.clear()
-        items.addAll(data)
+    fun updateData(data: List<FishEntity>) {
+        if (items != data) {
+            items.clear()
+            items.addAll(data)
+            notifyDataSetChanged()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = FishHolder(

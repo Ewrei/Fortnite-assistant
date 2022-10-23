@@ -1,15 +1,19 @@
 package robin.vitalij.fortniteassitant.repository
 
-import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import robin.vitalij.fortniteassitant.api.FortniteRequestsIOApi
+import robin.vitalij.fortniteassitant.common.extensions.getErrorModel
 import robin.vitalij.fortniteassitant.db.dao.FishDao
 import robin.vitalij.fortniteassitant.db.entity.FishEntity
-import robin.vitalij.fortniteassitant.db.entity.WeaponEntity
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.utils.LocaleUtils
 import robin.vitalij.fortniteassitant.utils.mapper.FishMapper
-import robin.vitalij.fortniteassitant.utils.mapper.WeaponMapper
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -25,25 +29,36 @@ class FishRepository @Inject constructor(
     private val preferenceManager: PreferenceManager
 ) {
 
-    fun loadData(): Single<List<FishEntity>> {
+    fun getFish(): Flow<LoadingState<List<FishEntity>>> {
         return if (preferenceManager.getFishDataLastUpdate() == DEFAULT_DATE_UPDATE
             || preferenceManager.getFishDataLastUpdate() < (Date().time - TimeUnit.DAYS.toMillis(
                 ONE_MOUNT_DAY
             ))
         ) {
-            fortniteRequestsIOApi.getFish(LocaleUtils.locale)
-                .subscribeOn(Schedulers.io())
-                .flatMap {
-                    val list = FishMapper().transform(it)
-                    fishDao.insertFish(list)
-                    preferenceManager.setFishDataLastUpdate(Date().time)
-                    return@flatMap Single.just(list)
-                }
+            getServerFish()
         } else {
-            fishDao.getFish()
-                .subscribeOn(Schedulers.io())
+            getLocalFish()
         }
     }
+
+    private fun getServerFish(): Flow<LoadingState<List<FishEntity>>> = flow {
+        emit(LoadingState.Loading)
+        kotlin.runCatching { fortniteRequestsIOApi.getFish(LocaleUtils.locale) }
+            .onSuccess {
+                val list = FishMapper().transform(it)
+                fishDao.insertFish(list)
+                preferenceManager.setFishDataLastUpdate(Date().time)
+                emit(LoadingState.Success(list))
+            }
+            .onFailure { emit(LoadingState.Error(ErrorModelListItem.ErrorItem(it.getErrorModel()))) }
+    }.flowOn(Dispatchers.IO)
+
+    private fun getLocalFish(): Flow<LoadingState<List<FishEntity>>> = flow {
+        emit(LoadingState.Loading)
+        kotlin.runCatching { fishDao.getFish() }
+            .onSuccess { emit(LoadingState.Success(it)) }
+            .onFailure { emit(LoadingState.Error(ErrorModelListItem.ErrorItem(it.getErrorModel()))) }
+    }.flowOn(Dispatchers.IO)
 
     fun loadData(fishId: String) = fishDao.getFish(fishId)
         .subscribeOn(Schedulers.io())
