@@ -11,7 +11,7 @@ import robin.vitalij.fortniteassitant.db.entity.AchievementEntity
 interface AchievementDao {
 
     @Query("SELECT * FROM Achievement")
-    fun getAchievements(): Single<List<AchievementEntity>>
+    suspend fun getAchievements(): List<AchievementEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAchievements(list: List<AchievementEntity>)

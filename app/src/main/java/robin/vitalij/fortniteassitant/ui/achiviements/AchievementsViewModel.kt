@@ -1,8 +1,13 @@
 package robin.vitalij.fortniteassitant.ui.achiviements
 
-import androidx.lifecycle.MutableLiveData
-import io.reactivex.android.schedulers.AndroidSchedulers
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.db.entity.AchievementEntity
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.repository.AchievementRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 
@@ -10,16 +15,19 @@ class AchievementsViewModel(
     private val achievementRepository: AchievementRepository
 ) : BaseViewModel() {
 
-    val mutableLiveData = MutableLiveData<List<AchievementEntity>>()
+    private val achievementsState =
+        MutableStateFlow<LoadingState<List<AchievementEntity>>>(LoadingState.Loading)
+
+    val achievementsResult: StateFlow<LoadingState<List<AchievementEntity>>> = achievementsState
+
+    private var job: Job? = null
 
     fun loadData() {
-        achievementRepository
-            .loadData()
-            .observeOn(AndroidSchedulers.mainThread())
-            .let(::setupProgressShow)
-            .subscribe({
-                mutableLiveData.value = it
-            }, error)
-            .let(disposables::add)
+        job?.cancel()
+        job = viewModelScope.launch {
+            achievementRepository.getAchievements().collect { loadingState ->
+                achievementsState.value = loadingState
+            }
+        }
     }
 }
