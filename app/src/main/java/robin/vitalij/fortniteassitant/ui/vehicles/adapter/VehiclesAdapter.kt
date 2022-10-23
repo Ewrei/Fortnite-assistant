@@ -13,9 +13,12 @@ class VehiclesAdapter(
 
     private val items = mutableListOf<VehicleModel>()
 
-    fun setData(data: List<VehicleModel>) {
-        items.clear()
-        items.addAll(data)
+    fun updateData(data: List<VehicleModel>) {
+        if (items != data) {
+            items.clear()
+            items.addAll(data)
+            notifyDataSetChanged()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = VehiclesHolder(

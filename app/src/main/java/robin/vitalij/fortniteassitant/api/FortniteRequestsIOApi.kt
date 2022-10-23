@@ -79,6 +79,6 @@ interface FortniteRequestsIOApi {
     suspend fun getGameCrew(@Query(LANG_QUERY) language: String): List<CrewModel>
 
     @GET("/$VERSION_SECOND_PATCH/$GAME_PATCH/$VEHICLES_PATCH")
-    fun getGameVehicles(@Query(LANG_QUERY) language: String): Single<VehiclesResponse>
+    suspend fun getGameVehicles(@Query(LANG_QUERY) language: String): VehiclesResponse
 
 }

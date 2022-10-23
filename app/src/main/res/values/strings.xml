@@ -325,4 +325,5 @@ This section is beta. If it does not work correctly for you, let us know</string
     <string name="free_skins_and_promo_codes">Free Skins\nand PromoCodes</string>
     <string name="for_your_favorite_games">for your favorite games - CS:GO, WoT, Fortnite, Free Fire, Steam games, League of Legends etc. Complete simple game tasks and get your gifts!</string>
 
+    <string name="empty_vehicles">"We didn't find any achievements"</string>
 </resources>

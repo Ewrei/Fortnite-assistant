@@ -288,4 +288,6 @@
     <string name="free_skins_and_promo_codes">Бесплатные\nскины и Промокоды</string>
     <string name="for_your_favorite_games">для твоих любимых игр - CS:GO, WoT, Fortnite, Free Fire, Steam games, League of Legends  и др. Выполняй простые игровые
 задания и получай подарки!</string>
+
+    <string name="empty_vehicles">Мы не нашли достижений</string>
 </resources>
