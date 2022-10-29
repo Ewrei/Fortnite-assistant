@@ -38,7 +38,7 @@ import robin.vitalij.fortniteassitant.ui.crew.details.CrewViewDetailsFragment
 import robin.vitalij.fortniteassitant.ui.crew.main.GameCrewFragment
 import robin.vitalij.fortniteassitant.ui.details.statistics.DetailsStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment
-import robin.vitalij.fortniteassitant.ui.fishing.FishingFragment
+import robin.vitalij.fortniteassitant.ui.fish.FishFragment
 import robin.vitalij.fortniteassitant.ui.fishstats.FishStatsFragment
 import robin.vitalij.fortniteassitant.ui.history.HistoryFragment
 import robin.vitalij.fortniteassitant.ui.home.HomeFragment
@@ -100,7 +100,7 @@ interface AppComponent {
     fun inject(fragment: BattlePassRewardsFragment)
     fun inject(fragment: AdapterChartsTypeFragment)
     fun inject(fragment: WeaponFragment)
-    fun inject(fragment: FishingFragment)
+    fun inject(fragment: FishFragment)
     fun inject(fragment: FishStatsFragment)
     fun inject(fragment: AchievementsFragment)
     fun inject(fragment: CosmeticsNewFragment)

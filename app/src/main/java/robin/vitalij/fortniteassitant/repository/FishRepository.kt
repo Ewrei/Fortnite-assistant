@@ -19,9 +19,6 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
-private const val ONE_MOUNT_DAY = 31L
-private const val DEFAULT_DATE_UPDATE = 0L
-
 @Singleton
 class FishRepository @Inject constructor(
     private val fishDao: FishDao,
@@ -30,16 +27,17 @@ class FishRepository @Inject constructor(
 ) {
 
     fun getFish(): Flow<LoadingState<List<FishEntity>>> {
-        return if (preferenceManager.getFishDataLastUpdate() == DEFAULT_DATE_UPDATE
-            || preferenceManager.getFishDataLastUpdate() < (Date().time - TimeUnit.DAYS.toMillis(
-                ONE_MOUNT_DAY
-            ))
-        ) {
+        return if (isNeedUpdateFromServer()) {
             getServerFish()
         } else {
             getLocalFish()
         }
     }
+
+    private fun isNeedUpdateFromServer(): Boolean =
+        preferenceManager.getFishDataLastUpdate() == DEFAULT_DATE_UPDATE || preferenceManager.getFishDataLastUpdate() < (Date().time - TimeUnit.DAYS.toMillis(
+            ONE_MOUNT_DAY
+        ))
 
     private fun getServerFish(): Flow<LoadingState<List<FishEntity>>> = flow {
         emit(LoadingState.Loading)
@@ -62,4 +60,10 @@ class FishRepository @Inject constructor(
 
     fun loadData(fishId: String) = fishDao.getFish(fishId)
         .subscribeOn(Schedulers.io())
+
+    companion object {
+        private const val ONE_MOUNT_DAY = 31L
+        private const val DEFAULT_DATE_UPDATE = 0L
+    }
+
 }

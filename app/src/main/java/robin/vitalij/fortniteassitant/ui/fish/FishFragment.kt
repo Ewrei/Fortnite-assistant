@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.fishing
+package robin.vitalij.fortniteassitant.ui.fish
 
 import android.content.Context
 import android.os.Bundle
@@ -17,22 +17,22 @@ import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.setErrorView
-import robin.vitalij.fortniteassitant.databinding.FragmentFishingBinding
+import robin.vitalij.fortniteassitant.databinding.FragmentFishBinding
 import robin.vitalij.fortniteassitant.db.entity.FishEntity
 import robin.vitalij.fortniteassitant.model.ErrorModelListItem
 import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.ui.bottomsheet.fish.FishResultFragment
-import robin.vitalij.fortniteassitant.ui.fishing.adapter.FishAdapter
+import robin.vitalij.fortniteassitant.ui.fish.adapter.FishAdapter
 import javax.inject.Inject
 
-class FishingFragment : Fragment(R.layout.fragment_fishing) {
+class FishFragment : Fragment(R.layout.fragment_fish) {
 
     @Inject
-    lateinit var viewModelFactory: FishingViewModelFactory
+    lateinit var viewModelFactory: FishViewModelFactory
 
-    private val viewModel: FishingViewModel by viewModels { viewModelFactory }
+    private val viewModel: FishViewModel by viewModels { viewModelFactory }
 
-    private val binding by viewBinding(FragmentFishingBinding::bind)
+    private val binding by viewBinding(FragmentFishBinding::bind)
 
     private val fishAdapter = FishAdapter {
         FishResultFragment.show(childFragmentManager, it.id)
@@ -77,16 +77,11 @@ class FishingFragment : Fragment(R.layout.fragment_fishing) {
     private fun initializeRecyclerView() {
         binding.recyclerView.run {
             adapter = fishAdapter
-
-            val gridlayoutManager = GridLayoutManager(
-                activity, MAX_SPAN_COUNT
-            ).apply {
+            layoutManager = GridLayoutManager(activity, MAX_SPAN_COUNT).apply {
                 this.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int) = FISH_SPAN_COUNT
                 }
             }
-
-            layoutManager = gridlayoutManager
         }
     }
 

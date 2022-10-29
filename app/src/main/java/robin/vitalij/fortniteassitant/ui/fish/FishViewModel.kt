@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.fishing
+package robin.vitalij.fortniteassitant.ui.fish
 
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
@@ -11,7 +11,7 @@ import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.repository.FishRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 
-class FishingViewModel(
+class FishViewModel(
     private val fishRepository: FishRepository
 ) : BaseViewModel() {
 

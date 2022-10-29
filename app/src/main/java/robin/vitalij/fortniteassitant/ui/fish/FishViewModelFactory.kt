@@ -1,19 +1,19 @@
-package robin.vitalij.fortniteassitant.ui.fishing
+package robin.vitalij.fortniteassitant.ui.fish
 
 import robin.vitalij.fortniteassitant.repository.FishRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
 import javax.inject.Inject
 
-class FishingViewModelFactory @Inject constructor(
+class FishViewModelFactory @Inject constructor(
     private val fishRepository: FishRepository
-) : BaseViewModelFactory<FishingViewModel>(FishingViewModel::class.java) {
+) : BaseViewModelFactory<FishViewModel>(FishViewModel::class.java) {
 
-    private var viewModel: FishingViewModel? = null
+    private var viewModel: FishViewModel? = null
 
-    override fun createViewModel(): FishingViewModel {
+    override fun createViewModel(): FishViewModel {
         return viewModel ?: run {
             val model =
-                FishingViewModel(fishRepository)
+                FishViewModel(fishRepository)
             viewModel = model
             return model
         }

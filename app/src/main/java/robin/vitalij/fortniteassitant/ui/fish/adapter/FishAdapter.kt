@@ -1,13 +1,10 @@
-package robin.vitalij.fortniteassitant.ui.fishing.adapter
+package robin.vitalij.fortniteassitant.ui.fish.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.db.entity.BannerEntity
+import robin.vitalij.fortniteassitant.databinding.ItemFishBinding
 import robin.vitalij.fortniteassitant.db.entity.FishEntity
-import robin.vitalij.fortniteassitant.db.entity.WeaponEntity
 
 class FishAdapter(
     private val onClick: (fishEntity: FishEntity) -> Unit
@@ -24,9 +21,8 @@ class FishAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = FishHolder(
-        DataBindingUtil.inflate(
+        ItemFishBinding.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_fish,
             parent,
             false
         )

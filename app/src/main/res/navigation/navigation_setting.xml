@@ -87,7 +87,7 @@
         android:label="@string/weapons" />
     <fragment
         android:id="@+id/navigation_fish"
-        android:name="robin.vitalij.fortniteassitant.ui.fishing.FishingFragment"
+        android:name="robin.vitalij.fortniteassitant.ui.fish.FishFragment"
         android:label="@string/fishing" >
         <action
             android:id="@+id/action_navigation_fish_to_fishStatsFragment"
