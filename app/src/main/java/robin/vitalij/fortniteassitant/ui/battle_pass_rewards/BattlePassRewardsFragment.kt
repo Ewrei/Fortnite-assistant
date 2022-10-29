@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.battlepassrewards
+package robin.vitalij.fortniteassitant.ui.battle_pass_rewards
 
 import android.content.Context
 import android.graphics.Color
@@ -20,7 +20,7 @@ import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.databinding.FragmentBattlePassRewardsBinding
 import robin.vitalij.fortniteassitant.model.battle_pass_reward.SeasonModel
 import robin.vitalij.fortniteassitant.model.enums.BattlePassSortedType
-import robin.vitalij.fortniteassitant.ui.battlepassrewards.adapter.BattlesPassRewardsAdapter
+import robin.vitalij.fortniteassitant.ui.battle_pass_rewards.adapter.BattlesPassRewardsAdapter
 import robin.vitalij.fortniteassitant.ui.bottomsheet.battlepassrewards.BattlePassRewardsResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.utils.view.CustomTypeFaceSpan
@@ -117,7 +117,7 @@ class BattlePassRewardsFragment : BaseFragment() {
             }
             popup.show()
 
-            val menu: Menu = popup.getMenu()
+            val menu: Menu = popup.menu
             for (i in 0 until menu.size()) {
                 val mi = menu.getItem(i)
                 applyFontToMenuItem(mi)
@@ -173,5 +173,7 @@ class BattlePassRewardsFragment : BaseFragment() {
     companion object {
         private const val MAX_SPAN_COUNT = 2
         private const val BATTLES_PASS_REWARDS_SPAN_COUNT = 1
+
     }
+
 }

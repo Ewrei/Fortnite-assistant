@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.battlepassrewards
+package robin.vitalij.fortniteassitant.ui.battle_pass_rewards
 
 import robin.vitalij.fortniteassitant.repository.network.BattlesPassRewardRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
@@ -12,8 +12,7 @@ class BattlePassRewardsViewModelFactory @Inject constructor(
 
     override fun createViewModel(): BattlePassRewardsViewModel {
         return viewModel ?: run {
-            val model =
-                BattlePassRewardsViewModel(battlesPassRewardRepository)
+            val model = BattlePassRewardsViewModel(battlesPassRewardRepository)
             viewModel = model
             return model
         }

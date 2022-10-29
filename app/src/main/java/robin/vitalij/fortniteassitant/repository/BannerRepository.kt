@@ -26,16 +26,18 @@ class BannerRepository @Inject constructor(
 ) {
 
     fun getBanners(): Flow<LoadingState<List<BannerEntity>>> {
-        return if (preferenceManager.getBannerDataLastUpdate() == DEFAULT_DATE_UPDATE
-            || preferenceManager.getBannerDataLastUpdate() < (Date().time - TimeUnit.DAYS.toMillis(
-                THIRTY_DAY
-            ))
-        ) {
+        return if (isNeedUpdateFromServer()) {
             getServerBanners()
         } else {
             getLocalBanners()
         }
     }
+
+    private fun isNeedUpdateFromServer(): Boolean =
+        preferenceManager.getBannerDataLastUpdate() == DEFAULT_DATE_UPDATE
+                || preferenceManager.getBannerDataLastUpdate() < (Date().time - TimeUnit.DAYS.toMillis(
+            THIRTY_DAY
+        ))
 
     private fun getServerBanners(): Flow<LoadingState<List<BannerEntity>>> = flow {
         emit(LoadingState.Loading)

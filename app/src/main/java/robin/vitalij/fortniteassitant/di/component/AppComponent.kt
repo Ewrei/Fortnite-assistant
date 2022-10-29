@@ -8,7 +8,7 @@ import robin.vitalij.fortniteassitant.di.module.RepositoryModule
 import robin.vitalij.fortniteassitant.ui.achiviements.AchievementsFragment
 import robin.vitalij.fortniteassitant.ui.ads_gift_fever.BasicRulesFragment
 import robin.vitalij.fortniteassitant.ui.banners.BannersFragment
-import robin.vitalij.fortniteassitant.ui.battlepassrewards.BattlePassRewardsFragment
+import robin.vitalij.fortniteassitant.ui.battle_pass_rewards.BattlePassRewardsFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.banner.BannerResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.battlepassrewards.BattlePassRewardsResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFragment

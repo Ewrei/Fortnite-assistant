@@ -12,9 +12,12 @@ class CosmeticsNewAdapter(
 
     private val items = mutableListOf<CosmeticsNewEntity>()
 
-    fun setData(data: List<CosmeticsNewEntity>) {
-        items.clear()
-        items.addAll(data)
+    fun updateData(data: List<CosmeticsNewEntity>) {
+        if (items != data) {
+            items.clear()
+            items.addAll(data)
+            notifyDataSetChanged()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CosmeticsNewHolder(

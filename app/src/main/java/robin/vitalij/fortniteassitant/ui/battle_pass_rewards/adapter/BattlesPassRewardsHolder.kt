@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.battlepassrewards.adapter
+package robin.vitalij.fortniteassitant.ui.battle_pass_rewards.adapter
 
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView

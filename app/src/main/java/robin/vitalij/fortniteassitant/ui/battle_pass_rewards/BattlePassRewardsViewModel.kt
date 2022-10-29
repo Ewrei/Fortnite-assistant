@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.battlepassrewards
+package robin.vitalij.fortniteassitant.ui.battle_pass_rewards
 
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers

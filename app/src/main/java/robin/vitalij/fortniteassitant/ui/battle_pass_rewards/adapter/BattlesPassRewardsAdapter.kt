@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.battlepassrewards.adapter
+package robin.vitalij.fortniteassitant.ui.battle_pass_rewards.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -38,4 +38,5 @@ class BattlesPassRewardsAdapter(
     override fun getItemCount() = items.size
 
     override fun getItemId(position: Int) = items[position].id
+
 }

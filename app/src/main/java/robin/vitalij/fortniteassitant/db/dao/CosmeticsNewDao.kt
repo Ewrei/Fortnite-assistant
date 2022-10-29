@@ -12,7 +12,7 @@ import robin.vitalij.fortniteassitant.db.entity.CosmeticsNewEntity
 interface CosmeticsNewDao {
 
     @Query("SELECT * FROM CosmeticsNew")
-    fun getCosmeticsNew(): Single<List<CosmeticsNewEntity>>
+    suspend fun getCosmeticsNew(): List<CosmeticsNewEntity>
 
     @Query("SELECT * FROM CosmeticsNew WHERE id = :id")
     fun getCosmetic(id: String): Single<CosmeticsNewEntity>

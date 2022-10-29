@@ -79,7 +79,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_battles_pass_rewards"
-        android:name="robin.vitalij.fortniteassitant.ui.battlepassrewards.BattlePassRewardsFragment"
+        android:name="robin.vitalij.fortniteassitant.ui.battle_pass_rewards.BattlePassRewardsFragment"
         android:label="@string/battle_pass_rewards" />
     <fragment
         android:id="@+id/navigation_weapon"

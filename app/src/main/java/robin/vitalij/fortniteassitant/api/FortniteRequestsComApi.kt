@@ -32,7 +32,7 @@ interface FortniteRequestsComApi {
     ): Single<PlayerStatsResponse>
 
     @GET("/$VERSION_SECOND_PATCH/$COSMETICS_PATCH/$BR_PATCH/$NEW_PATCH")
-    fun getCosmeticsNew(@Query(LANGUAGE_QUERY) language: String): Single<CosmeticsNewResponse>
+    suspend fun getCosmeticsNew(@Query(LANGUAGE_QUERY) language: String): CosmeticsNewResponse
 
     @GET("/$VERSION_SECOND_PATCH/$COSMETICS_PATCH/$BR_PATCH")
     suspend fun getCosmetics(@Query(LANGUAGE_QUERY) language: String): CosmeticsResponse
