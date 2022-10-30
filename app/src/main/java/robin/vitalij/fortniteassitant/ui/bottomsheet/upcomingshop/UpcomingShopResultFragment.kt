@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.bottom_sheet_upcoming_shop.*
 import robin.vitalij.fortniteassitant.FortniteApplication
@@ -17,6 +15,7 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadBackgroundRarity
 import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
 import robin.vitalij.fortniteassitant.common.binding.TextViewBinding.setValueText
+import robin.vitalij.fortniteassitant.common.extensions.initBottomSheetInternal
 import robin.vitalij.fortniteassitant.databinding.BottomSheetUpcomingShopBinding
 import robin.vitalij.fortniteassitant.model.network.shop.ItemShopUpcoming
 import javax.inject.Inject
@@ -34,16 +33,7 @@ class UpcomingShopResultFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dialog?.setOnShowListener { dialog ->
-            val d = dialog as BottomSheetDialog
-            val bottomSheetInternal =
-                d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-            bottomSheetInternal?.setBackgroundResource(R.drawable.bottomsheet_container_background)
-            bottomSheetInternal?.let {
-                BottomSheetBehavior.from(it).state = BottomSheetBehavior.STATE_EXPANDED
-                BottomSheetBehavior.from(it).skipCollapsed = true
-            }
-        }
+        dialog?.initBottomSheetInternal()
         val dataBinding =
             DataBindingUtil.inflate<BottomSheetUpcomingShopBinding>(
                 inflater,

@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.bottom_sheet_current_shop.*
 import robin.vitalij.fortniteassitant.FortniteApplication
@@ -18,11 +16,10 @@ import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadBackgr
 import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
 import robin.vitalij.fortniteassitant.common.binding.TextViewBinding.setValueText
 import robin.vitalij.fortniteassitant.common.extensions.getScreenWidth
+import robin.vitalij.fortniteassitant.common.extensions.initBottomSheetInternal
 import robin.vitalij.fortniteassitant.common.extensions.setVisibility
 import robin.vitalij.fortniteassitant.databinding.BottomSheetCurrentShopBinding
 import robin.vitalij.fortniteassitant.model.network.shop.GrantedModel
-import robin.vitalij.fortniteassitant.model.network.shop.OtherItemsDetails
-import robin.vitalij.fortniteassitant.model.network.shop.ShopItem
 import robin.vitalij.fortniteassitant.model.network.shop.ShopNewItem
 import robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.adapter.OtherItemsDetailsAdapter
 import javax.inject.Inject
@@ -41,16 +38,7 @@ class CurrentShopResultFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        dialog?.setOnShowListener { dialog ->
-            val d = dialog as BottomSheetDialog
-            val bottomSheetInternal =
-                d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-            bottomSheetInternal?.setBackgroundResource(R.drawable.bottomsheet_container_background)
-            bottomSheetInternal?.let {
-                BottomSheetBehavior.from(it).state = BottomSheetBehavior.STATE_EXPANDED
-                BottomSheetBehavior.from(it).skipCollapsed = true
-            }
-        }
+        dialog?.initBottomSheetInternal()
         val dataBinding =
             DataBindingUtil.inflate<BottomSheetCurrentShopBinding>(
                 inflater,

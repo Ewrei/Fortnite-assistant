@@ -9,16 +9,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.bottom_sheet_top.*
-import kotlinx.android.synthetic.main.fragment_adapter_comparion.*
 import kotlinx.android.synthetic.main.layout_type_stats_group.*
-import kotlinx.android.synthetic.main.recycler_view.*
 import kotlinx.android.synthetic.main.recycler_view.recyclerView
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.initBottomSheetInternal
 import robin.vitalij.fortniteassitant.databinding.BottomSheetTopBinding
 import robin.vitalij.fortniteassitant.interfaces.TopResultCallback
 import robin.vitalij.fortniteassitant.model.TopFullModel
@@ -49,16 +46,7 @@ class TopResultFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        dialog?.setOnShowListener { dialog ->
-            val d = dialog as BottomSheetDialog
-            val bottomSheetInternal =
-                d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-            bottomSheetInternal?.setBackgroundResource(R.drawable.bottomsheet_container_background)
-            bottomSheetInternal?.let {
-                BottomSheetBehavior.from(it).state = BottomSheetBehavior.STATE_EXPANDED
-                BottomSheetBehavior.from(it).skipCollapsed = true
-            }
-        }
+        dialog?.initBottomSheetInternal()
         val dataBinding =
             DataBindingUtil.inflate<BottomSheetTopBinding>(
                 inflater,

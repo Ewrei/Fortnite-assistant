@@ -8,15 +8,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.afterTextChanged
-import robin.vitalij.fortniteassitant.common.extensions.closeKeyboard
-import robin.vitalij.fortniteassitant.common.extensions.setClickableButton
-import robin.vitalij.fortniteassitant.common.extensions.setOnMultiEditorActionListener
+import robin.vitalij.fortniteassitant.common.extensions.*
 import robin.vitalij.fortniteassitant.databinding.BottomInputAccoountIdBinding
 import robin.vitalij.fortniteassitant.interfaces.InputAccountIdCallback
 import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFragment
@@ -37,16 +32,7 @@ class InputAccountIdResultFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        dialog?.setOnShowListener { dialog ->
-            val d = dialog as BottomSheetDialog
-            val bottomSheetInternal =
-                d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-            bottomSheetInternal?.setBackgroundResource(R.drawable.bottomsheet_container_background)
-            bottomSheetInternal?.let {
-                BottomSheetBehavior.from(it).state = BottomSheetBehavior.STATE_EXPANDED
-                BottomSheetBehavior.from(it).skipCollapsed = true
-            }
-        }
+        dialog?.initBottomSheetInternal()
         dataBinding =
             DataBindingUtil.inflate(inflater, R.layout.bottom_input_accoount_id, container, false)
         dataBinding.lifecycleOwner = this@InputAccountIdResultFragment
