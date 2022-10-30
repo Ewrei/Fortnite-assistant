@@ -14,7 +14,7 @@ interface BannerDao {
     suspend fun getBanners(): List<BannerEntity>
 
     @Query("SELECT * FROM Banner WHERE id = :id")
-    fun getBanner(id: String): Single<BannerEntity>
+    suspend fun getBanner(id: String): BannerEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertBanners(list: List<BannerEntity>)

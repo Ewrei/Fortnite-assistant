@@ -1,25 +1,26 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.banner.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.databinding.ItemBannerResultBinding
 import robin.vitalij.fortniteassitant.db.entity.BannerEntity
 
 class BannerResultAdapter : RecyclerView.Adapter<BannerResultHolder>() {
 
     private val items = mutableListOf<BannerEntity>()
 
-    fun setData(data: List<BannerEntity>) {
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateData(data: List<BannerEntity>) {
         items.clear()
         items.addAll(data)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = BannerResultHolder(
-        DataBindingUtil.inflate(
+        ItemBannerResultBinding.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_banner_result,
             parent,
             false
         )

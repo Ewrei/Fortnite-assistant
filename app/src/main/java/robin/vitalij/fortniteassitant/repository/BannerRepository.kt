@@ -25,6 +25,13 @@ class BannerRepository @Inject constructor(
     private val preferenceManager: PreferenceManager
 ) {
 
+    fun getBannerId(bannerId: String): Flow<LoadingState<List<BannerEntity>>> = flow {
+        emit(LoadingState.Loading)
+        kotlin.runCatching { bannerDao.getBanner(bannerId) }
+            .onSuccess { emit(LoadingState.Success(mutableListOf(it))) }
+            .onFailure { emit(LoadingState.Error(ErrorModelListItem.ErrorItem(it.getErrorModel()))) }
+    }.flowOn(Dispatchers.IO)
+
     fun getBanners(): Flow<LoadingState<List<BannerEntity>>> {
         return if (isNeedUpdateFromServer()) {
             getServerBanners()
@@ -60,11 +67,10 @@ class BannerRepository @Inject constructor(
             .onFailure { emit(LoadingState.Error(ErrorModelListItem.ErrorItem(it.getErrorModel()))) }
     }.flowOn(Dispatchers.IO)
 
-    fun getBannerId(bannerId: String) = bannerDao.getBanner(bannerId)
-
     companion object {
         private const val THIRTY_DAY = 30L
         private const val DEFAULT_DATE_UPDATE = 0L
+
     }
 
 }

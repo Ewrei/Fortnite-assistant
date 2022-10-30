@@ -67,4 +67,6 @@
     <dimen name="cosmetic_image_size">250dp</dimen>
 
     <dimen name="vehicles_image_size">100dp</dimen>
+
+    <dimen name="image_size_in_bottom_sheet">300dp</dimen>
 </resources>
