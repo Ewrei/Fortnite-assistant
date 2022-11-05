@@ -41,7 +41,7 @@ class HomeStatisticsViewHolder(
             }, openParameterList = {
                 onHomeAction(HomeActions.OpenParameterList)
             })
-            (adapter as HomeBodyStatsAdapter).setData(list)
+            (adapter as HomeBodyStatsAdapter).updateData(list)
             layoutManager = LinearLayoutManager(context)
         }
     }

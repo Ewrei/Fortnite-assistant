@@ -14,11 +14,6 @@ class HomeBodyStatsAdapter(
 
     private val items = mutableListOf<HomeBodyStatsListItem>()
 
-    fun setData(data: List<HomeBodyStatsListItem>) {
-        items.clear()
-        items.addAll(data)
-    }
-
     @SuppressLint("NotifyDataSetChanged")
     fun updateData(data: List<HomeBodyStatsListItem>) {
         if (items != data) {

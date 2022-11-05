@@ -2,74 +2,100 @@ package robin.vitalij.fortniteassitant.ui.details.statistics
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.recycler_view.*
+import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
+import robin.vitalij.fortniteassitant.databinding.FragmentHomeBinding
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsAdapter
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsListItem
 import javax.inject.Inject
 
-class DetailsStatisticsFragment : BaseFragment() {
+class DetailsStatisticsFragment : Fragment(R.layout.fragment_home) {
 
     @Inject
     lateinit var viewModelFactory: DetailsStatisticsViewModelFactory
 
-    private lateinit var viewModel: DetailsStatisticsViewModel
+    private val viewModel: DetailsStatisticsViewModel by viewModels { viewModelFactory }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_home, container, false)
+    private val binding by viewBinding(FragmentHomeBinding::bind)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(DetailsStatisticsViewModel::class.java).apply {
-                observeToProgressBar(this@DetailsStatisticsFragment)
-                observeToError(this@DetailsStatisticsFragment)
-            }
-    }
+    private val homeAdapter = HomeBodyStatsAdapter({
+        //do nothing
+    }, {
+        //do nothing
+    })
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         FortniteApplication.appComponent.inject(this)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
-            it.let(::initAdapter)
-        }
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         arguments?.let {
-            viewModel.loadData(
-                it.getSerializable(ARG_BATTLES_TYPE) as BattlesType,
-                it.getSerializable(ARG_GAME_TYPE) as GameType
-            )
+            viewModel.battlesType = it.getSerializable(ARG_BATTLES_TYPE) as BattlesType
+            viewModel.gameType = it.getSerializable(ARG_GAME_TYPE) as GameType
         }
     }
 
-    private fun initAdapter(list: List<HomeBodyStatsListItem>) {
-        recyclerView.run {
-            adapter = HomeBodyStatsAdapter({
-                //do nothing
-            }, {
-                //do nothing
-            })
-            (adapter as HomeBodyStatsAdapter).setData(list)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initializeRecyclerView()
+        setListener()
+
+        lifecycleScope.launch {
+            viewModel.detailsStatisticsResult.collect {
+                handleDetailsStatisticsResult(it)
+            }
+        }
+
+        viewModel.loadData()
+    }
+
+    private fun initializeRecyclerView() {
+        binding.recyclerViewInclude.recyclerView.run {
+            adapter = homeAdapter
             layoutManager = LinearLayoutManager(context)
+        }
+    }
+
+    private fun setListener() {
+        binding.errorViewInclude.errorResolveButton.setOnClickListener {
+            viewModel.loadData()
+        }
+    }
+
+    private fun handleDetailsStatisticsResult(result: LoadingState<List<HomeBodyStatsListItem>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
+            }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                homeAdapter.updateData(result.data)
+            }
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                }
+            }
         }
     }
 

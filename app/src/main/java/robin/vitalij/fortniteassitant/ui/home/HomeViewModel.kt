@@ -1,32 +1,44 @@
 package robin.vitalij.fortniteassitant.ui.home
 
-import androidx.lifecycle.MutableLiveData
-import io.reactivex.android.schedulers.AndroidSchedulers
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
+import robin.vitalij.fortniteassitant.model.FullHomeModel
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.repository.db.HomeRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
-import robin.vitalij.fortniteassitant.ui.home.adapter.HomeListItem
 
 class HomeViewModel(
     private val homeRepository: HomeRepository,
     private val preferenceManager: PreferenceManager
-) : BaseViewModel() {
+) : ViewModel() {
 
-    val mutableLiveData = MutableLiveData<List<HomeListItem>>()
+    private val detailsStatisticsState =
+        MutableStateFlow<LoadingState<FullHomeModel>>(LoadingState.Loading)
+
+    val detailsStatisticsResult: StateFlow<LoadingState<FullHomeModel>> = detailsStatisticsState
 
     var detailsStatistics: ArrayList<DetailStatisticsModel> = arrayListOf()
 
+    private var job: Job? = null
+
     fun loadData() {
-        homeRepository
-            .loadData(preferenceManager.getPlayerId())
-            .observeOn(AndroidSchedulers.mainThread())
-            .let(::setupProgressShow)
-            .subscribe({
-                detailsStatistics.clear()
-                detailsStatistics.addAll(it.details)
-                mutableLiveData.value = it.homes
-            }, error)
-            .let(disposables::add)
+        job?.cancel()
+        job = viewModelScope.launch {
+            homeRepository.loadData(preferenceManager.getPlayerId()).collect { loadingState ->
+                if(loadingState is LoadingState.Success) {
+                    detailsStatistics.clear()
+                    detailsStatistics.addAll(loadingState.data.details)
+                }
+                detailsStatisticsState.value = loadingState
+            }
+        }
     }
+
 }
