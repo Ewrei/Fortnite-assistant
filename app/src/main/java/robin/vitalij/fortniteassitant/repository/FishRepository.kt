@@ -1,6 +1,5 @@
 package robin.vitalij.fortniteassitant.repository
 
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -58,8 +57,12 @@ class FishRepository @Inject constructor(
             .onFailure { emit(LoadingState.Error(ErrorModelListItem.ErrorItem(it.getErrorModel()))) }
     }.flowOn(Dispatchers.IO)
 
-    fun loadData(fishId: String) = fishDao.getFish(fishId)
-        .subscribeOn(Schedulers.io())
+    fun getFish(fishId: String): Flow<LoadingState<FishEntity>> = flow {
+        emit(LoadingState.Loading)
+        kotlin.runCatching { fishDao.getFish(fishId) }
+            .onSuccess { emit(LoadingState.Success(it)) }
+            .onFailure { emit(LoadingState.Error(ErrorModelListItem.ErrorItem(it.getErrorModel()))) }
+    }.flowOn(Dispatchers.IO)
 
     companion object {
         private const val ONE_MOUNT_DAY = 31L
