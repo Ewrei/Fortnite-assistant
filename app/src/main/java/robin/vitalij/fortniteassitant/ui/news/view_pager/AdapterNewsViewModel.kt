@@ -1,5 +1,5 @@
 package robin.vitalij.fortniteassitant.ui.news.view_pager
 
-import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
+import androidx.lifecycle.ViewModel
 
-class AdapterNewsViewModel : BaseViewModel()
+class AdapterNewsViewModel : ViewModel()

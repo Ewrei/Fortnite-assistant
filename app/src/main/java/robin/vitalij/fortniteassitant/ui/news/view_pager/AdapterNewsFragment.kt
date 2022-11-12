@@ -17,8 +17,6 @@ import robin.vitalij.fortniteassitant.ui.common.BaseViewPagerAdapter
 import robin.vitalij.fortniteassitant.ui.news.fragment.NewsFragment
 import javax.inject.Inject
 
-private const val DEFAULT_LAST_TAB_VALUE = Integer.MAX_VALUE
-
 class AdapterNewsFragment : Fragment(R.layout.fragment_adapter_shop) {
 
     @Inject
@@ -91,7 +89,7 @@ class AdapterNewsFragment : Fragment(R.layout.fragment_adapter_shop) {
     }
 
     companion object {
-
+        private const val DEFAULT_LAST_TAB_VALUE = Integer.MAX_VALUE
         private const val OFF_SCREEN_PAGE_LIMIT = 3
 
     }

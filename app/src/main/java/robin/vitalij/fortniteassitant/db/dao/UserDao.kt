@@ -16,16 +16,10 @@ interface UserDao {
     fun getUserFull(playerId: String): Maybe<User>
 
     @Query("SELECT * FROM User WHERE player_id = :playerId order by playerSessionId desc limit 1")
-    fun getFlowableUserEntity(playerId: String): Flowable<UserEntity>
-
-    @Query("SELECT * FROM User WHERE player_id = :playerId order by playerSessionId desc limit 1")
     suspend fun getUserEntity(playerId: String): UserEntity
 
     @Query("SELECT * FROM User WHERE player_id = :playerId order by playerSessionId desc limit 2")
     suspend fun getLastTwoUserEntities(playerId: String): List<UserEntity>
-
-    @Query("SELECT * FROM User WHERE player_id = :playerId order by playerSessionId desc limit 2")
-    fun getLastTwoUserEntitiesFlowable(playerId: String): Flowable<List<UserEntity>>
 
     @Query("SELECT * FROM PlayerSession WHERE accountId = :playerId ORDER BY playerSessionId DESC")
     suspend fun getUserHistory(playerId: String): List<UserHistory>

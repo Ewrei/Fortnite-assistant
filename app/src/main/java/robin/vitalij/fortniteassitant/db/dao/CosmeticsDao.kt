@@ -18,7 +18,7 @@ interface CosmeticsDao {
     suspend fun getCosmetics(type: String): List<CosmeticsEntity>
 
     @Query("SELECT * FROM Cosmetics WHERE id = :id")
-    fun getCosmetic(id: String): Single<CosmeticsEntity>
+    suspend fun getCosmetic(id: String): CosmeticsEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCosmetics(list: List<CosmeticsEntity>)

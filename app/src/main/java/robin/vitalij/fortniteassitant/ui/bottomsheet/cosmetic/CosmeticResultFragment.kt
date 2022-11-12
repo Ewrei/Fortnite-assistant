@@ -1,19 +1,27 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic
 
+import android.content.Context
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.common.extensions.getScreenWidth
 import robin.vitalij.fortniteassitant.common.extensions.initBottomSheetInternal
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
 import robin.vitalij.fortniteassitant.databinding.BottomSheetMvvmBinding
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter.CosmeticsListItem
 import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter.CosmeticsResultAdapter
 import javax.inject.Inject
@@ -26,38 +34,45 @@ class CosmeticResultFragment : BottomSheetDialogFragment() {
     @Inject
     lateinit var viewModelFactory: CosmeticResultViewModelFactory
 
-    private lateinit var viewModel: CosmeticResultViewModel
+    private val viewModel: CosmeticResultViewModel by viewModels { viewModelFactory }
 
-    private lateinit var binding: BottomSheetMvvmBinding
+    private var _binding: BottomSheetMvvmBinding? = null
+
+    private val binding get() = _binding!!
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        FortniteApplication.appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         dialog?.initBottomSheetInternal()
-        binding = BottomSheetMvvmBinding.inflate(layoutInflater)
+        _binding = BottomSheetMvvmBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        FortniteApplication.appComponent.inject(this)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(CosmeticResultViewModel::class.java)
+        arguments?.let {
+            viewModel.cosmeticsId = it.getString(ARG_COSMETIC_ID) ?: ""
+            viewModel.isCosmeticNew = it.getBoolean(ARG_IS_COSMETIC_NEW, false)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.let {
-            viewModel.loadData(
-                it.getString(ARG_COSMETIC_ID) ?: "",
-                it.getBoolean(ARG_IS_COSMETIC_NEW, false)
-            )
+        setListener()
+
+        lifecycleScope.launch {
+            viewModel.cosmeticsResult.collect {
+                handleCosmeticsResult(it)
+            }
         }
 
-        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
-            it.let(::initAdapter)
-        }
+        viewModel.loadData()
     }
 
     override fun onStart() {
@@ -67,6 +82,38 @@ class CosmeticResultFragment : BottomSheetDialogFragment() {
         val sheetContainer = requireView().parent as? ViewGroup ?: return
         sheetContainer.layoutParams.height = (displayMetrics.heightPixels - BOTTOM_SHEET_MARGIN_TOP)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun setListener() {
+        binding.errorViewInclude.errorResolveButton.setOnClickListener {
+            viewModel.loadData()
+        }
+    }
+
+    private fun handleCosmeticsResult(result: LoadingState<List<CosmeticsListItem>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
+            }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                result.data.let(::initAdapter)
+            }
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                }
+            }
+        }
+    }
+
 
     private fun initAdapter(list: List<CosmeticsListItem>) {
         binding.recyclerViewInclude.recyclerView.run {
