@@ -89,7 +89,7 @@ class AdapterChartsTypeFragment : BaseFragment(), ChartsTypeCallback {
         gameType: GameType,
     ) {
         findNavController().navigate(R.id.navigation_charts, Bundle().apply {
-            putSerializable(ChartsFragment.CHARTS_TYPE, chartsType)
+            putSerializable(ChartsFragment.ARG_CHARTS_TYPE, chartsType)
             putSerializable(BATTLES_TYPE, battlesType)
             putSerializable(GAME_TYPE, gameType)
         })

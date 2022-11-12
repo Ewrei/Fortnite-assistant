@@ -40,7 +40,7 @@ class HomeRepository @Inject constructor(
 
     private fun getUserHistory(playerId: String): Flow<LoadingState<List<UserHistory>>> = flow {
         emit(LoadingState.Loading)
-        kotlin.runCatching { userDao.getUserHistoryNewVersion(playerId) }
+        kotlin.runCatching { userDao.getUserHistory(playerId) }
             .onSuccess { emit(LoadingState.Success(it)) }
             .onFailure { emit(LoadingState.Error(ErrorModelListItem.ErrorItem(it.getErrorModel()))) }
     }.flowOn(Dispatchers.IO)

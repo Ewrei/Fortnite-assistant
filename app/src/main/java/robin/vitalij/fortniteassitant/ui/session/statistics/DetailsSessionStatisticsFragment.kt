@@ -85,8 +85,8 @@ class DetailsSessionStatisticsFragment : BaseFragment() {
     companion object {
         private const val ARG_BATTLES_TYPE = "arg_battles_type"
         private const val ARG_GAME_TYPE = "arg_game_type"
-        const val ARG_SESSION_ID = "arg_session_id"
-        const val ARG_SESSION_LAST_ID = "arg_session_last_id"
+        private const val ARG_SESSION_ID = "arg_session_id"
+        private const val ARG_SESSION_LAST_ID = "arg_session_last_id"
 
         fun newInstance(
             battlesType: BattlesType,
