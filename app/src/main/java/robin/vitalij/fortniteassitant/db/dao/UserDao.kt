@@ -27,6 +27,9 @@ interface UserDao {
     @Query("SELECT * FROM User WHERE playerSessionId = :playerSessionId")
     fun getUserEntitySessionId(playerSessionId: Long): Single<UserEntity>
 
+    @Query("SELECT * FROM User WHERE playerSessionId = :playerSessionId")
+    suspend fun getUserEntitySessionIdNewVersion(playerSessionId: Long): UserEntity
+
     @Query("SELECT *, MAX(alloverallmatches) FROM User GROUP BY player_id")
     fun getUsers(): Flowable<List<UserEntity>>
 

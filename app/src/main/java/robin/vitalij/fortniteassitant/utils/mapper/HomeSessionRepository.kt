@@ -1,11 +1,16 @@
 package robin.vitalij.fortniteassitant.utils.mapper
 
-import io.reactivex.Single
-import io.reactivex.functions.BiFunction
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import robin.vitalij.fortniteassitant.common.extensions.differenceUser
+import robin.vitalij.fortniteassitant.common.extensions.getErrorModel
 import robin.vitalij.fortniteassitant.db.dao.UserDao
 import robin.vitalij.fortniteassitant.db.entity.UserEntity
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsListItem
@@ -17,34 +22,34 @@ class HomeSessionRepository @Inject constructor(
     private val resourceProvider: ResourceProvider
 ) {
 
-    fun loadData(
+    fun getDetailsStatistics(
         battlesType: BattlesType,
         gameType: GameType,
         sessionId: Long,
         sessionLastId: Long
-    ): Single<List<HomeBodyStatsListItem>> {
-        val sessionMap = userDao.getUserEntitySessionId(sessionId)
-        val lastSessionMap = userDao.getUserEntitySessionId(sessionLastId)
-
-        return Single.zip(sessionMap, lastSessionMap, handleResult()).subscribeOn(Schedulers.io())
-            .flatMap {
-                return@flatMap Single.just(
+    ): Flow<LoadingState<List<HomeBodyStatsListItem>>> =
+        getSessionId(sessionId).combine(getSessionId(sessionLastId)) { session, lastSession ->
+            if (session is LoadingState.Success && lastSession is LoadingState.Success) {
+                return@combine LoadingState.Success(
                     DetailsStatisticsMapper(
                         resourceProvider,
                         battlesType,
                         gameType
-                    ).transform(arrayListOf(it.userEntity.differenceUser(it.userEntityLast)))
+                    ).transform(mutableListOf(session.data.differenceUser(lastSession.data)))
                 )
-            }
-    }
+            } else if (session is LoadingState.Error) {
+                return@combine session
+            } else if (lastSession is LoadingState.Error) {
+                return@combine lastSession
+            } else LoadingState.Loading
 
-    private fun handleResult(): BiFunction<UserEntity, UserEntity, SessionHomeModel> =
-        BiFunction { sessionMap, sessionLastMap ->
-            SessionHomeModel(sessionMap, sessionLastMap)
         }
 
-    data class SessionHomeModel(
-        val userEntity: UserEntity,
-        val userEntityLast: UserEntity
-    )
+    private fun getSessionId(sessionId: Long): Flow<LoadingState<UserEntity>> = flow {
+        emit(LoadingState.Loading)
+        kotlin.runCatching { userDao.getUserEntitySessionIdNewVersion(sessionId) }
+            .onSuccess { emit(LoadingState.Success(it)) }
+            .onFailure { emit(LoadingState.Error(ErrorModelListItem.ErrorItem(it.getErrorModel()))) }
+    }.flowOn(Dispatchers.IO)
+
 }

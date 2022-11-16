@@ -2,31 +2,36 @@ package robin.vitalij.fortniteassitant.ui.session.statistics
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.common.extensions.observeToEmpty
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
 import robin.vitalij.fortniteassitant.databinding.FragmentHomeBinding
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsAdapter
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsListItem
 import javax.inject.Inject
 
-class DetailsSessionStatisticsFragment : BaseFragment() {
+class DetailsSessionStatisticsFragment : Fragment(R.layout.fragment_home) {
 
     @Inject
     lateinit var viewModelFactory: DetailsSessionStatisticsViewModelFactory
 
-    private lateinit var viewModel: DetailsSessionStatisticsViewModel
+    private val viewModel: DetailsSessionStatisticsViewModel by viewModels { viewModelFactory }
 
-    private lateinit var binding: FragmentHomeBinding
+    private val binding by viewBinding(FragmentHomeBinding::bind)
 
     private val homeBodyStatsAdapter = HomeBodyStatsAdapter({
         //do nothing
@@ -34,44 +39,40 @@ class DetailsSessionStatisticsFragment : BaseFragment() {
         //do nothing
     })
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentHomeBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(DetailsSessionStatisticsViewModel::class.java).apply {
-                observeToProgressBar(this@DetailsSessionStatisticsFragment)
-                observeToError(this@DetailsSessionStatisticsFragment)
-                observeToEmpty(this@DetailsSessionStatisticsFragment)
-            }
-    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         FortniteApplication.appComponent.inject(this)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initializeRecyclerView()
-
-        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
-            homeBodyStatsAdapter.updateData(it)
-        }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         arguments?.let {
-            viewModel.loadData(
-                it.getSerializable(ARG_BATTLES_TYPE) as BattlesType,
-                it.getSerializable(ARG_GAME_TYPE) as GameType,
-                it.getLong(ARG_SESSION_ID),
-                it.getLong(ARG_SESSION_LAST_ID)
-            )
+            viewModel.battlesType = it.getSerializable(ARG_BATTLES_TYPE) as BattlesType
+            viewModel.gameType = it.getSerializable(ARG_GAME_TYPE) as GameType
+            viewModel.sessionId = it.getLong(ARG_SESSION_ID)
+            viewModel.sessionLastId = it.getLong(ARG_SESSION_LAST_ID)
+
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setListener()
+        initializeRecyclerView()
+
+        lifecycleScope.launch {
+            viewModel.detailsStatisticsResult.collect {
+                handleDetailsStatisticsResult(it)
+            }
+        }
+
+        viewModel.loadData()
+    }
+
+    private fun setListener() {
+        binding.errorViewInclude.errorResolveButton.setOnClickListener {
+            viewModel.loadData()
         }
     }
 
@@ -79,6 +80,26 @@ class DetailsSessionStatisticsFragment : BaseFragment() {
         binding.recyclerViewInclude.recyclerView.run {
             adapter = homeBodyStatsAdapter
             layoutManager = LinearLayoutManager(context)
+        }
+    }
+
+    private fun handleDetailsStatisticsResult(result: LoadingState<List<HomeBodyStatsListItem>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
+            }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                homeBodyStatsAdapter.updateData(result.data)
+            }
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                }
+            }
         }
     }
 
