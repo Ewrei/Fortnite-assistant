@@ -4,9 +4,7 @@ import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
 import javax.inject.Inject
 
 class AdapterShoppingViewModelFactory @Inject constructor() :
-    BaseViewModelFactory<AdapterShoppingViewModel>(
-        AdapterShoppingViewModel::class.java
-    ) {
+    BaseViewModelFactory<AdapterShoppingViewModel>(AdapterShoppingViewModel::class.java) {
 
     private var viewModel: AdapterShoppingViewModel? = null
 

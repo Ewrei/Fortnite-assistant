@@ -1,5 +1,6 @@
 package robin.vitalij.fortniteassitant.ui.shop.upcoming
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -9,11 +10,10 @@ import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.network.shop.ItemShopUpcoming
 import robin.vitalij.fortniteassitant.repository.network.GetUpcomingShopRepository
-import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 
 class UpcomingShopViewModel(
     private val getUpcomingShopRepository: GetUpcomingShopRepository
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val upcomingShopState =
         MutableStateFlow<LoadingState<List<ItemShopUpcoming>>>(LoadingState.Loading)

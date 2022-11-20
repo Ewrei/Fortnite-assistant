@@ -1,5 +1,6 @@
 package robin.vitalij.fortniteassitant.ui.weapons
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -9,11 +10,10 @@ import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.db.entity.WeaponEntity
 import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.repository.WeaponRepository
-import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 
 class WeaponViewModel(
     private val weaponRepository: WeaponRepository
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val weaponsState =
         MutableStateFlow<LoadingState<List<WeaponEntity>>>(LoadingState.Loading)

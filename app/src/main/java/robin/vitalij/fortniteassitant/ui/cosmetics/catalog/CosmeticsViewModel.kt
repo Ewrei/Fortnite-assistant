@@ -1,5 +1,6 @@
 package robin.vitalij.fortniteassitant.ui.cosmetics.catalog
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,11 +11,10 @@ import robin.vitalij.fortniteassitant.db.entity.CosmeticsEntity
 import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.ShopType
 import robin.vitalij.fortniteassitant.repository.CatalogCosmeticsRepository
-import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 
 class CosmeticsViewModel(
     private val catalogCosmeticsRepository: CatalogCosmeticsRepository
-) : BaseViewModel() {
+) : ViewModel() {
 
     var shopType: ShopType = ShopType.BANNER
 

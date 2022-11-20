@@ -1,5 +1,6 @@
 package robin.vitalij.fortniteassitant.ui.cosmetics
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -9,11 +10,10 @@ import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.ShopType
 import robin.vitalij.fortniteassitant.repository.CatalogCosmeticsRepository
-import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 
 class CatalogCosmeticsViewModel(
     private val catalogCosmeticsRepository: CatalogCosmeticsRepository
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val shopTypesState =
         MutableStateFlow<LoadingState<List<ShopType>>>(LoadingState.Loading)

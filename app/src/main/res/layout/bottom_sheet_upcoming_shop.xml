@@ -1,103 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <data>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/default_margin_double"
+        android:adjustViewBounds="true"
+        android:scaleType="fitStart"
+        tools:srcCompat="@tools:sample/avatars" />
 
-        <import type="android.view.View" />
-
-        <variable
-            name="viewModel"
-            type="robin.vitalij.fortniteassitant.ui.bottomsheet.upcomingshop.UpcomingShopResultViewModel" />
-    </data>
-
-    <LinearLayout
-        android:id="@+id/content_view"
+    <TextView
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginStart="@dimen/default_margin_double"
+        android:layout_marginEnd="@dimen/default_margin_double"
+        android:fontFamily="@font/futura_pt_bold"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        tools:text="name" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin_double"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin_double"
+        android:fontFamily="@font/futura_pt_medium"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/darker_gray"
+        tools:text="description" />
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin_double"
+        android:layout_marginTop="@dimen/default_margin_double">
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="300dp"
-            android:layout_margin="@dimen/default_margin_double"
-            android:layout_gravity="center"
-            android:scaleType="fitStart"
-            android:adjustViewBounds="true"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            app:srcCompat="@drawable/img_v_baks" />
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_margin_double"
-            android:layout_marginEnd="@dimen/default_margin_double"
-            android:fontFamily="@font/futura_pt_bold"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:textStyle="bold"
-            tools:text="name" />
-
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin_double"
-            android:layout_marginTop="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin_double"
             android:fontFamily="@font/futura_pt_medium"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textColor="@android:color/darker_gray"
-            tools:text="description" />
+            tools:text="price" />
 
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin_double"
-            android:layout_marginTop="@dimen/default_margin_double">
+    </TableRow>
 
-            <ImageView
-                android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size"
-                app:srcCompat="@drawable/img_v_baks" />
+    <TextView
+        android:id="@+id/addedDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin_double"
+        android:layout_marginTop="@dimen/default_margin_x4"
+        android:layout_marginEnd="@dimen/default_margin_double"
+        android:fontFamily="@font/futura_pt_bold"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        tools:text="addedDate" />
 
-            <TextView
-                android:id="@+id/price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin_double"
-                android:layout_marginEnd="@dimen/default_margin_double"
-                android:fontFamily="@font/futura_pt_medium"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                tools:text="price" />
+    <TextView
+        android:id="@+id/addVersion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin_double"
+        android:layout_marginEnd="@dimen/default_margin_double"
+        android:fontFamily="@font/futura_pt_medium"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/darker_gray"
+        app:fontFamily="@font/futura_pt_medium"
+        tools:text="addedDate" />
 
-        </TableRow>
-
-        <TextView
-            android:id="@+id/addedDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin_double"
-            android:layout_marginEnd="@dimen/default_margin_double"
-            android:layout_marginTop="@dimen/default_margin_x4"
-            android:fontFamily="@font/futura_pt_bold"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:textStyle="bold"
-            tools:text="addedDate" />
-
-        <TextView
-            android:id="@+id/addVersion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin_double"
-            android:layout_marginEnd="@dimen/default_margin_double"
-            android:fontFamily="@font/futura_pt_medium"
-            app:fontFamily="@font/futura_pt_medium"
-            android:textColor="@android:color/darker_gray"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            tools:text="addedDate" />
-
-    </LinearLayout>
-
-</layout>
+</LinearLayout>
