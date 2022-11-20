@@ -2,51 +2,29 @@ package robin.vitalij.fortniteassitant.ui.wiki
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import by.kirich1409.viewbindingdelegate.viewBinding
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.common.extensions.setSafeOnClickListener
 import robin.vitalij.fortniteassitant.databinding.FragmentWikiBinding
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.pngread.PngReadDetailsFragment
 import javax.inject.Inject
 
 
-class WikiFragment : BaseFragment() {
+class WikiFragment : Fragment(R.layout.fragment_wiki) {
 
     @Inject
     lateinit var viewModelFactory: WikiViewModelFactory
 
-    private lateinit var viewModel: WikiViewModel
+    private val viewModel: WikiViewModel by viewModels { viewModelFactory }
 
-    private var _binding: FragmentWikiBinding? = null
-
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentWikiBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(WikiViewModel::class.java).apply {
-                observeToProgressBar(this@WikiFragment)
-                observeToError(this@WikiFragment)
-            }
-    }
+    private val binding by viewBinding(FragmentWikiBinding::bind)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -57,11 +35,6 @@ class WikiFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setNavigation()
         setListeners()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun setNavigation() {

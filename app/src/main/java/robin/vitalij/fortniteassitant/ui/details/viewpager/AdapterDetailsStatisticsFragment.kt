@@ -2,51 +2,36 @@ package robin.vitalij.fortniteassitant.ui.details.viewpager
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import kotlinx.android.synthetic.main.fragment_adapter_details_statistics.*
+import by.kirich1409.viewbindingdelegate.viewBinding
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.observeToEmpty
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.databinding.FragmentAdapterDetailsStatisticsBinding
 import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseViewPagerAdapter
 import robin.vitalij.fortniteassitant.ui.details.statistics.DetailsStatisticsFragment
 import robin.vitalij.fortniteassitant.utils.view.GameBattlesAdapter
 import javax.inject.Inject
 
-private const val DEFAULT_LAST_TAB_VALUE = Integer.MAX_VALUE
-
-class AdapterDetailsStatisticsFragment : BaseFragment() {
+class AdapterDetailsStatisticsFragment : Fragment(R.layout.fragment_adapter_details_statistics) {
 
     @Inject
     lateinit var viewModelFactory: AdapterDetailsStatisticsViewModelFactory
 
-    private lateinit var viewModel: AdapterDetailsStatisticsViewModel
+    private val viewModel: AdapterDetailsStatisticsViewModel by viewModels { viewModelFactory }
+
+    private val binding by viewBinding(FragmentAdapterDetailsStatisticsBinding::bind)
 
     private var lastTab: Int = DEFAULT_LAST_TAB_VALUE
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_adapter_details_statistics, container, false)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(AdapterDetailsStatisticsViewModel::class.java).apply {
-                observeToProgressBar(this@AdapterDetailsStatisticsFragment)
-                observeToError(this@AdapterDetailsStatisticsFragment)
-                observeToEmpty(this@AdapterDetailsStatisticsFragment)
-            }
 
         arguments?.let {
             viewModel.detailsStatistics =
@@ -61,7 +46,7 @@ class AdapterDetailsStatisticsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tabLayout.setupWithViewPager(viewPager)
+        binding.tabLayout.setupWithViewPager(binding.viewPager)
         setNavigation()
         setListeners()
     }
@@ -77,12 +62,12 @@ class AdapterDetailsStatisticsFragment : BaseFragment() {
     }
 
     private fun saveSelectedTab() {
-        lastTab = viewPager.currentItem
+        lastTab = binding.viewPager.currentItem
     }
 
     private fun restoreSelectedTab() {
         if (lastTab != DEFAULT_LAST_TAB_VALUE) {
-            viewPager.currentItem = lastTab
+            binding.viewPager.currentItem = lastTab
         }
     }
 
@@ -94,39 +79,40 @@ class AdapterDetailsStatisticsFragment : BaseFragment() {
                 getString(it.getTitleRes())
             )
         }
-        viewPager.adapter = pagerAdapter
+        binding.viewPager.adapter = pagerAdapter
     }
 
     private fun setNavigation() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
     private fun setListeners() {
-        val adapter =
-            GameBattlesAdapter(
-                context,
-                viewModel.detailsStatistics
-            )
-        toolbarSpinner.adapter = adapter
+        val adapter = GameBattlesAdapter(context, viewModel.detailsStatistics)
+        binding.toolbarSpinner.adapter = adapter
 
-        toolbarSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
+        binding.toolbarSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    //do nothing
+                }
 
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                addTabs(viewModel.detailsStatistics[position])
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    addTabs(viewModel.detailsStatistics[position])
+                }
             }
-        }
     }
 
     companion object {
         const val ARG_DETAIL_STATISTICS = "arg_detail_statistics"
+
+        private const val DEFAULT_LAST_TAB_VALUE = Integer.MAX_VALUE
     }
+
 }

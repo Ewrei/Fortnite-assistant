@@ -2,9 +2,8 @@ package robin.vitalij.fortniteassitant.ui.vehicles.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.databinding.ItemGameVecilesBinding
 import robin.vitalij.fortniteassitant.model.network.VehicleModel
 
 class VehiclesAdapter(
@@ -22,9 +21,8 @@ class VehiclesAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = VehiclesHolder(
-        DataBindingUtil.inflate(
+        ItemGameVecilesBinding.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_game_veciles,
             parent,
             false
         )

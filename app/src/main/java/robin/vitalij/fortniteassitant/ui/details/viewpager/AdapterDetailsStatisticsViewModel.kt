@@ -1,10 +1,10 @@
 package robin.vitalij.fortniteassitant.ui.details.viewpager
 
+import androidx.lifecycle.ViewModel
 import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
-import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 
-class AdapterDetailsStatisticsViewModel : BaseViewModel() {
+class AdapterDetailsStatisticsViewModel : ViewModel() {
 
-    var detailsStatistics: ArrayList<DetailStatisticsModel> = arrayListOf()
+    var detailsStatistics: MutableList<DetailStatisticsModel> = mutableListOf()
 
 }

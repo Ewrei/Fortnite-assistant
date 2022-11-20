@@ -1,5 +1,6 @@
 package robin.vitalij.fortniteassitant.ui.fish
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -9,11 +10,8 @@ import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.db.entity.FishEntity
 import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.repository.FishRepository
-import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 
-class FishViewModel(
-    private val fishRepository: FishRepository
-) : BaseViewModel() {
+class FishViewModel(private val fishRepository: FishRepository) : ViewModel() {
 
     private val fishState =
         MutableStateFlow<LoadingState<List<FishEntity>>>(LoadingState.Loading)

@@ -101,7 +101,7 @@ class UserResultFragment : BottomSheetDialogFragment() {
                         PLAYER_NAME
                     )
                 ),
-                onPositiveClickListener = DialogInterface.OnClickListener { _, _ ->
+                onPositiveClickListener = { _, _ ->
                     viewModel.deleteProfile(
                         viewModel.currentId
                     )
