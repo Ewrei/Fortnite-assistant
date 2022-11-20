@@ -1,6 +1,6 @@
 # Fortnite Assistant
 
-Исходный код Android приложения [Fortnite Assistant](https://play.google.com/store/apps/details?id=robin.vitalij.fortniteassitant)
+Android Application Source Code [Fortnite Assistant](https://play.google.com/store/apps/details?id=robin.vitalij.fortniteassitant)
 
 ##  What is it?
 
