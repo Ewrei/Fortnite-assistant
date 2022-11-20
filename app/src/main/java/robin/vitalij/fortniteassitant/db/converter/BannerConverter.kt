@@ -7,18 +7,13 @@ import robin.vitalij.fortniteassitant.db.entity.BannerImage
 
 class BannerConverter {
 
-    var gson = Gson()
+    private val gson = Gson()
 
     @TypeConverter
-    fun toTypePurse(data: String): BannerImage {
-
-        val listType = object : TypeToken<BannerImage>() {}.type
-
-        return gson.fromJson(data, listType)
-    }
+    fun toTypePurse(data: String): BannerImage =
+        gson.fromJson(data, object : TypeToken<BannerImage>() {}.type)
 
     @TypeConverter
-    fun toOrdinal(list: BannerImage): String {
-        return gson.toJson(list)
-    }
+    fun toOrdinal(list: BannerImage) = gson.toJson(list)
+
 }

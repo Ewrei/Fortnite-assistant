@@ -2,48 +2,40 @@ package robin.vitalij.fortniteassitant.ui.banners
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.recycler_view.*
-import kotlinx.android.synthetic.main.toolbar_center_title.*
-import kotlinx.android.synthetic.main.view_error.*
+import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
+import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewWithToolbarBinding
 import robin.vitalij.fortniteassitant.db.entity.BannerEntity
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.ui.banners.adapter.BannersAdapter
 import robin.vitalij.fortniteassitant.ui.bottomsheet.banner.BannerResultFragment
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import javax.inject.Inject
 
-private const val MAX_SPAN_COUNT = 2
-
-class BannersFragment : BaseFragment() {
+class BannersFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) {
 
     @Inject
     lateinit var viewModelFactory: BannersViewModelFactory
 
-    private lateinit var viewModel: BannersViewModel
+    private val viewModel: BannersViewModel by viewModels { viewModelFactory }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_history, container, false)
+    private val binding by viewBinding(FragmentRecyclerViewWithToolbarBinding::bind)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(BannersViewModel::class.java).apply {
-                observeToProgressBar(this@BannersFragment)
-                observeToError(this@BannersFragment)
-            }
+    private var bannersAdapter = BannersAdapter {
+        BannerResultFragment.show(childFragmentManager, it.id)
     }
 
     override fun onAttach(context: Context) {
@@ -53,16 +45,21 @@ class BannersFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
-            it.let(::initAdapter)
-        })
-
         setListener()
         setNavigation()
+        initializeRecyclerView()
+
+        lifecycleScope.launch {
+            viewModel.bannersResult.collect {
+                handleBannersResult(it)
+            }
+        }
+
+        viewModel.loadData()
     }
 
     private fun setListener() {
-        setErrorResolveButtonClick {
+        binding.errorViewInclude.errorResolveButton.setOnClickListener {
             viewModel.loadData()
         }
     }
@@ -70,24 +67,44 @@ class BannersFragment : BaseFragment() {
     private fun setNavigation() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
-    private fun initAdapter(list: List<BannerEntity>) {
-        recyclerView.run {
-            adapter = BannersAdapter {
-                BannerResultFragment.show(childFragmentManager, it.id)
-            }
-            (adapter as BannersAdapter).setData(list)
-            val gridlayoutManager = GridLayoutManager(
+    private fun initializeRecyclerView() {
+        binding.recyclerViewInclude.recyclerView.run {
+            adapter = bannersAdapter
+            layoutManager = GridLayoutManager(
                 activity, MAX_SPAN_COUNT
-            )
-
-            gridlayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int) = 1
+            ).apply {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int) = BANNER_SPAN_COUNT
+                }
             }
-
-            layoutManager = gridlayoutManager
         }
+    }
+
+    private fun handleBannersResult(result: LoadingState<List<BannerEntity>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
+            }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                bannersAdapter.updateData(result.data)
+            }
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                }
+            }
+        }
+    }
+
+    companion object {
+        private const val MAX_SPAN_COUNT = 2
+        private const val BANNER_SPAN_COUNT = 1
     }
 }

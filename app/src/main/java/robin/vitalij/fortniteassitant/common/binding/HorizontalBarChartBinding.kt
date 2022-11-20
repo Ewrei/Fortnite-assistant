@@ -16,6 +16,7 @@ import robin.vitalij.fortniteassitant.model.comparison.ManyPlayerSchedule
 import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel.ComparisonScheduleViewModel
 import robin.vitalij.fortniteassitant.utils.XAxisValueFormatter
 
+private const val TWO_PLAYERS = 2
 
 object HorizontalBarChartBinding {
 
@@ -23,7 +24,7 @@ object HorizontalBarChartBinding {
     @BindingAdapter("manyPlayerSchedules")
     fun HorizontalBarChart.setManyPlayerSchedules(manyPlayerSchedules: List<ManyPlayerSchedule>) {
 
-        if (manyPlayerSchedules.size > 2) {
+        if (manyPlayerSchedules.size > TWO_PLAYERS) {
             this.layoutParams = LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 100 * manyPlayerSchedules.size
@@ -62,7 +63,7 @@ object HorizontalBarChartBinding {
         yLeft.axisMinimum = 0f
         yLeft.isEnabled = false
 
-        val values = arrayListOf<String>()
+        val values = mutableListOf<String>()
         manyPlayerSchedules.forEach {
             values.add(it.accountName)
         }
@@ -87,9 +88,9 @@ object HorizontalBarChartBinding {
             entries.add(BarEntry(i.toFloat(), manyPlayerSchedules[i].value.toFloat()))
 
             val barDataSetOnePlayer = BarDataSet(entries, manyPlayerSchedules[i].accountName)
-            barDataSetOnePlayer.color = context.resources.getColor(R.color.text_color)
+            barDataSetOnePlayer.color = ContextCompat.getColor(context, R.color.text_color)
             barDataSetOnePlayer.barShadowColor =
-                context.resources.getColor(R.color.text_color)
+                ContextCompat.getColor(context, R.color.text_color)
             barDataSetOnePlayer.valueTextSize =
                 context.resources.getInteger(R.integer.infografika_size).toFloat()
             barDataSetOnePlayer.valueTextColor = ContextCompat.getColor(context, R.color.text_color)

@@ -1,70 +1,76 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.banner
 
+import android.content.Context
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.recycler_view.*
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.common.extensions.initBottomSheetInternal
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
+import robin.vitalij.fortniteassitant.databinding.BottomSheetMvvmBinding
 import robin.vitalij.fortniteassitant.db.entity.BannerEntity
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.ui.bottomsheet.banner.adapter.BannerResultAdapter
 import javax.inject.Inject
-
-const val BOTTOM_SHEET_MARGIN_TOP = 200
 
 class BannerResultFragment : BottomSheetDialogFragment() {
 
     @Inject
     lateinit var viewModelFactory: BannerResultViewModelFactory
 
-    private lateinit var viewModel: BannerResultViewModel
+    private val viewModel: BannerResultViewModel by viewModels { viewModelFactory }
+
+    private var _binding: BottomSheetMvvmBinding? = null
+
+    private val binding get() = _binding!!
+
+    private val bannerResultAdapter = BannerResultAdapter()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        FortniteApplication.appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        dialog?.setOnShowListener { dialog ->
-            val d = dialog as BottomSheetDialog
-            val bottomSheetInternal =
-                d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-            bottomSheetInternal?.setBackgroundResource(R.drawable.bottomsheet_container_background)
-            bottomSheetInternal?.let {
-                BottomSheetBehavior.from(it).state = BottomSheetBehavior.STATE_EXPANDED
-                BottomSheetBehavior.from(it).skipCollapsed = true
-            }
-        }
-        return inflater.inflate(R.layout.bottom_sheet_mvvm, container, false)
+        dialog?.initBottomSheetInternal()
+        _binding = BottomSheetMvvmBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        FortniteApplication.appComponent.inject(this)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(BannerResultViewModel::class.java).apply {
-                observeToProgressBar(this@BannerResultFragment)
-                observeToError(this@BannerResultFragment)
-            }
+        arguments?.let {
+            viewModel.bannerId = it.getString(ARG_BANNER_ID) ?: ""
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.let {
-            viewModel.loadData((it.getString(BANNER) ?: ""))
+        setListener()
+        initializeRecyclerView()
+
+        lifecycleScope.launch {
+            viewModel.bannerResult.collect {
+                handleBannerResult(it)
+            }
         }
 
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
-            it.let(::initAdapter)
-        })
+        viewModel.loadData()
     }
 
     override fun onStart() {
@@ -75,33 +81,54 @@ class BannerResultFragment : BottomSheetDialogFragment() {
         sheetContainer.layoutParams.height = (displayMetrics.heightPixels - BOTTOM_SHEET_MARGIN_TOP)
     }
 
-    private fun initAdapter(list: List<BannerEntity>) {
-        recyclerView.run {
-            adapter = BannerResultAdapter()
-            (adapter as BannerResultAdapter).setData(list)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun setListener() {
+        binding.errorViewInclude.errorResolveButton.setOnClickListener {
+            viewModel.loadData()
+        }
+    }
+
+    private fun initializeRecyclerView() {
+        binding.recyclerViewInclude.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
+            adapter = bannerResultAdapter
+        }
+    }
+
+    private fun handleBannerResult(result: LoadingState<List<BannerEntity>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
+            }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                bannerResultAdapter.updateData(result.data)
+            }
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                }
+            }
         }
     }
 
     companion object {
 
         private const val TAG = "BannerResultFragment"
-        private const val BANNER = "Banner"
+        private const val ARG_BANNER_ID = "arg_banner_id"
+        private const val BOTTOM_SHEET_MARGIN_TOP = 200
 
-        fun show(
-            fragmentManager: FragmentManager?,
-            fishId: String
-        ) {
-            fragmentManager?.let {
-                BannerResultFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(BANNER, fishId)
-                    }
-                }.show(
-                    it,
-                    TAG
-                )
-            }
+        fun show(fragmentManager: FragmentManager, bannerId: String) {
+            BannerResultFragment().apply {
+                arguments = bundleOf(ARG_BANNER_ID to bannerId)
+            }.show(fragmentManager, TAG)
         }
     }
 }

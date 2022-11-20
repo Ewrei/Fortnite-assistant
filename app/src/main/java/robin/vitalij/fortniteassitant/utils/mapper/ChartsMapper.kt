@@ -19,7 +19,7 @@ class ChartsMapper(
 ) : Mapper<List<UserHistory>, ChartsModel> {
 
     override fun transform(obj: List<UserHistory>): ChartsModel {
-        val chartsModel = ChartsModel()
+        var chartsModel = ChartsModel()
         if (obj.size > EMPTY_SESSION) {
             chartsModel.sessionModels =
                 generateSessionModels(obj)
@@ -31,7 +31,7 @@ class ChartsMapper(
     private fun generateSessionModels(
         sessions: List<UserHistory>
     ): List<SessionModel> {
-        val sessionModels = arrayListOf<SessionTempModel>()
+        val sessionModels = mutableListOf<SessionTempModel>()
         sessions.forEach {
             sessionModels.add(
                 SessionTempModel(

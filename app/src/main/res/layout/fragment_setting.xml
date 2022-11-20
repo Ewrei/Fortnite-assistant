@@ -1,622 +1,611 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <variable
-            name="viewModel"
-            type="robin.vitalij.fortniteassitant.ui.setting.SettingViewModel" />
-    </data>
-
-    <LinearLayout
+    <include
+        android:id="@+id/toolbarInclude"
+        layout="@layout/toolbar_center_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content" />
 
-        <include
-            layout="@layout/toolbar_center_title"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/content_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ScrollView
-                android:id="@+id/content_view"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/profileImage"
+                        android:layout_width="@dimen/profile_image_size"
+                        android:layout_height="@dimen/profile_image_size"
+                        android:layout_marginStart="@dimen/default_margin_double"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_marginBottom="@dimen/default_margin_double"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/userName"
+                        app:layout_constraintVertical_bias="1.0"
+                        tools:srcCompat="@tools:sample/avatars" />
+
+                    <TextView
+                        android:id="@+id/userName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/default_margin_double"
+                        android:layout_marginTop="@dimen/default_margin_double"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/futura_pt_bold"
+                        android:maxLines="1"
+                        android:text="@{viewModel.user.name}"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                        app:layout_constraintEnd_toEndOf="@+id/profileImage"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="userName" />
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/refresh"
+                        style="@style/DefaultButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/default_margin_double"
+                        android:layout_marginEnd="@dimen/default_margin_double"
+                        android:text="@string/refresh"
+                        app:icon="@drawable/ic_refresh"
+                        app:iconTint="@android:color/black"
+                        app:layout_constraintBottom_toTopOf="@+id/lastUpdate"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toEndOf="@+id/profileImage"
+                        app:layout_constraintTop_toBottomOf="@+id/copyStatsLink" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/copyStatsLink"
+                        style="@style/DefaultButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/default_margin_double"
+                        android:layout_marginEnd="@dimen/default_margin_double"
+                        android:text="@string/copy_stats_link"
+                        app:icon="@drawable/ic_link"
+                        app:iconTint="@android:color/black"
+                        app:layout_constraintBottom_toTopOf="@+id/refresh"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/profileImage"
+                        app:layout_constraintTop_toTopOf="@+id/profileImage" />
+
+                    <TextView
+                        android:id="@+id/lastUpdate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/default_margin_double"
+                        android:layout_marginEnd="@dimen/default_margin_double"
+                        android:fontFamily="@font/futura_pt_medium"
+                        android:text="@{@string/last_date_update(viewModel.user.getLastUpdate())}"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        app:layout_constraintBottom_toBottomOf="@+id/profileImage"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/profileImage"
+                        app:layout_constraintTop_toBottomOf="@+id/refresh"
+                        tools:text="last update" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/default_margin_double"
+                    android:layout_marginTop="@dimen/default_margin_double"
+                    android:layout_marginEnd="@dimen/default_margin_double"
+                    android:fontFamily="@font/futura_pt_bold"
+                    android:text="@string/add_functional"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardView"
+                    style="@style/DefaultCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginTop="@dimen/default_margin">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                        <ImageView
-                            android:id="@+id/profileImage"
-                            android:layout_width="@dimen/profile_image_size"
-                            android:layout_height="@dimen/profile_image_size"
-                            android:layout_marginStart="@dimen/default_margin_double"
-                            android:layout_marginTop="@dimen/default_margin"
-                            android:layout_marginBottom="@dimen/default_margin_double"
-                            app:imageUrl="@{viewModel.user.avatar}"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/userName"
-                            app:layout_constraintVertical_bias="1.0"
-                            tools:srcCompat="@tools:sample/avatars" />
-
-                        <TextView
-                            android:id="@+id/userName"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/default_margin_double"
+                        <LinearLayout
+                            android:id="@+id/searchLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_marginTop="@dimen/default_margin_double"
-                            android:ellipsize="end"
-                            android:fontFamily="@font/futura_pt_bold"
-                            android:maxLines="1"
-                            android:text="@{viewModel.user.name}"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                            app:layout_constraintEnd_toEndOf="@+id/profileImage"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:text="userName" />
+                            android:orientation="horizontal"
+                            android:padding="@dimen/default_padding_double">
 
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                app:srcCompat="@drawable/ic_search_24px"
+                                app:tint="@android:color/white" />
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/refresh"
-                            style="@style/DefaultButton"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/default_margin_double"
-                            android:layout_marginEnd="@dimen/default_margin_double"
-                            android:text="@string/refresh"
-                            app:icon="@drawable/ic_refresh"
-                            app:iconTint="@android:color/black"
-                            app:layout_constraintBottom_toTopOf="@+id/lastUpdate"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintStart_toEndOf="@+id/profileImage"
-                            app:layout_constraintTop_toBottomOf="@+id/copyStatsLink" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/default_margin_double"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/futura_pt_medium"
+                                android:text="@string/search_player"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                app:layout_constraintBottom_toTopOf="@+id/hours"
+                                app:layout_constraintEnd_toEndOf="parent" />
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/copyStatsLink"
-                            style="@style/DefaultButton"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/default_margin_double"
-                            android:layout_marginEnd="@dimen/default_margin_double"
-                            android:text="@string/copy_stats_link"
-                            app:icon="@drawable/ic_link"
-                            app:iconTint="@android:color/black"
-                            app:layout_constraintBottom_toTopOf="@+id/refresh"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/profileImage"
-                            app:layout_constraintTop_toTopOf="@+id/profileImage" />
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:padding="@dimen/half_default_padding"
+                                app:srcCompat="@drawable/ic_arrow_right"
+                                app:tint="@android:color/white" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/comparisonLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/default_padding_double">
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                app:srcCompat="@drawable/ic_compare"
+                                app:tint="@android:color/white" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/default_margin_double"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/futura_pt_medium"
+                                android:text="@string/compare_players"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                app:layout_constraintBottom_toTopOf="@+id/hours"
+                                app:layout_constraintEnd_toEndOf="parent" />
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:padding="@dimen/half_default_padding"
+                                app:srcCompat="@drawable/ic_arrow_right"
+                                app:tint="@android:color/white" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/accountsLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/default_padding_double">
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                app:srcCompat="@drawable/ic_persons"
+                                app:tint="@android:color/white" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/default_margin_double"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/futura_pt_medium"
+                                android:text="@string/users"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                app:layout_constraintBottom_toTopOf="@+id/hours"
+                                app:layout_constraintEnd_toEndOf="parent" />
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:padding="@dimen/half_default_padding"
+                                app:srcCompat="@drawable/ic_arrow_right"
+                                app:tint="@android:color/white" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/newsLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/default_padding_double">
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                app:srcCompat="@drawable/ic_news"
+                                app:tint="@android:color/white" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/default_margin_double"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/futura_pt_medium"
+                                android:text="@string/news_game"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                app:layout_constraintBottom_toTopOf="@+id/hours"
+                                app:layout_constraintEnd_toEndOf="parent" />
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:padding="@dimen/half_default_padding"
+                                app:srcCompat="@drawable/ic_arrow_right"
+                                app:tint="@android:color/white" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/crewLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/default_padding_double">
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                app:srcCompat="@drawable/ic_news"
+                                app:tint="@android:color/white" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/default_margin_double"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/futura_pt_medium"
+                                android:text="@string/fortnite_crew_information"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                app:layout_constraintBottom_toTopOf="@+id/hours"
+                                app:layout_constraintEnd_toEndOf="parent" />
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:padding="@dimen/half_default_padding"
+                                app:srcCompat="@drawable/ic_arrow_right"
+                                app:tint="@android:color/white" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/wikiLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="@dimen/default_margin_double"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/default_padding_double">
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                app:srcCompat="@drawable/ic_open_book"
+                                app:tint="@android:color/white" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/default_margin_double"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/futura_pt_medium"
+                                android:text="@string/wikipedia"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                app:layout_constraintBottom_toTopOf="@+id/hours"
+                                app:layout_constraintEnd_toEndOf="parent" />
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:padding="@dimen/half_default_padding"
+                                app:srcCompat="@drawable/ic_arrow_right"
+                                app:tint="@android:color/white" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/default_margin_double"
+                    android:layout_marginTop="@dimen/default_margin_double"
+                    android:layout_marginEnd="@dimen/default_margin_double"
+                    android:fontFamily="@font/futura_pt_bold"
+                    android:text="@string/disabling_ads"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/DefaultCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/subscriptionLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/default_margin_double"
+                            android:layout_marginBottom="@dimen/default_margin_double"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/default_padding_double">
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                app:srcCompat="@drawable/ic_ads"
+                                app:tint="@android:color/white" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/default_margin_double"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/futura_pt_medium"
+                                android:text="@string/disabling_ads"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                app:layout_constraintBottom_toTopOf="@+id/hours"
+                                app:layout_constraintEnd_toEndOf="parent" />
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:padding="@dimen/half_default_padding"
+                                app:srcCompat="@drawable/ic_arrow_right"
+                                app:tint="@android:color/white" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/default_margin_double"
+                    android:layout_marginTop="@dimen/default_margin_double"
+                    android:layout_marginEnd="@dimen/default_margin_double"
+                    android:fontFamily="@font/futura_pt_bold"
+                    android:text="@string/feedback"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/DefaultCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/contactUs"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/default_margin_double"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/default_padding_double">
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                app:srcCompat="@drawable/ic_contact_us"
+                                app:tint="@android:color/white" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/default_margin_double"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/futura_pt_medium"
+                                android:text="@string/to_contact_us"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                app:layout_constraintBottom_toTopOf="@+id/hours"
+                                app:layout_constraintEnd_toEndOf="parent" />
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:padding="@dimen/half_default_padding"
+                                app:srcCompat="@drawable/ic_arrow_right"
+                                app:tint="@android:color/white" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ratePlayMarket"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/default_padding_double">
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                app:srcCompat="@drawable/ic_google_play"
+                                app:tint="@android:color/white" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/default_margin_double"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/futura_pt_medium"
+                                android:text="@string/play_market_header"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                app:layout_constraintBottom_toTopOf="@+id/hours"
+                                app:layout_constraintEnd_toEndOf="parent" />
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:padding="@dimen/half_default_padding"
+                                app:srcCompat="@drawable/ic_arrow_right"
+                                app:tint="@android:color/white" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/applicationInfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/default_padding_double">
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                app:srcCompat="@drawable/ic_about"
+                                app:tint="@android:color/white" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/default_margin_double"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/futura_pt_medium"
+                                android:text="@string/info_application"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                app:layout_constraintBottom_toTopOf="@+id/hours"
+                                app:layout_constraintEnd_toEndOf="parent" />
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:padding="@dimen/half_default_padding"
+                                app:srcCompat="@drawable/ic_arrow_right"
+                                app:tint="@android:color/white" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/shareApp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/default_padding_double">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                app:srcCompat="@drawable/ic_collaboration"
+                                app:tint="@android:color/white" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/default_margin_double"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/futura_pt_medium"
+                                android:text="@string/share_title"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                app:layout_constraintBottom_toTopOf="@+id/hours"
+                                app:layout_constraintEnd_toEndOf="parent" />
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:padding="@dimen/half_default_padding"
+                                app:srcCompat="@drawable/ic_arrow_right"
+                                app:tint="@android:color/white" />
+
+                        </LinearLayout>
 
                         <TextView
-                            android:id="@+id/lastUpdate"
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/default_margin_double"
                             android:layout_marginEnd="@dimen/default_margin_double"
                             android:fontFamily="@font/futura_pt_medium"
-                            android:text="@{@string/last_date_update(viewModel.user.getLastUpdate())}"
+                            android:text="@string/to_contact_us_body"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                            app:layout_constraintBottom_toBottomOf="@+id/profileImage"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/profileImage"
-                            app:layout_constraintTop_toBottomOf="@+id/refresh"
-                            tools:text="last update" />
+                            android:textColor="@android:color/darker_gray" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/default_margin_double"
-                        android:layout_marginTop="@dimen/default_margin_double"
-                        android:layout_marginEnd="@dimen/default_margin_double"
-                        android:fontFamily="@font/futura_pt_bold"
-                        android:text="@string/add_functional"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/cardView"
-                        style="@style/DefaultCard"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/default_margin">
-
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:layout_marginStart="@dimen/default_margin_double"
+                            android:layout_marginEnd="@dimen/default_margin_double"
+                            android:fontFamily="@font/futura_pt_medium"
+                            android:text="@string/play_market_body"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:textColor="@android:color/darker_gray" />
 
-                            <LinearLayout
-                                android:id="@+id/searchLayout"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginTop="@dimen/default_margin_double"
-                                android:orientation="horizontal"
-                                android:padding="@dimen/default_padding_double">
-
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    app:srcCompat="@drawable/ic_search_24px"
-                                    app:tint="@android:color/white" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/default_margin_double"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/futura_pt_medium"
-                                    android:text="@string/search_player"
-                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    app:layout_constraintBottom_toTopOf="@+id/hours"
-                                    app:layout_constraintEnd_toEndOf="parent" />
-
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    android:padding="@dimen/half_default_padding"
-                                    app:srcCompat="@drawable/ic_arrow_right"
-                                    app:tint="@android:color/white" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/comparisonLayout"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                android:padding="@dimen/default_padding_double">
-
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    app:srcCompat="@drawable/ic_compare"
-                                    app:tint="@android:color/white" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/default_margin_double"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/futura_pt_medium"
-                                    android:text="@string/compare_players"
-                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    app:layout_constraintBottom_toTopOf="@+id/hours"
-                                    app:layout_constraintEnd_toEndOf="parent" />
-
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    android:padding="@dimen/half_default_padding"
-                                    app:srcCompat="@drawable/ic_arrow_right"
-                                    app:tint="@android:color/white" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/accountsLayout"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                android:padding="@dimen/default_padding_double">
-
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    app:srcCompat="@drawable/ic_persons"
-                                    app:tint="@android:color/white" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/default_margin_double"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/futura_pt_medium"
-                                    android:text="@string/users"
-                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    app:layout_constraintBottom_toTopOf="@+id/hours"
-                                    app:layout_constraintEnd_toEndOf="parent" />
-
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    android:padding="@dimen/half_default_padding"
-                                    app:srcCompat="@drawable/ic_arrow_right"
-                                    app:tint="@android:color/white" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/newsLayout"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                android:padding="@dimen/default_padding_double">
-
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    app:srcCompat="@drawable/ic_news"
-                                    app:tint="@android:color/white" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/default_margin_double"
-                                    android:layout_weight="1"
-                                    android:text="@string/news_game"
-                                    android:fontFamily="@font/futura_pt_medium"
-                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    app:layout_constraintBottom_toTopOf="@+id/hours"
-                                    app:layout_constraintEnd_toEndOf="parent" />
-
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    android:padding="@dimen/half_default_padding"
-                                    app:srcCompat="@drawable/ic_arrow_right"
-                                    app:tint="@android:color/white" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/crewLayout"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                android:padding="@dimen/default_padding_double">
-
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    app:srcCompat="@drawable/ic_news"
-                                    app:tint="@android:color/white" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/default_margin_double"
-                                    android:layout_weight="1"
-                                    android:text="@string/fortnite_crew_information"
-                                    android:fontFamily="@font/futura_pt_medium"
-                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    app:layout_constraintBottom_toTopOf="@+id/hours"
-                                    app:layout_constraintEnd_toEndOf="parent" />
-
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    android:padding="@dimen/half_default_padding"
-                                    app:srcCompat="@drawable/ic_arrow_right"
-                                    app:tint="@android:color/white" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/wikiLayout"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginBottom="@dimen/default_margin_double"
-                                android:orientation="horizontal"
-                                android:padding="@dimen/default_padding_double">
-
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    app:srcCompat="@drawable/ic_open_book"
-                                    app:tint="@android:color/white" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/default_margin_double"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/futura_pt_medium"
-                                    android:text="@string/wikipedia"
-                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    app:layout_constraintBottom_toTopOf="@+id/hours"
-                                    app:layout_constraintEnd_toEndOf="parent" />
-
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    android:padding="@dimen/half_default_padding"
-                                    app:srcCompat="@drawable/ic_arrow_right"
-                                    app:tint="@android:color/white" />
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/default_margin_double"
-                        android:layout_marginTop="@dimen/default_margin_double"
-                        android:layout_marginEnd="@dimen/default_margin_double"
-                        android:fontFamily="@font/futura_pt_bold"
-                        android:text="@string/disabling_ads"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
-                    <com.google.android.material.card.MaterialCardView
-                        style="@style/DefaultCard"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/default_margin">
-
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:layout_marginStart="@dimen/default_margin_double"
+                            android:layout_marginEnd="@dimen/default_margin_double"
+                            android:layout_marginBottom="@dimen/default_margin_double"
+                            android:fontFamily="@font/futura_pt_medium"
+                            android:text="@string/share_body"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:textColor="@android:color/darker_gray" />
 
-                            <LinearLayout
-                                android:id="@+id/subscriptionLayout"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginTop="@dimen/default_margin_double"
-                                android:layout_marginBottom="@dimen/default_margin_double"
-                                android:orientation="horizontal"
-                                android:padding="@dimen/default_padding_double">
+                    </LinearLayout>
 
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    app:srcCompat="@drawable/ic_ads"
-                                    app:tint="@android:color/white" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/default_margin_double"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/futura_pt_medium"
-                                    android:text="@string/disabling_ads"
-                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    app:layout_constraintBottom_toTopOf="@+id/hours"
-                                    app:layout_constraintEnd_toEndOf="parent" />
-
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    android:padding="@dimen/half_default_padding"
-                                    app:srcCompat="@drawable/ic_arrow_right"
-                                    app:tint="@android:color/white" />
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/default_margin_double"
-                        android:layout_marginTop="@dimen/default_margin_double"
-                        android:layout_marginEnd="@dimen/default_margin_double"
-                        android:fontFamily="@font/futura_pt_bold"
-                        android:text="@string/feedback"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
-                    <com.google.android.material.card.MaterialCardView
-                        style="@style/DefaultCard"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/default_margin">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:id="@+id/contactUs"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginTop="@dimen/default_margin_double"
-                                android:orientation="horizontal"
-                                android:padding="@dimen/default_padding_double">
-
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    app:srcCompat="@drawable/ic_contact_us"
-                                    app:tint="@android:color/white" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/default_margin_double"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/futura_pt_medium"
-                                    android:text="@string/to_contact_us"
-                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    app:layout_constraintBottom_toTopOf="@+id/hours"
-                                    app:layout_constraintEnd_toEndOf="parent" />
-
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    android:padding="@dimen/half_default_padding"
-                                    app:srcCompat="@drawable/ic_arrow_right"
-                                    app:tint="@android:color/white" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/ratePlayMarket"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                android:padding="@dimen/default_padding_double">
-
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    app:srcCompat="@drawable/ic_google_play"
-                                    app:tint="@android:color/white" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/default_margin_double"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/futura_pt_medium"
-                                    android:text="@string/play_market_header"
-                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    app:layout_constraintBottom_toTopOf="@+id/hours"
-                                    app:layout_constraintEnd_toEndOf="parent" />
-
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    android:padding="@dimen/half_default_padding"
-                                    app:srcCompat="@drawable/ic_arrow_right"
-                                    app:tint="@android:color/white" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/applicationInfo"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                android:padding="@dimen/default_padding_double">
-
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    app:srcCompat="@drawable/ic_about"
-                                    app:tint="@android:color/white" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/default_margin_double"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/futura_pt_medium"
-                                    android:text="@string/info_application"
-                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    app:layout_constraintBottom_toTopOf="@+id/hours"
-                                    app:layout_constraintEnd_toEndOf="parent" />
-
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    android:padding="@dimen/half_default_padding"
-                                    app:srcCompat="@drawable/ic_arrow_right"
-                                    app:tint="@android:color/white" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/shareApp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                android:padding="@dimen/default_padding_double">
-
-                                <ImageView
-                                    android:layout_width="24dp"
-                                    android:layout_height="24dp"
-                                    app:srcCompat="@drawable/ic_collaboration"
-                                    app:tint="@android:color/white" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/default_margin_double"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/futura_pt_medium"
-                                    android:text="@string/share_title"
-                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    app:layout_constraintBottom_toTopOf="@+id/hours"
-                                    app:layout_constraintEnd_toEndOf="parent" />
-
-                                <ImageView
-                                    android:layout_width="@dimen/icon_size"
-                                    android:layout_height="@dimen/icon_size"
-                                    android:padding="@dimen/half_default_padding"
-                                    app:srcCompat="@drawable/ic_arrow_right"
-                                    app:tint="@android:color/white" />
-
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/default_margin_double"
-                                android:layout_marginEnd="@dimen/default_margin_double"
-                                android:fontFamily="@font/futura_pt_medium"
-                                android:text="@string/to_contact_us_body"
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                                android:textColor="@android:color/darker_gray" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/default_margin_double"
-                                android:layout_marginEnd="@dimen/default_margin_double"
-                                android:fontFamily="@font/futura_pt_medium"
-                                android:text="@string/play_market_body"
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                                android:textColor="@android:color/darker_gray" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/default_margin_double"
-                                android:layout_marginEnd="@dimen/default_margin_double"
-                                android:layout_marginBottom="@dimen/default_margin_double"
-                                android:fontFamily="@font/futura_pt_medium"
-                                android:text="@string/share_body"
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                                android:textColor="@android:color/darker_gray" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
+                </com.google.android.material.card.MaterialCardView>
 
 
-                </LinearLayout>
+            </LinearLayout>
 
-            </ScrollView>
+        </ScrollView>
 
-            <include
-                layout="@layout/progress_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:visibility="gone" />
+        <include
+            android:id="@+id/progressViewInclude"
+            layout="@layout/progress_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone" />
 
-            <include
-                layout="@layout/view_error"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:visibility="gone" />
+        <include
+            android:id="@+id/errorViewInclude"
+            layout="@layout/view_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone" />
 
-        </FrameLayout>
+    </FrameLayout>
 
-    </LinearLayout>
-
-</layout>
+</LinearLayout>

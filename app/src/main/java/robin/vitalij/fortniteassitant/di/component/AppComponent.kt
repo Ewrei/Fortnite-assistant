@@ -6,14 +6,16 @@ import robin.vitalij.fortniteassitant.di.module.FortniteAppModule
 import robin.vitalij.fortniteassitant.di.module.NetworkModule
 import robin.vitalij.fortniteassitant.di.module.RepositoryModule
 import robin.vitalij.fortniteassitant.ui.achiviements.AchievementsFragment
+import robin.vitalij.fortniteassitant.ui.ads_gift_fever.BasicRulesFragment
 import robin.vitalij.fortniteassitant.ui.banners.BannersFragment
-import robin.vitalij.fortniteassitant.ui.battlepassrewards.BattlePassRewardsFragment
+import robin.vitalij.fortniteassitant.ui.battle_pass_rewards.BattlePassRewardsFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.banner.BannerResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.battlepassrewards.BattlePassRewardsResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.CosmeticResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.CurrentShopResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.fish.FishResultFragment
+import robin.vitalij.fortniteassitant.ui.bottomsheet.input_account_id.InputAccountIdResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.top.TopResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.upcomingshop.UpcomingShopResultFragment
@@ -21,7 +23,7 @@ import robin.vitalij.fortniteassitant.ui.bottomsheet.user.UserResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.vehicles.VehiclesResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.weapon.WeaponResultFragment
 import robin.vitalij.fortniteassitant.ui.chartlist.ChartsTypeFragment
-import robin.vitalij.fortniteassitant.ui.chartlist.viewpager.AdapterChartsTypeFragment
+import robin.vitalij.fortniteassitant.ui.chartlist.view_pager.AdapterChartsTypeFragment
 import robin.vitalij.fortniteassitant.ui.charts.ChartsFragment
 import robin.vitalij.fortniteassitant.ui.comparison.selected.ComparisonSelectedFragment
 import robin.vitalij.fortniteassitant.ui.comparison.selected.listuser.SelectedListUserFragment
@@ -31,18 +33,18 @@ import robin.vitalij.fortniteassitant.ui.comparison.statistics.ComparisonStatist
 import robin.vitalij.fortniteassitant.ui.comparison.viewpager.AdapterComparisonFragment
 import robin.vitalij.fortniteassitant.ui.cosmetics.CatalogCosmeticsFragment
 import robin.vitalij.fortniteassitant.ui.cosmetics.catalog.CosmeticsFragment
-import robin.vitalij.fortniteassitant.ui.cosmeticsnew.CosmeticsNewFragment
+import robin.vitalij.fortniteassitant.ui.cosmetics_new.CosmeticsNewFragment
 import robin.vitalij.fortniteassitant.ui.crew.details.CrewViewDetailsFragment
 import robin.vitalij.fortniteassitant.ui.crew.main.GameCrewFragment
 import robin.vitalij.fortniteassitant.ui.details.statistics.DetailsStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment
-import robin.vitalij.fortniteassitant.ui.fishing.FishingFragment
+import robin.vitalij.fortniteassitant.ui.fish.FishFragment
 import robin.vitalij.fortniteassitant.ui.fishstats.FishStatsFragment
 import robin.vitalij.fortniteassitant.ui.history.HistoryFragment
 import robin.vitalij.fortniteassitant.ui.home.HomeFragment
 import robin.vitalij.fortniteassitant.ui.main.MainActivity
 import robin.vitalij.fortniteassitant.ui.news.fragment.NewsFragment
-import robin.vitalij.fortniteassitant.ui.news.viewpager.AdapterNewsFragment
+import robin.vitalij.fortniteassitant.ui.news.view_pager.AdapterNewsFragment
 import robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment
 import robin.vitalij.fortniteassitant.ui.season.statistics.DetailsSeasonStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.season.viewpager.AdapterDetailsSeasonStatisticsFragment
@@ -93,13 +95,12 @@ interface AppComponent {
     fun inject(fragment: AdapterDetailsSeasonStatisticsFragment)
     fun inject(fragment: AdapterShoppingFragment)
     fun inject(fragment: TopFragment)
-    fun inject(fragment: CurrentShopFragment)
     fun inject(fragment: UpcomingShopFragment)
     fun inject(fragment: WikiFragment)
     fun inject(fragment: BattlePassRewardsFragment)
     fun inject(fragment: AdapterChartsTypeFragment)
     fun inject(fragment: WeaponFragment)
-    fun inject(fragment: FishingFragment)
+    fun inject(fragment: FishFragment)
     fun inject(fragment: FishStatsFragment)
     fun inject(fragment: AchievementsFragment)
     fun inject(fragment: CosmeticsNewFragment)
@@ -110,6 +111,7 @@ interface AppComponent {
     fun inject(fragment: GameCrewFragment)
     fun inject(fragment: CrewViewDetailsFragment)
     fun inject(fragment: VehiclesFragment)
+    fun inject(fragment: CurrentShopFragment)
 
     fun inject(fragment: CosmeticResultFragment)
     fun inject(fragment: ProfileResultFragment)
@@ -123,4 +125,6 @@ interface AppComponent {
     fun inject(fragment: FishResultFragment)
     fun inject(fragment: BannerResultFragment)
     fun inject(fragment: VehiclesResultFragment)
+    fun inject(fragment: InputAccountIdResultFragment)
+    fun inject(fragment: BasicRulesFragment)
 }

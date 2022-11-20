@@ -6,13 +6,13 @@ import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.repository.network.GetSeasonStatisticsRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.HomeBodyStats
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsListItem
 
 class DetailsSeasonStatisticsViewModel(
     private val getSeasonStatisticsRepository: GetSeasonStatisticsRepository
 ) : BaseViewModel() {
 
-    val mutableLiveData = MutableLiveData<List<HomeBodyStats>>()
+    val mutableLiveData = MutableLiveData<List<HomeBodyStatsListItem>>()
 
     fun loadData(battlesType: BattlesType, gameType: GameType) {
         getSeasonStatisticsRepository

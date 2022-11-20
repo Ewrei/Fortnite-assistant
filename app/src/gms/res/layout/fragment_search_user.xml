@@ -19,7 +19,7 @@
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/adView"
+            app:layout_constraintBottom_toTopOf="@+id/customBannerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -91,6 +91,38 @@
                         android:layout_height="wrap_content"
                         android:text="@string/look_for_similar" />
 
+                    <com.google.android.material.button.MaterialButton
+                        style="@style/DefaultButton"
+                        android:id="@+id/iKnowMyAccountIdButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_marginStart="@dimen/default_margin_double"
+                        android:layout_marginEnd="@dimen/default_margin_double"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:text="@string/i_know_my_account_id"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/howToFindAccountIdButton"
+                        style="@style/DefaultButton"
+                        android:layout_marginStart="@dimen/default_margin_double"
+                        android:layout_marginEnd="@dimen/default_margin_double"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height"
+                        android:backgroundTint="@color/telegram"
+                        android:textColor="@color/white"
+                        android:layout_marginBottom="@dimen/default_margin_double"
+                        android:text="@string/how_to_find_account_id" />
+
+                    <include
+                        layout="@layout/view_empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:visibility="gone" />
+
                     <include
                         layout="@layout/recycler_view"
                         android:layout_width="match_parent"
@@ -114,22 +146,13 @@
                 android:layout_gravity="center"
                 android:visibility="gone" />
 
-            <include
-                layout="@layout/view_empty"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:visibility="gone" />
-
         </FrameLayout>
 
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
+        <robin.vitalij.fortniteassitant.CustomBannerView
+            android:id="@+id/customBannerView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:visibility="invisible"
-            app:adSize="SMART_BANNER"
-            app:adUnitId="@string/BANNER_ID"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

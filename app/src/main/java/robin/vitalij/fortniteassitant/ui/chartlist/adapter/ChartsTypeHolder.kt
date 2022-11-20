@@ -5,10 +5,10 @@ import robin.vitalij.fortniteassitant.databinding.ItemChartsTypeBinding
 import robin.vitalij.fortniteassitant.model.enums.ChartsType
 
 class ChartsTypeHolder(
-    var binding: ItemChartsTypeBinding
+    private val binding: ItemChartsTypeBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: ChartsType) {
-        binding.item = item
+        binding.chartsType.setText(item.getTitleRes())
     }
 }

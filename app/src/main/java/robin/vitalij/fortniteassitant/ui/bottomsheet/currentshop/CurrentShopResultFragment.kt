@@ -8,22 +8,24 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.bottom_sheet_current_shop.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadBackgroundRarity
 import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
 import robin.vitalij.fortniteassitant.common.binding.TextViewBinding.setValueText
+import robin.vitalij.fortniteassitant.common.extensions.getScreenWidth
+import robin.vitalij.fortniteassitant.common.extensions.initBottomSheetInternal
 import robin.vitalij.fortniteassitant.common.extensions.setVisibility
 import robin.vitalij.fortniteassitant.databinding.BottomSheetCurrentShopBinding
-import robin.vitalij.fortniteassitant.model.network.shop.OtherItemsDetails
-import robin.vitalij.fortniteassitant.model.network.shop.ShopItem
+import robin.vitalij.fortniteassitant.model.network.shop.GrantedModel
+import robin.vitalij.fortniteassitant.model.network.shop.ShopNewItem
 import robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.adapter.OtherItemsDetailsAdapter
 import javax.inject.Inject
 
 const val BOTTOM_SHEET_MARGIN_TOP = 200
+private const val WIDTH_PIXELS_PERCENT = 0.35
 
 class CurrentShopResultFragment : BottomSheetDialogFragment() {
 
@@ -35,17 +37,8 @@ class CurrentShopResultFragment : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        dialog?.setOnShowListener { dialog ->
-            val d = dialog as BottomSheetDialog
-            val bottomSheetInternal =
-                d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-            bottomSheetInternal?.setBackgroundResource(R.drawable.bottomsheet_container_background)
-            bottomSheetInternal?.let {
-                BottomSheetBehavior.from(it).state = BottomSheetBehavior.STATE_EXPANDED
-                BottomSheetBehavior.from(it).skipCollapsed = true
-            }
-        }
+    ): View {
+        dialog?.initBottomSheetInternal()
         val dataBinding =
             DataBindingUtil.inflate<BottomSheetCurrentShopBinding>(
                 inflater,
@@ -68,14 +61,15 @@ class CurrentShopResultFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
-            val itemShop = it.getSerializable(ITEM_SHOP_CURRENT) as ShopItem
-            imageView.loadImage(itemShop.fullBackground)
-            name.text = itemShop.name
-            description.text = itemShop.description
-            price.setValueText(itemShop.price)
+            val itemShop = it.getSerializable(ITEM_SHOP_CURRENT) as ShopNewItem
+            imageView.loadImage(itemShop.displayAssets.first().fullBackground)
+            imageView.loadBackgroundRarity(itemShop.rarity.id)
+            name.text = itemShop.displayName
+            description.text = itemShop.displayDescription
+            price.setValueText(itemShop.price.finalPrice)
 
-            if (itemShop.otherItemsDetails.isNotEmpty()) {
-                initAdapter(itemShop.otherItemsDetails)
+            if (itemShop.granted.size > 1) {
+                initAdapter(itemShop.granted)
             }
         }
     }
@@ -88,15 +82,11 @@ class CurrentShopResultFragment : BottomSheetDialogFragment() {
         sheetContainer.layoutParams.height = (displayMetrics.heightPixels - BOTTOM_SHEET_MARGIN_TOP)
     }
 
-    private fun initAdapter(list: List<OtherItemsDetails>) {
+    private fun initAdapter(list: List<GrantedModel>) {
         theKitIncludes.setVisibility(true)
-        val displayMetrics = DisplayMetrics()
-        activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
-        val widthPixels = displayMetrics.widthPixels * 0.35
-
         recyclerView.run {
             adapter = OtherItemsDetailsAdapter(
-                widthPixels = widthPixels.toInt()
+                widthPixels = activity?.getScreenWidth(WIDTH_PIXELS_PERCENT) ?: 0
             )
             (adapter as OtherItemsDetailsAdapter).setData(list)
         }
@@ -109,7 +99,7 @@ class CurrentShopResultFragment : BottomSheetDialogFragment() {
 
         fun show(
             fragmentManager: FragmentManager?,
-            shopUpcoming: ShopItem
+            shopUpcoming: ShopNewItem
         ) {
             fragmentManager?.let {
                 CurrentShopResultFragment().apply {

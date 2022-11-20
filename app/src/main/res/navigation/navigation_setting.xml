@@ -79,7 +79,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_battles_pass_rewards"
-        android:name="robin.vitalij.fortniteassitant.ui.battlepassrewards.BattlePassRewardsFragment"
+        android:name="robin.vitalij.fortniteassitant.ui.battle_pass_rewards.BattlePassRewardsFragment"
         android:label="@string/battle_pass_rewards" />
     <fragment
         android:id="@+id/navigation_weapon"
@@ -87,7 +87,7 @@
         android:label="@string/weapons" />
     <fragment
         android:id="@+id/navigation_fish"
-        android:name="robin.vitalij.fortniteassitant.ui.fishing.FishingFragment"
+        android:name="robin.vitalij.fortniteassitant.ui.fish.FishFragment"
         android:label="@string/fishing" >
         <action
             android:id="@+id/action_navigation_fish_to_fishStatsFragment"
@@ -103,7 +103,7 @@
         android:label="@string/achievements" />
     <fragment
         android:id="@+id/navigation_cosmetics_new"
-        android:name="robin.vitalij.fortniteassitant.ui.cosmeticsnew.CosmeticsNewFragment"
+        android:name="robin.vitalij.fortniteassitant.ui.cosmetics_new.CosmeticsNewFragment"
         android:label="@string/cosmetics_news" >
         <action
             android:id="@+id/action_navigation_cosmetics_new_to_adapterNewsFragment"
@@ -123,11 +123,11 @@
         android:label="CosmeticsFragment" />
     <fragment
         android:id="@+id/navigation_news"
-        android:name="robin.vitalij.fortniteassitant.ui.news.viewpager.AdapterNewsFragment"
+        android:name="robin.vitalij.fortniteassitant.ui.news.view_pager.AdapterNewsFragment"
         android:label="@string/news_game" />
     <fragment
         android:id="@+id/navigation_game_crew"
-        tools:layout="@layout/fragment_history"
+        tools:layout="@layout/fragment_recycler_view_with_toolbar"
         android:name="robin.vitalij.fortniteassitant.ui.crew.main.GameCrewFragment"
         android:label="@string/fortnite_crew_information" />
 
@@ -138,7 +138,7 @@
 
     <fragment
         android:id="@+id/navigation_banner"
-        tools:layout="@layout/fragment_history"
+        tools:layout="@layout/fragment_recycler_view_with_toolbar"
         android:name="robin.vitalij.fortniteassitant.ui.banners.BannersFragment"
         android:label="@string/banners" />
     <fragment

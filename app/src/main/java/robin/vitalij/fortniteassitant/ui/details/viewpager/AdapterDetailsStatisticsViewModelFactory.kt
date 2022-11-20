@@ -3,9 +3,8 @@ package robin.vitalij.fortniteassitant.ui.details.viewpager
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
 import javax.inject.Inject
 
-class AdapterDetailsStatisticsViewModelFactory @Inject constructor() : BaseViewModelFactory<AdapterDetailsStatisticsViewModel>(
-    AdapterDetailsStatisticsViewModel::class.java
-) {
+class AdapterDetailsStatisticsViewModelFactory @Inject constructor() :
+    BaseViewModelFactory<AdapterDetailsStatisticsViewModel>(AdapterDetailsStatisticsViewModel::class.java) {
 
     private var viewModel: AdapterDetailsStatisticsViewModel? = null
 

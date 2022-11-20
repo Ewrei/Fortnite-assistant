@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_charts_type"
-        android:name="robin.vitalij.fortniteassitant.ui.chartlist.viewpager.AdapterChartsTypeFragment"
+        android:name="robin.vitalij.fortniteassitant.ui.chartlist.view_pager.AdapterChartsTypeFragment"
         android:label="@string/parameter_List"
         tools:layout="@layout/fragment_adapter_details_season">
         <action
@@ -58,7 +58,7 @@
     <fragment
         android:id="@+id/navigation_history"
         android:name="robin.vitalij.fortniteassitant.ui.history.HistoryFragment"
-        tools:layout="@layout/fragment_history"
+        tools:layout="@layout/fragment_recycler_view_with_toolbar"
         android:label="@string/game_sessions" >
         <action
             android:id="@+id/action_navigation_history_to_adapterSessionFragment2"

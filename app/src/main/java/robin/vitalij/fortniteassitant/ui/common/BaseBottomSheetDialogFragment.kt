@@ -21,12 +21,14 @@ abstract class BaseBottomSheetDialogFragment : BottomSheetDialogFragment(),
     ) {
         context?.let { context ->
             errorView.setVisibility(true)
-            errorText.text = context.getString(
+            errorText.text =
+                context.getString(
                 errorModel.textResourceId
             )
-            /*    if (errorModel.errors.isNotEmpty()) errorModel.errors.getMessage() else context.getString(
-                    errorModel.textResourceId
-                )*/
+
+            errorModel.errors?.let {
+                errorText.text = it.error
+            }
             errorImage.setImageDrawable(
                 ContextCompat.getDrawable(context, errorModel.imageResourceId)
             )

@@ -2,46 +2,44 @@ package robin.vitalij.fortniteassitant.ui.charts
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import kotlinx.android.synthetic.main.fragment_charts.*
-import kotlinx.android.synthetic.main.toolbar_center_title.*
-import kotlinx.android.synthetic.main.view_no_subscription.*
-import kotlinx.android.synthetic.main.view_no_subscription.empty
+import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.binding.LineChartBinding.setSession
-import robin.vitalij.fortniteassitant.common.extensions.*
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
+import robin.vitalij.fortniteassitant.databinding.FragmentChartsBinding
+import robin.vitalij.fortniteassitant.model.ChartsModel
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.SessionModel
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.ChartsType
 import robin.vitalij.fortniteassitant.model.enums.GameType
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.comparison.BATTLES_TYPE
 import robin.vitalij.fortniteassitant.ui.comparison.GAME_TYPE
 import robin.vitalij.fortniteassitant.ui.main.MainActivity
 import robin.vitalij.fortniteassitant.ui.subscription.SubscriptionActivity
 import javax.inject.Inject
 
-private const val ONE_SESSION = 1
-
-class ChartsFragment : BaseFragment() {
+class ChartsFragment : Fragment(R.layout.fragment_charts) {
 
     @Inject
     lateinit var viewModelFactory: ChartsViewModelFactory
 
-    private lateinit var viewModel: ChartsViewModel
+    private val viewModel: ChartsViewModel by viewModels { viewModelFactory }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_charts, container, false)
+    private val binding by viewBinding(FragmentChartsBinding::bind)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -50,71 +48,90 @@ class ChartsFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel =
-            ViewModelProvider(viewModelStore, viewModelFactory).get(ChartsViewModel::class.java)
-                .apply {
-                    observeToProgressBar(this@ChartsFragment)
-                    observeToError(this@ChartsFragment)
-                    observeToSubscriptionAccess(this@ChartsFragment)
-                }
+        arguments?.let {
+            viewModel.chartsType = it.getSerializable(ARG_CHARTS_TYPE) as ChartsType
+            viewModel.battlesType = it.getSerializable(BATTLES_TYPE) as BattlesType
+            viewModel.gameType = it.getSerializable(GAME_TYPE) as GameType
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, Observer {
-            arcProgress.setAnimatedProgress(it.header)
-            it.sessionModels.let(::initAdapter)
-        })
-
         setNavigation()
         initToolbar()
         setListeners()
 
-        arguments?.let {
-            viewModel.loadData(
-                it.getSerializable(CHARTS_TYPE) as ChartsType,
-                it.getSerializable(BATTLES_TYPE) as BattlesType,
-                it.getSerializable(GAME_TYPE) as GameType
-            )
-            arcProgress.setBottomText(getString((it.getSerializable(CHARTS_TYPE) as ChartsType).getTitleShortRes()))
-            arcProgress.max = (it.getSerializable(CHARTS_TYPE) as ChartsType).getProgressMax()
-        }
-    }
+        viewModel.loadData()
 
-    private fun setListeners() {
-        subscribe.setOnClickListener {
-            startActivity(SubscriptionActivity.newInstance(context))
-        }
+        binding.arcProgress.setBottomText(getString((viewModel.chartsType.getTitleShortRes())))
+        binding.arcProgress.max = viewModel.chartsType.getProgressMax()
 
-        watchVideoAds.setOnClickListener {
-            (activity as? MainActivity)?.onDisplayButtonClicked {
-                viewModel.checkSubscriptionAccess()
+        lifecycleScope.launch {
+            viewModel.chartsResult.collect {
+                handleChartsResult(it)
             }
         }
     }
 
-    private fun initToolbar() {
-        arguments?.let {
-            toolbar.title = getString((it.getSerializable(CHARTS_TYPE) as ChartsType).getTitleRes())
+    private fun setListeners() {
+        binding.noSubscriptionView.subscribe.setOnClickListener {
+            startActivity(SubscriptionActivity.newInstance(context))
         }
+
+        binding.noSubscriptionView.watchVideoAds.setOnClickListener {
+            (activity as? MainActivity)?.onDisplayButtonClicked {
+                binding.noSubscriptionView.noSubscriptionView.isVisible =
+                    viewModel.checkSubscriptionAccess()
+            }
+        }
+
+        binding.errorViewInclude.errorResolveButton.setOnClickListener {
+            viewModel.loadData()
+        }
+    }
+
+    private fun initToolbar() {
+        binding.toolbarInclude.toolbar.title = getString(viewModel.chartsType.getTitleRes())
     }
 
     private fun setNavigation() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
+    }
+
+    private fun handleChartsResult(result: LoadingState<ChartsModel>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
+            }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                binding.arcProgress.setAnimatedProgress(result.data.header)
+                result.data.sessionModels.let(::initAdapter)
+            }
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                }
+            }
+        }
     }
 
     private fun initAdapter(list: List<SessionModel>) {
-        сhart.setInVisibility(list.size > ONE_SESSION)
-        empty.setVisibility(list.size <= ONE_SESSION)
+        binding.chart.isInvisible = list.size < ONE_SESSION
+        binding.empty.isVisible = list.size <= ONE_SESSION
         if (list.size > ONE_SESSION) {
-            сhart.setSession(list)
+            binding.chart.setSession(list)
         }
     }
 
     companion object {
-        const val CHARTS_TYPE = "charts_type"
+        const val ARG_CHARTS_TYPE = "arg_charts_type"
+        private const val ONE_SESSION = 1
 
         fun newInstance() = ChartsFragment()
     }

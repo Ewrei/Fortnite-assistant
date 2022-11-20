@@ -4,23 +4,20 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
 import robin.vitalij.fortniteassitant.model.network.stats.StatsTypeDevice
-import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewholder.body.adapter.viewmodel.*
-import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewmodel.Profile
-import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewmodel.ProfileBodyViewModel
-import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewmodel.ProfileHeaderViewModel
+import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.ProfileListItem
+import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.stats_adapter.BodyStatsListItem
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 import robin.vitalij.fortniteassitant.utils.TextUtils
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
-import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 class ProfileResultMapper(
     private val resourceProvider: ResourceProvider
-) :
-    Mapper<FortniteProfileResponse, List<Profile>> {
+) : Mapper<FortniteProfileResponse, List<ProfileListItem>> {
 
-    override fun transform(obj: FortniteProfileResponse): List<Profile> {
-        val list = arrayListOf<Profile>()
+    override fun transform(obj: FortniteProfileResponse): List<ProfileListItem> {
+        val list = mutableListOf<ProfileListItem>()
         list.add(
-            ProfileHeaderViewModel(
+            ProfileListItem.HeaderItem(
                 avatarUrl = obj.avatar,
                 userName = obj.stats.playerStatsData.account.name,
                 playerId = obj.stats.playerStatsData.account.id,
@@ -44,25 +41,25 @@ class ProfileResultMapper(
         )
 
         list.add(
-            ProfileBodyViewModel(
-                getAllBodyStats(obj.stats.playerStatsData.stats.all),
-                getAllBodyStats(obj.stats.playerStatsData.stats.keyboardMouse),
-                getAllBodyStats(obj.stats.playerStatsData.stats.gamepad),
-                getAllBodyStats(obj.stats.playerStatsData.stats.touch)
+            ProfileListItem.BodyItem(
+                all = getAllBodyStats(obj.stats.playerStatsData.stats.all),
+                keyboardMouse = getAllBodyStats(obj.stats.playerStatsData.stats.keyboardMouse),
+                gamepad = getAllBodyStats(obj.stats.playerStatsData.stats.gamepad),
+                touch = getAllBodyStats(obj.stats.playerStatsData.stats.touch)
             )
         )
         return list
     }
 
-    private fun getAllBodyStats(statsTypeDevice: StatsTypeDevice?): List<BodyStats> {
-        val list = arrayListOf<BodyStats>()
+    private fun getAllBodyStats(statsTypeDevice: StatsTypeDevice?): List<BodyStatsListItem> {
+        val list = mutableListOf<BodyStatsListItem>()
 
         if (statsTypeDevice == null || statsTypeDevice.overall?.matches == 0) {
-            list.add(BodyStatsEmpty(resourceProvider.getString(R.string.no_results_for_this_platform)))
+            list.add(BodyStatsListItem.EmptyItem(resourceProvider.getString(R.string.no_results_for_this_platform)))
         } else {
             statsTypeDevice.overall?.let {
                 list.add(
-                    BodyStatsOverall(
+                    BodyStatsListItem.OverallItem(
                         resourceProvider.getString(R.string.overall_battles),
                         it
                     )
@@ -71,7 +68,7 @@ class ProfileResultMapper(
 
             statsTypeDevice.solo?.let {
                 list.add(
-                    BodyStatsStats(
+                    BodyStatsListItem.StatsItem(
                         resourceProvider.getString(R.string.solo_battles),
                         score = it.score,
                         wins = it.wins,
@@ -93,7 +90,7 @@ class ProfileResultMapper(
 
             statsTypeDevice.duo?.let {
                 list.add(
-                    BodyStatsStats(
+                    BodyStatsListItem.StatsItem(
                         resourceProvider.getString(R.string.duo_battles),
                         score = it.score,
                         wins = it.wins,
@@ -115,7 +112,7 @@ class ProfileResultMapper(
 
             statsTypeDevice.trio?.let {
                 list.add(
-                    BodyStatsStats(
+                    BodyStatsListItem.StatsItem(
                         resourceProvider.getString(R.string.trio_battles),
                         score = it.score,
                         wins = it.wins,
@@ -137,7 +134,7 @@ class ProfileResultMapper(
 
             statsTypeDevice.squad?.let {
                 list.add(
-                    BodyStatsStats(
+                    BodyStatsListItem.StatsItem(
                         resourceProvider.getString(R.string.squad_battles),
                         score = it.score,
                         wins = it.wins,
@@ -159,7 +156,7 @@ class ProfileResultMapper(
 
             statsTypeDevice.ltm?.let {
                 list.add(
-                    BodyStatsLtm(
+                    BodyStatsListItem.LtmItem(
                         resourceProvider.getString(R.string.ltm_battles),
                         it
                     )

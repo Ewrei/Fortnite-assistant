@@ -3,21 +3,25 @@
     android:id="@+id/content_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="@dimen/default_padding_double">
 
     <include
+        android:id="@+id/recyclerViewInclude"
         layout="@layout/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <include
+        android:id="@+id/progressViewInclude"
         layout="@layout/progress_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
     <include
+        android:id="@+id/errorViewInclude"
         layout="@layout/view_error"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

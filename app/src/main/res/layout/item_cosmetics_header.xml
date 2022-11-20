@@ -1,121 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <data>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/cosmetic_image_size"
+        android:layout_height="@dimen/cosmetic_image_size"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/default_margin_double"
+        tools:srcCompat="@tools:sample/avatars" />
 
-        <import type="android.view.View" />
-
-        <variable
-            name="item"
-            type="robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter.viewmodel.CosmeticsHeaderViewModel" />
-    </data>
-
-    <LinearLayout
-        android:id="@+id/content_view"
+    <TextView
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginStart="@dimen/default_margin_double"
+        android:layout_marginEnd="@dimen/default_margin_double"
+        android:fontFamily="@font/futura_pt_bold"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        tools:text="name" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_gravity="center_horizontal"
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin_double"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin_double"
+        android:fontFamily="@font/futura_pt_medium"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/darker_gray"
+        tools:text="description" />
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin_double"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin_double"
+        android:fontFamily="@font/futura_pt_medium"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/darker_gray"
+        tools:text="type" />
+
+    <TextView
+        android:id="@+id/addDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin_double"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin_double"
+        android:fontFamily="@font/futura_pt_medium"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/darker_gray"
+        tools:text="addDate" />
+
+    <TextView
+        android:id="@+id/introduction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin_double"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin_double"
+        android:fontFamily="@font/futura_pt_bold"
+        android:gravity="center"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        tools:text="introduction" />
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/DefaultCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_double"
+        android:checkable="false"
+        app:cardBackgroundColor="@color/colorPrimaryDark">
+
+        <TextView
+            android:id="@+id/typeSet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin_double"
-            app:rarity="@{item.rarity.value}"
-            app:images="@{item.images}"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin_double"
-            android:layout_marginEnd="@dimen/default_margin_double"
             android:fontFamily="@font/futura_pt_bold"
-            android:text="@{item.name}"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:textStyle="bold"
-            tools:text="name" />
-
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin_double"
-            android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginEnd="@dimen/default_margin_double"
-            android:fontFamily="@font/futura_pt_medium"
-            android:text="@{item.description}"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textColor="@android:color/darker_gray"
-            tools:text="description" />
-
-        <TextView
-            android:id="@+id/type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin_double"
-            android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginEnd="@dimen/default_margin_double"
-            android:fontFamily="@font/futura_pt_medium"
-            android:text="@{item.typeCosmetics.displayValue}"
-            tools:text="type"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textColor="@android:color/darker_gray"/>
-
-        <TextView
-            android:id="@+id/addDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin_double"
-            android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginEnd="@dimen/default_margin_double"
-            android:fontFamily="@font/futura_pt_medium"
-            android:text="@{item.addDate}"
-            android:visibility="@{item.addDate == null ? View.GONE : View.VISIBLE}"
-            tools:text="addDate"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textColor="@android:color/darker_gray"/>
-
-        <TextView
-            android:id="@+id/introduction"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginStart="@dimen/default_margin_double"
-            android:layout_marginEnd="@dimen/default_margin_double"
-            tools:text="introduction"
-            android:layout_marginTop="@dimen/default_margin"
-            android:fontFamily="@font/futura_pt_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:visibility="@{item.introduction == null ? View.GONE : View.VISIBLE}"
-            android:text="@{item.introduction}" />
+            tools:text="set" />
 
-        <com.google.android.material.card.MaterialCardView
-            style="@style/DefaultCard"
-            app:cardBackgroundColor="@color/colorPrimaryDark"
-            android:layout_width="match_parent"
-            android:layout_margin="@dimen/default_margin_double"
-            android:layout_height="wrap_content"
-            android:checkable="false">
+    </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:id="@+id/set"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_margin="@dimen/default_margin_double"
-            tools:text="set"
-            android:fontFamily="@font/futura_pt_bold"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:visibility="@{item.set == null ? View.GONE : View.VISIBLE}"
-            android:text="@{item.set.text}" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-    </LinearLayout>
-
-</layout>
+</LinearLayout>

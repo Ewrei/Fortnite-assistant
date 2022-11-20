@@ -3,7 +3,6 @@ package robin.vitalij.fortniteassitant.ui.bottomsheet.vehicles.adapter
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.common.extensions.initChip
-import robin.vitalij.fortniteassitant.databinding.ItemVehiclesResultHeaderBinding
 import robin.vitalij.fortniteassitant.databinding.ItemVehiclesResultTagBinding
 
 class VehiclesResultTagViewHolder(
@@ -12,7 +11,6 @@ class VehiclesResultTagViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: VehiclesResultListItem.TagItem) {
-        binding.item = item
         binding.chipGroup.initChip(item.tags, layoutInflater)
     }
 }

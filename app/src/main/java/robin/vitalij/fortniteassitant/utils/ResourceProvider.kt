@@ -8,6 +8,4 @@ class ResourceProvider(private val context: Context) {
 
     fun getString(string: Int, text: String) = context.getString(string, text)
 
-    fun getQuantityString(pluralsId: Int, size: Int) =
-        context.resources.getQuantityString(pluralsId, size, size)
 }

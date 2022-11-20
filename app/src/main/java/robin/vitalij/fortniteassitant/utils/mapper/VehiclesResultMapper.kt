@@ -8,7 +8,7 @@ class VehiclesResultMapper() :
     Mapper<VehicleModel, List<VehiclesResultListItem>> {
 
     override fun transform(obj: VehicleModel): List<VehiclesResultListItem> {
-        val list = arrayListOf<VehiclesResultListItem>()
+        val list = mutableListOf<VehiclesResultListItem>()
 
         list.add(VehiclesResultListItem.HeaderItem(obj.name, obj.icon))
 

@@ -5,8 +5,8 @@ import robin.vitalij.fortniteassitant.databinding.ItemSearchBinding
 import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
 
 class SearchHolder(
-    var binding: ItemSearchBinding,
-    val onClick: (accountId: SearchSteamUser) -> Unit
+    private val binding: ItemSearchBinding,
+    private val onClick: (accountId: SearchSteamUser) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: SearchSteamUser) {

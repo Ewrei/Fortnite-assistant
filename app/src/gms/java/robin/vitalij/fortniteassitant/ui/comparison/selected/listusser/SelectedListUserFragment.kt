@@ -64,10 +64,10 @@ class SelectedListUserFragment : BaseFragment() {
         setToolbarTitle(R.string.selected_user)
         setListener()
 
-        viewModel.data.observe(viewLifecycleOwner, {
+        viewModel.data.observe(viewLifecycleOwner) {
             it?.let(::initAdapter)
             comparisonButton.setVisibility(it.isNotEmpty())
-        })
+        }
 
         viewModel.loadData()
 
@@ -140,8 +140,8 @@ class SelectedListUserFragment : BaseFragment() {
     }
 
     private fun onDisplayButtonClicked(getAnWard: () -> Unit) {
-        if (viewModel.rewardedAdRepository.defaultRewardedAd != null) {
-            viewModel.rewardedAdRepository.defaultRewardedAd?.show(requireActivity()) {
+        if (viewModel.rewardedAdRepository.isLoadVideo()) {
+            viewModel.rewardedAdRepository.showReward(requireActivity()) {
                 getAnWard()
             }
         }

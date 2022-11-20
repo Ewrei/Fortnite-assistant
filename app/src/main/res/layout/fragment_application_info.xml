@@ -1,188 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <variable
-            name="viewModel"
-            type="robin.vitalij.fortniteassitant.ui.setting.applicationinfo.ApplicationInfoViewModel" />
-    </data>
-
-    <LinearLayout
+    <include
+        android:id="@+id/toolbarInclude"
+        layout="@layout/toolbar_center_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content" />
 
-        <include
-            layout="@layout/toolbar_center_title"
+    <ScrollView
+        android:id="@+id/content_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <ScrollView
-            android:id="@+id/content_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
+                style="@style/DefaultCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="@dimen/half_default_margin">
 
-                <com.google.android.material.card.MaterialCardView
-                    style="@style/DefaultCard"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/half_default_margin">
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <ImageView
+                        android:layout_width="@dimen/avatar_size"
+                        android:layout_height="@dimen/avatar_size"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/default_margin"
+                        app:srcCompat="@drawable/image_profile_develop" />
+
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/default_margin"
-                        android:layout_marginBottom="@dimen/default_margin"
-                        android:orientation="vertical">
+                        android:autoLink="web|email"
+                        android:fontFamily="@font/futura_pt_bold"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/default_padding"
+                        android:text="@string/develop"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                        android:textStyle="bold" />
 
-                        <ImageView
-                            android:layout_width="@dimen/avatar_size"
-                            android:layout_height="@dimen/avatar_size"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/default_margin"
-                            app:srcCompat="@drawable/image_profile_develop" />
+                    <TextView
+                        android:id="@+id/version"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/futura_pt_medium"
+                        android:gravity="center"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        tools:text="Version: 1.0.0" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:autoLink="web|email"
-                            android:gravity="center"
-                            android:paddingTop="@dimen/default_padding"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/futura_pt_bold"
-                            android:text="@string/develop"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/version"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:fontFamily="@font/futura_pt_medium"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                            tools:text="Version: 1.0.0" />
+            </com.google.android.material.card.MaterialCardView>
 
-                    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin"
+                android:fontFamily="@font/futura_pt_medium"
+                android:text="@string/application_info"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/darker_gray" />
 
-                </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/bugCard"
+                style="@style/DefaultCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/half_default_margin">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/default_margin"
-                    android:textColor="@android:color/darker_gray"
-                    android:fontFamily="@font/futura_pt_medium"
-                    android:text="@string/application_info"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                    android:orientation="vertical">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/bugCard"
-                    style="@style/DefaultCard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/half_default_margin">
-
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/default_margin"
-                        android:orientation="vertical">
+                        android:layout_weight="1"
+                        android:fontFamily="@font/futura_pt_bold"
+                        android:text="@string/developer_title"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/developer_title"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/futura_pt_bold"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_marginBottom="@dimen/default_margin"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/futura_pt_medium"
+                        android:text="@string/developer_body"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:textColor="@android:color/darker_gray" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textColor="@android:color/darker_gray"
-                            android:layout_marginTop="@dimen/default_margin"
-                            android:layout_marginBottom="@dimen/default_margin"
-                            android:fontFamily="@font/futura_pt_medium"
-                            android:text="@string/developer_body"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:autoLink="web|email"
+                        android:drawableStart="@drawable/ic_gmail"
+                        android:drawablePadding="@dimen/default_padding"
+                        android:fontFamily="@font/futura_pt_medium"
+                        android:text="@string/gmail"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        tools:ignore="RtlCompat" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:layout_marginEnd="@dimen/default_margin"
-                            android:autoLink="web|email"
-                            android:drawableStart="@drawable/ic_gmail"
-                            android:drawablePadding="@dimen/default_padding"
-                            android:fontFamily="@font/futura_pt_medium"
-                            android:text="@string/gmail"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                            tools:ignore="RtlCompat" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:layout_marginBottom="@dimen/default_margin"
+                        android:autoLink="web|email"
+                        android:drawableStart="@drawable/ic_vk"
+                        android:drawablePadding="@dimen/default_padding"
+                        android:fontFamily="@font/futura_pt_medium"
+                        android:gravity="center"
+                        android:text="@string/vk_url"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        tools:ignore="RtlCompat" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/default_margin"
-                            android:layout_marginEnd="@dimen/default_margin"
-                            android:layout_marginBottom="@dimen/default_margin"
-                            android:autoLink="web|email"
-                            android:fontFamily="@font/futura_pt_medium"
-                            android:drawableStart="@drawable/ic_vk"
-                            android:drawablePadding="@dimen/default_padding"
-                            android:gravity="center"
-                            android:text="@string/vk_url"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                            tools:ignore="RtlCompat" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="@dimen/half_default_margin"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:autoLink="web|email"
+                        android:drawableStart="@drawable/ic_telegram"
+                        android:drawablePadding="@dimen/default_padding"
+                        android:fontFamily="@font/futura_pt_medium"
+                        android:text="@string/telegram_url"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        tools:ignore="RtlCompat" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:layout_marginTop="@dimen/half_default_margin"
-                            android:layout_marginEnd="@dimen/default_margin"
-                            android:autoLink="web|email"
-                            android:fontFamily="@font/futura_pt_medium"
-                            android:drawableStart="@drawable/ic_telegram"
-                            android:drawablePadding="@dimen/default_padding"
-                            android:text="@string/telegram_url"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                            tools:ignore="RtlCompat" />
+                </LinearLayout>
 
-                    </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-                </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/privacyPolicy"
+                style="@style/DefaultButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:text="@string/privacy_policy"
+                app:layout_constraintBottom_toTopOf="@+id/faceitProfile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/profileImage"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/privacyPolicy"
-                    style="@style/DefaultButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:text="@string/privacy_policy"
-                    app:layout_constraintBottom_toTopOf="@+id/faceitProfile"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/profileImage"
-                    app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
 
-            </LinearLayout>
+    </ScrollView>
 
-        </ScrollView>
-
-    </LinearLayout>
-
-</layout>
+</LinearLayout>

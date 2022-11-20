@@ -131,8 +131,8 @@ class NetworkModule {
                         )
                     } else {
                         request.addHeader(
-                            "API-Key",
-                            "01b315a55d2237b1b8a9e9a9e7abe882eb094638"
+                            "Authorization",
+                            "71433b56-06ad-4a38-8df2-c0efd7d9e834"
                         )
                     }
                     chain.proceed(request.build())

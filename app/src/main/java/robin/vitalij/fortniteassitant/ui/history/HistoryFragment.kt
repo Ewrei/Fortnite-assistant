@@ -2,54 +2,56 @@ package robin.vitalij.fortniteassitant.ui.history
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.recycler_view.*
-import kotlinx.android.synthetic.main.toolbar_center_title.*
+import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.observeToEmpty
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
+import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewWithToolbarBinding
 import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
 import robin.vitalij.fortniteassitant.model.HistoryUserModel
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.history.adapter.HistoryAdapter
-import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.DATE
-import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.SESSION_ID
-import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.SESSION_LAST_ID
-import java.util.*
+import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.ARG_DATE
+import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.ARG_SESSION_ID
+import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.ARG_SESSION_LAST_ID
 import javax.inject.Inject
 
 
-class HistoryFragment : BaseFragment() {
+class HistoryFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) {
 
     @Inject
     lateinit var viewModelFactory: HistoryViewModelFactory
 
-    private lateinit var viewModel: HistoryViewModel
+    private val viewModel: HistoryViewModel by viewModels { viewModelFactory }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_recycler_view_with_toolbar, container, false)
+    private val binding by viewBinding(FragmentRecyclerViewWithToolbarBinding::bind)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(HistoryViewModel::class.java).apply {
-                observeToProgressBar(this@HistoryFragment)
-                observeToError(this@HistoryFragment)
-                observeToEmpty(this@HistoryFragment)
-            }
-    }
+    private val historyAdapter =
+        HistoryAdapter { sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel> ->
+            findNavController().navigate(
+                R.id.navigation_adapter_session,
+                bundleOf(
+                    ARG_SESSION_ID to sessionId,
+                    ARG_SESSION_LAST_ID to sessionLast,
+                    ARG_DATE to sessionDate,
+                    AdapterDetailsStatisticsFragment.ARG_DETAIL_STATISTICS to detailsStats as ArrayList<DetailStatisticsModel>
+                )
+            )
+        }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -58,35 +60,52 @@ class HistoryFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
-            it.let(::initAdapter)
-        })
-
         setNavigation()
+        initializeRecyclerView()
+
+        binding.viewEmptyInclude.empty.setText(R.string.empty_session)
+
+        lifecycleScope.launch {
+            viewModel.historiesResult.collect {
+                handleHistoriesResult(it)
+            }
+        }
+
+        viewModel.loadData()
     }
 
     private fun setNavigation() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
-    private fun initAdapter(list: List<HistoryUserModel>) {
-        recyclerView.run {
-            adapter =
-                HistoryAdapter { sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel> ->
-                    findNavController().navigate(R.id.navigation_adapter_session, Bundle().apply {
-                        putLong(SESSION_ID, sessionId)
-                        putLong(SESSION_LAST_ID, sessionLast)
-                        putString(DATE, sessionDate)
-                        putParcelableArrayList(
-                            AdapterDetailsStatisticsFragment.DETAIL_STATISTICS,
-                            detailsStats as ArrayList<DetailStatisticsModel>
-                        )
-                    })
-                }
-            (adapter as HistoryAdapter).setData(list)
+    private fun initializeRecyclerView() {
+        binding.recyclerViewInclude.recyclerView.run {
+            adapter = historyAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
+
+    private fun handleHistoriesResult(result: LoadingState<List<HistoryUserModel>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
+            }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                binding.viewEmptyInclude.emptyView.isVisible = result.data.isEmpty()
+                historyAdapter.updateData(result.data)
+            }
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                }
+            }
+        }
+    }
+
 }

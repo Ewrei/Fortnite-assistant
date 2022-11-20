@@ -26,8 +26,6 @@ class ComparisonSelectedViewModel(
 
     val mutableSizeLiveData = MutableLiveData<Int>()
 
-    val nickname = ObservableField("")
-
     val visibility = ObservableField(true)
 
     var mutableLiveData = MutableLiveData<List<SearchSteamUser>>()

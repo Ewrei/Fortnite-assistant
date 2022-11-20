@@ -10,6 +10,6 @@
         android:id="@+id/topScreen"
         android:name="robin.vitalij.fortniteassitant.ui.top.TopFragment"
         android:label="@string/tab_title_top"
-        tools:layout="@layout/fragment_top"/>
+        tools:layout="@layout/fragment_recycler_view_with_toolbar"/>
 
 </navigation>

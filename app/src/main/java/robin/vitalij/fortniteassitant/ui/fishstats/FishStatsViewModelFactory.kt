@@ -7,7 +7,7 @@ import robin.vitalij.fortniteassitant.utils.ResourceProvider
 import javax.inject.Inject
 
 class FishStatsViewModelFactory @Inject constructor(
-    private var fishStatsRepository: FishStatsRepository,
+    private val fishStatsRepository: FishStatsRepository,
     private val preferenceManager: PreferenceManager,
     private val resourceProvider: ResourceProvider
 ) : BaseViewModelFactory<FishStatsViewModel>(FishStatsViewModel::class.java) {

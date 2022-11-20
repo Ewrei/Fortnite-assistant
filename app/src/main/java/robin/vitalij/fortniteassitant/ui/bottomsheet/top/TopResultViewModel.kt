@@ -21,7 +21,7 @@ class TopResultViewModel(private val resourceProvider: ResourceProvider) : BaseV
     }
 
     private fun getTops(): List<TopResult> {
-        val list = arrayListOf<TopResult>()
+        val list = mutableListOf<TopResult>()
         list.add(TopHeaderModel(resourceProvider.getString(R.string.score)))
         list.add(TopContentModel(TopType.SCORE))
         list.add(TopContentModel(TopType.SCORE_PER_MIN))

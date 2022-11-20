@@ -5,17 +5,21 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.model.network.NewsModel
 
 class TopAdapter(
     private val onClick: (accountId: String) -> Unit,
     private val onTopClick: () -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var items = arrayListOf<TopListItem>()
+    private val items = mutableListOf<TopListItem>()
 
-    fun setData(data: List<TopListItem>) {
-        items.clear()
-        items.addAll(data)
+    fun updateData(data: List<TopListItem>) {
+        if (items != data) {
+            items.clear()
+            items.addAll(data)
+            notifyDataSetChanged()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

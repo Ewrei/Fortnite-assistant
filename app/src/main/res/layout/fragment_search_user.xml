@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -78,6 +77,31 @@
                             app:iconPadding="0dp" />
 
                     </TableRow>
+
+                    <com.google.android.material.button.MaterialButton
+                        style="@style/DefaultButton"
+                        android:id="@+id/iKnowMyAccountIdButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_marginStart="@dimen/default_margin_double"
+                        android:layout_marginEnd="@dimen/default_margin_double"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:text="@string/i_know_my_account_id"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/howToFindAccountIdButton"
+                        style="@style/DefaultButton"
+                        android:layout_marginStart="@dimen/default_margin_double"
+                        android:layout_marginEnd="@dimen/default_margin_double"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height"
+                        android:backgroundTint="@color/telegram"
+                        android:textColor="@color/white"
+                        android:layout_marginBottom="@dimen/default_margin_double"
+                        android:text="@string/how_to_find_account_id" />
 
                     <include
                         layout="@layout/recycler_view"

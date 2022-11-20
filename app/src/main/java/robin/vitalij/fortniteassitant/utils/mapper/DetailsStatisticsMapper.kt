@@ -8,20 +8,18 @@ import robin.vitalij.fortniteassitant.db.entity.UserEntity
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.model.network.stats.*
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.*
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsListItem
 import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
 import robin.vitalij.fortniteassitant.utils.ResourceProvider
-
-private const val TWO_SESSION = 2
 
 class DetailsStatisticsMapper(
     private val resourceProvider: ResourceProvider,
     private val battlesType: BattlesType,
     private val gameType: GameType
-) : Mapper<List<UserEntity>, List<HomeBodyStats>> {
+) : Mapper<List<UserEntity>, List<HomeBodyStatsListItem>> {
 
-    override fun transform(obj: List<UserEntity>): List<HomeBodyStats> {
-        val list = arrayListOf<HomeBodyStats>()
+    override fun transform(obj: List<UserEntity>): List<HomeBodyStatsListItem> {
+        val list = mutableListOf<HomeBodyStatsListItem>()
 
         val userEntity: UserEntity = obj.last()
         val userLastEntity: UserEntity = obj.first()
@@ -44,8 +42,8 @@ class DetailsStatisticsMapper(
         return list
     }
 
-    private fun getAllBodyStats(statsTypeDevice: StatsTypeDevice): List<HomeBodyStats> {
-        val list = arrayListOf<HomeBodyStats>()
+    private fun getAllBodyStats(statsTypeDevice: StatsTypeDevice): List<HomeBodyStatsListItem> {
+        val list = mutableListOf<HomeBodyStatsListItem>()
 
         when (battlesType) {
             BattlesType.OVERALL -> {
@@ -101,11 +99,11 @@ class DetailsStatisticsMapper(
         return list
     }
 
-    private fun getOverallBodyStats(overall: Overall): List<HomeBodyStats> {
-        val list = arrayListOf<HomeBodyStats>()
+    private fun getOverallBodyStats(overall: Overall): List<HomeBodyStatsListItem> {
+        val list = mutableListOf<HomeBodyStatsListItem>()
 
         list.add(
-            HomeBodyStatsViewModel(
+            HomeBodyStatsListItem.StatsItem(
                 leftTop = overall.matches.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.matches),
                 rightTop = overall.kd.getStringFormat(),
@@ -120,7 +118,7 @@ class DetailsStatisticsMapper(
         )
 
         list.add(
-            HomeBodyStatsShortViewModel(
+            HomeBodyStatsListItem.StatsShortItem(
                 leftTop = overall.wins.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.top_one),
                 rightTop = overall.top3.getStringFormat(),
@@ -133,7 +131,7 @@ class DetailsStatisticsMapper(
         )
 
         list.add(
-            HomeBodyStatsShortViewModel(
+            HomeBodyStatsListItem.StatsShortItem(
                 leftTop = overall.top10.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.top_ten),
                 rightTop = overall.top12.getStringFormat(),
@@ -145,10 +143,10 @@ class DetailsStatisticsMapper(
             )
         )
 
-        list.add(HomeBodyHeaderViewModel(resourceProvider.getString(R.string.score)))
+        list.add(HomeBodyStatsListItem.HeaderItem(resourceProvider.getString(R.string.score)))
 
         list.add(
-            HomeBodyStatsShortViewModel(
+            HomeBodyStatsListItem.StatsShortItem(
                 leftTop = overall.score.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.score),
                 rightTop = overall.getAvgScore().getStringFormat(),
@@ -160,10 +158,10 @@ class DetailsStatisticsMapper(
             )
         )
 
-        list.add(HomeBodyHeaderViewModel(resourceProvider.getString(R.string.other)))
+        list.add(HomeBodyStatsListItem.HeaderItem(resourceProvider.getString(R.string.other)))
 
         list.add(
-            HomeBodyStatsShortViewModel(
+            HomeBodyStatsListItem.StatsShortItem(
                 leftTop = overall.killsPerMin.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.kills_per_min),
                 rightTop = overall.killsPerMatch.getStringFormat(),
@@ -180,11 +178,11 @@ class DetailsStatisticsMapper(
 
     private fun getSoloMatchesBodyStats(
         soloMatches: SoloMatches
-    ): List<HomeBodyStats> {
-        val list = arrayListOf<HomeBodyStats>()
+    ): List<HomeBodyStatsListItem> {
+        val list = mutableListOf<HomeBodyStatsListItem>()
 
         list.add(
-            HomeBodyStatsViewModel(
+            HomeBodyStatsListItem.StatsItem(
                 leftTop = soloMatches.matches.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.matches),
                 rightTop = soloMatches.kd.getStringFormat(),
@@ -199,7 +197,7 @@ class DetailsStatisticsMapper(
         )
 
         list.add(
-            HomeBodyStatsShortViewModel(
+            HomeBodyStatsListItem.StatsShortItem(
                 leftTop = soloMatches.wins.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.top_one),
                 rightTop = soloMatches.top10.getStringFormat(),
@@ -211,10 +209,10 @@ class DetailsStatisticsMapper(
             )
         )
 
-        list.add(HomeBodyHeaderViewModel(resourceProvider.getString(R.string.score)))
+        list.add(HomeBodyStatsListItem.HeaderItem(resourceProvider.getString(R.string.score)))
 
         list.add(
-            HomeBodyStatsShortViewModel(
+            HomeBodyStatsListItem.StatsShortItem(
                 leftTop = soloMatches.score.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.score),
                 rightTop = soloMatches.getAvgScore().getStringFormat(),
@@ -226,10 +224,10 @@ class DetailsStatisticsMapper(
             )
         )
 
-        list.add(HomeBodyHeaderViewModel(resourceProvider.getString(R.string.other)))
+        list.add(HomeBodyStatsListItem.HeaderItem(resourceProvider.getString(R.string.other)))
 
         list.add(
-            HomeBodyStatsShortViewModel(
+            HomeBodyStatsListItem.StatsShortItem(
                 leftTop = soloMatches.killsPerMin.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.kills_per_min),
                 rightTop = soloMatches.killsPerMatch.getStringFormat(),
@@ -246,11 +244,11 @@ class DetailsStatisticsMapper(
 
     private fun getDuoMatchesBodyStats(
         soloMatches: DuoMatches,
-    ): List<HomeBodyStats> {
-        val list = arrayListOf<HomeBodyStats>()
+    ): List<HomeBodyStatsListItem> {
+        val list = mutableListOf<HomeBodyStatsListItem>()
 
         list.add(
-            HomeBodyStatsViewModel(
+            HomeBodyStatsListItem.StatsItem(
                 leftTop = soloMatches.matches.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.matches),
                 rightTop = soloMatches.kd.getStringFormat(),
@@ -265,7 +263,7 @@ class DetailsStatisticsMapper(
         )
 
         list.add(
-            HomeBodyStatsShortViewModel(
+            HomeBodyStatsListItem.StatsShortItem(
                 leftTop = soloMatches.wins.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.top_one),
                 rightTop = soloMatches.top5.getStringFormat(),
@@ -277,10 +275,10 @@ class DetailsStatisticsMapper(
             )
         )
 
-        list.add(HomeBodyHeaderViewModel(resourceProvider.getString(R.string.score)))
+        list.add(HomeBodyStatsListItem.HeaderItem(resourceProvider.getString(R.string.score)))
 
         list.add(
-            HomeBodyStatsShortViewModel(
+            HomeBodyStatsListItem.StatsShortItem(
                 leftTop = soloMatches.score.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.score),
                 rightTop = soloMatches.getAvgScore().getStringFormat(),
@@ -292,10 +290,10 @@ class DetailsStatisticsMapper(
             )
         )
 
-        list.add(HomeBodyHeaderViewModel(resourceProvider.getString(R.string.other)))
+        list.add(HomeBodyStatsListItem.HeaderItem(resourceProvider.getString(R.string.other)))
 
         list.add(
-            HomeBodyStatsShortViewModel(
+            HomeBodyStatsListItem.StatsShortItem(
                 leftTop = soloMatches.killsPerMin.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.kills_per_min),
                 rightTop = soloMatches.killsPerMatch.getStringFormat(),
@@ -312,11 +310,11 @@ class DetailsStatisticsMapper(
 
     private fun getThreeMatchesBodyStats(
         trioMatches: TrioMatches,
-    ): List<HomeBodyStats> {
-        val list = arrayListOf<HomeBodyStats>()
+    ): List<HomeBodyStatsListItem> {
+        val list = mutableListOf<HomeBodyStatsListItem>()
 
         list.add(
-            HomeBodyStatsViewModel(
+            HomeBodyStatsListItem.StatsItem(
                 leftTop = trioMatches.matches.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.matches),
                 rightTop = trioMatches.kd.getStringFormat(),
@@ -331,7 +329,7 @@ class DetailsStatisticsMapper(
         )
 
         list.add(
-            HomeBodyStatsShortViewModel(
+            HomeBodyStatsListItem.StatsShortItem(
                 leftTop = trioMatches.wins.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.top_one),
                 rightTop = trioMatches.top3.getStringFormat(),
@@ -343,10 +341,10 @@ class DetailsStatisticsMapper(
             )
         )
 
-        list.add(HomeBodyHeaderViewModel(resourceProvider.getString(R.string.score)))
+        list.add(HomeBodyStatsListItem.HeaderItem(resourceProvider.getString(R.string.score)))
 
         list.add(
-            HomeBodyStatsShortViewModel(
+            HomeBodyStatsListItem.StatsShortItem(
                 leftTop = trioMatches.score.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.score),
                 rightTop = trioMatches.getAvgScore().getStringFormat(),
@@ -358,10 +356,10 @@ class DetailsStatisticsMapper(
             )
         )
 
-        list.add(HomeBodyHeaderViewModel(resourceProvider.getString(R.string.other)))
+        list.add(HomeBodyStatsListItem.HeaderItem(resourceProvider.getString(R.string.other)))
 
         list.add(
-            HomeBodyStatsShortViewModel(
+            HomeBodyStatsListItem.StatsShortItem(
                 leftTop = trioMatches.killsPerMin.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.kills_per_min),
                 rightTop = trioMatches.killsPerMatch.getStringFormat(),
@@ -378,11 +376,11 @@ class DetailsStatisticsMapper(
 
     private fun getLtmMatchesBodyStats(
         ltm: Ltm
-    ): List<HomeBodyStats> {
-        val list = arrayListOf<HomeBodyStats>()
+    ): List<HomeBodyStatsListItem> {
+        val list = mutableListOf<HomeBodyStatsListItem>()
 
         list.add(
-            HomeBodyStatsViewModel(
+            HomeBodyStatsListItem.StatsItem(
                 leftTop = ltm.matches.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.matches),
                 rightTop = ltm.kd.getStringFormat(),
@@ -397,7 +395,7 @@ class DetailsStatisticsMapper(
         )
 
         list.add(
-            HomeBodyStatsSmallViewModel(
+            HomeBodyStatsListItem.StatsSmallItem(
                 leftTop = ltm.wins.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.top_one),
                 rightTop = ltm.lastModified.getDateZFull(DATE_STATS_FULL),
@@ -405,10 +403,10 @@ class DetailsStatisticsMapper(
             )
         )
 
-        list.add(HomeBodyHeaderViewModel(resourceProvider.getString(R.string.score)))
+        list.add(HomeBodyStatsListItem.HeaderItem(resourceProvider.getString(R.string.score)))
 
         list.add(
-            HomeBodyStatsShortViewModel(
+            HomeBodyStatsListItem.StatsShortItem(
                 leftTop = ltm.score.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.score),
                 rightTop = ltm.getAvgScore().getStringFormat(),
@@ -420,10 +418,10 @@ class DetailsStatisticsMapper(
             )
         )
 
-        list.add(HomeBodyHeaderViewModel(resourceProvider.getString(R.string.other)))
+        list.add(HomeBodyStatsListItem.HeaderItem(resourceProvider.getString(R.string.other)))
 
         list.add(
-            HomeBodyStatsShortViewModel(
+            HomeBodyStatsListItem.StatsShortItem(
                 leftTop = ltm.killsPerMin.getStringFormat(),
                 leftTopTitle = resourceProvider.getString(R.string.kills_per_min),
                 rightTop = ltm.killsPerMatch.getStringFormat(),

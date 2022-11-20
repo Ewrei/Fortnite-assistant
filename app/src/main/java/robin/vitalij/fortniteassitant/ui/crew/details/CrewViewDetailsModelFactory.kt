@@ -10,8 +10,7 @@ class CrewViewDetailsModelFactory @Inject constructor() :
 
     override fun createViewModel(): CrewViewDetailsViewModel {
         return viewModel ?: run {
-            val model =
-                CrewViewDetailsViewModel()
+            val model = CrewViewDetailsViewModel()
             viewModel = model
             return model
         }

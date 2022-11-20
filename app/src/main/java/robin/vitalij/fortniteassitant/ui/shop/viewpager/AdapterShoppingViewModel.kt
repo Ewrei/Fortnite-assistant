@@ -1,7 +1,5 @@
 package robin.vitalij.fortniteassitant.ui.shop.viewpager
 
-import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
+import androidx.lifecycle.ViewModel
 
-class AdapterShoppingViewModel() : BaseViewModel() {
-
-}
+class AdapterShoppingViewModel : ViewModel()

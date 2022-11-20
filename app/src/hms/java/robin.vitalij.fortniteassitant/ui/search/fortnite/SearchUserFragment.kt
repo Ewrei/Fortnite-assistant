@@ -3,6 +3,7 @@ package robin.vitalij.fortniteassitant.ui.search.fortnite
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,16 +23,20 @@ import robin.vitalij.fortniteassitant.BuildConfig
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.*
+import robin.vitalij.fortniteassitant.interfaces.InputAccountIdCallback
 import robin.vitalij.fortniteassitant.interfaces.RegistrationProfileCallback
+import robin.vitalij.fortniteassitant.model.enums.AvatarType
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
+import robin.vitalij.fortniteassitant.ui.bottomsheet.input_account_id.InputAccountIdResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.main.MainActivity
 import robin.vitalij.fortniteassitant.ui.search.SearchUserViewModel
 import robin.vitalij.fortniteassitant.ui.search.SearchUserViewModelFactory
 import robin.vitalij.fortniteassitant.ui.search.adapter.SearchAdapter
+import robin.vitalij.fortniteassitant.ui.web.WebActivity
 import java.util.*
 import javax.inject.Inject
 
@@ -149,6 +154,34 @@ class SearchUserFragment : BaseFragment() {
 
         strictUserSwitch.setOnCheckedChangeListener { it, isChecked ->
             viewModel.strict = !isChecked
+        }
+
+        iKnowMyAccountIdButton.setOnClickListener {
+            InputAccountIdResultFragment.show(
+                childFragmentManager,
+                object : InputAccountIdCallback {
+                    override fun sendAccountId(accountId: String) {
+                        arguments?.let { bundle ->
+                            context.closeKeyboard(view)
+                            ProfileResultFragment.show(
+                                childFragmentManager,
+                                accountId,
+                                AvatarType.values().random().getImageUrl(),
+                                bundle.getSerializable(IS_COMPARISON_VISIBLE) as ProfileResultType,
+                                object : RegistrationProfileCallback {
+                                    override fun addedProfile(fortniteProfileResponse: FortniteProfileResponse) {
+                                        viewModel.textActivityVisibility.set(getString(R.string.save_the_user))
+                                        viewModel.saveUser(fortniteProfileResponse)
+                                    }
+                                })
+                        }
+                    }
+                })
+        }
+
+
+        howToFindAccountIdButton.setOnClickListener {
+            ContactUsResultFragment.show(childFragmentManager, false)
         }
     }
 

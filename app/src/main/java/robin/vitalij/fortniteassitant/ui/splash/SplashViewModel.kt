@@ -36,6 +36,7 @@ class SplashViewModel @Inject constructor(
         }
 
         loadInterstitialAd()
+        checkAccount()
     }
 
     fun setFirebaseDynamicLink(firebaseDynamicLinkType: FirebaseDynamicLinkType, id: String) {
@@ -45,7 +46,6 @@ class SplashViewModel @Inject constructor(
 
     private fun loadInterstitialAd() {
         interstitialAdRepository.initInterstitialAd {
-            checkAccount()
         }
     }
 

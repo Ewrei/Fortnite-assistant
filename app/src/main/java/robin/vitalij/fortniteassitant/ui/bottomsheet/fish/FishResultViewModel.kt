@@ -1,26 +1,35 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.fish
 
-import androidx.lifecycle.MutableLiveData
-import io.reactivex.android.schedulers.AndroidSchedulers
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.db.entity.FishEntity
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.repository.FishRepository
-import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 
 class FishResultViewModel(
     private val fishRepository: FishRepository
-) : BaseViewModel() {
+) : ViewModel() {
 
-    val mutableLiveData = MutableLiveData<List<FishEntity>>()
+    var fishId: String = ""
 
-    fun loadData(fishId: String) {
-        fishRepository
-            .loadData(fishId)
-            .observeOn(AndroidSchedulers.mainThread())
-            .let(::setupProgressShow)
-            .subscribe({
-                mutableLiveData.value = arrayListOf(it)
-            }, error)
-            .let(disposables::add)
+    private val fishState = MutableStateFlow<LoadingState<FishEntity>>(LoadingState.Loading)
+
+    val fishResult: StateFlow<LoadingState<FishEntity>> = fishState
+
+    private var job: Job? = null
+
+    fun loadData() {
+        job?.cancel()
+        job = viewModelScope.launch {
+            fishRepository.getFish(fishId).collect { loadingState ->
+                fishState.value = loadingState
+            }
+        }
     }
 
 }

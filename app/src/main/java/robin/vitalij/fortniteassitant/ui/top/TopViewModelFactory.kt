@@ -13,9 +13,7 @@ class TopViewModelFactory @Inject constructor(
     override fun createViewModel(): TopViewModel {
         return viewModel ?: run {
             val model =
-                TopViewModel(
-                    topRepository
-                )
+                TopViewModel(topRepository)
             viewModel = model
             return model
         }

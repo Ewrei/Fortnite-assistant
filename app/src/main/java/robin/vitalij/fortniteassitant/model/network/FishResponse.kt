@@ -3,21 +3,21 @@ package robin.vitalij.fortniteassitant.model.network
 import com.google.gson.annotations.SerializedName
 
 class FishResponse(
-    @SerializedName("result") var result: Boolean,
-    @SerializedName("lang") var lang: String,
-    @SerializedName("fish") var fishes: List<Fish>
+    @SerializedName("result") val result: Boolean,
+    @SerializedName("lang") val lang: String,
+    @SerializedName("fish") val fishes: List<FishModel>
 )
 
-class Fish(
-    @SerializedName("id") var id: String,
-    @SerializedName("name") var name: String,
-    @SerializedName("description") var description: String,
-    @SerializedName("details") var details: String,
-    @SerializedName("needsProFishingRod") var needsProFishingRod: Boolean,
-    @SerializedName("sizeMin") var sizeMin: Int,
-    @SerializedName("sizeMax") var sizeMax: Int,
-    @SerializedName("heal") var heal: Int,
-    @SerializedName("rarity") var rarity: String,
-    @SerializedName("maxStackSize") var maxStackSize: Int,
-    @SerializedName("image") var image: String
+class FishModel(
+    @SerializedName("id") val id: String,
+    @SerializedName("name") val name: String,
+    @SerializedName("description") val description: String,
+    @SerializedName("details") val details: String,
+    @SerializedName("needsProFishingRod") val needsProFishingRod: Boolean,
+    @SerializedName("sizeMin") val sizeMin: Int,
+    @SerializedName("sizeMax") val sizeMax: Int,
+    @SerializedName("heal") val heal: Int,
+    @SerializedName("rarity") val rarity: String,
+    @SerializedName("maxStackSize") val maxStackSize: Int,
+    @SerializedName("image") val image: String
 )

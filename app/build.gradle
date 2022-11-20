@@ -8,15 +8,15 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    compileSdkVersion 31
+    buildToolsVersion "31.0.0"
 
     defaultConfig {
         applicationId "robin.vitalij.fortniteassitant"
         minSdkVersion 22
-        targetSdkVersion 30
-        versionCode 13
-        versionName "1.0.8"
+        targetSdkVersion 31
+        versionCode 18
+        versionName "1.1.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -139,7 +139,7 @@ dependencies {
     implementation "com.google.android.material:material:$material_version"
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
 
-    def constraintlayout_version = "2.1.0"
+    def constraintlayout_version = "2.1.4"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
 
     def navigation_version = "2.3.5"
@@ -156,14 +156,16 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_compiler_version"
 
     //Glide
-    def glide_version = '4.12.0'
+    def glide_version = '4.13.0'
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 
-    def room_version = '2.2.6'
+    def room_version = '2.4.3'
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
+    implementation "androidx.room:room-ktx:$room_version"
 
     def lifecycle_version = '2.3.1'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
@@ -174,7 +176,7 @@ dependencies {
     def rxjava2_rxjava_version = "2.2.21"
     implementation "io.reactivex.rxjava2:rxjava:$rxjava2_rxjava_version"
 
-    def gson_version = "2.8.7"
+    def gson_version = "2.8.9"
     implementation "com.google.code.gson:gson:$gson_version"
 
     def retrofit2_adapter_version = "2.9.0"
@@ -184,7 +186,7 @@ dependencies {
     implementation "com.github.PhilJay:MPAndroidChart:$mp_android_chart_version"
 
     //Okhttp3
-    def okhttp3_version = '4.4.1'
+    def okhttp3_version = '5.0.0-alpha.2'
     implementation "com.squareup.okhttp3:okhttp:$okhttp3_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
 
@@ -194,24 +196,24 @@ dependencies {
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$coroutine_adapter_version"
 
     //Ads
-    def ads_version = "20.2.0"
+    def ads_version = "20.6.0"
     gmsImplementation "com.google.android.gms:play-services-ads:$ads_version"
     gmsImplementation "com.google.firebase:firebase-ads:$ads_version"
 
     //Firebase
-    def firebase_analytics_version = "19.0.0"
+    def firebase_analytics_version = "21.0.0"
     implementation "com.google.firebase:firebase-analytics:$firebase_analytics_version"
 
-    def firebase_core_version = "19.0.0"
+    def firebase_core_version = "21.0.0"
     implementation "com.google.firebase:firebase-core:$firebase_core_version"
 
-    def firebase_crashlytics_version = "18.2.1"
+    def firebase_crashlytics_version = "18.2.10"
     implementation "com.google.firebase:firebase-crashlytics:$firebase_crashlytics_version"
 
-    def firebase_firestore_ktx_version = "23.0.3"
+    def firebase_firestore_ktx_version = "24.1.2"
     implementation "com.google.firebase:firebase-firestore-ktx:$firebase_firestore_ktx_version"
 
-    def firebase_dynamic_links_version = "20.1.1"
+    def firebase_dynamic_links_version = "21.0.1"
     implementation "com.google.firebase:firebase-dynamic-links-ktx:$firebase_dynamic_links_version"
 
     def multidex_version = "2.0.1"
@@ -220,7 +222,7 @@ dependencies {
     def timber_version = "4.7.1"
     implementation "com.jakewharton.timber:timber:$timber_version"
 
-    def play_core_version = "1.10.0"
+    def play_core_version = "1.10.3"
     implementation "com.google.android.play:core:$play_core_version"
 
     def circle_progress_version = "1.2.1"
@@ -245,5 +247,20 @@ dependencies {
 
     hmsImplementation('com.huawei.hms:ads-lite:13.4.41.304')
     hmsImplementation('com.huawei.hms:ads-consent:3.4.41.304')
+
+    def unity_ads_version = "3.7.5"
+    gmsImplementation "com.unity3d.ads:unity-ads:$unity_ads_version"
+
+    def yandex_ads_version = "5.2.0"
+    gmsImplementation "com.yandex.android:mobileads:$yandex_ads_version"
+
+    def mobmetricalib_version = "5.0.0"
+    gmsImplementation "com.yandex.android:mobmetricalib:$mobmetricalib_version"
+
+    def viewbindingpropertydelegate_version = "1.5.6"
+    implementation "com.github.kirich1409:viewbindingpropertydelegate-noreflection:$viewbindingpropertydelegate_version"
+
+    def kprogresshud_version = "1.2.0"
+    implementation "com.kaopiz:kprogresshud:$kprogresshud_version"
 
 }

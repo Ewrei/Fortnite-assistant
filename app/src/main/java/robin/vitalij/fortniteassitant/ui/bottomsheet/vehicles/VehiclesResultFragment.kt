@@ -5,22 +5,19 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.initBottomSheetInternal
+import robin.vitalij.fortniteassitant.databinding.BottomSheetRecyclerviewBinding
 import robin.vitalij.fortniteassitant.model.network.VehicleModel
 import robin.vitalij.fortniteassitant.ui.bottomsheet.vehicles.adapter.VehiclesResultAdapter
 import robin.vitalij.fortniteassitant.ui.bottomsheet.vehicles.adapter.VehiclesResultListItem
 import robin.vitalij.fortniteassitant.utils.mapper.VehiclesResultMapper
 import javax.inject.Inject
-
-const val BOTTOM_SHEET_MARGIN_TOP = 200
 
 class VehiclesResultFragment : BottomSheetDialogFragment() {
 
@@ -29,22 +26,15 @@ class VehiclesResultFragment : BottomSheetDialogFragment() {
 
     private lateinit var viewModel: VehiclesResultViewModel
 
+    private lateinit var binding: BottomSheetRecyclerviewBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        dialog?.setOnShowListener { dialog ->
-            val d = dialog as BottomSheetDialog
-            val bottomSheetInternal =
-                d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-            bottomSheetInternal?.setBackgroundResource(R.drawable.bottomsheet_container_background)
-            bottomSheetInternal?.let {
-                BottomSheetBehavior.from(it).state = BottomSheetBehavior.STATE_EXPANDED
-                BottomSheetBehavior.from(it).skipCollapsed = true
-            }
-        }
-
-        return inflater.inflate(R.layout.bottom_sheet_recyclerview, container, false)
+        dialog?.initBottomSheetInternal()
+        binding = BottomSheetRecyclerviewBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +47,7 @@ class VehiclesResultFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
-            val vehicleModel: VehicleModel = it.getParcelable(VEHICLES)!!
+            val vehicleModel: VehicleModel = it.getParcelable(ARG_VEHICLES)!!
 
             VehiclesResultMapper().transform(vehicleModel).apply {
                 this.let(::initAdapter)
@@ -74,7 +64,7 @@ class VehiclesResultFragment : BottomSheetDialogFragment() {
     }
 
     private fun initAdapter(list: List<VehiclesResultListItem>) {
-        recyclerView.run {
+        binding.recyclerView.run {
             adapter = VehiclesResultAdapter(
                 layoutInflater = layoutInflater
             )
@@ -84,24 +74,14 @@ class VehiclesResultFragment : BottomSheetDialogFragment() {
     }
 
     companion object {
-
         private const val TAG = "VehiclesResultFragment"
-        private const val VEHICLES = "Vehicles"
+        private const val ARG_VEHICLES = "arg_vehicles"
+        private const val BOTTOM_SHEET_MARGIN_TOP = 200
 
-        fun show(
-            fragmentManager: FragmentManager?,
-            vehicleModel: VehicleModel
-        ) {
-            fragmentManager?.let {
-                VehiclesResultFragment().apply {
-                    arguments = Bundle().apply {
-                        putParcelable(VEHICLES, vehicleModel)
-                    }
-                }.show(
-                    it,
-                    TAG
-                )
-            }
+        fun show(fragmentManager: FragmentManager, vehicleModel: VehicleModel) {
+            VehiclesResultFragment().apply {
+                arguments = bundleOf(ARG_VEHICLES to vehicleModel)
+            }.show(fragmentManager, TAG)
         }
     }
 }

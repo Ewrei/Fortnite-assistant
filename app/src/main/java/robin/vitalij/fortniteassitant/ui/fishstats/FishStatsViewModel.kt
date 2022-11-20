@@ -5,8 +5,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.getSeason
 import robin.vitalij.fortniteassitant.model.EmptyTextModel
-import robin.vitalij.fortniteassitant.model.battlepassreward.SeasonModel
-import robin.vitalij.fortniteassitant.model.network.FishStats
+import robin.vitalij.fortniteassitant.model.battle_pass_reward.SeasonModel
+import robin.vitalij.fortniteassitant.model.network.FishStatsModel
 import robin.vitalij.fortniteassitant.model.network.FishStatsResponse
 import robin.vitalij.fortniteassitant.repository.FishStatsRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
@@ -19,7 +19,7 @@ class FishStatsViewModel(
     private val resourceProvider: ResourceProvider
 ) : BaseViewModel() {
 
-    val mutableLiveData = MutableLiveData<List<FishStats>>()
+    val mutableLiveData = MutableLiveData<List<FishStatsModel>>()
     val mutableSeasonLiveData = MutableLiveData<List<SeasonModel>>()
 
     private var fishStatsResponse: FishStatsResponse = FishStatsResponse()
@@ -35,7 +35,7 @@ class FishStatsViewModel(
             .let(::setupProgressShow)
             .subscribe({
                 fishStatsResponse= it
-                mutableLiveData.value = it.seasonStats.firstOrNull()?.fish ?: arrayListOf()
+                mutableLiveData.value = it.seasonStats.firstOrNull()?.fish ?: emptyList()
                 mutableSeasonLiveData.value = it.seasonStats.getSeason(resourceProvider)
 
                 emptyText(

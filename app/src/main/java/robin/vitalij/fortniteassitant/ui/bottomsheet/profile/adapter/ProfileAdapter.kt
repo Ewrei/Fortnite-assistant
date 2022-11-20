@@ -1,27 +1,24 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewholder.body.ProfileBodyViewHolder
-import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewholder.ProfileHeaderViewHolder
-import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewmodel.Profile
-import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewmodel.ProfileType
-import robin.vitalij.fortniteassitant.ui.common.BaseViewHolder
+import robin.vitalij.fortniteassitant.databinding.ItemProfileBodyBinding
+import robin.vitalij.fortniteassitant.databinding.ItemProfileHeaderBinding
 
-class ProfileAdapter(
-) : RecyclerView.Adapter<BaseViewHolder<Profile>>() {
+class ProfileAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val items = arrayListOf<Profile>()
+    private val items = mutableListOf<ProfileListItem>()
 
-    fun setData(data: List<Profile>) {
+    fun setData(data: List<ProfileListItem>) {
         items.clear()
         items.addAll(data)
     }
 
-    fun updateData(data: List<Profile>) {
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateData(data: List<ProfileListItem>) {
         if (items != data) {
             items.clear()
             items.addAll(data)
@@ -29,47 +26,44 @@ class ProfileAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Profile> {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        when (viewType) {
-            ProfileType.HEADER.id -> {
-                return ProfileHeaderViewHolder(
-                    DataBindingUtil.inflate(
+
+        return when (viewType) {
+            R.layout.item_profile_header -> {
+                ProfileHeaderViewHolder(
+                    ItemProfileHeaderBinding.inflate(
                         inflater,
-                        R.layout.item_profile_header,
                         parent,
                         false
                     )
                 )
             }
-            ProfileType.BODY.id -> {
-                return ProfileBodyViewHolder(
-                    DataBindingUtil.inflate(
+            R.layout.item_profile_body -> {
+                ProfileBodyViewHolder(
+                    ItemProfileBodyBinding.inflate(
                         inflater,
-                        R.layout.item_profile_body,
                         parent,
                         false
                     )
                 )
             }
-            else -> {
-                return ProfileHeaderViewHolder(
-                    DataBindingUtil.inflate(
-                        inflater,
-                        R.layout.item_profile_header,
-                        parent,
-                        false
-                    )
-                )
-            }
+            else -> throw UnknownError("Unknown view type $viewType")
         }
     }
 
     override fun getItemCount() = items.size
 
-    override fun onBindViewHolder(holder: BaseViewHolder<Profile>, position: Int) {
-        holder.bind(items[position])
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (val item = items[position]) {
+            is ProfileListItem.HeaderItem -> (holder as ProfileHeaderViewHolder).bind(item)
+            is ProfileListItem.BodyItem -> (holder as ProfileBodyViewHolder).bind(item)
+        }
     }
 
-    override fun getItemViewType(position: Int) = items[position].getType().id
+    override fun getItemViewType(position: Int): Int = when (items[position]) {
+        is ProfileListItem.HeaderItem -> R.layout.item_profile_header
+        is ProfileListItem.BodyItem -> R.layout.item_profile_body
+    }
+
 }

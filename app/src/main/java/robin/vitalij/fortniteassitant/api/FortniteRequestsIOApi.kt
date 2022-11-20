@@ -6,56 +6,79 @@ import retrofit2.http.Query
 import robin.vitalij.fortniteassitant.model.network.*
 import robin.vitalij.fortniteassitant.model.network.search.SearchResponse
 import robin.vitalij.fortniteassitant.model.network.search.SearchUserModel
-import robin.vitalij.fortniteassitant.model.network.shop.ShopResponse
+import robin.vitalij.fortniteassitant.model.network.shop.ShopNewResponse
 import robin.vitalij.fortniteassitant.model.network.shop.ShopUpcomingResponse
+
+const val LOOKUP_PATCH = "lookup"
+const val LOOT_PATCH = "loot"
+const val FISH_PATCH = "fish"
+const val GAME_PATCH = "game"
+const val SHOP_PATCH = "shop"
+const val ITEMS_PATCH = "items"
+const val UPCOMING_PATCH = "upcoming"
+const val BATTLE_PASS_PATCH = "battlepass"
+const val NEWS_PATCH = "news"
+const val ACHIEVEMENTS_PATCH = "achievements"
+const val CREW_PATCH = "crew"
+const val VEHICLES_PATCH = "vehicles"
+const val LIST_PATCH = "list"
+
+private const val LANG_QUERY = "lang"
+private const val USERNAME_QUERY = "username"
+private const val STRICT_QUERY = "strict"
+private const val TYPE_QUERY = "type"
+private const val SEASON_QUERY = "season"
 
 interface FortniteRequestsIOApi {
 
-    @GET("/v1/lookup")
+    @GET("/$VERSION_FIRST_PATCH/$LOOKUP_PATCH")
     fun getSearch(
-        @Query("username") username: String,
-        @Query("strict") strict: Boolean
+        @Query(USERNAME_QUERY) username: String,
+        @Query(STRICT_QUERY) strict: Boolean
     ): Single<SearchResponse>
 
-    @GET("/v1/lookup")
+    @GET("/$VERSION_FIRST_PATCH/$LOOKUP_PATCH")
     fun getSearch(
-        @Query("username") username: String
+        @Query(USERNAME_QUERY) username: String
     ): Single<SearchUserModel>
 
-    @GET("/v1/shop")
-    fun getCurrentShop(@Query("lang") language: String): Single<ShopResponse>
+    @GET("/$VERSION_SECOND_PATCH/$SHOP_PATCH")
+    suspend fun getCurrentShop(@Query(LANG_QUERY) language: String): ShopNewResponse
 
-    @GET("/v1/items/upcoming")
-    fun getUpcomingShop(@Query("lang") language: String): Single<ShopUpcomingResponse>
+    @GET("/$VERSION_SECOND_PATCH/$ITEMS_PATCH/$UPCOMING_PATCH")
+    suspend fun getUpcomingShop(@Query(LANG_QUERY) language: String): ShopUpcomingResponse
 
-    @GET("/v1/battlepass")
+    @GET("/$VERSION_FIRST_PATCH/$BATTLE_PASS_PATCH")
     fun getBattlesPassRewards(
-        @Query("lang") language: String,
-        @Query("season") season: String
+        @Query(LANG_QUERY) language: String,
+        @Query(SEASON_QUERY) season: String
     ): Single<BattlePassRewardsResponse>
 
-    @GET("/v1/loot/list")
-    fun getWeapons(@Query("lang") language: String): Single<WeaponResponse>
+    @GET("/$VERSION_FIRST_PATCH/$LOOT_PATCH/$LIST_PATCH")
+    suspend fun getWeapons(@Query(LANG_QUERY) language: String): WeaponResponse
 
-    @GET("/v1/loot/fish")
-    fun getFish(@Query("lang") language: String): Single<FishResponse>
+    @GET("/$VERSION_FIRST_PATCH/$LOOT_PATCH/$FISH_PATCH")
+    suspend fun getFish(@Query(LANG_QUERY) language: String): FishResponse
 
-    @GET("/v1/stats/fish")
+    @GET("/$VERSION_FIRST_PATCH/$STATS_PATCH/$FISH_PATCH")
     fun getFishStats(
-        @Query("lang") language: String,
-        @Query("accountId") accountId: String
+        @Query(LANG_QUERY) language: String,
+        @Query(ACCOUNT_ID_PATCH) accountId: String
     ): Single<FishStatsResponse>
 
-    @GET("/v1/achievements")
-    fun getAchievements(@Query("lang") language: String): Single<AchievementResponse>
+    @GET("/$VERSION_FIRST_PATCH/$ACHIEVEMENTS_PATCH")
+    suspend fun getAchievements(@Query(LANG_QUERY) language: String): AchievementResponse
 
-    @GET("/v1/news")
-    fun getNews(@Query("lang") language: String, @Query("type") type: String): Single<NewsResponse>
+    @GET("/$VERSION_FIRST_PATCH/$NEWS_PATCH")
+    suspend fun getNews(
+        @Query(LANG_QUERY) language: String,
+        @Query(TYPE_QUERY) type: String
+    ): NewsResponse
 
-    @GET("/v2/game/crew")
-    fun getGameCrew(@Query("lang") language: String): Single<List<CrewModel>>
+    @GET("/$VERSION_SECOND_PATCH/$GAME_PATCH/$CREW_PATCH")
+    suspend fun getGameCrew(@Query(LANG_QUERY) language: String): List<CrewModel>
 
-    @GET("/v2/game/vehicles")
-    fun getGameVehicles(@Query("lang") language: String): Single<VehiclesResponse>
+    @GET("/$VERSION_SECOND_PATCH/$GAME_PATCH/$VEHICLES_PATCH")
+    suspend fun getGameVehicles(@Query(LANG_QUERY) language: String): VehiclesResponse
 
 }

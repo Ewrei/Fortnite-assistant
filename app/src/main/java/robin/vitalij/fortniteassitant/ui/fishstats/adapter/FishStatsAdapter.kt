@@ -5,16 +5,15 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.db.entity.FishEntity
-import robin.vitalij.fortniteassitant.model.network.FishStats
+import robin.vitalij.fortniteassitant.model.network.FishStatsModel
 
 class FishStatsAdapter(
-    private val onClick: (fishStats: FishStats) -> Unit
+    private val onClick: (fishStats: FishStatsModel) -> Unit
 ) : RecyclerView.Adapter<FishStatsHolder>() {
 
-    private val items = arrayListOf<FishStats>()
+    private val items = mutableListOf<FishStatsModel>()
 
-    fun setData(data: List<FishStats>) {
+    fun setData(data: List<FishStatsModel>) {
         items.clear()
         items.addAll(data)
     }

@@ -1,21 +1,29 @@
 package robin.vitalij.fortniteassitant.ui.news.fragment.adapter
 
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_news.view.*
+import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
 import robin.vitalij.fortniteassitant.databinding.ItemNewsBinding
 import robin.vitalij.fortniteassitant.model.network.NewsModel
 
 class NewsHolder(
-    var binding: ItemNewsBinding,
+    private val binding: ItemNewsBinding,
     private val onVideoClick: (videoUrl: String, videoName: String) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: NewsModel) {
-        binding.item = item
-        itemView.videoButton.setOnClickListener {
+        binding.date.text = item.getDateString()
+        binding.title.text = item.title
+        binding.body.text = item.body
+        binding.imageView.loadImage(item.image)
+
+        binding.videoButton.isVisible = item.video != null
+
+        binding.videoButton.setOnClickListener {
             item.video?.let {
                 onVideoClick(it, item.title)
             }
         }
     }
+
 }

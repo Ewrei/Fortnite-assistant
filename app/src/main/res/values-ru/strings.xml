@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="found_account_id_in_epic_games_url">https://youtu.be/0_HHwZG8XsE</string>
+    <string name="found_account_id_in_fortnite_url">https://youtu.be/mmjnjLexp00</string>
+
     <string name="title_setting">Настройки</string>
     <string name="title_item_shop">Магазин</string>
     <string name="title_home">Глав</string>
@@ -272,4 +275,19 @@
     <string name="your_current_position_format">Ваша текущая позиция: %s</string>
     <string name="your_value_format">Ваша значение: %s</string>
 
+    <string name="i_know_my_account_id">Я знаю свой account ID</string>
+    <string name="send">Отправить</string>
+    <string name="input_account_id">Введите ваш account ID</string>
+    <string name="account_id">Ваш account ID</string>
+    <string name="how_to_find_account_id">Как узнать ваш account ID</string>
+
+    <string name="how_to_find_out_your_account_in_epic_game">Как узнать account ID в Epic game store</string>
+    <string name="how_to_find_out_your_account_in_fortnite">Как узнать account ID в Fortnite</string>
+
+    <string name="download_app">Скачать приложение</string>
+    <string name="free_skins_and_promo_codes">Бесплатные\nскины и Промокоды</string>
+    <string name="for_your_favorite_games">для твоих любимых игр - CS:GO, WoT, Fortnite, Free Fire, Steam games, League of Legends  и др. Выполняй простые игровые
+задания и получай подарки!</string>
+
+    <string name="empty_vehicles">Мы не нашли достижений</string>
 </resources>

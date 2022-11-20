@@ -4,6 +4,6 @@ import robin.vitalij.fortniteassitant.db.entity.PlayerSession
 import robin.vitalij.fortniteassitant.db.entity.UserEntity
 
 data class SaveUserModel(
-    var userEntity: UserEntity,
-    var session: PlayerSession
+    val userEntity: UserEntity,
+    val session: PlayerSession
 )

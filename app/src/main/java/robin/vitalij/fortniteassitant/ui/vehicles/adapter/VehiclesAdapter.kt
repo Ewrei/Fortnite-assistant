@@ -2,26 +2,27 @@ package robin.vitalij.fortniteassitant.ui.vehicles.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.databinding.ItemGameVecilesBinding
 import robin.vitalij.fortniteassitant.model.network.VehicleModel
 
 class VehiclesAdapter(
     private val onClick: (vehicleModel: VehicleModel) -> Unit,
 ) : RecyclerView.Adapter<VehiclesHolder>() {
 
-    private val items = arrayListOf<VehicleModel>()
+    private val items = mutableListOf<VehicleModel>()
 
-    fun setData(data: List<VehicleModel>) {
-        items.clear()
-        items.addAll(data)
+    fun updateData(data: List<VehicleModel>) {
+        if (items != data) {
+            items.clear()
+            items.addAll(data)
+            notifyDataSetChanged()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = VehiclesHolder(
-        DataBindingUtil.inflate(
+        ItemGameVecilesBinding.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_game_veciles,
             parent,
             false
         )

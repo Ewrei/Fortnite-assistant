@@ -1,49 +1,47 @@
 package robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.layout_type_stats_group.view.*
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.recycler_view.view.*
 import robin.vitalij.fortniteassitant.databinding.ItemHomeStatisticsBinding
-import robin.vitalij.fortniteassitant.ui.common.BaseViewHolder
+import robin.vitalij.fortniteassitant.model.actions.HomeActions
+import robin.vitalij.fortniteassitant.ui.home.adapter.HomeListItem
 import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsAdapter
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.HomeBodyStats
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.Home
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.HomeStatisticsViewModel
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsListItem
 
 class HomeStatisticsViewHolder(
-    override val binding: ItemHomeStatisticsBinding,
-    private val openDetailsStatistics: () -> Unit,
-    private val openParameterList: () -> Unit
-) : BaseViewHolder<Home>(binding) {
+    private val binding: ItemHomeStatisticsBinding,
+    private val onHomeAction: (homeActions: HomeActions) -> Unit
+) : RecyclerView.ViewHolder(binding.root) {
 
-    override fun bind(item: Home) {
-        if (item is HomeStatisticsViewModel) {
-            binding.item = item
+    fun bind(item: HomeListItem.StatisticsItem) {
+        item.all.let(::initAdapter)
 
+        binding.typeStatGroupInclude.allStats.setOnClickListener {
             item.all.let(::initAdapter)
+        }
 
-            itemView.allStats.setOnClickListener {
-                item.all.let(::initAdapter)
-            }
+        binding.typeStatGroupInclude.keyboardMouse.setOnClickListener {
+            item.keyboardMouse.let(::initAdapter)
+        }
 
-            itemView.keyboardMouse.setOnClickListener {
-                item.keyboardMouse.let(::initAdapter)
-            }
+        binding.typeStatGroupInclude.gamepad.setOnClickListener {
+            item.gamepad.let(::initAdapter)
+        }
 
-            itemView.gamepad.setOnClickListener {
-                item.gamepad.let(::initAdapter)
-            }
-
-            itemView.touch.setOnClickListener {
-                item.touch.let(::initAdapter)
-            }
+        binding.typeStatGroupInclude.touch.setOnClickListener {
+            item.touch.let(::initAdapter)
         }
     }
 
-    private fun initAdapter(list: List<HomeBodyStats>) {
+    private fun initAdapter(list: List<HomeBodyStatsListItem>) {
         itemView.recyclerView.run {
-            adapter = HomeBodyStatsAdapter(openDetailsStatistics, openParameterList)
-            (adapter as HomeBodyStatsAdapter).setData(list)
+            adapter = HomeBodyStatsAdapter(openDetailsStatistics = {
+                onHomeAction(HomeActions.OpenDetailsStatistics)
+            }, openParameterList = {
+                onHomeAction(HomeActions.OpenParameterList)
+            })
+            (adapter as HomeBodyStatsAdapter).updateData(list)
             layoutManager = LinearLayoutManager(context)
         }
     }

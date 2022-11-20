@@ -86,8 +86,8 @@ class SubscriptionsFragment : BaseFragment() {
     }
 
     private fun onDisplayButtonClicked(getAnWard: () -> Unit) {
-        if (viewModel.rewardedAdRepository.defaultRewardedAd != null) {
-            viewModel.rewardedAdRepository.defaultRewardedAd?.show(requireActivity()) {
+        if (viewModel.rewardedAdRepository.isLoadVideo()) {
+            viewModel.rewardedAdRepository.showReward(requireActivity()) {
                 Toast.makeText(
                     activity,
                     String.format(

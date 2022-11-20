@@ -96,6 +96,11 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
         initBanner()
 
         setListener()
+
+        if(viewModel.preferenceManager.getShowBasicRulesDate() < Date()) {
+            startActivity(BasicRulesActivity.newInstance(this))
+            viewModel.preferenceManager.setShowBasicRulesDate(Date(Date().time + SEVEN_DAY))
+        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -279,5 +284,9 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
                 // to the app after tapping on an ad.
             }
         }
+    }
+
+    companion object {
+        const val SEVEN_DAY = 60000 * 60 * 24 * 7
     }
 }

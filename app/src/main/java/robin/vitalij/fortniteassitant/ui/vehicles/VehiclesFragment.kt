@@ -2,51 +2,41 @@ package robin.vitalij.fortniteassitant.ui.vehicles
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.recycler_view.*
-import kotlinx.android.synthetic.main.toolbar_center_title.*
-import kotlinx.android.synthetic.main.view_error.*
+import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
+import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewWithToolbarBinding
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.network.VehicleModel
 import robin.vitalij.fortniteassitant.ui.bottomsheet.vehicles.VehiclesResultFragment
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.vehicles.adapter.VehiclesAdapter
-import java.util.*
 import javax.inject.Inject
 
-private const val MAX_SPAN_COUNT = 2
-private const val VEHICLES_SPAN_COUNT = 1
-
-class VehiclesFragment : BaseFragment() {
+class VehiclesFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) {
 
     @Inject
     lateinit var viewModelFactory: VehiclesViewModelFactory
 
-    private lateinit var viewModel: VehiclesViewModel
+    private val viewModel: VehiclesViewModel by viewModels { viewModelFactory }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_history, container, false)
+    private val binding by viewBinding(FragmentRecyclerViewWithToolbarBinding::bind)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(VehiclesViewModel::class.java).apply {
-                observeToProgressBar(this@VehiclesFragment)
-                observeToError(this@VehiclesFragment)
-            }
-    }
+    private val vehiclesAdapter = VehiclesAdapter(onClick = {
+        VehiclesResultFragment.show(childFragmentManager, it)
+    })
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -55,16 +45,23 @@ class VehiclesFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
-            it.let(::initAdapter)
-        })
-
         setListener()
         setNavigation()
+        initializeRecyclerView()
+
+        binding.viewEmptyInclude.empty.setText(R.string.empty_vehicles)
+
+        lifecycleScope.launch {
+            viewModel.gameVehiclesResult.collect {
+                handleVehiclesResult(it)
+            }
+        }
+
+        viewModel.loadData()
     }
 
     private fun setListener() {
-        setErrorResolveButtonClick {
+        binding.errorViewInclude.errorResolveButton.setOnClickListener {
             viewModel.loadData()
         }
     }
@@ -72,25 +69,45 @@ class VehiclesFragment : BaseFragment() {
     private fun setNavigation() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
-    private fun initAdapter(list: List<VehicleModel>) {
-        recyclerView.run {
-            adapter = VehiclesAdapter(onClick = {
-                VehiclesResultFragment.show(childFragmentManager, it)
-            })
-            (adapter as VehiclesAdapter).setData(list)
-
-            val gridlayoutManager = GridLayoutManager(
-                activity, MAX_SPAN_COUNT
-            )
-
-            gridlayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int) = VEHICLES_SPAN_COUNT
+    private fun handleVehiclesResult(result: LoadingState<List<VehicleModel>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
             }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                binding.viewEmptyInclude.emptyView.isVisible = result.data.isEmpty()
 
-            layoutManager = gridlayoutManager
+                vehiclesAdapter.updateData(result.data)
+            }
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                }
+            }
         }
     }
+
+    private fun initializeRecyclerView() {
+        binding.recyclerViewInclude.recyclerView.run {
+            adapter = vehiclesAdapter
+            layoutManager = GridLayoutManager(activity, MAX_SPAN_COUNT).apply {
+                this.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int) = VEHICLES_SPAN_COUNT
+                }
+            }
+        }
+    }
+
+    companion object {
+        private const val MAX_SPAN_COUNT = 2
+        private const val VEHICLES_SPAN_COUNT = 1
+
+    }
+
 }

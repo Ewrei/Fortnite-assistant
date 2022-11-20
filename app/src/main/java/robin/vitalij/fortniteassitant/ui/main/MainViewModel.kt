@@ -1,7 +1,5 @@
 package robin.vitalij.fortniteassitant.ui.main
 
-import androidx.databinding.ObservableField
-import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.interfaces.SaveUserCallback
 import robin.vitalij.fortniteassitant.model.enums.FirebaseDynamicLinkType
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse

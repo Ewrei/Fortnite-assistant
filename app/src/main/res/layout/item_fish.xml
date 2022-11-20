@@ -1,40 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView"
+    style="@style/DefaultCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/default_margin"
+    app:cardCornerRadius="0dp"
+    app:strokeColor="@color/background_button">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <variable
-            name="item"
-            type="robin.vitalij.fortniteassitant.db.entity.FishEntity" />
-    </data>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardView"
-        style="@style/DefaultCard"
+    <ImageView
+        android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
-        app:cardCornerRadius="0dp"
-        app:strokeColor="@color/background_button">
+        android:layout_gravity="center_vertical"
+        android:adjustViewBounds="true"
+        android:scaleType="fitStart"
+        tools:srcCompat="@tools:sample/avatars" />
 
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:adjustViewBounds="true"
-            android:scaleType="fitStart"
-            app:rarity="@{item.rarity}"
-            app:imageUrl="@{item.image}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
-
-    </com.google.android.material.card.MaterialCardView>
-
-</layout>
+</com.google.android.material.card.MaterialCardView>

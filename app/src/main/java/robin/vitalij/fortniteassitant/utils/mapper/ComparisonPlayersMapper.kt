@@ -20,7 +20,7 @@ class ComparisonPlayersMapper(
 ) : Mapper<ComparisonProfileResponse, List<ComparisonPlayer>> {
 
     override fun transform(obj: ComparisonProfileResponse): List<ComparisonPlayer> {
-        val list = arrayListOf<ComparisonPlayer>()
+        val list = mutableListOf<ComparisonPlayer>()
 
         if (gameType == GameType.ALL) {
             if (isSchedule) {
@@ -105,7 +105,7 @@ class ComparisonPlayersMapper(
         statsTypeDeviceOne: StatsTypeDevice?,
         statsTypeDeviceTwo: StatsTypeDevice?
     ): List<ComparisonPlayer> {
-        val list = arrayListOf<ComparisonPlayer>()
+        val list = mutableListOf<ComparisonPlayer>()
 
         when (battlesType) {
             BattlesType.OVERALL -> {
@@ -167,7 +167,7 @@ class ComparisonPlayersMapper(
         nameOne: String,
         nameTwo: String
     ): List<ComparisonPlayer> {
-        val list = arrayListOf<ComparisonPlayer>()
+        val list = mutableListOf<ComparisonPlayer>()
 
         if (battlesType == BattlesType.OVERALL) {
             list.addAll(
@@ -232,7 +232,7 @@ class ComparisonPlayersMapper(
         playerOne: Overall?,
         playerTwo: Overall?
     ): List<ComparisonPlayer> {
-        val list = arrayListOf<ComparisonPlayer>()
+        val list = mutableListOf<ComparisonPlayer>()
 
         if (playerOne == null && playerTwo == null) {
             list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
@@ -417,7 +417,7 @@ class ComparisonPlayersMapper(
         playerOne: SoloMatches?,
         playerTwo: SoloMatches?
     ): List<ComparisonPlayer> {
-        val list = arrayListOf<ComparisonPlayer>()
+        val list = mutableListOf<ComparisonPlayer>()
 
         if (playerOne == null && playerTwo == null) {
             list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
@@ -570,7 +570,7 @@ class ComparisonPlayersMapper(
         playerOne: DuoMatches?,
         playerTwo: DuoMatches?
     ): List<ComparisonPlayer> {
-        val list = arrayListOf<ComparisonPlayer>()
+        val list = mutableListOf<ComparisonPlayer>()
 
         if (playerOne == null && playerTwo == null) {
             list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
@@ -723,7 +723,7 @@ class ComparisonPlayersMapper(
         playerOne: TrioMatches?,
         playerTwo: TrioMatches?
     ): List<ComparisonPlayer> {
-        val list = arrayListOf<ComparisonPlayer>()
+        val list = mutableListOf<ComparisonPlayer>()
 
         if (playerOne == null && playerTwo == null) {
             list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
@@ -876,7 +876,7 @@ class ComparisonPlayersMapper(
         playerOne: Ltm?,
         playerTwo: Ltm?
     ): List<ComparisonPlayer> {
-        val list = arrayListOf<ComparisonPlayer>()
+        val list = mutableListOf<ComparisonPlayer>()
 
         if (playerOne == null && playerTwo == null) {
             list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
@@ -1005,7 +1005,7 @@ class ComparisonPlayersMapper(
         nameOne: String,
         nameTwo: String
     ): List<ComparisonPlayer> {
-        val list = arrayListOf<ComparisonPlayer>()
+        val list = mutableListOf<ComparisonPlayer>()
 
         if (playerOne == null && playerTwo == null) {
             list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
@@ -1234,7 +1234,7 @@ class ComparisonPlayersMapper(
         nameOne: String,
         nameTwo: String
     ): List<ComparisonPlayer> {
-        val list = arrayListOf<ComparisonPlayer>()
+        val list = mutableListOf<ComparisonPlayer>()
 
         if (playerOne == null && playerTwo == null) {
             list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
@@ -1423,7 +1423,7 @@ class ComparisonPlayersMapper(
         nameOne: String,
         nameTwo: String
     ): List<ComparisonPlayer> {
-        val list = arrayListOf<ComparisonPlayer>()
+        val list = mutableListOf<ComparisonPlayer>()
 
         if (playerOne == null && playerTwo == null) {
             list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
@@ -1612,7 +1612,7 @@ class ComparisonPlayersMapper(
         nameOne: String,
         nameTwo: String
     ): List<ComparisonPlayer> {
-        val list = arrayListOf<ComparisonPlayer>()
+        val list = mutableListOf<ComparisonPlayer>()
 
         if (playerOne == null && playerTwo == null) {
             list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
@@ -1801,7 +1801,7 @@ class ComparisonPlayersMapper(
         nameOne: String,
         nameTwo: String
     ): List<ComparisonPlayer> {
-        val list = arrayListOf<ComparisonPlayer>()
+        val list = mutableListOf<ComparisonPlayer>()
 
         if (playerOne == null && playerTwo == null) {
             list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))

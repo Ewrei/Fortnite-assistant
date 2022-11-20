@@ -9,7 +9,7 @@ import robin.vitalij.fortniteassitant.utils.ResourceProvider
 import javax.inject.Inject
 
 class UsersViewModelFactory @Inject constructor(
-    private var usersRepository: UsersRepository,
+    private val usersRepository: UsersRepository,
     private val saveUserRepository: SaveUserRepository,
     private val getUserRepository: GetUserRepository,
     private val resourceProvider: ResourceProvider,

@@ -1,5 +1,10 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.upcomingshop
 
-import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
+import androidx.lifecycle.ViewModel
+import robin.vitalij.fortniteassitant.model.network.shop.ItemShopUpcoming
 
-class UpcomingShopResultViewModel() : BaseViewModel()
+class UpcomingShopResultViewModel : ViewModel() {
+
+    lateinit var itemShopUpcoming: ItemShopUpcoming
+
+}

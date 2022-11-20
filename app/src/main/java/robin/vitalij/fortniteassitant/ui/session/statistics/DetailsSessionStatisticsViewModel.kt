@@ -1,27 +1,44 @@
 package robin.vitalij.fortniteassitant.ui.session.statistics
 
-import androidx.lifecycle.MutableLiveData
-import io.reactivex.android.schedulers.AndroidSchedulers
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
-import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.viewmodel.HomeBodyStats
+import robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.statistics.adapter.HomeBodyStatsListItem
 import robin.vitalij.fortniteassitant.utils.mapper.HomeSessionRepository
 
 class DetailsSessionStatisticsViewModel(
     private val homeSessionRepository: HomeSessionRepository
-) : BaseViewModel() {
+) : ViewModel() {
 
-    val mutableLiveData = MutableLiveData<List<HomeBodyStats>>()
+    var battlesType: BattlesType = BattlesType.DUO
+    var gameType: GameType = GameType.ALL
+    var sessionId: Long = 0
+    var sessionLastId: Long = 0
 
-    fun loadData(battlesType: BattlesType, gameType: GameType, sessionId: Long, sessionLastId: Long) {
-        homeSessionRepository
-            .loadData(battlesType, gameType, sessionId, sessionLastId)
-            .observeOn(AndroidSchedulers.mainThread())
-            .let(::setupProgressShow)
-            .subscribe({
-                mutableLiveData.value = it
-            }, error)
-            .let(disposables::add)
+    private val detailsStatisticsState =
+        MutableStateFlow<LoadingState<List<HomeBodyStatsListItem>>>(LoadingState.Loading)
+
+    val detailsStatisticsResult: StateFlow<LoadingState<List<HomeBodyStatsListItem>>> =
+        detailsStatisticsState
+
+    private var job: Job? = null
+
+    fun loadData() {
+        job?.cancel()
+        job = viewModelScope.launch {
+            homeSessionRepository
+                .getDetailsStatistics(battlesType, gameType, sessionId, sessionLastId)
+                .collect { loadingState ->
+                    detailsStatisticsState.value = loadingState
+                }
+        }
     }
+
 }

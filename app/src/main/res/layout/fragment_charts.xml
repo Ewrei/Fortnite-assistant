@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <include
+        android:id="@+id/toolbarInclude"
         layout="@layout/toolbar_center_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -24,18 +25,18 @@
                 android:id="@+id/arcProgress"
                 android:layout_width="250dp"
                 android:layout_height="250dp"
+                android:layout_marginTop="@dimen/default_margin_double"
                 android:layout_marginBottom="@dimen/default_margin_x4"
                 app:arc_bottom_text="@string/win_rate"
                 app:arc_bottom_text_size="24dp"
                 app:arc_finished_color="@color/color_orange"
                 app:arc_max="100"
                 app:arc_progress="55"
-                android:layout_marginTop="@dimen/default_margin_double"
                 app:arc_stroke_width="16dp"
                 app:arc_suffix_text_size="36dp"
                 app:arc_text_color="@color/text_color"
                 app:arc_unfinished_color="@color/color_orange_full"
-                app:layout_constraintBottom_toTopOf="@+id/сhart"
+                app:layout_constraintBottom_toTopOf="@+id/chart"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +45,7 @@
                 tools:arc_progress="55" />
 
             <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/сhart"
+                android:id="@+id/chart"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginStart="@dimen/default_margin_double"
@@ -62,11 +63,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin_double"
                 android:layout_marginEnd="@dimen/default_margin_double"
+                android:fontFamily="@font/futura_pt_bold"
                 android:gravity="center"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:textStyle="bold"
                 android:visibility="gone"
-                android:fontFamily="@font/futura_pt_bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -77,6 +78,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include
+            android:id="@+id/progressViewInclude"
             layout="@layout/progress_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -84,6 +86,7 @@
             android:visibility="gone" />
 
         <include
+            android:id="@+id/errorViewInclude"
             layout="@layout/view_error"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -91,6 +94,7 @@
             android:visibility="gone" />
 
         <include
+            android:id="@+id/noSubscriptionView"
             layout="@layout/view_no_subscription"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

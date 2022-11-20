@@ -5,28 +5,25 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import kotlinx.android.synthetic.main.bottom_sheet_profile.*
-import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.initBottomSheetInternal
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
-import robin.vitalij.fortniteassitant.common.extensions.setVisibility
 import robin.vitalij.fortniteassitant.common.extensions.showDialog
+import robin.vitalij.fortniteassitant.databinding.BottomSheetProfileBinding
 import robin.vitalij.fortniteassitant.interfaces.RegistrationProfileCallback
 import robin.vitalij.fortniteassitant.model.enums.ComparisonDataType
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.ProfileAdapter
-import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewmodel.Profile
+import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.ProfileListItem
 import robin.vitalij.fortniteassitant.ui.common.BaseBottomSheetDialogFragment
 import robin.vitalij.fortniteassitant.ui.comparison.ComparisonActivity
-import robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment.Companion.IS_COMPARISON_VISIBLE
+import robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment.Companion.ARG_PROFILE_RESULT_TYPE
 import javax.inject.Inject
 
 const val ACCOUNT_ID = "account_id"
@@ -41,21 +38,15 @@ class ProfileResultFragment : BaseBottomSheetDialogFragment() {
 
     private var registrationProfileCallback: RegistrationProfileCallback? = null
 
+    private lateinit var binding: BottomSheetProfileBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dialog?.setOnShowListener { dialog ->
-            val d = dialog as BottomSheetDialog
-            val bottomSheetInternal =
-                d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-            bottomSheetInternal?.setBackgroundResource(R.drawable.bottomsheet_container_background)
-            bottomSheetInternal?.let {
-                BottomSheetBehavior.from(it).state = BottomSheetBehavior.STATE_EXPANDED
-                BottomSheetBehavior.from(it).skipCollapsed = true
-            }
-        }
-        return inflater.inflate(R.layout.bottom_sheet_profile, container, false)
+        dialog?.initBottomSheetInternal()
+        binding = BottomSheetProfileBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,18 +71,19 @@ class ProfileResultFragment : BaseBottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        compareWithYourself.setVisibility(arguments?.getBoolean(IS_COMPARISON_VISIBLE))
+        binding.compareWithYourself.isVisible =
+            arguments?.getBoolean(ARG_PROFILE_RESULT_TYPE) ?: false
         setListeners()
 
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, Observer {
-            tabMenu.setVisibility(true)
+        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
+            binding.tabMenu.isVisible = true
             it.let(::initAdapter)
-        })
+        }
 
         arguments?.let {
             val profileResultType = it.getSerializable(PROFILE_RESULT_TYPE) as ProfileResultType
-            compareWithYourself.setVisibility(profileResultType != ProfileResultType.NEW)
-            addedToComparison.setVisibility(profileResultType != ProfileResultType.NEW)
+            binding.compareWithYourself.isVisible = profileResultType != ProfileResultType.NEW
+            binding.addedToComparison.isVisible = profileResultType != ProfileResultType.NEW
         }
 
         loadData()
@@ -106,7 +98,7 @@ class ProfileResultFragment : BaseBottomSheetDialogFragment() {
     }
 
     private fun setListeners() {
-        addedProfile.setOnClickListener {
+        binding.addedProfile.setOnClickListener {
             viewModel.playerModel.get()?.let {
                 if (viewModel.playerModel.get()?.stats?.playerStatsData?.stats?.all?.overall?.matches == 0) {
                     context?.showDialog(R.string.user_empty_stats)
@@ -117,15 +109,15 @@ class ProfileResultFragment : BaseBottomSheetDialogFragment() {
             }
         }
 
-        compareWithYourself.setOnClickListener {
+        binding.compareWithYourself.setOnClickListener {
             if (viewModel.playerModel.get()?.stats?.playerStatsData?.stats?.all?.overall?.matches == 0) {
-              //  context?.showDialog(R.string.steam_private) TODO
+                //  context?.showDialog(R.string.steam_private) TODO
             } else {
                 viewModel.compareWithYourself()
             }
         }
 
-        addedToComparison.setOnClickListener {
+        binding.addedToComparison.setOnClickListener {
             dismiss()
             viewModel.addedUserMode()
         }
@@ -144,8 +136,8 @@ class ProfileResultFragment : BaseBottomSheetDialogFragment() {
         }
     }
 
-    private fun initAdapter(list: List<Profile>) {
-        recyclerView.run {
+    private fun initAdapter(list: List<ProfileListItem>) {
+        binding.recyclerViewInclude.recyclerView.run {
             adapter = ProfileAdapter()
             (adapter as ProfileAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)

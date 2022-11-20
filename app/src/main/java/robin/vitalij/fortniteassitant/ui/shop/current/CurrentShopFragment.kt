@@ -2,47 +2,43 @@ package robin.vitalij.fortniteassitant.ui.shop.current
 
 import android.content.Context
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.recycler_view.*
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
+import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewBinding
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
+import robin.vitalij.fortniteassitant.model.network.shop.ShopAdapterItem
 import robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.CurrentShopResultFragment
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
-import robin.vitalij.fortniteassitant.ui.shop.current.adapter.CurrentShopAdapter
-import robin.vitalij.fortniteassitant.ui.shop.current.adapter.viewmodel.CurrentShopImpl
-import robin.vitalij.fortniteassitant.ui.shop.current.adapter.viewmodel.CurrentShopType
+import robin.vitalij.fortniteassitant.ui.shop.current.header_adapter.HeaderShopAdapter
 import javax.inject.Inject
 
-private const val MAX_SPAN_COUNT = 2
-
-class CurrentShopFragment : BaseFragment() {
+class CurrentShopFragment : Fragment(R.layout.fragment_recycler_view) {
 
     @Inject
     lateinit var viewModelFactory: CurrentShopViewModelFactory
 
-    private lateinit var viewModel: CurrentShopViewModel
+    private val viewModel: CurrentShopViewModel by viewModels { viewModelFactory }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_achievements, container, false)
+    private val binding by viewBinding(FragmentRecyclerViewBinding::bind)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(CurrentShopViewModel::class.java).apply {
-                observeToProgressBar(this@CurrentShopFragment)
-                observeToError(this@CurrentShopFragment)
-            }
-    }
+    private val headerShopAdapter = HeaderShopAdapter(
+        onClick = {
+            CurrentShopResultFragment.show(
+                childFragmentManager,
+                it,
+            )
+        },
+    )
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -51,50 +47,47 @@ class CurrentShopFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, Observer {
-            it.let(::initAdapter)
-        })
+        setListener()
+        initializeRecyclerView()
+
+        lifecycleScope.launch {
+            viewModel.currentShopResult.collect {
+                handleCurrentShopResult(it)
+            }
+        }
 
         viewModel.loadData()
-        setListener()
     }
 
     private fun setListener() {
-        setErrorResolveButtonClick {
+        binding.errorViewInclude.errorResolveButton.setOnClickListener {
             viewModel.loadData()
         }
     }
 
-    private fun initAdapter(list: List<CurrentShopImpl>) {
-        val displayMetrics = DisplayMetrics()
-        activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
-        val widthPixels = displayMetrics.widthPixels * 0.35
+    private fun initializeRecyclerView() {
+        binding.recyclerViewInclude.recyclerView.run {
+            adapter = headerShopAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
+    }
 
-        recyclerView.run {
-            adapter = CurrentShopAdapter(
-                onClick = {
-                    CurrentShopResultFragment.show(
-                        childFragmentManager,
-                        it,
-                    )
-                },
-                widthPixels = widthPixels.toInt()
-            )
-            (adapter as CurrentShopAdapter).setData(list)
-
-            val gridlayoutManager = GridLayoutManager(
-                activity, MAX_SPAN_COUNT
-            )
-
-            gridlayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int): Int {
-                    return when (adapter?.getItemViewType(position)) {
-                        CurrentShopType.SHOP_ITEM.id -> 1
-                        else -> MAX_SPAN_COUNT
-                    }
+    private fun handleCurrentShopResult(result: LoadingState<List<ShopAdapterItem>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
+            }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                headerShopAdapter.updateData(result.data)
+            }
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
                 }
             }
-            layoutManager = gridlayoutManager
         }
     }
 }

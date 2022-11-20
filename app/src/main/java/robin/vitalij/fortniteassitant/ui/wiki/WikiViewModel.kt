@@ -1,5 +1,5 @@
 package robin.vitalij.fortniteassitant.ui.wiki
 
-import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
+import androidx.lifecycle.ViewModel
 
-class WikiViewModel : BaseViewModel()
+class WikiViewModel : ViewModel()

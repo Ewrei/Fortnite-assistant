@@ -1,31 +1,44 @@
 package robin.vitalij.fortniteassitant.ui.home
 
-import androidx.lifecycle.MutableLiveData
-import io.reactivex.android.schedulers.AndroidSchedulers
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
+import robin.vitalij.fortniteassitant.model.FullHomeModel
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.repository.db.HomeRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
-import robin.vitalij.fortniteassitant.ui.home.adapter.viewmodel.Home
 
 class HomeViewModel(
-    homeRepository: HomeRepository,
-    preferenceManager: PreferenceManager
-) : BaseViewModel() {
+    private val homeRepository: HomeRepository,
+    private val preferenceManager: PreferenceManager
+) : ViewModel() {
 
-    val mutableLiveData = MutableLiveData<List<Home>>()
+    private val detailsStatisticsState =
+        MutableStateFlow<LoadingState<FullHomeModel>>(LoadingState.Loading)
+
+    val detailsStatisticsResult: StateFlow<LoadingState<FullHomeModel>> = detailsStatisticsState
 
     var detailsStatistics: ArrayList<DetailStatisticsModel> = arrayListOf()
 
-    init {
-        homeRepository
-            .loadData(preferenceManager.getPlayerId())
-            .observeOn(AndroidSchedulers.mainThread())
-            .let(::setupProgressShow)
-            .subscribe({
-                mutableLiveData.value = it.homes
-                detailsStatistics = it.details
-            }, error)
-            .let(disposables::add)
+    private var job: Job? = null
+
+    fun loadData() {
+        job?.cancel()
+        job = viewModelScope.launch {
+            homeRepository.loadData(preferenceManager.getPlayerId()).collect { loadingState ->
+                if(loadingState is LoadingState.Success) {
+                    detailsStatistics.clear()
+                    detailsStatistics.addAll(loadingState.data.details)
+                }
+                detailsStatisticsState.value = loadingState
+            }
+        }
     }
+
 }

@@ -11,17 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.StringRes
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-//import org.solovyev.android.checkout.Billing
-import robin.vitalij.fortniteassitant.BuildConfig
 import robin.vitalij.fortniteassitant.R
-
-
-//fun Context.getBilling() =
-//    Billing(this, object : Billing.DefaultConfiguration() {
-//        override fun getPublicKey(): String {
-//            return BuildConfig.BILLING_ID
-//        }
-//    })
 
 fun Context.showToast(title: String) {
     Toast.makeText(this, title, Toast.LENGTH_SHORT).show()

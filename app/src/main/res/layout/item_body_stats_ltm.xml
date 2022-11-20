@@ -1,371 +1,352 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <data>
-
-        <variable
-            name="item"
-            type="robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.viewholder.body.adapter.viewmodel.BodyStatsLtm" />
-    </data>
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin_double"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:fontFamily="@font/futura_pt_bold"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        tools:text="type battles" />
 
-        <TextView
+    <com.google.android.material.card.MaterialCardView
+        style="@style/DefaultCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checkable="false"
+        android:clickable="false"
+        app:cardBackgroundColor="@color/colorPrimaryDark">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginTop="@dimen/default_margin_double"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:text="@{item.title}"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:fontFamily="@font/futura_pt_bold"
-            tools:text="type battles" />
+            android:orientation="vertical">
 
-        <com.google.android.material.card.MaterialCardView
-            style="@style/DefaultCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/colorPrimaryDark"
-            android:checkable="false"
-            android:clickable="false">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/matches"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin_double"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:fontFamily="@font/fortnite_battlefest"
+                android:gravity="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="matches" />
 
-                <TextView
-                    android:id="@+id/matches"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/default_margin_double"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:gravity="center"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:fontFamily="@font/fortnite_battlefest"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:value="@{item.matches.matches}"
-                    tools:text="matches" />
+            <TextView
+                android:id="@+id/matchesTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:fontFamily="@font/futura_pt_medium"
+                android:gravity="center"
+                android:text="@string/matches"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/darker_gray"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/matches" />
 
-                <TextView
-                    android:id="@+id/matchesTitle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:gravity="center"
-                    android:text="@string/matches"
-                    android:fontFamily="@font/futura_pt_medium"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    android:textColor="@android:color/darker_gray"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/matches" />
+            <TextView
+                android:id="@+id/winRate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin_double"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:fontFamily="@font/fortnite_battlefest"
+                android:gravity="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="winRate" />
 
-                <TextView
-                    android:id="@+id/winRate"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/default_margin_double"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:gravity="center"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:fontFamily="@font/fortnite_battlefest"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline2"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:percent="@{item.matches.winRate}"
-                    tools:text="winRate" />
+            <TextView
+                android:id="@+id/winRateTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:fontFamily="@font/futura_pt_medium"
+                android:gravity="center"
+                android:text="@string/wins_percent"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/matches" />
 
-                <TextView
-                    android:id="@+id/winRateTitle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:gravity="center"
-                    android:text="@string/wins_percent"
-                    android:fontFamily="@font/futura_pt_medium"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    android:textColor="@android:color/darker_gray"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline2"
-                    app:layout_constraintTop_toBottomOf="@+id/matches" />
+            <TextView
+                android:id="@+id/kills"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin_double"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:fontFamily="@font/fortnite_battlefest"
+                android:gravity="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view1"
+                tools:text="kills" />
 
-                <TextView
-                    android:id="@+id/kills"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/default_margin_double"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:gravity="center"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:fontFamily="@font/fortnite_battlefest"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view1"
-                    app:value="@{item.matches.kills}"
-                    tools:text="kills" />
+            <TextView
+                android:id="@+id/killsTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:fontFamily="@font/futura_pt_medium"
+                android:gravity="center"
+                android:text="@string/kills"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/darker_gray"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/kills" />
 
-                <TextView
-                    android:id="@+id/killsTitle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:gravity="center"
-                    android:text="@string/kills"
-                    android:fontFamily="@font/futura_pt_medium"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    android:textColor="@android:color/darker_gray"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/kills" />
+            <TextView
+                android:id="@+id/deaths"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin_double"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:fontFamily="@font/fortnite_battlefest"
+                android:gravity="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/view2"
+                tools:text="deaths" />
 
-                <TextView
-                    android:id="@+id/deaths"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/default_margin_double"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:gravity="center"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:fontFamily="@font/fortnite_battlefest"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline2"
-                    app:layout_constraintTop_toBottomOf="@+id/view2"
-                    app:value="@{item.matches.deaths}"
-                    tools:text="deaths" />
+            <TextView
+                android:id="@+id/deathsTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:fontFamily="@font/futura_pt_medium"
+                android:gravity="center"
+                android:text="@string/deaths"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/deaths" />
 
-                <TextView
-                    android:id="@+id/deathsTitle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:gravity="center"
-                    android:text="@string/deaths"
-                    android:fontFamily="@font/futura_pt_medium"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    android:textColor="@android:color/darker_gray"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline2"
-                    app:layout_constraintTop_toBottomOf="@+id/deaths" />
+            <TextView
+                android:id="@+id/killsPerMin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin_double"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:fontFamily="@font/fortnite_battlefest"
+                android:gravity="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view3"
+                tools:text="killsPerMin" />
 
-                <TextView
-                    android:id="@+id/killsPerMin"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/default_margin_double"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:gravity="center"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:fontFamily="@font/fortnite_battlefest"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view3"
-                    app:value="@{item.matches.killsPerMin}"
-                    tools:text="killsPerMin" />
+            <TextView
+                android:id="@+id/killsPerMinTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:fontFamily="@font/futura_pt_medium"
+                android:gravity="center"
+                android:text="@string/killsPerMin"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/darker_gray"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/killsPerMin" />
 
-                <TextView
-                    android:id="@+id/killsPerMinTitle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:gravity="center"
-                    android:text="@string/killsPerMin"
-                    android:fontFamily="@font/futura_pt_medium"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    android:textColor="@android:color/darker_gray"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/killsPerMin" />
+            <TextView
+                android:id="@+id/killsPerMatch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin_double"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:fontFamily="@font/fortnite_battlefest"
+                android:gravity="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/view4"
+                tools:text="killsPerMatch" />
 
-                <TextView
-                    android:id="@+id/killsPerMatch"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/default_margin_double"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:gravity="center"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:fontFamily="@font/fortnite_battlefest"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline2"
-                    app:layout_constraintTop_toBottomOf="@+id/view4"
-                    app:value="@{item.matches.killsPerMatch}"
-                    tools:text="killsPerMatch" />
+            <TextView
+                android:id="@+id/killsPerMatchTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:fontFamily="@font/futura_pt_medium"
+                android:gravity="center"
+                android:text="@string/killsPerMatch"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/killsPerMatch" />
 
-                <TextView
-                    android:id="@+id/killsPerMatchTitle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:gravity="center"
-                    android:text="@string/killsPerMatch"
-                    android:fontFamily="@font/futura_pt_medium"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    android:textColor="@android:color/darker_gray"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline2"
-                    app:layout_constraintTop_toBottomOf="@+id/killsPerMatch" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.5" />
+            <View
+                android:id="@+id/view1"
+                style="@style/DefaultDivider"
+                android:layout_width="0dp"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin_double"
+                android:layout_marginEnd="@dimen/default_margin_double"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/matchesTitle" />
 
-                <View
-                    android:id="@+id/view1"
-                    style="@style/DefaultDivider"
-                    android:layout_width="0dp"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/default_margin_double"
-                    android:layout_marginEnd="@dimen/default_margin_double"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/matchesTitle" />
+            <View
+                android:id="@+id/view2"
+                style="@style/DefaultDivider"
+                android:layout_width="0dp"
+                android:layout_marginStart="@dimen/default_margin_double"
+                android:layout_marginTop="@dimen/default_margin_double"
+                android:layout_marginEnd="@dimen/default_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/matchesTitle" />
 
-                <View
-                    android:id="@+id/view2"
-                    style="@style/DefaultDivider"
-                    android:layout_width="0dp"
-                    android:layout_marginStart="@dimen/default_margin_double"
-                    android:layout_marginTop="@dimen/default_margin_double"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline2"
-                    app:layout_constraintTop_toBottomOf="@+id/matchesTitle" />
+            <View
+                android:id="@+id/view3"
+                style="@style/DefaultDivider"
+                android:layout_width="0dp"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin_double"
+                android:layout_marginEnd="@dimen/default_margin_double"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/killsTitle" />
 
-                <View
-                    android:id="@+id/view3"
-                    style="@style/DefaultDivider"
-                    android:layout_width="0dp"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/default_margin_double"
-                    android:layout_marginEnd="@dimen/default_margin_double"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/killsTitle" />
+            <View
+                android:id="@+id/view4"
+                style="@style/DefaultDivider"
+                android:layout_width="0dp"
+                android:layout_marginStart="@dimen/default_margin_double"
+                android:layout_marginTop="@dimen/default_margin_double"
+                android:layout_marginEnd="@dimen/default_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/deathsTitle" />
 
-                <View
-                    android:id="@+id/view4"
-                    style="@style/DefaultDivider"
-                    android:layout_width="0dp"
-                    android:layout_marginStart="@dimen/default_margin_double"
-                    android:layout_marginTop="@dimen/default_margin_double"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline2"
-                    app:layout_constraintTop_toBottomOf="@+id/deathsTitle" />
+            <View
+                android:id="@+id/view5"
+                style="@style/DefaultDivider"
+                android:layout_width="0dp"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin_double"
+                android:layout_marginEnd="@dimen/default_margin_double"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/killsPerMinTitle" />
 
-                <View
-                    android:id="@+id/view5"
-                    style="@style/DefaultDivider"
-                    android:layout_width="0dp"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/default_margin_double"
-                    android:layout_marginEnd="@dimen/default_margin_double"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/killsPerMinTitle" />
+            <View
+                android:id="@+id/view6"
+                style="@style/DefaultDivider"
+                android:layout_width="0dp"
+                android:layout_marginStart="@dimen/default_margin_double"
+                android:layout_marginTop="@dimen/default_margin_double"
+                android:layout_marginEnd="@dimen/default_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/killsPerMatchTitle" />
 
-                <View
-                    android:id="@+id/view6"
-                    style="@style/DefaultDivider"
-                    android:layout_width="0dp"
-                    android:layout_marginStart="@dimen/default_margin_double"
-                    android:layout_marginTop="@dimen/default_margin_double"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline2"
-                    app:layout_constraintTop_toBottomOf="@+id/killsPerMatchTitle" />
+            <TextView
+                android:id="@+id/kd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin_double"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:fontFamily="@font/fortnite_battlefest"
+                android:gravity="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view5"
+                tools:text="kd" />
 
-                <TextView
-                    android:id="@+id/kd"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/default_margin_double"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:gravity="center"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:fontFamily="@font/fortnite_battlefest"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view5"
-                    app:value="@{item.matches.kd}"
-                    tools:text="kd" />
+            <TextView
+                android:id="@+id/kdTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/default_margin_double"
+                android:fontFamily="@font/futura_pt_medium"
+                android:gravity="center"
+                android:text="@string/kd"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/darker_gray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/kd" />
 
-                <TextView
-                    android:id="@+id/kdTitle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:layout_marginBottom="@dimen/default_margin_double"
-                    android:gravity="center"
-                    android:text="@string/kd"
-                    android:fontFamily="@font/futura_pt_medium"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    android:textColor="@android:color/darker_gray"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/kd" />
+            <TextView
+                android:id="@+id/minutesPlayed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin_double"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:fontFamily="@font/fortnite_battlefest"
+                android:gravity="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/view6"
+                tools:text="minutesPlayed" />
 
-                <TextView
-                    android:id="@+id/minutesPlayed"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/default_margin_double"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:gravity="center"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:fontFamily="@font/fortnite_battlefest"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline2"
-                    app:layout_constraintTop_toBottomOf="@+id/view6"
-                    app:value="@{item.matches.minutesPlayed}"
-                    tools:text="minutesPlayed" />
+            <TextView
+                android:id="@+id/minutesPlayedTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:fontFamily="@font/futura_pt_medium"
+                android:gravity="center"
+                android:text="@string/minutes_played"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/minutesPlayed" />
 
-                <TextView
-                    android:id="@+id/minutesPlayedTitle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:gravity="center"
-                    android:text="@string/minutes_played"
-                    android:fontFamily="@font/futura_pt_medium"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    android:textColor="@android:color/darker_gray"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline2"
-                    app:layout_constraintTop_toBottomOf="@+id/minutesPlayed" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 
-        </com.google.android.material.card.MaterialCardView>
-
-    </LinearLayout>
-
-</layout>
+</LinearLayout>

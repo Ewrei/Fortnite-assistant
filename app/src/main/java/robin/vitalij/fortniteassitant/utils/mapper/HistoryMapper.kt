@@ -12,7 +12,7 @@ private const val ONE_SESSION = 1
 class HistoryMapper : Mapper<List<UserHistory>, List<HistoryUserModel>> {
 
     override fun transform(obj: List<UserHistory>): List<HistoryUserModel> {
-        val list = arrayListOf<HistoryUserModel>()
+        val list = mutableListOf<HistoryUserModel>()
 
         if (obj.size > ONE_SESSION) {
             for (i in ONE_SESSION until obj.size) {

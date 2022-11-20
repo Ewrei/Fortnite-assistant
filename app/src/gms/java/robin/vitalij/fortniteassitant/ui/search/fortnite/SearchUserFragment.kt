@@ -7,26 +7,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.LoadAdError
 import kotlinx.android.synthetic.gms.fragment_search_user.*
+import kotlinx.android.synthetic.gms.fragment_search_user.searchButton
+import kotlinx.android.synthetic.gms.fragment_search_user.searchInputEditText
 import kotlinx.android.synthetic.main.recycler_view.*
 import kotlinx.android.synthetic.main.toolbar_center_title.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.*
+import robin.vitalij.fortniteassitant.interfaces.InputAccountIdCallback
 import robin.vitalij.fortniteassitant.interfaces.RegistrationProfileCallback
 import robin.vitalij.fortniteassitant.model.enums.AvatarType
 import robin.vitalij.fortniteassitant.model.enums.FirebaseDynamicLinkType
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
+import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFragment
+import robin.vitalij.fortniteassitant.ui.bottomsheet.input_account_id.InputAccountIdResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.main.MainActivity
@@ -42,8 +45,6 @@ class SearchUserFragment : BaseFragment() {
     lateinit var viewModelFactory: SearchUserViewModelFactory
 
     private lateinit var viewModel: SearchUserViewModel
-
-    lateinit var adRequest: AdRequest
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -96,12 +97,12 @@ class SearchUserFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
+        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
             it?.let(::initAdapter)
-        })
+        }
 
         arguments?.let {
-            if (it.getSerializable(IS_COMPARISON_VISIBLE) as ProfileResultType == ProfileResultType.FULL) {
+            if (it.getSerializable(ARG_PROFILE_RESULT_TYPE) as ProfileResultType == ProfileResultType.FULL) {
                 setNavigation()
             } else {
                 toolbar.title = getString(R.string.search_player)
@@ -117,16 +118,16 @@ class SearchUserFragment : BaseFragment() {
     private fun initBanner() {
         var profileResultType: ProfileResultType = ProfileResultType.NEW
         arguments?.let {
-            profileResultType = it.getSerializable(IS_COMPARISON_VISIBLE) as ProfileResultType
+            profileResultType = it.getSerializable(ARG_PROFILE_RESULT_TYPE) as ProfileResultType
         }
 
         if (viewModel.preferenceManager.getIsSubscription() || viewModel.preferenceManager.getDisableAdvertising() >= Date().time
             || profileResultType == ProfileResultType.FULL
         ) {
-            adView.setVisibility(false)
+            customBannerView.setVisibility(false)
         } else {
-            adRequest = AdRequest.Builder().build()
-            adView.loadAd(adRequest)
+            customBannerView.setVisibility(true)
+            customBannerView.startBanner(getString(R.string.BANNER_ID), activity)
         }
     }
 
@@ -143,35 +144,10 @@ class SearchUserFragment : BaseFragment() {
             false
         }
 
-        adView?.adListener = object : AdListener() {
-            override fun onAdLoaded() {
-                adView?.setVisibility(true)
-            }
-
-            override fun onAdFailedToLoad(adError: LoadAdError) {
-                adView?.setVisibility(false)
-                adView?.loadAd(adRequest)
-            }
-
-            override fun onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-            }
-
-            override fun onAdClicked() {
-                // Code to be executed when the user clicks on an ad.
-            }
-
-            override fun onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
-            }
-        }
-
         searchButton.setSafeOnClickListener {
             context?.closeKeyboard(view)
             if (searchInputEditText.text.toString().isEmpty()) {
-                viewModel.mutableLiveData.value = arrayListOf()
+                viewModel.mutableLiveData.value = emptyList()
             }
             if (searchInputEditText.text.toString().length >= resources.getInteger(R.integer.min_length)) {
                 viewModel.searchPlayer(searchInputEditText.text.toString())
@@ -180,6 +156,33 @@ class SearchUserFragment : BaseFragment() {
 
         strictUserSwitch.setOnCheckedChangeListener { it, isChecked ->
             viewModel.strict = !isChecked
+        }
+
+        iKnowMyAccountIdButton.setOnClickListener {
+            InputAccountIdResultFragment.show(
+                childFragmentManager,
+                object : InputAccountIdCallback {
+                    override fun sendAccountId(accountId: String) {
+                        arguments?.let { bundle ->
+                            context.closeKeyboard(view)
+                            ProfileResultFragment.show(
+                                childFragmentManager,
+                                accountId,
+                                AvatarType.values().random().getImageUrl(),
+                                bundle.getSerializable(ARG_PROFILE_RESULT_TYPE) as ProfileResultType,
+                                object : RegistrationProfileCallback {
+                                    override fun addedProfile(fortniteProfileResponse: FortniteProfileResponse) {
+                                        viewModel.textActivityVisibility.set(getString(R.string.save_the_user))
+                                        viewModel.saveUser(fortniteProfileResponse)
+                                    }
+                                })
+                        }
+                    }
+                })
+        }
+
+        howToFindAccountIdButton.setOnClickListener {
+            ContactUsResultFragment.show(childFragmentManager, false)
         }
     }
 
@@ -192,7 +195,7 @@ class SearchUserFragment : BaseFragment() {
                         childFragmentManager,
                         it.accountId,
                         it.avatarImage,
-                        bundle.getSerializable(IS_COMPARISON_VISIBLE) as ProfileResultType,
+                        bundle.getSerializable(ARG_PROFILE_RESULT_TYPE) as ProfileResultType,
                         object : RegistrationProfileCallback {
                             override fun addedProfile(fortniteProfileResponse: FortniteProfileResponse) {
                                 viewModel.textActivityVisibility.set(getString(R.string.save_the_user))
@@ -207,12 +210,10 @@ class SearchUserFragment : BaseFragment() {
     }
 
     companion object {
-        const val IS_COMPARISON_VISIBLE = "is_comparison_visible"
+        const val ARG_PROFILE_RESULT_TYPE = "arg_profile_result_type"
 
         fun newInstance(profileResultType: ProfileResultType) = SearchUserFragment().apply {
-            arguments = Bundle().apply {
-                putSerializable(IS_COMPARISON_VISIBLE, profileResultType)
-            }
+            arguments = bundleOf(ARG_PROFILE_RESULT_TYPE to profileResultType)
         }
     }
 }

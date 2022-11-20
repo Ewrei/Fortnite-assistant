@@ -21,10 +21,10 @@ interface SteamChartRequestsApi {
     fun saveTop(@Body body: PlayerStatsResponse): Observable<Response<ResponseBody>>
 
     @GET("/$PATCH_FORTNITE/$PATCH_TOP_USERS?period=mount&limit=1000")
-    fun getTopUsers(
+    suspend fun getTopUsers(
         @Query(QUERY_ATTRIBUTE) attribute: String,
         @Query(QUERY_TYPE) type: String,
         @Query(QUERY_PLATFORM) platform: String
-    ): Observable<List<TopUser>>
+    ): List<TopUser>
 
 }

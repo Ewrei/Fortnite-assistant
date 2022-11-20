@@ -1,6 +1,7 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.vehicles.adapter
 
 import androidx.recyclerview.widget.RecyclerView
+import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
 import robin.vitalij.fortniteassitant.databinding.ItemVehiclesResultHeaderBinding
 
 class VehiclesResultHeaderViewHolder(
@@ -8,6 +9,7 @@ class VehiclesResultHeaderViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: VehiclesResultListItem.HeaderItem) {
-        binding.item = item
+        binding.image.loadImage(item.icon)
+        binding.name.text = item.name
     }
 }

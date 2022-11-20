@@ -2,48 +2,41 @@ package robin.vitalij.fortniteassitant.ui.cosmetics
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.recycler_view.*
-import kotlinx.android.synthetic.main.toolbar_center_title.*
-import kotlinx.android.synthetic.main.view_error.*
+import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
+import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewWithToolbarBinding
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.ShopType
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.cosmetics.adapter.CatalogCosmeticsAdapter
-import robin.vitalij.fortniteassitant.ui.cosmetics.catalog.CosmeticsFragment.Companion.SHOP_TYPE
+import robin.vitalij.fortniteassitant.ui.cosmetics.catalog.CosmeticsFragment.Companion.ARG_SHOP_TYPE
 import javax.inject.Inject
 
-private const val MAX_SPAN_COUNT = 2
-
-class CatalogCosmeticsFragment : BaseFragment() {
+class CatalogCosmeticsFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) {
 
     @Inject
     lateinit var viewModelFactory: CatalogCosmeticsViewModelFactory
 
-    private lateinit var viewModel: CatalogCosmeticsViewModel
+    private val viewModel: CatalogCosmeticsViewModel by viewModels { viewModelFactory }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_history, container, false)
+    private val binding by viewBinding(FragmentRecyclerViewWithToolbarBinding::bind)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(CatalogCosmeticsViewModel::class.java).apply {
-                observeToProgressBar(this@CatalogCosmeticsFragment)
-                observeToError(this@CatalogCosmeticsFragment)
-            }
+    private val catalogCosmeticsAdapter = CatalogCosmeticsAdapter {
+        findNavController().navigate(R.id.navigation_cosmetics,  bundleOf(ARG_SHOP_TYPE to it))
     }
 
     override fun onAttach(context: Context) {
@@ -53,16 +46,21 @@ class CatalogCosmeticsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
-            it.let(::initAdapter)
-        })
-
         setListener()
         setNavigation()
+        initializeRecyclerView()
+
+        lifecycleScope.launch {
+            viewModel.shopTypesResult.collect {
+                handleShopTypesResult(it)
+            }
+        }
+
+        viewModel.loadData()
     }
 
     private fun setListener() {
-        setErrorResolveButtonClick {
+        binding.errorViewInclude.errorResolveButton.setOnClickListener {
             viewModel.loadData()
         }
     }
@@ -70,27 +68,47 @@ class CatalogCosmeticsFragment : BaseFragment() {
     private fun setNavigation() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
-    private fun initAdapter(list: List<ShopType>) {
-        recyclerView.run {
-            adapter = CatalogCosmeticsAdapter {
-                val bundle = Bundle().apply {
-                    putSerializable(SHOP_TYPE, it)
-                }
-                findNavController().navigate(R.id.navigation_cosmetics, bundle)
-            }
-            (adapter as CatalogCosmeticsAdapter).setData(list)
+    private fun initializeRecyclerView() {
+        binding.recyclerViewInclude.recyclerView.run {
+            adapter = catalogCosmeticsAdapter
             val gridlayoutManager = GridLayoutManager(
                 activity, MAX_SPAN_COUNT
-            )
-
-            gridlayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int) = 1
+            ).apply {
+                this.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int) = 1
+                }
             }
 
             layoutManager = gridlayoutManager
         }
     }
+
+    private fun handleShopTypesResult(result: LoadingState<List<ShopType>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
+            }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                catalogCosmeticsAdapter.updateData(result.data)
+            }
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                }
+            }
+        }
+    }
+
+    companion object {
+        private const val MAX_SPAN_COUNT = 2
+
+    }
+
 }

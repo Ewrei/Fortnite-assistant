@@ -1,14 +1,19 @@
 package robin.vitalij.fortniteassitant.repository.db
 
-import io.reactivex.Flowable
-import io.reactivex.functions.BiFunction
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import robin.vitalij.fortniteassitant.common.extensions.getErrorModel
 import robin.vitalij.fortniteassitant.db.dao.UserDao
 import robin.vitalij.fortniteassitant.db.entity.UserEntity
 import robin.vitalij.fortniteassitant.db.projection.UserHistory
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
 import robin.vitalij.fortniteassitant.model.FullHomeModel
-import robin.vitalij.fortniteassitant.utils.mapper.HomeMapper
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.utils.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.mapper.HomeMapper
 import javax.inject.Inject
 
 class HomeRepository @Inject constructor(
@@ -16,16 +21,37 @@ class HomeRepository @Inject constructor(
     private val resourceProvider: ResourceProvider
 ) {
 
-    fun loadData(playerId: String): Flowable<FullHomeModel> =
-        Flowable.combineLatest(
-            userDao.getLastTwoUserEntities(playerId),
-            userDao.getUserHistory(playerId),
-            handleResult()
-        ).subscribeOn(Schedulers.io())
+    fun loadData(playerId: String): Flow<LoadingState<FullHomeModel>> =
+        getLastTwoUserEntities(playerId).combine(getUserHistory(playerId)) { users, userHistory ->
+            if (users is LoadingState.Success && userHistory is LoadingState.Success) {
+                return@combine LoadingState.Success(
+                    HomeMapper(
+                        resourceProvider,
+                        userHistory.data
+                    ).transform(users.data)
+                )
+            } else if (users is LoadingState.Error) {
+                return@combine users
+            } else if (userHistory is LoadingState.Error) {
+                return@combine userHistory
+            } else LoadingState.Loading
 
-
-    private fun handleResult(): BiFunction<List<UserEntity>, List<UserHistory>, FullHomeModel> =
-        BiFunction { users, histories ->
-            HomeMapper(resourceProvider, histories).transform(users)
         }
+
+    private fun getUserHistory(playerId: String): Flow<LoadingState<List<UserHistory>>> = flow {
+        emit(LoadingState.Loading)
+        kotlin.runCatching { userDao.getUserHistory(playerId) }
+            .onSuccess { emit(LoadingState.Success(it)) }
+            .onFailure { emit(LoadingState.Error(ErrorModelListItem.ErrorItem(it.getErrorModel()))) }
+    }.flowOn(Dispatchers.IO)
+
+
+    private fun getLastTwoUserEntities(playerId: String): Flow<LoadingState<List<UserEntity>>> =
+        flow {
+            emit(LoadingState.Loading)
+            kotlin.runCatching { userDao.getLastTwoUserEntities(playerId) }
+                .onSuccess { emit(LoadingState.Success((it))) }
+                .onFailure { emit(LoadingState.Error(ErrorModelListItem.ErrorItem(it.getErrorModel()))) }
+        }.flowOn(Dispatchers.IO)
+
 }

@@ -1,16 +1,22 @@
 package robin.vitalij.fortniteassitant.ui.users
 
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.interfaces.SaveUserCallback
+import robin.vitalij.fortniteassitant.model.LoadingState
+import robin.vitalij.fortniteassitant.model.UserModel
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
 import robin.vitalij.fortniteassitant.repository.db.UsersRepository
 import robin.vitalij.fortniteassitant.repository.network.GetUserRepository
 import robin.vitalij.fortniteassitant.repository.network.SaveUserRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
-import robin.vitalij.fortniteassitant.ui.users.adapter.UserModel
 import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 class UsersViewModel(
@@ -21,10 +27,19 @@ class UsersViewModel(
     val preferenceManager: PreferenceManager
 ) : BaseViewModel() {
 
-    val mutableLiveData = MutableLiveData<List<UserModel>>()
+    private val usersState = MutableSharedFlow<LoadingState<List<UserModel>>>(1)
 
-    init {
-        loadData()
+    val usersResult: SharedFlow<LoadingState<List<UserModel>>> = usersState
+
+    private var job: Job? = null
+
+    fun loadData() {
+        job?.cancel()
+        job = viewModelScope.launch {
+            usersRepository.getUsers(preferenceManager.getPlayerId()).collect { loadingState ->
+                usersState.tryEmit(loadingState)
+            }
+        }
     }
 
     fun update(playerId: String) {
@@ -42,17 +57,6 @@ class UsersViewModel(
 
     fun switch(playerId: String) {
         preferenceManager.setPlayerId(playerId)
-    }
-
-    private fun loadData() {
-        usersRepository
-            .loadData(preferenceManager.getPlayerId())
-            .observeOn(AndroidSchedulers.mainThread())
-            .let(::setupProgressShow)
-            .subscribe({
-                mutableLiveData.value = it
-            }, error)
-            .let(disposables::add)
     }
 
     private fun saveUser(fortniteProfileResponse: FortniteProfileResponse) {

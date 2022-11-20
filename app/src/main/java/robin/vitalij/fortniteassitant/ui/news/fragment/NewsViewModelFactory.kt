@@ -6,18 +6,13 @@ import javax.inject.Inject
 
 class NewsViewModelFactory @Inject constructor(
     private val newsRepository: NewsRepository
-) : BaseViewModelFactory<NewsViewModel>(
-    NewsViewModel::class.java
-) {
+) : BaseViewModelFactory<NewsViewModel>(NewsViewModel::class.java) {
 
     private var viewModel: NewsViewModel? = null
 
     override fun createViewModel(): NewsViewModel {
         return viewModel ?: run {
-            val model =
-                NewsViewModel(
-                    newsRepository
-                )
+            val model = NewsViewModel(newsRepository)
             viewModel = model
             return model
         }

@@ -1,72 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView"
+    style="@style/DefaultCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/default_margin"
+    app:cardCornerRadius="0dp">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <variable
-            name="item"
-            type="robin.vitalij.fortniteassitant.db.entity.BannerEntity" />
-    </data>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardView"
-        style="@style/DefaultCard"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
-        app:cardCornerRadius="0dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:fontFamily="@font/futura_pt_medium"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/darker_gray"
+            tools:text="name" />
+
+        <TextView
+            android:id="@+id/type"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_margin="@dimen/default_margin"
+            android:fontFamily="@font/futura_pt_medium"
+            android:gravity="center|bottom"
+            android:textAllCaps="true"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/small_10_text_size"
+            tools:text="type" />
 
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:scaleType="fitStart"
-                app:imageUrl="@{item.bannerImage.icon}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginEnd="@dimen/default_margin"
-                android:fontFamily="@font/futura_pt_medium"
-                android:gravity="center"
-                android:text="@{item.name}"
-                android:textAllCaps="true"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@android:color/darker_gray"
-                tools:text="name" />
-
-            <TextView
-                android:id="@+id/type"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/default_margin"
-                android:fontFamily="@font/futura_pt_medium"
-                android:gravity="center|bottom"
-                android:text="@{item.category}"
-                android:textAllCaps="true"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="@dimen/small_10_text_size"
-                tools:text="type" />
-
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-</layout>
+</com.google.android.material.card.MaterialCardView>

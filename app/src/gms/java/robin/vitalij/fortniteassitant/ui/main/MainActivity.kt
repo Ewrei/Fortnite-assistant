@@ -5,16 +5,13 @@ import android.content.IntentSender
 import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.rewarded.*
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
@@ -27,10 +24,12 @@ import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.tasks.Task
 import kotlinx.android.synthetic.gms.activity_main.*
 import kotlinx.android.synthetic.main.loading_layout.*
-import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.*
+import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.common.extensions.setVisibility
+import robin.vitalij.fortniteassitant.common.extensions.setupWithNavController
+import robin.vitalij.fortniteassitant.common.extensions.showApplicationDialog
 import robin.vitalij.fortniteassitant.databinding.ActivityMainBinding
 import robin.vitalij.fortniteassitant.interfaces.ProgressBarActivityController
 import robin.vitalij.fortniteassitant.interfaces.RegistrationProfileCallback
@@ -38,6 +37,7 @@ import robin.vitalij.fortniteassitant.model.enums.AvatarType
 import robin.vitalij.fortniteassitant.model.enums.FirebaseDynamicLinkType
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
+import robin.vitalij.fortniteassitant.ui.ads_gift_fever.BasicRulesActivity
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
 import robin.vitalij.fortniteassitant.ui.subscription.SubscriptionActivity
 import java.util.*
@@ -56,14 +56,17 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
 
     var binding: ActivityMainBinding? = null
 
-    private lateinit var adRequest: AdRequest
-
     private var currentNavController: LiveData<NavController>? = null
 
     private var appUpdateManager: AppUpdateManager? = null
     private var inAppUpdateType = 0
     private var appUpdateInfoTask: Task<AppUpdateInfo>? = null
     private lateinit var installStateUpdatedListener: InstallStateUpdatedListener
+
+    private val listener =
+        NavController.OnDestinationChangedListener { controller, destination, arguments ->
+            initInterstitialAd()
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,8 +109,6 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
                     }
                 }
 
-        initInterstitialAd()
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding?.viewModel = viewModel
 
@@ -121,14 +122,28 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
         initAppUpdateManager()
         openSubscriptionDialog()
         initBanner()
-        setListener()
 
         viewModel.checkFirebaseDynamicLink()
+
+        if(viewModel.preferenceManager.getShowBasicRulesDate() < Date()) {
+            startActivity(BasicRulesActivity.newInstance(this))
+            viewModel.preferenceManager.setShowBasicRulesDate(Date(Date().time + SEVEN_DAY))
+        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         setupBottomNavigationBar()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        currentNavController?.value?.addOnDestinationChangedListener(listener)
+    }
+
+    override fun onPause() {
+        currentNavController?.value?.removeOnDestinationChangedListener(listener)
+        super.onPause()
     }
 
     private fun setupBottomNavigationBar() {
@@ -145,7 +160,10 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,
             containerId = R.id.nav_host_container,
-            intent = intent
+            intent = intent,
+            changeNavigationTab = {
+                initInterstitialAd()
+            }
         )
 
         currentNavController = controller
@@ -160,8 +178,8 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
     }
 
     fun onDisplayButtonClicked(getAnWard: () -> Unit) {
-        if (viewModel.rewardedAdRepository.defaultRewardedAd != null) {
-            viewModel.rewardedAdRepository.defaultRewardedAd?.show(this) {
+        if (viewModel.rewardedAdRepository.isLoadVideo()) {
+            viewModel.rewardedAdRepository.showReward(this) {
                 val date = Date()
                 val instance = Calendar.getInstance()
                 instance.time = date
@@ -178,10 +196,10 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
 
     private fun initBanner() {
         if (viewModel.preferenceManager.getIsSubscription() || viewModel.preferenceManager.getDisableAdvertising() >= Date().time) {
-            adView.setVisibility(false)
+            customBannerView.setVisibility(false)
         } else {
-            adRequest = AdRequest.Builder().build()
-            adView.loadAd(adRequest)
+            customBannerView.setVisibility(true)
+            customBannerView.startBanner(getString(R.string.BANNER_ID), this)
         }
     }
 
@@ -273,30 +291,7 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
         }
     }
 
-    private fun setListener() {
-        adView?.adListener = object : AdListener() {
-            override fun onAdLoaded() {
-                adView?.setVisibility(true)
-            }
-
-            override fun onAdFailedToLoad(adError: LoadAdError) {
-                adView?.setVisibility(false)
-                adView?.loadAd(adRequest)
-            }
-
-            override fun onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-            }
-
-            override fun onAdClicked() {
-                // Code to be executed when the user clicks on an ad.
-            }
-
-            override fun onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
-            }
-        }
+    companion object {
+        const val SEVEN_DAY = 60000 * 60 * 24 * 7
     }
 }

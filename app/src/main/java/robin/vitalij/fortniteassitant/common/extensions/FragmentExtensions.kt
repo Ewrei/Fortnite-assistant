@@ -35,13 +35,17 @@ fun FragmentActivity.intentTelegram(url: String?) {
     }
 }
 
+fun FragmentActivity.intentUrl(url: String?) {
+    startActivity(Intent(Intent.ACTION_VIEW,  Uri.parse(url)))
+}
+
 fun FragmentActivity.intentGmail(gmail: String) {
     val emailIntent = Intent(
         Intent.ACTION_SENDTO, Uri.fromParts(
             "mailto", gmail, null
         )
     )
-    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "CS:GO Assistant")
+    emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.full_app_name))
     startActivity(Intent.createChooser(emailIntent, null))
 }
 
@@ -53,6 +57,10 @@ fun FragmentActivity.intentVk(vkUrl: String) {
     } catch (e: ActivityNotFoundException) {
         Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
     }
+}
+
+fun FragmentActivity.intentView(url: String?) {
+    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
 }
 
 private fun isAppAvailable(

@@ -1,13 +1,11 @@
 package robin.vitalij.fortniteassitant.ui.crew.details
 
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import robin.vitalij.fortniteassitant.model.network.CrewRewardsModel
-import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 
-class CrewViewDetailsViewModel() : BaseViewModel() {
+class CrewViewDetailsViewModel : ViewModel() {
 
-    val mutableLiveData = MutableLiveData<List<CrewRewardsModel>>()
+    val crewRewardsModels = mutableListOf<CrewRewardsModel>()
+    var toolbarTitle: String = ""
 
-    fun loadData() {
-    }
 }

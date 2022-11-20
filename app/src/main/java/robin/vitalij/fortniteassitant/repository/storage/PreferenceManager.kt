@@ -1,5 +1,7 @@
 package robin.vitalij.fortniteassitant.repository.storage
 
+import java.util.*
+
 interface PreferenceManager {
 
     fun setPlayerId(playerId: String)
@@ -65,4 +67,8 @@ interface PreferenceManager {
     fun setBannerDataLastUpdate(dataUpdate: Long)
 
     fun getBannerDataLastUpdate(): Long
+
+    fun setShowBasicRulesDate(date: Date)
+
+    fun getShowBasicRulesDate(): Date
 }

@@ -16,14 +16,26 @@ class LastUpdate(
 
 class ItemShopUpcoming(
     @SerializedName("id") val id: String,
+    @SerializedName("type") val type: TypeShopModel,
     @SerializedName("name") val name: String,
-    @SerializedName("type") val type: String,
-    @SerializedName("rarity") val rarity: String,
-    @SerializedName("set") val set: String,
+    @SerializedName("rarity") val rarity: RarityModel,
+    @SerializedName("description") val description: String,
     @SerializedName("price") val price: Int,
     @SerializedName("interest") val interest: Double,
+
+    @SerializedName("set") val set: SetModel?,
     @SerializedName("releaseDate") val releaseDate: Any?,
-    @SerializedName("description") val description: String,
     @SerializedName("reactive") val reactive: Boolean,
-    @SerializedName("images") val images: OtherImage
+    @SerializedName("images") val images: OtherImage,
+    @SerializedName("added") val added: AddedModel
 ): Serializable
+
+class TypeShopModel(
+    @SerializedName("id") val id: String,
+    @SerializedName("name") val name: String,
+): Serializable
+
+class AddedModel(
+    @SerializedName("date") val date: String,
+    @SerializedName("version") val version: String
+)

@@ -12,13 +12,13 @@ import robin.vitalij.fortniteassitant.db.entity.CosmeticsNewEntity
 interface CosmeticsDao {
 
     @Query("SELECT * FROM Cosmetics")
-    fun getCosmetics(): Single<List<CosmeticsEntity>>
+    suspend fun getCosmetics(): List<CosmeticsEntity>
 
     @Query("SELECT * FROM Cosmetics WHERE typevalue = :type")
-    fun getCosmetics(type: String): Single<List<CosmeticsEntity>>
+    suspend fun getCosmetics(type: String): List<CosmeticsEntity>
 
     @Query("SELECT * FROM Cosmetics WHERE id = :id")
-    fun getCosmetic(id: String): Single<CosmeticsEntity>
+    suspend fun getCosmetic(id: String): CosmeticsEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCosmetics(list: List<CosmeticsEntity>)

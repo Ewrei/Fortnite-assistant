@@ -2,47 +2,39 @@ package robin.vitalij.fortniteassitant.ui.achiviements
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.recycler_view.*
-import kotlinx.android.synthetic.main.toolbar_center_title.*
-import kotlinx.android.synthetic.main.view_error.*
+import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
+import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewWithToolbarBinding
 import robin.vitalij.fortniteassitant.db.entity.AchievementEntity
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.ui.achiviements.adapter.AchievementsAdapter
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import javax.inject.Inject
 
 
-class AchievementsFragment : BaseFragment() {
+class AchievementsFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) {
 
     @Inject
     lateinit var viewModelFactory: AchievementsViewModelFactory
 
-    private lateinit var viewModel: AchievementsViewModel
+    private val viewModel: AchievementsViewModel by viewModels { viewModelFactory }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_history, container, false)
+    private val binding by viewBinding(FragmentRecyclerViewWithToolbarBinding::bind)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(AchievementsViewModel::class.java).apply {
-                observeToProgressBar(this@AchievementsFragment)
-                observeToError(this@AchievementsFragment)
-            }
-    }
+    private var achievementsAdapter = AchievementsAdapter()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -51,16 +43,21 @@ class AchievementsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
-            it.let(::initAdapter)
-        })
-
         setListener()
         setNavigation()
+        initializeRecyclerView()
+
+        lifecycleScope.launch {
+            viewModel.achievementsResult.collect {
+                handleAchievementsResult(it)
+            }
+        }
+
+        viewModel.loadData()
     }
 
     private fun setListener() {
-        errorResolveButton.setOnClickListener {
+        binding.errorViewInclude.errorResolveButton.setOnClickListener {
             viewModel.loadData()
         }
     }
@@ -68,14 +65,34 @@ class AchievementsFragment : BaseFragment() {
     private fun setNavigation() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
-    private fun initAdapter(list: List<AchievementEntity>) {
-        recyclerView.run {
-            adapter = AchievementsAdapter()
-            (adapter as AchievementsAdapter).setData(list)
+    private fun initializeRecyclerView() {
+        binding.recyclerViewInclude.recyclerView.run {
+            adapter = achievementsAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
+
+    private fun handleAchievementsResult(result: LoadingState<List<AchievementEntity>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
+            }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                achievementsAdapter.updateData(result.data)
+                binding.viewEmptyInclude.emptyView.isVisible = result.data.isEmpty()
+            }
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                }
+            }
+        }
+    }
+
 }

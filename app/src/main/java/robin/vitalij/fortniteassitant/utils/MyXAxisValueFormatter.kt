@@ -6,9 +6,8 @@ import robin.vitalij.fortniteassitant.common.extensions.DATE_PATTERN
 import robin.vitalij.fortniteassitant.common.extensions.getDateStringFormat
 import robin.vitalij.fortniteassitant.model.SessionModel
 
-class MyXAxisValueFormatter(private val mValues: List<SessionModel>) : IAxisValueFormatter {
+class MyXAxisValueFormatter(private val values: List<SessionModel>) : IAxisValueFormatter {
 
-    override fun getFormattedValue(value: Float, axis: AxisBase): String {
-        return mValues[value.toInt()].timestamp.getDateStringFormat(DATE_PATTERN)
-    }
+    override fun getFormattedValue(value: Float, axis: AxisBase) =
+        values[value.toInt()].timestamp.getDateStringFormat(DATE_PATTERN)
 }

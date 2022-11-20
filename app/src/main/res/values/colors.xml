@@ -48,4 +48,6 @@
     <color name="loading_background">#E41D1B1B</color>
 
     <color name="background_button">#f5ff00</color>
+
+    <color name="download_app_text_color">#042C51</color>
 </resources>

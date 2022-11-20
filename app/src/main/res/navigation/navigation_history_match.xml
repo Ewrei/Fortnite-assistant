@@ -10,7 +10,7 @@
         android:id="@+id/historyMatch"
         android:name="robin.vitalij.fortniteassitant.ui.history.HistoryFragment"
         android:label="@string/game_sessions"
-        tools:layout="@layout/fragment_history">
+        tools:layout="@layout/fragment_recycler_view_with_toolbar">
         <action
             android:id="@+id/action_historyMatch_to_navigation_adapter_session"
             app:destination="@id/navigation_adapter_session" />

@@ -6,8 +6,7 @@ import robin.vitalij.fortniteassitant.databinding.ItemSelectedUserBinding
 import robin.vitalij.fortniteassitant.model.comparison.PlayerModel
 
 class SelectedListUserHolder(
-    var binding: ItemSelectedUserBinding,
-    val onClick: (playerModel: PlayerModel) -> Unit
+    val binding: ItemSelectedUserBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: PlayerModel) {

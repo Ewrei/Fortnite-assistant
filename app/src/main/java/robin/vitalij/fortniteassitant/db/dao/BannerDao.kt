@@ -11,15 +11,15 @@ import robin.vitalij.fortniteassitant.db.entity.BannerEntity
 interface BannerDao {
 
     @Query("SELECT * FROM Banner")
-    fun getBanner(): Single<List<BannerEntity>>
+    suspend fun getBanners(): List<BannerEntity>
 
     @Query("SELECT * FROM Banner WHERE id = :id")
-    fun getBanner(id: String): Single<BannerEntity>
+    suspend fun getBanner(id: String): BannerEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertBanner(list: List<BannerEntity>)
+    fun insertBanners(list: List<BannerEntity>)
 
     @Query("DELETE FROM Banner")
-    fun removeBanner()
+    fun removeBanners()
 
 }

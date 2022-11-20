@@ -2,50 +2,54 @@ package robin.vitalij.fortniteassitant.ui.crew.main
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.os.Parcelable
 import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.recycler_view.*
-import kotlinx.android.synthetic.main.toolbar_center_title.*
-import kotlinx.android.synthetic.main.view_error.*
+import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
+import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewWithToolbarBinding
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.network.CrewModel
 import robin.vitalij.fortniteassitant.model.network.CrewRewardsModel
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.crew.details.CrewViewDetailsFragment
 import robin.vitalij.fortniteassitant.ui.crew.main.adapter.GameCrewAdapter
 import robin.vitalij.fortniteassitant.ui.news.VideoActivity
-import java.util.*
 import javax.inject.Inject
 
-class GameCrewFragment : BaseFragment() {
+class GameCrewFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) {
 
     @Inject
     lateinit var viewModelFactory: CrewViewModelFactory
 
-    private lateinit var viewModel: GameCrewViewModel
+    private val viewModel: GameCrewViewModel by viewModels { viewModelFactory }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_history, container, false)
+    private val binding by viewBinding(FragmentRecyclerViewWithToolbarBinding::bind)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(GameCrewViewModel::class.java).apply {
-                observeToProgressBar(this@GameCrewFragment)
-                observeToError(this@GameCrewFragment)
-            }
-    }
+    private var recyclerViewState: Parcelable? = null
+
+    private val gameCrewAdapter = GameCrewAdapter(onClick = {
+        findNavController().navigate(
+            R.id.navigation_crew_details, bundleOf(
+                CrewViewDetailsFragment.ARG_NAME to it.descriptions.title,
+                CrewViewDetailsFragment.ARG_CREW_REWARDS_MODEL to it.rewards as ArrayList<CrewRewardsModel>
+            )
+        )
+    }, onVideoClick = { videoUrl: String, videoName: String ->
+        startActivity(VideoActivity.newInstance(context, videoUrl, videoName))
+    })
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -54,16 +58,29 @@ class GameCrewFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
-            it.let(::initAdapter)
-        })
-
+        initializeRecyclerView()
         setListener()
         setNavigation()
+
+        binding.viewEmptyInclude.empty.setText(R.string.no_information)
+
+        lifecycleScope.launch {
+            viewModel.newsResult.collect {
+                handleGameCrewResult(it)
+            }
+        }
+
+        viewModel.loadData()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        recyclerViewState =
+            binding.recyclerViewInclude.recyclerView.layoutManager?.onSaveInstanceState()
     }
 
     private fun setListener() {
-        setErrorResolveButtonClick {
+        binding.errorViewInclude.errorResolveButton.setOnClickListener {
             viewModel.loadData()
         }
     }
@@ -71,28 +88,40 @@ class GameCrewFragment : BaseFragment() {
     private fun setNavigation() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
-    private fun initAdapter(list: List<CrewModel>) {
-        recyclerView.run {
-            adapter = GameCrewAdapter(onClick = {
-                val bundle = Bundle().apply {
-                    putString(CrewViewDetailsFragment.NAME, it.descriptions.title)
-                    putParcelableArrayList(
-                        CrewViewDetailsFragment.CREW_REWARDS_MODEL,
-                        it.rewards as ArrayList<CrewRewardsModel>
-                    )
-                }
-
-                findNavController().navigate(R.id.navigation_crew_details, bundle)
-            },
-                onVideoClick = { videoUrl: String, videoName: String ->
-                    startActivity(VideoActivity.newInstance(context, videoUrl, videoName))
-                })
-            (adapter as GameCrewAdapter).setData(list)
-
+    private fun initializeRecyclerView() {
+        binding.recyclerViewInclude.recyclerView.run {
+            adapter = gameCrewAdapter
             layoutManager = LinearLayoutManager(context)
+        }
+    }
+
+    private fun handleGameCrewResult(result: LoadingState<List<CrewModel>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
+            }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                gameCrewAdapter.updateData(result.data)
+                binding.viewEmptyInclude.emptyView.isVisible = result.data.isEmpty()
+
+                recyclerViewState?.let {
+                    binding.recyclerViewInclude.recyclerView.layoutManager?.onRestoreInstanceState(
+                        recyclerViewState
+                    )
+                    recyclerViewState = null
+                }
+            }
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                }
+            }
         }
     }
 }

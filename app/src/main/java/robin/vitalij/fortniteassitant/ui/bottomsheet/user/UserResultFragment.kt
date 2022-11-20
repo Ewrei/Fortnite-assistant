@@ -35,7 +35,7 @@ class UserResultFragment : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val dataBinding =
             DataBindingUtil.inflate<BottomSheetUserBinding>(
                 inflater,
@@ -101,7 +101,7 @@ class UserResultFragment : BottomSheetDialogFragment() {
                         PLAYER_NAME
                     )
                 ),
-                onPositiveClickListener = DialogInterface.OnClickListener { _, _ ->
+                onPositiveClickListener = { _, _ ->
                     viewModel.deleteProfile(
                         viewModel.currentId
                     )

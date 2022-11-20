@@ -7,9 +7,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.LoadAdError
 import kotlinx.android.synthetic.gms.fragment_comparion.*
 import kotlinx.android.synthetic.main.recycler_view.*
 import robin.vitalij.fortniteassitant.FortniteApplication
@@ -36,8 +33,6 @@ class ComparisonSelectedFragment : BaseFragment() {
     private lateinit var viewModel: ComparisonSelectedViewModel
 
     private var selectedComparisonImageView: SelectedComparisonImageView? = null
-
-    private lateinit var adRequest: AdRequest
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,14 +78,14 @@ class ComparisonSelectedFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
+        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
             it?.let(::initAdapter)
-        })
+        }
 
 
-        viewModel.mutableSizeLiveData.observe(viewLifecycleOwner, {
+        viewModel.mutableSizeLiveData.observe(viewLifecycleOwner) {
             selectedComparisonImageView?.setFilterSize(it)
-        })
+        }
 
         setListeners()
         initBanner()
@@ -106,37 +101,13 @@ class ComparisonSelectedFragment : BaseFragment() {
         searchButton.setSafeOnClickListener {
             context?.closeKeyboard(view)
             if (searchInputEditText.text.toString().isEmpty()) {
-                viewModel.mutableLiveData.value = arrayListOf()
+                viewModel.mutableLiveData.value = emptyList()
             }
             if (searchInputEditText.text.toString().length >= resources.getInteger(R.integer.min_length)) {
                 viewModel.searchPlayer(searchInputEditText.text.toString())
             }
         }
 
-        adView?.adListener = object : AdListener() {
-            override fun onAdLoaded() {
-                adView?.setVisibility(true)
-            }
-
-            override fun onAdFailedToLoad(adError: LoadAdError) {
-                adView?.setVisibility(false)
-                adView?.loadAd(adRequest)
-            }
-
-            override fun onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-            }
-
-            override fun onAdClicked() {
-                // Code to be executed when the user clicks on an ad.
-            }
-
-            override fun onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
-            }
-        }
     }
 
     private fun initAdapter(list: List<SearchSteamUser>) {
@@ -161,10 +132,10 @@ class ComparisonSelectedFragment : BaseFragment() {
 
     private fun initBanner() {
         if (viewModel.preferenceManager.getIsSubscription() || viewModel.preferenceManager.getDisableAdvertising() >= Date().time) {
-            adView.setVisibility(false)
+            customBannerView.setVisibility(false)
         } else {
-            adRequest = AdRequest.Builder().build()
-            adView.loadAd(adRequest)
+            customBannerView.setVisibility(true)
+            customBannerView.startBanner(getString(R.string.BANNER_ID), activity)
         }
     }
 

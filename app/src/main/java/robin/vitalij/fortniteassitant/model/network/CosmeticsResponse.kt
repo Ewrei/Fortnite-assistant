@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 import robin.vitalij.fortniteassitant.db.entity.CosmeticsEntity
 
 class CosmeticsResponse(
-    @SerializedName("result") var result: Boolean,
-    @SerializedName("data") var data: List<CosmeticsEntity>
+    @SerializedName("result") val result: Boolean,
+    @SerializedName("data") val data: List<CosmeticsEntity>
 )
