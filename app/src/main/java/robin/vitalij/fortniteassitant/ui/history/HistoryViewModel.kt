@@ -1,5 +1,6 @@
 package robin.vitalij.fortniteassitant.ui.history
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,12 +11,11 @@ import robin.vitalij.fortniteassitant.model.HistoryUserModel
 import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.repository.db.HistoryRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
-import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 
 class HistoryViewModel(
     private val historyRepository: HistoryRepository,
     private val preferenceManager: PreferenceManager
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val historiesState =
         MutableStateFlow<LoadingState<List<HistoryUserModel>>>(LoadingState.Loading)

@@ -2,74 +2,51 @@ package robin.vitalij.fortniteassitant.ui.crew.details
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewWithToolbarBinding
-import robin.vitalij.fortniteassitant.model.network.CrewRewardsModel
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.crew.details.adapter.GameCrewViewDetailsAdapter
-import java.util.*
 import javax.inject.Inject
 
-class CrewViewDetailsFragment : BaseFragment() {
+class CrewViewDetailsFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) {
 
     @Inject
     lateinit var viewModelFactory: CrewViewDetailsModelFactory
 
-    private lateinit var viewModel: CrewViewDetailsViewModel
+    private val viewModel: CrewViewDetailsViewModel by viewModels { viewModelFactory }
 
-    private var _binding: FragmentRecyclerViewWithToolbarBinding? = null
+    private val binding by viewBinding(FragmentRecyclerViewWithToolbarBinding::bind)
 
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentRecyclerViewWithToolbarBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(CrewViewDetailsViewModel::class.java).apply {
-                observeToProgressBar(this@CrewViewDetailsFragment)
-                observeToError(this@CrewViewDetailsFragment)
-            }
-    }
+    private val gameCrewViewDetailsAdapter = GameCrewViewDetailsAdapter()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         FortniteApplication.appComponent.inject(this)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            viewModel.crewRewardsModels.addAll(it.getParcelableArrayList(ARG_CREW_REWARDS_MODEL)!!)
+            viewModel.toolbarTitle = it.getString(ARG_NAME) ?: ""
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
-            it.let(::initAdapter)
-        })
-
         setNavigation()
+        initializeRecyclerView()
 
-        arguments?.let {
-            viewModel.mutableLiveData.value = it.getParcelableArrayList(CREW_REWARDS_MODEL)
-            binding.toolbarInclude.toolbar.title = it.getString(NAME)
-        }
+        viewModel.toolbarTitle = viewModel.toolbarTitle
+        gameCrewViewDetailsAdapter.updateData(viewModel.crewRewardsModels)
     }
 
     private fun setNavigation() {
@@ -78,17 +55,17 @@ class CrewViewDetailsFragment : BaseFragment() {
         binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
-    private fun initAdapter(list: List<CrewRewardsModel>) {
+    private fun initializeRecyclerView() {
         binding.recyclerViewInclude.recyclerView.run {
-            adapter = GameCrewViewDetailsAdapter()
-            (adapter as GameCrewViewDetailsAdapter).setData(list)
-
+            adapter = gameCrewViewDetailsAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
 
     companion object {
-        const val NAME = "name"
-        const val CREW_REWARDS_MODEL = "crew_rewards_model"
+
+        const val ARG_NAME = "name"
+        const val ARG_CREW_REWARDS_MODEL = "crew_rewards_model"
+
     }
 }

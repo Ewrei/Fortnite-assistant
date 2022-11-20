@@ -43,8 +43,8 @@ class GameCrewFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) 
     private val gameCrewAdapter = GameCrewAdapter(onClick = {
         findNavController().navigate(
             R.id.navigation_crew_details, bundleOf(
-                CrewViewDetailsFragment.NAME to it.descriptions.title,
-                CrewViewDetailsFragment.CREW_REWARDS_MODEL to it.rewards as ArrayList<CrewRewardsModel>
+                CrewViewDetailsFragment.ARG_NAME to it.descriptions.title,
+                CrewViewDetailsFragment.ARG_CREW_REWARDS_MODEL to it.rewards as ArrayList<CrewRewardsModel>
             )
         )
     }, onVideoClick = { videoUrl: String, videoName: String ->
