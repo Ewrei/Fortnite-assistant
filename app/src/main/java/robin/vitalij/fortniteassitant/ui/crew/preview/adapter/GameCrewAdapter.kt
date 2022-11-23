@@ -1,12 +1,10 @@
-package robin.vitalij.fortniteassitant.ui.crew.main.adapter
+package robin.vitalij.fortniteassitant.ui.crew.preview.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.databinding.ItemGameCrewBinding
 import robin.vitalij.fortniteassitant.model.network.CrewModel
-import robin.vitalij.fortniteassitant.model.network.NewsModel
 
 class GameCrewAdapter(
     private val onClick: (crewModel: CrewModel) -> Unit,
@@ -24,9 +22,8 @@ class GameCrewAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = GameCrewHolder(
-        DataBindingUtil.inflate(
+        ItemGameCrewBinding.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_game_crew,
             parent,
             false
         ),

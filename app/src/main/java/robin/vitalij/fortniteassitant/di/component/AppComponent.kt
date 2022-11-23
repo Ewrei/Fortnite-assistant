@@ -34,8 +34,8 @@ import robin.vitalij.fortniteassitant.ui.comparison.viewpager.AdapterComparisonF
 import robin.vitalij.fortniteassitant.ui.cosmetics.CatalogCosmeticsFragment
 import robin.vitalij.fortniteassitant.ui.cosmetics.catalog.CosmeticsFragment
 import robin.vitalij.fortniteassitant.ui.cosmetics_new.CosmeticsNewFragment
-import robin.vitalij.fortniteassitant.ui.crew.details.CrewViewDetailsFragment
-import robin.vitalij.fortniteassitant.ui.crew.main.GameCrewFragment
+import robin.vitalij.fortniteassitant.ui.crew.details.GameCrewDetailsFragment
+import robin.vitalij.fortniteassitant.ui.crew.preview.GameCrewFragment
 import robin.vitalij.fortniteassitant.ui.details.statistics.DetailsStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.fish.FishFragment
@@ -109,7 +109,7 @@ interface AppComponent {
     fun inject(fragment: AdapterNewsFragment)
     fun inject(fragment: BannersFragment)
     fun inject(fragment: GameCrewFragment)
-    fun inject(fragment: CrewViewDetailsFragment)
+    fun inject(fragment: GameCrewDetailsFragment)
     fun inject(fragment: VehiclesFragment)
     fun inject(fragment: CurrentShopFragment)
 

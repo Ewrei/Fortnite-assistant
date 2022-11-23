@@ -1,10 +1,9 @@
-package robin.vitalij.fortniteassitant.ui.crew.main
+package robin.vitalij.fortniteassitant.ui.crew.preview
 
 import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -23,16 +22,14 @@ import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewWithToolba
 import robin.vitalij.fortniteassitant.model.ErrorModelListItem
 import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.network.CrewModel
-import robin.vitalij.fortniteassitant.model.network.CrewRewardsModel
-import robin.vitalij.fortniteassitant.ui.crew.details.CrewViewDetailsFragment
-import robin.vitalij.fortniteassitant.ui.crew.main.adapter.GameCrewAdapter
+import robin.vitalij.fortniteassitant.ui.crew.preview.adapter.GameCrewAdapter
 import robin.vitalij.fortniteassitant.ui.news.VideoActivity
 import javax.inject.Inject
 
 class GameCrewFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) {
 
     @Inject
-    lateinit var viewModelFactory: CrewViewModelFactory
+    lateinit var viewModelFactory: GameCrewViewModelFactory
 
     private val viewModel: GameCrewViewModel by viewModels { viewModelFactory }
 
@@ -42,9 +39,9 @@ class GameCrewFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) 
 
     private val gameCrewAdapter = GameCrewAdapter(onClick = {
         findNavController().navigate(
-            R.id.navigation_crew_details, bundleOf(
-                CrewViewDetailsFragment.ARG_NAME to it.descriptions.title,
-                CrewViewDetailsFragment.ARG_CREW_REWARDS_MODEL to it.rewards as ArrayList<CrewRewardsModel>
+            GameCrewFragmentDirections.actionNavigationGameCrewToNavigationCrewDetails(
+                it.descriptions.title,
+                it.rewards.toTypedArray()
             )
         )
     }, onVideoClick = { videoUrl: String, videoName: String ->
@@ -65,8 +62,8 @@ class GameCrewFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) 
         binding.viewEmptyInclude.empty.setText(R.string.no_information)
 
         lifecycleScope.launch {
-            viewModel.newsResult.collect {
-                handleGameCrewResult(it)
+            viewModel.gameCrewsResult.collect {
+                handleGameCrewsResult(it)
             }
         }
 
@@ -98,7 +95,7 @@ class GameCrewFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) 
         }
     }
 
-    private fun handleGameCrewResult(result: LoadingState<List<CrewModel>>) {
+    private fun handleGameCrewsResult(result: LoadingState<List<CrewModel>>) {
         when (result) {
             is LoadingState.Loading -> {
                 binding.progressViewInclude.progressContainer.isVisible = true
@@ -106,8 +103,9 @@ class GameCrewFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) 
             }
             is LoadingState.Success -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
-                gameCrewAdapter.updateData(result.data)
                 binding.viewEmptyInclude.emptyView.isVisible = result.data.isEmpty()
+
+                gameCrewAdapter.updateData(result.data)
 
                 recyclerViewState?.let {
                     binding.recyclerViewInclude.recyclerView.layoutManager?.onRestoreInstanceState(
@@ -124,4 +122,5 @@ class GameCrewFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) 
             }
         }
     }
+
 }
