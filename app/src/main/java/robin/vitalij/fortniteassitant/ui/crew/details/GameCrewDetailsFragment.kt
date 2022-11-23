@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,28 +17,22 @@ import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewWithToolba
 import robin.vitalij.fortniteassitant.ui.crew.details.adapter.GameCrewViewDetailsAdapter
 import javax.inject.Inject
 
-class CrewViewDetailsFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) {
+class GameCrewDetailsFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) {
 
     @Inject
-    lateinit var viewModelFactory: CrewViewDetailsModelFactory
+    lateinit var viewModelFactory: GameCrewDetailsModelFactory
 
-    private val viewModel: CrewViewDetailsViewModel by viewModels { viewModelFactory }
+    private val viewModel: GameCrewDetailsViewModel by viewModels { viewModelFactory }
 
     private val binding by viewBinding(FragmentRecyclerViewWithToolbarBinding::bind)
 
     private val gameCrewViewDetailsAdapter = GameCrewViewDetailsAdapter()
 
+    private val args: GameCrewDetailsFragmentArgs by navArgs()
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         FortniteApplication.appComponent.inject(this)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            viewModel.crewRewardsModels.addAll(it.getParcelableArrayList(ARG_CREW_REWARDS_MODEL)!!)
-            viewModel.toolbarTitle = it.getString(ARG_NAME) ?: ""
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,8 +40,7 @@ class CrewViewDetailsFragment : Fragment(R.layout.fragment_recycler_view_with_to
         setNavigation()
         initializeRecyclerView()
 
-        viewModel.toolbarTitle = viewModel.toolbarTitle
-        gameCrewViewDetailsAdapter.updateData(viewModel.crewRewardsModels)
+        gameCrewViewDetailsAdapter.updateData(args.argCrews.toList())
     }
 
     private fun setNavigation() {
@@ -62,10 +56,4 @@ class CrewViewDetailsFragment : Fragment(R.layout.fragment_recycler_view_with_to
         }
     }
 
-    companion object {
-
-        const val ARG_NAME = "name"
-        const val ARG_CREW_REWARDS_MODEL = "crew_rewards_model"
-
-    }
 }

@@ -43,7 +43,7 @@
         android:id="@+id/navigation_users"
         android:name="robin.vitalij.fortniteassitant.ui.users.UsersFragment"
         android:label="@string/users"
-        tools:layout="@layout/fragment_with_recyclerview_and_lce" />
+        tools:layout="@layout/fragment_recycler_view_with_toolbar" />
     <fragment
         android:id="@+id/navigation_wiki"
         tools:layout="@layout/fragment_wiki"
@@ -128,13 +128,25 @@
     <fragment
         android:id="@+id/navigation_game_crew"
         tools:layout="@layout/fragment_recycler_view_with_toolbar"
-        android:name="robin.vitalij.fortniteassitant.ui.crew.main.GameCrewFragment"
-        android:label="@string/fortnite_crew_information" />
+        android:name="robin.vitalij.fortniteassitant.ui.crew.preview.GameCrewFragment"
+        android:label="@string/fortnite_crew_information" >
+        <action
+            android:id="@+id/action_navigation_game_crew_to_navigation_crew_details"
+            app:destination="@id/navigation_crew_details" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_crew_details"
-        android:name="robin.vitalij.fortniteassitant.ui.crew.details.CrewViewDetailsFragment"
-        android:label="@string/fortnite_crew_information" />
+        android:name="robin.vitalij.fortniteassitant.ui.crew.details.GameCrewDetailsFragment"
+        tools:layout="@layout/fragment_recycler_view_with_toolbar"
+        android:label="{arg_toolbar_title}" >
+        <argument
+            android:name="arg_toolbar_title"
+            app:argType="string" />
+        <argument
+            android:name="arg_crews"
+            app:argType="robin.vitalij.fortniteassitant.model.network.CrewRewardsModel[]" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_banner"

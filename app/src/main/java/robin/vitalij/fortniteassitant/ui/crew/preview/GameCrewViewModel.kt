@@ -1,6 +1,6 @@
-package robin.vitalij.fortniteassitant.ui.crew.main
+package robin.vitalij.fortniteassitant.ui.crew.preview
 
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,16 +10,13 @@ import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.network.CrewModel
 import robin.vitalij.fortniteassitant.repository.network.GameCrewRepository
-import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 
-class GameCrewViewModel(private val gameCrewRepository: GameCrewRepository) : BaseViewModel() {
+class GameCrewViewModel(private val gameCrewRepository: GameCrewRepository) : ViewModel() {
 
-    val mutableLiveData = MutableLiveData<List<CrewModel>>()
-
-    private val newsState =
+    private val gameCrewsState =
         MutableStateFlow<LoadingState<List<CrewModel>>>(LoadingState.Loading)
 
-    val newsResult: StateFlow<LoadingState<List<CrewModel>>> = newsState
+    val gameCrewsResult: StateFlow<LoadingState<List<CrewModel>>> = gameCrewsState
 
     private var job: Job? = null
 
@@ -27,7 +24,7 @@ class GameCrewViewModel(private val gameCrewRepository: GameCrewRepository) : Ba
         job?.cancel()
         job = viewModelScope.launch {
             gameCrewRepository.getGameCrew().collect { loadingState ->
-                newsState.value = loadingState
+                gameCrewsState.value = loadingState
             }
         }
     }
