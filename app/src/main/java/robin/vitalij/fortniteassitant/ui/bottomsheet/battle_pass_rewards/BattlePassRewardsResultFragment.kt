@@ -1,5 +1,6 @@
-package robin.vitalij.fortniteassitant.ui.bottomsheet.battlepassrewards
+package robin.vitalij.fortniteassitant.ui.bottomsheet.battle_pass_rewards
 
+import android.content.Context
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
@@ -7,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
@@ -17,44 +18,41 @@ import robin.vitalij.fortniteassitant.databinding.BottomSheetBattlesPassRewardsB
 import robin.vitalij.fortniteassitant.model.network.Reward
 import javax.inject.Inject
 
-const val BOTTOM_SHEET_MARGIN_TOP = 200
-
 class BattlePassRewardsResultFragment : BottomSheetDialogFragment() {
 
     @Inject
     lateinit var viewModelFactory: BattlePassRewardsResultViewModelFactory
 
-    private lateinit var viewModel: BattlePassRewardsResultViewModel
+    private val viewModel: BattlePassRewardsResultViewModel by viewModels { viewModelFactory }
 
-    private lateinit var binding: BottomSheetBattlesPassRewardsBinding
+    private var _binding: BottomSheetBattlesPassRewardsBinding? = null
+
+    private val binding get() = _binding!!
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        FortniteApplication.appComponent.inject(this)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            viewModel.reward = it.getSerializable(ARG_REWARD) as Reward
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         dialog?.initBottomSheetInternal()
-        binding = BottomSheetBattlesPassRewardsBinding.inflate(layoutInflater)
+        _binding = BottomSheetBattlesPassRewardsBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        FortniteApplication.appComponent.inject(this)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(BattlePassRewardsResultViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        arguments?.let {
-            val itemShop = it.getSerializable(ARG_REWARD) as Reward
-            binding.imageView.loadImage(itemShop.images.fullBackground)
-            binding.name.text = itemShop.name
-            binding.description.text = itemShop.description
-            binding.quantity.text =
-                String.format(getString(R.string.quantity_format, itemShop.quantity))
-        }
+        setUI()
     }
 
     override fun onStart() {
@@ -65,7 +63,21 @@ class BattlePassRewardsResultFragment : BottomSheetDialogFragment() {
         sheetContainer.layoutParams.height = (displayMetrics.heightPixels - BOTTOM_SHEET_MARGIN_TOP)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun setUI() {
+        binding.imageView.loadImage(viewModel.reward.images.fullBackground)
+        binding.name.text = viewModel.reward.name
+        binding.description.text = viewModel.reward.description
+        binding.quantity.text =
+            String.format(getString(R.string.quantity_format, viewModel.reward.quantity))
+    }
+
     companion object {
+        private const val BOTTOM_SHEET_MARGIN_TOP = 200
 
         private const val TAG = "BattlePassRewardsResultFragment"
         private const val ARG_REWARD = "arg_reward"

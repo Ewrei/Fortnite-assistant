@@ -1,11 +1,11 @@
-package robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.adapter
+package robin.vitalij.fortniteassitant.ui.bottomsheet.current_shop.adapter
 
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_inventory_content.view.*
 import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadBackgroundRarity
+import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
+import robin.vitalij.fortniteassitant.common.binding.TextViewBinding.setTypeShop
 import robin.vitalij.fortniteassitant.databinding.ItemOtherItemsDetailsBinding
 import robin.vitalij.fortniteassitant.model.network.shop.GrantedModel
-import robin.vitalij.fortniteassitant.model.network.shop.OtherItemsDetails
 
 class OtherItemsDetailsHolder(
     private val binding: ItemOtherItemsDetailsBinding,
@@ -13,10 +13,13 @@ class OtherItemsDetailsHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: GrantedModel) {
-        binding.item = item
-        itemView.cardView.layoutParams.width = widthPixels
-        itemView.cardView.requestLayout()
+        binding.cardView.layoutParams.width = widthPixels
+        binding.cardView.requestLayout()
 
+        binding.inventoryName.text = item.name
+        binding.type.setTypeShop(item.type.id)
+
+        binding.image.loadImage(item.images.background)
         binding.image.loadBackgroundRarity(item.rarity.id)
     }
 }

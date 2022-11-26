@@ -1,10 +1,10 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.user
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
@@ -19,9 +19,6 @@ import robin.vitalij.fortniteassitant.interfaces.UsersCallback
 import robin.vitalij.fortniteassitant.model.enums.ComparisonDataType
 import robin.vitalij.fortniteassitant.ui.comparison.ComparisonActivity
 import javax.inject.Inject
-
-const val ACCOUNT_ID = "account_id"
-const val PLAYER_NAME = "player_name"
 
 class UserResultFragment : BottomSheetDialogFragment() {
 
@@ -73,7 +70,7 @@ class UserResultFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
-            viewModel.setPlayerId(it.getString(ACCOUNT_ID, ""))
+            viewModel.setPlayerId(it.getString(ARG_ACCOUNT_ID, ""))
         }
 
         setListeners()
@@ -98,7 +95,7 @@ class UserResultFragment : BottomSheetDialogFragment() {
             context?.showApplicationDialog(
                 getString(
                     R.string.delete_account_title, arguments?.getString(
-                        PLAYER_NAME
+                        ARG_PLAYER_NAME
                     )
                 ),
                 onPositiveClickListener = { _, _ ->
@@ -111,27 +108,24 @@ class UserResultFragment : BottomSheetDialogFragment() {
     }
 
     companion object {
+        private const val ARG_ACCOUNT_ID = "arg_account_id"
+        private const val ARG_PLAYER_NAME = "arg_player_name"
 
         private const val TAG = "UserResultFragment"
 
         fun show(
-            fragmentManager: FragmentManager?,
+            fragmentManager: FragmentManager,
             playerId: String,
             playerName: String,
             usersCallback: UsersCallback
         ) {
-            fragmentManager?.let {
-                UserResultFragment().apply {
-                    this.usersCallback = usersCallback
-                    arguments = Bundle().apply {
-                        putString(ACCOUNT_ID, playerId)
-                        putString(PLAYER_NAME, playerName)
-                    }
-                }.show(
-                    it,
-                    TAG
+            UserResultFragment().apply {
+                this.usersCallback = usersCallback
+                arguments = bundleOf(
+                    ARG_ACCOUNT_ID to playerId,
+                    ARG_PLAYER_NAME to playerName
                 )
-            }
+            }.show(fragmentManager, TAG)
         }
     }
 }

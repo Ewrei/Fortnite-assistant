@@ -1,5 +1,6 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.banner
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -9,9 +10,8 @@ import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.db.entity.BannerEntity
 import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.repository.BannerRepository
-import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 
-class BannerResultViewModel(private val bannerRepository: BannerRepository) : BaseViewModel() {
+class BannerResultViewModel(private val bannerRepository: BannerRepository) : ViewModel() {
 
     var bannerId: String = ""
 

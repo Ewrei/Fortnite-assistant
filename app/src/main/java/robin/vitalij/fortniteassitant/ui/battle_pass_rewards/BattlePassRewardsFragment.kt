@@ -21,7 +21,7 @@ import robin.vitalij.fortniteassitant.databinding.FragmentBattlePassRewardsBindi
 import robin.vitalij.fortniteassitant.model.battle_pass_reward.SeasonModel
 import robin.vitalij.fortniteassitant.model.enums.BattlePassSortedType
 import robin.vitalij.fortniteassitant.ui.battle_pass_rewards.adapter.BattlesPassRewardsAdapter
-import robin.vitalij.fortniteassitant.ui.bottomsheet.battlepassrewards.BattlePassRewardsResultFragment
+import robin.vitalij.fortniteassitant.ui.bottomsheet.battle_pass_rewards.BattlePassRewardsResultFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.utils.view.CustomTypeFaceSpan
 import javax.inject.Inject

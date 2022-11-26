@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop
+package robin.vitalij.fortniteassitant.ui.bottomsheet.current_shop
 
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
 import javax.inject.Inject

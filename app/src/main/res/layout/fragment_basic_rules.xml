@@ -53,7 +53,7 @@
         app:srcCompat="@drawable/ic_gift_fever" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/mainImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/default_margin_triple"
@@ -77,7 +77,7 @@
         app:srcCompat="@drawable/ic_close_basic_rules" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/rightImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,10 +95,10 @@
         android:textColor="#00DBDE"
         android:textSize="26sp"
         app:fontFamily="@font/nexa_extra_bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintBottom_toBottomOf="@+id/rightImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="@+id/rightImage"
         app:layout_constraintVertical_bias="0.19999999" />
 
     <TextView

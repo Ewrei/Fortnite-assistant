@@ -2,9 +2,9 @@ package robin.vitalij.fortniteassitant.ui.ads_gift_fever
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import by.kirich1409.viewbindingdelegate.viewBinding
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.getStatusBarHeight
@@ -12,25 +12,16 @@ import robin.vitalij.fortniteassitant.common.extensions.intentView
 import robin.vitalij.fortniteassitant.common.extensions.setMarginTop
 import robin.vitalij.fortniteassitant.databinding.FragmentBasicRulesBinding
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import java.util.*
 import javax.inject.Inject
 
 
-class BasicRulesFragment : BaseFragment() {
-
-    private lateinit var binding: FragmentBasicRulesBinding
+class BasicRulesFragment : Fragment(R.layout.fragment_basic_rules) {
 
     @Inject
     lateinit var preferenceManager: PreferenceManager
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentBasicRulesBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    private val binding by viewBinding(FragmentBasicRulesBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,18 +45,21 @@ class BasicRulesFragment : BaseFragment() {
 
     private fun setListeners() {
         binding.downloadAppButton.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            calendar.add(Calendar.MONTH, TWO_MOUNT)
-            calendar.time
-            preferenceManager.setShowBasicRulesDate(calendar.time)
-
-            activity?.intentView(getString(R.string.gift_fever_url))
-            activity?.finish()
+            downloadAppClickHandle()
         }
 
         binding.closeImageButton.setOnClickListener {
             activity?.finish()
         }
+    }
+
+    private fun downloadAppClickHandle() {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.MONTH, TWO_MOUNT)
+        preferenceManager.setShowBasicRulesDate(calendar.time)
+
+        activity?.intentView(getString(R.string.gift_fever_url))
+        activity?.finish()
     }
 
     companion object {
