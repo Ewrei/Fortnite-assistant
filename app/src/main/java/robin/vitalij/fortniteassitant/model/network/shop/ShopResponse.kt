@@ -54,7 +54,7 @@ class OtherItemsDetails(
     @SerializedName("images") val images: OtherImage
 ): Serializable
 
-class OtherImage(
+data class OtherImage(
     @SerializedName("icon") val icon: String?,
     @SerializedName("featured") val featured: String?,
     @SerializedName("background") val background: String?,

@@ -83,7 +83,7 @@ class AchievementsFragment : Fragment(R.layout.fragment_recycler_view_with_toolb
             }
             is LoadingState.Success -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
-                achievementsAdapter.updateData(result.data)
+                achievementsAdapter.submitList(result.data)
                 binding.viewEmptyInclude.emptyView.isVisible = result.data.isEmpty()
             }
             is LoadingState.Error -> {

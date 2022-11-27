@@ -5,8 +5,8 @@ import robin.vitalij.fortniteassitant.model.battle_pass_reward.BattlesPassReward
 import robin.vitalij.fortniteassitant.model.battle_pass_reward.FullBattlePassRewardModel
 import robin.vitalij.fortniteassitant.model.battle_pass_reward.SeasonModel
 import robin.vitalij.fortniteassitant.model.network.BattlePassRewardsResponse
-import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
 import robin.vitalij.fortniteassitant.utils.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
 
 class BattlesPassRewardsMapper(private val resourceProvider: ResourceProvider) :
     Mapper<BattlePassRewardsResponse, FullBattlePassRewardModel> {
@@ -14,12 +14,16 @@ class BattlesPassRewardsMapper(private val resourceProvider: ResourceProvider) :
     override fun transform(obj: BattlePassRewardsResponse): FullBattlePassRewardModel {
         val list = mutableListOf<BattlesPassRewardsModel>()
 
+        var uniqueId: Long = 1
+
         obj.free.rewards.forEach {
-            list.add(BattlesPassRewardsModel(it, true, (it.id.hashCode() + it.tier).toLong()))
+            list.add(BattlesPassRewardsModel(it, true, uniqueId))
+            uniqueId++
         }
 
         obj.paid.rewards.forEach {
-            list.add(BattlesPassRewardsModel(it, false, (it.id.hashCode() + it.tier).toLong()))
+            list.add(BattlesPassRewardsModel(it, false, uniqueId))
+            uniqueId++
         }
 
         return FullBattlePassRewardModel(list.sortedBy { it.reward.tier }, getSeasons(obj.season))

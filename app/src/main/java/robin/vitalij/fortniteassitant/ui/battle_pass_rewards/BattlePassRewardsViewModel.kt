@@ -1,64 +1,78 @@
 package robin.vitalij.fortniteassitant.ui.battle_pass_rewards
 
-import androidx.lifecycle.MutableLiveData
-import io.reactivex.android.schedulers.AndroidSchedulers
-import robin.vitalij.fortniteassitant.model.battle_pass_reward.BattlesPassRewardsModel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.launch
+import robin.vitalij.fortniteassitant.model.LoadingState
+import robin.vitalij.fortniteassitant.model.battle_pass_reward.FullBattlePassRewardModel
 import robin.vitalij.fortniteassitant.model.battle_pass_reward.SeasonModel
 import robin.vitalij.fortniteassitant.model.enums.BattlePassSortedType
 import robin.vitalij.fortniteassitant.repository.network.BattlesPassRewardRepository
-import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 
 class BattlePassRewardsViewModel(
     private val battlesPassRewardRepository: BattlesPassRewardRepository
-) : BaseViewModel() {
+) : ViewModel() {
 
-    val mutableLiveData = MutableLiveData<List<BattlesPassRewardsModel>>()
-    val mutableSeasonLiveData = MutableLiveData<List<SeasonModel>>()
+    private val filterTriggerFlow = MutableStateFlow(BattlePassSortedType.ALL)
 
-    private var list = listOf<BattlesPassRewardsModel>()
+    val seasonsResult = MutableStateFlow<List<SeasonModel>>(emptyList())
 
-    init {
-        battlesPassRewardRepository
-            .getBattlesPassReward(CURRENT_SEASON)
-            .observeOn(AndroidSchedulers.mainThread())
-            .let(::setupProgressShow)
-            .subscribe({
-                mutableLiveData.value = it.battlesPassRewards
-                mutableSeasonLiveData.value = it.seasons
-                list = it.battlesPassRewards
-            }, error)
-            .let(disposables::add)
-    }
+    private val fullBattlePassRewardState =
+        MutableStateFlow<LoadingState<FullBattlePassRewardModel>>(LoadingState.Loading)
 
-    fun changeSeason(season: String) {
-        battlesPassRewardRepository
-            .getBattlesPassReward(season)
-            .observeOn(AndroidSchedulers.mainThread())
-            .let(::setupProgressShow)
-            .subscribe({
-                mutableLiveData.value = it.battlesPassRewards
-                list = it.battlesPassRewards
-            }, error)
-            .let(disposables::add)
-    }
+    private var job: Job? = null
 
-    fun sortedBattlesPassReward(battlePassSortedType: BattlePassSortedType) {
-        mutableLiveData.value =
-            when (battlePassSortedType) {
-                BattlePassSortedType.ALL -> {
-                    list
+    var currentSeason = CURRENT_SEASON
+
+    val filterResult = filterTriggerFlow.combine(fullBattlePassRewardState) { battlePassSortedType, state ->
+        return@combine when (state) {
+            is LoadingState.Success -> {
+                if (currentSeason == CURRENT_SEASON) {
+                    seasonsResult.value = state.data.seasons
                 }
-                BattlePassSortedType.FREE -> {
-                    list.filter { it.isFree }
-                }
-                BattlePassSortedType.PAID -> {
-                    list.filter { !it.isFree }
-                }
+
+                LoadingState.Success(
+                    when (battlePassSortedType) {
+                        BattlePassSortedType.ALL -> {
+                            state.data.battlesPassRewards
+                        }
+                        BattlePassSortedType.FREE -> {
+                            state.data.battlesPassRewards.filter { it.isFree }
+                        }
+                        BattlePassSortedType.PAID -> {
+                            state.data.battlesPassRewards.filter { !it.isFree }
+                        }
+                    })
             }
+            is LoadingState.Loading -> {
+                return@combine LoadingState.Loading
+            }
+            is LoadingState.Error -> {
+                return@combine LoadingState.Error(state.cause)
+            }
+        }
+    }
+
+    fun loadData() {
+        job?.cancel()
+        job = viewModelScope.launch {
+            battlesPassRewardRepository.getBattlesPassReward(currentSeason)
+                .collect { loadingState ->
+                    fullBattlePassRewardState.value = loadingState
+                }
+        }
+    }
+
+    fun filterBattlesPassReward(battlePassSortedType: BattlePassSortedType) {
+        filterTriggerFlow.value = battlePassSortedType
     }
 
     companion object {
-        private const val CURRENT_SEASON = "current"
+        const val CURRENT_SEASON = "current"
     }
 
 }

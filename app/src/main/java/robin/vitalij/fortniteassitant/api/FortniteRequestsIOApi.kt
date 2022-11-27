@@ -49,10 +49,10 @@ interface FortniteRequestsIOApi {
     suspend fun getUpcomingShop(@Query(LANG_QUERY) language: String): ShopUpcomingResponse
 
     @GET("/$VERSION_FIRST_PATCH/$BATTLE_PASS_PATCH")
-    fun getBattlesPassRewards(
+    suspend fun getBattlesPassRewards(
         @Query(LANG_QUERY) language: String,
         @Query(SEASON_QUERY) season: String
-    ): Single<BattlePassRewardsResponse>
+    ): BattlePassRewardsResponse
 
     @GET("/$VERSION_FIRST_PATCH/$LOOT_PATCH/$LIST_PATCH")
     suspend fun getWeapons(@Query(LANG_QUERY) language: String): WeaponResponse
