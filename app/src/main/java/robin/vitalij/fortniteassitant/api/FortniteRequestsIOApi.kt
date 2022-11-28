@@ -61,10 +61,10 @@ interface FortniteRequestsIOApi {
     suspend fun getFish(@Query(LANG_QUERY) language: String): FishResponse
 
     @GET("/$VERSION_FIRST_PATCH/$STATS_PATCH/$FISH_PATCH")
-    fun getFishStats(
+    suspend fun getFishStats(
         @Query(LANG_QUERY) language: String,
         @Query(ACCOUNT_ID_PATCH) accountId: String
-    ): Single<FishStatsResponse>
+    ): FishStatsResponse
 
     @GET("/$VERSION_FIRST_PATCH/$ACHIEVEMENTS_PATCH")
     suspend fun getAchievements(@Query(LANG_QUERY) language: String): AchievementResponse

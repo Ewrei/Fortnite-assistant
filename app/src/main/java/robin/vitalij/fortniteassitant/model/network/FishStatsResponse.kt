@@ -13,7 +13,7 @@ class SeasonStatsFishModel(
     @SerializedName("fish") val fish: List<FishStatsModel>
 )
 
-class FishStatsModel(
+data class FishStatsModel(
     @SerializedName("type") val type: String,
     @SerializedName("name") val name: String,
     @SerializedName("description") val description: String,

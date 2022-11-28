@@ -16,8 +16,7 @@ class FishStatsViewModelFactory @Inject constructor(
 
     override fun createViewModel(): FishStatsViewModel {
         return viewModel ?: run {
-            val model =
-                FishStatsViewModel(fishStatsRepository, preferenceManager, resourceProvider)
+            val model = FishStatsViewModel(fishStatsRepository, preferenceManager, resourceProvider)
             viewModel = model
             return model
         }

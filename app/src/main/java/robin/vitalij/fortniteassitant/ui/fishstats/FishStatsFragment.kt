@@ -2,61 +2,41 @@ package robin.vitalij.fortniteassitant.ui.fishstats
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.fragment_battle_pass_rewards.*
-import kotlinx.android.synthetic.main.recycler_view.*
-import kotlinx.android.synthetic.main.toolbar_center_title.*
-import kotlinx.android.synthetic.main.view_error.*
+import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.common.extensions.observeToEmpty
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
 import robin.vitalij.fortniteassitant.databinding.FragmentBattlePassRewardsBinding
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.battle_pass_reward.SeasonModel
 import robin.vitalij.fortniteassitant.model.network.FishStatsModel
 import robin.vitalij.fortniteassitant.ui.bottomsheet.fish.FishResultFragment
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.fishstats.adapter.FishStatsAdapter
 import javax.inject.Inject
 
-private const val MAX_SPAN_COUNT = 3
-private const val FISH_SPAN_COUNT = 1
-
-class FishStatsFragment : BaseFragment() {
+class FishStatsFragment : Fragment(R.layout.fragment_battle_pass_rewards) {
 
     @Inject
     lateinit var viewModelFactory: FishStatsViewModelFactory
 
-    private lateinit var viewModel: FishStatsViewModel
+    private val viewModel: FishStatsViewModel by viewModels { viewModelFactory }
 
-    private var _binding: FragmentBattlePassRewardsBinding? = null
+    private val binding by viewBinding(FragmentBattlePassRewardsBinding::bind)
 
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentBattlePassRewardsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(FishStatsViewModel::class.java).apply {
-                observeToProgressBar(this@FishStatsFragment)
-                observeToError(this@FishStatsFragment)
-                observeToEmpty(this@FishStatsFragment)
-            }
+    private val fishStatsAdapter = FishStatsAdapter {
+        FishResultFragment.show(childFragmentManager, it.type)
     }
 
     override fun onAttach(context: Context) {
@@ -66,26 +46,30 @@ class FishStatsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
-            it.let(::initAdapter)
-        }
-
-        viewModel.mutableSeasonLiveData.observe(viewLifecycleOwner) {
-            binding.seasonSpinner.isVisible = it.isNotEmpty()
-            binding.seasonSpinner.setItems(it)
-        }
-
         setListener()
         setNavigation()
-    }
+        initializeRecyclerView()
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        binding.viewEmptyInclude.empty.setText(R.string.empty_fish)
+
+        lifecycleScope.launch {
+            viewModel.filterResult.collect {
+                handleFishStatsResult(it)
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.seasonsResult.collect {
+                binding.seasonSpinner.isVisible = it.isNotEmpty()
+                binding.seasonSpinner.setItems(it)
+            }
+        }
+
+        viewModel.loadData()
     }
 
     private fun setListener() {
-        setErrorResolveButtonClick {
+        binding.errorViewInclude.errorResolveButton.setOnClickListener {
             viewModel.loadData()
         }
 
@@ -100,20 +84,47 @@ class FishStatsFragment : BaseFragment() {
         binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
-    private fun initAdapter(list: List<FishStatsModel>) {
+    private fun initializeRecyclerView() {
         binding.recyclerViewInclude.recyclerView.run {
-            adapter = FishStatsAdapter {
-                FishResultFragment.show(childFragmentManager, it.type)
-            }
-            (adapter as FishStatsAdapter).setData(list)
-
-            layoutManager = GridLayoutManager(
-                activity, MAX_SPAN_COUNT
-            ).apply {
+            adapter = fishStatsAdapter
+            layoutManager = GridLayoutManager(activity, MAX_SPAN_COUNT).apply {
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int) = FISH_SPAN_COUNT
                 }
             }
         }
     }
+
+    private fun handleFishStatsResult(result: LoadingState<List<FishStatsModel>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
+                binding.recyclerViewInclude.recyclerView.isVisible = false
+                binding.viewEmptyInclude.emptyView.isVisible = false
+            }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                binding.recyclerViewInclude.recyclerView.isVisible = true
+
+                fishStatsAdapter.submitList(result.data)
+                binding.viewEmptyInclude.emptyView.isVisible = result.data.isEmpty()
+            }
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                binding.recyclerViewInclude.recyclerView.isVisible = false
+                binding.viewEmptyInclude.emptyView.isVisible = false
+
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                }
+            }
+        }
+    }
+
+    companion object {
+        private const val MAX_SPAN_COUNT = 3
+        private const val FISH_SPAN_COUNT = 1
+    }
+
 }
