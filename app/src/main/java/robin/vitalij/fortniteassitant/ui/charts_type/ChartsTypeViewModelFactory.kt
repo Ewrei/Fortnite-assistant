@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.chartlist
+package robin.vitalij.fortniteassitant.ui.charts_type
 
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
 import javax.inject.Inject

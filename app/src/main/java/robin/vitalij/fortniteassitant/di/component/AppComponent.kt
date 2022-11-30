@@ -22,8 +22,8 @@ import robin.vitalij.fortniteassitant.ui.bottomsheet.upcomingshop.UpcomingShopRe
 import robin.vitalij.fortniteassitant.ui.bottomsheet.user.UserResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.vehicles.VehiclesResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.weapon.WeaponResultFragment
-import robin.vitalij.fortniteassitant.ui.chartlist.ChartsTypeFragment
-import robin.vitalij.fortniteassitant.ui.chartlist.view_pager.AdapterChartsTypeFragment
+import robin.vitalij.fortniteassitant.ui.charts_type.ChartsTypeFragment
+import robin.vitalij.fortniteassitant.ui.charts_type.view_pager.AdapterChartsTypeFragment
 import robin.vitalij.fortniteassitant.ui.charts.ChartsFragment
 import robin.vitalij.fortniteassitant.ui.comparison.selected.ComparisonSelectedFragment
 import robin.vitalij.fortniteassitant.ui.comparison.selected.listuser.SelectedListUserFragment

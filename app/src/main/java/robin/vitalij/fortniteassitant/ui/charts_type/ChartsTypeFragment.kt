@@ -1,34 +1,33 @@
-package robin.vitalij.fortniteassitant.ui.chartlist
+package robin.vitalij.fortniteassitant.ui.charts_type
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.databinding.FragmentHomeBinding
 import robin.vitalij.fortniteassitant.interfaces.ChartsTypeCallback
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
-import robin.vitalij.fortniteassitant.ui.chartlist.adapter.ChartsTypeAdapter
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
+import robin.vitalij.fortniteassitant.ui.charts_type.adapter.ChartsTypeAdapter
+import robin.vitalij.fortniteassitant.utils.mapper.ChartsTypeMapper
 import javax.inject.Inject
 
-class ChartsTypeFragment : BaseFragment() {
+class ChartsTypeFragment : Fragment(R.layout.fragment_home) {
 
     @Inject
     lateinit var viewModelFactory: ChartsTypeViewModelFactory
 
-    private lateinit var viewModel: ChartsTypeViewModel
+    private val viewModel: ChartsTypeViewModel by viewModels { viewModelFactory }
+
+    private val binding by viewBinding(FragmentHomeBinding::bind)
 
     private var chartsTypeCallback: ChartsTypeCallback? = null
-
-    private lateinit var binding: FragmentHomeBinding
 
     private val chartsAdapter = ChartsTypeAdapter {
         arguments?.let { bundle ->
@@ -40,43 +39,22 @@ class ChartsTypeFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         FortniteApplication.appComponent.inject(this)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(ChartsTypeViewModel::class.java).apply {
-                observeToProgressBar(this@ChartsTypeFragment)
-                observeToError(this@ChartsTypeFragment)
-            }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initializeRecyclerView()
 
         arguments?.let {
-            viewModel.loadData(
-                it.get(ARG_BATTLES_TYPE) as BattlesType,
-                it.get(ARG_GAME_TYPE) as GameType
+            chartsAdapter.submitList(
+                ChartsTypeMapper(it.get(ARG_GAME_TYPE) as GameType).transform(
+                    it.get(ARG_BATTLES_TYPE) as BattlesType
+                )
             )
         }
-
-        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
-            chartsAdapter.updateData(it)
-        }
-
-        initializeRecyclerView()
     }
 
     private fun initializeRecyclerView() {

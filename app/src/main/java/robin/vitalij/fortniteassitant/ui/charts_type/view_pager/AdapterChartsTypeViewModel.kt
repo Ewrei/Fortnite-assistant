@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.chartlist.view_pager
+package robin.vitalij.fortniteassitant.ui.charts_type.view_pager
 
 import androidx.lifecycle.ViewModel
 import robin.vitalij.fortniteassitant.model.DetailStatisticsModel

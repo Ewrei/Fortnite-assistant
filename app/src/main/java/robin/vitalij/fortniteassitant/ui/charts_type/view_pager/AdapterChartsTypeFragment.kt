@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.chartlist.view_pager
+package robin.vitalij.fortniteassitant.ui.charts_type.view_pager
 
 import android.content.Context
 import android.os.Bundle
@@ -18,7 +18,7 @@ import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.ChartsType
 import robin.vitalij.fortniteassitant.model.enums.GameType
-import robin.vitalij.fortniteassitant.ui.chartlist.ChartsTypeFragment
+import robin.vitalij.fortniteassitant.ui.charts_type.ChartsTypeFragment
 import robin.vitalij.fortniteassitant.ui.charts.ChartsFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseViewPagerAdapter
 import robin.vitalij.fortniteassitant.ui.comparison.BATTLES_TYPE
@@ -134,7 +134,7 @@ class AdapterChartsTypeFragment : Fragment(R.layout.fragment_adapter_details_sta
     }
 
     companion object {
-        const val ARG_DETAIL_STATISTICS = "detail_statistics"
+        const val ARG_DETAIL_STATISTICS = "arg_detail_statistics"
 
         private const val DEFAULT_LAST_TAB_VALUE = Integer.MAX_VALUE
 
