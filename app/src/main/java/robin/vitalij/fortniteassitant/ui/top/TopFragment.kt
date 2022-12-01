@@ -43,28 +43,8 @@ class TopFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) {
 
     private val binding by viewBinding(FragmentRecyclerViewWithToolbarBinding::bind)
 
-    private val topAdapter = TopAdapter(onClick = {
-        ProfileResultFragment.show(
-            childFragmentManager,
-            it,
-            AvatarType.values().random().getImageUrl(),
-            ProfileResultType.FULL,
-            object : RegistrationProfileCallback {
-                override fun addedProfile(fortniteProfileResponse: FortniteProfileResponse) {
-                    saveUser(fortniteProfileResponse)
-                }
-
-            })
-    }, onTopClick = {
-        TopResultFragment.show(childFragmentManager,
-            viewModel.topType,
-            object : TopResultCallback {
-                override fun checkTop(topFullModel: TopFullModel) {
-                    viewModel.topType = topFullModel
-                    viewModel.loadData()
-                }
-            })
-    })
+    private val topAdapter =
+        TopAdapter(onClick = { openProfile(it) }, onTopClick = { openTopResult() })
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -123,6 +103,31 @@ class TopFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) {
                 }
             }
         }
+    }
+
+    private fun openProfile(accountId: String) {
+        ProfileResultFragment.show(
+            childFragmentManager,
+            accountId,
+            AvatarType.values().random().getImageUrl(),
+            ProfileResultType.FULL,
+            object : RegistrationProfileCallback {
+                override fun addedProfile(fortniteProfileResponse: FortniteProfileResponse) {
+                    saveUser(fortniteProfileResponse)
+                }
+
+            })
+    }
+
+    private fun openTopResult() {
+        TopResultFragment.show(childFragmentManager,
+            viewModel.topType,
+            object : TopResultCallback {
+                override fun checkTop(topFullModel: TopFullModel) {
+                    viewModel.topType = topFullModel
+                    viewModel.loadData()
+                }
+            })
     }
 
 }
