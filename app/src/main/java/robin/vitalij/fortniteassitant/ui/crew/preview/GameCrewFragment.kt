@@ -23,7 +23,6 @@ import robin.vitalij.fortniteassitant.model.ErrorModelListItem
 import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.network.CrewModel
 import robin.vitalij.fortniteassitant.ui.crew.preview.adapter.GameCrewAdapter
-import robin.vitalij.fortniteassitant.ui.news.VideoActivity
 import javax.inject.Inject
 
 class GameCrewFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) {
@@ -45,7 +44,12 @@ class GameCrewFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) 
             )
         )
     }, onVideoClick = { videoUrl: String, videoName: String ->
-        startActivity(VideoActivity.newInstance(context, videoUrl, videoName))
+        findNavController().navigate(
+            GameCrewFragmentDirections.actionNavigationGameCrewToNavigationVideo(
+                videoName,
+                videoUrl
+            )
+        )
     })
 
     override fun onAttach(context: Context) {

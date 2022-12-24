@@ -1,12 +1,11 @@
 package robin.vitalij.fortniteassitant.ui.news
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.navArgs
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
@@ -19,13 +18,11 @@ import kotlinx.android.synthetic.main.toolbar_center_title.*
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.setToolbarTitle
 
-
-const val VIDEO_URL = "video_url"
-const val VIDEO_TITLE = "video_title"
-
 class VideoActivity : AppCompatActivity() {
 
     private var simpleExoPlayer: SimpleExoPlayer? = null
+
+    private val args: VideoActivityArgs by navArgs()
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +55,7 @@ class VideoActivity : AppCompatActivity() {
     private fun setToolbar() {
         setSupportActionBar(toolbar)
         enableBackButton()
-        setToolbarTitle(intent?.getStringExtra(VIDEO_TITLE) ?: "")
+        setToolbarTitle(args.argVideoName)
     }
 
     private fun enableBackButton() {
@@ -82,7 +79,7 @@ class VideoActivity : AppCompatActivity() {
             val extractorsFactory: ExtractorsFactory = DefaultExtractorsFactory()
             val mediaSource: MediaSource =
                 ExtractorMediaSource(
-                    Uri.parse(intent?.getStringExtra(VIDEO_URL)),
+                    Uri.parse(args.argVideoUrl),
                     dataSourceFactory,
                     extractorsFactory,
                     null,
@@ -98,11 +95,4 @@ class VideoActivity : AppCompatActivity() {
         }
     }
 
-    companion object {
-        fun newInstance(context: Context?, url: String, title: String) =
-            Intent(context, VideoActivity::class.java)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                .putExtra(VIDEO_URL, url)
-                .putExtra(VIDEO_TITLE, title)
-    }
 }

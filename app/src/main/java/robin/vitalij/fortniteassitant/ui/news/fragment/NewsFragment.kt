@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import kotlinx.coroutines.flow.collect
@@ -20,8 +21,8 @@ import robin.vitalij.fortniteassitant.model.ErrorModelListItem
 import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.NewsType
 import robin.vitalij.fortniteassitant.model.network.NewsModel
-import robin.vitalij.fortniteassitant.ui.news.VideoActivity
 import robin.vitalij.fortniteassitant.ui.news.fragment.adapter.NewsAdapter
+import robin.vitalij.fortniteassitant.ui.news.view_pager.AdapterNewsFragmentDirections
 import javax.inject.Inject
 
 
@@ -36,7 +37,12 @@ class NewsFragment : Fragment(R.layout.fragment_recycler_view) {
 
     private val newsAdapter = NewsAdapter(
         onVideoClick = { videoUrl: String, videoName: String ->
-            startActivity(VideoActivity.newInstance(context, videoUrl, videoName))
+            findNavController().navigate(
+                AdapterNewsFragmentDirections.actionNavigationNewsToNavigationVideo(
+                    videoName,
+                    videoUrl
+                )
+            )
         }
     )
 

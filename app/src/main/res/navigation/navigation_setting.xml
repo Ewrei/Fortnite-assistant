@@ -124,7 +124,11 @@
     <fragment
         android:id="@+id/navigation_news"
         android:name="robin.vitalij.fortniteassitant.ui.news.view_pager.AdapterNewsFragment"
-        android:label="@string/news_game" />
+        android:label="@string/news_game" >
+        <action
+            android:id="@+id/action_navigation_news_to_navigation_video"
+            app:destination="@id/navigation_video" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_game_crew"
         tools:layout="@layout/fragment_recycler_view_with_toolbar"
@@ -133,6 +137,9 @@
         <action
             android:id="@+id/action_navigation_game_crew_to_navigation_crew_details"
             app:destination="@id/navigation_crew_details" />
+        <action
+            android:id="@+id/action_navigation_game_crew_to_navigation_video"
+            app:destination="@id/navigation_video" />
     </fragment>
 
     <fragment
@@ -164,8 +171,15 @@
         android:label="" />
 
     <activity
-        android:id="@+id/navigvideoActivity"
+        android:id="@+id/navigation_video"
         android:name="robin.vitalij.fortniteassitant.ui.news.VideoActivity"
-        android:label="VideoActivity" />
+        android:label="VideoActivity" >
+        <argument
+            android:name="arg_video_name"
+            app:argType="string" />
+
+        <argument android:name="arg_video_url"
+            app:argType="string" />
+    </activity>
 
 </navigation>

@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_shop"
-    app:startDestination="@+id/homeScreen">
+    app:startDestination="@+id/shop_screen">
 
     <fragment
-        android:id="@+id/homeScreen"
+        android:id="@+id/shop_screen"
         android:name="robin.vitalij.fortniteassitant.ui.shop.viewpager.AdapterShoppingFragment"
         android:label="@string/title_item_shop"
         tools:layout="@layout/fragment_adapter_shop">
-        <action
-            android:id="@+id/action_homeScreen_to_newsFragment2"
-            app:destination="@id/navigation_news" />
+
     </fragment>
-    <fragment
-        android:id="@+id/navigation_news"
-        android:name="robin.vitalij.fortniteassitant.ui.news.fragment.NewsFragment"
-        android:label="NewsFragment" />
+
 
 </navigation>
