@@ -4,9 +4,17 @@ import android.annotation.SuppressLint
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.observeOn
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.interfaces.SaveUserCallback
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
 import robin.vitalij.fortniteassitant.repository.comparison.ComparisonListUserRepository
@@ -30,7 +38,15 @@ class ComparisonSelectedViewModel(
 
     var mutableLiveData = MutableLiveData<List<SearchSteamUser>>()
 
+    private val fullFishStatsState =
+        MutableStateFlow<LoadingState<List<SearchSteamUser>>>(LoadingState.Success(emptyList()))
+
+    val seasonsResult: StateFlow<LoadingState<List<SearchSteamUser>>> =
+        fullFishStatsState
+
     private lateinit var owner: LifecycleOwner
+
+    private var job: Job? = null
 
     fun initOwner(owner: LifecycleOwner) {
         this.owner = owner
@@ -49,15 +65,13 @@ class ComparisonSelectedViewModel(
     }
 
     fun searchPlayer(searchName: String) {
-        getSearchUserRepository.getSearch(searchName, false)
-            .observeOn(AndroidSchedulers.mainThread())
-            .let(::setupProgressShow)
-            .subscribe({
-                mutableLiveData.value = it
-            }, {
-                it.printStackTrace()
-            })
-            .let(disposables::add)
+        job?.cancel()
+        job = viewModelScope.launch {
+            getSearchUserRepository.getSearch(searchName, false)
+                .collect { loadingState ->
+                    fullFishStatsState.value = loadingState
+                }
+        }
     }
 
     fun saveUser(fortniteProfileResponse: FortniteProfileResponse) {

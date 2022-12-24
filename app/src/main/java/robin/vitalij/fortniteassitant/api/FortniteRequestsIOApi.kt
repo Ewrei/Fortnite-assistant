@@ -32,15 +32,13 @@ private const val SEASON_QUERY = "season"
 interface FortniteRequestsIOApi {
 
     @GET("/$VERSION_FIRST_PATCH/$LOOKUP_PATCH")
-    fun getSearch(
+    suspend fun getSearch(
         @Query(USERNAME_QUERY) username: String,
         @Query(STRICT_QUERY) strict: Boolean
-    ): Single<SearchResponse>
+    ): SearchResponse
 
     @GET("/$VERSION_FIRST_PATCH/$LOOKUP_PATCH")
-    fun getSearch(
-        @Query(USERNAME_QUERY) username: String
-    ): Single<SearchUserModel>
+    suspend fun getSearch(@Query(USERNAME_QUERY) username: String): SearchUserModel
 
     @GET("/$VERSION_SECOND_PATCH/$SHOP_PATCH")
     suspend fun getCurrentShop(@Query(LANG_QUERY) language: String): ShopNewResponse

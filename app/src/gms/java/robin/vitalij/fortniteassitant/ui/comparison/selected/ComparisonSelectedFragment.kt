@@ -5,14 +5,20 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.gms.fragment_comparion.*
-import kotlinx.android.synthetic.main.recycler_view.*
+import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.*
+import robin.vitalij.fortniteassitant.databinding.FragmentComparionBinding
 import robin.vitalij.fortniteassitant.interfaces.RegistrationProfileCallback
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
@@ -34,10 +40,21 @@ class ComparisonSelectedFragment : BaseFragment() {
 
     private var selectedComparisonImageView: SelectedComparisonImageView? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_comparion, container, false)
+    private val binding by viewBinding(FragmentComparionBinding::bind)
+
+    private val searchAdapter = SearchAdapter() {
+        ProfileResultFragment.show(
+            childFragmentManager,
+            it.accountId,
+            it.avatarImage,
+            ProfileResultType.FULL,
+            object : RegistrationProfileCallback {
+                override fun addedProfile(fortniteProfileResponse: FortniteProfileResponse) {
+                    viewModel.saveUser(fortniteProfileResponse)
+                }
+
+            })
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,64 +95,79 @@ class ComparisonSelectedFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
-            it?.let(::initAdapter)
-        }
+        setListeners()
+        initBanner()
+        initializeRecyclerView()
 
+        lifecycleScope.launch {
+            viewModel.seasonsResult.collect {
+                handleBattlesPassRewardsResult(it)
+            }
+        }
 
         viewModel.mutableSizeLiveData.observe(viewLifecycleOwner) {
             selectedComparisonImageView?.setFilterSize(it)
         }
-
-        setListeners()
-        initBanner()
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setListeners() {
-        recyclerView.setOnTouchListener { v, event ->
+        binding.recyclerViewInclude.recyclerView.setOnTouchListener { v, event ->
             context.closeKeyboard(view)
             false
         }
 
-        searchButton.setSafeOnClickListener {
+        binding.searchButton.setSafeOnClickListener {
             context?.closeKeyboard(view)
-            if (searchInputEditText.text.toString().isEmpty()) {
+            if (binding.searchInputEditText.text.toString().isEmpty()) {
                 viewModel.mutableLiveData.value = emptyList()
             }
-            if (searchInputEditText.text.toString().length >= resources.getInteger(R.integer.min_length)) {
-                viewModel.searchPlayer(searchInputEditText.text.toString())
+            if (binding.searchInputEditText.text.toString().length >= resources.getInteger(R.integer.min_length)) {
+                viewModel.searchPlayer(binding.searchInputEditText.text.toString())
             }
         }
-
     }
 
-    private fun initAdapter(list: List<SearchSteamUser>) {
-        recyclerView.run {
-            adapter = SearchAdapter() {
-                ProfileResultFragment.show(
-                    childFragmentManager,
-                    it.accountId,
-                    it.avatarImage,
-                    ProfileResultType.FULL,
-                    object : RegistrationProfileCallback {
-                        override fun addedProfile(fortniteProfileResponse: FortniteProfileResponse) {
-                            viewModel.saveUser(fortniteProfileResponse)
-                        }
-
-                    })
-            }
+    private fun initializeRecyclerView() {
+        binding.recyclerViewInclude.recyclerView.run {
+            adapter = searchAdapter
             layoutManager = LinearLayoutManager(context)
-            (adapter as SearchAdapter).setData(list)
         }
     }
 
     private fun initBanner() {
         if (viewModel.preferenceManager.getIsSubscription() || viewModel.preferenceManager.getDisableAdvertising() >= Date().time) {
-            customBannerView.setVisibility(false)
+            binding.customBannerView.isVisible = false
         } else {
-            customBannerView.setVisibility(true)
-            customBannerView.startBanner(getString(R.string.BANNER_ID), activity)
+            binding.customBannerView.isVisible = true
+            binding.customBannerView.startBanner(getString(R.string.BANNER_ID), activity)
+        }
+    }
+
+    private fun handleBattlesPassRewardsResult(result: LoadingState<List<SearchSteamUser>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
+                binding.recyclerViewInclude.recyclerView.isVisible = false
+            }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                binding.recyclerViewInclude.recyclerView.isVisible = true
+
+                searchAdapter.submitList(result.data)
+                binding.viewEmptyInclude.emptyView.isVisible =
+                    result.data.isEmpty() && binding.searchInputEditText.text.toString()
+                        .isNotBlank()
+            }
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                binding.recyclerViewInclude.recyclerView.isVisible = false
+
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                }
+            }
         }
     }
 

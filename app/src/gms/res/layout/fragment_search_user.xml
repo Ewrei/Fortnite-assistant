@@ -117,6 +117,7 @@
                         android:text="@string/how_to_find_account_id" />
 
                     <include
+                        android:id="@+id/viewEmptyInclude"
                         layout="@layout/view_empty"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -124,6 +125,7 @@
                         android:visibility="gone" />
 
                     <include
+                        android:id="@+id/recyclerViewInclude"
                         layout="@layout/recycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
@@ -133,6 +135,7 @@
             </androidx.core.widget.NestedScrollView>
 
             <include
+                android:id="@+id/progressViewInclude"
                 layout="@layout/progress_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -140,6 +143,7 @@
                 android:visibility="gone" />
 
             <include
+                android:id="@+id/errorViewInclude"
                 layout="@layout/view_error"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

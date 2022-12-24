@@ -163,4 +163,9 @@
         tools:layout="@layout/fragment_png_read"
         android:label="" />
 
+    <activity
+        android:id="@+id/navigvideoActivity"
+        android:name="robin.vitalij.fortniteassitant.ui.news.VideoActivity"
+        android:label="VideoActivity" />
+
 </navigation>
