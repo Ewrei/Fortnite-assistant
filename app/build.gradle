@@ -9,15 +9,14 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion "31.0.0"
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "robin.vitalij.fortniteassitant"
         minSdkVersion 22
-        targetSdkVersion 31
-        versionCode 18
-        versionName "1.1.4"
+        targetSdkVersion 33
+        versionCode 19
+        versionName "1.2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -143,7 +142,7 @@ dependencies {
     def constraintlayout_version = "2.1.4"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
 
-    def navigation_version = "2.3.5"
+    def navigation_version = "2.4.0"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
 
@@ -166,8 +165,10 @@ dependencies {
 
     implementation "androidx.room:room-ktx:$room_version"
 
-    def lifecycle_version = '2.3.1'
+    def lifecycle_version = '2.4.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.4.0'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
 
     def rxjava2_rxandroid_version = "2.1.1"
     implementation "io.reactivex.rxjava2:rxandroid:$rxjava2_rxandroid_version"

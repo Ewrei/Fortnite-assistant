@@ -17,7 +17,7 @@ import robin.vitalij.fortniteassitant.databinding.BottomSheetBattlesPassRewardsB
 import robin.vitalij.fortniteassitant.model.network.Reward
 import javax.inject.Inject
 
-const val BOTTOM_SHEET_MARGIN_TOP = 200
+const val BOTTOM_SHEET_MARGIN_TOP = 100
 
 class BattlePassRewardsResultFragment : BottomSheetDialogFragment() {
 

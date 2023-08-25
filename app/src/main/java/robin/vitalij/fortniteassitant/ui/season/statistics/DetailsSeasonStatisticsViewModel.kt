@@ -18,7 +18,6 @@ class DetailsSeasonStatisticsViewModel(
         getSeasonStatisticsRepository
             .loadData(battlesType, gameType)
             .observeOn(AndroidSchedulers.mainThread())
-            .let(::setupProgressShow)
             .subscribe({
                 mutableLiveData.value = it
             }, error)

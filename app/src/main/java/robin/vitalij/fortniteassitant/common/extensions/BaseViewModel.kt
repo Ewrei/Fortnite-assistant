@@ -22,9 +22,9 @@ fun BaseViewModel.observeToProgressBar(
 }
 
 fun BaseViewModel.observeToProgressBar(fragment: Fragment) {
-    progressBarVisibility.observe(fragment, { show ->
+    progressBarVisibility.observe(fragment) { show ->
         (fragment as? ProgressBarController)?.showOrHideProgressBar(show)
-    })
+    }
 }
 
 fun BaseViewModel.observeToError(fragment: Fragment) {

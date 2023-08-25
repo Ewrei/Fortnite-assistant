@@ -49,8 +49,7 @@ class DetailsSeasonStatisticsFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(DetailsSeasonStatisticsViewModel::class.java).apply {
+        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)[DetailsSeasonStatisticsViewModel::class.java].apply {
                 observeToProgressBar(this@DetailsSeasonStatisticsFragment)
                 observeToError(this@DetailsSeasonStatisticsFragment)
                 observeToEmpty(this@DetailsSeasonStatisticsFragment)

@@ -25,7 +25,7 @@ import javax.net.ssl.X509TrustManager
 const val TIMEOUT_SEC = 30L
 private const val ROOT_FORTNITE_COM_URL = "https://fortnite-api.com"
 private const val ROOT_FORTNITE_IO_URL = "https://fortniteapi.io"
-private const val STEAM_CHART_URL = "http://194-67-110-123.cloudvps.regruhosting.ru"
+private const val STEAM_CHART_URL = "http://134-0-119-178.cloudvps.regruhosting.ru"
 
 private const val AUTHORIZATION = "Authorization"
 
