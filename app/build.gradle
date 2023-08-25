@@ -15,7 +15,7 @@ android {
         applicationId "robin.vitalij.fortniteassitant"
         minSdkVersion 22
         targetSdkVersion 33
-        versionCode 19
+        versionCode 20
         versionName "1.2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -248,7 +248,7 @@ dependencies {
     hmsImplementation('com.huawei.hms:ads-lite:13.4.41.304')
     hmsImplementation('com.huawei.hms:ads-consent:3.4.41.304')
 
-    def unity_ads_version = "3.7.5"
+    def unity_ads_version = "4.6.0"
     gmsImplementation "com.unity3d.ads:unity-ads:$unity_ads_version"
 
     def yandex_ads_version = "5.2.0"

@@ -1,6 +1,10 @@
 package robin.vitalij.fortniteassitant
 
+import android.app.ActivityManager
 import android.app.Application
+import android.content.Context
+import android.os.Build
+import android.webkit.WebView
 import com.google.android.exoplayer2.upstream.cache.SimpleCache
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.initialization.InitializationStatus
@@ -18,10 +22,19 @@ class FortniteApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         appComponent = getComponent()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val processName = getProcessName(this)
+            val packageName = this.packageName
+            if (packageName != processName) {
+                WebView.setDataDirectorySuffix(processName!!)
+            }
+        }
+
         MobileAds.initialize(this)
 
         UnityAds.initialize(applicationContext, "4721429",
-            BuildConfig.DEBUG, true, object : IUnityAdsInitializationListener {
+            BuildConfig.DEBUG, object : IUnityAdsInitializationListener {
                 override fun onInitializationComplete() {
                     //do nothing
                 }
@@ -53,6 +66,17 @@ class FortniteApplication : Application() {
             .fortniteAppModule(FortniteAppModule(applicationContext))
             .databaseModule(DatabaseModule(applicationContext))
             .build()
+    }
+
+    private fun getProcessName(context: Context?): String? {
+        if (context == null) return null
+        val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        for (processInfo in manager.runningAppProcesses) {
+            if (processInfo.pid == android.os.Process.myPid()) {
+                return processInfo.processName
+            }
+        }
+        return null
     }
 
     companion object {
