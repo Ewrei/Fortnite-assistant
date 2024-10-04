@@ -2,24 +2,22 @@ package robin.vitalij.fortniteassitant.ui.season.viewpager
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import kotlinx.android.synthetic.main.fragment_adapter_details_statistics.*
-import kotlinx.android.synthetic.main.view_error.*
+import by.kirich1409.viewbindingdelegate.viewBinding
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToEmpty
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.databinding.FragmentAdapterDetailsSeasonBinding
 import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseViewPagerAdapter
 import robin.vitalij.fortniteassitant.ui.season.statistics.DetailsSeasonStatisticsFragment
 import robin.vitalij.fortniteassitant.utils.view.GameBattlesAdapter
@@ -27,7 +25,8 @@ import javax.inject.Inject
 
 private const val DEFAULT_LAST_TAB_VALUE = Integer.MAX_VALUE
 
-class AdapterDetailsSeasonStatisticsFragment : BaseFragment() {
+class AdapterDetailsSeasonStatisticsFragment :
+    Fragment(R.layout.fragment_adapter_details_statistics) {
 
     @Inject
     lateinit var viewModelFactory: AdapterDetailsSeasonStatisticsViewModelFactory
@@ -36,19 +35,18 @@ class AdapterDetailsSeasonStatisticsFragment : BaseFragment() {
 
     private var lastTab: Int = DEFAULT_LAST_TAB_VALUE
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_adapter_details_season, container, false)
+    private val binding by viewBinding(FragmentAdapterDetailsSeasonBinding::bind)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(AdapterDetailsSeasonStatisticsViewModel::class.java).apply {
-                observeToProgressBar(this@AdapterDetailsSeasonStatisticsFragment)
-                observeToError(this@AdapterDetailsSeasonStatisticsFragment)
-                observeToEmpty(this@AdapterDetailsSeasonStatisticsFragment)
-            }
+        viewModel = ViewModelProvider(
+            viewModelStore,
+            viewModelFactory
+        )[AdapterDetailsSeasonStatisticsViewModel::class.java].apply {
+            observeToProgressBar(this@AdapterDetailsSeasonStatisticsFragment)
+            observeToError(this@AdapterDetailsSeasonStatisticsFragment)
+            observeToEmpty(this@AdapterDetailsSeasonStatisticsFragment)
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -58,7 +56,7 @@ class AdapterDetailsSeasonStatisticsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tabLayout.setupWithViewPager(viewPager)
+        binding.tabLayout.setupWithViewPager(binding.viewPager)
         setNavigation()
         setListeners()
 
@@ -67,10 +65,6 @@ class AdapterDetailsSeasonStatisticsFragment : BaseFragment() {
         viewModel.mutableLiveData.observe(viewLifecycleOwner, Observer {
             setListeners()
         })
-
-        errorResolveButton.setOnClickListener {
-            viewModel.loadData()
-        }
     }
 
     override fun onResume() {
@@ -84,12 +78,12 @@ class AdapterDetailsSeasonStatisticsFragment : BaseFragment() {
     }
 
     private fun saveSelectedTab() {
-        lastTab = viewPager.currentItem
+        lastTab = binding.viewPager.currentItem
     }
 
     private fun restoreSelectedTab() {
         if (lastTab != DEFAULT_LAST_TAB_VALUE) {
-            viewPager.currentItem = lastTab
+            binding.viewPager.currentItem = lastTab
         }
     }
 
@@ -101,13 +95,13 @@ class AdapterDetailsSeasonStatisticsFragment : BaseFragment() {
                 getString(it.getTitleRes())
             )
         }
-        viewPager.adapter = pagerAdapter
+        binding.viewPager.adapter = pagerAdapter
     }
 
     private fun setNavigation() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
     private fun setListeners() {
@@ -116,24 +110,21 @@ class AdapterDetailsSeasonStatisticsFragment : BaseFragment() {
                 context,
                 viewModel.detailsStatistics
             )
-        toolbarSpinner.adapter = adapter
+        binding.toolbarSpinner.adapter = adapter
 
-        toolbarSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
+        binding.toolbarSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    addTabs(viewModel.detailsStatistics[position])
+                }
             }
-
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                addTabs(viewModel.detailsStatistics[position])
-            }
-        }
-
-        setErrorResolveButtonClick {
-            viewModel.loadData()
-        }
     }
 }

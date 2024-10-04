@@ -93,24 +93,25 @@
         </LinearLayout>
 
         <include
+            android:id="@+id/typeStatGroupInclude"
             layout="@layout/layout_type_stats_group"
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:tabMode="scrollable"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:tabMode="scrollable">
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"
-                app:tabTextAppearance="@style/TabText"
                 style="@style/DefaultColorTabLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:tabTextAppearance="@style/TabText" />
 
         </androidx.viewpager.widget.ViewPager>
 

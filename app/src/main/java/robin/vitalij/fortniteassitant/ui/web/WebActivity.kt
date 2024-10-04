@@ -8,30 +8,31 @@ import android.view.MenuItem
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_web_view.*
-import kotlinx.android.synthetic.main.toolbar_center_title.*
-import robin.vitalij.fortniteassitant.R
+import by.kirich1409.viewbindingdelegate.viewBinding
 import robin.vitalij.fortniteassitant.common.extensions.setToolbarTitle
+import robin.vitalij.fortniteassitant.databinding.ActivityWebViewBinding
 
 const val WEB_URL = "web_url"
 const val WEB_TITLE = "web_title"
 
 class WebActivity : AppCompatActivity() {
 
+    private val binding by viewBinding(ActivityWebViewBinding::bind)
+
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_web_view)
+        setContentView(binding.root)
         setToolbar()
         setWebView()
     }
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun setWebView() {
-        webView.settings.javaScriptEnabled = true
-        webView.loadUrl((intent?.getStringExtra(WEB_URL)!!))
-        webView.webViewClient = WebViewClient()
-        webView.webChromeClient = WebChromeClient()
+        binding.webView.settings.javaScriptEnabled = true
+        binding.webView.loadUrl((intent?.getStringExtra(WEB_URL)!!))
+        binding.webView.webViewClient = WebViewClient()
+        binding.webView.webChromeClient = WebChromeClient()
     }
 
     override fun onBackPressed() {
@@ -50,7 +51,7 @@ class WebActivity : AppCompatActivity() {
     }
 
     private fun setToolbar() {
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbarInclude.toolbar)
         enableBackButton()
         setToolbarTitle(intent?.getStringExtra(WEB_TITLE) ?: "")
     }

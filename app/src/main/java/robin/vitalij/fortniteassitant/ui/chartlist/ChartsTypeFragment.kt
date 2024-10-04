@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import robin.vitalij.fortniteassitant.FortniteApplication
+import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.databinding.FragmentHomeBinding
@@ -16,10 +18,9 @@ import robin.vitalij.fortniteassitant.interfaces.ChartsTypeCallback
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.ui.chartlist.adapter.ChartsTypeAdapter
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import javax.inject.Inject
 
-class ChartsTypeFragment : BaseFragment() {
+class ChartsTypeFragment : Fragment(R.layout.fragment_home) {
 
     @Inject
     lateinit var viewModelFactory: ChartsTypeViewModelFactory
@@ -55,11 +56,13 @@ class ChartsTypeFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(ChartsTypeViewModel::class.java).apply {
-                observeToProgressBar(this@ChartsTypeFragment)
-                observeToError(this@ChartsTypeFragment)
-            }
+        viewModel = ViewModelProvider(
+            viewModelStore,
+            viewModelFactory
+        )[ChartsTypeViewModel::class.java].apply {
+            observeToProgressBar(this@ChartsTypeFragment)
+            observeToError(this@ChartsTypeFragment)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

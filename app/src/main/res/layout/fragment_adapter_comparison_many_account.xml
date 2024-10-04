@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <include
+        android:id="@+id/typeStatGroupInclude"
         layout="@layout/layout_type_stats_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

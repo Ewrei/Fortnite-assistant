@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
@@ -59,7 +58,7 @@ class UpcomingShopFragment : Fragment(R.layout.fragment_recycler_view) {
     }
 
     private fun setListener() {
-        binding.errorViewInclude.errorResolveButton.setOnClickListener {
+        binding.viewErrorInclude.errorResolveButton.setOnClickListener {
             viewModel.loadData()
         }
     }
@@ -75,16 +74,19 @@ class UpcomingShopFragment : Fragment(R.layout.fragment_recycler_view) {
         when (result) {
             is LoadingState.Loading -> {
                 binding.progressViewInclude.progressContainer.isVisible = true
-                binding.errorViewInclude.errorView.isVisible = false
+                binding.viewErrorInclude.errorView.isVisible = false
             }
+
             is LoadingState.Success -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
                 upcomingShopAdapter.updateData(result.data)
             }
+
             is LoadingState.Error -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
+
                 if (result.cause is ErrorModelListItem.ErrorItem) {
-                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                    binding.viewErrorInclude.setErrorView(result.cause.errorModel)
                 }
             }
         }

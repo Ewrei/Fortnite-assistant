@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.bottom_sheet_current_shop.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadBackgroundRarity
@@ -34,12 +33,14 @@ class CurrentShopResultFragment : BottomSheetDialogFragment() {
 
     private lateinit var viewModel: CurrentShopResultViewModel
 
+    private lateinit var dataBinding: BottomSheetCurrentShopBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         dialog?.initBottomSheetInternal()
-        val dataBinding =
+        dataBinding =
             DataBindingUtil.inflate<BottomSheetCurrentShopBinding>(
                 inflater,
                 R.layout.bottom_sheet_current_shop,
@@ -62,11 +63,11 @@ class CurrentShopResultFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
             val itemShop = it.getSerializable(ITEM_SHOP_CURRENT) as ShopNewItem
-            imageView.loadImage(itemShop.displayAssets.first().fullBackground)
-            imageView.loadBackgroundRarity(itemShop.rarity.id)
-            name.text = itemShop.displayName
-            description.text = itemShop.displayDescription
-            price.setValueText(itemShop.price.finalPrice)
+            dataBinding.imageView.loadImage(itemShop.displayAssets.first().fullBackground)
+            dataBinding.imageView.loadBackgroundRarity(itemShop.rarity.id)
+            dataBinding.name.text = itemShop.displayName
+            dataBinding.description.text = itemShop.displayDescription
+            dataBinding.price.setValueText(itemShop.price.finalPrice)
 
             if (itemShop.granted.size > 1) {
                 initAdapter(itemShop.granted)
@@ -83,8 +84,8 @@ class CurrentShopResultFragment : BottomSheetDialogFragment() {
     }
 
     private fun initAdapter(list: List<GrantedModel>) {
-        theKitIncludes.setVisibility(true)
-        recyclerView.run {
+        dataBinding.theKitIncludes.setVisibility(true)
+        dataBinding.recyclerView.run {
             adapter = OtherItemsDetailsAdapter(
                 widthPixels = activity?.getScreenWidth(WIDTH_PIXELS_PERCENT) ?: 0
             )

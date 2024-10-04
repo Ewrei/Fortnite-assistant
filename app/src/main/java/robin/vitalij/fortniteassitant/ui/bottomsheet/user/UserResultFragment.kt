@@ -1,6 +1,5 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.user
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.bottom_sheet_user.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.showApplicationDialog
@@ -32,11 +30,13 @@ class UserResultFragment : BottomSheetDialogFragment() {
 
     private var usersCallback: UsersCallback? = null
 
+    private lateinit var dataBinding: BottomSheetUserBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dataBinding =
+        dataBinding =
             DataBindingUtil.inflate<BottomSheetUserBinding>(
                 inflater,
                 R.layout.bottom_sheet_user,
@@ -80,21 +80,21 @@ class UserResultFragment : BottomSheetDialogFragment() {
     }
 
     private fun setListeners() {
-        updateButton.setOnClickListener {
+        dataBinding.updateButton.setOnClickListener {
             dismiss()
             usersCallback?.updateProfile(viewModel.currentId)
         }
 
-        switchButton.setOnClickListener {
+        dataBinding.switchButton.setOnClickListener {
             dismiss()
             usersCallback?.switch(viewModel.currentId)
         }
 
-        compareWithYourself.setOnClickListener {
+        dataBinding.compareWithYourself.setOnClickListener {
             viewModel.compareWithYourself()
         }
 
-        removeAccount.setOnClickListener {
+        dataBinding.removeAccount.setOnClickListener {
             context?.showApplicationDialog(
                 getString(
                     R.string.delete_account_title, arguments?.getString(

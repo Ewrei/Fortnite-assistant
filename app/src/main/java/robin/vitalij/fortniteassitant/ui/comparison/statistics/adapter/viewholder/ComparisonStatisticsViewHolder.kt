@@ -1,6 +1,5 @@
 package robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewholder
 
-import kotlinx.android.synthetic.main.item_comparison_player_statistics.view.*
 import robin.vitalij.fortniteassitant.common.binding.TextViewBinding.setDifference
 import robin.vitalij.fortniteassitant.common.extensions.setInVisibility
 import robin.vitalij.fortniteassitant.common.extensions.setVisibility
@@ -20,18 +19,20 @@ class ComparisonStatisticsViewHolder(override val binding: ItemComparisonPlayerS
 
             when {
                 difference > 0.0 -> {
-                    itemView.differenceOne.setDifference(difference)
-                    itemView.differenceOne.setInVisibility(true)
-                    itemView.differenceTwo.setInVisibility(false)
+                    binding.differenceOne.setDifference(difference)
+                    binding.differenceOne.setInVisibility(true)
+                    binding.differenceTwo.setInVisibility(false)
                 }
+
                 difference < 0.0 -> {
-                    itemView.differenceTwo.setDifference(difference * -1)
-                    itemView.differenceOne.setInVisibility(false)
-                    itemView.differenceTwo.setInVisibility(true)
+                    binding.differenceTwo.setDifference(difference * -1)
+                    binding.differenceOne.setInVisibility(false)
+                    binding.differenceTwo.setInVisibility(true)
                 }
+
                 else -> {
-                    itemView.differenceOne.setVisibility(false)
-                    itemView.differenceTwo.setVisibility(false)
+                    binding.differenceOne.setVisibility(false)
+                    binding.differenceTwo.setVisibility(false)
                 }
             }
         }

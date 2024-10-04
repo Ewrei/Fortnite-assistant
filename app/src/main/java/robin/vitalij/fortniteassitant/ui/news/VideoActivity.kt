@@ -7,17 +7,15 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.exoplayer2.ExoPlayerFactory
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
-import com.google.android.exoplayer2.extractor.ExtractorsFactory
-import com.google.android.exoplayer2.source.ExtractorMediaSource
 import com.google.android.exoplayer2.source.MediaSource
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
-import kotlinx.android.synthetic.main.activity_video_view.*
-import kotlinx.android.synthetic.main.toolbar_center_title.*
-import robin.vitalij.fortniteassitant.R
+import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import robin.vitalij.fortniteassitant.common.extensions.setToolbarTitle
+import robin.vitalij.fortniteassitant.databinding.ActivityVideoViewBinding
 
 
 const val VIDEO_URL = "video_url"
@@ -25,12 +23,14 @@ const val VIDEO_TITLE = "video_title"
 
 class VideoActivity : AppCompatActivity() {
 
-    private var simpleExoPlayer: SimpleExoPlayer? = null
+    private var simpleExoPlayer: ExoPlayer? = null
+
+    private val binding by viewBinding(ActivityVideoViewBinding::bind)
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_video_view)
+        setContentView(binding.root)
         setToolbar()
         initializePlayer()
     }
@@ -52,11 +52,17 @@ class VideoActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        simpleExoPlayer?.stop()
+        simpleExoPlayer?.pause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        simpleExoPlayer?.release()
+        simpleExoPlayer = null
     }
 
     private fun setToolbar() {
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbarInclude.toolbar)
         enableBackButton()
         setToolbarTitle(intent?.getStringExtra(VIDEO_TITLE) ?: "")
     }
@@ -70,31 +76,21 @@ class VideoActivity : AppCompatActivity() {
 
     private fun initializePlayer() {
         if (simpleExoPlayer == null) {
-            simpleExoPlayer = ExoPlayerFactory.newSimpleInstance(this)
-        } else {
-            simpleExoPlayer?.release()
-            simpleExoPlayer = null
-            simpleExoPlayer = ExoPlayerFactory.newSimpleInstance(this)
+            simpleExoPlayer = SimpleExoPlayer.Builder(this).build()
         }
 
         try {
-            val dataSourceFactory = DefaultHttpDataSourceFactory("exoplayer_video")
-            val extractorsFactory: ExtractorsFactory = DefaultExtractorsFactory()
-            val mediaSource: MediaSource =
-                ExtractorMediaSource(
-                    Uri.parse(intent?.getStringExtra(VIDEO_URL)),
-                    dataSourceFactory,
-                    extractorsFactory,
-                    null,
-                    null
-                )
-            storyDisplayVideo.player = simpleExoPlayer
+            val dataSourceFactory = DefaultHttpDataSource.Factory()
+            val mediaSource: MediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
+                .createMediaSource(MediaItem.fromUri(Uri.parse(intent?.getStringExtra(VIDEO_URL))))
 
-            simpleExoPlayer?.prepare(mediaSource)
+            binding.storyDisplayVideo.player = simpleExoPlayer
 
+            simpleExoPlayer?.setMediaSource(mediaSource)
+            simpleExoPlayer?.prepare()
             simpleExoPlayer?.playWhenReady = true
         } catch (e: Exception) {
-            //Do nothing
+            // Handle exception if necessary
         }
     }
 

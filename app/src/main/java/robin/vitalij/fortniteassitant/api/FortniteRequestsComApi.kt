@@ -31,6 +31,13 @@ interface FortniteRequestsComApi {
         @Query(IMAGE_QUERY) image: String
     ): Single<PlayerStatsResponse>
 
+    @GET("/$VERSION_SECOND_PATCH/$STATS_PATCH/$BR_PATCH/$VERSION_SECOND_PATCH/{$ACCOUNT_ID_PATCH}")
+    suspend fun getStatsNew(
+        @Path(ACCOUNT_ID_PATCH) accountId: String,
+        @Query(TIME_WINDOW_QUERY) timeWindow: String,
+        @Query(IMAGE_QUERY) image: String
+    ): PlayerStatsResponse
+
     @GET("/$VERSION_SECOND_PATCH/$COSMETICS_PATCH/$BR_PATCH/$NEW_PATCH")
     suspend fun getCosmeticsNew(@Query(LANGUAGE_QUERY) language: String): CosmeticsNewResponse
 

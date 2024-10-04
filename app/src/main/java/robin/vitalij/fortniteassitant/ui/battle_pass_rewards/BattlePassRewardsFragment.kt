@@ -5,9 +5,17 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
-import android.view.*
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -17,17 +25,22 @@ import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
 import robin.vitalij.fortniteassitant.databinding.FragmentBattlePassRewardsBinding
+import robin.vitalij.fortniteassitant.interfaces.ErrorController
+import robin.vitalij.fortniteassitant.interfaces.ProgressBarController
+import robin.vitalij.fortniteassitant.model.ErrorModel
 import robin.vitalij.fortniteassitant.model.battle_pass_reward.SeasonModel
 import robin.vitalij.fortniteassitant.model.enums.BattlePassSortedType
 import robin.vitalij.fortniteassitant.ui.battle_pass_rewards.adapter.BattlesPassRewardsAdapter
 import robin.vitalij.fortniteassitant.ui.bottomsheet.battlepassrewards.BattlePassRewardsResultFragment
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.utils.view.CustomTypeFaceSpan
 import javax.inject.Inject
 
 
-class BattlePassRewardsFragment : BaseFragment() {
+class BattlePassRewardsFragment : Fragment(R.layout.fragment_battle_pass_rewards),
+    ProgressBarController,
+    ErrorController {
 
     @Inject
     lateinit var viewModelFactory: BattlePassRewardsViewModelFactory
@@ -104,10 +117,12 @@ class BattlePassRewardsFragment : BaseFragment() {
                         viewModel.sortedBattlesPassReward(BattlePassSortedType.ALL)
                         true
                     }
+
                     R.id.action_paid -> {
                         viewModel.sortedBattlesPassReward(BattlePassSortedType.PAID)
                         true
                     }
+
                     R.id.action_free -> {
                         viewModel.sortedBattlesPassReward(BattlePassSortedType.FREE)
                         true
@@ -146,7 +161,7 @@ class BattlePassRewardsFragment : BaseFragment() {
             viewModel.changeSeason((item as SeasonModel).season.toString())
         }
 
-        setErrorResolveButtonClick {
+        binding.viewErrorInclude.errorResolveButton.setOnClickListener {
             viewModel.changeSeason("current")
         }
     }
@@ -168,6 +183,18 @@ class BattlePassRewardsFragment : BaseFragment() {
                 }
             }
         }
+    }
+
+    override fun setError(errorModel: ErrorModel) {
+        binding.viewErrorInclude.setErrorView(errorModel)
+    }
+
+    override fun hideError() {
+        binding.viewErrorInclude.errorView.isVisible = false
+    }
+
+    override fun showOrHideProgressBar(show: Boolean) {
+        binding.progressViewInclude.progressContainer.isVisible = show
     }
 
     companion object {

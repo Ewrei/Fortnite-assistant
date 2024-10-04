@@ -5,13 +5,13 @@ import android.content.IntentSender
 import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
@@ -21,9 +21,6 @@ import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
-import com.google.android.play.core.tasks.Task
-import kotlinx.android.synthetic.gms.activity_main.*
-import kotlinx.android.synthetic.main.loading_layout.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
@@ -40,7 +37,8 @@ import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileRespons
 import robin.vitalij.fortniteassitant.ui.ads_gift_fever.BasicRulesActivity
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
 import robin.vitalij.fortniteassitant.ui.subscription.SubscriptionActivity
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 import javax.inject.Inject
 
 private const val SEVENTH_ENTRANCE = 7
@@ -116,7 +114,7 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
             setupBottomNavigationBar()
         }
 
-        loading_container.setVisibility(false)
+        binding?.progressViewInclude?.loadingContainer?.setVisibility(false)
 
         initEstimate()
         initAppUpdateManager()
@@ -125,9 +123,10 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
 
         viewModel.checkFirebaseDynamicLink()
 
-        if(viewModel.preferenceManager.getShowBasicRulesDate() < Date()) {
-            startActivity(BasicRulesActivity.newInstance(this))
-            viewModel.preferenceManager.setShowBasicRulesDate(Date(Date().time + SEVEN_DAY))
+        //TODO need turn off
+        if (viewModel.preferenceManager.getShowBasicRulesDate() < Date()) {
+         //   startActivity(BasicRulesActivity.newInstance(this))
+       //     viewModel.preferenceManager.setShowBasicRulesDate(Date(Date().time + SEVEN_DAY))
         }
     }
 
@@ -156,7 +155,7 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
                 R.navigation.navigation_setting
             )
 
-        val controller = bottom_nav.setupWithNavController(
+        val controller = binding?.bottomNav?.setupWithNavController(
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,
             containerId = R.id.nav_host_container,
@@ -172,9 +171,9 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
     override fun onSupportNavigateUp() = currentNavController?.value?.navigateUp() ?: false
 
     override fun showOrHideProgressBar(show: Boolean, title: String) {
-        loading_container.setVisibility(show)
-        loadTitle.setVisibility(title.isNotBlank())
-        loadTitle.text = title
+        binding?.progressViewInclude?.loadingContainer?.setVisibility(show)
+        binding?.progressViewInclude?.loadTitle?.setVisibility(title.isNotBlank())
+        binding?.progressViewInclude?.loadTitle?.text = title
     }
 
     fun onDisplayButtonClicked(getAnWard: () -> Unit) {
@@ -196,10 +195,10 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
 
     private fun initBanner() {
         if (viewModel.preferenceManager.getIsSubscription() || viewModel.preferenceManager.getDisableAdvertising() >= Date().time) {
-            customBannerView.setVisibility(false)
+            binding?.customBannerView?.setVisibility(false)
         } else {
-            customBannerView.setVisibility(true)
-            customBannerView.startBanner(getString(R.string.BANNER_ID), this)
+            binding?.customBannerView?.setVisibility(true)
+            binding?.customBannerView?.startBanner(getString(R.string.BANNER_ID), this)
         }
     }
 

@@ -8,20 +8,23 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.initBottomSheetInternal
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
 import robin.vitalij.fortniteassitant.common.extensions.showDialog
 import robin.vitalij.fortniteassitant.databinding.BottomSheetProfileBinding
 import robin.vitalij.fortniteassitant.interfaces.RegistrationProfileCallback
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.ComparisonDataType
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.ProfileAdapter
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.ProfileListItem
-import robin.vitalij.fortniteassitant.ui.common.BaseBottomSheetDialogFragment
 import robin.vitalij.fortniteassitant.ui.comparison.ComparisonActivity
 import robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment.Companion.ARG_PROFILE_RESULT_TYPE
 import javax.inject.Inject
@@ -29,7 +32,7 @@ import javax.inject.Inject
 const val ACCOUNT_ID = "account_id"
 const val BOTTOM_SHEET_MARGIN_TOP = 200
 
-class ProfileResultFragment : BaseBottomSheetDialogFragment() {
+class ProfileResultFragment : BottomSheetDialogFragment() {
 
     @Inject
     lateinit var viewModelFactory: ProfileResultViewModelFactory
@@ -52,21 +55,20 @@ class ProfileResultFragment : BaseBottomSheetDialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FortniteApplication.appComponent.inject(this)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(ProfileResultViewModel::class.java).apply {
-                observeToProgressBar(this@ProfileResultFragment)
-                observeToError(this@ProfileResultFragment)
-
-                openCompare = {
-                    dismiss()
-                    startActivity(
-                        ComparisonActivity.getComparisonActivityIntent(
-                            requireContext(),
-                            ComparisonDataType.COMPARE_WITH_YOURSELF
-                        )
+        viewModel = ViewModelProvider(
+            viewModelStore,
+            viewModelFactory
+        )[ProfileResultViewModel::class.java].apply {
+            openCompare = {
+                dismiss()
+                startActivity(
+                    ComparisonActivity.getComparisonActivityIntent(
+                        requireContext(),
+                        ComparisonDataType.COMPARE_WITH_YOURSELF
                     )
-                }
+                )
             }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -84,6 +86,12 @@ class ProfileResultFragment : BaseBottomSheetDialogFragment() {
             val profileResultType = it.getSerializable(PROFILE_RESULT_TYPE) as ProfileResultType
             binding.compareWithYourself.isVisible = profileResultType != ProfileResultType.NEW
             binding.addedToComparison.isVisible = profileResultType != ProfileResultType.NEW
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.profileResult.collect {
+                handleProfileResult(it)
+            }
         }
 
         loadData()
@@ -122,7 +130,7 @@ class ProfileResultFragment : BaseBottomSheetDialogFragment() {
             viewModel.addedUserMode()
         }
 
-        setErrorResolveButtonClick {
+        binding.errorViewInclude.errorResolveButton.setOnClickListener {
             loadData()
         }
     }
@@ -141,6 +149,29 @@ class ProfileResultFragment : BaseBottomSheetDialogFragment() {
             adapter = ProfileAdapter()
             (adapter as ProfileAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)
+        }
+    }
+
+    private fun handleProfileResult(result: LoadingState<List<ProfileListItem>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
+            }
+
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                binding.tabMenu.isVisible = true
+                result.data.let(::initAdapter)
+            }
+
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                }
+            }
         }
     }
 

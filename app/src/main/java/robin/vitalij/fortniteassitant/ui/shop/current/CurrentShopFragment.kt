@@ -60,7 +60,7 @@ class CurrentShopFragment : Fragment(R.layout.fragment_recycler_view) {
     }
 
     private fun setListener() {
-        binding.errorViewInclude.errorResolveButton.setOnClickListener {
+        binding.viewErrorInclude.errorResolveButton.setOnClickListener {
             viewModel.loadData()
         }
     }
@@ -76,7 +76,7 @@ class CurrentShopFragment : Fragment(R.layout.fragment_recycler_view) {
         when (result) {
             is LoadingState.Loading -> {
                 binding.progressViewInclude.progressContainer.isVisible = true
-                binding.errorViewInclude.errorView.isVisible = false
+                binding.viewErrorInclude.errorView.isVisible = false
             }
             is LoadingState.Success -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
@@ -85,7 +85,7 @@ class CurrentShopFragment : Fragment(R.layout.fragment_recycler_view) {
             is LoadingState.Error -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
                 if (result.cause is ErrorModelListItem.ErrorItem) {
-                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                    binding.viewErrorInclude.setErrorView(result.cause.errorModel)
                 }
             }
         }

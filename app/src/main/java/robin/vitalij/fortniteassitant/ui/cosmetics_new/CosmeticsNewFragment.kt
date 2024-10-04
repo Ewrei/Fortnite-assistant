@@ -12,7 +12,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
@@ -88,10 +87,12 @@ class CosmeticsNewFragment : Fragment(R.layout.fragment_recycler_view_with_toolb
                 binding.progressViewInclude.progressContainer.isVisible = true
                 binding.errorViewInclude.errorView.isVisible = false
             }
+
             is LoadingState.Success -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
                 cosmeticsNewAdapter.updateData(result.data)
             }
+
             is LoadingState.Error -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
 

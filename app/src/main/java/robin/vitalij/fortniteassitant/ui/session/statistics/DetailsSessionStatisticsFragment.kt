@@ -71,7 +71,7 @@ class DetailsSessionStatisticsFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun setListener() {
-        binding.errorViewInclude.errorResolveButton.setOnClickListener {
+        binding.viewErrorInclude.errorResolveButton.setOnClickListener {
             viewModel.loadData()
         }
     }
@@ -87,7 +87,7 @@ class DetailsSessionStatisticsFragment : Fragment(R.layout.fragment_home) {
         when (result) {
             is LoadingState.Loading -> {
                 binding.progressViewInclude.progressContainer.isVisible = true
-                binding.errorViewInclude.errorView.isVisible = false
+                binding.viewErrorInclude.errorView.isVisible = false
             }
             is LoadingState.Success -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
@@ -97,7 +97,7 @@ class DetailsSessionStatisticsFragment : Fragment(R.layout.fragment_home) {
                 binding.progressViewInclude.progressContainer.isVisible = false
 
                 if (result.cause is ErrorModelListItem.ErrorItem) {
-                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                    binding.viewErrorInclude.setErrorView(result.cause.errorModel)
                 }
             }
         }

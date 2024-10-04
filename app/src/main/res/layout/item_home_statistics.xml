@@ -12,6 +12,7 @@
         android:layout_gravity="center" />
 
     <include
+        android:id="@+id/recyclerViewInclude"
         layout="@layout/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

@@ -7,20 +7,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
-import kotlinx.android.synthetic.main.fragment_selected_user.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.*
+import robin.vitalij.fortniteassitant.common.extensions.observeToError
+import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
+import robin.vitalij.fortniteassitant.common.extensions.setToolbarTitle
+import robin.vitalij.fortniteassitant.common.extensions.setVisibility
+import robin.vitalij.fortniteassitant.common.extensions.showDialog
 import robin.vitalij.fortniteassitant.databinding.FragmentSelectedUserBinding
+import robin.vitalij.fortniteassitant.interfaces.ErrorController
+import robin.vitalij.fortniteassitant.interfaces.ProgressBarController
+import robin.vitalij.fortniteassitant.model.ErrorModel
 import robin.vitalij.fortniteassitant.model.comparison.PlayerModel
 import robin.vitalij.fortniteassitant.model.enums.ComparisonDataType
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.comparison.ComparisonActivity
 import robin.vitalij.fortniteassitant.ui.comparison.selected.listuser.adapter.SelectedListUserAdapter
 import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.ManyAccountActivity
@@ -28,7 +36,8 @@ import robin.vitalij.fortniteassitant.ui.subscription.SubscriptionActivity
 import javax.inject.Inject
 
 
-class SelectedListUserFragment : BaseFragment() {
+class SelectedListUserFragment : Fragment(R.layout.fragment_selected_user), ProgressBarController,
+    ErrorController {
 
     @Inject
     lateinit var viewModelFactory: SelectedListViewModelFactory
@@ -37,11 +46,13 @@ class SelectedListUserFragment : BaseFragment() {
 
     private var selectedListUserAdapter: SelectedListUserAdapter? = null
 
+    private lateinit var dataBinding: FragmentSelectedUserBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dataBinding: FragmentSelectedUserBinding =
+        dataBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_selected_user, container, false)
         dataBinding.lifecycleOwner = this@SelectedListUserFragment
         dataBinding.viewModel = viewModel
@@ -51,8 +62,7 @@ class SelectedListUserFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FortniteApplication.appComponent.inject(this)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(SelectedListViewModel::class.java).apply {
+        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)[SelectedListViewModel::class.java].apply {
                 observeToProgressBar(this@SelectedListUserFragment)
                 observeToError(this@SelectedListUserFragment)
             }
@@ -66,21 +76,26 @@ class SelectedListUserFragment : BaseFragment() {
 
         viewModel.data.observe(viewLifecycleOwner) {
             it?.let(::initAdapter)
-            comparisonButton.setVisibility(it.isNotEmpty())
+            dataBinding.comparisonButton.setVisibility(it.isNotEmpty())
         }
 
         viewModel.loadData()
 
         val itemTouchHelper = ItemTouchHelper(simpleCallback)
-        itemTouchHelper.attachToRecyclerView(recyclerView)
+        itemTouchHelper.attachToRecyclerView(dataBinding.recyclerView)
     }
 
     private fun setListener() {
-        comparisonButton.setOnClickListener {
+        dataBinding.viewErrorInclude.errorResolveButton.setOnClickListener {
+            viewModel.loadData()
+        }
+
+        dataBinding.comparisonButton.setOnClickListener {
             when {
                 viewModel.selectedSize < 2 -> {
                     context?.showDialog(R.string.comparison_no_players_selected_dialog_body)
                 }
+
                 viewModel.selectedSize == 2 -> {
                     startActivity(
                         ComparisonActivity.getComparisonActivityIntent(
@@ -88,6 +103,7 @@ class SelectedListUserFragment : BaseFragment() {
                         )
                     )
                 }
+
                 else -> {
                     if (viewModel.preferenceManager.getIsSubscription()) {
                         startActivity(ManyAccountActivity.getComparisonActivityIntent(context))
@@ -130,10 +146,10 @@ class SelectedListUserFragment : BaseFragment() {
                 }
             )
 
-            recyclerView.adapter = selectedListUserAdapter
+            dataBinding.recyclerView.adapter = selectedListUserAdapter
             selectedListUserAdapter?.setData(list)
 
-            recyclerView.run {
+            dataBinding.recyclerView.run {
                 layoutManager = LinearLayoutManager(context)
             }
         }
@@ -216,6 +232,18 @@ class SelectedListUserFragment : BaseFragment() {
                 )
             }
         }
+
+    override fun setError(errorModel: ErrorModel) {
+        dataBinding.viewErrorInclude.setErrorView(errorModel)
+    }
+
+    override fun hideError() {
+        dataBinding.viewErrorInclude.errorView.isVisible = false
+    }
+
+    override fun showOrHideProgressBar(show: Boolean) {
+        dataBinding.progressViewInclude.progressContainer.isVisible = show
+    }
 
     companion object {
 

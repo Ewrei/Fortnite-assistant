@@ -12,7 +12,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
@@ -46,6 +45,7 @@ class AchievementsFragment : Fragment(R.layout.fragment_recycler_view_with_toolb
         setListener()
         setNavigation()
         initializeRecyclerView()
+
 
         lifecycleScope.launch {
             viewModel.achievementsResult.collect {
@@ -81,11 +81,13 @@ class AchievementsFragment : Fragment(R.layout.fragment_recycler_view_with_toolb
                 binding.progressViewInclude.progressContainer.isVisible = true
                 binding.errorViewInclude.errorView.isVisible = false
             }
+
             is LoadingState.Success -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
                 achievementsAdapter.updateData(result.data)
                 binding.viewEmptyInclude.emptyView.isVisible = result.data.isEmpty()
             }
+
             is LoadingState.Error -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
                 if (result.cause is ErrorModelListItem.ErrorItem) {

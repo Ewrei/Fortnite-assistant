@@ -1,7 +1,6 @@
 package robin.vitalij.fortniteassitant.ui.users.adapter
 
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_user.view.*
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
 import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
@@ -16,8 +15,12 @@ class UsersHolder(
     fun bind(item: UserModel) {
         binding.profileImage.loadImage(item.userEntity.image)
         binding.profileName.text = item.userEntity.name
-        binding.lifetime.text = binding.root.context.getString(R.string.last_date_update, item.getLastData())
-        binding.matches.text = binding.root.context.getString(R.string.matches_format, item.userEntity.all?.overall?.getMatchesString())
+        binding.lifetime.text =
+            binding.root.context.getString(R.string.last_date_update, item.getLastData())
+        binding.matches.text = binding.root.context.getString(
+            R.string.matches_format,
+            item.userEntity.all?.overall?.getMatchesString()
+        )
 
         binding.wins.text = item.userEntity.all?.overall?.wins.getStringFormat()
         binding.winRate.text = item.userEntity.all?.overall?.winRate.getStringFormat("%")

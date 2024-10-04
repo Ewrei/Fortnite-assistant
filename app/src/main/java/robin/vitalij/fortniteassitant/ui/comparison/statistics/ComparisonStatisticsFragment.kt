@@ -4,15 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import robin.vitalij.fortniteassitant.FortniteApplication
+import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
 import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewBinding
+import robin.vitalij.fortniteassitant.interfaces.ErrorController
+import robin.vitalij.fortniteassitant.interfaces.ProgressBarController
+import robin.vitalij.fortniteassitant.model.ErrorModel
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.comparison.BATTLES_TYPE
 import robin.vitalij.fortniteassitant.ui.comparison.GAME_TYPE
 import robin.vitalij.fortniteassitant.ui.comparison.PLAYER_ONE
@@ -21,7 +27,8 @@ import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.Compariso
 import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel.ComparisonPlayer
 import javax.inject.Inject
 
-class ComparisonStatisticsFragment : BaseFragment() {
+class ComparisonStatisticsFragment : Fragment(R.layout.fragment_recycler_view), ErrorController,
+    ProgressBarController {
 
     @Inject
     lateinit var viewModelFactory: ComparisonStatisticsViewModelFactory
@@ -90,6 +97,18 @@ class ComparisonStatisticsFragment : BaseFragment() {
             (adapter as ComparisonStatisticsAdapter).setData(list)
             layoutManager = LinearLayoutManager(context)
         }
+    }
+
+    override fun setError(errorModel: ErrorModel) {
+        binding.viewErrorInclude.setErrorView(errorModel)
+    }
+
+    override fun hideError() {
+        binding.viewErrorInclude.errorView.isVisible = false
+    }
+
+    override fun showOrHideProgressBar(show: Boolean) {
+        binding.progressViewInclude.progressContainer.isVisible = show
     }
 
     companion object {

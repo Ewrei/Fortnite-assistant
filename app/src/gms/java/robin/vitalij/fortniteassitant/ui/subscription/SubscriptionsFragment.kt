@@ -8,19 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.fragment_subcriptions.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.DATE_PATTERN_YEAR_TIME
 import robin.vitalij.fortniteassitant.common.extensions.getDateStringFormat
 import robin.vitalij.fortniteassitant.databinding.FragmentSubcriptionsBinding
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import javax.inject.Inject
 
 
-class SubscriptionsFragment : BaseFragment() {
+class SubscriptionsFragment : Fragment(R.layout.fragment_subcriptions) {
 
     @Inject
     lateinit var viewModelFactory: SubscriptionsViewModelFactory
@@ -81,8 +80,8 @@ class SubscriptionsFragment : BaseFragment() {
     }
 
     private fun setListeners() {
-        closeImage.setOnClickListener { activity?.finish() }
-        watchClick.setOnClickListener { onDisplayButtonClicked({}) }
+        dataBinding.closeImage.setOnClickListener { activity?.finish() }
+        dataBinding.watchClick.setOnClickListener { onDisplayButtonClicked({}) }
     }
 
     private fun onDisplayButtonClicked(getAnWard: () -> Unit) {

@@ -10,9 +10,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.bottom_sheet_top.*
-import kotlinx.android.synthetic.main.layout_type_stats_group.*
-import kotlinx.android.synthetic.main.recycler_view.recyclerView
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.initBottomSheetInternal
@@ -42,12 +39,14 @@ class TopResultFragment : BottomSheetDialogFragment() {
 
     private var battlesType: BattlesType = BattlesType.OVERALL
 
+    private lateinit var dataBinding: BottomSheetTopBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         dialog?.initBottomSheetInternal()
-        val dataBinding =
+        dataBinding =
             DataBindingUtil.inflate<BottomSheetTopBinding>(
                 inflater,
                 R.layout.bottom_sheet_top,
@@ -90,7 +89,7 @@ class TopResultFragment : BottomSheetDialogFragment() {
     }
 
     private fun initAdapter(list: List<TopResult>) {
-        recyclerView.run {
+        dataBinding.recyclerView.run {
             adapter = TopResultAdapter {
                 topResultCallback?.checkTop(TopFullModel(it, gameType, battlesType))
                 dismiss()
@@ -115,25 +114,25 @@ class TopResultFragment : BottomSheetDialogFragment() {
     }
 
     private fun setListeners() {
-        typeBattlesSpinner.setItems(BattlesType.getTitles(requireContext()))
+        dataBinding.typeBattlesSpinner.setItems(BattlesType.getTitles(requireContext()))
 
-        typeBattlesSpinner.setOnItemSelectedListener { view, position, id, item ->
+        dataBinding.typeBattlesSpinner.setOnItemSelectedListener { view, position, id, item ->
             battlesType = BattlesType.values()[position]
         }
 
-        allStats.setOnClickListener {
+        dataBinding.topStatsGroup.allStats.setOnClickListener {
             gameType = GameType.ALL
         }
 
-        keyboardMouse.setOnClickListener {
+        dataBinding.topStatsGroup.keyboardMouse.setOnClickListener {
             gameType = GameType.KEYBOARD_MOUSE
         }
 
-        gamepad.setOnClickListener {
+        dataBinding.topStatsGroup.gamepad.setOnClickListener {
             gameType = GameType.GAMEPAD
         }
 
-        touch.setOnClickListener {
+        dataBinding.topStatsGroup.touch.setOnClickListener {
             gameType = GameType.TOUCH
         }
     }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.getStatusBarHeight
@@ -12,12 +13,11 @@ import robin.vitalij.fortniteassitant.common.extensions.intentView
 import robin.vitalij.fortniteassitant.common.extensions.setMarginTop
 import robin.vitalij.fortniteassitant.databinding.FragmentBasicRulesBinding
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
-import java.util.*
+import java.util.Calendar
 import javax.inject.Inject
 
 
-class BasicRulesFragment : BaseFragment() {
+class BasicRulesFragment : Fragment() {
 
     private lateinit var binding: FragmentBasicRulesBinding
 

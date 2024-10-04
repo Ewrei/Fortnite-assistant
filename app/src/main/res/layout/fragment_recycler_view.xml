@@ -18,7 +18,7 @@
         android:visibility="gone" />
 
     <include
-        android:id="@+id/errorViewInclude"
+        android:id="@+id/viewErrorInclude"
         layout="@layout/view_error"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

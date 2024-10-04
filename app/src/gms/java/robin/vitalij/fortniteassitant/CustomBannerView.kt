@@ -72,7 +72,7 @@ class CustomBannerView: LinearLayout {
     private fun initAdmodBanner(adUnitId: String) {
         if(!::bannerAdmodView.isInitialized) {
             bannerAdmodView = AdView(context)
-            bannerAdmodView.adSize = com.google.android.gms.ads.AdSize.SMART_BANNER
+            bannerAdmodView.setAdSize(com.google.android.gms.ads.AdSize.SMART_BANNER)
             bannerAdmodView.adUnitId = adUnitId
             bannerAdmodView.loadAd(adRequest)
             bannerAdmodView.adListener = object : AdListener() {

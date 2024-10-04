@@ -5,16 +5,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import robin.vitalij.fortniteassitant.FortniteApplication
+import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
 import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewBinding
+import robin.vitalij.fortniteassitant.interfaces.ErrorController
+import robin.vitalij.fortniteassitant.interfaces.ProgressBarController
+import robin.vitalij.fortniteassitant.model.ErrorModel
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.comparison.BATTLES_TYPE
 import robin.vitalij.fortniteassitant.ui.comparison.GAME_TYPE
 import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.statistics.adapter.ComparisonManyPlayerAdapter
@@ -22,7 +28,8 @@ import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.statist
 import javax.inject.Inject
 
 class ComparisonManyPlayersStatisticsFragment :
-    BaseFragment() {
+    Fragment(R.layout.fragment_recycler_view), ErrorController,
+    ProgressBarController {
 
     @Inject
     lateinit var viewModelFactory: ComparisonManyPlayersStatisticsViewModelFactory
@@ -46,11 +53,13 @@ class ComparisonManyPlayersStatisticsFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(ComparisonManyPlayersStatisticsViewModel::class.java).apply {
-                observeToProgressBar(this@ComparisonManyPlayersStatisticsFragment)
-                observeToError(this@ComparisonManyPlayersStatisticsFragment)
-            }
+        viewModel = ViewModelProvider(
+            viewModelStore,
+            viewModelFactory
+        )[ComparisonManyPlayersStatisticsViewModel::class.java].apply {
+            observeToProgressBar(this@ComparisonManyPlayersStatisticsFragment)
+            observeToError(this@ComparisonManyPlayersStatisticsFragment)
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -61,9 +70,9 @@ class ComparisonManyPlayersStatisticsFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.data.observe(viewLifecycleOwner, {
+        viewModel.data.observe(viewLifecycleOwner) {
             it.let(::initAdapter)
-        })
+        }
 
         arguments?.let {
             viewModel.battlesType = it.get(BATTLES_TYPE) as BattlesType
@@ -88,6 +97,18 @@ class ComparisonManyPlayersStatisticsFragment :
     fun loadGameType(gameType: GameType) {
         viewModel.gameType = gameType
         viewModel.loadData()
+    }
+
+    override fun setError(errorModel: ErrorModel) {
+        binding.viewErrorInclude.setErrorView(errorModel)
+    }
+
+    override fun hideError() {
+        binding.viewErrorInclude.errorView.isVisible = false
+    }
+
+    override fun showOrHideProgressBar(show: Boolean) {
+        binding.progressViewInclude.progressContainer.isVisible = show
     }
 
     companion object {

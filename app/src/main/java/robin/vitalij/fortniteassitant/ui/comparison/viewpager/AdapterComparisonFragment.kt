@@ -1,19 +1,22 @@
 package robin.vitalij.fortniteassitant.ui.comparison.viewpager
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.fragment_adapter_comparion.*
-import kotlinx.android.synthetic.main.layout_type_stats_group.*
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.databinding.FragmentAdapterComparionBinding
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.ComparisonDataType
 import robin.vitalij.fortniteassitant.model.enums.GameType
-import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseViewPagerAdapter
 import robin.vitalij.fortniteassitant.ui.comparison.COMPARISON_DATA_TYPE
 import robin.vitalij.fortniteassitant.ui.comparison.statistics.ComparisonStatisticsFragment
@@ -22,7 +25,7 @@ import javax.inject.Inject
 private const val PLAYER_ONE_ID = "player_one_id"
 private const val PLAYER_TWO_ID = "player_two_id"
 
-class AdapterComparisonFragment : BaseFragment() {
+class AdapterComparisonFragment : Fragment(R.layout.fragment_adapter_comparion) {
 
     @Inject
     lateinit var viewModelFactory: AdapterComparisonViewModelFactory
@@ -73,7 +76,7 @@ class AdapterComparisonFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewPager.offscreenPageLimit = 6
+        dataBinding.viewPager.offscreenPageLimit = 6
 
         arguments?.let {
             viewModel.loadData(it.getSerializable(COMPARISON_DATA_TYPE) as ComparisonDataType)
@@ -113,23 +116,23 @@ class AdapterComparisonFragment : BaseFragment() {
                 isSchedule = !isSchedule
                 favoriteMenuItem?.isSelected = isSchedule
 
-                ((viewPager.adapter as BaseViewPagerAdapter).getItem(0) as ComparisonStatisticsFragment).loadSchedule(
+                ((dataBinding.viewPager.adapter as BaseViewPagerAdapter).getItem(0) as ComparisonStatisticsFragment).loadSchedule(
                     isSchedule
                 )
-                ((viewPager.adapter as BaseViewPagerAdapter).getItem(1) as ComparisonStatisticsFragment).loadSchedule(
+                ((dataBinding.viewPager.adapter as BaseViewPagerAdapter).getItem(1) as ComparisonStatisticsFragment).loadSchedule(
                     isSchedule
                 )
 
-                ((viewPager.adapter as BaseViewPagerAdapter).getItem(2) as ComparisonStatisticsFragment).loadSchedule(
+                ((dataBinding.viewPager.adapter as BaseViewPagerAdapter).getItem(2) as ComparisonStatisticsFragment).loadSchedule(
                     isSchedule
                 )
-                ((viewPager.adapter as BaseViewPagerAdapter).getItem(3) as ComparisonStatisticsFragment).loadSchedule(
+                ((dataBinding.viewPager.adapter as BaseViewPagerAdapter).getItem(3) as ComparisonStatisticsFragment).loadSchedule(
                     isSchedule
                 )
-                ((viewPager.adapter as BaseViewPagerAdapter).getItem(4) as ComparisonStatisticsFragment).loadSchedule(
+                ((dataBinding.viewPager.adapter as BaseViewPagerAdapter).getItem(4) as ComparisonStatisticsFragment).loadSchedule(
                     isSchedule
                 )
-                ((viewPager.adapter as BaseViewPagerAdapter).getItem(5) as ComparisonStatisticsFragment).loadSchedule(
+                ((dataBinding.viewPager.adapter as BaseViewPagerAdapter).getItem(5) as ComparisonStatisticsFragment).loadSchedule(
                     isSchedule
                 )
             }
@@ -145,44 +148,44 @@ class AdapterComparisonFragment : BaseFragment() {
     }
 
     private fun setListeners() {
-        allStats.setOnClickListener {
-            ((viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
+        dataBinding.typeStatGroupInclude.allStats.setOnClickListener {
+            ((dataBinding.viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
                 (it as? ComparisonStatisticsFragment)?.loadGameType(
                     GameType.ALL
                 )
             })
         }
 
-        keyboardMouse.setOnClickListener {
-            ((viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
+        dataBinding.typeStatGroupInclude.keyboardMouse.setOnClickListener {
+            ((dataBinding.viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
                 (it as? ComparisonStatisticsFragment)?.loadGameType(
                     GameType.KEYBOARD_MOUSE
                 )
             })
         }
 
-        gamepad.setOnClickListener {
-            ((viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
+        dataBinding.typeStatGroupInclude.gamepad.setOnClickListener {
+            ((dataBinding.viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
                 (it as? ComparisonStatisticsFragment)?.loadGameType(
                     GameType.GAMEPAD
                 )
             })
         }
 
-        touch.setOnClickListener {
-            ((viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
+        dataBinding.typeStatGroupInclude.touch.setOnClickListener {
+            ((dataBinding.viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
                 (it as? ComparisonStatisticsFragment)?.loadGameType(GameType.TOUCH)
             })
         }
     }
 
     private fun saveSelectedTab() {
-        lastTab = viewPager.currentItem
+        lastTab = dataBinding.viewPager.currentItem
     }
 
     private fun restoreSelectedTab() {
         if (lastTab != DEFAULT_LAST_TAB_VALUE) {
-            viewPager.currentItem = lastTab
+            dataBinding.viewPager.currentItem = lastTab
         }
     }
 
@@ -242,7 +245,7 @@ class AdapterComparisonFragment : BaseFragment() {
                 ),
                 getString(R.string.ltm_battles)
             )
-            viewPager.adapter = pagerAdapter
+            dataBinding.viewPager.adapter = pagerAdapter
         }
     }
 

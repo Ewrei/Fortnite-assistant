@@ -1,17 +1,18 @@
 apply plugin: 'com.android.library'
 
 android {
-  compileSdkVersion 30
-  buildToolsVersion '28.0.3'
+  compileSdkVersion 34
   resourcePrefix 'ms__'
+
+  namespace "com.jaredrummler.materialspinner"
 
   defaultConfig {
     minSdkVersion 22
-    targetSdkVersion 30
+    targetSdkVersion 34
   }
 }
 
 dependencies {
-  implementation 'androidx.annotation:annotation:1.1.0'
+  implementation 'androidx.annotation:annotation:1.8.2'
   testImplementation 'junit:junit:4.13.1'
 }

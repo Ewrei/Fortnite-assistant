@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_splash.*
 import robin.vitalij.fortniteassitant.BuildConfig
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
@@ -52,7 +51,7 @@ class SplashActivity : AppCompatActivity() {
                                 val intent = if (it) {
                                     Intent(
                                         this@SplashActivity,
-                                         MainActivity::class.java
+                                        MainActivity::class.java
                                     )
                                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -70,7 +69,7 @@ class SplashActivity : AppCompatActivity() {
 
         val dataBinding: ActivitySplashBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_splash)
-        version.text = getString(R.string.version_format, BuildConfig.VERSION_NAME)
+        dataBinding.version.text = getString(R.string.version_format, BuildConfig.VERSION_NAME)
         dataBinding.lifecycleOwner = this
         dataBinding.viewModel = viewModel
 

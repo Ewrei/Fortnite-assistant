@@ -2,16 +2,15 @@ package robin.vitalij.fortniteassitant.ui.common
 
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import by.kirich1409.viewbindingdelegate.viewBinding
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.databinding.ActivityBaseBinding
+import robin.vitalij.fortniteassitant.databinding.FragmentAdapterDetailsSeasonBinding
 
-abstract class BaseActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_base)
-    }
+abstract class BaseActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity(contentLayoutId) {
 
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount <= 1) {

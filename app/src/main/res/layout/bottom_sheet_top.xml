@@ -23,6 +23,7 @@
             android:orientation="vertical">
 
             <include
+                android:id="@+id/topStatsGroup"
                 layout="@layout/layout_type_stats_group"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="@dimen/default_margin"

@@ -73,12 +73,14 @@
     </LinearLayout>
 
     <include
+        android:id="@+id/progressViewInclude"
         layout="@layout/progress_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center" />
 
     <include
+        android:id="@+id/errorViewInclude"
         layout="@layout/view_error"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -39,7 +39,7 @@ class InterstitialAdRepository @Inject constructor(
                     ad = null
                 }
 
-                override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+                override fun onAdFailedToShowFullScreenContent(adError: AdError) {
                     isAdsShow = false
                 }
 

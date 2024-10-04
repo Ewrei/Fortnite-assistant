@@ -2,15 +2,13 @@ package robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.viewpa
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.fragment_adapter_comparison_many_account.*
-import kotlinx.android.synthetic.main.layout_type_stats_group.*
+import by.kirich1409.viewbindingdelegate.viewBinding
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.databinding.FragmentAdapterComparisonManyAccountBinding
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.ui.common.BaseViewPagerAdapter
@@ -20,7 +18,7 @@ import javax.inject.Inject
 
 private const val DEFAULT_LAST_TAB_VALUE = Integer.MAX_VALUE
 
-class AdapterManyAccountFragment : Fragment() {
+class AdapterManyAccountFragment : Fragment(R.layout.fragment_adapter_comparison_many_account) {
 
     @Inject
     lateinit var viewModelFactory: AdapterManyAccountViewModelFactory
@@ -29,10 +27,7 @@ class AdapterManyAccountFragment : Fragment() {
 
     private lateinit var viewModel: AdapterManyAccountViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_adapter_comparison_many_account, container, false)
+    private val binding by viewBinding(FragmentAdapterComparisonManyAccountBinding::bind)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,10 +43,10 @@ class AdapterManyAccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewPager.offscreenPageLimit = 6
+        binding.viewPager.offscreenPageLimit = 6
 
         addTabs()
-        tabLayout.setupWithViewPager(viewPager)
+        binding.tabLayout.setupWithViewPager(binding.viewPager)
 
         setListeners()
     }
@@ -72,42 +67,42 @@ class AdapterManyAccountFragment : Fragment() {
     }
 
     private fun saveSelectedTab() {
-        lastTab = viewPager.currentItem
+        lastTab = binding.viewPager.currentItem
     }
 
     private fun restoreSelectedTab() {
         if (lastTab != DEFAULT_LAST_TAB_VALUE) {
-            viewPager.currentItem = lastTab
+            binding.viewPager.currentItem = lastTab
         }
     }
 
     private fun setListeners() {
-        allStats.setOnClickListener {
-            ((viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
+        binding.typeStatGroupInclude.allStats.setOnClickListener {
+            ((binding.viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
                 (it as? ComparisonManyPlayersStatisticsFragment)?.loadGameType(
                     GameType.ALL
                 )
             })
         }
 
-        keyboardMouse.setOnClickListener {
-            ((viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
+        binding.typeStatGroupInclude.keyboardMouse.setOnClickListener {
+            ((binding.viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
                 (it as? ComparisonManyPlayersStatisticsFragment)?.loadGameType(
                     GameType.KEYBOARD_MOUSE
                 )
             })
         }
 
-        gamepad.setOnClickListener {
-            ((viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
+        binding.typeStatGroupInclude.gamepad.setOnClickListener {
+            ((binding.viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
                 (it as? ComparisonManyPlayersStatisticsFragment)?.loadGameType(
                     GameType.GAMEPAD
                 )
             })
         }
 
-        touch.setOnClickListener {
-            ((viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
+        binding.typeStatGroupInclude.touch.setOnClickListener {
+            ((binding.viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
                 (it as? ComparisonManyPlayersStatisticsFragment)?.loadGameType(GameType.TOUCH)
             })
         }
@@ -160,7 +155,7 @@ class AdapterManyAccountFragment : Fragment() {
             )
         }
 
-        viewPager.adapter = pagerAdapter
+        binding.viewPager.adapter = pagerAdapter
     }
 
     companion object {
