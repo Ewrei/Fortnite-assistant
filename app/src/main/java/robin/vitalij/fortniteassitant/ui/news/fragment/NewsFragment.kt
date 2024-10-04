@@ -8,21 +8,19 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.setErrorView
 import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewBinding
+import robin.vitalij.fortniteassitant.interfaces.AdapterNewsCallback
 import robin.vitalij.fortniteassitant.model.ErrorModelListItem
 import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.NewsType
 import robin.vitalij.fortniteassitant.model.network.NewsModel
 import robin.vitalij.fortniteassitant.ui.news.fragment.adapter.NewsAdapter
-import robin.vitalij.fortniteassitant.ui.news.view_pager.AdapterNewsFragmentDirections
 import javax.inject.Inject
 
 
@@ -35,14 +33,11 @@ class NewsFragment : Fragment(R.layout.fragment_recycler_view) {
 
     private val binding by viewBinding(FragmentRecyclerViewBinding::bind)
 
+    private var adapterNewsCallback: AdapterNewsCallback? = null
+
     private val newsAdapter = NewsAdapter(
         onVideoClick = { videoUrl: String, videoName: String ->
-            findNavController().navigate(
-                AdapterNewsFragmentDirections.actionNavigationNewsToNavigationVideo(
-                    videoName,
-                    videoUrl
-                )
-            )
+            adapterNewsCallback?.onVideoClick(videoUrl, videoName)
         }
     )
 
@@ -94,11 +89,13 @@ class NewsFragment : Fragment(R.layout.fragment_recycler_view) {
                 binding.progressViewInclude.progressContainer.isVisible = true
                 binding.viewErrorInclude.errorView.isVisible = false
             }
+
             is LoadingState.Success -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
                 newsAdapter.updateData(result.data)
                 binding.viewEmptyInclude.emptyView.isVisible = result.data.isEmpty()
             }
+
             is LoadingState.Error -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
                 if (result.cause is ErrorModelListItem.ErrorItem) {
@@ -111,7 +108,8 @@ class NewsFragment : Fragment(R.layout.fragment_recycler_view) {
     companion object {
         private const val ARG_NEWS_TYPE = "arg_news_type"
 
-        fun newInstance(newsType: NewsType) = NewsFragment().apply {
+        fun newInstance(newsType: NewsType, adapterNewsCallback: AdapterNewsCallback) = NewsFragment().apply {
+            this.adapterNewsCallback = adapterNewsCallback
             arguments = bundleOf(ARG_NEWS_TYPE to newsType)
         }
     }

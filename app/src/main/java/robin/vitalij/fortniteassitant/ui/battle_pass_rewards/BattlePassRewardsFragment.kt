@@ -6,30 +6,29 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.common.extensions.setErrorView
 import robin.vitalij.fortniteassitant.databinding.FragmentBattlePassRewardsBinding
-import robin.vitalij.fortniteassitant.interfaces.ErrorController
-import robin.vitalij.fortniteassitant.interfaces.ProgressBarController
-import robin.vitalij.fortniteassitant.model.ErrorModel
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
+import robin.vitalij.fortniteassitant.model.battle_pass_reward.BattlesPassRewardsModel
 import robin.vitalij.fortniteassitant.model.battle_pass_reward.SeasonModel
 import robin.vitalij.fortniteassitant.model.enums.BattlePassSortedType
 import robin.vitalij.fortniteassitant.ui.battle_pass_rewards.adapter.BattlesPassRewardsAdapter
@@ -38,16 +37,14 @@ import robin.vitalij.fortniteassitant.utils.view.CustomTypeFaceSpan
 import javax.inject.Inject
 
 
-class BattlePassRewardsFragment : Fragment(R.layout.fragment_battle_pass_rewards),
-    ProgressBarController,
-    ErrorController {
+class BattlePassRewardsFragment : Fragment(R.layout.fragment_battle_pass_rewards) {
 
     @Inject
     lateinit var viewModelFactory: BattlePassRewardsViewModelFactory
 
-    private lateinit var viewModel: BattlePassRewardsViewModel
+    private val viewModel: BattlePassRewardsViewModel by viewModels { viewModelFactory }
 
-    private lateinit var binding: FragmentBattlePassRewardsBinding
+    private val binding by viewBinding(FragmentBattlePassRewardsBinding::bind)
 
     private val battlesPassRewardsAdapter = BattlesPassRewardsAdapter {
         BattlePassRewardsResultFragment.show(
@@ -63,37 +60,26 @@ class BattlePassRewardsFragment : Fragment(R.layout.fragment_battle_pass_rewards
         FortniteApplication.appComponent.inject(this)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentBattlePassRewardsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(BattlePassRewardsViewModel::class.java).apply {
-                observeToProgressBar(this@BattlePassRewardsFragment)
-                observeToError(this@BattlePassRewardsFragment)
-            }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
-            battlesPassRewardsAdapter.updateData(it)
-        }
-
-        viewModel.mutableSeasonLiveData.observe(viewLifecycleOwner) {
-            binding.seasonSpinner.setItems(it)
-        }
-
         setNavigation()
         setListeners()
         setToolbarMenu()
         initializeRecyclerView()
+
+        lifecycleScope.launch {
+            viewModel.filterResult.collect {
+                handleBattlesPassRewardsResult(it)
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.seasonsResult.collect {
+                binding.seasonSpinner.setItems(it)
+            }
+        }
+
+        viewModel.loadData()
     }
 
     private fun setToolbarMenu() {
@@ -114,17 +100,17 @@ class BattlePassRewardsFragment : Fragment(R.layout.fragment_battle_pass_rewards
             popup.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.action_all -> {
-                        viewModel.sortedBattlesPassReward(BattlePassSortedType.ALL)
+                        viewModel.filterBattlesPassReward(BattlePassSortedType.ALL)
                         true
                     }
 
                     R.id.action_paid -> {
-                        viewModel.sortedBattlesPassReward(BattlePassSortedType.PAID)
+                        viewModel.filterBattlesPassReward(BattlePassSortedType.PAID)
                         true
                     }
 
                     R.id.action_free -> {
-                        viewModel.sortedBattlesPassReward(BattlePassSortedType.FREE)
+                        viewModel.filterBattlesPassReward(BattlePassSortedType.FREE)
                         true
                     }
                 }
@@ -158,11 +144,12 @@ class BattlePassRewardsFragment : Fragment(R.layout.fragment_battle_pass_rewards
 
     private fun setListeners() {
         binding.seasonSpinner.setOnItemSelectedListener { _, _, _, item ->
-            viewModel.changeSeason((item as SeasonModel).season.toString())
+            viewModel.currentSeason = (item as SeasonModel).season.toString()
+            viewModel.loadData()
         }
 
         binding.viewErrorInclude.errorResolveButton.setOnClickListener {
-            viewModel.changeSeason("current")
+            viewModel.loadData()
         }
     }
 
@@ -175,9 +162,7 @@ class BattlePassRewardsFragment : Fragment(R.layout.fragment_battle_pass_rewards
     private fun initializeRecyclerView() {
         binding.recyclerViewInclude.recyclerView.run {
             adapter = battlesPassRewardsAdapter
-            layoutManager = GridLayoutManager(
-                activity, MAX_SPAN_COUNT
-            ).apply {
+            layoutManager = GridLayoutManager(activity, MAX_SPAN_COUNT).apply {
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int) = BATTLES_PASS_REWARDS_SPAN_COUNT
                 }
@@ -185,16 +170,31 @@ class BattlePassRewardsFragment : Fragment(R.layout.fragment_battle_pass_rewards
         }
     }
 
-    override fun setError(errorModel: ErrorModel) {
-        binding.viewErrorInclude.setErrorView(errorModel)
-    }
+    private fun handleBattlesPassRewardsResult(result: LoadingState<List<BattlesPassRewardsModel>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.viewErrorInclude.errorView.isVisible = false
+                binding.recyclerViewInclude.recyclerView.isVisible = false
+            }
 
-    override fun hideError() {
-        binding.viewErrorInclude.errorView.isVisible = false
-    }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                binding.recyclerViewInclude.recyclerView.isVisible = true
 
-    override fun showOrHideProgressBar(show: Boolean) {
-        binding.progressViewInclude.progressContainer.isVisible = show
+                battlesPassRewardsAdapter.submitList(result.data)
+                binding.viewEmptyInclude.emptyView.isVisible = result.data.isEmpty()
+            }
+
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                binding.recyclerViewInclude.recyclerView.isVisible = false
+
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.viewErrorInclude.setErrorView(result.cause.errorModel)
+                }
+            }
+        }
     }
 
     companion object {

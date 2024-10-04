@@ -15,6 +15,8 @@ import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
 import robin.vitalij.fortniteassitant.common.extensions.initBottomSheetInternal
 import robin.vitalij.fortniteassitant.databinding.BottomSheetBattlesPassRewardsBinding
 import robin.vitalij.fortniteassitant.model.network.Reward
+import robin.vitalij.fortniteassitant.ui.bottomsheet.battle_pass_rewards.BattlePassRewardsResultViewModel
+import robin.vitalij.fortniteassitant.ui.bottomsheet.battle_pass_rewards.BattlePassRewardsResultViewModelFactory
 import javax.inject.Inject
 
 const val BOTTOM_SHEET_MARGIN_TOP = 100

@@ -14,6 +14,7 @@ import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.setToolbarTitle
 import robin.vitalij.fortniteassitant.databinding.ActivityVideoViewBinding
 
@@ -21,7 +22,7 @@ import robin.vitalij.fortniteassitant.databinding.ActivityVideoViewBinding
 const val VIDEO_URL = "video_url"
 const val VIDEO_TITLE = "video_title"
 
-class VideoActivity : AppCompatActivity() {
+class VideoActivity : AppCompatActivity(R.layout.activity_video_view) {
 
     private var simpleExoPlayer: ExoPlayer? = null
 

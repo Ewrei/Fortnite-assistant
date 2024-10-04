@@ -141,7 +141,7 @@ class ComparisonSelectedFragment : Fragment(R.layout.fragment_comparion), ErrorC
                     })
             }
             layoutManager = LinearLayoutManager(context)
-            (adapter as SearchAdapter).setData(list)
+            (adapter as SearchAdapter).submitList(list)
         }
     }
 

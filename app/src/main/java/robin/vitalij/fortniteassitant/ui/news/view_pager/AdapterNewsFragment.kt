@@ -12,12 +12,13 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.databinding.FragmentAdapterShopBinding
+import robin.vitalij.fortniteassitant.interfaces.AdapterNewsCallback
 import robin.vitalij.fortniteassitant.model.enums.NewsType
 import robin.vitalij.fortniteassitant.ui.common.BaseViewPagerAdapter
 import robin.vitalij.fortniteassitant.ui.news.fragment.NewsFragment
 import javax.inject.Inject
 
-class AdapterNewsFragment : Fragment(R.layout.fragment_adapter_shop) {
+class AdapterNewsFragment : Fragment(R.layout.fragment_adapter_shop), AdapterNewsCallback {
 
     @Inject
     lateinit var viewModelFactory: AdapterNewsViewModelFactory
@@ -52,6 +53,15 @@ class AdapterNewsFragment : Fragment(R.layout.fragment_adapter_shop) {
         saveSelectedTab()
     }
 
+    override fun onVideoClick(videoUrl: String, videoName: String) {
+        findNavController().navigate(
+            AdapterNewsFragmentDirections.actionNavigationNewsToNavigationVideo(
+                videoName,
+                videoUrl
+            )
+        )
+    }
+
     private fun saveSelectedTab() {
         lastTab = binding.viewPager.currentItem
     }
@@ -65,17 +75,17 @@ class AdapterNewsFragment : Fragment(R.layout.fragment_adapter_shop) {
     private fun addTabs() {
         val pagerAdapter = BaseViewPagerAdapter(childFragmentManager)
         pagerAdapter.addFragment(
-            NewsFragment.newInstance(NewsType.BR_NEWS),
+            NewsFragment.newInstance(NewsType.BR_NEWS, this),
             getString(NewsType.BR_NEWS.getTitleRes())
         )
 
         pagerAdapter.addFragment(
-            NewsFragment.newInstance(NewsType.STW),
+            NewsFragment.newInstance(NewsType.STW, this),
             getString(NewsType.STW.getTitleRes())
         )
 
         pagerAdapter.addFragment(
-            NewsFragment.newInstance(NewsType.CREATIVE_NEWS),
+            NewsFragment.newInstance(NewsType.CREATIVE_NEWS, this),
             getString(NewsType.CREATIVE_NEWS.getTitleRes())
         )
 

@@ -10,10 +10,10 @@ import robin.vitalij.fortniteassitant.ui.ads_gift_fever.BasicRulesFragment
 import robin.vitalij.fortniteassitant.ui.banners.BannersFragment
 import robin.vitalij.fortniteassitant.ui.battle_pass_rewards.BattlePassRewardsFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.banner.BannerResultFragment
-import robin.vitalij.fortniteassitant.ui.bottomsheet.battle_pass_rewards.BattlePassRewardsResultFragment
+import robin.vitalij.fortniteassitant.ui.bottomsheet.battlepassrewards.BattlePassRewardsResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.CosmeticResultFragment
-import robin.vitalij.fortniteassitant.ui.bottomsheet.current_shop.CurrentShopResultFragment
+import robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.CurrentShopResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.fish.FishResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.input_account_id.InputAccountIdResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
@@ -22,9 +22,9 @@ import robin.vitalij.fortniteassitant.ui.bottomsheet.upcomingshop.UpcomingShopRe
 import robin.vitalij.fortniteassitant.ui.bottomsheet.user.UserResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.vehicles.VehiclesResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.weapon.WeaponResultFragment
-import robin.vitalij.fortniteassitant.ui.charts_type.ChartsTypeFragment
-import robin.vitalij.fortniteassitant.ui.charts_type.view_pager.AdapterChartsTypeFragment
+import robin.vitalij.fortniteassitant.ui.chartlist.ChartsTypeFragment
 import robin.vitalij.fortniteassitant.ui.charts.ChartsFragment
+import robin.vitalij.fortniteassitant.ui.charts_type.view_pager.AdapterChartsTypeFragment
 import robin.vitalij.fortniteassitant.ui.comparison.selected.ComparisonSelectedFragment
 import robin.vitalij.fortniteassitant.ui.comparison.selected.listuser.SelectedListUserFragment
 import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.statistics.ComparisonManyPlayersStatisticsFragment

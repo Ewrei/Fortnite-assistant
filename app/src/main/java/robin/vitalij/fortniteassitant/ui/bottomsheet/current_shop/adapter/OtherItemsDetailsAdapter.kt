@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.databinding.ItemOtherItemsDetailsBinding
 import robin.vitalij.fortniteassitant.model.network.shop.GrantedModel
+import robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.adapter.OtherItemsDetailsHolder
 
 internal class OtherItemsDetailsAdapter(
     private val widthPixels: Int
