@@ -22,6 +22,7 @@ import robin.vitalij.fortniteassitant.model.ErrorModelListItem
 import robin.vitalij.fortniteassitant.model.FullHomeModel
 import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.actions.HomeActions
+import robin.vitalij.fortniteassitant.ui.charts_type.view_pager.AdapterChartsTypeFragment
 import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment.Companion.ARG_DETAIL_STATISTICS
 import robin.vitalij.fortniteassitant.ui.home.adapter.HomeAdapter
 import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment
@@ -97,7 +98,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             is HomeActions.OpenParameterList -> {
                 findNavController().navigate(
                     R.id.navigation_charts_type,
-                    bundleOf(ARG_DETAIL_STATISTICS to viewModel.detailsStatistics)
+                    bundleOf(AdapterChartsTypeFragment.ARG_DETAIL_STATISTICS to viewModel.detailsStatistics)
                 )
             }
             is HomeActions.OpenDetailsStatistics -> {

@@ -133,18 +133,16 @@ class CosmeticResultFragment : BottomSheetDialogFragment() {
         private const val ARG_IS_COSMETIC_NEW = "arg_is_cosmetic_new"
 
         fun show(
-            fragmentManager: FragmentManager?,
+            fragmentManager: FragmentManager,
             cosmeticId: String,
             isCosmeticNew: Boolean
         ) {
-            fragmentManager?.let {
-                CosmeticResultFragment().apply {
-                    arguments = bundleOf(
-                        ARG_COSMETIC_ID to cosmeticId,
-                        ARG_IS_COSMETIC_NEW to isCosmeticNew
-                    )
-                }.show(it, TAG)
-            }
+            CosmeticResultFragment().apply {
+                arguments = bundleOf(
+                    ARG_COSMETIC_ID to cosmeticId,
+                    ARG_IS_COSMETIC_NEW to isCosmeticNew
+                )
+            }.show(fragmentManager, TAG)
         }
     }
 }

@@ -1,8 +1,13 @@
 package robin.vitalij.fortniteassitant.repository.network
 
-import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import robin.vitalij.fortniteassitant.api.FortniteRequestsIOApi
+import robin.vitalij.fortniteassitant.common.extensions.getErrorModel
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.AvatarType
 import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
 import robin.vitalij.fortniteassitant.utils.mapper.SearchUserMapper
@@ -12,16 +17,31 @@ class GetSearchUserRepository @Inject constructor(
     private val fortniteRequestsIOApi: FortniteRequestsIOApi
 ) {
 
-    fun getSearch(username: String, strict: Boolean) =
-        if (!strict) {
-            fortniteRequestsIOApi.getSearch(username, strict).subscribeOn(Schedulers.io()).flatMap {
-                return@flatMap Single.just(SearchUserMapper().transform(it))
+    fun getSearch(username: String, strict: Boolean) = if (!strict) {
+        getSearchWithStrict(username, strict)
+    } else {
+        getSearchWithoutStrict(username)
+    }
+
+    private fun getSearchWithStrict(
+        username: String,
+        strict: Boolean
+    ): Flow<LoadingState<List<SearchSteamUser>>> = flow {
+        emit(LoadingState.Loading)
+        kotlin.runCatching { fortniteRequestsIOApi.getSearch(username, strict) }
+            .onSuccess {
+                emit(LoadingState.Success(SearchUserMapper().transform(it)))
             }
-        } else {
-            fortniteRequestsIOApi.getSearch(username).subscribeOn(Schedulers.io()).flatMap {
-                return@flatMap Single.just(
-                    if (it.result) {
-                        arrayListOf<SearchSteamUser>().apply {
+            .onFailure { emit(LoadingState.Error(ErrorModelListItem.ErrorItem(it.getErrorModel()))) }
+    }.flowOn(Dispatchers.IO)
+
+    private fun getSearchWithoutStrict(username: String): Flow<LoadingState<List<SearchSteamUser>>> =
+        flow {
+            emit(LoadingState.Loading)
+            kotlin.runCatching { fortniteRequestsIOApi.getSearch(username) }
+                .onSuccess {
+                    emit(LoadingState.Success(if (it.result) {
+                        mutableListOf<SearchSteamUser>().apply {
                             add(
                                 SearchSteamUser(
                                     accountId = it.accountId,
@@ -32,9 +52,9 @@ class GetSearchUserRepository @Inject constructor(
                         }
                     } else {
                         arrayListOf()
-                    }
-                )
-            }
-        }
+                    }))
+                }
+                .onFailure { emit(LoadingState.Error(ErrorModelListItem.ErrorItem(it.getErrorModel()))) }
+        }.flowOn(Dispatchers.IO)
 
 }

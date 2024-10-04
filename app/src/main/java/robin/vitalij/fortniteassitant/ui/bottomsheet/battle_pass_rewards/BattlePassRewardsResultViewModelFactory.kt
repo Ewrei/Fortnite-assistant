@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.bottomsheet.battlepassrewards
+package robin.vitalij.fortniteassitant.ui.bottomsheet.battle_pass_rewards
 
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
 import javax.inject.Inject

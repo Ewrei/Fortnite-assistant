@@ -12,8 +12,7 @@ class AchievementsViewModelFactory @Inject constructor(
 
     override fun createViewModel(): AchievementsViewModel {
         return viewModel ?: run {
-            val model =
-                AchievementsViewModel(achievementRepository)
+            val model = AchievementsViewModel(achievementRepository)
             viewModel = model
             return model
         }

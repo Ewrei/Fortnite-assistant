@@ -2,22 +2,13 @@ package robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import robin.vitalij.fortniteassitant.databinding.ItemContactUsBinding
 import robin.vitalij.fortniteassitant.model.ContactUsModel
 
 class ContactUsAdapter(val onClick: (contactUsModel: ContactUsModel) -> Unit) :
-    RecyclerView.Adapter<ContactUsHolder>() {
-
-    private val items = mutableListOf<ContactUsModel>()
-
-    fun updateData(data: List<ContactUsModel>) {
-        if (items != data) {
-            items.clear()
-            items.addAll(data)
-            notifyDataSetChanged()
-        }
-    }
+    ListAdapter<ContactUsModel, ContactUsHolder>(ContactUsComparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ContactUsHolder(
         ItemContactUsBinding.inflate(
@@ -28,12 +19,20 @@ class ContactUsAdapter(val onClick: (contactUsModel: ContactUsModel) -> Unit) :
     )
 
     override fun onBindViewHolder(holder: ContactUsHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(getItem(position))
         holder.itemView.setOnClickListener {
-            onClick(items[position])
+            onClick(getItem(position))
         }
     }
 
-    override fun getItemCount() = items.size
+    object ContactUsComparator : DiffUtil.ItemCallback<ContactUsModel>() {
+
+        override fun areItemsTheSame(oldItem: ContactUsModel, newItem: ContactUsModel) =
+            oldItem.url == newItem.url
+
+        override fun areContentsTheSame(oldItem: ContactUsModel, newItem: ContactUsModel) =
+            oldItem == newItem
+
+    }
 
 }

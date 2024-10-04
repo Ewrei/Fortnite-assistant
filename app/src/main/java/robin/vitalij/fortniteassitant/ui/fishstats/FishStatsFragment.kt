@@ -2,43 +2,52 @@ package robin.vitalij.fortniteassitant.ui.fishstats
 
 import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.android.synthetic.main.fragment_battle_pass_rewards.*
+import kotlinx.android.synthetic.main.recycler_view.*
+import kotlinx.android.synthetic.main.toolbar_center_title.*
+import kotlinx.android.synthetic.main.view_error.*
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.observeToEmpty
 import robin.vitalij.fortniteassitant.common.extensions.observeToError
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
-import robin.vitalij.fortniteassitant.common.extensions.setErrorView
 import robin.vitalij.fortniteassitant.databinding.FragmentBattlePassRewardsBinding
-import robin.vitalij.fortniteassitant.interfaces.ErrorController
-import robin.vitalij.fortniteassitant.interfaces.ProgressBarController
-import robin.vitalij.fortniteassitant.model.ErrorModel
 import robin.vitalij.fortniteassitant.model.battle_pass_reward.SeasonModel
 import robin.vitalij.fortniteassitant.model.network.FishStatsModel
 import robin.vitalij.fortniteassitant.ui.bottomsheet.fish.FishResultFragment
+import robin.vitalij.fortniteassitant.ui.common.BaseFragment
 import robin.vitalij.fortniteassitant.ui.fishstats.adapter.FishStatsAdapter
 import javax.inject.Inject
 
 private const val MAX_SPAN_COUNT = 3
 private const val FISH_SPAN_COUNT = 1
 
-class FishStatsFragment : Fragment(R.layout.fragment_battle_pass_rewards), ProgressBarController,
-    ErrorController {
+class FishStatsFragment : BaseFragment() {
 
     @Inject
     lateinit var viewModelFactory: FishStatsViewModelFactory
 
     private lateinit var viewModel: FishStatsViewModel
 
-    private val binding by viewBinding(FragmentBattlePassRewardsBinding::bind)
+    private var _binding: FragmentBattlePassRewardsBinding? = null
+
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentBattlePassRewardsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,8 +79,13 @@ class FishStatsFragment : Fragment(R.layout.fragment_battle_pass_rewards), Progr
         setNavigation()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun setListener() {
-        binding.viewErrorInclude.errorResolveButton.setOnClickListener {
+        setErrorResolveButtonClick {
             viewModel.loadData()
         }
 
@@ -101,17 +115,5 @@ class FishStatsFragment : Fragment(R.layout.fragment_battle_pass_rewards), Progr
                 }
             }
         }
-    }
-
-    override fun setError(errorModel: ErrorModel) {
-        binding.viewErrorInclude.setErrorView(errorModel)
-    }
-
-    override fun hideError() {
-        binding.viewErrorInclude.errorView.isVisible = false
-    }
-
-    override fun showOrHideProgressBar(show: Boolean) {
-        binding.progressViewInclude.progressContainer.isVisible = show
     }
 }

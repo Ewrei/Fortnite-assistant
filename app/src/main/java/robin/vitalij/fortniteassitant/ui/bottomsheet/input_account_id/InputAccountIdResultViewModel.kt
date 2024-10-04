@@ -1,5 +1,5 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.input_account_id
 
-import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
+import androidx.lifecycle.ViewModel
 
-class InputAccountIdResultViewModel : BaseViewModel()
+class InputAccountIdResultViewModel : ViewModel()

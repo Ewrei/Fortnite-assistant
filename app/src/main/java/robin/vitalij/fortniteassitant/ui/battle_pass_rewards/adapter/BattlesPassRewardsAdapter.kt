@@ -2,23 +2,14 @@ package robin.vitalij.fortniteassitant.ui.battle_pass_rewards.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import robin.vitalij.fortniteassitant.databinding.ItemBattlesPassRewardsBinding
 import robin.vitalij.fortniteassitant.model.battle_pass_reward.BattlesPassRewardsModel
 
 class BattlesPassRewardsAdapter(
     private val onClick: (battlesPassRewardsModel: BattlesPassRewardsModel) -> Unit
-) : RecyclerView.Adapter<BattlesPassRewardsHolder>() {
-
-    private val items = mutableListOf<BattlesPassRewardsModel>()
-
-    fun updateData(data: List<BattlesPassRewardsModel>) {
-        if (items != data) {
-            items.clear()
-            items.addAll(data)
-            notifyDataSetChanged()
-        }
-    }
+) : ListAdapter<BattlesPassRewardsModel, BattlesPassRewardsHolder>(BATTLES_PASS_REWARDS_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = BattlesPassRewardsHolder(
         ItemBattlesPassRewardsBinding.inflate(
@@ -29,14 +20,27 @@ class BattlesPassRewardsAdapter(
     )
 
     override fun onBindViewHolder(holder: BattlesPassRewardsHolder, position: Int) {
-        holder.bind(items[position])
+        val currentItem = getItem(position)
+        holder.bind(currentItem)
         holder.itemView.setOnClickListener {
-            onClick(items[position])
+            onClick(currentItem)
         }
     }
 
-    override fun getItemCount() = items.size
+    override fun getItemId(position: Int) = getItem(position).id
 
-    override fun getItemId(position: Int) = items[position].id
+    companion object {
+        private val BATTLES_PASS_REWARDS_COMPARATOR =
+            object : DiffUtil.ItemCallback<BattlesPassRewardsModel>() {
+                override fun areItemsTheSame(
+                    oldItem: BattlesPassRewardsModel, newItem: BattlesPassRewardsModel
+                ): Boolean = oldItem.id == newItem.id
+
+                override fun areContentsTheSame(
+                    oldItem: BattlesPassRewardsModel,
+                    newItem: BattlesPassRewardsModel
+                ): Boolean = oldItem == newItem
+            }
+    }
 
 }

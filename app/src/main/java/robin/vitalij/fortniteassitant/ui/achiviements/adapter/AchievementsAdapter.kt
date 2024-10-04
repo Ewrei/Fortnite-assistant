@@ -2,21 +2,13 @@ package robin.vitalij.fortniteassitant.ui.achiviements.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import robin.vitalij.fortniteassitant.databinding.ItemAchievementBinding
 import robin.vitalij.fortniteassitant.db.entity.AchievementEntity
 
-class AchievementsAdapter : RecyclerView.Adapter<AchievementsHolder>() {
-
-    private val items = mutableListOf<AchievementEntity>()
-
-    fun updateData(data: List<AchievementEntity>) {
-        if (items != data) {
-            items.clear()
-            items.addAll(data)
-            notifyDataSetChanged()
-        }
-    }
+class AchievementsAdapter :
+    ListAdapter<AchievementEntity, AchievementsHolder>(ACHIEVEMENT_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = AchievementsHolder(
         ItemAchievementBinding.inflate(
@@ -27,9 +19,20 @@ class AchievementsAdapter : RecyclerView.Adapter<AchievementsHolder>() {
     )
 
     override fun onBindViewHolder(holder: AchievementsHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount() = items.size
+    companion object {
+        private val ACHIEVEMENT_COMPARATOR = object : DiffUtil.ItemCallback<AchievementEntity>() {
+            override fun areItemsTheSame(
+                oldItem: AchievementEntity, newItem: AchievementEntity
+            ): Boolean = oldItem.id == newItem.id
+
+            override fun areContentsTheSame(
+                oldItem: AchievementEntity,
+                newItem: AchievementEntity
+            ): Boolean = oldItem == newItem
+        }
+    }
 
 }

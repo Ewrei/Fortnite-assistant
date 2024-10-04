@@ -1,43 +1,36 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.contactus
 
-import androidx.lifecycle.MutableLiveData
-import robin.vitalij.fortniteassitant.R
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.model.ContactUsModel
-import robin.vitalij.fortniteassitant.model.enums.ConfigType
-import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
-import robin.vitalij.fortniteassitant.utils.ResourceProvider
+import robin.vitalij.fortniteassitant.model.LoadingState
+import robin.vitalij.fortniteassitant.repository.ContactUsRepository
 
-class ContactUsResultViewModel(private val resourceProvider: ResourceProvider) : BaseViewModel() {
+class ContactUsResultViewModel(
+    private val contactUsRepository: ContactUsRepository
+) : ViewModel() {
 
-    var mutableLiveData = MutableLiveData<List<ContactUsModel>>()
+    var isContactUs: Boolean = false
 
-    fun loadData(isContactUs: Boolean) {
-        if(isContactUs) {
-            mutableLiveData.value = getContacts()
-        } else {
-            mutableLiveData.value = getFoundAccountId()
+    private val contactUsState =
+        MutableStateFlow<LoadingState<List<ContactUsModel>>>(LoadingState.Loading)
+
+    val contactUsResult: StateFlow<LoadingState<List<ContactUsModel>>> = contactUsState
+
+    private var job: Job? = null
+
+    fun loadData() {
+        job?.cancel()
+        job = viewModelScope.launch {
+            contactUsRepository.getData(isContactUs).collect { loadingState ->
+                contactUsState.value = loadingState
+            }
         }
-    }
-
-    private fun getContacts(): List<ContactUsModel> {
-        val list = mutableListOf<ContactUsModel>()
-        list.add(ContactUsModel(resourceProvider.getString(R.string.gmail), ConfigType.GMAIL))
-        list.add(
-            ContactUsModel(
-                resourceProvider.getString(R.string.telegram_url),
-                ConfigType.TELEGRAM
-            )
-        )
-        list.add(ContactUsModel(resourceProvider.getString(R.string.vk_url), ConfigType.VK))
-        return list
-    }
-
-    private fun getFoundAccountId(): List<ContactUsModel> {
-        val list = mutableListOf<ContactUsModel>()
-        list.add(ContactUsModel(resourceProvider.getString(R.string.found_account_id_in_epic_games_url), ConfigType.FOUND_ACCOUNT_ID_IN_EPIC_GAMES))
-        list.add(ContactUsModel(resourceProvider.getString(R.string.found_account_id_in_fortnite_url), ConfigType.FOUND_ACCOUNT_ID_IN_FORTNITE))
-
-        return list
     }
 
 }

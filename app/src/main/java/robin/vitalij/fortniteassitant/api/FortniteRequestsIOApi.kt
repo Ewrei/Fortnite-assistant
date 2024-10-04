@@ -32,15 +32,13 @@ private const val SEASON_QUERY = "season"
 interface FortniteRequestsIOApi {
 
     @GET("/$VERSION_FIRST_PATCH/$LOOKUP_PATCH")
-    fun getSearch(
+    suspend fun getSearch(
         @Query(USERNAME_QUERY) username: String,
         @Query(STRICT_QUERY) strict: Boolean
-    ): Single<SearchResponse>
+    ): SearchResponse
 
     @GET("/$VERSION_FIRST_PATCH/$LOOKUP_PATCH")
-    fun getSearch(
-        @Query(USERNAME_QUERY) username: String
-    ): Single<SearchUserModel>
+    suspend fun getSearch(@Query(USERNAME_QUERY) username: String): SearchUserModel
 
     @GET("/$VERSION_SECOND_PATCH/$SHOP_PATCH")
     suspend fun getCurrentShop(@Query(LANG_QUERY) language: String): ShopNewResponse
@@ -49,10 +47,10 @@ interface FortniteRequestsIOApi {
     suspend fun getUpcomingShop(@Query(LANG_QUERY) language: String): ShopUpcomingResponse
 
     @GET("/$VERSION_FIRST_PATCH/$BATTLE_PASS_PATCH")
-    fun getBattlesPassRewards(
+    suspend fun getBattlesPassRewards(
         @Query(LANG_QUERY) language: String,
         @Query(SEASON_QUERY) season: String
-    ): Single<BattlePassRewardsResponse>
+    ): BattlePassRewardsResponse
 
     @GET("/$VERSION_FIRST_PATCH/$LOOT_PATCH/$LIST_PATCH")
     suspend fun getWeapons(@Query(LANG_QUERY) language: String): WeaponResponse
@@ -61,10 +59,10 @@ interface FortniteRequestsIOApi {
     suspend fun getFish(@Query(LANG_QUERY) language: String): FishResponse
 
     @GET("/$VERSION_FIRST_PATCH/$STATS_PATCH/$FISH_PATCH")
-    fun getFishStats(
+    suspend fun getFishStats(
         @Query(LANG_QUERY) language: String,
         @Query(ACCOUNT_ID_PATCH) accountId: String
-    ): Single<FishStatsResponse>
+    ): FishStatsResponse
 
     @GET("/$VERSION_FIRST_PATCH/$ACHIEVEMENTS_PATCH")
     suspend fun getAchievements(@Query(LANG_QUERY) language: String): AchievementResponse

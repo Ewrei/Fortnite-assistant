@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.chartlist.adapter
+package robin.vitalij.fortniteassitant.ui.charts_type.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.databinding.ItemChartsTypeBinding

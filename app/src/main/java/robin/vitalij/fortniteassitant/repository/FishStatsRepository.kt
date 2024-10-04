@@ -1,7 +1,14 @@
 package robin.vitalij.fortniteassitant.repository
 
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import robin.vitalij.fortniteassitant.api.FortniteRequestsIOApi
+import robin.vitalij.fortniteassitant.common.extensions.getErrorModel
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
+import robin.vitalij.fortniteassitant.model.network.SeasonStatsFishModel
 import robin.vitalij.fortniteassitant.utils.LocaleUtils
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -12,7 +19,13 @@ class FishStatsRepository @Inject constructor(
     private val fortniteRequestsIOApi: FortniteRequestsIOApi
 ) {
 
-    fun loadData(accountId: String) =
-        fortniteRequestsIOApi.getFishStats(LocaleUtils.locale, accountId)
-            .subscribeOn(Schedulers.io())
+    fun getFishStats(accountId: String): Flow<LoadingState<List<SeasonStatsFishModel>>> = flow {
+        emit(LoadingState.Loading)
+        kotlin.runCatching { fortniteRequestsIOApi.getFishStats(LocaleUtils.locale, accountId) }
+            .onSuccess {
+                emit(LoadingState.Success(it.seasonStats.sortedByDescending { it.season }))
+            }
+            .onFailure { emit(LoadingState.Error(ErrorModelListItem.ErrorItem(it.getErrorModel()))) }
+    }.flowOn(Dispatchers.IO)
+
 }

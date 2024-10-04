@@ -1,5 +1,6 @@
 package robin.vitalij.fortniteassitant.ui.achiviements
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -9,11 +10,10 @@ import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.db.entity.AchievementEntity
 import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.repository.AchievementRepository
-import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 
 class AchievementsViewModel(
     private val achievementRepository: AchievementRepository
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val achievementsState =
         MutableStateFlow<LoadingState<List<AchievementEntity>>>(LoadingState.Loading)

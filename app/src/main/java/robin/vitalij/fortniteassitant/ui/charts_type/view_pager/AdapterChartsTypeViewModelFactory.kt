@@ -1,4 +1,4 @@
-package robin.vitalij.fortniteassitant.ui.chartlist.view_pager
+package robin.vitalij.fortniteassitant.ui.charts_type.view_pager
 
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
 import javax.inject.Inject

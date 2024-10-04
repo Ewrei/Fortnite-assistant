@@ -15,7 +15,7 @@ class Paid(
     @SerializedName("rewards") val rewards: List<Reward>
 )
 
-class Reward(
+data class Reward(
     @SerializedName("id") val id: String,
     @SerializedName("tier") val tier: Int,
     @SerializedName("type") val type: String,

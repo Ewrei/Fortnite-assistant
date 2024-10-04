@@ -1,11 +1,15 @@
 package robin.vitalij.fortniteassitant.ui.search
 
-import androidx.lifecycle.MutableLiveData
-import io.reactivex.android.schedulers.AndroidSchedulers
-import robin.vitalij.fortniteassitant.R
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.interfaces.SaveUserCallback
-import robin.vitalij.fortniteassitant.model.EmptyTextModel
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.FirebaseDynamicLinkType
+import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
 import robin.vitalij.fortniteassitant.repository.FirebaseDynamicLinkRepository
@@ -19,9 +23,10 @@ class SearchUserViewModel(
     private val getSearchUserRepository: GetSearchUserRepository,
     private val saveUserRepository: SaveUserRepository,
     private val firebaseDynamicLinkRepository: FirebaseDynamicLinkRepository,
-    val preferenceManager: PreferenceManager,
-    private val resourceProvider: ResourceProvider
+    val preferenceManager: PreferenceManager
 ) : BaseViewModel() {
+
+    var profileResultType: ProfileResultType = ProfileResultType.FULL
 
     lateinit var openFirebaseDynamicLink: (
         firebaseDynamicLinkType: FirebaseDynamicLinkType,
@@ -30,30 +35,28 @@ class SearchUserViewModel(
 
     lateinit var openMainScreen: () -> Unit
 
-    var mutableLiveData = MutableLiveData<List<SearchSteamUser>>()
+    var strict: Boolean = true
 
-    var strict: Boolean =  true
+    private var job: Job? = null
+
+    private val fullFishStatsState =
+        MutableStateFlow<LoadingState<List<SearchSteamUser>>>(LoadingState.Success(emptyList()))
+
+    val seasonsResult: StateFlow<LoadingState<List<SearchSteamUser>>> =
+        fullFishStatsState
 
     fun searchPlayer(searchName: String) {
-        getSearchUserRepository.getSearch(searchName, strict)
-            .observeOn(AndroidSchedulers.mainThread())
-            .let(::setupProgressShow)
-            .subscribe({
-                mutableLiveData.value = it
+        job?.cancel()
+        job = viewModelScope.launch {
+            getSearchUserRepository.getSearch(searchName, strict)
+                .collect { loadingState ->
+                    fullFishStatsState.value = loadingState
+                }
+        }
+    }
 
-                emptyText(
-                    EmptyTextModel(
-                        it.isEmpty(),
-                        resourceProvider.getString(
-                            R.string.empty_search_user
-                        )
-                    )
-                )
-
-            }, {
-                it.printStackTrace()
-            })
-            .let(disposables::add)
+    fun clearSearch() {
+        fullFishStatsState.value = LoadingState.Success(emptyList())
     }
 
     fun saveUser(csGoFullProfileResponse: FortniteProfileResponse) {

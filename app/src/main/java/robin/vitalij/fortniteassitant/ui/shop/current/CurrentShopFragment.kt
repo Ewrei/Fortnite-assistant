@@ -18,7 +18,7 @@ import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewBinding
 import robin.vitalij.fortniteassitant.model.ErrorModelListItem
 import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.network.shop.ShopAdapterItem
-import robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.CurrentShopResultFragment
+import robin.vitalij.fortniteassitant.ui.bottomsheet.current_shop.CurrentShopResultFragment
 import robin.vitalij.fortniteassitant.ui.shop.current.header_adapter.HeaderShopAdapter
 import javax.inject.Inject
 

@@ -7,15 +7,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.setFullScreen
+import robin.vitalij.fortniteassitant.databinding.ActivityBaseNoToolbarBinding
 
 class BasicRulesActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityBaseNoToolbarBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_base_no_toolbar)
+
+        binding = ActivityBaseNoToolbarBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         if (savedInstanceState == null) {
-            replaceFragment(BasicRulesFragment.newInstance())
+            addFragment(BasicRulesFragment.newInstance())
         }
 
         window?.setFullScreen(true)
@@ -34,10 +39,10 @@ class BasicRulesActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 
-    private fun replaceFragment(fragment: Fragment) {
+    private fun addFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, fragment, fragment.javaClass.simpleName)
+            .add(R.id.container, fragment, fragment.javaClass.simpleName)
             .commit()
     }
 

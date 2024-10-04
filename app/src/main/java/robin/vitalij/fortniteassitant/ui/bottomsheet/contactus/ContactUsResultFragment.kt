@@ -1,19 +1,28 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.contactus
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.common.extensions.intentGmail
 import robin.vitalij.fortniteassitant.common.extensions.intentUrl
 import robin.vitalij.fortniteassitant.common.extensions.intentVk
-import robin.vitalij.fortniteassitant.databinding.BottomSheetRecyclerviewBinding
+import robin.vitalij.fortniteassitant.common.extensions.setErrorView
+import robin.vitalij.fortniteassitant.databinding.BottomSheetMvvmBinding
+import robin.vitalij.fortniteassitant.model.ContactUsModel
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.ConfigType
 import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.adapter.ContactUsAdapter
 import robin.vitalij.fortniteassitant.ui.web.WebActivity
@@ -24,66 +33,108 @@ class ContactUsResultFragment : BottomSheetDialogFragment() {
     @Inject
     lateinit var viewModelFactory: ContactUsResultViewModelFactory
 
-    private lateinit var viewModel: ContactUsResultViewModel
+    private val viewModel: ContactUsResultViewModel by viewModels { viewModelFactory }
 
-    private lateinit var binding: BottomSheetRecyclerviewBinding
+    private var _binding: BottomSheetMvvmBinding? = null
+
+    private val binding get() = _binding!!
 
     private val contactUsAdapter = ContactUsAdapter {
-        when (it.configType) {
-            ConfigType.GMAIL -> {
-                activity?.intentGmail(it.url)
-            }
-            ConfigType.VK -> {
-                activity?.intentVk(it.url)
-            }
-            ConfigType.FOUND_ACCOUNT_ID_IN_EPIC_GAMES, ConfigType.FOUND_ACCOUNT_ID_IN_FORTNITE -> {
-                startActivity(
-                    WebActivity.newInstance(
-                        context,
-                        it.url,
-                        getString(it.configType.getNameRes())
-                    )
-                )
-            }
-            else -> {
-                activity?.intentUrl(it.url)
-            }
-        }
+        handleContactUs(it)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        FortniteApplication.appComponent.inject(this)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = BottomSheetRecyclerviewBinding.inflate(layoutInflater)
+        _binding = BottomSheetMvvmBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        FortniteApplication.appComponent.inject(this)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(ContactUsResultViewModel::class.java)
+        arguments?.let {
+            viewModel.isContactUs = it.getBoolean(ARG_IS_CONTACT_US)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        arguments?.let {
-            viewModel.loadData(it.getBoolean(ARG_IS_CONTACT_US))
-        }
-
-        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
-            contactUsAdapter.updateData(it)
-        }
-
         initializeRecyclerView()
+        setListener()
+
+        lifecycleScope.launch {
+            viewModel.contactUsResult.collect {
+                handleContactUsResult(it)
+            }
+        }
+
+        viewModel.loadData()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun setListener() {
+        binding.errorViewInclude.errorResolveButton.setOnClickListener {
+            viewModel.loadData()
+        }
     }
 
     private fun initializeRecyclerView() {
-        binding.recyclerView.run {
+        binding.recyclerViewInclude.recyclerView.run {
             adapter = contactUsAdapter
             layoutManager = LinearLayoutManager(context)
+        }
+    }
+
+    private fun handleContactUsResult(result: LoadingState<List<ContactUsModel>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+                binding.errorViewInclude.errorView.isVisible = false
+            }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                contactUsAdapter.submitList(result.data)
+            }
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.errorViewInclude.setErrorView(result.cause.errorModel)
+                }
+            }
+        }
+    }
+
+    private fun handleContactUs(contactUsModel: ContactUsModel) {
+        when (contactUsModel.configType) {
+            ConfigType.GMAIL -> {
+                activity?.intentGmail(contactUsModel.url)
+            }
+            ConfigType.VK -> {
+                activity?.intentVk(contactUsModel.url)
+            }
+            ConfigType.FOUND_ACCOUNT_ID_IN_EPIC_GAMES, ConfigType.FOUND_ACCOUNT_ID_IN_FORTNITE -> {
+                startActivity(
+                    WebActivity.newInstance(
+                        context,
+                        contactUsModel.url,
+                        getString(contactUsModel.configType.getNameRes())
+                    )
+                )
+            }
+            else -> {
+                activity?.intentUrl(contactUsModel.url)
+            }
         }
     }
 

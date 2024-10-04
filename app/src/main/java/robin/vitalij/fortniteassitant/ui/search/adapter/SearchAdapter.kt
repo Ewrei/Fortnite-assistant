@@ -3,19 +3,13 @@ package robin.vitalij.fortniteassitant.ui.search.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
 
-internal class SearchAdapter(private val onClick: (accountId: SearchSteamUser) -> Unit) :
-    RecyclerView.Adapter<SearchHolder>() {
-
-    private val items = mutableListOf<SearchSteamUser>()
-
-    fun setData(data: List<SearchSteamUser>) {
-        items.clear()
-        items.addAll(data)
-    }
+class SearchAdapter(private val onClick: (accountId: SearchSteamUser) -> Unit) :
+    ListAdapter<SearchSteamUser, SearchHolder>(SEARCH_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = SearchHolder(
         DataBindingUtil.inflate(
@@ -27,8 +21,21 @@ internal class SearchAdapter(private val onClick: (accountId: SearchSteamUser) -
     )
 
     override fun onBindViewHolder(holder: SearchHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount() = items.size
+    companion object {
+        private val SEARCH_COMPARATOR = object : DiffUtil.ItemCallback<SearchSteamUser>() {
+            override fun areItemsTheSame(
+                oldItem: SearchSteamUser, newItem: SearchSteamUser
+            ): Boolean = oldItem.accountId == newItem.accountId
+
+            override fun areContentsTheSame(
+                oldItem: SearchSteamUser,
+                newItem: SearchSteamUser
+            ): Boolean = oldItem == newItem
+        }
+
+    }
+
 }

@@ -1,12 +1,10 @@
-package robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.adapter
+package robin.vitalij.fortniteassitant.ui.bottomsheet.current_shop.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.databinding.ItemOtherItemsDetailsBinding
 import robin.vitalij.fortniteassitant.model.network.shop.GrantedModel
-import robin.vitalij.fortniteassitant.model.network.shop.OtherItemsDetails
 
 internal class OtherItemsDetailsAdapter(
     private val widthPixels: Int
@@ -20,9 +18,8 @@ internal class OtherItemsDetailsAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = OtherItemsDetailsHolder(
-        DataBindingUtil.inflate(
+        ItemOtherItemsDetailsBinding.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_other_items_details,
             parent,
             false
         ), widthPixels
