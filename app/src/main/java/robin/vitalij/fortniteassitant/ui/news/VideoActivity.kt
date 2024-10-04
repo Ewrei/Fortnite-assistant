@@ -1,12 +1,11 @@
 package robin.vitalij.fortniteassitant.ui.news
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -18,15 +17,13 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.setToolbarTitle
 import robin.vitalij.fortniteassitant.databinding.ActivityVideoViewBinding
 
-
-const val VIDEO_URL = "video_url"
-const val VIDEO_TITLE = "video_title"
-
 class VideoActivity : AppCompatActivity(R.layout.activity_video_view) {
 
     private var simpleExoPlayer: ExoPlayer? = null
 
     private val binding by viewBinding(ActivityVideoViewBinding::bind)
+
+    private val args: VideoActivityArgs by navArgs()
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,7 +62,7 @@ class VideoActivity : AppCompatActivity(R.layout.activity_video_view) {
     private fun setToolbar() {
         setSupportActionBar(binding.toolbarInclude.toolbar)
         enableBackButton()
-        setToolbarTitle(intent?.getStringExtra(VIDEO_TITLE) ?: "")
+        setToolbarTitle(intent?.getStringExtra(args.argVideoName) ?: "")
     }
 
     private fun enableBackButton() {
@@ -83,7 +80,7 @@ class VideoActivity : AppCompatActivity(R.layout.activity_video_view) {
         try {
             val dataSourceFactory = DefaultHttpDataSource.Factory()
             val mediaSource: MediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
-                .createMediaSource(MediaItem.fromUri(Uri.parse(intent?.getStringExtra(VIDEO_URL))))
+                .createMediaSource(MediaItem.fromUri(Uri.parse(args.argVideoUrl)))
 
             binding.storyDisplayVideo.player = simpleExoPlayer
 
@@ -93,13 +90,5 @@ class VideoActivity : AppCompatActivity(R.layout.activity_video_view) {
         } catch (e: Exception) {
             // Handle exception if necessary
         }
-    }
-
-    companion object {
-        fun newInstance(context: Context?, url: String, title: String) =
-            Intent(context, VideoActivity::class.java)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                .putExtra(VIDEO_URL, url)
-                .putExtra(VIDEO_TITLE, title)
     }
 }

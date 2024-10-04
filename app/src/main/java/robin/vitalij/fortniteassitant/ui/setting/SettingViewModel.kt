@@ -8,7 +8,6 @@ import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.db.entity.UserEntity
 import robin.vitalij.fortniteassitant.interfaces.SaveUserCallback
@@ -18,14 +17,12 @@ import robin.vitalij.fortniteassitant.repository.db.UserRepository
 import robin.vitalij.fortniteassitant.repository.network.GetUserRepository
 import robin.vitalij.fortniteassitant.repository.network.SaveUserRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
-import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 class SettingViewModel(
     private val userRepository: UserRepository,
     private val saveUserRepository: SaveUserRepository,
     private val getUserRepository: GetUserRepository,
-    private val preferenceManager: PreferenceManager,
-    private val resourceProvider: ResourceProvider
+    private val preferenceManager: PreferenceManager
 ) : ViewModel() {
 
     lateinit var openDialogError: (titleError: String) -> Unit

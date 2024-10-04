@@ -16,8 +16,6 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.dynamiclinks.ktx.shortLinkAsync
 import com.google.firebase.ktx.Firebase
-import com.kaopiz.kprogresshud.KProgressHUD
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
@@ -42,10 +40,6 @@ class SettingFragment : Fragment(R.layout.fragment_setting) {
     private val viewModel: SettingViewModel by viewModels { viewModelFactory }
 
     private val binding by viewBinding(FragmentSettingBinding::bind)
-
-    private val spinner: KProgressHUD by lazy {
-        KProgressHUD.create(context)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,6 +76,7 @@ class SettingFragment : Fragment(R.layout.fragment_setting) {
                 binding.progressViewInclude.progressContainer.isVisible = true
                 binding.errorViewInclude.errorView.isVisible = false
             }
+
             is LoadingState.Success -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
                 binding.profileImage.loadImage(result.data.avatar)
@@ -89,6 +84,7 @@ class SettingFragment : Fragment(R.layout.fragment_setting) {
                 binding.lastUpdate.text =
                     getString(R.string.last_date_update, result.data.getLastUpdate())
             }
+
             is LoadingState.Error -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
                 if (result.cause is ErrorModelListItem.ErrorItem) {

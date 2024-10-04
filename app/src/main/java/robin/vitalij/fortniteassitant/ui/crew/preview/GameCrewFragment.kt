@@ -13,7 +13,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
@@ -23,7 +22,6 @@ import robin.vitalij.fortniteassitant.model.ErrorModelListItem
 import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.network.CrewModel
 import robin.vitalij.fortniteassitant.ui.crew.preview.adapter.GameCrewAdapter
-import robin.vitalij.fortniteassitant.ui.news.VideoActivity
 import javax.inject.Inject
 
 class GameCrewFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) {
@@ -45,7 +43,12 @@ class GameCrewFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) 
             )
         )
     }, onVideoClick = { videoUrl: String, videoName: String ->
-        startActivity(VideoActivity.newInstance(context, videoUrl, videoName))
+        findNavController().navigate(
+            GameCrewFragmentDirections.actionNavigationGameCrewToNavigationVideo(
+                videoName,
+                videoUrl
+            )
+        )
     })
 
     override fun onAttach(context: Context) {
@@ -101,6 +104,7 @@ class GameCrewFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) 
                 binding.progressViewInclude.progressContainer.isVisible = true
                 binding.errorViewInclude.errorView.isVisible = false
             }
+
             is LoadingState.Success -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
                 binding.viewEmptyInclude.emptyView.isVisible = result.data.isEmpty()
@@ -114,6 +118,7 @@ class GameCrewFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) 
                     recyclerViewState = null
                 }
             }
+
             is LoadingState.Error -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
                 if (result.cause is ErrorModelListItem.ErrorItem) {

@@ -139,6 +139,12 @@
         <action
             android:id="@+id/action_navigation_game_crew_to_navigation_crew_details"
             app:destination="@id/navigation_crew_details" />
+
+        <action
+            android:id="@+id/action_navigation_game_crew_to_navigation_video"
+            app:destination="@id/navigation_video" />
+
+
     </fragment>
 
     <fragment

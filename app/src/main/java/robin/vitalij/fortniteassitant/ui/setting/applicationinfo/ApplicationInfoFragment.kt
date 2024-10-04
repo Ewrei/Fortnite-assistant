@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -14,14 +13,8 @@ import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.databinding.FragmentApplicationInfoBinding
 import robin.vitalij.fortniteassitant.ui.web.WebActivity
-import javax.inject.Inject
 
 class ApplicationInfoFragment : Fragment(R.layout.fragment_application_info) {
-
-    @Inject
-    lateinit var viewModelFactory: ApplicationInfoViewModelFactory
-
-    private val viewModel: ApplicationInfoViewModel by viewModels { viewModelFactory }
 
     private val binding by viewBinding(FragmentApplicationInfoBinding::bind)
 

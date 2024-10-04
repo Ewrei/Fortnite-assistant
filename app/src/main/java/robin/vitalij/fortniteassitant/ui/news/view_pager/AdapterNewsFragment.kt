@@ -15,6 +15,7 @@ import robin.vitalij.fortniteassitant.databinding.FragmentAdapterShopBinding
 import robin.vitalij.fortniteassitant.interfaces.AdapterNewsCallback
 import robin.vitalij.fortniteassitant.model.enums.NewsType
 import robin.vitalij.fortniteassitant.ui.common.BaseViewPagerAdapter
+import robin.vitalij.fortniteassitant.ui.news.VideoActivity
 import robin.vitalij.fortniteassitant.ui.news.fragment.NewsFragment
 import javax.inject.Inject
 

@@ -5,15 +5,13 @@ import robin.vitalij.fortniteassitant.repository.network.GetUserRepository
 import robin.vitalij.fortniteassitant.repository.network.SaveUserRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModelFactory
-import robin.vitalij.fortniteassitant.utils.ResourceProvider
 import javax.inject.Inject
 
 class SettingViewModelFactory @Inject constructor(
     private val userRepository: UserRepository,
     private val saveUserRepository: SaveUserRepository,
     private val getUserRepository: GetUserRepository,
-    private val preferenceManager: PreferenceManager,
-    private val resourceProvider: ResourceProvider
+    private val preferenceManager: PreferenceManager
 ) : BaseViewModelFactory<SettingViewModel>(SettingViewModel::class.java) {
 
     private var viewModel: SettingViewModel? = null
@@ -24,7 +22,7 @@ class SettingViewModelFactory @Inject constructor(
                 userRepository,
                 saveUserRepository,
                 getUserRepository,
-                preferenceManager, resourceProvider
+                preferenceManager
             )
             viewModel = model
             return model
