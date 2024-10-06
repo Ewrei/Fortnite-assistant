@@ -19,10 +19,7 @@ import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.ChartsType
 import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.ui.chartlist.ChartsTypeFragment
-import robin.vitalij.fortniteassitant.ui.charts.ChartsFragment
 import robin.vitalij.fortniteassitant.ui.common.BaseViewPagerAdapter
-import robin.vitalij.fortniteassitant.ui.comparison.BATTLES_TYPE
-import robin.vitalij.fortniteassitant.ui.comparison.GAME_TYPE
 import robin.vitalij.fortniteassitant.utils.view.GameBattlesAdapter
 import javax.inject.Inject
 
@@ -74,11 +71,13 @@ class AdapterChartsTypeFragment : Fragment(R.layout.fragment_adapter_details_sta
         battlesType: BattlesType,
         gameType: GameType,
     ) {
-        findNavController().navigate(R.id.navigation_charts, Bundle().apply {
-            putSerializable(ChartsFragment.ARG_CHARTS_TYPE, chartsType)
-            putSerializable(BATTLES_TYPE, battlesType)
-            putSerializable(GAME_TYPE, gameType)
-        })
+        findNavController().navigate(
+            AdapterChartsTypeFragmentDirections.actionChartsTypeFragmentToChartsFragment(
+                chartsType,
+                battlesType,
+                gameType
+            )
+        )
     }
 
     private fun saveSelectedTab() {
