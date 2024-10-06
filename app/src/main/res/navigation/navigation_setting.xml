@@ -169,11 +169,19 @@
         android:id="@+id/navigation_vehicles"
         android:name="robin.vitalij.fortniteassitant.ui.vehicles.VehiclesFragment"
         android:label="@string/vehicles" />
+
     <fragment
         android:id="@+id/navigation_png_read_details"
         android:name="robin.vitalij.fortniteassitant.ui.pngread.PngReadDetailsFragment"
         tools:layout="@layout/fragment_png_read"
-        android:label="" />
+        android:label="" >
+        <argument
+            android:name="arg_image_url"
+            app:argType="string" />
+        <argument
+            android:name="arg_title"
+            app:argType="string" />
+    </fragment>
 
     <activity
         android:id="@+id/navigation_video"

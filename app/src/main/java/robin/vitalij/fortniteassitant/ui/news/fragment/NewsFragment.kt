@@ -92,7 +92,7 @@ class NewsFragment : Fragment(R.layout.fragment_recycler_view) {
 
             is LoadingState.Success -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
-                newsAdapter.updateData(result.data)
+                newsAdapter.submitList(result.data)
                 binding.viewEmptyInclude.emptyView.isVisible = result.data.isEmpty()
             }
 
@@ -108,10 +108,11 @@ class NewsFragment : Fragment(R.layout.fragment_recycler_view) {
     companion object {
         private const val ARG_NEWS_TYPE = "arg_news_type"
 
-        fun newInstance(newsType: NewsType, adapterNewsCallback: AdapterNewsCallback) = NewsFragment().apply {
-            this.adapterNewsCallback = adapterNewsCallback
-            arguments = bundleOf(ARG_NEWS_TYPE to newsType)
-        }
+        fun newInstance(newsType: NewsType, adapterNewsCallback: AdapterNewsCallback) =
+            NewsFragment().apply {
+                this.adapterNewsCallback = adapterNewsCallback
+                arguments = bundleOf(ARG_NEWS_TYPE to newsType)
+            }
     }
 
 }

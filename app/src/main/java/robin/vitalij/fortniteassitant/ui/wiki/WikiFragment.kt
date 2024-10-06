@@ -13,7 +13,6 @@ import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.setSafeOnClickListener
 import robin.vitalij.fortniteassitant.databinding.FragmentWikiBinding
-import robin.vitalij.fortniteassitant.ui.pngread.PngReadDetailsFragment
 import javax.inject.Inject
 
 
@@ -77,10 +76,12 @@ class WikiFragment : Fragment(R.layout.fragment_wiki) {
         }
 
         binding.currentMap.setSafeOnClickListener {
-            findNavController().navigate(R.id.navigation_png_read_details, Bundle().apply {
-                putString(PngReadDetailsFragment.ARG_IMAGE_URL, getString(R.string.current_map_url))
-                putString(PngReadDetailsFragment.ARG_TITLE, getString(R.string.current_map))
-            })
+            findNavController().navigate(
+                WikiFragmentDirections.actionNavigationWikiToNavigationPngReadDetails(
+                    getString(R.string.current_map_url),
+                    getString(R.string.current_map)
+                )
+            )
         }
     }
 }

@@ -9,7 +9,7 @@ class NewsResponse(
     @SerializedName("news") val news: List<NewsModel>
 )
 
-class NewsModel(
+data class NewsModel(
     @SerializedName("title") val title: String,
     @SerializedName("tabTitle") val tabTitle: String,
     @SerializedName("date") val date: String,

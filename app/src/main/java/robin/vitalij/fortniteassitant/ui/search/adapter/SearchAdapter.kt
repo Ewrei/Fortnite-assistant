@@ -2,19 +2,17 @@ package robin.vitalij.fortniteassitant.ui.search.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.databinding.ItemSearchBinding
 import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
 
 class SearchAdapter(private val onClick: (accountId: SearchSteamUser) -> Unit) :
     ListAdapter<SearchSteamUser, SearchHolder>(SEARCH_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = SearchHolder(
-        DataBindingUtil.inflate(
+        ItemSearchBinding.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_search,
             parent,
             false
         ), onClick
@@ -35,7 +33,6 @@ class SearchAdapter(private val onClick: (accountId: SearchSteamUser) -> Unit) :
                 newItem: SearchSteamUser
             ): Boolean = oldItem == newItem
         }
-
     }
 
 }

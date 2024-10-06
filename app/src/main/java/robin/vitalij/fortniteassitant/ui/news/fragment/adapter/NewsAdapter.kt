@@ -2,23 +2,13 @@ package robin.vitalij.fortniteassitant.ui.news.fragment.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import robin.vitalij.fortniteassitant.databinding.ItemNewsBinding
 import robin.vitalij.fortniteassitant.model.network.NewsModel
 
-internal class NewsAdapter(
-    private val onVideoClick: (videoUrl: String, videoName: String) -> Unit
-) : RecyclerView.Adapter<NewsHolder>() {
-
-    private val items = mutableListOf<NewsModel>()
-
-    fun updateData(data: List<NewsModel>) {
-        if (items != data) {
-            items.clear()
-            items.addAll(data)
-            notifyDataSetChanged()
-        }
-    }
+class NewsAdapter(private val onVideoClick: (videoUrl: String, videoName: String) -> Unit) :
+    ListAdapter<NewsModel, NewsHolder>(ACHIEVEMENT_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = NewsHolder(
         ItemNewsBinding.inflate(
@@ -29,9 +19,20 @@ internal class NewsAdapter(
     )
 
     override fun onBindViewHolder(holder: NewsHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount() = items.size
+    companion object {
+        private val ACHIEVEMENT_COMPARATOR = object : DiffUtil.ItemCallback<NewsModel>() {
+            override fun areItemsTheSame(
+                oldItem: NewsModel, newItem: NewsModel
+            ): Boolean = oldItem.date == newItem.date
+
+            override fun areContentsTheSame(
+                oldItem: NewsModel,
+                newItem: NewsModel
+            ): Boolean = oldItem == newItem
+        }
+    }
 
 }

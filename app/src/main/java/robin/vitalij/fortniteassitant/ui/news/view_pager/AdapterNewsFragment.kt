@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -15,16 +14,9 @@ import robin.vitalij.fortniteassitant.databinding.FragmentAdapterShopBinding
 import robin.vitalij.fortniteassitant.interfaces.AdapterNewsCallback
 import robin.vitalij.fortniteassitant.model.enums.NewsType
 import robin.vitalij.fortniteassitant.ui.common.BaseViewPagerAdapter
-import robin.vitalij.fortniteassitant.ui.news.VideoActivity
 import robin.vitalij.fortniteassitant.ui.news.fragment.NewsFragment
-import javax.inject.Inject
 
 class AdapterNewsFragment : Fragment(R.layout.fragment_adapter_shop), AdapterNewsCallback {
-
-    @Inject
-    lateinit var viewModelFactory: AdapterNewsViewModelFactory
-
-    private val viewModel: AdapterNewsViewModel by viewModels { viewModelFactory }
 
     private val binding by viewBinding(FragmentAdapterShopBinding::bind)
 
