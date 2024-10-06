@@ -1,34 +1,20 @@
 package robin.vitalij.fortniteassitant.ui.wiki
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
-import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.setSafeOnClickListener
 import robin.vitalij.fortniteassitant.databinding.FragmentWikiBinding
-import javax.inject.Inject
 
 
 class WikiFragment : Fragment(R.layout.fragment_wiki) {
 
-    @Inject
-    lateinit var viewModelFactory: WikiViewModelFactory
-
-    private val viewModel: WikiViewModel by viewModels { viewModelFactory }
-
     private val binding by viewBinding(FragmentWikiBinding::bind)
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        FortniteApplication.appComponent.inject(this)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -1,45 +1,24 @@
 package robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.viewpager
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import by.kirich1409.viewbindingdelegate.viewBinding
-import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.databinding.FragmentAdapterComparisonManyAccountBinding
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.ui.common.BaseViewPagerAdapter
 import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.statistics.ComparisonManyPlayersStatisticsFragment
-import javax.inject.Inject
 
 
 private const val DEFAULT_LAST_TAB_VALUE = Integer.MAX_VALUE
 
 class AdapterManyAccountFragment : Fragment(R.layout.fragment_adapter_comparison_many_account) {
 
-    @Inject
-    lateinit var viewModelFactory: AdapterManyAccountViewModelFactory
-
     private var lastTab: Int = DEFAULT_LAST_TAB_VALUE
 
-    private lateinit var viewModel: AdapterManyAccountViewModel
-
     private val binding by viewBinding(FragmentAdapterComparisonManyAccountBinding::bind)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(AdapterManyAccountViewModel::class.java)
-
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        FortniteApplication.appComponent.inject(this)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

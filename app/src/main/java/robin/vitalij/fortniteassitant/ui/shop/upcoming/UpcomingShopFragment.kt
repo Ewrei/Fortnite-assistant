@@ -48,7 +48,7 @@ class UpcomingShopFragment : Fragment(R.layout.fragment_recycler_view) {
         setListener()
         initializeRecyclerView()
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.upcomingShopResult.collect {
                 handleUpcomingShopResult(it)
             }
