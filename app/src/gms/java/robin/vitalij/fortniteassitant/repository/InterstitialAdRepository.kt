@@ -2,7 +2,10 @@ package robin.vitalij.fortniteassitant.repository
 
 import android.app.Activity
 import android.content.Context
-import com.google.android.gms.ads.*
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.unity3d.ads.IUnityAdsShowListener
@@ -12,7 +15,7 @@ import robin.vitalij.fortniteassitant.BuildConfig
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.repository.unity.InterstitialUnityAdRepository
 import robin.vitalij.fortniteassitant.repository.yandex.InterstitialYandexAdRepository
-import java.util.*
+import java.util.Date
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -51,9 +54,9 @@ class InterstitialAdRepository @Inject constructor(
 
             ad?.show(activity)
         } else
-            if (interstitialYandexAdRepository.interstitialAd?.isLoaded == true && !isAdsShow) {
+            if (interstitialYandexAdRepository.interstitialAd != null && !isAdsShow) {
                 isAdsShow = true
-                interstitialYandexAdRepository.interstitialAd?.show()
+                interstitialYandexAdRepository.showAd(activity)
             } else if (interstitialUnityAdRepository.isInterstitialUnityAdLoad && !isAdsShow) {
                 isAdsShow = true
                 UnityAds.show(activity,

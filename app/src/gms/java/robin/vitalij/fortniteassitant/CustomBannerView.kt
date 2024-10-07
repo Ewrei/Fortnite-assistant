@@ -13,9 +13,10 @@ import com.google.android.gms.ads.LoadAdError
 import com.unity3d.services.banners.BannerErrorInfo
 import com.unity3d.services.banners.BannerView
 import com.unity3d.services.banners.UnityBannerSize
-import com.yandex.mobile.ads.banner.AdSize
 import com.yandex.mobile.ads.banner.BannerAdEventListener
+import com.yandex.mobile.ads.banner.BannerAdSize
 import com.yandex.mobile.ads.common.AdRequestError
+import com.yandex.mobile.ads.common.AdSize
 import com.yandex.mobile.ads.common.ImpressionData
 import robin.vitalij.fortniteassitant.common.extensions.checkIfNetworkAvailable
 import robin.vitalij.fortniteassitant.common.extensions.setVisibility
@@ -117,8 +118,7 @@ class CustomBannerView: LinearLayout {
         binding.bannerYandexView.apply {
             // Replace demo Ad Unit ID with actual Ad Unit ID
             setAdUnitId("R-M-1661871-1")
-            setAdSize(AdSize.BANNER_320x50)
-            gravity = Gravity.CENTER
+            setAdSize(BannerAdSize.stickySize(context, 100))
             setBannerAdEventListener(BannerAdYandexAdsEventListener())
         }
         binding.bannerYandexView.loadAd(com.yandex.mobile.ads.common.AdRequest.Builder().build())
@@ -133,6 +133,10 @@ class CustomBannerView: LinearLayout {
                     binding.bannerAdsView?.setVisibility(true)
                     binding.bannerAdmodAdsView?.setVisibility(false)
                     binding.bannerYandexView?.setVisibility(false)
+                }
+
+                override fun onBannerShown(bannerAdView: BannerView?) {
+                    //do nothing
                 }
 
                 override fun onBannerClick(bannerAdView: BannerView?) {

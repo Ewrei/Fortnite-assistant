@@ -1,12 +1,16 @@
 package robin.vitalij.fortniteassitant.repository.yandex
 
+import android.app.Activity
 import android.content.Context
-import com.yandex.mobile.ads.common.AdRequest
+import com.yandex.mobile.ads.common.AdError
+import com.yandex.mobile.ads.common.AdRequestConfiguration
 import com.yandex.mobile.ads.common.AdRequestError
 import com.yandex.mobile.ads.common.ImpressionData
 import com.yandex.mobile.ads.rewarded.Reward
 import com.yandex.mobile.ads.rewarded.RewardedAd
 import com.yandex.mobile.ads.rewarded.RewardedAdEventListener
+import com.yandex.mobile.ads.rewarded.RewardedAdLoadListener
+import com.yandex.mobile.ads.rewarded.RewardedAdLoader
 import javax.inject.Inject
 
 
@@ -14,58 +18,74 @@ class RewardAdYandexRepository @Inject constructor(private val context: Context)
 
 
     var rewardedAd: RewardedAd? = null
+    private var rewardedAdLoader: RewardedAdLoader? = null
 
     var onRewarded: () -> Unit = {
 
     }
 
-    fun load() {
-        rewardedAd = RewardedAd(context)
-        rewardedAd?.setAdUnitId("R-M-1661871-3")
-        rewardedAd?.setRewardedAdEventListener(RewardedAdYandexAdsEventListener())
-        rewardedAd?.loadAd(AdRequest.Builder().build())
+    init {
+        rewardedAdLoader = RewardedAdLoader(context).apply {
+            setAdLoadListener(object : RewardedAdLoadListener {
+                override fun onAdLoaded(ad: RewardedAd) {
+                    rewardedAd = ad
+                    // The ad was loaded successfully. Now you can show loaded ad.
+                }
+
+                override fun onAdFailedToLoad(adRequestError: AdRequestError) {
+                    // Ad failed to load with AdRequestError.
+                    // Attempting to load a new ad from the onAdFailedToLoad() method is strongly discouraged.
+                }
+            })
+        }
     }
 
-    private inner class RewardedAdYandexAdsEventListener : RewardedAdEventListener {
+    fun loadRewardedAd() {
+        val adRequestConfiguration = AdRequestConfiguration.Builder("R-M-1661871-3").build()
+        rewardedAdLoader?.loadAd(adRequestConfiguration)
+    }
 
-        override fun onAdLoaded() {
-         //   Logger.debug("onAdLoaded")
-        }
+    fun showAd(activity: Activity) {
+        rewardedAd?.apply {
+            setAdEventListener(object : RewardedAdEventListener {
+                override fun onAdShown() {
+                    // Called when ad is shown.
+                }
 
-        override fun onRewarded(reward: Reward) {
-            val message = "onRewarded, amount = ${reward.amount}, type = ${reward.type}"
-            onRewarded()
-          //  Logger.debug(message)
-        }
+                override fun onAdFailedToShow(adError: AdError) {
+                    // Called when an RewardedAd failed to show
 
-        override fun onAdFailedToLoad(adRequestError: AdRequestError) {
-            val message = "onAdFailedToLoad, error = ${adRequestError.description}"
-           // Logger.error(message)
-          //  hideLoading()
-        }
+                    // Clean resources after Ad failed to show
+                    rewardedAd?.setAdEventListener(null)
+                    rewardedAd = null
 
-        override fun onImpression(impressionData: ImpressionData?) {
-          //  Logger.debug("onImpression")
-        }
+                    // Now you can preload the next rewarded ad.
+                    loadRewardedAd()
+                }
 
-        override fun onAdShown() {
-         //   Logger.debug("onAdShown")
-        }
+                override fun onAdDismissed() {
+                    // Called when ad is dismissed.
+                    // Clean resources after Ad dismissed
+                    rewardedAd?.setAdEventListener(null)
+                    rewardedAd = null
 
-        override fun onAdDismissed() {
-           // Logger.debug("onAdDismissed")
-        }
+                    // Now you can preload the next rewarded ad.
+                    loadRewardedAd()
+                }
 
-        override fun onAdClicked() {
-           // Logger.debug( "onAdClicked")
-        }
+                override fun onAdClicked() {
+                    // Called when a click is recorded for an ad.
+                }
 
-        override fun onLeftApplication() {
-          //  Logger.debug("onLeftApplication")
-        }
+                override fun onAdImpression(impressionData: ImpressionData?) {
+                    // Called when an impression is recorded for an ad.
+                }
 
-        override fun onReturnedToApplication() {
-          //  Logger.debug("onReturnedToApplication")
+                override fun onRewarded(reward: Reward) {
+                    // Called when the user can be rewarded.
+                }
+            })
+            show(activity)
         }
     }
 }

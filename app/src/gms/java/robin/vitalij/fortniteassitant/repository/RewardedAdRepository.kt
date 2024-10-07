@@ -29,11 +29,11 @@ class RewardedAdRepository @Inject constructor(
     init {
         loadAdmodReward()
         rewardAdUnityRepository.load()
-        rewardAdYandexRepository.load()
+        rewardAdYandexRepository.loadRewardedAd()
     }
 
     fun isLoadVideo() =
-        defaultRewardedAd != null || rewardAdUnityRepository.isLoadAds || (rewardAdYandexRepository.rewardedAd?.isLoaded == true)
+        defaultRewardedAd != null || rewardAdUnityRepository.isLoadAds || (rewardAdYandexRepository.rewardedAd != null)
 
     fun showReward(activity: Activity, getAnWard: () -> Unit) {
         when {
@@ -44,9 +44,11 @@ class RewardedAdRepository @Inject constructor(
                     getAnWard()
                 }
             }
-            rewardAdYandexRepository.rewardedAd?.isLoaded == true -> {
-                loadRewardYandexAds(getAnWard)
+
+            rewardAdYandexRepository.rewardedAd != null -> {
+                loadRewardYandexAds(getAnWard, activity)
             }
+
             rewardAdUnityRepository.isLoadAds -> {
                 loadRewardUnityAds(activity, getAnWard)
             }
@@ -56,7 +58,7 @@ class RewardedAdRepository @Inject constructor(
     fun loadReward() {
         loadAdmodReward()
         rewardAdUnityRepository.load()
-        rewardAdYandexRepository.load()
+        rewardAdYandexRepository.loadRewardedAd()
     }
 
     private fun loadAdmodReward() {
@@ -76,9 +78,9 @@ class RewardedAdRepository @Inject constructor(
 
     }
 
-    private fun loadRewardYandexAds(getAnWard: () -> Unit) {
-        if (rewardAdYandexRepository.rewardedAd?.isLoaded == true) {
-            rewardAdYandexRepository.rewardedAd?.show()
+    private fun loadRewardYandexAds(getAnWard: () -> Unit, activity: Activity) {
+        if (rewardAdYandexRepository.rewardedAd != null) {
+            rewardAdYandexRepository.showAd(activity)
             rewardAdYandexRepository.onRewarded = getAnWard
 
         }
