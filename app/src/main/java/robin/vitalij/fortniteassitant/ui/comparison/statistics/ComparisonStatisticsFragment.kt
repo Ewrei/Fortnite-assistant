@@ -1,114 +1,117 @@
 package robin.vitalij.fortniteassitant.ui.comparison.statistics
 
+import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.extensions.observeToError
-import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.common.extensions.setErrorView
 import robin.vitalij.fortniteassitant.databinding.FragmentRecyclerViewBinding
-import robin.vitalij.fortniteassitant.interfaces.ErrorController
-import robin.vitalij.fortniteassitant.interfaces.ProgressBarController
-import robin.vitalij.fortniteassitant.model.ErrorModel
+import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
-import robin.vitalij.fortniteassitant.ui.comparison.BATTLES_TYPE
-import robin.vitalij.fortniteassitant.ui.comparison.GAME_TYPE
-import robin.vitalij.fortniteassitant.ui.comparison.PLAYER_ONE
-import robin.vitalij.fortniteassitant.ui.comparison.PLAYER_TWO
+import robin.vitalij.fortniteassitant.ui.comparison.ComparisonActivity.Companion.ARG_BATTLES_TYPE
+import robin.vitalij.fortniteassitant.ui.comparison.ComparisonActivity.Companion.ARG_GAME_TYPE
+import robin.vitalij.fortniteassitant.ui.comparison.ComparisonActivity.Companion.ARG_PLAYER_ONE
+import robin.vitalij.fortniteassitant.ui.comparison.ComparisonActivity.Companion.ARG_PLAYER_TWO
 import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.ComparisonStatisticsAdapter
 import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel.ComparisonPlayer
 import javax.inject.Inject
 
-class ComparisonStatisticsFragment : Fragment(R.layout.fragment_recycler_view), ErrorController,
-    ProgressBarController {
+class ComparisonStatisticsFragment : Fragment(R.layout.fragment_recycler_view) {
 
     @Inject
     lateinit var viewModelFactory: ComparisonStatisticsViewModelFactory
 
-    private lateinit var viewModel: ComparisonStatisticsViewModel
-
     private var isSchedule: Boolean = false
 
-    private var _binding: FragmentRecyclerViewBinding? = null
+    private val viewModel: ComparisonStatisticsViewModel by viewModels { viewModelFactory }
 
-    private val binding get() = _binding!!
+    private val binding by viewBinding(FragmentRecyclerViewBinding::bind)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentRecyclerViewBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    private val comparisonStatisticsAdapter = ComparisonStatisticsAdapter()
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        FortniteApplication.appComponent.inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        FortniteApplication.appComponent.inject(this)
-        viewModel = ViewModelProvider(viewModelStore, viewModelFactory)
-            .get(ComparisonStatisticsViewModel::class.java).apply {
-                observeToProgressBar(this@ComparisonStatisticsFragment)
-                observeToError(this@ComparisonStatisticsFragment)
-            }
 
         arguments?.let {
-            viewModel.playerOneId = it.getString(PLAYER_ONE, "")
-            viewModel.playerTwoId = it.getString(PLAYER_TWO, "")
-            viewModel.battlesType = it.get(BATTLES_TYPE) as BattlesType
-            viewModel.gameType = it.get(GAME_TYPE) as GameType
+            viewModel.playerOneId = it.getString(ARG_PLAYER_ONE, "")
+            viewModel.playerTwoId = it.getString(ARG_PLAYER_TWO, "")
+            viewModel.battlesType = it.get(ARG_BATTLES_TYPE) as BattlesType
+            viewModel.gameType = it.get(ARG_GAME_TYPE) as GameType
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initializeRecyclerView()
+        setListener()
 
-        viewModel.data.observe(viewLifecycleOwner, {
-            it.let(::initAdapter)
-        })
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.comparisonStatisticsResult.collect {
+                handleComparisonStatisticsResult(it)
+            }
+        }
 
         viewModel.loadData(isSchedule)
     }
 
     fun loadSchedule(isSchedule: Boolean) {
         this.isSchedule = isSchedule
-        viewModel.loadSchedule(isSchedule)
+        viewModel.loadData(isSchedule)
     }
 
     fun loadGameType(gameType: GameType) {
         viewModel.gameType = gameType
-        viewModel.loadSchedule(isSchedule)
+        viewModel.loadData(isSchedule)
     }
 
-    private fun initAdapter(list: List<ComparisonPlayer>) {
+    private fun setListener() {
+        binding.viewErrorInclude.errorResolveButton.setOnClickListener {
+            viewModel.loadData(isSchedule)
+        }
+    }
+
+    private fun initializeRecyclerView() {
         binding.recyclerViewInclude.recyclerView.run {
-            adapter = ComparisonStatisticsAdapter()
-            (adapter as ComparisonStatisticsAdapter).setData(list)
+            adapter = comparisonStatisticsAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
 
-    override fun setError(errorModel: ErrorModel) {
-        binding.viewErrorInclude.setErrorView(errorModel)
-    }
+    private fun handleComparisonStatisticsResult(result: LoadingState<List<ComparisonPlayer>>) {
+        when (result) {
+            is LoadingState.Loading -> {
+                binding.progressViewInclude.progressContainer.isVisible = true
+            }
 
-    override fun hideError() {
-        binding.viewErrorInclude.errorView.isVisible = false
-    }
+            is LoadingState.Success -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+                comparisonStatisticsAdapter.setData(result.data)
+            }
 
-    override fun showOrHideProgressBar(show: Boolean) {
-        binding.progressViewInclude.progressContainer.isVisible = show
+            is LoadingState.Error -> {
+                binding.progressViewInclude.progressContainer.isVisible = false
+
+                if (result.cause is ErrorModelListItem.ErrorItem) {
+                    binding.viewErrorInclude.setErrorView(result.cause.errorModel)
+                }
+            }
+        }
     }
 
     companion object {
@@ -118,12 +121,12 @@ class ComparisonStatisticsFragment : Fragment(R.layout.fragment_recycler_view), 
             battlesType: BattlesType,
             gameType: GameType
         ) = ComparisonStatisticsFragment().apply {
-            arguments = Bundle().apply {
-                putString(PLAYER_ONE, playerOneId)
-                putString(PLAYER_TWO, playerTwoId)
-                putSerializable(BATTLES_TYPE, battlesType)
-                putSerializable(GAME_TYPE, gameType)
-            }
+            arguments = bundleOf(
+                ARG_PLAYER_ONE to playerOneId,
+                ARG_PLAYER_TWO to playerTwoId,
+                ARG_BATTLES_TYPE to battlesType,
+                ARG_GAME_TYPE to gameType
+            )
         }
     }
 }

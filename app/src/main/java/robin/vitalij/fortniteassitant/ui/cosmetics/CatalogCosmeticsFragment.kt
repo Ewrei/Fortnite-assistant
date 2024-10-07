@@ -50,7 +50,7 @@ class CatalogCosmeticsFragment : Fragment(R.layout.fragment_recycler_view_with_t
         setNavigation()
         initializeRecyclerView()
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.shopTypesResult.collect {
                 handleShopTypesResult(it)
             }

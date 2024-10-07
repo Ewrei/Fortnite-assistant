@@ -13,12 +13,6 @@ import robin.vitalij.fortniteassitant.model.enums.ComparisonDataType
 import robin.vitalij.fortniteassitant.ui.common.BaseActivity
 import robin.vitalij.fortniteassitant.ui.comparison.viewpager.AdapterComparisonFragment
 
-const val PLAYER_ONE = "player_one"
-const val PLAYER_TWO = "player_two"
-const val BATTLES_TYPE = "battles_type"
-const val GAME_TYPE = "game_type"
-const val COMPARISON_DATA_TYPE = "comparison_data_type"
-
 class ComparisonActivity : BaseActivity(R.layout.activity_base) {
 
     private val binding by viewBinding(ActivityBaseBinding::bind)
@@ -47,17 +41,23 @@ class ComparisonActivity : BaseActivity(R.layout.activity_base) {
     private fun setFragment() {
         replaceFragment(
             AdapterComparisonFragment.newInstance(
-                intent?.getSerializableExtra(COMPARISON_DATA_TYPE) as ComparisonDataType
+                intent?.getSerializableExtra(ARG_COMPARISON_DATA_TYPE) as ComparisonDataType
             )
         )
     }
 
     companion object {
+        const val ARG_PLAYER_ONE = "player_one"
+        const val ARG_PLAYER_TWO = "player_two"
+        const val ARG_BATTLES_TYPE = "battles_type"
+        const val ARG_GAME_TYPE = "game_type"
+        const val ARG_COMPARISON_DATA_TYPE = "comparison_data_type"
+
         fun getComparisonActivityIntent(
             context: Context?,
             comparisonDataType: ComparisonDataType
         ) = Intent(context, ComparisonActivity::class.java).apply {
-            putExtra(COMPARISON_DATA_TYPE, comparisonDataType)
+            putExtra(ARG_COMPARISON_DATA_TYPE, comparisonDataType)
         }
     }
 }

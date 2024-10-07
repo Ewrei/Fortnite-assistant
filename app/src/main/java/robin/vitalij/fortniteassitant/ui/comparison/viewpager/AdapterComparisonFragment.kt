@@ -18,7 +18,7 @@ import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.ComparisonDataType
 import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.ui.common.BaseViewPagerAdapter
-import robin.vitalij.fortniteassitant.ui.comparison.COMPARISON_DATA_TYPE
+import robin.vitalij.fortniteassitant.ui.comparison.ComparisonActivity.Companion.ARG_COMPARISON_DATA_TYPE
 import robin.vitalij.fortniteassitant.ui.comparison.statistics.ComparisonStatisticsFragment
 import javax.inject.Inject
 
@@ -79,7 +79,7 @@ class AdapterComparisonFragment : Fragment(R.layout.fragment_adapter_comparion) 
         dataBinding.viewPager.offscreenPageLimit = 6
 
         arguments?.let {
-            viewModel.loadData(it.getSerializable(COMPARISON_DATA_TYPE) as ComparisonDataType)
+            viewModel.loadData(it.getSerializable(ARG_COMPARISON_DATA_TYPE) as ComparisonDataType)
         }
 
         viewModel.data.observe(viewLifecycleOwner, {
@@ -256,7 +256,7 @@ class AdapterComparisonFragment : Fragment(R.layout.fragment_adapter_comparion) 
             comparisonDataType: ComparisonDataType
         ) = AdapterComparisonFragment().apply {
             arguments = Bundle().apply {
-                putSerializable(COMPARISON_DATA_TYPE, comparisonDataType)
+                putSerializable(ARG_COMPARISON_DATA_TYPE, comparisonDataType)
             }
         }
     }

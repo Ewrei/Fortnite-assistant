@@ -21,8 +21,8 @@ import robin.vitalij.fortniteassitant.model.ErrorModel
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
-import robin.vitalij.fortniteassitant.ui.comparison.BATTLES_TYPE
-import robin.vitalij.fortniteassitant.ui.comparison.GAME_TYPE
+import robin.vitalij.fortniteassitant.ui.comparison.ComparisonActivity.Companion.ARG_BATTLES_TYPE
+import robin.vitalij.fortniteassitant.ui.comparison.ComparisonActivity.Companion.ARG_GAME_TYPE
 import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.statistics.adapter.ComparisonManyPlayerAdapter
 import robin.vitalij.fortniteassitant.ui.comparison.selected.manyaccount.statistics.adapter.viewmodel.ComparisonManyPlayers
 import javax.inject.Inject
@@ -75,8 +75,8 @@ class ComparisonManyPlayersStatisticsFragment :
         }
 
         arguments?.let {
-            viewModel.battlesType = it.get(BATTLES_TYPE) as BattlesType
-            viewModel.gameType = it.get(GAME_TYPE) as GameType
+            viewModel.battlesType = it.getSerializable(ARG_BATTLES_TYPE) as BattlesType
+            viewModel.gameType = it.getSerializable(ARG_GAME_TYPE) as GameType
             viewModel.loadData()
         }
     }
@@ -115,8 +115,8 @@ class ComparisonManyPlayersStatisticsFragment :
         fun newInstance(battlesType: BattlesType, gameType: GameType) =
             ComparisonManyPlayersStatisticsFragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable(BATTLES_TYPE, battlesType)
-                    putSerializable(GAME_TYPE, gameType)
+                    putSerializable(ARG_BATTLES_TYPE, battlesType)
+                    putSerializable(ARG_GAME_TYPE, gameType)
                 }
             }
     }

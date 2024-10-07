@@ -16,8 +16,7 @@ class ComparisonStatisticsViewModelFactory @Inject constructor(
         return viewModel ?: run {
             val model =
                 ComparisonStatisticsViewModel(
-                    comparisonProfileRepository,
-                    resourceProvider
+                    comparisonProfileRepository
                 )
             viewModel = model
             return model
