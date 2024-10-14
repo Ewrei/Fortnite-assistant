@@ -1,84 +1,89 @@
 package robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.databinding.ItemComparisonPlayerHeaderBinding
 import robin.vitalij.fortniteassitant.databinding.ItemComparisonPlayerScheduleBinding
 import robin.vitalij.fortniteassitant.databinding.ItemComparisonPlayerStatisticsBinding
-import robin.vitalij.fortniteassitant.ui.common.BaseViewHolder
-import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewholder.ComparisonScheduleViewHolder
-import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewholder.ComparisonStatisticsHeaderViewHolder
-import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewholder.ComparisonStatisticsViewHolder
-import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel.ComparisonPlayer
-import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel.ComparisonPlayerType
 
-class ComparisonStatisticsAdapter : RecyclerView.Adapter<BaseViewHolder<ComparisonPlayer>>() {
+class ComparisonStatisticsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val items = mutableListOf<ComparisonPlayer>()
+    private val items = mutableListOf<ComparisonStatisticsListItem>()
 
-    fun setData(data: List<ComparisonPlayer>) {
-        items.clear()
-        items.addAll(data)
-    }
-
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): BaseViewHolder<ComparisonPlayer> {
-        val inflater = LayoutInflater.from(parent.context)
-
-        when (viewType) {
-            ComparisonPlayerType.SCHEDULE.id -> {
-                return ComparisonScheduleViewHolder(
-                    ItemComparisonPlayerScheduleBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
-                )
-            }
-
-            ComparisonPlayerType.STATISTICS.id -> {
-                val binding = DataBindingUtil.inflate<ItemComparisonPlayerStatisticsBinding>(
-                    inflater,
-                    R.layout.item_comparison_player_statistics,
-                    parent,
-                    false
-                )
-                return ComparisonStatisticsViewHolder(binding)
-            }
-
-            ComparisonPlayerType.HEADER.id -> {
-                val binding =
-                    DataBindingUtil.inflate<ItemComparisonPlayerHeaderBinding>(
-                        inflater,
-                        R.layout.item_comparison_player_header,
-                        parent,
-                        false
-                    )
-                return ComparisonStatisticsHeaderViewHolder(binding)
-            }
-
-            else -> {
-                return ComparisonScheduleViewHolder(
-                    ItemComparisonPlayerScheduleBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
-                )
-            }
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateData(data: List<ComparisonStatisticsListItem>) {
+        if (items != data) {
+            items.clear()
+            items.addAll(data)
+            notifyDataSetChanged()
         }
     }
 
-    override fun getItemCount() = items.size
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
 
-    override fun onBindViewHolder(holder: BaseViewHolder<ComparisonPlayer>, position: Int) {
-        holder.bind(items[position])
+        return when (viewType) {
+            R.layout.item_comparison_player_schedule -> {
+                ComparisonScheduleViewHolder(
+                    ItemComparisonPlayerScheduleBinding.inflate(
+                        inflater,
+                        parent,
+                        false
+                    ),
+                )
+            }
+
+            R.layout.item_comparison_player_header -> {
+                ComparisonStatisticsHeaderViewHolder(
+                    ItemComparisonPlayerHeaderBinding.inflate(
+                        inflater,
+                        parent,
+                        false
+                    ),
+                )
+            }
+
+            R.layout.item_comparison_player_statistics -> {
+                ComparisonStatisticsViewHolder(
+                    ItemComparisonPlayerStatisticsBinding.inflate(
+                        inflater,
+                        parent,
+                        false
+                    ),
+                )
+            }
+
+            else -> throw UnknownError("Unknown view type $viewType")
+        }
     }
 
-    override fun getItemViewType(position: Int) = items[position].getType().id
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (val item = items[position]) {
+            is ComparisonStatisticsListItem.ScheduleItem -> (holder as ComparisonScheduleViewHolder).bind(
+                item
+            )
+
+            is ComparisonStatisticsListItem.HeaderItem -> (holder as ComparisonStatisticsHeaderViewHolder).bind(
+                item
+            )
+
+            is ComparisonStatisticsListItem.StatisticsItem -> (holder as ComparisonStatisticsViewHolder).bind(
+                item
+            )
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when (items[position]) {
+            is ComparisonStatisticsListItem.ScheduleItem -> R.layout.item_comparison_player_schedule
+            is ComparisonStatisticsListItem.HeaderItem -> R.layout.item_comparison_player_header
+            is ComparisonStatisticsListItem.StatisticsItem -> R.layout.item_comparison_player_statistics
+        }
+    }
+
+    override fun getItemCount(): Int = items.size
+
 }

@@ -10,16 +10,16 @@ import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
 import robin.vitalij.fortniteassitant.repository.comparison.ComparisonProfileRepository
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
-import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel.ComparisonPlayer
+import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.ComparisonStatisticsListItem
 
 class ComparisonStatisticsViewModel(
     private val comparisonProfileRepository: ComparisonProfileRepository
 ) : BaseViewModel() {
 
     private val comparisonStatisticsState =
-        MutableStateFlow<LoadingState<List<ComparisonPlayer>>>(LoadingState.Loading)
+        MutableStateFlow<LoadingState<List<ComparisonStatisticsListItem>>>(LoadingState.Loading)
 
-    val comparisonStatisticsResult: StateFlow<LoadingState<List<ComparisonPlayer>>> =
+    val comparisonStatisticsResult: StateFlow<LoadingState<List<ComparisonStatisticsListItem>>> =
         comparisonStatisticsState
 
     private var job: Job? = null

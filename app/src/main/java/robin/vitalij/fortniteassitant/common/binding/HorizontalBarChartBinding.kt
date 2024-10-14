@@ -13,7 +13,7 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.model.comparison.ManyPlayerSchedule
-import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel.ComparisonScheduleViewModel
+import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.ComparisonStatisticsListItem
 import robin.vitalij.fortniteassitant.utils.XAxisValueFormatter
 
 private const val TWO_PLAYERS = 2
@@ -99,7 +99,7 @@ object HorizontalBarChartBinding {
         return sets
     }
 
-    fun HorizontalBarChart.initTwoPlayers(comparisonScheduleViewModel: ComparisonScheduleViewModel) {
+    fun HorizontalBarChart.initTwoPlayers(comparisonScheduleViewModel: ComparisonStatisticsListItem.ScheduleItem) {
         setScaleEnabled(false)
         setDrawBarShadow(false)
         description.isEnabled = false

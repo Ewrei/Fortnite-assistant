@@ -24,7 +24,7 @@ import robin.vitalij.fortniteassitant.ui.comparison.ComparisonActivity.Companion
 import robin.vitalij.fortniteassitant.ui.comparison.ComparisonActivity.Companion.ARG_PLAYER_ONE
 import robin.vitalij.fortniteassitant.ui.comparison.ComparisonActivity.Companion.ARG_PLAYER_TWO
 import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.ComparisonStatisticsAdapter
-import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel.ComparisonPlayer
+import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.ComparisonStatisticsListItem
 import javax.inject.Inject
 
 class ComparisonStatisticsFragment : Fragment(R.layout.fragment_recycler_view) {
@@ -93,7 +93,7 @@ class ComparisonStatisticsFragment : Fragment(R.layout.fragment_recycler_view) {
         }
     }
 
-    private fun handleComparisonStatisticsResult(result: LoadingState<List<ComparisonPlayer>>) {
+    private fun handleComparisonStatisticsResult(result: LoadingState<List<ComparisonStatisticsListItem>>) {
         when (result) {
             is LoadingState.Loading -> {
                 binding.progressViewInclude.progressContainer.isVisible = true
@@ -101,7 +101,7 @@ class ComparisonStatisticsFragment : Fragment(R.layout.fragment_recycler_view) {
 
             is LoadingState.Success -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
-                comparisonStatisticsAdapter.setData(result.data)
+                comparisonStatisticsAdapter.updateData(result.data)
             }
 
             is LoadingState.Error -> {

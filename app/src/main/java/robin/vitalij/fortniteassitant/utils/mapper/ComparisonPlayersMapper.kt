@@ -4,23 +4,25 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.model.comparison.ComparisonProfileResponse
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
-import robin.vitalij.fortniteassitant.model.network.stats.*
-import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel.ComparisonPlayer
-import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel.ComparisonScheduleViewModel
-import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel.ComparisonStatisticsHeaderViewModel
-import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.viewmodel.ComparisonStatisticsViewModel
-import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
+import robin.vitalij.fortniteassitant.model.network.stats.DuoMatches
+import robin.vitalij.fortniteassitant.model.network.stats.Ltm
+import robin.vitalij.fortniteassitant.model.network.stats.Overall
+import robin.vitalij.fortniteassitant.model.network.stats.SoloMatches
+import robin.vitalij.fortniteassitant.model.network.stats.StatsTypeDevice
+import robin.vitalij.fortniteassitant.model.network.stats.TrioMatches
+import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.ComparisonStatisticsListItem
 import robin.vitalij.fortniteassitant.utils.ResourceProvider
+import robin.vitalij.fortniteassitant.utils.mapper.base.Mapper
 
 class ComparisonPlayersMapper(
     private val resourceProvider: ResourceProvider,
     private val isSchedule: Boolean,
     private val battlesType: BattlesType,
     private val gameType: GameType
-) : Mapper<ComparisonProfileResponse, List<ComparisonPlayer>> {
+) : Mapper<ComparisonProfileResponse, List<ComparisonStatisticsListItem>> {
 
-    override fun transform(obj: ComparisonProfileResponse): List<ComparisonPlayer> {
-        val list = mutableListOf<ComparisonPlayer>()
+    override fun transform(obj: ComparisonProfileResponse): List<ComparisonStatisticsListItem> {
+        val list = mutableListOf<ComparisonStatisticsListItem>()
 
         if (gameType == GameType.ALL) {
             if (isSchedule) {
@@ -104,8 +106,8 @@ class ComparisonPlayersMapper(
     private fun getStatistics(
         statsTypeDeviceOne: StatsTypeDevice?,
         statsTypeDeviceTwo: StatsTypeDevice?
-    ): List<ComparisonPlayer> {
-        val list = mutableListOf<ComparisonPlayer>()
+    ): List<ComparisonStatisticsListItem> {
+        val list = mutableListOf<ComparisonStatisticsListItem>()
 
         when (battlesType) {
             BattlesType.OVERALL -> {
@@ -116,6 +118,7 @@ class ComparisonPlayersMapper(
                     )
                 )
             }
+
             BattlesType.SOLO -> {
                 list.addAll(
                     getOverallStatistics(
@@ -124,6 +127,7 @@ class ComparisonPlayersMapper(
                     )
                 )
             }
+
             BattlesType.DUO -> {
                 list.addAll(
                     getOverallStatistics(
@@ -132,6 +136,7 @@ class ComparisonPlayersMapper(
                     )
                 )
             }
+
             BattlesType.TRIO -> {
                 list.addAll(
                     getOverallStatistics(
@@ -140,6 +145,7 @@ class ComparisonPlayersMapper(
                     )
                 )
             }
+
             BattlesType.SQUAD -> {
                 list.addAll(
                     getOverallStatistics(
@@ -148,6 +154,7 @@ class ComparisonPlayersMapper(
                     )
                 )
             }
+
             BattlesType.LTM -> {
                 list.addAll(
                     getOverallStatistics(
@@ -166,8 +173,8 @@ class ComparisonPlayersMapper(
         statsTypeDeviceTwo: StatsTypeDevice?,
         nameOne: String,
         nameTwo: String
-    ): List<ComparisonPlayer> {
-        val list = mutableListOf<ComparisonPlayer>()
+    ): List<ComparisonStatisticsListItem> {
+        val list = mutableListOf<ComparisonStatisticsListItem>()
 
         if (battlesType == BattlesType.OVERALL) {
             list.addAll(
@@ -231,14 +238,14 @@ class ComparisonPlayersMapper(
     private fun getOverallStatistics(
         playerOne: Overall?,
         playerTwo: Overall?
-    ): List<ComparisonPlayer> {
-        val list = mutableListOf<ComparisonPlayer>()
+    ): List<ComparisonStatisticsListItem> {
+        val list = mutableListOf<ComparisonStatisticsListItem>()
 
         if (playerOne == null && playerTwo == null) {
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
         } else {
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.matches),
                     value = playerOne?.matches?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.matches?.toDouble() ?: 0.0
@@ -246,7 +253,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.wins),
                     value = playerOne?.wins?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.wins?.toDouble() ?: 0.0
@@ -254,7 +261,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.wins_percent),
                     value = playerOne?.winRate?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.winRate?.toDouble() ?: 0.0
@@ -262,7 +269,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.kd),
                     value = playerOne?.kd ?: 0.0,
                     valueTwo = playerTwo?.kd ?: 0.0
@@ -270,7 +277,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.kills),
                     value = playerOne?.kills?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.kills?.toDouble() ?: 0.0
@@ -278,7 +285,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.deaths),
                     value = playerOne?.deaths?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.deaths?.toDouble() ?: 0.0
@@ -286,7 +293,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.killsPerMin),
                     value = playerOne?.killsPerMin?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.killsPerMin?.toDouble() ?: 0.0
@@ -294,17 +301,17 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.killsPerMatch),
                     value = playerOne?.killsPerMatch?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.killsPerMatch?.toDouble() ?: 0.0
                 )
             )
 
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.tops)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.tops)))
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.top_one),
                     value = playerOne?.wins?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.wins?.toDouble() ?: 0.0
@@ -312,7 +319,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.top_three),
                     value = playerOne?.top3?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top3?.toDouble() ?: 0.0
@@ -320,7 +327,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.top_five),
                     value = playerOne?.top5?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top5?.toDouble() ?: 0.0
@@ -328,7 +335,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.top_six),
                     value = playerOne?.top6?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top6?.toDouble() ?: 0.0
@@ -336,7 +343,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.top_ten),
                     value = playerOne?.top10?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top10?.toDouble() ?: 0.0
@@ -344,7 +351,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.top_twelve),
                     value = playerOne?.top12?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top12?.toDouble() ?: 0.0
@@ -352,17 +359,17 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.top_twenty_five),
                     value = playerOne?.top25?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top25?.toDouble() ?: 0.0
                 )
             )
 
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.score)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.score)))
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.score),
                     value = playerOne?.score?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.score?.toDouble() ?: 0.0
@@ -370,7 +377,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.avg_score),
                     value = playerOne?.getAvgScore()?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.getAvgScore()?.toDouble() ?: 0.0
@@ -378,7 +385,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.score_per_min),
                     value = playerOne?.scorePerMin?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.scorePerMin?.toDouble() ?: 0.0
@@ -386,7 +393,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.score_per_match),
                     value = playerOne?.scorePerMatch?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.scorePerMatch?.toDouble() ?: 0.0
@@ -394,7 +401,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.minutes_played),
                     value = playerOne?.minutesPlayed?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.minutesPlayed?.toDouble() ?: 0.0
@@ -402,7 +409,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.players_outlived),
                     value = playerOne?.playersOutlived?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.playersOutlived?.toDouble() ?: 0.0
@@ -416,14 +423,14 @@ class ComparisonPlayersMapper(
     private fun getOverallStatistics(
         playerOne: SoloMatches?,
         playerTwo: SoloMatches?
-    ): List<ComparisonPlayer> {
-        val list = mutableListOf<ComparisonPlayer>()
+    ): List<ComparisonStatisticsListItem> {
+        val list = mutableListOf<ComparisonStatisticsListItem>()
 
         if (playerOne == null && playerTwo == null) {
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
         } else {
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.matches),
                     value = playerOne?.matches?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.matches?.toDouble() ?: 0.0
@@ -431,7 +438,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.wins),
                     value = playerOne?.wins?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.wins?.toDouble() ?: 0.0
@@ -439,7 +446,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.wins_percent),
                     value = playerOne?.winRate?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.winRate?.toDouble() ?: 0.0
@@ -447,7 +454,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.kd),
                     value = playerOne?.kd ?: 0.0,
                     valueTwo = playerTwo?.kd ?: 0.0
@@ -455,7 +462,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.kills),
                     value = playerOne?.kills?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.kills?.toDouble() ?: 0.0
@@ -463,7 +470,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.deaths),
                     value = playerOne?.deaths?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.deaths?.toDouble() ?: 0.0
@@ -471,7 +478,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.killsPerMin),
                     value = playerOne?.killsPerMin?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.killsPerMin?.toDouble() ?: 0.0
@@ -479,17 +486,17 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.killsPerMatch),
                     value = playerOne?.killsPerMatch?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.killsPerMatch?.toDouble() ?: 0.0
                 )
             )
 
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.tops)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.tops)))
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.top_one),
                     value = playerOne?.wins?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.wins?.toDouble() ?: 0.0
@@ -497,7 +504,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.top_ten),
                     value = playerOne?.top10?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top10?.toDouble() ?: 0.0
@@ -505,17 +512,17 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.top_twenty_five),
                     value = playerOne?.top25?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top25?.toDouble() ?: 0.0
                 )
             )
 
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.score)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.score)))
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.score),
                     value = playerOne?.score?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.score?.toDouble() ?: 0.0
@@ -523,7 +530,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.avg_score),
                     value = playerOne?.getAvgScore()?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.getAvgScore()?.toDouble() ?: 0.0
@@ -531,7 +538,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.score_per_min),
                     value = playerOne?.scorePerMin?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.scorePerMin?.toDouble() ?: 0.0
@@ -539,7 +546,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.score_per_match),
                     value = playerOne?.scorePerMatch?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.scorePerMatch?.toDouble() ?: 0.0
@@ -547,7 +554,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.minutes_played),
                     value = playerOne?.minutesPlayed?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.minutesPlayed?.toDouble() ?: 0.0
@@ -555,7 +562,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.players_outlived),
                     value = playerOne?.playersOutlived?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.playersOutlived?.toDouble() ?: 0.0
@@ -569,14 +576,14 @@ class ComparisonPlayersMapper(
     private fun getOverallStatistics(
         playerOne: DuoMatches?,
         playerTwo: DuoMatches?
-    ): List<ComparisonPlayer> {
-        val list = mutableListOf<ComparisonPlayer>()
+    ): List<ComparisonStatisticsListItem> {
+        val list = mutableListOf<ComparisonStatisticsListItem>()
 
         if (playerOne == null && playerTwo == null) {
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
         } else {
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.matches),
                     value = playerOne?.matches?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.matches?.toDouble() ?: 0.0
@@ -584,7 +591,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.wins),
                     value = playerOne?.wins?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.wins?.toDouble() ?: 0.0
@@ -592,7 +599,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.wins_percent),
                     value = playerOne?.winRate?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.winRate?.toDouble() ?: 0.0
@@ -600,7 +607,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.kd),
                     value = playerOne?.kd ?: 0.0,
                     valueTwo = playerTwo?.kd ?: 0.0
@@ -608,7 +615,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.kills),
                     value = playerOne?.kills?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.kills?.toDouble() ?: 0.0
@@ -616,7 +623,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.deaths),
                     value = playerOne?.deaths?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.deaths?.toDouble() ?: 0.0
@@ -624,7 +631,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.killsPerMin),
                     value = playerOne?.killsPerMin?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.killsPerMin?.toDouble() ?: 0.0
@@ -632,17 +639,17 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.killsPerMatch),
                     value = playerOne?.killsPerMatch?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.killsPerMatch?.toDouble() ?: 0.0
                 )
             )
 
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.tops)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.tops)))
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.top_one),
                     value = playerOne?.wins?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.wins?.toDouble() ?: 0.0
@@ -650,7 +657,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.top_five),
                     value = playerOne?.top5?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top5?.toDouble() ?: 0.0
@@ -658,17 +665,17 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.top_twelve),
                     value = playerOne?.top12?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top12?.toDouble() ?: 0.0
                 )
             )
 
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.score)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.score)))
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.score),
                     value = playerOne?.score?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.score?.toDouble() ?: 0.0
@@ -676,7 +683,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.avg_score),
                     value = playerOne?.getAvgScore()?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.getAvgScore()?.toDouble() ?: 0.0
@@ -684,7 +691,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.score_per_min),
                     value = playerOne?.scorePerMin?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.scorePerMin?.toDouble() ?: 0.0
@@ -692,7 +699,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.score_per_match),
                     value = playerOne?.scorePerMatch?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.scorePerMatch?.toDouble() ?: 0.0
@@ -700,7 +707,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.minutes_played),
                     value = playerOne?.minutesPlayed?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.minutesPlayed?.toDouble() ?: 0.0
@@ -708,7 +715,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.players_outlived),
                     value = playerOne?.playersOutlived?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.playersOutlived?.toDouble() ?: 0.0
@@ -722,14 +729,14 @@ class ComparisonPlayersMapper(
     private fun getOverallStatistics(
         playerOne: TrioMatches?,
         playerTwo: TrioMatches?
-    ): List<ComparisonPlayer> {
-        val list = mutableListOf<ComparisonPlayer>()
+    ): List<ComparisonStatisticsListItem> {
+        val list = mutableListOf<ComparisonStatisticsListItem>()
 
         if (playerOne == null && playerTwo == null) {
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
         } else {
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.matches),
                     value = playerOne?.matches?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.matches?.toDouble() ?: 0.0
@@ -737,7 +744,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.wins),
                     value = playerOne?.wins?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.wins?.toDouble() ?: 0.0
@@ -745,7 +752,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.wins_percent),
                     value = playerOne?.winRate?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.winRate?.toDouble() ?: 0.0
@@ -753,7 +760,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.kd),
                     value = playerOne?.kd ?: 0.0,
                     valueTwo = playerTwo?.kd ?: 0.0
@@ -761,7 +768,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.kills),
                     value = playerOne?.kills?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.kills?.toDouble() ?: 0.0
@@ -769,7 +776,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.deaths),
                     value = playerOne?.deaths?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.deaths?.toDouble() ?: 0.0
@@ -777,7 +784,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.killsPerMin),
                     value = playerOne?.killsPerMin?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.killsPerMin?.toDouble() ?: 0.0
@@ -785,17 +792,17 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.killsPerMatch),
                     value = playerOne?.killsPerMatch?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.killsPerMatch?.toDouble() ?: 0.0
                 )
             )
 
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.tops)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.tops)))
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.top_one),
                     value = playerOne?.wins?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.wins?.toDouble() ?: 0.0
@@ -803,7 +810,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.top_three),
                     value = playerOne?.top3?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top3?.toDouble() ?: 0.0
@@ -811,17 +818,17 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.top_six),
                     value = playerOne?.top6?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top6?.toDouble() ?: 0.0
                 )
             )
 
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.score)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.score)))
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.score),
                     value = playerOne?.score?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.score?.toDouble() ?: 0.0
@@ -829,7 +836,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.avg_score),
                     value = playerOne?.getAvgScore()?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.getAvgScore()?.toDouble() ?: 0.0
@@ -837,7 +844,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.score_per_min),
                     value = playerOne?.scorePerMin?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.scorePerMin?.toDouble() ?: 0.0
@@ -845,7 +852,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.score_per_match),
                     value = playerOne?.scorePerMatch?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.scorePerMatch?.toDouble() ?: 0.0
@@ -853,7 +860,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.minutes_played),
                     value = playerOne?.minutesPlayed?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.minutesPlayed?.toDouble() ?: 0.0
@@ -861,7 +868,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.players_outlived),
                     value = playerOne?.playersOutlived?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.playersOutlived?.toDouble() ?: 0.0
@@ -875,14 +882,14 @@ class ComparisonPlayersMapper(
     private fun getOverallStatistics(
         playerOne: Ltm?,
         playerTwo: Ltm?
-    ): List<ComparisonPlayer> {
-        val list = mutableListOf<ComparisonPlayer>()
+    ): List<ComparisonStatisticsListItem> {
+        val list = mutableListOf<ComparisonStatisticsListItem>()
 
         if (playerOne == null && playerTwo == null) {
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
         } else {
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.matches),
                     value = playerOne?.matches?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.matches?.toDouble() ?: 0.0
@@ -890,7 +897,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.wins),
                     value = playerOne?.wins?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.wins?.toDouble() ?: 0.0
@@ -898,7 +905,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.wins_percent),
                     value = playerOne?.winRate?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.winRate?.toDouble() ?: 0.0
@@ -906,7 +913,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.kd),
                     value = playerOne?.kd ?: 0.0,
                     valueTwo = playerTwo?.kd ?: 0.0
@@ -914,7 +921,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.kills),
                     value = playerOne?.kills?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.kills?.toDouble() ?: 0.0
@@ -922,7 +929,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.deaths),
                     value = playerOne?.deaths?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.deaths?.toDouble() ?: 0.0
@@ -930,7 +937,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.killsPerMin),
                     value = playerOne?.killsPerMin?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.killsPerMin?.toDouble() ?: 0.0
@@ -938,17 +945,17 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.killsPerMatch),
                     value = playerOne?.killsPerMatch?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.killsPerMatch?.toDouble() ?: 0.0
                 )
             )
 
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.score)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.score)))
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.score),
                     value = playerOne?.score?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.score?.toDouble() ?: 0.0
@@ -956,7 +963,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.avg_score),
                     value = playerOne?.getAvgScore()?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.getAvgScore()?.toDouble() ?: 0.0
@@ -964,7 +971,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.score_per_min),
                     value = playerOne?.scorePerMin?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.scorePerMin?.toDouble() ?: 0.0
@@ -972,7 +979,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.score_per_match),
                     value = playerOne?.scorePerMatch?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.scorePerMatch?.toDouble() ?: 0.0
@@ -980,7 +987,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.minutes_played),
                     value = playerOne?.minutesPlayed?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.minutesPlayed?.toDouble() ?: 0.0
@@ -988,7 +995,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonStatisticsViewModel(
+                ComparisonStatisticsListItem.StatisticsItem(
                     title = resourceProvider.getString(R.string.players_outlived),
                     value = playerOne?.playersOutlived?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.playersOutlived?.toDouble() ?: 0.0
@@ -1004,14 +1011,14 @@ class ComparisonPlayersMapper(
         playerTwo: Overall?,
         nameOne: String,
         nameTwo: String
-    ): List<ComparisonPlayer> {
-        val list = mutableListOf<ComparisonPlayer>()
+    ): List<ComparisonStatisticsListItem> {
+        val list = mutableListOf<ComparisonStatisticsListItem>()
 
         if (playerOne == null && playerTwo == null) {
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
         } else {
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.matches),
                     value = playerOne?.matches?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.matches?.toDouble() ?: 0.0,
@@ -1021,7 +1028,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.wins),
                     value = playerOne?.wins?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.wins?.toDouble() ?: 0.0,
@@ -1031,7 +1038,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.wins_percent),
                     value = playerOne?.winRate?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.winRate?.toDouble() ?: 0.0,
@@ -1041,7 +1048,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.kd),
                     value = playerOne?.kd ?: 0.0,
                     valueTwo = playerTwo?.kd ?: 0.0,
@@ -1051,7 +1058,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.kills),
                     value = playerOne?.kills?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.kills?.toDouble() ?: 0.0,
@@ -1061,7 +1068,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.deaths),
                     value = playerOne?.deaths?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.deaths?.toDouble() ?: 0.0,
@@ -1071,7 +1078,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.killsPerMin),
                     value = playerOne?.killsPerMin?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.killsPerMin?.toDouble() ?: 0.0,
@@ -1081,7 +1088,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.killsPerMatch),
                     value = playerOne?.killsPerMatch?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.killsPerMatch?.toDouble() ?: 0.0,
@@ -1090,10 +1097,10 @@ class ComparisonPlayersMapper(
                 )
             )
 
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.tops)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.tops)))
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.top_one),
                     value = playerOne?.wins?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.wins?.toDouble() ?: 0.0,
@@ -1103,7 +1110,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.top_three),
                     value = playerOne?.top3?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top3?.toDouble() ?: 0.0,
@@ -1113,7 +1120,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.top_five),
                     value = playerOne?.top5?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top5?.toDouble() ?: 0.0,
@@ -1123,7 +1130,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.top_six),
                     value = playerOne?.top6?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top6?.toDouble() ?: 0.0,
@@ -1133,7 +1140,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.top_ten),
                     value = playerOne?.top10?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top10?.toDouble() ?: 0.0,
@@ -1143,7 +1150,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.top_twelve),
                     value = playerOne?.top12?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top12?.toDouble() ?: 0.0,
@@ -1153,7 +1160,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.top_twenty_five),
                     value = playerOne?.top25?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top25?.toDouble() ?: 0.0,
@@ -1162,10 +1169,10 @@ class ComparisonPlayersMapper(
                 )
             )
 
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.score)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.score)))
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.score),
                     value = playerOne?.score?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.score?.toDouble() ?: 0.0,
@@ -1175,7 +1182,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.avg_score),
                     value = playerOne?.getAvgScore()?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.getAvgScore()?.toDouble() ?: 0.0,
@@ -1185,7 +1192,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.score_per_min),
                     value = playerOne?.scorePerMin?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.scorePerMin?.toDouble() ?: 0.0,
@@ -1195,7 +1202,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.score_per_match),
                     value = playerOne?.scorePerMatch?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.scorePerMatch?.toDouble() ?: 0.0,
@@ -1205,7 +1212,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.minutes_played),
                     value = playerOne?.minutesPlayed?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.minutesPlayed?.toDouble() ?: 0.0,
@@ -1215,7 +1222,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.players_outlived),
                     value = playerOne?.playersOutlived?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.playersOutlived?.toDouble() ?: 0.0,
@@ -1233,14 +1240,14 @@ class ComparisonPlayersMapper(
         playerTwo: SoloMatches?,
         nameOne: String,
         nameTwo: String
-    ): List<ComparisonPlayer> {
-        val list = mutableListOf<ComparisonPlayer>()
+    ): List<ComparisonStatisticsListItem> {
+        val list = mutableListOf<ComparisonStatisticsListItem>()
 
         if (playerOne == null && playerTwo == null) {
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
         } else {
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.matches),
                     value = playerOne?.matches?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.matches?.toDouble() ?: 0.0,
@@ -1250,7 +1257,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.wins),
                     value = playerOne?.wins?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.wins?.toDouble() ?: 0.0,
@@ -1260,7 +1267,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.wins_percent),
                     value = playerOne?.winRate?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.winRate?.toDouble() ?: 0.0,
@@ -1270,7 +1277,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.kd),
                     value = playerOne?.kd ?: 0.0,
                     valueTwo = playerTwo?.kd ?: 0.0,
@@ -1280,7 +1287,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.kills),
                     value = playerOne?.kills?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.kills?.toDouble() ?: 0.0,
@@ -1290,7 +1297,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.deaths),
                     value = playerOne?.deaths?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.deaths?.toDouble() ?: 0.0,
@@ -1300,7 +1307,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.killsPerMin),
                     value = playerOne?.killsPerMin?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.killsPerMin?.toDouble() ?: 0.0,
@@ -1310,7 +1317,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.killsPerMatch),
                     value = playerOne?.killsPerMatch?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.killsPerMatch?.toDouble() ?: 0.0,
@@ -1319,10 +1326,10 @@ class ComparisonPlayersMapper(
                 )
             )
 
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.tops)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.tops)))
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.top_one),
                     value = playerOne?.wins?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.wins?.toDouble() ?: 0.0,
@@ -1332,7 +1339,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.top_ten),
                     value = playerOne?.top10?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top10?.toDouble() ?: 0.0,
@@ -1342,7 +1349,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.top_twenty_five),
                     value = playerOne?.top25?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top25?.toDouble() ?: 0.0,
@@ -1351,10 +1358,10 @@ class ComparisonPlayersMapper(
                 )
             )
 
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.score)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.score)))
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.score),
                     value = playerOne?.score?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.score?.toDouble() ?: 0.0,
@@ -1364,7 +1371,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.avg_score),
                     value = playerOne?.getAvgScore()?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.getAvgScore()?.toDouble() ?: 0.0,
@@ -1374,7 +1381,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.score_per_min),
                     value = playerOne?.scorePerMin?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.scorePerMin?.toDouble() ?: 0.0,
@@ -1384,7 +1391,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.score_per_match),
                     value = playerOne?.scorePerMatch?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.scorePerMatch?.toDouble() ?: 0.0,
@@ -1394,7 +1401,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.minutes_played),
                     value = playerOne?.minutesPlayed?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.minutesPlayed?.toDouble() ?: 0.0,
@@ -1404,7 +1411,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.players_outlived),
                     value = playerOne?.playersOutlived?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.playersOutlived?.toDouble() ?: 0.0,
@@ -1422,14 +1429,14 @@ class ComparisonPlayersMapper(
         playerTwo: DuoMatches?,
         nameOne: String,
         nameTwo: String
-    ): List<ComparisonPlayer> {
-        val list = mutableListOf<ComparisonPlayer>()
+    ): List<ComparisonStatisticsListItem> {
+        val list = mutableListOf<ComparisonStatisticsListItem>()
 
         if (playerOne == null && playerTwo == null) {
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
         } else {
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.matches),
                     value = playerOne?.matches?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.matches?.toDouble() ?: 0.0,
@@ -1439,7 +1446,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.wins),
                     value = playerOne?.wins?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.wins?.toDouble() ?: 0.0,
@@ -1449,7 +1456,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.wins_percent),
                     value = playerOne?.winRate?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.winRate?.toDouble() ?: 0.0,
@@ -1459,7 +1466,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.kd),
                     value = playerOne?.kd ?: 0.0,
                     valueTwo = playerTwo?.kd ?: 0.0,
@@ -1469,7 +1476,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.kills),
                     value = playerOne?.kills?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.kills?.toDouble() ?: 0.0,
@@ -1479,7 +1486,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.deaths),
                     value = playerOne?.deaths?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.deaths?.toDouble() ?: 0.0,
@@ -1489,7 +1496,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.killsPerMin),
                     value = playerOne?.killsPerMin?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.killsPerMin?.toDouble() ?: 0.0,
@@ -1499,7 +1506,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.killsPerMatch),
                     value = playerOne?.killsPerMatch?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.killsPerMatch?.toDouble() ?: 0.0,
@@ -1508,10 +1515,10 @@ class ComparisonPlayersMapper(
                 )
             )
 
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.tops)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.tops)))
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.top_one),
                     value = playerOne?.wins?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.wins?.toDouble() ?: 0.0,
@@ -1521,7 +1528,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.top_five),
                     value = playerOne?.top5?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top5?.toDouble() ?: 0.0,
@@ -1531,7 +1538,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.top_twelve),
                     value = playerOne?.top12?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top12?.toDouble() ?: 0.0,
@@ -1540,10 +1547,10 @@ class ComparisonPlayersMapper(
                 )
             )
 
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.score)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.score)))
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.score),
                     value = playerOne?.score?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.score?.toDouble() ?: 0.0,
@@ -1553,7 +1560,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.avg_score),
                     value = playerOne?.getAvgScore()?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.getAvgScore()?.toDouble() ?: 0.0,
@@ -1563,7 +1570,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.score_per_min),
                     value = playerOne?.scorePerMin?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.scorePerMin?.toDouble() ?: 0.0,
@@ -1573,7 +1580,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.score_per_match),
                     value = playerOne?.scorePerMatch?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.scorePerMatch?.toDouble() ?: 0.0,
@@ -1583,7 +1590,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.minutes_played),
                     value = playerOne?.minutesPlayed?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.minutesPlayed?.toDouble() ?: 0.0,
@@ -1593,7 +1600,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.players_outlived),
                     value = playerOne?.playersOutlived?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.playersOutlived?.toDouble() ?: 0.0,
@@ -1611,14 +1618,14 @@ class ComparisonPlayersMapper(
         playerTwo: TrioMatches?,
         nameOne: String,
         nameTwo: String
-    ): List<ComparisonPlayer> {
-        val list = mutableListOf<ComparisonPlayer>()
+    ): List<ComparisonStatisticsListItem> {
+        val list = mutableListOf<ComparisonStatisticsListItem>()
 
         if (playerOne == null && playerTwo == null) {
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
         } else {
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.matches),
                     value = playerOne?.matches?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.matches?.toDouble() ?: 0.0,
@@ -1628,7 +1635,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.wins),
                     value = playerOne?.wins?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.wins?.toDouble() ?: 0.0,
@@ -1638,7 +1645,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.wins_percent),
                     value = playerOne?.winRate?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.winRate?.toDouble() ?: 0.0,
@@ -1648,7 +1655,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.kd),
                     value = playerOne?.kd ?: 0.0,
                     valueTwo = playerTwo?.kd ?: 0.0,
@@ -1658,7 +1665,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.kills),
                     value = playerOne?.kills?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.kills?.toDouble() ?: 0.0,
@@ -1668,7 +1675,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.deaths),
                     value = playerOne?.deaths?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.deaths?.toDouble() ?: 0.0,
@@ -1678,7 +1685,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.killsPerMin),
                     value = playerOne?.killsPerMin?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.killsPerMin?.toDouble() ?: 0.0,
@@ -1688,7 +1695,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.killsPerMatch),
                     value = playerOne?.killsPerMatch?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.killsPerMatch?.toDouble() ?: 0.0,
@@ -1697,10 +1704,10 @@ class ComparisonPlayersMapper(
                 )
             )
 
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.tops)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.tops)))
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.top_one),
                     value = playerOne?.wins?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.wins?.toDouble() ?: 0.0,
@@ -1710,7 +1717,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.top_three),
                     value = playerOne?.top3?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top3?.toDouble() ?: 0.0,
@@ -1720,7 +1727,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.top_six),
                     value = playerOne?.top6?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.top6?.toDouble() ?: 0.0,
@@ -1729,10 +1736,10 @@ class ComparisonPlayersMapper(
                 )
             )
 
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.score)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.score)))
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.score),
                     value = playerOne?.score?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.score?.toDouble() ?: 0.0,
@@ -1742,7 +1749,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.avg_score),
                     value = playerOne?.getAvgScore()?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.getAvgScore()?.toDouble() ?: 0.0,
@@ -1752,7 +1759,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.score_per_min),
                     value = playerOne?.scorePerMin?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.scorePerMin?.toDouble() ?: 0.0,
@@ -1762,7 +1769,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.score_per_match),
                     value = playerOne?.scorePerMatch?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.scorePerMatch?.toDouble() ?: 0.0,
@@ -1772,7 +1779,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.minutes_played),
                     value = playerOne?.minutesPlayed?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.minutesPlayed?.toDouble() ?: 0.0,
@@ -1782,7 +1789,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.players_outlived),
                     value = playerOne?.playersOutlived?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.playersOutlived?.toDouble() ?: 0.0,
@@ -1800,14 +1807,14 @@ class ComparisonPlayersMapper(
         playerTwo: Ltm?,
         nameOne: String,
         nameTwo: String
-    ): List<ComparisonPlayer> {
-        val list = mutableListOf<ComparisonPlayer>()
+    ): List<ComparisonStatisticsListItem> {
+        val list = mutableListOf<ComparisonStatisticsListItem>()
 
         if (playerOne == null && playerTwo == null) {
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.players_did_not_participate_in_battles)))
         } else {
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.matches),
                     value = playerOne?.matches?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.matches?.toDouble() ?: 0.0,
@@ -1817,7 +1824,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.wins),
                     value = playerOne?.wins?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.wins?.toDouble() ?: 0.0,
@@ -1827,7 +1834,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.wins_percent),
                     value = playerOne?.winRate?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.winRate?.toDouble() ?: 0.0,
@@ -1837,7 +1844,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.kd),
                     value = playerOne?.kd ?: 0.0,
                     valueTwo = playerTwo?.kd ?: 0.0,
@@ -1847,7 +1854,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.kills),
                     value = playerOne?.kills?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.kills?.toDouble() ?: 0.0,
@@ -1857,7 +1864,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.deaths),
                     value = playerOne?.deaths?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.deaths?.toDouble() ?: 0.0,
@@ -1867,7 +1874,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.killsPerMin),
                     value = playerOne?.killsPerMin?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.killsPerMin?.toDouble() ?: 0.0,
@@ -1877,7 +1884,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.killsPerMatch),
                     value = playerOne?.killsPerMatch?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.killsPerMatch?.toDouble() ?: 0.0,
@@ -1886,10 +1893,10 @@ class ComparisonPlayersMapper(
                 )
             )
 
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.tops)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.tops)))
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.top_one),
                     value = playerOne?.wins?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.wins?.toDouble() ?: 0.0,
@@ -1899,10 +1906,10 @@ class ComparisonPlayersMapper(
             )
 
 
-            list.add(ComparisonStatisticsHeaderViewModel(resourceProvider.getString(R.string.score)))
+            list.add(ComparisonStatisticsListItem.HeaderItem(resourceProvider.getString(R.string.score)))
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.score),
                     value = playerOne?.score?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.score?.toDouble() ?: 0.0,
@@ -1912,7 +1919,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.avg_score),
                     value = playerOne?.getAvgScore()?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.getAvgScore()?.toDouble() ?: 0.0,
@@ -1922,7 +1929,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.score_per_min),
                     value = playerOne?.scorePerMin?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.scorePerMin?.toDouble() ?: 0.0,
@@ -1932,7 +1939,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.score_per_match),
                     value = playerOne?.scorePerMatch?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.scorePerMatch?.toDouble() ?: 0.0,
@@ -1942,7 +1949,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.minutes_played),
                     value = playerOne?.minutesPlayed?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.minutesPlayed?.toDouble() ?: 0.0,
@@ -1952,7 +1959,7 @@ class ComparisonPlayersMapper(
             )
 
             list.add(
-                ComparisonScheduleViewModel(
+                ComparisonStatisticsListItem.ScheduleItem(
                     title = resourceProvider.getString(R.string.players_outlived),
                     value = playerOne?.playersOutlived?.toDouble() ?: 0.0,
                     valueTwo = playerTwo?.playersOutlived?.toDouble() ?: 0.0,
