@@ -28,7 +28,7 @@ import robin.vitalij.fortniteassitant.interfaces.RegistrationProfileCallback
 import robin.vitalij.fortniteassitant.model.EmptyTextModel
 import robin.vitalij.fortniteassitant.model.ErrorModel
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
-import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
+import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUserModel
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
 import robin.vitalij.fortniteassitant.ui.bottomsheet.profile.ProfileResultFragment
 import robin.vitalij.fortniteassitant.ui.comparison.selected.listuser.SelectedListUserActivity
@@ -125,7 +125,7 @@ class ComparisonSelectedFragment : Fragment(R.layout.fragment_comparion), ErrorC
 
     }
 
-    private fun initAdapter(list: List<SearchSteamUser>) {
+    private fun initAdapter(list: List<SearchSteamUserModel>) {
         binding.recyclerViewInclude.recyclerView.run {
             adapter = SearchAdapter() {
                 ProfileResultFragment.show(

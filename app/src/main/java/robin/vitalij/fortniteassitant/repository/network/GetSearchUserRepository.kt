@@ -9,7 +9,7 @@ import robin.vitalij.fortniteassitant.common.extensions.getErrorModel
 import robin.vitalij.fortniteassitant.model.ErrorModelListItem
 import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.AvatarType
-import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
+import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUserModel
 import robin.vitalij.fortniteassitant.utils.mapper.SearchUserMapper
 import javax.inject.Inject
 
@@ -26,7 +26,7 @@ class GetSearchUserRepository @Inject constructor(
     private fun getSearchWithStrict(
         username: String,
         strict: Boolean
-    ): Flow<LoadingState<List<SearchSteamUser>>> = flow {
+    ): Flow<LoadingState<List<SearchSteamUserModel>>> = flow {
         emit(LoadingState.Loading)
         kotlin.runCatching { fortniteRequestsIOApi.getSearch(username, strict) }
             .onSuccess {
@@ -35,15 +35,15 @@ class GetSearchUserRepository @Inject constructor(
             .onFailure { emit(LoadingState.Error(ErrorModelListItem.ErrorItem(it.getErrorModel()))) }
     }.flowOn(Dispatchers.IO)
 
-    private fun getSearchWithoutStrict(username: String): Flow<LoadingState<List<SearchSteamUser>>> =
+    private fun getSearchWithoutStrict(username: String): Flow<LoadingState<List<SearchSteamUserModel>>> =
         flow {
             emit(LoadingState.Loading)
             kotlin.runCatching { fortniteRequestsIOApi.getSearch(username) }
                 .onSuccess {
                     emit(LoadingState.Success(if (it.result) {
-                        mutableListOf<SearchSteamUser>().apply {
+                        mutableListOf<SearchSteamUserModel>().apply {
                             add(
-                                SearchSteamUser(
+                                SearchSteamUserModel(
                                     accountId = it.accountId,
                                     name = username,
                                     AvatarType.values().random().getImageUrl()

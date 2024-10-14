@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import robin.vitalij.fortniteassitant.common.extensions.DATE_FULL
 import robin.vitalij.fortniteassitant.common.extensions.getDateFull
 
-class NewsResponse(
+data class NewsResponse(
     @SerializedName("type") val type: String,
     @SerializedName("news") val news: List<NewsModel>
 )

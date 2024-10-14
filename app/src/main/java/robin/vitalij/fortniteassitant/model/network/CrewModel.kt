@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import robin.vitalij.fortniteassitant.db.entity.Series
 
-class CrewModel(
+data class CrewModel(
     @SerializedName("type") val type: String,
     @SerializedName("date") val date: String,
     @SerializedName("video") val video: String?,
@@ -15,13 +15,13 @@ class CrewModel(
     @SerializedName("rewards") val rewards: List<CrewRewardsModel>
 )
 
-class DescriptionsModel(
+data class DescriptionsModel(
     @SerializedName("title") val title: String,
     @SerializedName("battlepass") val battlepass: String,
     @SerializedName("vbucksTitle") val vbucksTitle: String
 )
 
-class CrewImageModel(
+data class CrewImageModel(
     @SerializedName("battlepass") val battlepass: String,
     @SerializedName("battlepassTile") val battlepassTile: String?,
     @SerializedName("itemShopTile") val itemShopTile: String,
@@ -30,13 +30,13 @@ class CrewImageModel(
 )
 
 @Parcelize
-class CrewRewardsModel(
+data class CrewRewardsModel(
     @SerializedName("quantity") val quantity: Int,
     @SerializedName("item") val item: CrewItemModel
 ) : Parcelable
 
 @Parcelize
-class CrewItemModel(
+data class CrewItemModel(
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String,
     @SerializedName("description") val description: String?,
@@ -47,13 +47,13 @@ class CrewItemModel(
 ) : Parcelable
 
 @Parcelize
-class CrewItemRarityModel(
+data class CrewItemRarityModel(
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String
 ) : Parcelable
 
 @Parcelize
-class CrewItemImageModel(
+data class CrewItemImageModel(
     @SerializedName("icon") val icon: String?,
     @SerializedName("featured") val featured: String?,
     @SerializedName("background") val background: String?,
@@ -61,7 +61,7 @@ class CrewItemImageModel(
 ) : Parcelable
 
 @Parcelize
-class CrewItemTypeModel(
+data class CrewItemTypeModel(
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String
 ) : Parcelable

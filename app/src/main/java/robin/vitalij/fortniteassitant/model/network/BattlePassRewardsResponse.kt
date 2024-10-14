@@ -4,14 +4,14 @@ import com.google.gson.annotations.SerializedName
 import robin.vitalij.fortniteassitant.model.network.shop.OtherImage
 import java.io.Serializable
 
-class BattlePassRewardsResponse (
+data class BattlePassRewardsResponse (
     @SerializedName("result") val result: Boolean,
     @SerializedName("season") val season: Int,
     @SerializedName("paid") val paid: Paid,
     @SerializedName("free") val free: Paid
 )
 
-class Paid(
+data class Paid(
     @SerializedName("rewards") val rewards: List<Reward>
 )
 

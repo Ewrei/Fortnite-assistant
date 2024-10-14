@@ -10,12 +10,10 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.observeOn
 import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.interfaces.SaveUserCallback
 import robin.vitalij.fortniteassitant.model.LoadingState
-import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
+import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUserModel
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
 import robin.vitalij.fortniteassitant.repository.comparison.ComparisonListUserRepository
 import robin.vitalij.fortniteassitant.repository.network.GetSearchUserRepository
@@ -36,12 +34,12 @@ class ComparisonSelectedViewModel(
 
     val visibility = ObservableField(true)
 
-    var mutableLiveData = MutableLiveData<List<SearchSteamUser>>()
+    var mutableLiveData = MutableLiveData<List<SearchSteamUserModel>>()
 
     private val fullFishStatsState =
-        MutableStateFlow<LoadingState<List<SearchSteamUser>>>(LoadingState.Success(emptyList()))
+        MutableStateFlow<LoadingState<List<SearchSteamUserModel>>>(LoadingState.Success(emptyList()))
 
-    val seasonsResult: StateFlow<LoadingState<List<SearchSteamUser>>> =
+    val seasonsResult: StateFlow<LoadingState<List<SearchSteamUserModel>>> =
         fullFishStatsState
 
     private lateinit var owner: LifecycleOwner

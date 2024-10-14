@@ -2,13 +2,13 @@ package robin.vitalij.fortniteassitant.model.network
 
 import com.google.gson.annotations.SerializedName
 
-class WeaponResponse(
+data class WeaponResponse(
     @SerializedName("result") val result: Boolean,
     @SerializedName("lang") val lang: String,
     @SerializedName("weapons") val weapons: List<Weapon>
 )
 
-class Weapon(
+data class Weapon(
     @SerializedName("id") val id: String,
     @SerializedName("enabled") val enabled: Boolean,
     @SerializedName("name") val name: String,
@@ -21,12 +21,12 @@ class Weapon(
     @SerializedName("mainStats") val mainStats: MainStats
 )
 
-class Image(
+data class Image(
     @SerializedName("icon") val icon: String?,
     @SerializedName("background") val background: String?
 )
 
-class MainStats(
+data class MainStats(
     @SerializedName("DmgPB") val dmgPB: Double,
     @SerializedName("FiringRate") val firingRate: Double,
     @SerializedName("ClipSize") val clipSize: Double,

@@ -32,14 +32,15 @@ class ComparisonStatisticsAdapter : RecyclerView.Adapter<BaseViewHolder<Comparis
 
         when (viewType) {
             ComparisonPlayerType.SCHEDULE.id -> {
-                val binding = DataBindingUtil.inflate<ItemComparisonPlayerScheduleBinding>(
-                    inflater,
-                    R.layout.item_comparison_player_schedule,
-                    parent,
-                    false
+                return ComparisonScheduleViewHolder(
+                    ItemComparisonPlayerScheduleBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
                 )
-                return ComparisonScheduleViewHolder(binding)
             }
+
             ComparisonPlayerType.STATISTICS.id -> {
                 val binding = DataBindingUtil.inflate<ItemComparisonPlayerStatisticsBinding>(
                     inflater,
@@ -49,6 +50,7 @@ class ComparisonStatisticsAdapter : RecyclerView.Adapter<BaseViewHolder<Comparis
                 )
                 return ComparisonStatisticsViewHolder(binding)
             }
+
             ComparisonPlayerType.HEADER.id -> {
                 val binding =
                     DataBindingUtil.inflate<ItemComparisonPlayerHeaderBinding>(
@@ -59,14 +61,15 @@ class ComparisonStatisticsAdapter : RecyclerView.Adapter<BaseViewHolder<Comparis
                     )
                 return ComparisonStatisticsHeaderViewHolder(binding)
             }
+
             else -> {
-                val binding = DataBindingUtil.inflate<ItemComparisonPlayerScheduleBinding>(
-                    inflater,
-                    R.layout.item_comparison_player_schedule,
-                    parent,
-                    false
+                return ComparisonScheduleViewHolder(
+                    ItemComparisonPlayerScheduleBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
                 )
-                return ComparisonScheduleViewHolder(binding)
             }
         }
     }

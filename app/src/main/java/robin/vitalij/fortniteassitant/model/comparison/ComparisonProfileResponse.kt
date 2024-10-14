@@ -1,6 +1,6 @@
 package robin.vitalij.fortniteassitant.model.comparison
 
-class ComparisonProfileResponse(
+data class ComparisonProfileResponse(
     val playerModel: PlayerModel = PlayerModel(),
     val playerTwoModel: PlayerModel = PlayerModel()
 )

@@ -33,7 +33,7 @@ import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.AvatarType
 import robin.vitalij.fortniteassitant.model.enums.FirebaseDynamicLinkType
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
-import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
+import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUserModel
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
 import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFragment
 import robin.vitalij.fortniteassitant.ui.bottomsheet.input_account_id.InputAccountIdResultFragment
@@ -218,7 +218,7 @@ class SearchUserFragment : Fragment(R.layout.fragment_search_user) {
         }
     }
 
-    private fun handleBattlesPassRewardsResult(result: LoadingState<List<SearchSteamUser>>) {
+    private fun handleBattlesPassRewardsResult(result: LoadingState<List<SearchSteamUserModel>>) {
         when (result) {
             is LoadingState.Loading -> {
                 binding.progressViewInclude.progressContainer.isVisible = true

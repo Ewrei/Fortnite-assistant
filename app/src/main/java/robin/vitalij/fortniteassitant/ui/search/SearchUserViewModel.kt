@@ -4,20 +4,18 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.interfaces.SaveUserCallback
 import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.FirebaseDynamicLinkType
 import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
-import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUser
+import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUserModel
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
 import robin.vitalij.fortniteassitant.repository.FirebaseDynamicLinkRepository
 import robin.vitalij.fortniteassitant.repository.network.GetSearchUserRepository
 import robin.vitalij.fortniteassitant.repository.network.SaveUserRepository
 import robin.vitalij.fortniteassitant.repository.storage.PreferenceManager
 import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
-import robin.vitalij.fortniteassitant.utils.ResourceProvider
 
 class SearchUserViewModel(
     private val getSearchUserRepository: GetSearchUserRepository,
@@ -40,9 +38,9 @@ class SearchUserViewModel(
     private var job: Job? = null
 
     private val fullFishStatsState =
-        MutableStateFlow<LoadingState<List<SearchSteamUser>>>(LoadingState.Success(emptyList()))
+        MutableStateFlow<LoadingState<List<SearchSteamUserModel>>>(LoadingState.Success(emptyList()))
 
-    val seasonsResult: StateFlow<LoadingState<List<SearchSteamUser>>> =
+    val seasonsResult: StateFlow<LoadingState<List<SearchSteamUserModel>>> =
         fullFishStatsState
 
     fun searchPlayer(searchName: String) {

@@ -4,11 +4,11 @@ import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 
 sealed class HomeActions {
 
-    object OpenParameterList : HomeActions()
+    data object OpenParameterList : HomeActions()
 
-    object OpenDetailsStatistics : HomeActions()
+    data object OpenDetailsStatistics : HomeActions()
 
-    object OpenSessions : HomeActions()
+    data object OpenSessions : HomeActions()
 
     data class OpenSession(
         val sessionId: Long,
@@ -17,5 +17,5 @@ sealed class HomeActions {
         val detailsStats: List<DetailStatisticsModel>
     ) : HomeActions()
 
-    object OpenSeason : HomeActions()
+    data object OpenSeason : HomeActions()
 }

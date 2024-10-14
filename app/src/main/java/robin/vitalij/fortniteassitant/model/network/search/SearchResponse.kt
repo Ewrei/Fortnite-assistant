@@ -2,27 +2,27 @@ package robin.vitalij.fortniteassitant.model.network.search
 
 import com.google.gson.annotations.SerializedName
 
-class SearchResponse(
+data class SearchResponse(
     @SerializedName("result") val result: Boolean,
     @SerializedName("account_id") val accountId: String,
-    @SerializedName("all_matches") val allMatches: List<Matches>,
+    @SerializedName("all_matches") val allMatches: List<MatchesModel>,
     @SerializedName("error") val error: String
 )
 
-class Matches(
+data class MatchesModel(
     @SerializedName("accountId") val accountId: String,
     @SerializedName("matchType") val matchType: String,
     @SerializedName("epicMutuals") val epicMutuals: String,
     @SerializedName("sortPosition") val sortPosition: Int,
-    @SerializedName("matches") val matches: List<MatchesBody>
+    @SerializedName("matches") val matches: List<MatchesBodyModel>
 )
 
-class MatchesBody(
+data class MatchesBodyModel(
     @SerializedName("value") val value: String,
     @SerializedName("platform") val platform: String
 )
 
-class SearchUserModel(
+data class SearchUserModel(
     @SerializedName("result") val result: Boolean,
     @SerializedName("account_id") val accountId: String
 )

@@ -2,13 +2,13 @@ package robin.vitalij.fortniteassitant.model.network
 
 import com.google.gson.annotations.SerializedName
 
-class FishStatsResponse(
+data class FishStatsResponse(
     @SerializedName("result") val result: Boolean = false,
     @SerializedName("lang") val lang: String = "",
     @SerializedName("stats") val seasonStats: List<SeasonStatsFishModel> = arrayListOf()
 )
 
-class SeasonStatsFishModel(
+data class SeasonStatsFishModel(
     @SerializedName("season") val season: Int,
     @SerializedName("fish") val fish: List<FishStatsModel>
 )

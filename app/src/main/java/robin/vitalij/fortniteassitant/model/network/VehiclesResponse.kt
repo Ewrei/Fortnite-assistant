@@ -4,14 +4,14 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
-class VehiclesResponse(
+data class VehiclesResponse(
     @SerializedName("result") val result: Boolean,
     @SerializedName("lang") val lang: String,
     @SerializedName("vehicles") val vehicles: List<VehicleModel>
 )
 
 @Parcelize
-class VehicleModel(
+data class VehicleModel(
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String,
     @SerializedName("icon") val icon: String,
@@ -21,7 +21,7 @@ class VehicleModel(
 ) : Parcelable
 
 @Parcelize
-class VehicleGearsModel(
+data class VehicleGearsModel(
     @SerializedName("TopSpeed") val topSpeed: String,
     @SerializedName("MinSpeed") val minSpeed: String,
     @SerializedName("PushForce") val pushForce: String,
@@ -32,7 +32,7 @@ class VehicleGearsModel(
 ) : Parcelable
 
 @Parcelize
-class VehicleStatsModel(
+data class VehicleStatsModel(
     @SerializedName("Default.Valet.MinSpawnPercent.SportsCar") val minSpawnPercent: String,
     @SerializedName("Default.Valet.MaxSpawnPercent.SportsCar") val maxSpawnPercent: String,
     @SerializedName("Default.Valet.SportsCar.MaxCanSpawn") val maxCanSpawn: String,
