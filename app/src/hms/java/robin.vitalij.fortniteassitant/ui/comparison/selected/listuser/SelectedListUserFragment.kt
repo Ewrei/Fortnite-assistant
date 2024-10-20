@@ -30,7 +30,6 @@ import robin.vitalij.fortniteassitant.ui.subscription.SubscriptionActivity
 import java.util.*
 import javax.inject.Inject
 
-
 class SelectedListUserFragment : BaseFragment() {
 
     @Inject
