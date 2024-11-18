@@ -8,7 +8,7 @@ import robin.vitalij.fortniteassitant.model.ErrorModel
 fun ViewErrorBinding.setErrorView(errorModel: ErrorModel) {
     this.errorView.isVisible = true
 
-    errorView.setVisibility(true)
+    errorView.isVisible = true
     errorText.text =
         if (errorModel.errors != null) errorModel.errors.error else this.root.context.getString(
             errorModel.textResourceId
@@ -20,12 +20,12 @@ fun ViewErrorBinding.setErrorView(errorModel: ErrorModel) {
         )
     )
     errorModel.descriptionResourceId?.let {
-        errorDescription.setVisibility(true)
+        errorDescription.isVisible = true
         errorDescription.setText(errorModel.descriptionResourceId)
     }
 
-    errorResolveButton.setVisibility(errorModel.isButtonVisible)
+    errorResolveButton.isVisible = errorModel.isButtonVisible
 
-    this.errorResolveButton.setVisibility(errorModel.isButtonVisible)
+    this.errorResolveButton.isVisible = errorModel.isButtonVisible
 
 }

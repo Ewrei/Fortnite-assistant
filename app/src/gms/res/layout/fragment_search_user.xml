@@ -82,6 +82,7 @@
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/strictUserSwitch"
                         android:layout_marginStart="@dimen/default_margin_double"
+                        android:visibility="gone"
                         android:layout_marginEnd="@dimen/default_margin_double"
                         android:textColor="@color/text_color"
                         android:layout_marginBottom="@dimen/default_margin"

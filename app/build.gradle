@@ -17,8 +17,8 @@ android {
         applicationId "robin.vitalij.fortniteassitant"
         minSdkVersion 22
         targetSdkVersion 34
-        versionCode 21
-        versionName "1.2.0"
+        versionCode 22
+        versionName "1.2.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -141,10 +141,10 @@ dependencies {
     implementation "com.google.android.material:material:$material_version"
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
 
-    def constraintlayout_version = "2.1.4"
+    def constraintlayout_version = '2.2.0'
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
 
-    def navigation_version = '2.8.2'
+    def navigation_version = '2.8.4'
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
 
@@ -167,8 +167,8 @@ dependencies {
 
     implementation "androidx.room:room-ktx:$room_version"
 
-    def lifecycle_version = '2.8.6'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.8.6'
+    def lifecycle_version = '2.8.7'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.8.7'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
 
@@ -198,7 +198,7 @@ dependencies {
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$coroutine_adapter_version"
 
     //Ads
-    def ads_version = '23.4.0'
+    def ads_version = '23.5.0'
     gmsImplementation "com.google.android.gms:play-services-ads:$ads_version"
     gmsImplementation "com.google.firebase:firebase-ads:$ads_version"
 
@@ -209,10 +209,10 @@ dependencies {
     def firebase_core_version = '21.1.1'
     implementation "com.google.firebase:firebase-core:$firebase_core_version"
 
-    def firebase_crashlytics_version = '19.2.0'
+    def firebase_crashlytics_version = '19.2.1'
     implementation "com.google.firebase:firebase-crashlytics:$firebase_crashlytics_version"
 
-    def firebase_firestore_ktx_version = '25.1.0'
+    def firebase_firestore_ktx_version = '25.1.1'
     implementation "com.google.firebase:firebase-firestore-ktx:$firebase_firestore_ktx_version"
 
     def firebase_dynamic_links_version = '22.1.0'
@@ -247,10 +247,10 @@ dependencies {
     hmsImplementation('com.huawei.hms:ads-lite:13.4.41.304')
     hmsImplementation('com.huawei.hms:ads-consent:3.4.41.304')
 
-    def unity_ads_version = '4.12.3'
+    def unity_ads_version = '4.12.4'
     gmsImplementation "com.unity3d.ads:unity-ads:$unity_ads_version"
 
-    def yandex_ads_version = '7.5.0'
+    def yandex_ads_version = '7.6.0'
     gmsImplementation "com.yandex.android:mobileads:$yandex_ads_version"
 
     def mobmetricalib_version = '5.3.0'
@@ -266,7 +266,5 @@ dependencies {
     implementation "com.google.android.play:app-update:$play_upp_update_version"
 
     implementation "com.google.android.play:app-update-ktx:$play_upp_update_version"
-
-    implementation 'com.paypal.android:paypal-web-payments:1.5.0'
 
 }

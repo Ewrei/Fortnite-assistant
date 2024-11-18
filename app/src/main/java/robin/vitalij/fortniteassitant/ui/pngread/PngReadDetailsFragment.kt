@@ -9,7 +9,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
+import robin.vitalij.fortniteassitant.common.extensions.loadImage
 import robin.vitalij.fortniteassitant.databinding.FragmentPngReadBinding
 
 class PngReadDetailsFragment : Fragment(R.layout.fragment_png_read) {
@@ -23,12 +23,12 @@ class PngReadDetailsFragment : Fragment(R.layout.fragment_png_read) {
         setNavigation()
 
         binding.image.loadImage(args.argImageUrl)
-        binding.include.toolbar.title = args.argTitle
+        binding.toolbarInclude.toolbar.title = args.argTitle
     }
 
     private fun setNavigation() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        binding.include.toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbarInclude.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 }

@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
-import robin.vitalij.fortniteassitant.common.extensions.setVisibility
+import androidx.core.view.isVisible
 import robin.vitalij.fortniteassitant.databinding.LayoutComparisonSelectedBinding
 
 private const val EMPTY = 0
@@ -20,15 +20,15 @@ class SelectedComparisonImageView(context: Context?, attrs: AttributeSet?) :
 
     init {
         this.addView(binding.root)
-        binding.countTextView.setVisibility(false)
+        binding.countTextView.isVisible = false
     }
 
     fun setFilterSize(size: Int?) {
         binding.countTextView.text = size.toString()
         if (size == null || size == EMPTY) {
-            binding.countTextView.setVisibility(false)
+            binding.countTextView.isVisible = false
         } else {
-            binding.countTextView.setVisibility(true)
+            binding.countTextView.isVisible = true
         }
     }
 }

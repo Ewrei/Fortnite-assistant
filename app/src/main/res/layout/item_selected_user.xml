@@ -39,7 +39,6 @@
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginTop="@dimen/default_margin"
                     android:layout_marginBottom="@dimen/default_margin"
-                    app:profileImageUrl="@{item.userEntity.image}"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
@@ -48,7 +47,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_margin"
                     android:fontFamily="@font/futura_pt_bold"
-                    android:text="@{item.userEntity.name}"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     tools:text="name" />
             </TableRow>

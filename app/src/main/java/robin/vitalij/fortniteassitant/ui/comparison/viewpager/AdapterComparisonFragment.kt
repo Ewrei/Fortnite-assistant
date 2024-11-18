@@ -1,19 +1,19 @@
 package robin.vitalij.fortniteassitant.ui.comparison.viewpager
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageButton
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import by.kirich1409.viewbindingdelegate.viewBinding
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.loadImage
 import robin.vitalij.fortniteassitant.databinding.FragmentAdapterComparionBinding
+import robin.vitalij.fortniteassitant.model.comparison.ComparisonProfileResponse
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.ComparisonDataType
 import robin.vitalij.fortniteassitant.model.enums.GameType
@@ -34,8 +34,6 @@ class AdapterComparisonFragment : Fragment(R.layout.fragment_adapter_comparion) 
 
     private lateinit var viewModel: AdapterComparisonViewModel
 
-    private lateinit var dataBinding: FragmentAdapterComparionBinding
-
     private lateinit var playerOneId: String
     private lateinit var playerTwoId: String
 
@@ -46,20 +44,7 @@ class AdapterComparisonFragment : Fragment(R.layout.fragment_adapter_comparion) 
 
     private lateinit var pagerAdapter: BaseViewPagerAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        dataBinding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.fragment_adapter_comparion,
-            container,
-            false
-        )
-        dataBinding.lifecycleOwner = this@AdapterComparisonFragment
-        dataBinding.viewModel = viewModel
-        return dataBinding.contentView
-    }
+    private val binding by viewBinding(FragmentAdapterComparionBinding::bind)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,16 +61,16 @@ class AdapterComparisonFragment : Fragment(R.layout.fragment_adapter_comparion) 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dataBinding.viewPager.offscreenPageLimit = 6
+        binding.viewPager.offscreenPageLimit = 6
 
         arguments?.let {
             viewModel.loadData(it.getSerializable(ARG_COMPARISON_DATA_TYPE) as ComparisonDataType)
         }
 
-        viewModel.data.observe(viewLifecycleOwner, {
-            dataBinding.model = it
+        viewModel.data.observe(viewLifecycleOwner) { comparisonProfileResponse ->
+            setData(comparisonProfileResponse)
             addTabs()
-        })
+        }
 
         setListeners()
     }
@@ -116,23 +101,23 @@ class AdapterComparisonFragment : Fragment(R.layout.fragment_adapter_comparion) 
                 isSchedule = !isSchedule
                 favoriteMenuItem?.isSelected = isSchedule
 
-                ((dataBinding.viewPager.adapter as BaseViewPagerAdapter).getItem(0) as ComparisonStatisticsFragment).loadSchedule(
+                ((binding.viewPager.adapter as BaseViewPagerAdapter).getItem(0) as ComparisonStatisticsFragment).loadSchedule(
                     isSchedule
                 )
-                ((dataBinding.viewPager.adapter as BaseViewPagerAdapter).getItem(1) as ComparisonStatisticsFragment).loadSchedule(
+                ((binding.viewPager.adapter as BaseViewPagerAdapter).getItem(1) as ComparisonStatisticsFragment).loadSchedule(
                     isSchedule
                 )
 
-                ((dataBinding.viewPager.adapter as BaseViewPagerAdapter).getItem(2) as ComparisonStatisticsFragment).loadSchedule(
+                ((binding.viewPager.adapter as BaseViewPagerAdapter).getItem(2) as ComparisonStatisticsFragment).loadSchedule(
                     isSchedule
                 )
-                ((dataBinding.viewPager.adapter as BaseViewPagerAdapter).getItem(3) as ComparisonStatisticsFragment).loadSchedule(
+                ((binding.viewPager.adapter as BaseViewPagerAdapter).getItem(3) as ComparisonStatisticsFragment).loadSchedule(
                     isSchedule
                 )
-                ((dataBinding.viewPager.adapter as BaseViewPagerAdapter).getItem(4) as ComparisonStatisticsFragment).loadSchedule(
+                ((binding.viewPager.adapter as BaseViewPagerAdapter).getItem(4) as ComparisonStatisticsFragment).loadSchedule(
                     isSchedule
                 )
-                ((dataBinding.viewPager.adapter as BaseViewPagerAdapter).getItem(5) as ComparisonStatisticsFragment).loadSchedule(
+                ((binding.viewPager.adapter as BaseViewPagerAdapter).getItem(5) as ComparisonStatisticsFragment).loadSchedule(
                     isSchedule
                 )
             }
@@ -147,45 +132,53 @@ class AdapterComparisonFragment : Fragment(R.layout.fragment_adapter_comparion) 
         return super.onOptionsItemSelected(item)
     }
 
+    private fun setData(comparisonProfileResponse: ComparisonProfileResponse) {
+        binding.avatarOne.loadImage(comparisonProfileResponse.playerModel.userEntity.avatar)
+        binding.avatarTwo.loadImage(comparisonProfileResponse.playerTwoModel.userEntity.avatar)
+
+        binding.nickNameTwo.text = comparisonProfileResponse.playerTwoModel.userEntity.name
+        binding.nicknameOne.text = comparisonProfileResponse.playerModel.userEntity.name
+    }
+
     private fun setListeners() {
-        dataBinding.typeStatGroupInclude.allStats.setOnClickListener {
-            ((dataBinding.viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
+        binding.typeStatGroupInclude.allStats.setOnClickListener {
+            ((binding.viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
                 (it as? ComparisonStatisticsFragment)?.loadGameType(
                     GameType.ALL
                 )
             })
         }
 
-        dataBinding.typeStatGroupInclude.keyboardMouse.setOnClickListener {
-            ((dataBinding.viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
+        binding.typeStatGroupInclude.keyboardMouse.setOnClickListener {
+            ((binding.viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
                 (it as? ComparisonStatisticsFragment)?.loadGameType(
                     GameType.KEYBOARD_MOUSE
                 )
             })
         }
 
-        dataBinding.typeStatGroupInclude.gamepad.setOnClickListener {
-            ((dataBinding.viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
+        binding.typeStatGroupInclude.gamepad.setOnClickListener {
+            ((binding.viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
                 (it as? ComparisonStatisticsFragment)?.loadGameType(
                     GameType.GAMEPAD
                 )
             })
         }
 
-        dataBinding.typeStatGroupInclude.touch.setOnClickListener {
-            ((dataBinding.viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
+        binding.typeStatGroupInclude.touch.setOnClickListener {
+            ((binding.viewPager.adapter as BaseViewPagerAdapter).getItems().forEach {
                 (it as? ComparisonStatisticsFragment)?.loadGameType(GameType.TOUCH)
             })
         }
     }
 
     private fun saveSelectedTab() {
-        lastTab = dataBinding.viewPager.currentItem
+        lastTab = binding.viewPager.currentItem
     }
 
     private fun restoreSelectedTab() {
         if (lastTab != DEFAULT_LAST_TAB_VALUE) {
-            dataBinding.viewPager.currentItem = lastTab
+            binding.viewPager.currentItem = lastTab
         }
     }
 
@@ -245,7 +238,7 @@ class AdapterComparisonFragment : Fragment(R.layout.fragment_adapter_comparion) 
                 ),
                 getString(R.string.ltm_battles)
             )
-            dataBinding.viewPager.adapter = pagerAdapter
+            binding.viewPager.adapter = pagerAdapter
         }
     }
 

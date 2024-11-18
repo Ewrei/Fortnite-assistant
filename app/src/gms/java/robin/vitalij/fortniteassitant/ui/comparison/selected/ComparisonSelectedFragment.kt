@@ -147,9 +147,9 @@ class ComparisonSelectedFragment : Fragment(R.layout.fragment_comparion), ErrorC
 
     private fun initBanner() {
         if (viewModel.preferenceManager.getIsSubscription() || viewModel.preferenceManager.getDisableAdvertising() >= Date().time) {
-            binding.customBannerView.setVisibility(false)
+            binding.customBannerView.isVisible = false
         } else {
-            binding.customBannerView.setVisibility(true)
+            binding.customBannerView.isVisible = true
             binding.customBannerView.startBanner(getString(R.string.BANNER_ID), activity)
         }
     }

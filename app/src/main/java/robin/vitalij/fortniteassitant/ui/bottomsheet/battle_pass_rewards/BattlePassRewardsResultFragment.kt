@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
 import robin.vitalij.fortniteassitant.common.extensions.initBottomSheetInternal
+import robin.vitalij.fortniteassitant.common.extensions.loadImage
 import robin.vitalij.fortniteassitant.databinding.BottomSheetBattlesPassRewardsBinding
 import robin.vitalij.fortniteassitant.model.network.Reward
 import robin.vitalij.fortniteassitant.ui.bottomsheet.battle_pass_rewards.BattlePassRewardsResultViewModel

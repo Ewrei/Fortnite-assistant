@@ -12,10 +12,10 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadBackgroundRarity
-import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
 import robin.vitalij.fortniteassitant.common.binding.TextViewBinding.setValueText
 import robin.vitalij.fortniteassitant.common.extensions.initBottomSheetInternal
+import robin.vitalij.fortniteassitant.common.extensions.loadBackgroundRarity
+import robin.vitalij.fortniteassitant.common.extensions.loadImage
 import robin.vitalij.fortniteassitant.databinding.BottomSheetUpcomingShopBinding
 import robin.vitalij.fortniteassitant.model.network.shop.ItemShopUpcoming
 import javax.inject.Inject

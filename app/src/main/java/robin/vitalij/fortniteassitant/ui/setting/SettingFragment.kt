@@ -19,7 +19,7 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
+import robin.vitalij.fortniteassitant.common.extensions.loadImage
 import robin.vitalij.fortniteassitant.common.extensions.setErrorView
 import robin.vitalij.fortniteassitant.common.extensions.showDialog
 import robin.vitalij.fortniteassitant.databinding.FragmentSettingBinding

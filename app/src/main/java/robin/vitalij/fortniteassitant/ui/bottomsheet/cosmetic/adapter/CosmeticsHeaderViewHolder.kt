@@ -2,8 +2,8 @@ package robin.vitalij.fortniteassitant.ui.bottomsheet.cosmetic.adapter
 
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadBackgroundRarity
-import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImages
+import robin.vitalij.fortniteassitant.common.extensions.loadBackgroundRarity
+import robin.vitalij.fortniteassitant.common.extensions.loadImages
 import robin.vitalij.fortniteassitant.databinding.ItemCosmeticsHeaderBinding
 import robin.vitalij.fortniteassitant.db.entity.Set
 

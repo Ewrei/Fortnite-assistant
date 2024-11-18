@@ -1,9 +1,8 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.weapon.adapter
 
 import androidx.recyclerview.widget.RecyclerView
-import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
 import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
-import robin.vitalij.fortniteassitant.databinding.ItemWeaponBinding
+import robin.vitalij.fortniteassitant.common.extensions.loadImage
 import robin.vitalij.fortniteassitant.databinding.ItemWeaponResultBinding
 import robin.vitalij.fortniteassitant.db.entity.WeaponEntity
 

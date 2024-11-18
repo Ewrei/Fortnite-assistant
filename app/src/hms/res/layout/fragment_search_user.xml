@@ -89,6 +89,7 @@
                         app:fontFamily="@font/futura_pt_medium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:text="@string/look_for_similar" />
 
                     <com.google.android.material.button.MaterialButton

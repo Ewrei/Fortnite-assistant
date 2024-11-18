@@ -3,9 +3,9 @@ package robin.vitalij.fortniteassitant.ui.battle_pass_rewards.adapter
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
 import robin.vitalij.fortniteassitant.common.binding.TextViewBinding.setTypeShop
 import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
+import robin.vitalij.fortniteassitant.common.extensions.loadImage
 import robin.vitalij.fortniteassitant.databinding.ItemBattlesPassRewardsBinding
 import robin.vitalij.fortniteassitant.model.battle_pass_reward.BattlesPassRewardsModel
 

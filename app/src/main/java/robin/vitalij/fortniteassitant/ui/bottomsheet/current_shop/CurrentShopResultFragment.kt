@@ -12,11 +12,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadBackgroundRarity
-import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
 import robin.vitalij.fortniteassitant.common.binding.TextViewBinding.setValueText
 import robin.vitalij.fortniteassitant.common.extensions.getScreenWidth
 import robin.vitalij.fortniteassitant.common.extensions.initBottomSheetInternal
+import robin.vitalij.fortniteassitant.common.extensions.loadBackgroundRarity
+import robin.vitalij.fortniteassitant.common.extensions.loadImage
 import robin.vitalij.fortniteassitant.databinding.BottomSheetCurrentShopBinding
 import robin.vitalij.fortniteassitant.model.network.shop.GrantedModel
 import robin.vitalij.fortniteassitant.model.network.shop.ShopNewItem

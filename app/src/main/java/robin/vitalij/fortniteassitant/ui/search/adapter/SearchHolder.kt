@@ -1,7 +1,7 @@
 package robin.vitalij.fortniteassitant.ui.search.adapter
 
 import androidx.recyclerview.widget.RecyclerView
-import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
+import robin.vitalij.fortniteassitant.common.extensions.loadImage
 import robin.vitalij.fortniteassitant.databinding.ItemSearchBinding
 import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUserModel
 

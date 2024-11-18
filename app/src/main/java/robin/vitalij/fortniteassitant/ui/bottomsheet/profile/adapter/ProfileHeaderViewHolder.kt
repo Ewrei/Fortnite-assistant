@@ -2,9 +2,9 @@ package robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
 import robin.vitalij.fortniteassitant.common.binding.TextViewBinding.setTextPercent
 import robin.vitalij.fortniteassitant.common.binding.TextViewBinding.setValueText
+import robin.vitalij.fortniteassitant.common.extensions.loadImage
 import robin.vitalij.fortniteassitant.databinding.ItemProfileHeaderBinding
 
 class ProfileHeaderViewHolder(

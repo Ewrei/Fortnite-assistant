@@ -1,9 +1,9 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.currentshop.adapter
 
 import androidx.recyclerview.widget.RecyclerView
-import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadBackgroundRarity
-import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
 import robin.vitalij.fortniteassitant.common.binding.TextViewBinding.setTypeShop
+import robin.vitalij.fortniteassitant.common.extensions.loadBackgroundRarity
+import robin.vitalij.fortniteassitant.common.extensions.loadImage
 import robin.vitalij.fortniteassitant.databinding.ItemOtherItemsDetailsBinding
 import robin.vitalij.fortniteassitant.model.network.shop.GrantedModel
 

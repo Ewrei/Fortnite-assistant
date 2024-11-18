@@ -2,7 +2,7 @@ package robin.vitalij.fortniteassitant.ui.news.fragment.adapter
 
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import robin.vitalij.fortniteassitant.common.binding.ImageViewBinging.loadImage
+import robin.vitalij.fortniteassitant.common.extensions.loadImage
 import robin.vitalij.fortniteassitant.databinding.ItemNewsBinding
 import robin.vitalij.fortniteassitant.model.network.NewsModel
 
