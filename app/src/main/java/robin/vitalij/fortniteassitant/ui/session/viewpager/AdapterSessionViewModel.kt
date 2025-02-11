@@ -6,7 +6,7 @@ import robin.vitalij.fortniteassitant.ui.common.BaseViewModel
 
 class AdapterSessionViewModel : ViewModel() {
 
-    var detailsStatistics: ArrayList<DetailStatisticsModel> = arrayListOf()
+    var detailsStatistics: MutableList<DetailStatisticsModel> = mutableListOf()
 
     var sessionId: Long = 0
 

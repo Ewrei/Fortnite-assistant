@@ -7,6 +7,9 @@ import robin.vitalij.fortniteassitant.common.extensions.DATE_PATTERN_SHORT_TIME
 import robin.vitalij.fortniteassitant.common.extensions.getDateStringFormat
 import robin.vitalij.fortniteassitant.common.extensions.getDetailStatisticsModelList
 import robin.vitalij.fortniteassitant.common.extensions.loadDrawable
+import robin.vitalij.fortniteassitant.common.extensions.setSessionData
+import robin.vitalij.fortniteassitant.common.extensions.setTextPercent
+import robin.vitalij.fortniteassitant.common.extensions.setValueText
 import robin.vitalij.fortniteassitant.databinding.ItemHomeSessionCardBinding
 import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 
@@ -16,7 +19,18 @@ class HomeSessionViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: HomeSessionListItem.SessionItem) {
-        binding.item = item
+        binding.matchesPlayed.setValueText(
+            item.historyUserModel.userEntity.all?.overall?.matches ?: 0
+        )
+        binding.winRate.setTextPercent(
+            item.historyUserModel.userEntity.all?.overall?.winRate ?: 0.0
+        )
+        binding.leftBottom.setValueText(item.historyUserModel.userEntity.all?.overall?.kd ?: 0.0)
+
+        binding.sessionDate.setSessionData(
+            item.historyUserModel.startTimeUpdate,
+            item.historyUserModel.endTimeUpdate
+        )
 
         binding.mapImage.loadDrawable(
             ContextCompat.getDrawable(

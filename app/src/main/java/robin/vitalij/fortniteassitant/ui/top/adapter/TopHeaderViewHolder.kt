@@ -1,8 +1,10 @@
 package robin.vitalij.fortniteassitant.ui.top.adapter
 
 import androidx.recyclerview.widget.RecyclerView
+import robin.vitalij.fortniteassitant.common.extensions.setBattlesType
+import robin.vitalij.fortniteassitant.common.extensions.setGameType
+import robin.vitalij.fortniteassitant.common.extensions.setTopType
 import robin.vitalij.fortniteassitant.databinding.ItemTopHeaderBinding
-import robin.vitalij.fortniteassitant.ui.top.adapter.TopListItem
 
 class TopHeaderViewHolder(
     private val binding: ItemTopHeaderBinding,
@@ -10,7 +12,11 @@ class TopHeaderViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: TopListItem.HeaderItem) {
-        binding.item = item.topFullModel
+        binding.topType.setTopType(item.topFullModel.topType)
+        binding.topValue.setTopType(item.topFullModel.topType)
+        binding.gameType.setGameType(item.topFullModel.gameType)
+        binding.battlesType.setBattlesType(item.topFullModel.battlesType)
+
         itemView.setOnClickListener {
             onTopClick()
         }

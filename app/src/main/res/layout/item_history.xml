@@ -85,13 +85,13 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="@android:color/darker_gray"
                 app:layout_constraintBottom_toTopOf="@+id/view3"
-                app:layout_constraintEnd_toEndOf="@+id/leftTop"
+                app:layout_constraintEnd_toEndOf="@+id/matches"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@+id/leftTop"
-                app:layout_constraintTop_toBottomOf="@+id/leftTop" />
+                app:layout_constraintStart_toStartOf="@+id/matches"
+                app:layout_constraintTop_toBottomOf="@+id/matches" />
 
             <TextView
-                android:id="@+id/leftTop"
+                android:id="@+id/matches"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin_double"
@@ -117,13 +117,13 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="@android:color/darker_gray"
                 app:layout_constraintBottom_toBottomOf="@+id/view2"
-                app:layout_constraintEnd_toEndOf="@+id/rightTop"
+                app:layout_constraintEnd_toEndOf="@+id/kills"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/rightTop"
-                app:layout_constraintTop_toBottomOf="@+id/rightTop" />
+                app:layout_constraintStart_toStartOf="@+id/kills"
+                app:layout_constraintTop_toBottomOf="@+id/kills" />
 
             <TextView
-                android:id="@+id/rightTop"
+                android:id="@+id/kills"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin_double"
@@ -157,7 +157,7 @@
                 tools:arc_progress="55" />
 
             <TextView
-                android:id="@+id/leftBottom"
+                android:id="@+id/kd"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin_double"
@@ -183,13 +183,13 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="@android:color/darker_gray"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/leftBottom"
+                app:layout_constraintEnd_toEndOf="@+id/kd"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@+id/leftBottom"
-                app:layout_constraintTop_toBottomOf="@+id/leftBottom" />
+                app:layout_constraintStart_toStartOf="@+id/kd"
+                app:layout_constraintTop_toBottomOf="@+id/kd" />
 
             <TextView
-                android:id="@+id/rightBottom"
+                android:id="@+id/minutes_played"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin_double"
@@ -215,10 +215,10 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="@android:color/darker_gray"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/rightBottom"
+                app:layout_constraintEnd_toEndOf="@+id/minutes_played"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@+id/rightBottom"
-                app:layout_constraintTop_toBottomOf="@+id/rightBottom" />
+                app:layout_constraintStart_toStartOf="@+id/minutes_played"
+                app:layout_constraintTop_toBottomOf="@+id/minutes_played" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

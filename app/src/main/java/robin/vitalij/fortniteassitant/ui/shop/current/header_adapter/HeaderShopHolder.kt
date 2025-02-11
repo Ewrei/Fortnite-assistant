@@ -2,11 +2,10 @@ package robin.vitalij.fortniteassitant.ui.shop.current.header_adapter
 
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import robin.vitalij.fortniteassitant.common.binding.TextViewBinding.setValueText
+import robin.vitalij.fortniteassitant.common.extensions.setValueText
 import robin.vitalij.fortniteassitant.databinding.ItemHeaderShopBinding
 import robin.vitalij.fortniteassitant.model.network.shop.ShopAdapterItem
 import robin.vitalij.fortniteassitant.model.network.shop.ShopNewItem
-import robin.vitalij.fortniteassitant.ui.shop.current.CurrentShopFragment
 import robin.vitalij.fortniteassitant.ui.shop.current.adapter.CurrentShopAdapter
 import robin.vitalij.fortniteassitant.utils.GridSpacingItemDecoration
 

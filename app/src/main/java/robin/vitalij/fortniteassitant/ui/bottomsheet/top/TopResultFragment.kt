@@ -5,6 +5,7 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
@@ -18,9 +19,8 @@ import robin.vitalij.fortniteassitant.interfaces.TopResultCallback
 import robin.vitalij.fortniteassitant.model.TopFullModel
 import robin.vitalij.fortniteassitant.model.enums.BattlesType
 import robin.vitalij.fortniteassitant.model.enums.GameType
+import robin.vitalij.fortniteassitant.ui.bottomsheet.top.adapter.TopListItem
 import robin.vitalij.fortniteassitant.ui.bottomsheet.top.adapter.TopResultAdapter
-import robin.vitalij.fortniteassitant.ui.bottomsheet.top.adapter.viewmodel.TopResult
-import robin.vitalij.fortniteassitant.ui.bottomsheet.top.adapter.viewmodel.TopResultType
 import javax.inject.Inject
 
 
@@ -67,12 +67,12 @@ class TopResultFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.mutableLiveData.observe(viewLifecycleOwner, {
+        viewModel.mutableLiveData.observe(viewLifecycleOwner) {
             it.let(::initAdapter)
-        })
+        }
 
         arguments?.let {
-            viewModel.topFullModel = it.getSerializable(TOP_FULL_MODEL) as TopFullModel
+            viewModel.topFullModel = it.getSerializable(ARG_TOP_FULL_MODEL) as TopFullModel
         }
 
         viewModel.loadData()
@@ -88,13 +88,13 @@ class TopResultFragment : BottomSheetDialogFragment() {
         sheetContainer.layoutParams.height = (displayMetrics.heightPixels - BOTTOM_SHEET_MARGIN_TOP)
     }
 
-    private fun initAdapter(list: List<TopResult>) {
+    private fun initAdapter(list: List<TopListItem>) {
         dataBinding.recyclerView.run {
             adapter = TopResultAdapter {
                 topResultCallback?.checkTop(TopFullModel(it, gameType, battlesType))
                 dismiss()
             }
-            (adapter as TopResultAdapter).setData(list)
+            (adapter as TopResultAdapter).updateData(list)
             val gridlayoutManager = GridLayoutManager(
                 activity, MAX_SPAN_COUNT
             )
@@ -102,8 +102,8 @@ class TopResultFragment : BottomSheetDialogFragment() {
             gridlayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {
                     return when (adapter?.getItemViewType(position)) {
-                        TopResultType.HEADER.id -> 2
-                        TopResultType.CONTENT.id -> 1
+                        R.layout.item_top_result_header -> 2
+                        R.layout.item_top_result_content -> 1
                         else -> 1
                     }
                 }
@@ -140,7 +140,7 @@ class TopResultFragment : BottomSheetDialogFragment() {
     companion object {
 
         private const val TAG = "TopResultFragment"
-        private const val TOP_FULL_MODEL = "top_full_model"
+        private const val ARG_TOP_FULL_MODEL = "arg_top_full_model"
         private const val MAX_SPAN_COUNT = 2
 
         fun show(
@@ -150,14 +150,9 @@ class TopResultFragment : BottomSheetDialogFragment() {
         ) {
             fragmentManager?.let {
                 TopResultFragment().apply {
-                    arguments = Bundle().apply {
-                        putSerializable(TOP_FULL_MODEL, topFullModel)
-                    }
+                    arguments = bundleOf(ARG_TOP_FULL_MODEL to topFullModel)
                     this.topResultCallback = topResultCallback
-                }.show(
-                    it,
-                    TAG
-                )
+                }.show(it, TAG)
             }
         }
     }

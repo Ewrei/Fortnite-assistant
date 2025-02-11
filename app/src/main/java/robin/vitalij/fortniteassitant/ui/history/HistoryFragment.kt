@@ -3,7 +3,6 @@ package robin.vitalij.fortniteassitant.ui.history
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,7 +12,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
@@ -23,11 +21,7 @@ import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 import robin.vitalij.fortniteassitant.model.ErrorModelListItem
 import robin.vitalij.fortniteassitant.model.HistoryUserModel
 import robin.vitalij.fortniteassitant.model.LoadingState
-import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.history.adapter.HistoryAdapter
-import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.ARG_DATE
-import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.ARG_SESSION_ID
-import robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment.Companion.ARG_SESSION_LAST_ID
 import javax.inject.Inject
 
 
@@ -43,12 +37,11 @@ class HistoryFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) {
     private val historyAdapter =
         HistoryAdapter { sessionId: Long, sessionLast: Long, sessionDate: String, detailsStats: List<DetailStatisticsModel> ->
             findNavController().navigate(
-                R.id.navigation_adapter_session,
-                bundleOf(
-                    ARG_SESSION_ID to sessionId,
-                    ARG_SESSION_LAST_ID to sessionLast,
-                    ARG_DATE to sessionDate,
-                    AdapterDetailsStatisticsFragment.ARG_DETAIL_STATISTICS to detailsStats as ArrayList<DetailStatisticsModel>
+                HistoryFragmentDirections.actionNavigationHistoryToAdapterSessionFragment2(
+                    sessionId,
+                    sessionLast,
+                    sessionDate,
+                    detailsStats.toTypedArray()
                 )
             )
         }
@@ -65,7 +58,7 @@ class HistoryFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) {
 
         binding.viewEmptyInclude.empty.setText(R.string.empty_session)
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.historiesResult.collect {
                 handleHistoriesResult(it)
             }
@@ -93,11 +86,13 @@ class HistoryFragment : Fragment(R.layout.fragment_recycler_view_with_toolbar) {
                 binding.progressViewInclude.progressContainer.isVisible = true
                 binding.errorViewInclude.errorView.isVisible = false
             }
+
             is LoadingState.Success -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
                 binding.viewEmptyInclude.emptyView.isVisible = result.data.isEmpty()
                 historyAdapter.updateData(result.data)
             }
+
             is LoadingState.Error -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
 

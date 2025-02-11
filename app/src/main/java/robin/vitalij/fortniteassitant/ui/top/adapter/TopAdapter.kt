@@ -2,10 +2,11 @@ package robin.vitalij.fortniteassitant.ui.top.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
-import robin.vitalij.fortniteassitant.model.network.NewsModel
+import robin.vitalij.fortniteassitant.databinding.ItemTopBinding
+import robin.vitalij.fortniteassitant.databinding.ItemTopCurrentBinding
+import robin.vitalij.fortniteassitant.databinding.ItemTopHeaderBinding
 
 class TopAdapter(
     private val onClick: (accountId: String) -> Unit,
@@ -28,35 +29,35 @@ class TopAdapter(
         return when (viewType) {
             R.layout.item_top_header -> {
                 TopHeaderViewHolder(
-                    DataBindingUtil.inflate(
+                    ItemTopHeaderBinding.inflate(
                         inflater,
-                        R.layout.item_top_header,
                         parent,
                         false
                     ),
                     onTopClick
                 )
             }
+
             R.layout.item_top -> {
                 TopViewHolder(
-                    DataBindingUtil.inflate(
+                    ItemTopBinding.inflate(
                         inflater,
-                        R.layout.item_top,
                         parent,
                         false
                     ), onClick
                 )
             }
+
             R.layout.item_top_current -> {
                 TopCurrentViewHolder(
-                    DataBindingUtil.inflate(
+                    ItemTopCurrentBinding.inflate(
                         inflater,
-                        R.layout.item_top_current,
                         parent,
                         false
                     )
                 )
             }
+
             else -> throw UnknownError("Unknown view type $viewType")
         }
     }

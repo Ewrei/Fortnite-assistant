@@ -2,9 +2,8 @@ package robin.vitalij.fortniteassitant.ui.comparison.selected.listuser.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.databinding.ItemSelectedUserBinding
 import robin.vitalij.fortniteassitant.model.comparison.PlayerModel
 
 internal class SelectedListUserAdapter(private val onClick: (playerModel: PlayerModel) -> Unit) :
@@ -24,9 +23,8 @@ internal class SelectedListUserAdapter(private val onClick: (playerModel: Player
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = SelectedListUserHolder(
-        DataBindingUtil.inflate(
+        ItemSelectedUserBinding.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_selected_user,
             parent,
             false
         )

@@ -1,8 +1,8 @@
 package robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter.stats_adapter
 
 import androidx.recyclerview.widget.RecyclerView
-import robin.vitalij.fortniteassitant.common.binding.TextViewBinding.setTextPercent
 import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
+import robin.vitalij.fortniteassitant.common.extensions.setTextPercent
 import robin.vitalij.fortniteassitant.databinding.ItemBodyStatsOverallBinding
 
 class BodyStatsOverallViewHolder(

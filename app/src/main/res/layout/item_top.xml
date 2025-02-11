@@ -1,68 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/DefaultCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/default_margin">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <variable
-            name="item"
-            type="robin.vitalij.fortniteassitant.ui.top.adapter.TopListItem.PlayerItem" />
-    </data>
-
-    <com.google.android.material.card.MaterialCardView
-        style="@style/DefaultCard"
+    <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin">
+        android:layout_margin="@dimen/half_default_margin"
+        android:gravity="center_vertical">
 
-        <TableRow
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/position"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/half_default_margin"
-            android:gravity="center_vertical">
+            android:layout_marginStart="@dimen/default_margin"
+            android:minWidth="50dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/darker_gray"
+            android:textStyle="bold"
+            tools:text="pos" />
 
-            <TextView
-                android:id="@+id/position"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
-                android:minWidth="50dp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@android:color/darker_gray"
-                android:textStyle="bold"
-                app:value="@{item.position}"
-                tools:text="pos" />
+        <TextView
+            android:id="@+id/nickName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin_double"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            tools:text="12123434" />
 
-            <TextView
-                android:id="@+id/nickName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
-                android:layout_marginEnd="@dimen/default_margin_double"
-                android:layout_weight="1"
-                android:singleLine="true"
-                android:text="@{item.userName}"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textStyle="bold"
-                tools:text="12123434" />
+        <TextView
+            android:id="@+id/value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:gravity="end"
+            android:minWidth="90dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            tools:text="value" />
 
-            <TextView
-                android:id="@+id/value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/default_margin"
-                android:gravity="end"
-                android:minWidth="90dp"
-                android:text="@{item.value}"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                tools:text="value" />
+    </TableRow>
 
-        </TableRow>
-
-    </com.google.android.material.card.MaterialCardView>
-
-
-</layout>
+</com.google.android.material.card.MaterialCardView>

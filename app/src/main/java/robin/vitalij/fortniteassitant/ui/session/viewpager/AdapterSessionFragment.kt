@@ -7,6 +7,7 @@ import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -15,7 +16,6 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.databinding.FragmentAdapterDetailsStatisticsBinding
 import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 import robin.vitalij.fortniteassitant.ui.common.BaseViewPagerAdapter
-import robin.vitalij.fortniteassitant.ui.details.viewpager.AdapterDetailsStatisticsFragment
 import robin.vitalij.fortniteassitant.ui.session.statistics.DetailsSessionStatisticsFragment
 import robin.vitalij.fortniteassitant.utils.view.GameBattlesAdapter
 import javax.inject.Inject
@@ -32,6 +32,8 @@ class AdapterSessionFragment : Fragment(R.layout.fragment_adapter_details_statis
 
     private var lastTab: Int = DEFAULT_LAST_TAB_VALUE
 
+    private val args: AdapterSessionFragmentArgs by navArgs()
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         FortniteApplication.appComponent.inject(this)
@@ -39,14 +41,9 @@ class AdapterSessionFragment : Fragment(R.layout.fragment_adapter_details_statis
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            viewModel.sessionLastId = it.getLong(ARG_SESSION_LAST_ID)
-            viewModel.sessionId = it.getLong(ARG_SESSION_ID)
-            viewModel.detailsStatistics =
-                it.getParcelableArrayList<DetailStatisticsModel>(
-                    AdapterDetailsStatisticsFragment.ARG_DETAIL_STATISTICS
-                ) as ArrayList<DetailStatisticsModel>
-        }
+        viewModel.sessionLastId = args.argSessionLastId
+        viewModel.sessionId = args.argSessionId
+        viewModel.detailsStatistics.addAll(args.argDetailStatistics.toList())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -130,8 +127,6 @@ class AdapterSessionFragment : Fragment(R.layout.fragment_adapter_details_statis
     }
 
     companion object {
-        const val ARG_SESSION_ID = "arg_session_id"
-        const val ARG_SESSION_LAST_ID = "arg_session_last_id"
         const val ARG_DATE = "arg_date"
 
         private const val DEFAULT_LAST_TAB_VALUE = Integer.MAX_VALUE

@@ -3,9 +3,10 @@ package robin.vitalij.fortniteassitant.ui.home.adapter.viewholder.session.adapte
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.databinding.ItemHomeSessionCardBinding
+import robin.vitalij.fortniteassitant.databinding.ItemHomeSessionOtherBinding
 import robin.vitalij.fortniteassitant.model.DetailStatisticsModel
 
 class HomeSessionAdapter(
@@ -35,26 +36,26 @@ class HomeSessionAdapter(
         return when (viewType) {
             R.layout.item_home_session_other -> {
                 HomeOtherViewHolder(
-                    DataBindingUtil.inflate(
+                    ItemHomeSessionOtherBinding.inflate(
                         inflater,
-                        R.layout.item_home_session_other,
                         parent,
                         false
                     ),
                     openSessions
                 )
             }
+
             R.layout.item_home_session_card -> {
                 HomeSessionViewHolder(
-                    DataBindingUtil.inflate(
+                    ItemHomeSessionCardBinding.inflate(
                         inflater,
-                        R.layout.item_home_session_card,
                         parent,
                         false
                     ),
                     openSession
                 )
             }
+
             else -> throw UnknownError("Unknown view type $viewType")
         }
     }
@@ -67,6 +68,7 @@ class HomeSessionAdapter(
             is HomeSessionListItem.OtherItem -> (holder as HomeOtherViewHolder).bind(
                 item
             )
+
             is HomeSessionListItem.SessionItem -> (holder as HomeSessionViewHolder).bind(
                 item
             )

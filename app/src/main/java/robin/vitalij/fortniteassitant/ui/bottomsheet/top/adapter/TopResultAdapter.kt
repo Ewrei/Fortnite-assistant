@@ -2,68 +2,64 @@ package robin.vitalij.fortniteassitant.ui.bottomsheet.top.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.databinding.ItemTopResultContentBinding
+import robin.vitalij.fortniteassitant.databinding.ItemTopResultHeaderBinding
 import robin.vitalij.fortniteassitant.model.enums.TopType
-import robin.vitalij.fortniteassitant.ui.bottomsheet.top.adapter.viewholder.TopContentViewHolder
-import robin.vitalij.fortniteassitant.ui.bottomsheet.top.adapter.viewholder.TopHeaderViewHolder
-import robin.vitalij.fortniteassitant.ui.bottomsheet.top.adapter.viewmodel.TopResult
-import robin.vitalij.fortniteassitant.ui.bottomsheet.top.adapter.viewmodel.TopResultType
-import robin.vitalij.fortniteassitant.ui.common.BaseViewHolder
 
 class TopResultAdapter(private val onClick: (topType: TopType) -> Unit) :
-    RecyclerView.Adapter<BaseViewHolder<TopResult>>() {
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val items = mutableListOf<TopResult>()
+    private val items = mutableListOf<TopListItem>()
 
-    fun setData(data: List<TopResult>) {
-        items.clear()
-        items.addAll(data)
+    fun updateData(data: List<TopListItem>) {
+        if (items != data) {
+            items.clear()
+            items.addAll(data)
+            notifyDataSetChanged()
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<TopResult> {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         when (viewType) {
-            TopResultType.CONTENT.id -> {
+            R.layout.item_top_result_content -> {
                 return TopContentViewHolder(
-                    DataBindingUtil.inflate(
+                    ItemTopResultContentBinding.inflate(
                         inflater,
-                        R.layout.item_top_result_content,
                         parent,
                         false
                     ), onClick
                 )
             }
-            TopResultType.HEADER.id -> {
+
+            R.layout.item_top_result_header -> {
                 return TopHeaderViewHolder(
-                    DataBindingUtil.inflate(
+                    ItemTopResultHeaderBinding.inflate(
                         inflater,
-                        R.layout.item_top_result_header,
                         parent,
                         false
                     )
                 )
             }
-            else -> {
-                return TopHeaderViewHolder(
-                    DataBindingUtil.inflate(
-                        inflater,
-                        R.layout.item_top_result_header,
-                        parent,
-                        false
-                    )
-                )
-            }
+
+            else -> throw UnknownError("Unknown view type $viewType")
         }
     }
 
     override fun getItemCount() = items.size
 
-    override fun onBindViewHolder(holder: BaseViewHolder<TopResult>, position: Int) {
-        holder.bind(items[position])
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (val item = items[position]) {
+            is TopListItem.HeaderItem -> (holder as TopHeaderViewHolder).bind(item)
+            is TopListItem.ContentItem -> (holder as TopContentViewHolder).bind(item)
+        }
     }
 
-    override fun getItemViewType(position: Int) = items[position].getType().id
+    override fun getItemViewType(position: Int): Int = when (items[position]) {
+        is TopListItem.HeaderItem -> R.layout.item_top_result_header
+        is TopListItem.ContentItem -> R.layout.item_top_result_content
+    }
 
 }

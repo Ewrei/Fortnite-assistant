@@ -1,12 +1,11 @@
 package robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter
 
 import androidx.recyclerview.widget.RecyclerView
-import robin.vitalij.fortniteassitant.common.binding.TextViewBinding.setDifference
-import robin.vitalij.fortniteassitant.common.binding.TextViewBinding.setValueText
+import robin.vitalij.fortniteassitant.common.extensions.setDifference
 import robin.vitalij.fortniteassitant.common.extensions.setInVisibility
+import robin.vitalij.fortniteassitant.common.extensions.setValueText
 import robin.vitalij.fortniteassitant.common.extensions.setVisibility
 import robin.vitalij.fortniteassitant.databinding.ItemComparisonPlayerStatisticsBinding
-import robin.vitalij.fortniteassitant.ui.comparison.statistics.adapter.ComparisonStatisticsListItem
 
 class ComparisonStatisticsViewHolder(
     private val binding: ItemComparisonPlayerStatisticsBinding,

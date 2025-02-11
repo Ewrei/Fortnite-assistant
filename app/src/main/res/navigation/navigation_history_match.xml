@@ -20,6 +20,21 @@
         android:id="@+id/navigation_adapter_session"
         tools:layout="@layout/fragment_adapter_details_statistics"
         android:name="robin.vitalij.fortniteassitant.ui.session.viewpager.AdapterSessionFragment"
-        android:label="AdapterSessionFragment" />
+        android:label="" >
+
+        <argument
+            android:name="arg_session_id"
+            app:argType="long" />
+        <argument
+            android:name="arg_session_last_id"
+            app:argType="long" />
+        <argument
+            android:name="arg_date"
+            app:argType="string" />
+        <argument
+            android:name="arg_detail_statistics"
+            app:argType="robin.vitalij.fortniteassitant.model.DetailStatisticsModel[]"/>
+
+    </fragment>
 
 </navigation>

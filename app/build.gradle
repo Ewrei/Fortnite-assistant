@@ -258,9 +258,6 @@ dependencies {
     def viewbindingpropertydelegate_version = '1.5.9'
     implementation "com.github.kirich1409:viewbindingpropertydelegate-noreflection:$viewbindingpropertydelegate_version"
 
-//    def kprogresshud_version = "1.2.0"
-//    implementation "com.kaopiz:kprogresshud:$kprogresshud_version"
-
     def play_upp_update_version = "2.1.0"
     implementation "com.google.android.play:app-update:$play_upp_update_version"
 
