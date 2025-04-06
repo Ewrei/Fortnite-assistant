@@ -151,10 +151,10 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
 
     //Dagger 2
-    def dagger_version = '2.55'
+    def dagger_version = '2.56.1'
     implementation "com.google.dagger:dagger:$dagger_version"
 
-    def dagger_compiler_version = '2.55'
+    def dagger_compiler_version = '2.56.1'
     kapt "com.google.dagger:dagger-compiler:$dagger_compiler_version"
 
     //Glide
@@ -249,7 +249,7 @@ dependencies {
     def unity_ads_version = '4.14.1'
     gmsImplementation "com.unity3d.ads:unity-ads:$unity_ads_version"
 
-    def yandex_ads_version = '7.11.0'
+    def yandex_ads_version = '7.12.0'
     gmsImplementation "com.yandex.android:mobileads:$yandex_ads_version"
 
     def mobmetricalib_version = '5.3.0'
