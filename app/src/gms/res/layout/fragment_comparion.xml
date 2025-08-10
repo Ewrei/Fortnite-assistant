@@ -46,7 +46,7 @@
                             android:hint="@string/search"
                             android:maxLength="@integer/search_max_size"
                             android:singleLine="true"
-                            android:fontFamily="@font/futura_pt_medium"
+                            android:fontFamily="@font/poppins_medium"
                             android:textCursorDrawable="@drawable/color_cursor" />
 
                     </com.google.android.material.textfield.TextInputLayout>

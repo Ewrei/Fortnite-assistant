@@ -46,7 +46,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:autoLink="web|email"
-                        android:fontFamily="@font/futura_pt_bold"
+                        android:fontFamily="@font/poppins_bold"
                         android:gravity="center"
                         android:paddingTop="@dimen/default_padding"
                         android:text="@string/develop"
@@ -57,7 +57,7 @@
                         android:id="@+id/version"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/futura_pt_medium"
+                        android:fontFamily="@font/poppins_medium"
                         android:gravity="center"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         tools:text="Version: 1.0.0" />
@@ -70,7 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/default_margin"
-                android:fontFamily="@font/futura_pt_medium"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/application_info"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:textColor="@android:color/darker_gray" />
@@ -92,7 +92,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/futura_pt_bold"
+                        android:fontFamily="@font/poppins_bold"
                         android:text="@string/developer_title"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         android:textStyle="bold" />
@@ -103,7 +103,7 @@
                         android:layout_marginTop="@dimen/default_margin"
                         android:layout_marginBottom="@dimen/default_margin"
                         android:layout_weight="1"
-                        android:fontFamily="@font/futura_pt_medium"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="@string/developer_body"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textColor="@android:color/darker_gray" />
@@ -116,7 +116,7 @@
                         android:autoLink="web|email"
                         android:drawableStart="@drawable/ic_gmail"
                         android:drawablePadding="@dimen/default_padding"
-                        android:fontFamily="@font/futura_pt_medium"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="@string/gmail"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         tools:ignore="RtlCompat" />
@@ -130,7 +130,7 @@
                         android:autoLink="web|email"
                         android:drawableStart="@drawable/ic_vk"
                         android:drawablePadding="@dimen/default_padding"
-                        android:fontFamily="@font/futura_pt_medium"
+                        android:fontFamily="@font/poppins_medium"
                         android:gravity="center"
                         android:text="@string/vk_url"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -145,7 +145,7 @@
                         android:autoLink="web|email"
                         android:drawableStart="@drawable/ic_telegram"
                         android:drawablePadding="@dimen/default_padding"
-                        android:fontFamily="@font/futura_pt_medium"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="@string/telegram_url"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         tools:ignore="RtlCompat" />

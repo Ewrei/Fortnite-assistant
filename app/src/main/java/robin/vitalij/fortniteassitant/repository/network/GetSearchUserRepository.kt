@@ -40,19 +40,21 @@ class GetSearchUserRepository @Inject constructor(
             emit(LoadingState.Loading)
             kotlin.runCatching { fortniteRequestsIOApi.getSearch(username) }
                 .onSuccess {
-                    emit(LoadingState.Success(if (it.result) {
-                        mutableListOf<SearchSteamUserModel>().apply {
-                            add(
-                                SearchSteamUserModel(
-                                    accountId = it.accountId,
-                                    name = username,
-                                    AvatarType.values().random().getImageUrl()
-                                )
-                            )
-                        }
-                    } else {
-                        arrayListOf()
-                    }))
+                    emit(
+                        LoadingState.Success(
+                            if (it.result) {
+                                mutableListOf<SearchSteamUserModel>().apply {
+                                    add(
+                                        SearchSteamUserModel(
+                                            accountId = it.accountId,
+                                            name = username,
+                                            AvatarType.entries.toTypedArray().random().getImageUrl()
+                                        )
+                                    )
+                                }
+                            } else {
+                                emptyList<SearchSteamUserModel>()
+                            }))
                 }
                 .onFailure { emit(LoadingState.Error(ErrorModelListItem.ErrorItem(it.getErrorModel()))) }
         }.flowOn(Dispatchers.IO)

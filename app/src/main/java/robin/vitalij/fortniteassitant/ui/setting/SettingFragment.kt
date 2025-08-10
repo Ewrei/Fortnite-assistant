@@ -13,9 +13,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.firebase.Firebase
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.dynamiclinks.ktx.shortLinkAsync
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
@@ -190,27 +190,27 @@ class SettingFragment : Fragment(R.layout.fragment_setting) {
     }
 
     private fun copyStatsLink() {
-        Firebase.dynamicLinks.shortLinkAsync {
-            longLink = Uri.parse(
-                "https://fortniteassitant.page.link/?link=" +
-                        "https://fastfly-7bcba.firebaseapp.com/user/${viewModel.getPlayerId()}/&apn=robin.vitalij.fortniteassitant"
-            )
-        }.addOnSuccessListener { shortLink ->
-            val shareActionText =
-                "${resources.getString(R.string.full_app_name)}\n${
-                    String.format(
-                        getString(R.string.you_can_see_the_profile_format),
-                        viewModel.user.get()?.name
-                    )
-                }\n${shortLink.shortLink}"
-            startActivity(Intent.createChooser(Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, shareActionText)
-                type = "text/plain"
-            }, getString(R.string.share_user_title)))
-        }.addOnFailureListener {
-            context?.showDialog(R.string.no_function)
-        }
+//        Firebase.dynamicLinks.shortLinkAsync {
+//            longLink = Uri.parse(
+//                "https://fortniteassitant.page.link/?link=" +
+//                        "https://fastfly-7bcba.firebaseapp.com/user/${viewModel.getPlayerId()}/&apn=robin.vitalij.fortniteassitant"
+//            )
+//        }.addOnSuccessListener { shortLink ->
+//            val shareActionText =
+//                "${resources.getString(R.string.full_app_name)}\n${
+//                    String.format(
+//                        getString(R.string.you_can_see_the_profile_format),
+//                        viewModel.user.get()?.name
+//                    )
+//                }\n${shortLink.shortLink}"
+//            startActivity(Intent.createChooser(Intent().apply {
+//                action = Intent.ACTION_SEND
+//                putExtra(Intent.EXTRA_TEXT, shareActionText)
+//                type = "text/plain"
+//            }, getString(R.string.share_user_title)))
+//        }.addOnFailureListener {
+//            context?.showDialog(R.string.no_function)
+//        }
     }
 
 }

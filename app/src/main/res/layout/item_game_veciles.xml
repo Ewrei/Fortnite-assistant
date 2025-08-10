@@ -33,7 +33,7 @@
             android:layout_marginBottom="@dimen/default_margin"
             android:gravity="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            app:fontFamily="@font/futura_pt_bold"
+            app:fontFamily="@font/poppins_bold"
             tools:text="name" />
 
     </LinearLayout>

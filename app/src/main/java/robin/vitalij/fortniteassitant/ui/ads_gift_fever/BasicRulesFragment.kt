@@ -59,7 +59,7 @@ class BasicRulesFragment : Fragment() {
             calendar.time
             preferenceManager.setShowBasicRulesDate(calendar.time)
 
-            activity?.intentView(getString(R.string.gift_fever_url))
+      //      activity?.intentView(getString(R.string.gift_fever_url))
             activity?.finish()
         }
 

@@ -17,11 +17,11 @@
             android:id="@+id/position"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             android:singleLine="true"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textStyle="bold"
-            app:fontFamily="@font/futura_pt_medium"
+            app:fontFamily="@font/poppins_medium"
             tools:text="position" />
 
         <TextView
@@ -29,12 +29,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/half_default_margin"
-            android:fontFamily="@font/futura_pt_bold"
+            android:fontFamily="@font/poppins_bold"
             android:singleLine="true"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/color_orange"
             android:textStyle="bold"
-            app:fontFamily="@font/futura_pt_bold"
+            app:fontFamily="@font/poppins_bold"
             tools:text="value" />
 
     </LinearLayout>

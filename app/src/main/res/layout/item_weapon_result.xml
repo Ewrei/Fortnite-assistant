@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_margin_double"
         android:layout_marginEnd="@dimen/default_margin_double"
-        android:fontFamily="@font/futura_pt_bold"
+        android:fontFamily="@font/poppins_bold"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textStyle="bold"
         tools:text="name" />
@@ -31,7 +31,7 @@
         android:layout_marginStart="@dimen/default_margin_double"
         android:layout_marginTop="@dimen/default_margin"
         android:layout_marginEnd="@dimen/default_margin_double"
-        android:fontFamily="@font/futura_pt_medium"
+        android:fontFamily="@font/poppins_medium"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:textColor="@android:color/darker_gray"
         tools:text="description" />
@@ -47,7 +47,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/dmg_pb"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
@@ -56,7 +56,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/fortnite_battlefest"
+            android:fontFamily="@font/robot_serif_extra_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             tools:text="100" />
 
@@ -73,7 +73,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/firingRate"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
@@ -82,7 +82,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/fortnite_battlefest"
+            android:fontFamily="@font/robot_serif_extra_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             tools:text="100" />
 
@@ -99,7 +99,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/clipSize"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
@@ -108,7 +108,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/fortnite_battlefest"
+            android:fontFamily="@font/robot_serif_extra_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             tools:text="100" />
 
@@ -125,7 +125,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/reloadTime"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
@@ -134,7 +134,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/fortnite_battlefest"
+            android:fontFamily="@font/robot_serif_extra_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             tools:text="100" />
 
@@ -151,7 +151,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/bulletsPerCartridge"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
@@ -160,7 +160,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/fortnite_battlefest"
+            android:fontFamily="@font/robot_serif_extra_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             tools:text="100" />
 
@@ -177,7 +177,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/spread"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
@@ -186,7 +186,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/fortnite_battlefest"
+            android:fontFamily="@font/robot_serif_extra_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             tools:text="100" />
 
@@ -203,7 +203,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/spreadDownsights"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
@@ -212,7 +212,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/fortnite_battlefest"
+            android:fontFamily="@font/robot_serif_extra_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             tools:text="100" />
 
@@ -230,7 +230,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/damageZoneCritical"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
@@ -239,7 +239,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/fortnite_battlefest"
+            android:fontFamily="@font/robot_serif_extra_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             tools:text="100" />
 

@@ -128,7 +128,7 @@ class BattlePassRewardsFragment : Fragment(R.layout.fragment_battle_pass_rewards
 
     private fun applyFontToMenuItem(mi: MenuItem) {
         try {
-            val font = ResourcesCompat.getFont(requireContext(), R.font.futura_pt_medium)
+            val font = ResourcesCompat.getFont(requireContext(), R.font.poppins_medium)
             val mNewTitle = SpannableString(mi.title)
             mNewTitle.setSpan(
                 CustomTypeFaceSpan("", font!!, Color.WHITE),

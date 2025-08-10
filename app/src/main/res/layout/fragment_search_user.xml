@@ -55,7 +55,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/search"
-                                android:fontFamily="@font/futura_pt_medium"
+                                android:fontFamily="@font/poppins_medium"
                                 android:textCursorDrawable="@drawable/color_cursor"
                                 android:maxLength="@integer/search_max_size"
                                 android:singleLine="true" />

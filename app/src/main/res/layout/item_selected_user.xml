@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin"
-                android:fontFamily="@font/futura_pt_bold"
+                android:fontFamily="@font/poppins_bold"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 tools:text="name" />
         </TableRow>
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginEnd="@dimen/default_margin"
-                android:fontFamily="@font/futura_pt_medium"
+                android:fontFamily="@font/poppins_medium"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="?header_color"
                 tools:text="3200 matches" />
@@ -78,7 +78,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/futura_pt_medium"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="@string/kills"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="?header_color" />
@@ -87,7 +87,7 @@
                     android:id="@+id/kills"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/fortnite_battlefest"
+                    android:fontFamily="@font/robot_serif_extra_bold"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     tools:text="1 230" />
 
@@ -113,7 +113,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/futura_pt_medium"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="@string/wins"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="?header_color" />
@@ -122,7 +122,7 @@
                     android:id="@+id/wins"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/fortnite_battlefest"
+                    android:fontFamily="@font/robot_serif_extra_bold"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     tools:text="1 230" />
 
@@ -148,7 +148,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/futura_pt_medium"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="@string/wins_percent"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="?header_color" />
@@ -157,7 +157,7 @@
                     android:id="@+id/winRate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/fortnite_battlefest"
+                    android:fontFamily="@font/robot_serif_extra_bold"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     tools:text="58 %" />
 
@@ -183,7 +183,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/futura_pt_medium"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="@string/deaths"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="?header_color" />
@@ -192,7 +192,7 @@
                     android:id="@+id/deaths"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/fortnite_battlefest"
+                    android:fontFamily="@font/robot_serif_extra_bold"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     tools:text="1 230" />
 

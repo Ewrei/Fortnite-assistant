@@ -30,7 +30,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginEnd="@dimen/default_margin"
-                android:fontFamily="@font/futura_pt_medium"
+                android:fontFamily="@font/poppins_medium"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 tools:text="nicknameOne" />
 
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/default_margin"
-                android:fontFamily="@font/futura_pt_medium"
+                android:fontFamily="@font/poppins_medium"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 tools:text="nickNameTwo" />
 

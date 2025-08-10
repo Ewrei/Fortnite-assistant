@@ -30,8 +30,8 @@
                 android:layout_marginEnd="@dimen/default_margin"
                 android:layout_marginBottom="@dimen/default_margin_double"
                 android:backgroundTint="@color/colorPrimary"
-                android:fontFamily="@font/fortnite_battlefest"
-                app:fontFamily="@font/fortnite_battlefest"
+                android:fontFamily="@font/robot_serif_extra_bold"
+                app:fontFamily="@font/robot_serif_extra_bold"
                 app:ms_background_color="@color/colorPrimary" />
 
             <include

@@ -29,7 +29,7 @@
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             android:gravity="center"
             android:textAllCaps="true"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/default_margin"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             android:gravity="center|bottom"
             android:textAllCaps="true"
             android:textColor="@android:color/darker_gray"
@@ -64,7 +64,7 @@
                 android:layout_marginTop="@dimen/half_default_margin"
                 android:layout_marginEnd="@dimen/half_default_margin"
                 android:layout_marginBottom="@dimen/half_default_margin"
-                android:fontFamily="@font/fortnite_battlefest"
+                android:fontFamily="@font/robot_serif_extra_bold"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 tools:text="Quantity 10" />
 

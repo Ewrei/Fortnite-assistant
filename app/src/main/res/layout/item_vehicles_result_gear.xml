@@ -12,12 +12,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/futura_pt_bold"
+        android:fontFamily="@font/poppins_bold"
         android:gravity="center"
         android:text="Gear"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textColor="@color/text_color"
-        app:fontFamily="@font/futura_pt_bold" />
+        app:fontFamily="@font/poppins_bold" />
 
     <TableRow
         android:layout_width="match_parent"
@@ -28,20 +28,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             android:text="TopSpeed"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@android:color/darker_gray"
-            app:fontFamily="@font/futura_pt_medium" />
+            app:fontFamily="@font/poppins_medium" />
 
         <TextView
             android:id="@+id/topSpeed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/futura_pt_bold"
+            android:fontFamily="@font/poppins_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/text_color"
-            app:fontFamily="@font/futura_pt_bold"
+            app:fontFamily="@font/poppins_bold"
             tools:text="TopSpeed" />
 
     </TableRow>
@@ -55,20 +55,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             android:text="MinSpeed"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@android:color/darker_gray"
-            app:fontFamily="@font/futura_pt_medium" />
+            app:fontFamily="@font/poppins_medium" />
 
         <TextView
             android:id="@+id/minSpeed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/futura_pt_bold"
+            android:fontFamily="@font/poppins_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/text_color"
-            app:fontFamily="@font/futura_pt_bold"
+            app:fontFamily="@font/poppins_bold"
             tools:text="minSpeed" />
 
     </TableRow>
@@ -82,20 +82,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             android:text="PushForce"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@android:color/darker_gray"
-            app:fontFamily="@font/futura_pt_medium" />
+            app:fontFamily="@font/poppins_medium" />
 
         <TextView
             android:id="@+id/pushForce"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/futura_pt_bold"
+            android:fontFamily="@font/poppins_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/text_color"
-            app:fontFamily="@font/futura_pt_bold"
+            app:fontFamily="@font/poppins_bold"
             tools:text="PushForce" />
 
     </TableRow>
@@ -109,20 +109,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             android:text="RampTime"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@android:color/darker_gray"
-            app:fontFamily="@font/futura_pt_medium" />
+            app:fontFamily="@font/poppins_medium" />
 
         <TextView
             android:id="@+id/rampTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/futura_pt_bold"
+            android:fontFamily="@font/poppins_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/text_color"
-            app:fontFamily="@font/futura_pt_bold"
+            app:fontFamily="@font/poppins_bold"
             tools:text="RampTime" />
 
     </TableRow>
@@ -136,20 +136,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             android:text="SteeringAngleMultiplier"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@android:color/darker_gray"
-            app:fontFamily="@font/futura_pt_medium" />
+            app:fontFamily="@font/poppins_medium" />
 
         <TextView
             android:id="@+id/steeringAngleMultiplier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/futura_pt_bold"
+            android:fontFamily="@font/poppins_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/text_color"
-            app:fontFamily="@font/futura_pt_bold"
+            app:fontFamily="@font/poppins_bold"
             tools:text="SteeringAngleMultiplier" />
 
     </TableRow>
@@ -163,20 +163,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             android:text="bAutoBrake"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@android:color/darker_gray"
-            app:fontFamily="@font/futura_pt_medium" />
+            app:fontFamily="@font/poppins_medium" />
 
         <TextView
             android:id="@+id/bAutoBrake"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/futura_pt_bold"
+            android:fontFamily="@font/poppins_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/text_color"
-            app:fontFamily="@font/futura_pt_bold"
+            app:fontFamily="@font/poppins_bold"
             tools:text="bAutoBrake" />
 
     </TableRow>
@@ -190,20 +190,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             android:text="bIgnoreGravity"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@android:color/darker_gray"
-            app:fontFamily="@font/futura_pt_medium" />
+            app:fontFamily="@font/poppins_medium" />
 
         <TextView
             android:id="@+id/bIgnoreGravity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/futura_pt_bold"
+            android:fontFamily="@font/poppins_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/text_color"
-            app:fontFamily="@font/futura_pt_bold"
+            app:fontFamily="@font/poppins_bold"
             tools:text="bIgnoreGravity" />
 
     </TableRow>

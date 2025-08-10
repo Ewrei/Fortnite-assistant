@@ -17,8 +17,8 @@ android {
         applicationId "robin.vitalij.fortniteassitant"
         minSdkVersion 24
         targetSdkVersion 35
-        versionCode 22
-        versionName "1.2.1"
+        versionCode 23
+        versionName "1.2.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -130,13 +130,13 @@ repositories {
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     def coroutine_adapter_version = "0.9.2"
-    def retrofit2_version = '2.11.0'
+    def retrofit2_version = '3.0.0'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(':html_text_view')
 
-    def androidx_version = '1.7.0'
+    def androidx_version = '1.7.1'
     def material_version = '1.12.0'
     def recyclerview_version = '1.4.0'
     implementation "androidx.appcompat:appcompat:$androidx_version"
@@ -146,15 +146,15 @@ dependencies {
     def constraintlayout_version = '2.2.1'
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
 
-    def navigation_version = '2.8.9'
+    def navigation_version = '2.9.3'
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
 
     //Dagger 2
-    def dagger_version = '2.56.1'
+    def dagger_version = '2.57'
     implementation "com.google.dagger:dagger:$dagger_version"
 
-    def dagger_compiler_version = '2.56.1'
+    def dagger_compiler_version = '2.57'
     kapt "com.google.dagger:dagger-compiler:$dagger_compiler_version"
 
     //Glide
@@ -162,15 +162,15 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 
-    def room_version = '2.6.1'
+    def room_version = '2.7.2'
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
     implementation "androidx.room:room-ktx:$room_version"
 
-    def lifecycle_version = '2.8.7'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7'
+    def lifecycle_version = '2.9.2'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.2'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
 
@@ -180,17 +180,17 @@ dependencies {
     def rxjava2_rxjava_version = "2.2.21"
     implementation "io.reactivex.rxjava2:rxjava:$rxjava2_rxjava_version"
 
-    def gson_version = '2.12.1'
+    def gson_version = '2.13.1'
     implementation "com.google.code.gson:gson:$gson_version"
 
-    def retrofit2_adapter_version = '2.11.0'
+    def retrofit2_adapter_version = '3.0.0'
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_adapter_version"
 
     def mp_android_chart_version = 'v3.0.2'
     implementation "com.github.PhilJay:MPAndroidChart:$mp_android_chart_version"
 
     //Okhttp3
-    def okhttp3_version = '5.0.0-alpha.14'
+    def okhttp3_version = '5.1.0'
     implementation "com.squareup.okhttp3:okhttp:$okhttp3_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
 
@@ -200,21 +200,21 @@ dependencies {
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$coroutine_adapter_version"
 
     //Ads
-    def ads_version = '23.6.0'
+    def ads_version = '23.3.0'
     gmsImplementation "com.google.android.gms:play-services-ads:$ads_version"
     gmsImplementation "com.google.firebase:firebase-ads:$ads_version"
 
     //Firebase
-    def firebase_analytics_version = '22.4.0'
+    def firebase_analytics_version = '23.0.0'
     implementation "com.google.firebase:firebase-analytics:$firebase_analytics_version"
 
     def firebase_core_version = '21.1.1'
     implementation "com.google.firebase:firebase-core:$firebase_core_version"
 
-    def firebase_crashlytics_version = '19.4.2'
+    def firebase_crashlytics_version = '20.0.0'
     implementation "com.google.firebase:firebase-crashlytics:$firebase_crashlytics_version"
 
-    def firebase_firestore_ktx_version = '25.1.3'
+    def firebase_firestore_ktx_version = '25.1.4'
     implementation "com.google.firebase:firebase-firestore-ktx:$firebase_firestore_ktx_version"
 
     def firebase_dynamic_links_version = '22.1.0'
@@ -246,13 +246,13 @@ dependencies {
     hmsImplementation('com.huawei.hms:ads-lite:13.4.41.304')
     hmsImplementation('com.huawei.hms:ads-consent:3.4.41.304')
 
-    def unity_ads_version = '4.14.1'
+    def unity_ads_version = '4.16.0'
     gmsImplementation "com.unity3d.ads:unity-ads:$unity_ads_version"
 
-    def yandex_ads_version = '7.12.0'
+    def yandex_ads_version = '7.15.0'
     gmsImplementation "com.yandex.android:mobileads:$yandex_ads_version"
 
-    def mobmetricalib_version = '5.3.0'
+    def mobmetricalib_version = '5.3.7'
     gmsImplementation "com.yandex.android:mobmetricalib:$mobmetricalib_version"
 
     def viewbindingpropertydelegate_version = '1.5.9'

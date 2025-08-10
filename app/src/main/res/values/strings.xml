@@ -6,7 +6,7 @@
     <string name="how_to_find_account_id_url" translatable="false">https://youtu.be/YuoXP4V4hGo</string>
     <string name="found_account_id_in_epic_games_url">https://youtu.be/O6dv-YnFUzs</string>
     <string name="found_account_id_in_fortnite_url">https://youtu.be/t1gcUEZr8Ag</string>
-    <string name="gift_fever_url" translatable="false">https://giftfever.page.link/referral_program</string>
+<!--    <string name="gift_fever_url" translatable="false">https://giftfever.page.link/referral_program</string>-->
 
     <string name="title_home">Home</string>
     <string name="tab_title_history_match">History</string>

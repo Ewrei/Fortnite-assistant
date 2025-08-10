@@ -94,7 +94,7 @@ class ArcProgress @JvmOverloads constructor(
         textPaint?.color = textColor
         textPaint?.textSize = textSize
         textPaint?.isAntiAlias = true
-        textPaint?.typeface = ResourcesCompat.getFont(context, R.font.fortnite_battlefest)
+        textPaint?.typeface = ResourcesCompat.getFont(context, R.font.robot_serif_extra_bold)
         paint = Paint()
         paint!!.color = default_unfinished_color
         paint!!.isAntiAlias = true
@@ -268,7 +268,7 @@ class ArcProgress @JvmOverloads constructor(
         }
         if (!TextUtils.isEmpty(getBottomText())) {
             textPaint!!.textSize = bottomTextSize
-            textPaint!!.typeface = ResourcesCompat.getFont(context, R.font.futura_pt_medium)
+            textPaint!!.typeface = ResourcesCompat.getFont(context, R.font.poppins_medium)
 
             val bottomTextBaseline =
                 height - arcBottomHeight - (textPaint!!.descent() + textPaint!!.ascent()) / 2

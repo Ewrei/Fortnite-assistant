@@ -19,7 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/futura_pt_bold"
+            android:fontFamily="@font/poppins_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             tools:text="inventoryType" />
 
@@ -27,7 +27,7 @@
             android:id="@+id/size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             tools:text="size" />
 
     </TableRow>

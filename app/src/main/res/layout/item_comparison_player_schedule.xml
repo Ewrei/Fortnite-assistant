@@ -17,7 +17,7 @@
             android:id="@+id/battlesTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/futura_pt_bold"
+            android:fontFamily="@font/poppins_bold"
             android:gravity="center"
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"

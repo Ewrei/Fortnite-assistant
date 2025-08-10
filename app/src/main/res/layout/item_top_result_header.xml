@@ -7,6 +7,6 @@
     android:layout_marginTop="@dimen/default_margin_double"
     android:layout_marginEnd="@dimen/default_margin"
     android:layout_marginBottom="@dimen/default_margin"
-    android:fontFamily="@font/futura_pt_bold"
+    android:fontFamily="@font/poppins_bold"
     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
     android:textColor="@color/color_orange" />

@@ -34,7 +34,7 @@
             android:layout_marginTop="@dimen/default_margin_double"
             android:layout_marginEnd="@dimen/default_margin"
             android:gravity="center"
-            android:fontFamily="@font/futura_pt_bold"
+            android:fontFamily="@font/poppins_bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
         <TextView
@@ -45,7 +45,7 @@
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             android:gravity="center"
             android:visibility="gone" />
 

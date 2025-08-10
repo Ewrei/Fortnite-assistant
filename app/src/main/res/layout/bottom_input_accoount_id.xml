@@ -29,8 +29,8 @@
             android:layout_marginTop="@dimen/default_margin_double"
             android:layout_marginEnd="@dimen/default_margin_double"
             android:gravity="center"
-            android:fontFamily="@font/futura_pt_medium"
-            app:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
+            app:fontFamily="@font/poppins_medium"
             android:text="@string/input_account_id"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:textColor="@android:color/white"
@@ -53,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/account_id"
-                android:fontFamily="@font/futura_pt_medium"
+                android:fontFamily="@font/poppins_medium"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:singleLine="true" />
 

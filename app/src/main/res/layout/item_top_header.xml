@@ -68,7 +68,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:fontFamily="@font/futura_pt_medium"
+                    android:fontFamily="@font/poppins_medium"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="@android:color/darker_gray"
                     tools:text="platform" />
@@ -78,7 +78,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:fontFamily="@font/futura_pt_medium"
+                    android:fontFamily="@font/poppins_medium"
                     android:gravity="end"
                     android:text="@string/parametr"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"

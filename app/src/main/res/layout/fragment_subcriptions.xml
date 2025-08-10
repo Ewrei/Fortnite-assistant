@@ -81,7 +81,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/futura_pt_bold"
+                        android:fontFamily="@font/poppins_bold"
                         android:text="@string/disabling_ads"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/darker_gray" />
@@ -89,7 +89,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/futura_pt_medium"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="@string/remove_ads_body"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 

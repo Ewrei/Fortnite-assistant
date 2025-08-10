@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_margin_double"
         android:layout_marginEnd="@dimen/default_margin_double"
-        android:fontFamily="@font/futura_pt_bold"
+        android:fontFamily="@font/poppins_bold"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textStyle="bold"
         tools:text="name" />
@@ -33,7 +33,7 @@
         android:layout_marginStart="@dimen/default_margin_double"
         android:layout_marginTop="@dimen/default_margin"
         android:layout_marginEnd="@dimen/default_margin_double"
-        android:fontFamily="@font/futura_pt_medium"
+        android:fontFamily="@font/poppins_medium"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:textColor="@android:color/darker_gray"
         tools:text="description" />
@@ -45,7 +45,7 @@
         android:layout_marginStart="@dimen/default_margin_double"
         android:layout_marginTop="@dimen/default_margin"
         android:layout_marginEnd="@dimen/default_margin_double"
-        android:fontFamily="@font/futura_pt_medium"
+        android:fontFamily="@font/poppins_medium"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:textColor="@android:color/darker_gray"
         tools:text="type" />
@@ -57,7 +57,7 @@
         android:layout_marginStart="@dimen/default_margin_double"
         android:layout_marginTop="@dimen/default_margin"
         android:layout_marginEnd="@dimen/default_margin_double"
-        android:fontFamily="@font/futura_pt_medium"
+        android:fontFamily="@font/poppins_medium"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:textColor="@android:color/darker_gray"
         tools:text="addDate" />
@@ -69,7 +69,7 @@
         android:layout_marginStart="@dimen/default_margin_double"
         android:layout_marginTop="@dimen/default_margin"
         android:layout_marginEnd="@dimen/default_margin_double"
-        android:fontFamily="@font/futura_pt_bold"
+        android:fontFamily="@font/poppins_bold"
         android:gravity="center"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         tools:text="introduction" />
@@ -87,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin_double"
-            android:fontFamily="@font/futura_pt_bold"
+            android:fontFamily="@font/poppins_bold"
             android:gravity="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             tools:text="set" />

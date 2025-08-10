@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
-            android:fontFamily="@font/futura_pt_medium"
+            android:fontFamily="@font/poppins_medium"
             android:gravity="center"
             android:textAllCaps="true"
             android:textColor="@android:color/darker_gray"
@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/default_margin"
-                android:fontFamily="@font/fortnite_battlefest"
+                android:fontFamily="@font/robot_serif_extra_bold"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:visibility="gone"
                 tools:text="1300" />
@@ -59,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/half_default_margin"
-                android:fontFamily="@font/fortnite_battlefest"
+                android:fontFamily="@font/robot_serif_extra_bold"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 tools:text="1200" />
 
