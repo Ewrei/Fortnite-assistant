@@ -290,4 +290,5 @@
 задания и получай подарки!</string>
 
     <string name="empty_vehicles">Мы не нашли достижений</string>
+    <string name="error_internal_server">Сервер перабудоўвае сваю базу! Пакуль ён аднаўляецца, зрабі глыток шчыта і заходзь пазней.</string>
 </resources>

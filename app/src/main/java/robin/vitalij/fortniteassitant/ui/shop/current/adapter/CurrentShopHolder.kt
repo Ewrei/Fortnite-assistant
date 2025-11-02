@@ -16,8 +16,8 @@ class CurrentShopHolder(
     fun bind(item: ShopNewItem) {
         binding.oldPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
 
-        binding.image.loadBackgroundRarity(item.rarity.id)
-        binding.image.loadImage(item.displayAssets.first().fullBackground)
+        binding.image.loadBackgroundRarity(item.rarity?.id)
+        binding.image.loadImage(item.displayAssets.firstOrNull()?.fullBackground)
         binding.type.text = item.displayType
         binding.price.setValueText(item.price.finalPrice)
         binding.oldPrice.setValueText(item.price.regularPrice)

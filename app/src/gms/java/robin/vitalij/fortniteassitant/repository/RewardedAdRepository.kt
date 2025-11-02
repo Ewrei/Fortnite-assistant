@@ -28,7 +28,7 @@ class RewardedAdRepository @Inject constructor(
 
     init {
         loadAdmodReward()
-        rewardAdUnityRepository.load()
+      //  rewardAdUnityRepository.load()
         rewardAdYandexRepository.loadRewardedAd()
     }
 

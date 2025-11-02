@@ -79,8 +79,8 @@ class CurrentShopResultFragment : BottomSheetDialogFragment() {
     }
 
     private fun setUI() {
-        binding.imageView.loadImage(viewModel.shopNewItem.displayAssets.first().fullBackground)
-        binding.imageView.loadBackgroundRarity(viewModel.shopNewItem.rarity.id)
+        binding.imageView.loadImage(viewModel.shopNewItem.displayAssets.firstOrNull()?.fullBackground)
+        binding.imageView.loadBackgroundRarity(viewModel.shopNewItem.rarity?.id)
         binding.name.text = viewModel.shopNewItem.displayName
         binding.description.text = viewModel.shopNewItem.displayDescription
         binding.price.setValueText(viewModel.shopNewItem.price.finalPrice)

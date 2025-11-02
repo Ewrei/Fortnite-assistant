@@ -32,28 +32,29 @@ class InterstitialAdRepository @Inject constructor(
     private var isAdsShow: Boolean = false
 
     fun showInterstitial(activity: Activity) {
-        if (ad != null && !isAdsShow) {
-            isAdsShow = true
-            interstitialUnityAdRepository.isInterstitialUnityAdLoad = false
+//        if (ad != null && !isAdsShow) {
+//            isAdsShow = true
+//            interstitialUnityAdRepository.isInterstitialUnityAdLoad = false
+//
+//            ad?.fullScreenContentCallback = object : FullScreenContentCallback() {
+//                override fun onAdDismissedFullScreenContent() {
+//                    interstitialUnityAdRepository.isInterstitialUnityAdLoad = false
+//                    ad = null
+//                }
+//
+//                override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+//                    isAdsShow = false
+//                }
+//
+//                override fun onAdShowedFullScreenContent() {
+//                    interstitialUnityAdRepository.isInterstitialUnityAdLoad = false
+//                    ad = null
+//                }
+//            }
+//
+//            ad?.show(activity)
+//        } else
 
-            ad?.fullScreenContentCallback = object : FullScreenContentCallback() {
-                override fun onAdDismissedFullScreenContent() {
-                    interstitialUnityAdRepository.isInterstitialUnityAdLoad = false
-                    ad = null
-                }
-
-                override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-                    isAdsShow = false
-                }
-
-                override fun onAdShowedFullScreenContent() {
-                    interstitialUnityAdRepository.isInterstitialUnityAdLoad = false
-                    ad = null
-                }
-            }
-
-            ad?.show(activity)
-        } else
             if (interstitialYandexAdRepository.interstitialAd != null && !isAdsShow) {
                 isAdsShow = true
                 interstitialYandexAdRepository.showAd(activity)
@@ -92,7 +93,7 @@ class InterstitialAdRepository @Inject constructor(
 
     fun initInterstitialAd(interstitialAdCallback: () -> Unit) {
         if (preferenceManager.getDisableAdvertising() <= Date().time && !(preferenceManager.getIsSubscription())) {
-            interstitialUnityAdRepository.loadInterstitial()
+           // interstitialUnityAdRepository.loadInterstitial()
             interstitialYandexAdRepository.loadInterstitial()
 
             val adRequest = AdRequest.Builder().build()

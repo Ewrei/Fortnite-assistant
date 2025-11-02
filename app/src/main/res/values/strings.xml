@@ -326,4 +326,5 @@ This section is beta. If it does not work correctly for you, let us know</string
     <string name="for_your_favorite_games">for your favorite games - CS:GO, WoT, Fortnite, Free Fire, Steam games, League of Legends etc. Complete simple game tasks and get your gifts!</string>
 
     <string name="empty_vehicles">"We didn't find any achievements"</string>
+    <string name="error_internal_server">The server is rebuilding its base! While it’s recovering, take a shield sip and try again later.</string>
 </resources>

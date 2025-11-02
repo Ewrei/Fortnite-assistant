@@ -17,8 +17,8 @@ android {
         applicationId "robin.vitalij.fortniteassitant"
         minSdkVersion 24
         targetSdkVersion 35
-        versionCode 23
-        versionName "1.2.5"
+        versionCode 24
+        versionName "1.2.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -200,6 +200,7 @@ dependencies {
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$coroutine_adapter_version"
 
     //Ads
+    //Ads
     def ads_version = '23.3.0'
     gmsImplementation "com.google.android.gms:play-services-ads:$ads_version"
     gmsImplementation "com.google.firebase:firebase-ads:$ads_version"
@@ -211,7 +212,7 @@ dependencies {
     def firebase_core_version = '21.1.1'
     implementation "com.google.firebase:firebase-core:$firebase_core_version"
 
-    def firebase_crashlytics_version = '20.0.0'
+    def firebase_crashlytics_version = '20.0.3'
     implementation "com.google.firebase:firebase-crashlytics:$firebase_crashlytics_version"
 
     def firebase_firestore_ktx_version = '25.1.4'
@@ -249,10 +250,10 @@ dependencies {
     def unity_ads_version = '4.16.0'
     gmsImplementation "com.unity3d.ads:unity-ads:$unity_ads_version"
 
-    def yandex_ads_version = '7.15.0'
+    def yandex_ads_version = '7.16.1'
     gmsImplementation "com.yandex.android:mobileads:$yandex_ads_version"
 
-    def mobmetricalib_version = '5.3.7'
+    def mobmetricalib_version = '5.3.8'
     gmsImplementation "com.yandex.android:mobmetricalib:$mobmetricalib_version"
 
     def viewbindingpropertydelegate_version = '1.5.9'

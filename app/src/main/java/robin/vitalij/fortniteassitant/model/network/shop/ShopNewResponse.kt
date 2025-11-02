@@ -25,7 +25,7 @@ class ShopNewItem(
     @SerializedName("giftAllowed") val giftAllowed: Boolean,
     @SerializedName("buyAllowed") val buyAllowed: Boolean,
     @SerializedName("price") val price: PriceModel,
-    @SerializedName("rarity") val rarity: RarityModel,
+    @SerializedName("rarity") val rarity: RarityModel?,
     @SerializedName("series") val series: SeriesModel?,
     @SerializedName("banner") val banner: BannerModel?,
     @SerializedName("offerTag") val offerTag: OfferTagModel?,
@@ -48,7 +48,7 @@ class PriceModel(
 ): Serializable
 
 class RarityModel(
-    @SerializedName("id") val id: String,
+    @SerializedName("id") val id: String?,
     @SerializedName("name") val name: String,
 ): Serializable
 

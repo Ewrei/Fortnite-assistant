@@ -1,14 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-  compileSdkVersion 34
+  compileSdkVersion 35
   resourcePrefix 'ms__'
 
   namespace "com.jaredrummler.materialspinner"
 
   defaultConfig {
     minSdkVersion 22
-    targetSdkVersion 34
+    targetSdkVersion 35
   }
 }
 

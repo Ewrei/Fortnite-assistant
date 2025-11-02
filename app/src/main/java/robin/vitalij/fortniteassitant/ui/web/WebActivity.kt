@@ -8,14 +8,16 @@ import android.view.MenuItem
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil.setContentView
 import by.kirich1409.viewbindingdelegate.viewBinding
+import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.setToolbarTitle
 import robin.vitalij.fortniteassitant.databinding.ActivityWebViewBinding
 
 const val WEB_URL = "web_url"
 const val WEB_TITLE = "web_title"
 
-class WebActivity : AppCompatActivity() {
+class WebActivity : AppCompatActivity(R.layout.activity_web_view) {
 
     private val binding by viewBinding(ActivityWebViewBinding::bind)
 

@@ -5,16 +5,17 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import robin.vitalij.fortniteassitant.api.FortniteRequestsIOApi
-import robin.vitalij.fortniteassitant.common.extensions.getErrorModel
-import robin.vitalij.fortniteassitant.model.ErrorModelListItem
+import robin.vitalij.fortniteassitant.common.extensions.getErrorMessage
 import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.enums.AvatarType
 import robin.vitalij.fortniteassitant.model.network.search.SearchSteamUserModel
+import robin.vitalij.fortniteassitant.utils.ResourceProvider
 import robin.vitalij.fortniteassitant.utils.mapper.SearchUserMapper
 import javax.inject.Inject
 
 class GetSearchUserRepository @Inject constructor(
-    private val fortniteRequestsIOApi: FortniteRequestsIOApi
+    private val fortniteRequestsIOApi: FortniteRequestsIOApi,
+    private val resourceProvider: ResourceProvider
 ) {
 
     fun getSearch(username: String, strict: Boolean) = if (!strict) {
@@ -32,7 +33,7 @@ class GetSearchUserRepository @Inject constructor(
             .onSuccess {
                 emit(LoadingState.Success(SearchUserMapper().transform(it)))
             }
-            .onFailure { emit(LoadingState.Error(ErrorModelListItem.ErrorItem(it.getErrorModel()))) }
+            .onFailure { emit(LoadingState.Error(it.getErrorMessage(false, resourceProvider))) }
     }.flowOn(Dispatchers.IO)
 
     private fun getSearchWithoutStrict(username: String): Flow<LoadingState<List<SearchSteamUserModel>>> =
@@ -56,7 +57,7 @@ class GetSearchUserRepository @Inject constructor(
                                 emptyList<SearchSteamUserModel>()
                             }))
                 }
-                .onFailure { emit(LoadingState.Error(ErrorModelListItem.ErrorItem(it.getErrorModel()))) }
+                .onFailure { emit(LoadingState.Error(it.getErrorMessage(false, resourceProvider))) }
         }.flowOn(Dispatchers.IO)
 
 }

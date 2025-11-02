@@ -25,6 +25,7 @@ import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.common.extensions.setErrorView
 import robin.vitalij.fortniteassitant.common.extensions.setSafeOnClickListener
 import robin.vitalij.fortniteassitant.common.extensions.setVisibility
+import robin.vitalij.fortniteassitant.common.extensions.showDialog
 import robin.vitalij.fortniteassitant.databinding.FragmentSearchUserBinding
 import robin.vitalij.fortniteassitant.interfaces.InputAccountIdCallback
 import robin.vitalij.fortniteassitant.interfaces.RegistrationProfileCallback
@@ -242,6 +243,8 @@ class SearchUserFragment : Fragment(R.layout.fragment_search_user) {
 
                 if (result.cause is ErrorModelListItem.ErrorItem) {
                     binding.viewErrorInclude.setErrorView(result.cause.errorModel)
+                } else if (result.cause is ErrorModelListItem.MessageItem) {
+                    context?.showDialog(result.cause.message)
                 }
             }
         }
