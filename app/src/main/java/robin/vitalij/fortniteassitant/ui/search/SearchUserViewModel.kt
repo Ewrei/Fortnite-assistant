@@ -33,8 +33,6 @@ class SearchUserViewModel(
 
     lateinit var openMainScreen: () -> Unit
 
-    var strict: Boolean = true
-
     private var job: Job? = null
 
     private val fullFishStatsState =
@@ -46,7 +44,7 @@ class SearchUserViewModel(
     fun searchPlayer(searchName: String) {
         job?.cancel()
         job = viewModelScope.launch {
-            getSearchUserRepository.getSearch(searchName, strict)
+            getSearchUserRepository.getSearch(searchName)
                 .collect { loadingState ->
                     fullFishStatsState.value = loadingState
                 }

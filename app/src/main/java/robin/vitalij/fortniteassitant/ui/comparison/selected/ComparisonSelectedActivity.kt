@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import by.kirich1409.viewbindingdelegate.viewBinding
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.applySystemBarsPadding
 import robin.vitalij.fortniteassitant.common.extensions.replaceFragment
 import robin.vitalij.fortniteassitant.common.extensions.setToolbarTitle
 import robin.vitalij.fortniteassitant.databinding.ActivityBaseBinding
@@ -20,6 +21,8 @@ class ComparisonSelectedActivity : BaseActivity(R.layout.activity_base) {
 
         setToolbar()
         setFragment()
+
+        binding.root.applySystemBarsPadding()
     }
 
     private fun setToolbar() {
@@ -37,6 +40,10 @@ class ComparisonSelectedActivity : BaseActivity(R.layout.activity_base) {
 
     private fun setFragment() {
         val comparisonSelectedFragment = ComparisonSelectedFragment.newInstance()
-        replaceFragment(R.id.container, comparisonSelectedFragment, comparisonSelectedFragment.javaClass.simpleName)
+        replaceFragment(
+            R.id.container,
+            comparisonSelectedFragment,
+            comparisonSelectedFragment.javaClass.simpleName
+        )
     }
 }

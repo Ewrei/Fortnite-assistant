@@ -65,7 +65,7 @@ class ComparisonSelectedViewModel(
     fun searchPlayer(searchName: String) {
         job?.cancel()
         job = viewModelScope.launch {
-            getSearchUserRepository.getSearch(searchName, true)
+            getSearchUserRepository.getSearch(searchName)
                 .collect { loadingState ->
                     if(loadingState is LoadingState.Success) {
                         mutableLiveData.value = loadingState.data

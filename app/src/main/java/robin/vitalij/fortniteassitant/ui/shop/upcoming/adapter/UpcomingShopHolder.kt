@@ -10,7 +10,7 @@ class UpcomingShopHolder(private val binding: ItemUpcomingShopBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: ItemShopUpcoming) {
-        binding.imageView.loadBackgroundRarity(item.rarity.id)
+        binding.imageView.loadBackgroundRarity(item.rarity.displayValue)
         binding.imageView.loadImage(item.images.background)
 
         binding.name.text = item.name

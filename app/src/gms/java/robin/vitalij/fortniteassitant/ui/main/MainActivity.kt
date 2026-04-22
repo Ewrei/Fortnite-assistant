@@ -23,6 +23,7 @@ import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.applySystemBarsPadding
 import robin.vitalij.fortniteassitant.common.extensions.observeToProgressBar
 import robin.vitalij.fortniteassitant.common.extensions.setVisibility
 import robin.vitalij.fortniteassitant.common.extensions.setupWithNavController
@@ -128,6 +129,8 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
          //   startActivity(BasicRulesActivity.newInstance(this))
        //     viewModel.preferenceManager.setShowBasicRulesDate(Date(Date().time + SEVEN_DAY))
         }
+
+        binding?.root?.applySystemBarsPadding()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -150,7 +153,7 @@ class MainActivity : AppCompatActivity(), ProgressBarActivityController {
             listOf(
                 R.navigation.navigation_home,
                 R.navigation.navigation_history_match,
-                R.navigation.navigation_top,
+             //  R.navigation.navigation_top,
                 R.navigation.navigation_shop,
                 R.navigation.navigation_setting
             )

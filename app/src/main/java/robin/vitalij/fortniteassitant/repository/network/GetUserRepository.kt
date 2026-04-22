@@ -13,8 +13,8 @@ import robin.vitalij.fortniteassitant.model.LoadingState
 import robin.vitalij.fortniteassitant.model.network.stats.FortniteProfileResponse
 import javax.inject.Inject
 
-private const val TIME_WINDOW = "lifetime"
-private const val TYPE_IMAGE = "all"
+ const val TIME_WINDOW = "lifetime"
+ const val TYPE_IMAGE = "all"
 
 class GetUserRepository @Inject constructor(
     private val fortniteRequestsComApi: FortniteRequestsComApi

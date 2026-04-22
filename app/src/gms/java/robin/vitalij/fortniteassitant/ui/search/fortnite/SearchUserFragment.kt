@@ -180,10 +180,6 @@ class SearchUserFragment : Fragment(R.layout.fragment_search_user) {
             }
         }
 
-        binding.strictUserSwitch.setOnCheckedChangeListener { it, isChecked ->
-            viewModel.strict = !isChecked
-        }
-
         binding.iKnowMyAccountIdButton.setOnClickListener {
             InputAccountIdResultFragment.show(
                 childFragmentManager,

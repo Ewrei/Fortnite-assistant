@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 import robin.vitalij.fortniteassitant.FortniteApplication
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.loadImage
+import robin.vitalij.fortniteassitant.common.extensions.loadProfileImage
 import robin.vitalij.fortniteassitant.common.extensions.setErrorView
 import robin.vitalij.fortniteassitant.common.extensions.showDialog
 import robin.vitalij.fortniteassitant.databinding.FragmentSettingBinding
@@ -30,6 +31,7 @@ import robin.vitalij.fortniteassitant.model.enums.ProfileResultType
 import robin.vitalij.fortniteassitant.ui.bottomsheet.contactus.ContactUsResultFragment
 import robin.vitalij.fortniteassitant.ui.comparison.selected.ComparisonSelectedActivity
 import robin.vitalij.fortniteassitant.ui.search.fortnite.SearchUserFragment.Companion.ARG_PROFILE_RESULT_TYPE
+import robin.vitalij.fortniteassitant.ui.subscription.SubscriptionActivity
 import javax.inject.Inject
 
 class SettingFragment : Fragment(R.layout.fragment_setting) {
@@ -68,6 +70,9 @@ class SettingFragment : Fragment(R.layout.fragment_setting) {
         }
 
         viewModel.loadData()
+
+        binding.newsLayout.isVisible = false
+        binding.crewLayout.isVisible = false
     }
 
     private fun handleUserResult(result: LoadingState<UserEntity>) {
@@ -79,7 +84,7 @@ class SettingFragment : Fragment(R.layout.fragment_setting) {
 
             is LoadingState.Success -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
-                binding.profileImage.loadImage(result.data.avatar)
+                binding.profileImage.loadProfileImage(result.data.avatar)
                 binding.userName.text = result.data.name
                 binding.lastUpdate.text =
                     getString(R.string.last_date_update, result.data.getLastUpdate())
@@ -142,7 +147,7 @@ class SettingFragment : Fragment(R.layout.fragment_setting) {
         }
 
         binding.subscriptionLayout.setOnClickListener {
-            startActivity(Intent(context, ComparisonSelectedActivity::class.java))
+            startActivity(Intent(context, SubscriptionActivity::class.java))
         }
 
         binding.shareApp.setOnClickListener {

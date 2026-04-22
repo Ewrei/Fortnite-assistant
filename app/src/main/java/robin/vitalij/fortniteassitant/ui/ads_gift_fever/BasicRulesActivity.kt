@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.applySystemBarsPadding
 import robin.vitalij.fortniteassitant.common.extensions.setFullScreen
 import robin.vitalij.fortniteassitant.databinding.ActivityBaseNoToolbarBinding
 
@@ -24,6 +25,8 @@ class BasicRulesActivity : AppCompatActivity() {
         }
 
         window?.setFullScreen(true)
+
+        binding.root.applySystemBarsPadding()
     }
 
     override fun onBackPressed() {

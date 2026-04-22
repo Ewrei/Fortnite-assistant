@@ -2,6 +2,7 @@ package robin.vitalij.fortniteassitant.ui.wiki
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -20,6 +21,14 @@ class WikiFragment : Fragment(R.layout.fragment_wiki) {
         super.onViewCreated(view, savedInstanceState)
         setNavigation()
         setListeners()
+
+        binding.battlePassRewards.isVisible = false
+        binding.weapons.isVisible = false
+        binding.fishing.isVisible = false
+        binding.achievements.isVisible = false
+        binding.cosmeticsNew.isVisible = false
+        binding.vehicles.isVisible = false
+        binding.currentMap.isVisible = false
     }
 
     private fun setNavigation() {

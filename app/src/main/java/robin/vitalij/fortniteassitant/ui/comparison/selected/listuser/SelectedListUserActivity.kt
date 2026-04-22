@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import by.kirich1409.viewbindingdelegate.viewBinding
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.applySystemBarsPadding
 import robin.vitalij.fortniteassitant.common.extensions.replaceFragment
 import robin.vitalij.fortniteassitant.databinding.ActivityBaseBinding
 import robin.vitalij.fortniteassitant.ui.common.BaseActivity
@@ -19,6 +20,8 @@ class SelectedListUserActivity : BaseActivity(R.layout.activity_base) {
 
         enableBackButton()
         setFragment()
+
+        binding.root.applySystemBarsPadding()
     }
 
     private fun setFragment() {

@@ -4,21 +4,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.databinding.ItemCurrentShopBinding
-import robin.vitalij.fortniteassitant.model.network.shop.ShopAdapterItem
-import robin.vitalij.fortniteassitant.model.network.shop.ShopNewItem
+import robin.vitalij.fortniteassitant.model.network.shop.ShopEntry
 
 class CurrentShopAdapter(
-    private val onClick: (shopNewItem: ShopNewItem) -> Unit
+    private val onClick: (shopNewItem: ShopEntry) -> Unit
 ) : RecyclerView.Adapter<CurrentShopHolder>() {
 
-    private val items = mutableListOf<ShopNewItem>()
+    private val items = mutableListOf<ShopEntry>()
 
-    fun setData(data: List<ShopNewItem>) {
+    fun setData(data: List<ShopEntry>) {
         items.clear()
         items.addAll(data)
     }
 
-    fun updateData(data: List<ShopNewItem>) {
+    fun updateData(data: List<ShopEntry>) {
         if (items != data) {
             items.clear()
             items.addAll(data)

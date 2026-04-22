@@ -5,13 +5,13 @@ import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.common.extensions.setValueText
 import robin.vitalij.fortniteassitant.databinding.ItemHeaderShopBinding
 import robin.vitalij.fortniteassitant.model.network.shop.ShopAdapterItem
-import robin.vitalij.fortniteassitant.model.network.shop.ShopNewItem
+import robin.vitalij.fortniteassitant.model.network.shop.ShopEntry
 import robin.vitalij.fortniteassitant.ui.shop.current.adapter.CurrentShopAdapter
 import robin.vitalij.fortniteassitant.utils.GridSpacingItemDecoration
 
 class HeaderShopHolder(
     private val binding: ItemHeaderShopBinding,
-    private val onClick: (shopNewItem: ShopNewItem) -> Unit
+    private val onClick: (shopNewItem: ShopEntry) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: ShopAdapterItem) {
@@ -30,7 +30,7 @@ class HeaderShopHolder(
         }
     }
 
-    private fun initAdapter(list: List<ShopNewItem>) =
+    private fun initAdapter(list: List<ShopEntry>) =
         CurrentShopAdapter(onClick).apply {
             setData(list)
         }

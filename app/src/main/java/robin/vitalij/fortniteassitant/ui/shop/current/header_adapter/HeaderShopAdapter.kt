@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.databinding.ItemHeaderShopBinding
 import robin.vitalij.fortniteassitant.model.network.shop.ShopAdapterItem
-import robin.vitalij.fortniteassitant.model.network.shop.ShopNewItem
+import robin.vitalij.fortniteassitant.model.network.shop.ShopEntry
 
-class HeaderShopAdapter(private val onClick: (shopNewItem: ShopNewItem) -> Unit) :
+class HeaderShopAdapter(private val onClick: (shopNewItem: ShopEntry) -> Unit) :
     RecyclerView.Adapter<HeaderShopHolder>() {
 
     private val items = mutableListOf<ShopAdapterItem>()

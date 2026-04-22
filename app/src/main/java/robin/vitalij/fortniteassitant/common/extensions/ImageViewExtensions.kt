@@ -63,10 +63,10 @@ fun ImageView.loadImage(imageUrl: String?) {
 
 fun ImageView.loadProfileImage(imageUrl: String?) {
     Glide.with(context)
-        .load(if (imageUrl.isNullOrEmpty()) R.drawable.ic_cop else imageUrl)
+        .load(if (imageUrl.isNullOrEmpty()) R.drawable.img_profile_one else imageUrl)
         .apply(RequestOptions.circleCropTransform())
         .placeholder(getCircularProgressDrawable(context))
-        .error(getErrorDrawable())
+        .error(R.drawable.img_profile_one)
         .into(this)
 }
 

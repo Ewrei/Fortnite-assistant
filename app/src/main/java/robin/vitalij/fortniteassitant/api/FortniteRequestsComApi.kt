@@ -1,12 +1,16 @@
 package robin.vitalij.fortniteassitant.api
 
 import io.reactivex.Single
+import okhttp3.Response
+import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 import robin.vitalij.fortniteassitant.model.network.BannerResponse
 import robin.vitalij.fortniteassitant.model.network.CosmeticsNewResponse
 import robin.vitalij.fortniteassitant.model.network.CosmeticsResponse
+import robin.vitalij.fortniteassitant.model.network.NewsResponse
+import robin.vitalij.fortniteassitant.model.network.shop.ShopNewResponse
 import robin.vitalij.fortniteassitant.model.network.stats.PlayerStatsResponse
 
 const val VERSION_SECOND_PATCH = "v2"
@@ -23,6 +27,14 @@ const val TIME_WINDOW_QUERY = "timeWindow"
 const val IMAGE_QUERY = "image"
 
 interface FortniteRequestsComApi {
+
+    @GET("/v2/shop")
+    suspend fun getCurrentShop(@Query("language") language: String): ShopNewResponse
+
+    @GET("/v2/news")
+    suspend fun getNews(
+        @Query("language") language: String
+    ): NewsResponse
 
     @GET("/$VERSION_SECOND_PATCH/$STATS_PATCH/$BR_PATCH/$VERSION_SECOND_PATCH/{$ACCOUNT_ID_PATCH}")
     fun getStats(

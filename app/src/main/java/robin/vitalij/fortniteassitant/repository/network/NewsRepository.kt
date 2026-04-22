@@ -4,6 +4,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import robin.vitalij.fortniteassitant.api.FortniteRequestsComApi
 import robin.vitalij.fortniteassitant.api.FortniteRequestsIOApi
 import robin.vitalij.fortniteassitant.common.extensions.getErrorModel
 import robin.vitalij.fortniteassitant.model.ErrorModelListItem
@@ -15,11 +16,11 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class NewsRepository @Inject constructor(private val fortniteRequestsIOApi: FortniteRequestsIOApi) {
+class NewsRepository @Inject constructor(private val fortniteRequestsIOApi: FortniteRequestsComApi) {
 
     fun getNews(newsType: NewsType): Flow<LoadingState<List<NewsModel>>> = flow {
         emit(LoadingState.Loading)
-        kotlin.runCatching { fortniteRequestsIOApi.getNews(LocaleUtils.locale, newsType.getNewsName()) }
+        kotlin.runCatching { fortniteRequestsIOApi.getNews(LocaleUtils.locale) }
             .onSuccess { emit(LoadingState.Success(it.news)) }
             .onFailure { emit(LoadingState.Error(ErrorModelListItem.ErrorItem(it.getErrorModel()))) }
     }.flowOn(Dispatchers.IO)

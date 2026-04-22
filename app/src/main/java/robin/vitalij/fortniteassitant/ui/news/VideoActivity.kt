@@ -14,6 +14,7 @@ import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.applySystemBarsPadding
 import robin.vitalij.fortniteassitant.common.extensions.setToolbarTitle
 import robin.vitalij.fortniteassitant.databinding.ActivityVideoViewBinding
 
@@ -31,6 +32,8 @@ class VideoActivity : AppCompatActivity(R.layout.activity_video_view) {
         setContentView(binding.root)
         setToolbar()
         initializePlayer()
+
+        binding.root.applySystemBarsPadding()
     }
 
     override fun onBackPressed() {

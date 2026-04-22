@@ -3,6 +3,7 @@ package robin.vitalij.fortniteassitant.ui.search
 import android.os.Bundle
 import by.kirich1409.viewbindingdelegate.viewBinding
 import robin.vitalij.fortniteassitant.R
+import robin.vitalij.fortniteassitant.common.extensions.applySystemBarsPadding
 import robin.vitalij.fortniteassitant.common.extensions.setVisibility
 import robin.vitalij.fortniteassitant.databinding.ActivityBaseBinding
 import robin.vitalij.fortniteassitant.interfaces.ProgressBarActivityController
@@ -21,6 +22,8 @@ class SearchActivity : BaseActivity(R.layout.activity_base), ProgressBarActivity
         replaceFragment(SearchUserFragment.newInstance(ProfileResultType.NEW))
 
         binding.progressViewInclude.loadingContainer.setVisibility(false)
+
+        binding.root.applySystemBarsPadding()
     }
 
     override fun onBackPressed() {

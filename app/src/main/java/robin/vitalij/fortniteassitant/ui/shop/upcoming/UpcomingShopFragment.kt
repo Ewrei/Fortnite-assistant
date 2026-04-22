@@ -80,6 +80,10 @@ class UpcomingShopFragment : Fragment(R.layout.fragment_recycler_view) {
             is LoadingState.Success -> {
                 binding.progressViewInclude.progressContainer.isVisible = false
                 upcomingShopAdapter.updateData(result.data)
+
+                binding.viewEmptyInclude.emptyView.isVisible = result.data.isEmpty()
+                binding.viewEmptyInclude.empty.setText(R.string.empty_vehicles)
+
             }
 
             is LoadingState.Error -> {

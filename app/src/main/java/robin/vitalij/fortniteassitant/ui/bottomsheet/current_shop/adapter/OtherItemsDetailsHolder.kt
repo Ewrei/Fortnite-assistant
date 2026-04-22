@@ -5,21 +5,21 @@ import robin.vitalij.fortniteassitant.common.extensions.loadBackgroundRarity
 import robin.vitalij.fortniteassitant.common.extensions.loadImage
 import robin.vitalij.fortniteassitant.common.extensions.setTypeShop
 import robin.vitalij.fortniteassitant.databinding.ItemOtherItemsDetailsBinding
-import robin.vitalij.fortniteassitant.model.network.shop.GrantedModel
-
-class OtherItemsDetailsHolder(
-    private val binding: ItemOtherItemsDetailsBinding,
-    private val widthPixels: Int
-) : RecyclerView.ViewHolder(binding.root) {
-
-    fun bind(item: GrantedModel) {
-        binding.cardView.layoutParams.width = widthPixels
-        binding.cardView.requestLayout()
-
-        binding.inventoryName.text = item.name
-        binding.type.setTypeShop(item.type.id)
-
-        binding.image.loadImage(item.images.background)
-        binding.image.loadBackgroundRarity(item.rarity.id)
-    }
-}
+//import robin.vitalij.fortniteassitant.model.network.shop.GrantedModel
+//
+//class OtherItemsDetailsHolder(
+//    private val binding: ItemOtherItemsDetailsBinding,
+//    private val widthPixels: Int
+//) : RecyclerView.ViewHolder(binding.root) {
+//
+//    fun bind(item: GrantedModel) {
+//        binding.cardView.layoutParams.width = widthPixels
+//        binding.cardView.requestLayout()
+//
+//        binding.inventoryName.text = item.name
+//        binding.type.setTypeShop(item.type.id)
+//
+//        binding.image.loadImage(item.images.background)
+//        binding.image.loadBackgroundRarity(item.rarity.id)
+//    }
+//}

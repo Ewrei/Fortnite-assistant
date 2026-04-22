@@ -5,6 +5,7 @@ import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
 import robin.vitalij.fortniteassitant.common.extensions.loadDrawableRes
 import robin.vitalij.fortniteassitant.common.extensions.loadImage
+import robin.vitalij.fortniteassitant.common.extensions.loadProfileImage
 import robin.vitalij.fortniteassitant.common.extensions.setHoursGame
 import robin.vitalij.fortniteassitant.common.extensions.setSafeOnClickListener
 import robin.vitalij.fortniteassitant.common.extensions.setTextPercent
@@ -19,7 +20,7 @@ class HomeHeaderViewHolder(
 
     fun bind(item: HomeListItem.HeaderItem) {
         binding.imageView.loadDrawableRes(R.drawable.img_profile_phone)
-        binding.profileImage.loadImage(item.avatarUrl)
+        binding.profileImage.loadProfileImage(item.avatarUrl)
         binding.userName.text = item.userName
         binding.steamId.text = item.playerId
         binding.matchesPlayed.text = item.matchesPlayed.getStringFormat()

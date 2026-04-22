@@ -17,6 +17,7 @@ class SubscriptionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_base)
         replaceFragment(R.id.container, subscriptionsFragment, subscriptionsFragment.javaClass.simpleName)
         window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimary)
+
     }
 
     override fun onActivityResult(

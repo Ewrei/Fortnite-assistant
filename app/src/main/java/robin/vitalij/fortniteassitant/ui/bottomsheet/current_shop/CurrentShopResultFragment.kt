@@ -12,17 +12,13 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import robin.vitalij.fortniteassitant.FortniteApplication
-import robin.vitalij.fortniteassitant.common.extensions.getScreenWidth
 import robin.vitalij.fortniteassitant.common.extensions.initBottomSheetInternal
-import robin.vitalij.fortniteassitant.common.extensions.loadBackgroundRarity
 import robin.vitalij.fortniteassitant.common.extensions.loadImage
 import robin.vitalij.fortniteassitant.common.extensions.setValueText
 import robin.vitalij.fortniteassitant.databinding.BottomSheetCurrentShopBinding
-import robin.vitalij.fortniteassitant.model.network.shop.GrantedModel
-import robin.vitalij.fortniteassitant.model.network.shop.ShopNewItem
+import robin.vitalij.fortniteassitant.model.network.shop.ShopEntry
 import robin.vitalij.fortniteassitant.ui.bottomsheet.current_shop.CurrentShopResultViewModel
 import robin.vitalij.fortniteassitant.ui.bottomsheet.current_shop.CurrentShopResultViewModelFactory
-import robin.vitalij.fortniteassitant.ui.bottomsheet.current_shop.adapter.OtherItemsDetailsAdapter
 import javax.inject.Inject
 
 const val BOTTOM_SHEET_MARGIN_TOP = 200
@@ -56,7 +52,7 @@ class CurrentShopResultFragment : BottomSheetDialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            viewModel.shopNewItem = it.getSerializable(ITEM_SHOP_CURRENT) as ShopNewItem
+            viewModel.shopNewItem = it.getSerializable(ITEM_SHOP_CURRENT) as ShopEntry
         }
     }
 
@@ -79,26 +75,30 @@ class CurrentShopResultFragment : BottomSheetDialogFragment() {
     }
 
     private fun setUI() {
-        binding.imageView.loadImage(viewModel.shopNewItem.displayAssets.firstOrNull()?.fullBackground)
-        binding.imageView.loadBackgroundRarity(viewModel.shopNewItem.rarity?.id)
-        binding.name.text = viewModel.shopNewItem.displayName
-        binding.description.text = viewModel.shopNewItem.displayDescription
-        binding.price.setValueText(viewModel.shopNewItem.price.finalPrice)
+        binding.imageView.loadImage(viewModel.shopNewItem.bundle?.image ?: viewModel.shopNewItem.brItems?.firstOrNull()?.images?.featured ?: viewModel.shopNewItem.brItems?.firstOrNull()?.images?.icon ?: viewModel.shopNewItem.tracks?.firstOrNull()?.albumArt)
+        binding.name.text = viewModel.shopNewItem.bundle?.name ?: viewModel.shopNewItem.brItems?.firstOrNull()?.name ?: viewModel.shopNewItem.tracks?.firstOrNull()?.title
+        binding.price.setValueText(viewModel.shopNewItem.finalPrice)
+//        binding.oldPrice.isVisible = item.finalPrice != item.regularPrice
 
-        if (viewModel.shopNewItem.granted.size > 1) {
-            initAdapter(viewModel.shopNewItem.granted)
-        }
+//        binding.imageView.loadImage(viewModel.shopNewItem.displayAssets.firstOrNull()?.fullBackground)
+//        binding.imageView.loadBackgroundRarity(viewModel.shopNewItem.rarity?.id)
+//        binding.name.text = viewModel.shopNewItem.displayName
+        binding.description.text =  viewModel.shopNewItem.brItems?.firstOrNull()?.description ?: viewModel.shopNewItem.tracks?.firstOrNull()?.artist
+//
+//        if (viewModel.shopNewItem.granted.size > 1) {
+//            initAdapter(viewModel.shopNewItem.granted)
+//        }
     }
 
-    private fun initAdapter(list: List<GrantedModel>) {
-        binding.theKitIncludes.isVisible = true
-        binding.recyclerView.run {
-            adapter = OtherItemsDetailsAdapter(
-                widthPixels = activity?.getScreenWidth(WIDTH_PIXELS_PERCENT) ?: 0
-            )
-            (adapter as OtherItemsDetailsAdapter).setData(list)
-        }
-    }
+//    private fun initAdapter(list: List<GrantedModel>) {
+//        binding.theKitIncludes.isVisible = true
+//        binding.recyclerView.run {
+//            adapter = OtherItemsDetailsAdapter(
+//                widthPixels = activity?.getScreenWidth(WIDTH_PIXELS_PERCENT) ?: 0
+//            )
+//            (adapter as OtherItemsDetailsAdapter).setData(list)
+//        }
+//    }
 
     companion object {
         private const val BOTTOM_SHEET_MARGIN_TOP = 200
@@ -109,7 +109,7 @@ class CurrentShopResultFragment : BottomSheetDialogFragment() {
 
         fun show(
             fragmentManager: FragmentManager,
-            shopUpcoming: ShopNewItem
+            shopUpcoming: ShopEntry
         ) {
             CurrentShopResultFragment().apply {
                 arguments = bundleOf(ITEM_SHOP_CURRENT to shopUpcoming)

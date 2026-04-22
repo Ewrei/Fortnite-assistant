@@ -9,6 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import robin.vitalij.fortniteassitant.api.FortniteProdRequestApi
 import robin.vitalij.fortniteassitant.api.FortniteRequestsComApi
 import robin.vitalij.fortniteassitant.api.FortniteRequestsIOApi
 import robin.vitalij.fortniteassitant.api.SteamChartRequestsApi
@@ -25,12 +26,28 @@ import javax.net.ssl.X509TrustManager
 const val TIMEOUT_SEC = 30L
 private const val ROOT_FORTNITE_COM_URL = "https://fortnite-api.com"
 private const val ROOT_FORTNITE_IO_URL = "https://fortniteapi.io"
+private const val ROOT_FORTNITE_NEW_URL = "https://prod.api-fortnite.com"
 private const val STEAM_CHART_URL = "http://134-0-119-178.cloudvps.regruhosting.ru"
 
 private const val AUTHORIZATION = "Authorization"
 
 @Module
 class NetworkModule {
+
+    @Provides
+    @Singleton
+    fun provideFortniteProdRequestsApi(): FortniteProdRequestApi {
+        val okHttpClient = HttpClientFactory(false, true)
+            .createHttpClient()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(ROOT_FORTNITE_NEW_URL)
+            .client(okHttpClient)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        return retrofit.create(FortniteProdRequestApi::class.java)
+    }
+
 
     @Provides
     @Singleton
@@ -45,6 +62,8 @@ class NetworkModule {
             .build()
         return retrofit.create(FortniteRequestsComApi::class.java)
     }
+
+
 
     @Provides
     @Singleton
@@ -112,7 +131,7 @@ class NetworkModule {
         }
     }
 
-    inner class HttpClientFactory(private val isFortniteIo: Boolean) {
+    inner class HttpClientFactory(private val isFortniteIo: Boolean, private val isProd: Boolean = false) {
         fun createHttpClient(): OkHttpClient {
             val builder = getUnsafeOkHttpClient()
                 .addInterceptor(HttpLoggingInterceptor().apply {
@@ -124,7 +143,12 @@ class NetworkModule {
                 .writeTimeout(TIMEOUT_SEC, TimeUnit.SECONDS)
                 .addInterceptor { chain ->
                     val request = chain.request().newBuilder()
-                    if (isFortniteIo) {
+                    if (isProd) {
+                        request.addHeader(
+                            "x-api-key",
+                            "14753e3599607d5b7cfd46ff1b2c45d9f4cbf52a87b52bff6b3cef15297ce859"
+                        )
+                    } else if (isFortniteIo) {
                         request.addHeader(
                             AUTHORIZATION,
                             "bc649d1b-d9500276-7071abc4-b47bde1d"

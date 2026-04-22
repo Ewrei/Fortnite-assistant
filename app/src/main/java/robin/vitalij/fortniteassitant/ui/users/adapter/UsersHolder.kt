@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.getStringFormat
 import robin.vitalij.fortniteassitant.common.extensions.loadImage
+import robin.vitalij.fortniteassitant.common.extensions.loadProfileImage
 import robin.vitalij.fortniteassitant.databinding.ItemUserBinding
 import robin.vitalij.fortniteassitant.model.UserModel
 
@@ -13,7 +14,7 @@ class UsersHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: UserModel) {
-        binding.profileImage.loadImage(item.userEntity.image)
+        binding.profileImage.loadProfileImage(item.userEntity.image)
         binding.profileName.text = item.userEntity.name
         binding.lifetime.text =
             binding.root.context.getString(R.string.last_date_update, item.getLastData())

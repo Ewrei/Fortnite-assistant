@@ -3,6 +3,7 @@ package robin.vitalij.fortniteassitant.ui.bottomsheet.profile.adapter
 import androidx.recyclerview.widget.RecyclerView
 import robin.vitalij.fortniteassitant.R
 import robin.vitalij.fortniteassitant.common.extensions.loadImage
+import robin.vitalij.fortniteassitant.common.extensions.loadProfileImage
 import robin.vitalij.fortniteassitant.common.extensions.setTextPercent
 import robin.vitalij.fortniteassitant.common.extensions.setValueText
 import robin.vitalij.fortniteassitant.databinding.ItemProfileHeaderBinding
@@ -12,7 +13,7 @@ class ProfileHeaderViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: ProfileListItem.HeaderItem) {
-        binding.avatarImage.loadImage(item.avatarUrl)
+        binding.avatarImage.loadProfileImage(item.avatarUrl)
         binding.profileName.text = item.userName
         binding.playerId.text = item.playerId
         binding.playTime.text = item.playTime

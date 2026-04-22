@@ -26,3 +26,8 @@ data class SearchUserModel(
     @SerializedName("result") val result: Boolean,
     @SerializedName("account_id") val accountId: String
 )
+
+data class SearchNewUserModel(
+    @SerializedName("id") val id: String,
+    @SerializedName("displayName") val displayName: String
+)

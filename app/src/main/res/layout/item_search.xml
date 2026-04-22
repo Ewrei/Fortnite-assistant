@@ -7,48 +7,198 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/default_margin">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/userImage"
-            android:layout_width="@dimen/avatar_size"
-            android:layout_height="@dimen/avatar_size"
-            android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginBottom="@dimen/default_margin"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_cop"
-            tools:src="@drawable/ic_cop" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/nickName"
-            android:layout_width="0dp"
+            <ImageView
+                android:id="@+id/userImage"
+                android:layout_width="@dimen/avatar_size"
+                android:layout_height="@dimen/avatar_size"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/default_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_cop"
+                tools:src="@drawable/ic_cop" />
+
+            <TextView
+                android:id="@+id/nickName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:fontFamily="@font/poppins_bold"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                app:layout_constraintStart_toEndOf="@+id/userImage"
+                app:layout_constraintTop_toTopOf="@+id/userImage"
+                tools:text="12123434" />
+
+            <TextView
+                android:id="@+id/playerId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:fontFamily="@font/poppins_medium"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/userImage"
+                app:layout_constraintTop_toBottomOf="@+id/nickName"
+                tools:text="playerId" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/default_margin">
+
+            <TextView
+                android:id="@+id/matches"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_medium"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="?header_color"
+                tools:text="Level 1" />
+
+            <TextView
+                android:id="@+id/playTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="end"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="?header_color"
+                tools:text="play time" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin"
-            android:fontFamily="@font/poppins_bold"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            app:layout_constraintStart_toEndOf="@+id/userImage"
-            app:layout_constraintTop_toTopOf="@+id/userImage"
-            tools:text="12123434" />
+            android:layout_marginBottom="@dimen/default_margin">
 
-        <TextView
-            android:id="@+id/playerId"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:fontFamily="@font/poppins_medium"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/userImage"
-            app:layout_constraintTop_toBottomOf="@+id/nickName"
-            tools:text="playerId" />
+            <View
+                style="@style/DefaultDivider"
+                android:layout_width="@dimen/default_divider_height"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/default_margin" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/half_default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/half_default_margin"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/matches"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="?header_color" />
+
+                <TextView
+                    android:id="@+id/allMatches"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robot_serif_extra_bold"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    tools:text="58" />
+
+            </LinearLayout>
+
+            <View
+                style="@style/DefaultDivider"
+                android:layout_width="@dimen/default_divider_height"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/default_margin" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/half_default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/half_default_margin"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/wins_percent"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="?header_color" />
+
+                <TextView
+                    android:id="@+id/winRate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robot_serif_extra_bold"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    tools:text="3.2" />
+
+            </LinearLayout>
+
+            <View
+                style="@style/DefaultDivider"
+                android:layout_width="@dimen/default_divider_height"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/default_margin" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/half_default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/half_default_margin"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/kd"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="?header_color" />
+
+                <TextView
+                    android:id="@+id/kd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robot_serif_extra_bold"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    tools:text="1 230" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+    </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

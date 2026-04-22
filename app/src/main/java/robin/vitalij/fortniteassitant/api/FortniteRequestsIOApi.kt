@@ -24,24 +24,10 @@ const val VEHICLES_PATCH = "vehicles"
 const val LIST_PATCH = "list"
 
 private const val LANG_QUERY = "lang"
-private const val USERNAME_QUERY = "username"
-private const val STRICT_QUERY = "strict"
 private const val TYPE_QUERY = "type"
 private const val SEASON_QUERY = "season"
 
 interface FortniteRequestsIOApi {
-
-    @GET("/$VERSION_FIRST_PATCH/$LOOKUP_PATCH")
-    suspend fun getSearch(
-        @Query(USERNAME_QUERY) username: String,
-        @Query(STRICT_QUERY) strict: Boolean
-    ): SearchResponse
-
-    @GET("/$VERSION_FIRST_PATCH/$LOOKUP_PATCH")
-    suspend fun getSearch(@Query(USERNAME_QUERY) username: String): SearchUserModel
-
-    @GET("/$VERSION_SECOND_PATCH/$SHOP_PATCH")
-    suspend fun getCurrentShop(@Query(LANG_QUERY) language: String): ShopNewResponse
 
     @GET("/$VERSION_SECOND_PATCH/$ITEMS_PATCH/$UPCOMING_PATCH")
     suspend fun getUpcomingShop(@Query(LANG_QUERY) language: String): ShopUpcomingResponse
